@@ -49,6 +49,13 @@ function SectionHeading({ eyebrow, title }: { eyebrow?: string; title: string })
   );
 }
 
+const navLinks = [
+  { href: "#produkt", label: "Produkt" },
+  { href: "#integrationen", label: "Integrationen" },
+  { href: "#vergleich", label: "Vergleich" },
+  { href: "#faq", label: "FAQ" },
+];
+
 const painPoints = [
   {
     title: "Stunden im Research versenkt",
@@ -84,6 +91,52 @@ const usps = [
   { title: "Direkter Draht zum Team", body: "Kein Ticket-System. Ihr sprecht direkt mit den Leuten, die das Tool gebaut haben — inklusive echter Anpassungen auf Wunsch." },
 ];
 
+const integrations = [
+  { name: "Instantly", note: "CSV-Import, Auto-Mapping" },
+  { name: "Smartlead", note: "CSV-Import" },
+  { name: "Lemlist", note: "CSV-Import" },
+  { name: "HubSpot", note: "CSV-Import" },
+  { name: "Pipedrive", note: "CSV-Import" },
+  { name: "Salesforce", note: "CSV-Import" },
+  { name: "Excel / Sheets", note: "Excel-CSV" },
+  { name: "Zapier", note: "geplant" },
+];
+
+const trustBadges = [
+  {
+    title: "EU-Hosting",
+    body: "Server in Frankfurt, keine Datenübertragung außerhalb der EU.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
+        <path d="M12 2 3 6v6c0 5 3.8 8.7 9 10 5.2-1.3 9-5 9-10V6l-9-4Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+        <path d="m8.5 12 2.3 2.3L16 9.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
+  },
+  {
+    title: "Verschlüsselte API-Keys",
+    body: "Eure Zugangsdaten werden verschlüsselt gespeichert, nie im Klartext.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
+        <rect x="5" y="10.5" width="14" height="9.5" rx="2" stroke="currentColor" strokeWidth="1.6" />
+        <path d="M8 10.5V7.5a4 4 0 0 1 8 0v3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+        <circle cx="12" cy="15" r="1.4" fill="currentColor" />
+      </svg>
+    ),
+  },
+  {
+    title: "BYOK-Kostenkontrolle",
+    body: "Volle Transparenz über eure tatsächlichen API-Kosten, live im Dashboard.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
+        <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.6" />
+        <path d="M9.5 9.2c0-1.1 1.1-2 2.5-2s2.5.9 2.5 2-1.1 2-2.5 2-2.5.9-2.5 2 1.1 2 2.5 2 2.5-.9 2.5-2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M12 6v1.4M12 16.6V18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+];
+
 const comparisonRows: [string, string, string][] = [
   ["Preismodell", "Nur tatsächliche API-Kosten (BYOK)", "Mehrere Pauschal-Abos gleichzeitig"],
   ["Alles in einem Workflow", "Ja", "Nein — manueller Export/Import zwischen Tools"],
@@ -114,15 +167,24 @@ const faqs = [
     q: "Wie schnell bin ich startklar?",
     a: "API-Keys eintragen, erste Suche starten — beides gemeinsam in einer Demo machbar.",
   },
+  {
+    q: "Woher kommen die Zahlen zum Skalierungspotenzial?",
+    a: "Aus einer offen gelegten Beispielrechnung, nicht aus einer Zusicherung: Versandkapazität nach Instantly-Hypergrowth-Plan, Recherchezeit und Antwortquote nach branchenüblichen Annahmen. Die Rechnung samt Annahmen steht direkt neben den Zahlen.",
+  },
 ];
 
 export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Nav */}
-      <header className="border-b border-edge/60">
+      <header className="sticky top-0 z-10 border-b border-edge/60 bg-surface/90 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
           <Logo />
+          <nav className="hidden items-center gap-6 text-sm text-soft md:flex">
+            {navLinks.map((l) => (
+              <a key={l.href} href={l.href} className="hover:text-ink">{l.label}</a>
+            ))}
+          </nav>
           <CTAButton />
         </div>
       </header>
@@ -164,24 +226,57 @@ export default function Home() {
       </section>
 
       {/* Solution */}
-      <section className="border-y border-edge/60 bg-panel2">
+      <section id="produkt" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
         <div className="mx-auto max-w-[1267px] px-4 py-20 sm:px-6">
           <SectionHeading title="Ein Workflow. Vier Schritte. Keine Zwischenexporte." />
-          <div className="grid gap-8 lg:grid-cols-2">
-            {steps.map((s) => (
-              <div key={s.n} className="flex gap-4">
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ink text-xs font-semibold text-surface">
+
+          {/* Illustrated flow instead of a dense screenshot */}
+          <div className="grid gap-6 lg:grid-cols-4">
+            {steps.map((s, i) => (
+              <div key={s.n} className="relative rounded-xl border border-edge/60 bg-panel p-5">
+                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-ink text-sm font-semibold text-surface">
                   {s.n}
                 </div>
-                <div>
-                  <h3 className="text-sm font-semibold text-ink">{s.title}</h3>
-                  <p className="mt-1 text-sm leading-relaxed text-soft">{s.body}</p>
-                </div>
+                <h3 className="mt-4 text-sm font-semibold text-ink">{s.title}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-soft">{s.body}</p>
+                {i < steps.length - 1 && (
+                  <div className="pointer-events-none absolute -right-3 top-1/2 hidden -translate-y-1/2 text-edge3 lg:block">
+                    <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+                      <path d="M4 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </div>
+                )}
               </div>
             ))}
           </div>
-          <div className="mt-12">
-            <Screenshot src="/screenshots/dashboard.png" alt="Thaw Dashboard mit Suchmaske und Zeitersparnis-Kennzahl" />
+
+          {/* Standalone illustrated icebreaker mockup */}
+          <div className="mt-10 grid gap-6 lg:grid-cols-5 lg:items-center">
+            <div className="lg:col-span-2">
+              <h3 className="text-sm font-semibold text-ink">Beispiel: automatisch generierter Icebreaker</h3>
+              <p className="mt-1.5 text-sm leading-relaxed text-soft">
+                Fiktives Beispiel zur Veranschaulichung — jede echte Zeile basiert auf recherchierten
+                Fakten zum jeweiligen Unternehmen, nicht auf einem Textbaustein.
+              </p>
+            </div>
+            <div className="lg:col-span-3">
+              <div className="rounded-xl border border-edge/60 bg-panel p-5 shadow-sm">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-xs font-bold text-white">
+                    MA
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-ink">Muster Agentur GmbH</p>
+                    <p className="text-xs text-mute">Website-Text + Firmenbeschreibung analysiert</p>
+                  </div>
+                </div>
+                <p className="mt-4 rounded-lg bg-panel2 p-4 text-sm leading-relaxed text-ink">
+                  „Ihr habt euer Leistungsangebot letztes Jahr um Performance-Marketing erweitert —
+                  bei zehn neuen Kampagnen pro Monat wird die Lead-Recherche für neue Kund:innen
+                  schnell zum Flaschenhals.“
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -222,6 +317,21 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Integrations */}
+      <section id="integrationen" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
+        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+          <SectionHeading eyebrow="Passt in euren Stack" title="Exportiert direkt in die Tools, die ihr schon nutzt" />
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+            {integrations.map((i) => (
+              <div key={i.name} className="rounded-xl border border-edge/60 bg-panel p-5 text-center">
+                <p className="text-sm font-semibold text-ink">{i.name}</p>
+                <p className="mt-1 text-xs text-mute">{i.note}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* USPs */}
       <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <SectionHeading eyebrow="Warum Thaw" title="Warum Thaw und nicht vier einzelne Tools" />
@@ -235,7 +345,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Proof stat */}
+      {/* Proof stat (real) */}
       <section className="border-y border-edge/60 bg-ink">
         <div className="mx-auto max-w-4xl px-4 py-16 text-center sm:px-6">
           <p className="text-xs font-medium uppercase tracking-wide text-mute">Kein Testimonial — echte Zahl aus dem eigenen Account</p>
@@ -246,8 +356,45 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Comparison */}
+      {/* Scaling potential (calculated, clearly labeled) */}
       <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        <SectionHeading eyebrow="Skalierungspotenzial" title="Was rechnerisch möglich ist, wenn ihr Vollgas gebt" />
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="rounded-xl border border-edge/60 bg-panel p-6">
+            <p className="text-2xl font-semibold text-ink">125.000</p>
+            <p className="mt-1 text-sm text-soft">personalisierte E-Mails pro Monat versendbar</p>
+          </div>
+          <div className="rounded-xl border border-edge/60 bg-panel p-6">
+            <p className="text-2xl font-semibold text-ink">bis 125.000</p>
+            <p className="mt-1 text-sm text-soft">erreichbare Unternehmen pro Monat</p>
+          </div>
+          <div className="rounded-xl border border-edge/60 bg-panel p-6">
+            <p className="text-2xl font-semibold text-ink">≈ 16.700 Std.</p>
+            <p className="mt-1 text-sm text-soft">manuelle Recherche gespart — rund 100 Vollzeitstellen/Monat</p>
+          </div>
+          <div className="rounded-xl border border-edge/60 bg-panel p-6">
+            <p className="text-2xl font-semibold text-ink">≈ 780</p>
+            <p className="mt-1 text-sm text-soft">qualifizierte Meetings pro Monat rechnerisch möglich</p>
+          </div>
+        </div>
+        <div className="mt-6 rounded-xl border border-edge/60 bg-panel2 p-5 text-xs leading-relaxed text-faint">
+          <p className="font-medium text-soft">So ist das gerechnet, keine Zusicherung:</p>
+          <p className="mt-1.5">
+            Basis ist eine Versandkapazität von 125.000 E-Mails/Monat (Instantly-Hypergrowth-Plan;
+            das technische Maximum liegt bei bis zu 500.000/Monat). Lead-Beschaffung über Google
+            Maps und Hunter ist praktisch unlimitiert, daher ist der Versand der eigentliche
+            Flaschenhals, nicht die Anzahl verfügbarer Leads. Zeitersparnis auf Basis von ca. 8
+            Minuten angenommener manueller Recherchezeit pro Kontakt. Kostenersparnis auf Basis von
+            45&nbsp;€/Std. (abgeleitet aus 1.500&nbsp;€ ≈ 33,3 Std. oben). Meetings auf Basis von 5%
+            Antwortquote, davon 25% positiv, davon 50% zu einem Termin führend — branchenübliche
+            Richtwerte, keine Garantie. Euer tatsächliches Ergebnis hängt von Nische, Liste und
+            Angebot ab.
+          </p>
+        </div>
+      </section>
+
+      {/* Comparison */}
+      <section id="vergleich" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <SectionHeading title="Im Vergleich" />
         <div className="overflow-x-auto rounded-xl border border-edge/60">
           <table className="w-full border-collapse text-sm">
@@ -273,14 +420,19 @@ export default function Home() {
 
       {/* Trust / DSGVO */}
       <section className="border-y border-edge/60 bg-panel2">
-        <div className="mx-auto max-w-3xl px-4 py-20 text-center sm:px-6">
+        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <SectionHeading title="Datenschutz ist keine Checkbox, sondern Teil der Architektur" />
-          <p className="text-left text-sm leading-relaxed text-soft sm:text-base">
-            Thaw läuft vollständig auf EU-Servern (Frankfurt). Zugangsdaten zu euren eigenen
-            API-Keys werden verschlüsselt gespeichert, nicht im Klartext. Ihr behaltet die volle
-            Kontrolle über eure eigenen Zugänge — Thaw speichert nur, was für den Betrieb
-            tatsächlich nötig ist.
-          </p>
+          <div className="grid gap-5 sm:grid-cols-3">
+            {trustBadges.map((b) => (
+              <div key={b.title} className="rounded-xl border border-edge/60 bg-panel p-6">
+                <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-panel2 text-ink">
+                  {b.icon}
+                </div>
+                <h3 className="mt-4 text-sm font-semibold text-ink">{b.title}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-soft">{b.body}</p>
+              </div>
+            ))}
+          </div>
           <div className="mt-6 flex flex-wrap gap-x-4 gap-y-2 text-sm text-faint">
             <a href="/datenschutz" className="hover:text-ink">Datenschutzerklärung</a>
             <span>·</span>
@@ -291,19 +443,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About */}
+      {/* Why Thaw exists (professional, no personal/age framing) */}
       <section className="mx-auto max-w-3xl px-4 py-20 sm:px-6">
-        <SectionHeading title="Warum wir das gebaut haben" />
+        <SectionHeading title="Warum es Thaw gibt" />
         <p className="text-sm leading-relaxed text-soft sm:text-base">
-          Wir sind drei aus Wien, Anfang 20. Thaw haben wir zuerst für uns selbst gebaut, weil
-          wir für unsere eigene Kundenakquise genau das gesucht haben, was es so nicht gab: ein
-          Tool statt vier. Wir suchen jetzt die ersten Partneragenturen, die es mit uns gemeinsam
-          scharf machen.
+          Outbound-Teams kombinieren heute meist vier bis fünf einzelne Tools, um vom ersten
+          Suchbegriff bis zur personalisierten, verifizierten E-Mail zu kommen. Thaw reduziert
+          diesen Workflow auf ein einziges Tool — mit voller Kostentransparenz statt
+          Pauschal-Abos und ohne CSV-Hin-und-Her zwischen Anbietern.
         </p>
       </section>
 
       {/* FAQ */}
-      <section className="border-t border-edge/60 bg-panel2">
+      <section id="faq" className="scroll-mt-20 border-t border-edge/60 bg-panel2">
         <div className="mx-auto max-w-3xl px-4 py-20 sm:px-6">
           <SectionHeading title="Häufige Fragen" />
           <div className="divide-y divide-edge/60 rounded-xl border border-edge/60 bg-panel">
