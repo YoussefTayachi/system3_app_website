@@ -27,10 +27,16 @@ function CTAButton({ className = "" }: { className?: string }) {
 
 function Screenshot({ src, alt }: { src: string; alt: string }) {
   return (
-    <div className="overflow-hidden rounded-xl border border-edge/60 shadow-sm">
+    <a
+      href={src}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group block overflow-hidden rounded-xl border border-edge/60 shadow-sm transition-shadow hover:shadow-md"
+      title="Zum Vergrößern klicken"
+    >
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={src} alt={alt} className="w-full" />
-    </div>
+      <img src={src} alt={alt} className="w-full transition-transform duration-300 group-hover:scale-[1.02]" />
+    </a>
   );
 }
 
@@ -123,9 +129,9 @@ export default function Home() {
 
       {/* Hero */}
       <section className="dot-grid border-b border-edge/60">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:items-center lg:py-28">
-          <div className="fade-up">
-            <h1 className="text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl lg:text-[2.75rem]">
+        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-24">
+          <div className="fade-up mx-auto max-w-3xl text-center">
+            <h1 className="text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl lg:text-5xl">
               Finde und kontaktiere neue Kunden, ohne dafür vier Tools zu bezahlen.
             </h1>
             <p className="mt-5 text-base leading-relaxed text-soft sm:text-lg">
@@ -133,12 +139,12 @@ export default function Home() {
               E-Mail-Adressen und schreibt für jeden Lead eine individuelle Icebreaker-Zeile —
               alles in einem Workflow, alles in einer App.
             </p>
-            <div className="mt-8 flex items-center gap-4">
+            <div className="mt-8 flex items-center justify-center gap-4">
               <CTAButton />
               <span className="text-xs text-mute">15 Minuten, wir zeigen es live an eurer eigenen Nische.</span>
             </div>
           </div>
-          <div className="fade-up">
+          <div className="fade-up mt-14">
             <Screenshot src="/screenshots/alle-leads.png" alt="System3 Leads-Tabelle mit Firmen-Logos, Kontaktanzahl und E-Mail-Status" />
           </div>
         </div>
@@ -174,9 +180,11 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid gap-6 sm:grid-cols-2">
             <Screenshot src="/screenshots/dashboard.png" alt="System3 Dashboard mit Suchmaske und Zeitersparnis-Kennzahl" />
             <Screenshot src="/screenshots/ai-agent.png" alt="System3 AI-Agent-Konfiguration für individuelle Icebreaker" />
+          </div>
+          <div className="mt-6 sm:mx-auto sm:max-w-md">
             <Screenshot src="/screenshots/api-keys.png" alt="System3 Einstellungen: eigene API-Keys verschlüsselt hinterlegt" />
           </div>
         </div>
