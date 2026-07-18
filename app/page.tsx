@@ -25,13 +25,11 @@ function CTAButton({ className = "" }: { className?: string }) {
   );
 }
 
-function ScreenshotPlaceholder({ label }: { label: string }) {
+function Screenshot({ src, alt }: { src: string; alt: string }) {
   return (
-    <div className="flex aspect-[16/10] w-full items-center justify-center rounded-xl border border-dashed border-edge2 bg-panel2 text-center">
-      <div>
-        <p className="text-sm font-medium text-faint">Screenshot: {label}</p>
-        <p className="mt-1 text-xs text-mute">wird eingesetzt, sobald verfügbar</p>
-      </div>
+    <div className="overflow-hidden rounded-xl border border-edge/60 shadow-sm">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={src} alt={alt} className="w-full" />
     </div>
   );
 }
@@ -141,7 +139,7 @@ export default function Home() {
             </div>
           </div>
           <div className="fade-up">
-            <ScreenshotPlaceholder label="Leads-Tabelle" />
+            <Screenshot src="/screenshots/alle-leads.png" alt="System3 Leads-Tabelle mit Firmen-Logos, Kontaktanzahl und E-Mail-Status" />
           </div>
         </div>
       </section>
@@ -176,9 +174,10 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <div className="mt-12 grid gap-5 sm:grid-cols-2">
-            <ScreenshotPlaceholder label="Suchmaske (Google Maps / Firmendatenbank)" />
-            <ScreenshotPlaceholder label="AI-Agent-Konfiguration" />
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <Screenshot src="/screenshots/dashboard.png" alt="System3 Dashboard mit Suchmaske und Zeitersparnis-Kennzahl" />
+            <Screenshot src="/screenshots/ai-agent.png" alt="System3 AI-Agent-Konfiguration für individuelle Icebreaker" />
+            <Screenshot src="/screenshots/api-keys.png" alt="System3 Einstellungen: eigene API-Keys verschlüsselt hinterlegt" />
           </div>
         </div>
       </section>
