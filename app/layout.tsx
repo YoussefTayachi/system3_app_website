@@ -3,9 +3,9 @@ import "@fontsource-variable/inter";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "System3 — Leads finden, anreichern und persönlich kontaktieren, ohne vier Tools zu bezahlen",
+  title: "Thaw — Leads finden, anreichern und persönlich kontaktieren, ohne vier Tools zu bezahlen",
   description:
-    "System3 findet B2B-Leads, verifiziert E-Mails und schreibt individuelle Icebreaker automatisch — alles in einem Tool, mit eigenen API-Keys statt teurer Pauschale.",
+    "Thaw findet B2B-Leads, verifiziert E-Mails und schreibt individuelle Icebreaker automatisch — alles in einem Tool, mit eigenen API-Keys statt teurer Pauschale.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

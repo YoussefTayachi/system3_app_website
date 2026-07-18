@@ -4,9 +4,9 @@ function Logo() {
   return (
     <div className="flex items-center gap-2.5">
       <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 text-sm font-bold text-white">
-        3
+        T
       </div>
-      <span className="text-base font-semibold tracking-tight text-ink">System3</span>
+      <span className="text-base font-semibold tracking-tight text-ink">Thaw</span>
     </div>
   );
 }
@@ -69,7 +69,7 @@ const painPoints = [
 ];
 
 const steps = [
-  { n: "1", title: "Suchen", body: "Nische + Ort eingeben — System3 findet passende Unternehmen automatisch (lokal über Google Maps oder breit über eine Firmendatenbank)." },
+  { n: "1", title: "Suchen", body: "Nische + Ort eingeben — Thaw findet passende Unternehmen automatisch (lokal über Google Maps oder breit über eine Firmendatenbank)." },
   { n: "2", title: "Finden", body: "Entscheider:innen und E-Mail-Adressen werden automatisch ermittelt." },
   { n: "3", title: "Verifizieren", body: "Jede Adresse wird geprüft, bevor sie in eine Kampagne geht." },
   { n: "4", title: "Personalisieren & Exportieren", body: "Eine KI schreibt pro Lead eine individuelle Icebreaker-Zeile — danach direkt exportierbar, auch im Instantly-fertigen Format." },
@@ -108,7 +108,7 @@ const faqs = [
   },
   {
     q: "Wie unterscheidet sich das von Apollo/Hunter/Instantly?",
-    a: "Die machen jeweils einen Teil des Workflows gut — System3 verbindet Suche, Anreicherung, Verifizierung und Personalisierung, damit ihr nicht zwischen mehreren Tools hin- und herexportiert.",
+    a: "Die machen jeweils einen Teil des Workflows gut — Thaw verbindet Suche, Anreicherung, Verifizierung und Personalisierung, damit ihr nicht zwischen mehreren Tools hin- und herexportiert.",
   },
   {
     q: "Wie schnell bin ich startklar?",
@@ -129,13 +129,13 @@ export default function Home() {
 
       {/* Hero */}
       <section className="dot-grid border-b border-edge/60">
-        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-24">
+        <div className="mx-auto max-w-[1267px] px-4 py-20 sm:px-6 lg:py-24">
           <div className="fade-up mx-auto max-w-3xl text-center">
             <h1 className="text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl lg:text-5xl">
               Finde und kontaktiere neue Kunden, ohne dafür vier Tools zu bezahlen.
             </h1>
             <p className="mt-5 text-base leading-relaxed text-soft sm:text-lg">
-              System3 sucht Unternehmen, findet die richtigen Ansprechpartner, verifiziert die
+              Thaw sucht Unternehmen, findet die richtigen Ansprechpartner, verifiziert die
               E-Mail-Adressen und schreibt für jeden Lead eine individuelle Icebreaker-Zeile —
               alles in einem Workflow, alles in einer App.
             </p>
@@ -145,7 +145,7 @@ export default function Home() {
             </div>
           </div>
           <div className="fade-up mt-14">
-            <Screenshot src="/screenshots/alle-leads.png" alt="System3 Leads-Tabelle mit Firmen-Logos, Kontaktanzahl und E-Mail-Status" />
+            <Screenshot src="/screenshots/alle-leads.png" alt="Thaw Leads-Tabelle mit Firmen-Logos, Kontaktanzahl und E-Mail-Status" />
           </div>
         </div>
       </section>
@@ -165,7 +165,7 @@ export default function Home() {
 
       {/* Solution */}
       <section className="border-y border-edge/60 bg-panel2">
-        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        <div className="mx-auto max-w-[1267px] px-4 py-20 sm:px-6">
           <SectionHeading title="Ein Workflow. Vier Schritte. Keine Zwischenexporte." />
           <div className="grid gap-8 lg:grid-cols-2">
             {steps.map((s) => (
@@ -181,52 +181,50 @@ export default function Home() {
             ))}
           </div>
           <div className="mt-12">
-            <Screenshot src="/screenshots/dashboard.png" alt="System3 Dashboard mit Suchmaske und Zeitersparnis-Kennzahl" />
+            <Screenshot src="/screenshots/dashboard.png" alt="Thaw Dashboard mit Suchmaske und Zeitersparnis-Kennzahl" />
           </div>
         </div>
       </section>
 
       {/* AI Agent deep-dive */}
-      <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+      <section className="mx-auto max-w-[1267px] px-4 py-20 sm:px-6">
         <SectionHeading
           eyebrow="Personalisierung"
           title="Der KI-Agent ist keine Blackbox"
         />
-        <div className="grid gap-10 lg:grid-cols-5 lg:items-start">
-          <div className="lg:col-span-2">
-            <p className="text-sm leading-relaxed text-soft sm:text-base">
-              Die meisten Tools spucken einen Icebreaker aus, ohne dass ihr wisst, worauf er sich
-              stützt oder wie er klingt. Bei System3 stellt ihr das selbst ein — pro Nische, pro
-              Kampagne, so oft ihr wollt.
-            </p>
-            <ul className="mt-6 space-y-4 text-sm text-soft">
-              <li className="flex gap-3">
-                <span className="mt-0.5 text-ink">•</span>
-                <span><span className="font-medium text-ink">Datenquelle wählen</span> — Firmenbeschreibung, Website-Text oder beides kombiniert.</span>
-              </li>
-              <li className="flex gap-3">
-                <span className="mt-0.5 text-ink">•</span>
-                <span><span className="font-medium text-ink">System-Prompt vollständig editierbar</span> — ihr bestimmt Ton, Regeln und Struktur, kein starres Template.</span>
-              </li>
-              <li className="flex gap-3">
-                <span className="mt-0.5 text-ink">•</span>
-                <span><span className="font-medium text-ink">Verbotene Wörter definieren</span> — damit kein Icebreaker nach generischer KI klingt.</span>
-              </li>
-              <li className="flex gap-3">
-                <span className="mt-0.5 text-ink">•</span>
-                <span><span className="font-medium text-ink">Live-Test an einer echten, recherchierten Firma</span> — bevor irgendetwas gespeichert oder verschickt wird.</span>
-              </li>
-            </ul>
-          </div>
-          <div className="lg:col-span-3">
-            <Screenshot src="/screenshots/ai-agent.png" alt="System3 AI-Agent-Konfiguration: Datenquelle, System-Prompt, Live-Test" />
-          </div>
+        <div className="max-w-2xl">
+          <p className="text-sm leading-relaxed text-soft sm:text-base">
+            Die meisten Tools spucken einen Icebreaker aus, ohne dass ihr wisst, worauf er sich
+            stützt oder wie er klingt. Bei Thaw stellt ihr das selbst ein — pro Nische, pro
+            Kampagne, so oft ihr wollt.
+          </p>
+          <ul className="mt-6 grid gap-4 text-sm text-soft sm:grid-cols-2">
+            <li className="flex gap-3">
+              <span className="mt-0.5 text-ink">•</span>
+              <span><span className="font-medium text-ink">Datenquelle wählen</span> — Firmenbeschreibung, Website-Text oder beides kombiniert.</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="mt-0.5 text-ink">•</span>
+              <span><span className="font-medium text-ink">System-Prompt vollständig editierbar</span> — ihr bestimmt Ton, Regeln und Struktur, kein starres Template.</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="mt-0.5 text-ink">•</span>
+              <span><span className="font-medium text-ink">Verbotene Wörter definieren</span> — damit kein Icebreaker nach generischer KI klingt.</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="mt-0.5 text-ink">•</span>
+              <span><span className="font-medium text-ink">Live-Test an einer echten, recherchierten Firma</span> — bevor irgendetwas gespeichert oder verschickt wird.</span>
+            </li>
+          </ul>
+        </div>
+        <div className="mt-10">
+          <Screenshot src="/screenshots/ai-agent.png" alt="Thaw AI-Agent-Konfiguration: Datenquelle, System-Prompt, Live-Test" />
         </div>
       </section>
 
       {/* USPs */}
       <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <SectionHeading eyebrow="Warum System3" title="Warum System3 und nicht vier einzelne Tools" />
+        <SectionHeading eyebrow="Warum Thaw" title="Warum Thaw und nicht vier einzelne Tools" />
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {usps.map((u) => (
             <div key={u.title} className="rounded-xl border border-edge/60 bg-panel p-6">
@@ -256,7 +254,7 @@ export default function Home() {
             <thead>
               <tr className="border-b border-edge/60 bg-panel2 text-left">
                 <th className="px-5 py-3 font-medium text-faint"> </th>
-                <th className="px-5 py-3 font-medium text-ink">System3</th>
+                <th className="px-5 py-3 font-medium text-ink">Thaw</th>
                 <th className="px-5 py-3 font-medium text-faint">Hunter + Apollo + Instantly einzeln</th>
               </tr>
             </thead>
@@ -278,9 +276,9 @@ export default function Home() {
         <div className="mx-auto max-w-3xl px-4 py-20 text-center sm:px-6">
           <SectionHeading title="Datenschutz ist keine Checkbox, sondern Teil der Architektur" />
           <p className="text-left text-sm leading-relaxed text-soft sm:text-base">
-            System3 läuft vollständig auf EU-Servern (Frankfurt). Zugangsdaten zu euren eigenen
+            Thaw läuft vollständig auf EU-Servern (Frankfurt). Zugangsdaten zu euren eigenen
             API-Keys werden verschlüsselt gespeichert, nicht im Klartext. Ihr behaltet die volle
-            Kontrolle über eure eigenen Zugänge — System3 speichert nur, was für den Betrieb
+            Kontrolle über eure eigenen Zugänge — Thaw speichert nur, was für den Betrieb
             tatsächlich nötig ist.
           </p>
           <div className="mt-6 flex flex-wrap gap-x-4 gap-y-2 text-sm text-faint">
@@ -297,7 +295,7 @@ export default function Home() {
       <section className="mx-auto max-w-3xl px-4 py-20 sm:px-6">
         <SectionHeading title="Warum wir das gebaut haben" />
         <p className="text-sm leading-relaxed text-soft sm:text-base">
-          Wir sind drei aus Wien, Anfang 20. System3 haben wir zuerst für uns selbst gebaut, weil
+          Wir sind drei aus Wien, Anfang 20. Thaw haben wir zuerst für uns selbst gebaut, weil
           wir für unsere eigene Kundenakquise genau das gesucht haben, was es so nicht gab: ein
           Tool statt vier. Wir suchen jetzt die ersten Partneragenturen, die es mit uns gemeinsam
           scharf machen.
@@ -327,7 +325,7 @@ export default function Home() {
           Bereit für die ersten Leads ohne manuelles Research?
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-soft sm:text-base">
-          15 Minuten, wir zeigen euch live, wie System3 für eure Nische aussieht — kein
+          15 Minuten, wir zeigen euch live, wie Thaw für eure Nische aussieht — kein
           Verkaufsgespräch von der Stange, sondern eine echte Suche mit euren eigenen Kriterien.
         </p>
         <CTAButton className="mt-8" />
@@ -336,7 +334,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="border-t border-edge/60">
         <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 text-xs text-mute sm:flex-row sm:items-center sm:justify-between sm:px-6">
-          <span>© {new Date().getFullYear()} System3 · Wien, Österreich</span>
+          <span>© {new Date().getFullYear()} Thaw · Wien, Österreich</span>
           <div className="flex flex-wrap gap-x-4 gap-y-2">
             <a href="/impressum" className="hover:text-ink">Impressum</a>
             <a href="/datenschutz" className="hover:text-ink">Datenschutzerklärung</a>
