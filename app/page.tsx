@@ -180,12 +180,46 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2">
+          <div className="mt-12">
             <Screenshot src="/screenshots/dashboard.png" alt="System3 Dashboard mit Suchmaske und Zeitersparnis-Kennzahl" />
-            <Screenshot src="/screenshots/ai-agent.png" alt="System3 AI-Agent-Konfiguration für individuelle Icebreaker" />
           </div>
-          <div className="mt-6 sm:mx-auto sm:max-w-md">
-            <Screenshot src="/screenshots/api-keys.png" alt="System3 Einstellungen: eigene API-Keys verschlüsselt hinterlegt" />
+        </div>
+      </section>
+
+      {/* AI Agent deep-dive */}
+      <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        <SectionHeading
+          eyebrow="Personalisierung"
+          title="Der KI-Agent ist keine Blackbox"
+        />
+        <div className="grid gap-10 lg:grid-cols-5 lg:items-start">
+          <div className="lg:col-span-2">
+            <p className="text-sm leading-relaxed text-soft sm:text-base">
+              Die meisten Tools spucken einen Icebreaker aus, ohne dass ihr wisst, worauf er sich
+              stützt oder wie er klingt. Bei System3 stellt ihr das selbst ein — pro Nische, pro
+              Kampagne, so oft ihr wollt.
+            </p>
+            <ul className="mt-6 space-y-4 text-sm text-soft">
+              <li className="flex gap-3">
+                <span className="mt-0.5 text-ink">•</span>
+                <span><span className="font-medium text-ink">Datenquelle wählen</span> — Firmenbeschreibung, Website-Text oder beides kombiniert.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="mt-0.5 text-ink">•</span>
+                <span><span className="font-medium text-ink">System-Prompt vollständig editierbar</span> — ihr bestimmt Ton, Regeln und Struktur, kein starres Template.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="mt-0.5 text-ink">•</span>
+                <span><span className="font-medium text-ink">Verbotene Wörter definieren</span> — damit kein Icebreaker nach generischer KI klingt.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="mt-0.5 text-ink">•</span>
+                <span><span className="font-medium text-ink">Live-Test an einer echten, recherchierten Firma</span> — bevor irgendetwas gespeichert oder verschickt wird.</span>
+              </li>
+            </ul>
+          </div>
+          <div className="lg:col-span-3">
+            <Screenshot src="/screenshots/ai-agent.png" alt="System3 AI-Agent-Konfiguration: Datenquelle, System-Prompt, Live-Test" />
           </div>
         </div>
       </section>
