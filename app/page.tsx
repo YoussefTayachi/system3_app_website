@@ -49,11 +49,15 @@ function SectionHeading({ eyebrow, title }: { eyebrow?: string; title: string })
   );
 }
 
-function StatNote({ text, source }: { text: string; source: string }) {
+function FactBox({ fact, sub, source }: { fact: string; sub?: string; source: string }) {
   return (
-    <div className="mt-4 rounded-lg bg-panel2 p-4">
-      <p className="text-sm leading-relaxed text-ink">{text}</p>
-      <p className="mt-1.5 text-xs text-mute">Quelle: {source}</p>
+    <div className="mt-4 rounded-lg border-l-4 border-indigo-500 bg-indigo-50 p-4">
+      <div className="flex items-start gap-2">
+        <span className="mt-0.5 shrink-0 rounded bg-indigo-500 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">Fakt</span>
+        <p className="text-sm font-semibold leading-snug text-ink">{fact}</p>
+      </div>
+      {sub && <p className="mt-2 text-sm leading-relaxed text-soft">{sub}</p>}
+      <p className="mt-2 text-xs text-mute">Quelle: {source}</p>
     </div>
   );
 }
@@ -85,7 +89,7 @@ const painPoints = [
 ];
 
 const steps = [
-  { n: "1", title: "Suchen", body: "Nische und Ort eingeben: Thaw findet passende Unternehmen automatisch, lokal über Google Maps oder breit über eine Firmendatenbank." },
+  { n: "1", title: "Suchen", body: "Nische und Ort eingeben, Thaw findet automatisch passende Unternehmen für euch." },
   { n: "2", title: "Finden", body: "Entscheider:innen und E-Mail-Adressen werden automatisch ermittelt." },
   { n: "3", title: "Verifizieren", body: "Jede Adresse wird geprüft, bevor sie in eine Kampagne geht." },
   { n: "4", title: "Personalisieren & Exportieren", body: "Eine KI schreibt pro Lead eine individuelle Icebreaker-Zeile, danach direkt exportierbar, auch im Instantly-fertigen Format." },
@@ -99,14 +103,16 @@ const usps = [
   {
     title: "Individuelle KI-Zusammenfassung pro Lead",
     body: "Für jedes Unternehmen wird automatisch eine faktenbasierte Zusammenfassung erstellt, Grundlage für einen Icebreaker, der wirklich nach Recherche klingt. Ton, Regeln und verbotene Wörter sind vollständig einstellbar.",
-    stat: "Tief personalisierte E-Mails erreichen 17 bis 18% Antwortquote, gegenüber 7 bis 9% bei einfacher oder keiner Personalisierung. Nur 5% der Versender personalisieren überhaupt jede einzelne E-Mail, genau diesen Aufwand automatisiert Thaw.",
+    fact: "Persönliche E-Mails bekommen etwa doppelt so oft eine Antwort wie 08/15-Mails.",
+    sub: "Fast niemand macht das von Hand, weil es zu lange dauert. Thaw übernimmt das für euch, bei jeder einzelnen E-Mail.",
     source: "Woodpecker, Auswertung von über 20 Mio. E-Mails, 2026",
   },
   {
     title: "E-Mail-Verifizierung eingebaut",
     body: "Jede gefundene Adresse wird geprüft, bevor sie in eine Kampagne geht. Das schützt eure Sender-Reputation, ohne ein zusätzliches Tool.",
-    stat: "Verifizierte Listen erreichen etwa die doppelte Antwortquote unverifizierter Listen. Ab rund 5% Bounce-Rate drosseln E-Mail-Provider aktiv die Zustellung.",
-    source: "Branchen-Benchmarks E-Mail-Deliverability, 2026",
+    fact: "Geprüfte E-Mail-Adressen kommen etwa doppelt so oft an wie ungeprüfte.",
+    sub: "Zu viele falsche Adressen und eure Mails landen im Spam statt im Postfach.",
+    source: "Branchen-Benchmarks E-Mail-Zustellbarkeit, 2026",
   },
   {
     title: "Bring Your Own Key: volle Kostentransparenz",
@@ -236,10 +242,13 @@ export default function Home() {
               <CTAButton />
               <span className="text-xs text-mute">15 Minuten, wir zeigen es live an eurer eigenen Nische.</span>
             </div>
-            <p className="mt-6 text-xs text-mute">
-              Marketing- und Werbeagenturen erzielen im Schnitt 42&nbsp;€ Rückfluss pro investiertem Euro in
-              E-Mail-Marketing. Quelle: Litmus, State of Email 2025.
-            </p>
+            <div className="mt-6 inline-flex flex-wrap items-center justify-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-4 py-2">
+              <span className="rounded bg-indigo-500 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">Fakt</span>
+              <span className="text-sm font-medium text-ink">
+                Agenturen bekommen im Schnitt 42&nbsp;€ zurück für jeden Euro, den sie in E-Mails stecken.
+              </span>
+            </div>
+            <p className="mt-1.5 text-xs text-mute">Quelle: Litmus, State of Email 2025</p>
           </div>
           <div className="fade-up mt-10">
             <Screenshot src="/screenshots/alle-leads.png" alt="Thaw Leads-Tabelle mit Firmen-Logos, Kontaktanzahl und E-Mail-Status" />
@@ -285,8 +294,9 @@ export default function Home() {
             ))}
           </div>
 
-          <StatNote
-            text="Kampagnen mit unter 50 gezielt ausgewählten Kontakten erzielen im Schnitt 5,8% Antwortquote, gegenüber 2,1% bei Listen mit über 1.000 Kontakten. Nischen- und Ort-Suche statt Massenliste zahlt sich rechnerisch aus."
+          <FactBox
+            fact="Kleine, gezielte Listen bekommen fast dreimal mehr Antworten als riesige Listen."
+            sub="Lieber wenige, gut ausgewählte Unternehmen anschreiben als tausende wahllos."
             source="Woodpecker, mit Verweis auf Belkins-Analyse von 16,5 Mio. E-Mails, 2026"
           />
 
@@ -380,12 +390,7 @@ export default function Home() {
             <div key={u.title} className="rounded-xl border border-edge/60 bg-panel p-6">
               <h3 className="text-sm font-semibold text-ink">{u.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-soft">{u.body}</p>
-              {u.stat && (
-                <div className="mt-4 border-t border-edge/60 pt-4">
-                  <p className="text-xs leading-relaxed text-soft">{u.stat}</p>
-                  <p className="mt-1.5 text-xs text-mute">Quelle: {u.source}</p>
-                </div>
-              )}
+              {u.fact && <FactBox fact={u.fact} sub={u.sub} source={u.source!} />}
             </div>
           ))}
         </div>
@@ -424,19 +429,17 @@ export default function Home() {
           </div>
         </div>
         <div className="mt-6 rounded-xl border border-edge/60 bg-panel2 p-5 text-xs leading-relaxed text-faint">
-          <p className="font-medium text-soft">So ist das gerechnet, keine Zusicherung:</p>
+          <p className="font-medium text-soft">So kommen die Zahlen zustande, keine Garantie:</p>
           <p className="mt-1.5">
-            Basis ist eine Versandkapazität von 125.000 E-Mails/Monat (Instantly-Hypergrowth-Plan,
-            das technische Maximum liegt bei bis zu 500.000/Monat). Lead-Beschaffung über Google
-            Maps und Hunter ist praktisch unlimitiert, daher ist der Versand der eigentliche
-            Flaschenhals, nicht die Anzahl verfügbarer Leads. Zeitersparnis auf Basis von rund 8
-            Minuten angenommener manueller Recherchezeit pro Kontakt. Kostenersparnis auf Basis von
-            45&nbsp;€/Std. (abgeleitet aus 1.500&nbsp;€ bei rund 33,3 Std. oben). Meetings auf Basis von 5%
-            Antwortquote, davon 25% positiv, davon 50% zu einem Termin führend, branchenübliche
-            Richtwerte, keine Garantie. Rund 42% aller Antworten in einer Kampagne kommen laut
-            Woodpecker-Auswertung erst aus Follow-up-Mails, deshalb zählt der direkte, saubere
-            Export in Instantly und Co. mit zur Rechnung. Euer tatsächliches Ergebnis hängt von
-            Nische, Liste und Angebot ab.
+            Wir rechnen mit 125.000 verschickten E-Mails im Monat (möglich wären sogar bis zu
+            500.000). Neue Unternehmen zu finden ist praktisch unbegrenzt, der Versand ist der
+            eigentliche Engpass. Für die Zeitersparnis rechnen wir mit rund 8 Minuten Handarbeit
+            pro Kontakt, für die Kostenersparnis mit 45&nbsp;€ Stundenlohn. Für die Meetings rechnen
+            wir mit 5% Antwortquote, davon ein Viertel positiv, davon die Hälfte führt zu einem
+            Termin, branchenübliche Werte, keine Garantie. Fast die Hälfte aller Antworten kommt
+            übrigens erst von der zweiten Mail, nicht von der ersten, deshalb zählt ein sauberer
+            Export in euer Versandtool mit dazu. Euer echtes Ergebnis hängt von eurer Nische und
+            eurem Angebot ab.
           </p>
         </div>
       </section>
