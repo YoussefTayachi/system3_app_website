@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+/* ===== Farb-Tokens — identisch zur System3-App (Attio/Notion-artig) ===== */
+:root {
+  --c-surface: #f9f9f8;
+  --c-panel: #ffffff;
+  --c-panel2: #f5f5f4;
+  --c-field: #ffffff;
+  --c-chip: #f1f0ee;
+  --c-wash: #f5f5f4;
+  --c-edge: #e9e8e6;
+  --c-edge2: #d8d7d4;
+  --c-edge3: #a9a8a2;
+  --c-ink: #1c1b19;
+  --c-soft: #57534e;
+  --c-faint: #79766f;
+  --c-mute: #aaa79f;
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-surface: var(--c-surface);
+  --color-panel: var(--c-panel);
+  --color-panel2: var(--c-panel2);
+  --color-field: var(--c-field);
+  --color-chip: var(--c-chip);
+  --color-wash: var(--c-wash);
+  --color-edge: var(--c-edge);
+  --color-edge2: var(--c-edge2);
+  --color-edge3: var(--c-edge3);
+  --color-ink: var(--c-ink);
+  --color-soft: var(--c-soft);
+  --color-faint: var(--c-faint);
+  --color-mute: var(--c-mute);
+}
+
+body {
+  background: var(--c-surface);
+  color: var(--c-ink);
+  font-family: "Inter Variable", Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "cv11", "ss01";
+}
+
+::selection { background: rgba(79, 70, 229, 0.18); }
+
+@keyframes fadeUp {
+  from { opacity: 0; top: 6px; }
+  to { opacity: 1; top: 0; }
+}
+.fade-up { position: relative; animation: fadeUp 0.5s cubic-bezier(0.2, 0.7, 0.3, 1) both; }
+
+.dot-grid {
+  background-image: radial-gradient(var(--c-edge2) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-up { animation: none; }
+}
