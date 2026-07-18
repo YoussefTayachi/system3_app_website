@@ -1,3 +1,5 @@
+import { AIAgentDemo } from "./_components/AIAgentDemo";
+
 const BOOKING_URL = "#book-a-demo"; // TODO: Cal.com/Calendly-Link einsetzen, sobald eingerichtet
 
 function Logo() {
@@ -16,11 +18,11 @@ function CTAButton({ className = "" }: { className?: string }) {
     <a
       href={BOOKING_URL}
       className={
-        "inline-flex items-center justify-center rounded-lg bg-ink px-5 py-2.5 text-sm font-medium text-surface shadow-sm transition-all hover:opacity-85 active:scale-[0.99] " +
+        "inline-flex items-center justify-center whitespace-nowrap rounded-lg bg-ink px-3.5 py-2 text-xs font-medium text-surface shadow-sm transition-all hover:opacity-85 active:scale-[0.99] sm:px-5 sm:py-2.5 sm:text-sm " +
         className
       }
     >
-      Demo buchen
+      Kostenlose Demo buchen
     </a>
   );
 }
@@ -238,7 +240,7 @@ export default function Home() {
               E-Mail-Adressen und schreibt für jeden Lead eine individuelle Icebreaker-Zeile,
               alles in einem Workflow, alles in einer App.
             </p>
-            <div className="mt-8 flex items-center justify-center gap-4">
+            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
               <CTAButton />
               <span className="text-xs text-mute">15 Minuten, wir zeigen es live an eurer eigenen Nische.</span>
             </div>
@@ -331,17 +333,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* AI Agent deep-dive */}
+      {/* AI Agent deep-dive: echtes, interaktives Demo statt Screenshot */}
       <section className="mx-auto max-w-[1267px] px-4 py-20 sm:px-6">
         <SectionHeading
           eyebrow="Personalisierung"
-          title="Der KI-Agent ist keine Blackbox"
+          title="Probiert es direkt an eurer eigenen Firma aus"
         />
         <div className="max-w-2xl">
           <p className="text-sm leading-relaxed text-soft sm:text-base">
-            Die meisten Tools spucken einen Icebreaker aus, ohne dass ihr wisst, worauf er sich
-            stützt oder wie er klingt. Bei Thaw stellt ihr das selbst ein: pro Nische, pro
-            Kampagne, so oft ihr wollt.
+            Gebt euren Firmennamen und eure Website ein, und ihr bekommt in ein paar Sekunden einen echten,
+            von der KI generierten Icebreaker-Satz, so wie ihn Thaw für jeden Lead automatisch schreibt.
           </p>
           <ul className="mt-6 grid gap-4 text-sm text-soft sm:grid-cols-2">
             <li className="flex gap-3">
@@ -363,7 +364,7 @@ export default function Home() {
           </ul>
         </div>
         <div className="mt-10">
-          <Screenshot src="/screenshots/ai-agent.png" alt="Thaw AI-Agent-Konfiguration: Datenquelle, System-Prompt, Live-Test" />
+          <AIAgentDemo />
         </div>
       </section>
 
@@ -447,7 +448,8 @@ export default function Home() {
       {/* Comparison */}
       <section id="vergleich" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <SectionHeading title="Im Vergleich" />
-        <div className="overflow-x-auto rounded-xl border border-edge/60">
+        {/* Desktop/tablet: table */}
+        <div className="hidden overflow-x-auto rounded-xl border border-edge/60 sm:block">
           <table className="w-full border-collapse text-sm">
             <thead>
               <tr className="border-b border-edge/60 bg-panel2 text-left">
@@ -466,6 +468,25 @@ export default function Home() {
               ))}
             </tbody>
           </table>
+        </div>
+
+        {/* Mobile: stacked cards */}
+        <div className="grid gap-4 sm:hidden">
+          {comparisonRows.map(([label, s3, other]) => (
+            <div key={label} className="rounded-xl border border-edge/60 bg-panel p-4">
+              <p className="text-xs font-medium uppercase tracking-wide text-faint">{label}</p>
+              <div className="mt-3 grid grid-cols-2 gap-3">
+                <div>
+                  <p className="text-[10px] font-medium uppercase tracking-wide text-mute">Thaw</p>
+                  <p className="mt-1 text-sm text-ink">{s3}</p>
+                </div>
+                <div>
+                  <p className="text-[10px] font-medium uppercase tracking-wide text-mute">Einzeln</p>
+                  <p className="mt-1 text-sm text-faint">{other}</p>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
