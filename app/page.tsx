@@ -1,5 +1,3 @@
-import { AIAgentDemo } from "./_components/AIAgentDemo";
-
 const BOOKING_URL = "#book-a-demo"; // TODO: Cal.com/Calendly-Link einsetzen, sobald eingerichtet
 
 function Logo() {
@@ -205,11 +203,15 @@ const faqs = [
     q: "Woher kommen die Zahlen zum Skalierungspotenzial?",
     a: "Aus einer offen gelegten Beispielrechnung, nicht aus einer Zusicherung: Versandkapazität nach Instantly-Hypergrowth-Plan, Recherchezeit und Antwortquote nach branchenüblichen Annahmen. Die Rechnung samt Annahmen steht direkt neben den Zahlen.",
   },
+  {
+    q: "Was passiert mit meinen Daten, wenn ich kündige?",
+    a: "Eure Daten werden nach Vertragsende gelöscht oder auf Wunsch zurückgegeben, geregelt im AVV. Es gibt keine automatische Weiternutzung nach Kündigung.",
+  },
 ];
 
 export default function Home() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen pb-16 sm:pb-0">
       {/* Nav */}
       <header className="sticky top-0 z-10 border-b border-edge/60 bg-surface/90 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
@@ -328,38 +330,67 @@ export default function Home() {
         </div>
       </section>
 
-      {/* AI Agent deep-dive: echtes, interaktives Demo statt Screenshot */}
+      {/* AI Agent deep-dive: illustriertes Mockup statt echtem Screenshot */}
       <section className="mx-auto max-w-[1267px] px-4 py-20 sm:px-6">
         <SectionHeading
           eyebrow="Personalisierung"
-          title="Probiert es direkt an eurer eigenen Firma aus"
+          title="Der KI-Agent ist keine Blackbox"
         />
-        <div className="max-w-2xl">
-          <p className="text-sm leading-relaxed text-soft sm:text-base">
-            Gebt euren Firmennamen und eure Website ein, und ihr bekommt in ein paar Sekunden einen echten,
-            von der KI generierten Icebreaker-Satz, so wie ihn Thaw für jeden Lead automatisch schreibt.
-          </p>
-          <ul className="mt-6 grid gap-4 text-sm text-soft sm:grid-cols-2">
-            <li className="flex gap-3">
-              <span className="mt-0.5 text-ink">•</span>
-              <span><span className="font-medium text-ink">Datenquelle wählen:</span> Firmenbeschreibung, Website-Text oder beides kombiniert.</span>
-            </li>
-            <li className="flex gap-3">
-              <span className="mt-0.5 text-ink">•</span>
-              <span><span className="font-medium text-ink">System-Prompt vollständig editierbar:</span> ihr bestimmt Ton, Regeln und Struktur, kein starres Template.</span>
-            </li>
-            <li className="flex gap-3">
-              <span className="mt-0.5 text-ink">•</span>
-              <span><span className="font-medium text-ink">Verbotene Wörter definieren:</span> damit kein Icebreaker nach generischer KI klingt.</span>
-            </li>
-            <li className="flex gap-3">
-              <span className="mt-0.5 text-ink">•</span>
-              <span><span className="font-medium text-ink">Live-Test an einer echten, recherchierten Firma:</span> bevor irgendetwas gespeichert oder verschickt wird.</span>
-            </li>
-          </ul>
-        </div>
-        <div className="mt-10">
-          <AIAgentDemo />
+        <div className="grid gap-10 lg:grid-cols-5 lg:items-start">
+          <div className="max-w-2xl lg:col-span-2">
+            <p className="text-sm leading-relaxed text-soft sm:text-base">
+              Die meisten Tools spucken einen Icebreaker aus, ohne dass ihr wisst, worauf er sich
+              stützt oder wie er klingt. Bei Thaw stellt ihr das selbst ein: pro Nische, pro
+              Kampagne, so oft ihr wollt.
+            </p>
+            <ul className="mt-6 grid gap-4 text-sm text-soft">
+              <li className="flex gap-3">
+                <span className="mt-0.5 text-ink">•</span>
+                <span><span className="font-medium text-ink">Datenquelle wählen:</span> Firmenbeschreibung, Website-Text oder beides kombiniert.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="mt-0.5 text-ink">•</span>
+                <span><span className="font-medium text-ink">System-Prompt vollständig editierbar:</span> ihr bestimmt Ton, Regeln und Struktur, kein starres Template.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="mt-0.5 text-ink">•</span>
+                <span><span className="font-medium text-ink">Verbotene Wörter definieren:</span> damit kein Icebreaker nach generischer KI klingt.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="mt-0.5 text-ink">•</span>
+                <span><span className="font-medium text-ink">Live-Test an einer echten, recherchierten Firma:</span> bevor irgendetwas gespeichert oder verschickt wird.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div className="lg:col-span-3">
+            <div className="rounded-xl border border-edge/60 bg-panel p-6 shadow-sm">
+              <p className="text-xs font-medium uppercase tracking-wide text-faint">Datenquelle</p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                <span className="rounded-full border border-sky-500/60 bg-sky-500/10 px-3 py-1 text-xs font-medium text-sky-700 dark:text-sky-300">
+                  Firmenbeschreibung
+                </span>
+                <span className="rounded-full border border-edge2 px-3 py-1 text-xs text-faint">Website-Text</span>
+                <span className="rounded-full border border-edge2 px-3 py-1 text-xs text-faint">Beides kombiniert</span>
+              </div>
+
+              <p className="mt-5 text-xs font-medium uppercase tracking-wide text-faint">System-Prompt</p>
+              <div className="mt-2 space-y-1.5 rounded-lg bg-panel2 p-4 font-mono text-[12px] leading-relaxed text-soft">
+                <p>- Nutze ausschließlich überprüfbare Fakten aus der Recherche.</p>
+                <p>- Kein Name, keine Begrüßung, keine Floskeln.</p>
+                <p>- Direkt, konkret, wie eine Beobachtung vor einer Vertriebsfrage.</p>
+              </div>
+
+              <p className="mt-5 text-xs font-medium uppercase tracking-wide text-faint">Verbotene Wörter</p>
+              <div className="mt-2 flex flex-wrap gap-1.5">
+                {["Respekt", "bewundern", "stolz", "Lob", "begeistert"].map((w) => (
+                  <span key={w} className="rounded bg-panel2 px-2 py-1 text-[11px] text-faint">
+                    {w}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -510,15 +541,61 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Thaw exists (professional, no personal/age framing) */}
-      <section className="mx-auto max-w-3xl px-4 py-20 sm:px-6">
+      {/* Why Thaw exists + honest trust building (early access, founder statement, powered by) */}
+      <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <SectionHeading title="Warum es Thaw gibt" />
-        <p className="text-sm leading-relaxed text-soft sm:text-base">
+        <p className="max-w-3xl text-sm leading-relaxed text-soft sm:text-base">
           Outbound-Teams kombinieren heute meist vier bis fünf einzelne Tools, um vom ersten
           Suchbegriff bis zur personalisierten, verifizierten E-Mail zu kommen. Thaw reduziert
           diesen Workflow auf ein einziges Tool, mit voller Kostentransparenz statt
           Pauschal-Abos und ohne CSV-Hin-und-Her zwischen Anbietern.
         </p>
+
+        <div className="mt-8 grid gap-5 lg:grid-cols-3">
+          <div className="rounded-xl border border-edge/60 bg-panel p-6">
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400">
+              <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+                <path d="M12 3v3m6.4 1.6-2.1 2.1M21 12h-3M6.7 9.7 4.6 7.6M3 12h3m1.7 4.3-2.1 2.1M12 18v3m4.3-1.7 2.1 2.1" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                <circle cx="12" cy="12" r="3.2" stroke="currentColor" strokeWidth="1.6" />
+              </svg>
+            </div>
+            <h3 className="mt-4 text-sm font-semibold text-ink">Früher Zugang statt großer Kundenliste</h3>
+            <p className="mt-1.5 text-sm leading-relaxed text-soft">
+              Thaw ist aktuell in aktiver Erprobung mit den ersten Partneragenturen. Bewusst eine
+              kleine, eng begleitete Gruppe statt eines anonymen Massenprodukts, jede Anpassung
+              geht direkt in den nächsten Sprint.
+            </p>
+          </div>
+
+          <div className="rounded-xl border border-edge/60 bg-panel p-6">
+            <p className="text-xs font-medium uppercase tracking-wide text-faint">Vom Gründerteam</p>
+            <p className="mt-3 text-sm italic leading-relaxed text-ink">
+              „Die 33 Stunden gesparte Recherchezeit weiter oben auf dieser Seite sind aus unserer
+              eigenen Akquise, nicht aus einer Fallstudie. Wir bauen Thaw für das Problem, das wir
+              selbst jeden Tag lösen mussten."
+            </p>
+            <div className="mt-4 flex items-center gap-2.5">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-sky-500 text-xs font-bold text-white">
+                T
+              </div>
+              <p className="text-xs text-mute">Gründerteam, Thaw</p>
+            </div>
+          </div>
+
+          <div className="rounded-xl border border-edge/60 bg-panel p-6">
+            <h3 className="text-sm font-semibold text-ink">Läuft mit etablierten Diensten</h3>
+            <p className="mt-1.5 text-sm leading-relaxed text-soft">
+              Keine Blackbox, sondern bekannte, geprüfte Anbieter im Hintergrund.
+            </p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {["OpenAI", "Google", "Hunter.io", "NeverBounce"].map((name) => (
+                <span key={name} className="rounded-full border border-edge2 bg-panel2 px-3 py-1 text-xs font-medium text-soft">
+                  {name}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* FAQ */}
@@ -562,6 +639,11 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Sticky mobile CTA */}
+      <div className="fixed inset-x-0 bottom-0 z-20 border-t border-edge/60 bg-surface/95 p-3 backdrop-blur sm:hidden">
+        <CTAButton className="w-full" />
+      </div>
     </div>
   );
 }
