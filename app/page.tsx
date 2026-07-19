@@ -4,7 +4,7 @@ const BOOKING_URL = "#book-a-demo"; // TODO: Cal.com/Calendly-Link einsetzen, so
 
 function Logo() {
   return (
-    <span className="text-xl font-bold tracking-tight text-[#0EA5E9]">thaw</span>
+    <span className="text-2xl font-extrabold tracking-tighter text-[#0EA5E9]">thaw</span>
   );
 }
 
