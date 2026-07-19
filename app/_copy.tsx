@@ -221,7 +221,7 @@ export const heroStatTiles = [
 // Vergleichsspalte beschreibt jetzt den realen Alternativ-Stack einer Agentur
 // mit mehreren Kunden, nicht den Stack einer einzelnen Person.
 export const comparisonRows: [string, string, string][] = [
-  ["Preismodell", "Nur tatsächliche API-Kosten (BYOK)", "Mehrere Pauschal-Abos, teils zusätzlich pro Kunden-Workspace"],
+  ["Lokale Kleinunternehmen finden", "Ja, direkt über Google Places/Maps", "Meist nicht gelistet, da kein LinkedIn-Profil oder strukturierte Firmendaten"],
   ["Alles in einem Workflow", "Ja", "Nein, separates Recherche-Tool + Sende-Tool + eigenes Reporting"],
   ["Mehrere Kunden verwalten", "Eigener Workspace pro Kunde inklusive", "Meist ein separat bepreistes White-Label-Add-on"],
   ["Reporting für den Endkunden", "Teilbarer Report-Link im Look des Kunden", "Von Hand aus mehreren Tools zusammengebaut"],
@@ -241,8 +241,8 @@ export const faqs = [
     a: "Ja, dafür gibt es eigene Workspaces pro Kunde, inklusive eigenem Namen, Logo und Akzentfarbe. Für jeden Workspace lässt sich ein Report-Link teilen, der eurem Endkunden aggregierte Kennzahlen im eigenen Look zeigt, ganz ohne dass der einen eigenen Account braucht.",
   },
   {
-    q: "Was kostet das wirklich?",
-    a: "Ihr zahlt eure eigenen API-Kosten, transparent im Dashboard sichtbar, plus eine feste Nutzungsgebühr, die wir im Gespräch für eure Größe festlegen. Keine versteckten Aufschläge auf die API-Nutzung.",
+    q: "Was kostet das?",
+    a: "Das besprechen wir individuell im Gespräch, abgestimmt auf eure Anzahl an Kunden-Workspaces und euren Umfang. Es gibt bewusst keinen Standardpreis von der Stange.",
   },
   {
     q: "Brauche ich eigene API-Keys? Ist das kompliziert?",

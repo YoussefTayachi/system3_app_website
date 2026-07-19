@@ -1,5 +1,5 @@
 import { Logo, CTAButton, Screenshot, SectionHeading, FactBox, StatTile } from "./_ui";
-import { AgencyMockup, PostSendMockup } from "./_mockups";
+import { AgencyMockup, PostSendMockup, LocalReachMockup } from "./_mockups";
 import {
   navLinks,
   painPoints,
@@ -38,9 +38,11 @@ export default function Home() {
               Lead-Gen und Cold Outreach für alle eure Kunden, aus einem Tool, unter eurem eigenen Namen.
             </h1>
             <p className="mt-5 text-base leading-relaxed text-soft sm:text-lg">
-              Thaw sucht Unternehmen, findet die richtigen Ansprechpartner, verifiziert die
-              E-Mail-Adressen und schreibt für jeden Lead eine individuelle Icebreaker-Zeile,
-              für jeden Kunden im eigenen Workspace, alles in einer App.
+              Ein Klick, und Thaw sucht automatisch passende Unternehmen, findet die richtigen
+              Ansprechpartner, verifiziert die E-Mail-Adressen und schreibt für jeden Lead eine
+              individuelle Icebreaker-Zeile, vollautomatisch, für jeden Kunden im eigenen
+              Workspace. Kein manueller Zwischenschritt spart euch Stunden pro Kunde und macht
+              Cold Outreach zu einem der günstigsten Kanäle, die es gibt.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
               <CTAButton />
@@ -68,9 +70,45 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Warum die Lead-Quelle den Unterschied macht: lokale Kleinunternehmen,
+          die klassische B2B-Datenbanken kaum abbilden */}
+      <section className="border-y border-edge/60 bg-panel2">
+        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+          <SectionHeading
+            eyebrow="Die Lead-Quelle macht den Unterschied"
+            title="Findet die kleinen, lokalen Unternehmen, die in klassischen Lead-Datenbanken kaum auftauchen"
+          />
+          <div className="grid gap-10 lg:grid-cols-5 lg:items-start">
+            <div className="lg:col-span-2">
+              <p className="text-sm leading-relaxed text-soft sm:text-base">
+                Klassische B2B-Datenbanken bauen auf LinkedIn-Profilen und strukturierten
+                Firmendaten auf, das bevorzugt Unternehmen mit digitaler Präsenz: Software-Firmen,
+                größere Mittelständler, Agenturen selbst. Der Handwerksbetrieb, das
+                Nachbarschaftsrestaurant, die Zahnarztpraxis, die kleine Kanzlei, oft genau die
+                Betriebe, die Marketing am dringendsten bräuchten, weil sie selbst noch nie
+                strukturiert investiert haben, tauchen dort kaum auf.
+              </p>
+              <p className="mt-4 text-sm leading-relaxed text-soft sm:text-base">
+                Thaw sucht stattdessen direkt über Google Places/Google Maps, wo praktisch jedes
+                Unternehmen mit physischer Adresse gelistet ist, unabhängig von digitaler Reife.
+                Für eine Agentur heißt das: Zugriff auf genau die lokalen Kund:innen, die sonst
+                zwischen den Zähnen der üblichen Prospecting-Tools durchfallen.
+              </p>
+            </div>
+            <div className="lg:col-span-3">
+              <LocalReachMockup />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Problem */}
       <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <SectionHeading title="Kommt dir bekannt vor?" />
+        <p className="-mt-6 mb-8 max-w-2xl text-sm leading-relaxed text-soft sm:text-base">
+          Jede Stunde manuelle Recherche ist eine Stunde, die weder abgerechnet noch für neue
+          Kund:innen genutzt wird, und multipliziert sich mit jedem zusätzlichen Kunden-Account.
+        </p>
         <div className="grid gap-5 sm:grid-cols-2">
           {painPoints.map((p) => (
             <div key={p.title} className="rounded-xl border border-edge/60 bg-panel p-6">
@@ -84,7 +122,11 @@ export default function Home() {
       {/* Solution */}
       <section id="produkt" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
         <div className="mx-auto max-w-[1267px] px-4 py-20 sm:px-6">
-          <SectionHeading title="Ein Workflow. Vier Schritte. Keine Zwischenexporte." />
+          <SectionHeading title="Ein Workflow. Vier Schritte. Vollautomatisch, auf Knopfdruck." />
+          <p className="-mt-6 mb-8 max-w-2xl text-sm leading-relaxed text-soft sm:text-base">
+            Einmal Nische und Kriterien festlegen, den Rest übernimmt Thaw: kein manueller
+            Zwischenschritt, kein Warten auf einen Praktikanten, keine Excel-Liste von Hand.
+          </p>
 
           <div className="grid gap-6 lg:grid-cols-4">
             {steps.map((s, i) => (
@@ -111,33 +153,6 @@ export default function Home() {
             source="Woodpecker, mit Verweis auf Belkins-Analyse von 16,5 Mio. E-Mails, 2026"
           />
 
-          <div className="mt-10 grid gap-6 lg:grid-cols-5 lg:items-center">
-            <div className="lg:col-span-2">
-              <h3 className="text-sm font-semibold text-ink">Beispiel: automatisch generierter Icebreaker</h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-soft">
-                Fiktives Beispiel zur Veranschaulichung. Jede echte Zeile basiert auf recherchierten
-                Fakten zum jeweiligen Unternehmen, nicht auf einem Textbaustein.
-              </p>
-            </div>
-            <div className="lg:col-span-3">
-              <div className="rounded-xl border border-edge/60 bg-panel p-5 shadow-sm">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-sky-500 text-xs font-bold text-white">
-                    MA
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-ink">Muster Agentur GmbH</p>
-                    <p className="text-xs text-mute">Website-Text und Firmenbeschreibung analysiert</p>
-                  </div>
-                </div>
-                <p className="mt-4 rounded-lg bg-panel2 p-4 text-sm leading-relaxed text-ink">
-                  „Ihr habt euer Leistungsangebot letztes Jahr um Performance-Marketing erweitert.
-                  Bei zehn neuen Kampagnen pro Monat wird die Lead-Recherche für neue Kund:innen
-                  schnell zum Flaschenhals.“
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 

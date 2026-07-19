@@ -84,3 +84,57 @@ export function PostSendMockup() {
     </div>
   );
 }
+
+/**
+ * Illustrierter Vergleich, warum die Lead-Quelle den Unterschied macht:
+ * kleine, rein lokale Betriebe tauchen in klassischen B2B-Firmendatenbanken
+ * (LinkedIn-/Firmografie-basiert) kaum auf, wohl aber bei einer direkten
+ * Google-Places-Suche. Bewusst als illustrierter Vergleich, keine erfundene
+ * Zahl/Studie dazu -- das ist eine strukturelle, nachvollziehbare Beobachtung
+ * über die jeweilige Datenquelle, keine belegte Statistik.
+ */
+export function LocalReachMockup() {
+  const businesses = [
+    { name: "Frisör Kaiser", sub: "Einzelsalon, 1 Standort" },
+    { name: "Schreinerei Huber", sub: "Handwerksbetrieb, 6 Mitarbeitende" },
+    { name: "Zahnarztpraxis Dr. Berger", sub: "Einzelpraxis" },
+  ];
+  return (
+    <div className="rounded-xl border border-edge/60 bg-panel p-6 shadow-sm">
+      <div className="grid gap-5 sm:grid-cols-2">
+        <div>
+          <p className="text-xs font-medium uppercase tracking-wide text-faint">Typische B2B-Datenbank</p>
+          <div className="mt-2 space-y-1.5">
+            {businesses.map((b) => (
+              <div key={b.name} className="flex items-center gap-2.5 rounded-lg border border-edge2 px-3 py-2 opacity-60">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-panel2 text-mute">
+                  <svg viewBox="0 0 24 24" fill="none" className="h-3.5 w-3.5"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>
+                </span>
+                <div className="min-w-0">
+                  <p className="truncate text-sm text-faint line-through">{b.name}</p>
+                  <p className="text-[11px] text-mute">nicht gelistet</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div>
+          <p className="text-xs font-medium uppercase tracking-wide text-faint">Thaw, über Google Places</p>
+          <div className="mt-2 space-y-1.5">
+            {businesses.map((b) => (
+              <div key={b.name} className="flex items-center gap-2.5 rounded-lg border border-emerald-500/30 bg-emerald-500/5 px-3 py-2">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-emerald-500/15 text-emerald-600 dark:text-emerald-300">
+                  <svg viewBox="0 0 24 24" fill="none" className="h-3.5 w-3.5"><path d="m5 13 4 4L19 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                </span>
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-medium text-ink">{b.name}</p>
+                  <p className="text-[11px] text-mute">{b.sub}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
