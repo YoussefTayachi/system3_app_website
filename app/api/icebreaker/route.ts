@@ -117,11 +117,24 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const systemPrompt =
-      "Du schreibst genau einen kurzen Icebreaker-Satz (Deutsch, maximal 30 Wörter) für eine Cold-E-Mail. " +
-      "Nutze ausschließlich Informationen aus dem gegebenen Firmentext, erfinde keine Fakten. " +
-      "Kein Smalltalk, keine Anrede, keine Grußformel, kein Hype. Direkt, konkret, klingt nach echter Recherche. " +
-      "Antworte nur mit dem einen Satz, ohne Anführungszeichen.";
+    // Identischer Prompt wie die "Thaw"-Standardvorlage im AI-Agent-Tab der App
+    // (apps/web/lib/personalization-defaults.ts, DEFAULT_PROMPT_DE). Bei Aenderungen
+    // dort bitte auch hier manuell nachziehen, damit die Website-Demo und das
+    // tatsaechliche Produkt dieselbe Qualitaet zeigen.
+    const systemPrompt = `Deine Aufgabe ist es, einen einzelnen, vertrieblich messerscharfen Aufhänger (Icebreaker) für eine Cold-Email zu generieren, der beweist, dass du die Welt des potenziellen Kunden tatsächlich verstehst.
+Regeln für den Icebreaker:
+- Nutze ausschließlich spezifische, überprüfbare Fakten aus der Recherche und anderen Datenfeldern (Rolle, Unternehmen, Nische, Standort, Historie, Angebote, Projekte etc.).
+- Tonalität: direkt, selbstbewusst, geschäftsmäßig. Eine gewisse Schärfe ist völlig in Ordnung. Kein Slang, kein Hype.
+- Erwähne NICHT LinkedIn, Google, „Ich habe gesehen", „Mir ist aufgefallen", „Ich habe gefunden" oder andere Verweise auf deinen Rechercheprozess. Nenne einfach direkt den Fakt.
+- Baue KEINEN Namen des potenziellen Kunden, deinen eigenen Namen, Begrüßungen oder Verabschiedungen in den Icebreaker ein.
+- Du darfst kommerzielle Interessen, Dynamiken oder Hebelwirkung andeuten (z. B. Mitbewerber überdauern, maßgeschneiderte Lösungen statt Masse wählen, eine Nische verdoppeln, Kapazitäten schützen), aber du darfst deine eigene Dienstleistung oder Lösung NICHT beschreiben oder pitchen.
+- Der Satz sollte sich wie eine scharfe Beobachtung anfühlen, die du direkt vor einer ernsthaften Vertriebsfrage äußern würdest.
+- Werde konkret. Vermeide vages Lob. Verankere die Aussage in etwas Zeitgebundenem, Ortsgebundenem oder Modellgebundenem (z. B. was sich verändert hat, worauf sie doppelt gesetzt haben, was sie weitergeführt haben, während andere damit aufhörten).
+Folge dem Ausgabeformat immer ganz genau.
+-Schreibe immer in der "Du" Form und nicht "Sie" Form und lass den Icebreaker persönlich klingen.
+-Beende den Icebreaker damit, dass du dich deswegen meldest und nutze verschiedene Varianten zb:"Dachte ich melde mich mal", "Deswegen wollte ich uns connecten", "Deshalb wollte ich dir mal schreiben" etc..
+
+Schreibe standardmäßig auf Deutsch, außer diese Vorgaben verlangen hier ausdrücklich eine andere Sprache.`;
 
     const aiRes = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
