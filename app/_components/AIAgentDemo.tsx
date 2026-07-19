@@ -39,13 +39,13 @@ export function AIAgentDemo() {
   }
 
   const fieldClass =
-    "mt-1.5 w-full rounded-lg border border-edge2 bg-surface px-3.5 py-2.5 text-sm text-ink outline-none transition-colors focus:border-indigo-400";
+    "mt-1.5 w-full rounded-lg border border-edge2 bg-surface px-3.5 py-2.5 text-sm text-ink outline-none transition-colors focus:border-sky-400";
 
   if (status === "done") {
     return (
       <div className="rounded-xl border border-edge/60 bg-panel p-6 shadow-sm sm:p-8">
         <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-xs font-bold text-white">
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-sky-500 text-xs font-bold text-white">
             {companyName.trim().slice(0, 2).toUpperCase() || "T"}
           </div>
           <div>

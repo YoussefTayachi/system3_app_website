@@ -4,12 +4,7 @@ const BOOKING_URL = "#book-a-demo"; // TODO: Cal.com/Calendly-Link einsetzen, so
 
 function Logo() {
   return (
-    <div className="flex items-center gap-2.5">
-      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 text-sm font-bold text-white">
-        T
-      </div>
-      <span className="text-base font-semibold tracking-tight text-ink">Thaw</span>
-    </div>
+    <span className="text-xl font-bold tracking-tight text-[#0EA5E9]">thaw</span>
   );
 }
 
@@ -53,9 +48,9 @@ function SectionHeading({ eyebrow, title }: { eyebrow?: string; title: string })
 
 function FactBox({ fact, sub, source }: { fact: string; sub?: string; source: string }) {
   return (
-    <div className="mt-4 rounded-lg border-l-4 border-indigo-500 bg-indigo-50 p-4">
+    <div className="mt-4 rounded-lg border-l-4 border-sky-500 bg-sky-50 p-4">
       <div className="flex items-start gap-2">
-        <span className="mt-0.5 shrink-0 rounded bg-indigo-500 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">Fakt</span>
+        <span className="mt-0.5 shrink-0 rounded bg-sky-500 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">Fakt</span>
         <p className="text-sm font-semibold leading-snug text-ink">{fact}</p>
       </div>
       {sub && <p className="mt-2 text-sm leading-relaxed text-soft">{sub}</p>}
@@ -244,8 +239,8 @@ export default function Home() {
               <CTAButton />
               <span className="text-xs text-mute">15 Minuten, wir zeigen es live an eurer eigenen Nische.</span>
             </div>
-            <div className="mt-6 inline-flex flex-wrap items-center justify-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-4 py-2">
-              <span className="rounded bg-indigo-500 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">Fakt</span>
+            <div className="mt-6 inline-flex flex-wrap items-center justify-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-4 py-2">
+              <span className="rounded bg-sky-500 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">Fakt</span>
               <span className="text-sm font-medium text-ink">
                 Agenturen bekommen im Schnitt 42&nbsp;€ zurück für jeden Euro, den sie in E-Mails stecken.
               </span>
@@ -314,7 +309,7 @@ export default function Home() {
             <div className="lg:col-span-3">
               <div className="rounded-xl border border-edge/60 bg-panel p-5 shadow-sm">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-xs font-bold text-white">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-sky-500 text-xs font-bold text-white">
                     MA
                   </div>
                   <div>
