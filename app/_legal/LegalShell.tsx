@@ -6,7 +6,7 @@ export function LegalShell({ title, updated, children }: { title: string; update
       <header className="border-b border-edge/60">
         <div className="mx-auto flex max-w-3xl items-center justify-between px-4 py-4 sm:px-6">
           <Link href="/" className="flex items-center gap-2.5">
-            <span className="text-2xl font-extrabold tracking-tighter text-[#0EA5E9]">thaw</span>
+            <span className="text-3xl font-extrabold tracking-tighter text-[#0EA5E9]">thaw</span>
           </Link>
           <Link href="/" className="text-sm text-soft hover:text-ink">Zurück zur Startseite</Link>
         </div>
