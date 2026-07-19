@@ -59,6 +59,7 @@ function FactBox({ fact, sub, source }: { fact: string; sub?: string; source: st
 
 const navLinks = [
   { href: "#produkt", label: "Produkt" },
+  { href: "#agenturen", label: "Für Agenturen" },
   { href: "#integrationen", label: "Integrationen" },
   { href: "#vergleich", label: "Vergleich" },
   { href: "#faq", label: "FAQ" },
@@ -121,10 +122,18 @@ const usps = [
     title: "Direkter Draht zum Team",
     body: "Kein Ticket-System. Ihr sprecht direkt mit den Leuten, die das Tool gebaut haben, inklusive echter Anpassungen auf Wunsch.",
   },
+  {
+    title: "Filtert nach echten Pain Points, nicht nur nach Branche und Ort",
+    body: "Google-Bewertung und ob überhaupt eine Website existiert fließen direkt in die Suche ein. Der Icebreaker bezieht dieses Signal automatisch mit ein, wenn es zutrifft, zum Beispiel wenn ein Unternehmen seit Jahren keine aktuelle Bewertung oder gar keine Website hat, statt nur Firmenname und Branche zu kennen.",
+  },
+  {
+    title: "Fertige Branchen-Playbooks statt eigenem Trial-and-Error",
+    body: "Vorgefertigte Kombinationen aus Suchkriterien, Pain-Point-Filter und Personalisierungs-Hinweis für gängige Nischen, etwa Restaurants ohne aktuelle Website oder Handwerksbetriebe ohne Terminbuchung. Ein Klick statt tagelangem Herumprobieren mit Suchbegriffen.",
+  },
 ];
 
 const integrations = [
-  { name: "Instantly", note: "CSV-Import, Auto-Mapping" },
+  { name: "Instantly", note: "CSV-Export + native Sync für Antworten & Kennzahlen" },
   { name: "Smartlead", note: "CSV-Import" },
   { name: "Lemlist", note: "CSV-Import" },
   { name: "HubSpot", note: "CSV-Import" },
@@ -169,6 +178,86 @@ const trustBadges = [
   },
 ];
 
+const postSendFeatures = [
+  {
+    title: "Antworten automatisch einordnen",
+    body: "Jede eingehende Antwort wird per KI in interessiert, kein Interesse oder Rückfrage sortiert, direkt sichtbar am jeweiligen Kontakt. Kein manuelles Durchklicken des Postfachs mehr, um herauszufinden, wer wirklich reagiert hat.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
+        <path d="M4 6h16v12H4z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+        <path d="m4 7 8 6 8-6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
+  },
+  {
+    title: "Umsatzbezogenes Dashboard statt nur Öffnungsrate",
+    body: "Gebuchte Meetings, geschätzter Pipeline-Wert und Kosten pro Opportunity, direkt im selben Dashboard wie die Lead-Suche. Die meisten Recherche-Tools enden beim Export einer Liste, hier fließen die Ergebnisse danach sichtbar zurück.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
+        <path d="M4 20V10m6 10V4m6 16v-7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
+  },
+  {
+    title: "Lead-Status pro Kontakt, ohne separates CRM",
+    body: "Kontaktiert, geantwortet, Meeting gebucht, Kunde geworden, alles direkt in der Leads-Tabelle nachvollziehbar. Für den Überblick, wer schon bearbeitet wurde, reicht das oft, ohne dass ein zusätzliches CRM angeschafft werden muss.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
+        <rect x="4" y="5" width="16" height="14" rx="2" stroke="currentColor" strokeWidth="1.6" />
+        <path d="M8 9h8M8 13h5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+  {
+    title: "Zustellbarkeit im Blick, bevor es zum Problem wird",
+    body: "Tagesvolumen pro Postfach auf einen Blick, mit Warnung bei riskant hohem Sendevolumen. Besonders wichtig, sobald mehrere Kunden-Domains gleichzeitig laufen, sonst merkt man ein Zustellbarkeits-Problem oft erst, wenn die Antwortquote schon eingebrochen ist.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
+        <path d="M12 2 3 6v6c0 5 3.8 8.7 9 10 5.2-1.3 9-5 9-10V6l-9-4Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+        <path d="M12 8v5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+        <circle cx="12" cy="15.7" r="1" fill="currentColor" />
+      </svg>
+    ),
+  },
+];
+
+const agencyFeatures = [
+  {
+    title: "Ein Login, ein Workspace pro Kunde",
+    body: "Leads, Kampagnen und Kontakte laufen pro Kunde sauber getrennt, ohne für jeden ein eigenes Abo abzuschließen oder Daten manuell zu trennen. Workspaces lassen sich in Sekunden anlegen, umbenennen oder wieder entfernen.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
+        <rect x="3" y="4" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.6" />
+        <rect x="14" y="4" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.6" />
+        <rect x="3" y="15" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.6" />
+        <rect x="14" y="15" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.6" />
+      </svg>
+    ),
+  },
+  {
+    title: "Branding pro Kunden-Workspace",
+    body: "Name, Logo und Akzentfarbe lassen sich je Workspace hinterlegen, damit das, was der Endkunde zu sehen bekommt, nach der Agentur aussieht, nicht nach einem fremden Tool im Hintergrund.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
+        <path d="M4 17.5 14.5 7 17 9.5 6.5 20H4v-2.5Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+        <path d="m13 8.5 2.5 2.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+  {
+    title: "Teilbarer Report-Link, ohne Login für den Endkunden",
+    body: "Ein Link pro Workspace zeigt aggregierte Kennzahlen wie gefundene Leads, versendete Mails, Antworten, gebuchte Meetings und Pipeline-Wert im Look des jeweiligen Kunden, ganz ohne dass der einen eigenen Account braucht. Einzelne Kontaktdaten sieht der Endkunde dabei bewusst nicht.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
+        <circle cx="6" cy="12" r="2.4" stroke="currentColor" strokeWidth="1.6" />
+        <circle cx="18" cy="6" r="2.4" stroke="currentColor" strokeWidth="1.6" />
+        <circle cx="18" cy="18" r="2.4" stroke="currentColor" strokeWidth="1.6" />
+        <path d="m8.1 10.8 7.8-3.6M8.1 13.2l7.8 3.6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+];
+
 const comparisonRows: [string, string, string][] = [
   ["Preismodell", "Nur tatsächliche API-Kosten (BYOK)", "Mehrere Pauschal-Abos gleichzeitig"],
   ["Alles in einem Workflow", "Ja", "Nein, manueller Export/Import zwischen Tools"],
@@ -193,7 +282,11 @@ const faqs = [
   },
   {
     q: "Wie unterscheidet sich das von Apollo/Hunter/Instantly?",
-    a: "Die machen jeweils einen Teil des Workflows gut. Thaw verbindet Suche, Anreicherung, Verifizierung und Personalisierung, damit ihr nicht zwischen mehreren Tools hin- und herexportiert.",
+    a: "Die machen jeweils einen Teil des Workflows gut. Thaw verbindet Suche, Anreicherung, Verifizierung und Personalisierung, damit ihr nicht zwischen mehreren Tools hin- und herexportiert. Zusätzlich bleibt Thaw auch nach dem Versand im Bild: Antworten werden automatisch eingeordnet, und das Dashboard zeigt gebuchte Meetings und Pipeline-Wert, nicht nur Öffnungsraten.",
+  },
+  {
+    q: "Kann ich das als Agentur für mehrere Kunden gleichzeitig nutzen?",
+    a: "Ja, dafür gibt es eigene Workspaces pro Kunde, inklusive eigenem Namen, Logo und Akzentfarbe. Für jeden Workspace lässt sich ein Report-Link teilen, der eurem Endkunden aggregierte Kennzahlen im eigenen Look zeigt, ganz ohne dass der einen eigenen Account braucht.",
   },
   {
     q: "Wie schnell bin ich startklar?",
@@ -394,6 +487,31 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Post-send loop: reply classification, revenue dashboard, CRM-lite status, deliverability */}
+      <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        <SectionHeading
+          eyebrow="Mehr als Lead-Suche"
+          title="Die meisten Tools hören auf, sobald die Mail raus ist. Thaw nicht."
+        />
+        <p className="max-w-3xl text-sm leading-relaxed text-soft sm:text-base">
+          Über eine Verbindung zu eurem Versandtool fließen Antworten, Bounces und
+          Meeting-Ergebnisse zurück in dasselbe Dashboard, in dem die Leads gefunden wurden.
+          Ihr müsst dafür nicht zwischen Recherche-Tool, Postfach und einer separaten
+          Tabelle hin- und herspringen.
+        </p>
+        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {postSendFeatures.map((f) => (
+            <div key={f.title} className="rounded-xl border border-edge/60 bg-panel p-6">
+              <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-panel2 text-ink">
+                {f.icon}
+              </div>
+              <h3 className="mt-4 text-sm font-semibold text-ink">{f.title}</h3>
+              <p className="mt-1.5 text-sm leading-relaxed text-soft">{f.body}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* Integrations */}
       <section id="integrationen" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
@@ -405,6 +523,42 @@ export default function Home() {
                 <p className="mt-1 text-xs text-mute">{i.note}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Agency / white-label */}
+      <section id="agenturen" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
+        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+          <SectionHeading
+            eyebrow="Für Agenturen"
+            title="Mehrere Kunden verwalten, ohne für jeden ein neues Abo aufzumachen"
+          />
+          <p className="max-w-3xl text-sm leading-relaxed text-soft sm:text-base">
+            Betreut ihr Lead-Gen oder Cold Outreach für eure eigenen Kunden? Dann läuft jeder
+            Kunde in einem eigenen, sauber getrennten Workspace, im Look dieses Kunden, unter
+            einem einzigen Login für euer Team.
+          </p>
+          <div className="mt-8 grid gap-5 sm:grid-cols-3">
+            {agencyFeatures.map((f) => (
+              <div key={f.title} className="rounded-xl border border-edge/60 bg-panel p-6">
+                <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400">
+                  {f.icon}
+                </div>
+                <h3 className="mt-4 text-sm font-semibold text-ink">{f.title}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-soft">{f.body}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-6 rounded-xl border border-edge/60 bg-panel p-5">
+            <p className="text-sm leading-relaxed text-soft">
+              <span className="font-medium text-ink">Bei reinen Versand-Tools ist eine Multi-Kunden-Verwaltung meist ein
+              separat bepreistes Zusatzmodul,</span> oft mit einem eigenen Preis pro angelegtem
+              Kunden-Workspace, obendrauf auf ein Tool, das nur den Versand übernimmt. Bei Thaw
+              ist das von Anfang an Teil des Produkts, weil Lead-Suche, Personalisierung und
+              Reporting sowieso pro Kunde getrennt laufen müssen, nicht als nachträglich
+              angeflanschtes Feature.
+            </p>
           </div>
         </div>
       </section>
