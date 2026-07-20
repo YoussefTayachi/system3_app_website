@@ -3,7 +3,7 @@ import { AgencyMockup } from "../_mockups";
 import { heroStatTiles } from "../_copy";
 
 export const metadata = {
-  title: "Thaw für Agenturen · Kurzübersicht",
+  title: "Frostbreaker für Agenturen · Kurzübersicht",
   description: "Lead-Gen und Cold Outreach für alle eure Kunden, aus einem Tool, unter eurem eigenen Namen.",
 };
 
@@ -12,7 +12,7 @@ export const metadata = {
  * Kaltakquise (E-Mail/Anruf). Bewusst kein Nav, keine Vergleichstabelle, keine
  * FAQ: wer hierher klickt, hat den Haken aus der Mail schon im Kopf und soll
  * in Sekunden bestätigt sehen, dass das hier genau das ist ("Message Match").
- * Die volle Seite mit allen Belegen bleibt unter thaw.io/ für alle anderen
+ * Die volle Seite mit allen Belegen bleibt unter frostbreaker.app/ für alle anderen
  * Besucher (organisch, weitergeleitet, etc.).
  */
 export default function StartPage() {
@@ -54,7 +54,7 @@ export default function StartPage() {
           </div>
           <FactBox
             fact="Bei reinen Versand-Tools ist Multi-Kunden-Verwaltung meist ein separat bepreistes Zusatzmodul."
-            sub="Bei Thaw ist das von Anfang an Teil des Produkts, weil Lead-Suche, Personalisierung und Reporting sowieso pro Kunde getrennt laufen müssen."
+            sub="Bei Frostbreaker ist das von Anfang an Teil des Produkts, weil Lead-Suche, Personalisierung und Reporting sowieso pro Kunde getrennt laufen müssen."
             source="Marktvergleich White-Label-Cold-Email-Tools, 2026"
           />
         </div>
@@ -75,7 +75,7 @@ export default function StartPage() {
 
       <footer className="border-t border-edge/60">
         <div className="mx-auto max-w-3xl px-4 py-6 text-center text-xs text-mute sm:px-6">
-          © {new Date().getFullYear()} Thaw · Wien, Österreich
+          © {new Date().getFullYear()} Frostbreaker · Wien, Österreich
         </div>
       </footer>
     </div>

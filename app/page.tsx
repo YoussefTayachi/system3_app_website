@@ -38,7 +38,7 @@ export default function Home() {
               Lead-Gen und Cold Outreach für alle eure Kunden, aus einem Tool, unter eurem eigenen Namen.
             </h1>
             <p className="mt-5 text-base leading-relaxed text-soft sm:text-lg">
-              Ein Klick, und Thaw sucht automatisch passende Unternehmen, findet die richtigen
+              Ein Klick, und Frostbreaker sucht automatisch passende Unternehmen, findet die richtigen
               Ansprechpartner, verifiziert die E-Mail-Adressen und schreibt für jeden Lead eine
               individuelle Icebreaker-Zeile, vollautomatisch, für jeden Kunden im eigenen
               Workspace. Kein manueller Zwischenschritt spart euch Stunden pro Kunde und macht
@@ -57,7 +57,7 @@ export default function Home() {
             <p className="mt-1.5 text-xs text-mute">Quelle: Litmus, State of Email 2025</p>
           </div>
           <div className="fade-up mt-10">
-            <Screenshot src="/screenshots/alle-leads.png" alt="Thaw Leads-Tabelle mit Firmen-Logos, Kontaktanzahl und E-Mail-Status" />
+            <Screenshot src="/screenshots/alle-leads.png" alt="Frostbreaker Leads-Tabelle mit Firmen-Logos, Kontaktanzahl und E-Mail-Status" />
           </div>
           {/* Kompakte Stat-Kachel-Reihe, dieselbe belegte Zahl wie weiter unten im
               "Proof stat"-Abschnitt, hier bewusst früher und kompakter wiederholt
@@ -89,7 +89,7 @@ export default function Home() {
                 strukturiert investiert haben, tauchen dort kaum auf.
               </p>
               <p className="mt-4 text-sm leading-relaxed text-soft sm:text-base">
-                Thaw sucht stattdessen direkt über Google Places/Google Maps, wo praktisch jedes
+                Frostbreaker sucht stattdessen direkt über Google Places/Google Maps, wo praktisch jedes
                 Unternehmen mit physischer Adresse gelistet ist, unabhängig von digitaler Reife.
                 Für eine Agentur heißt das: Zugriff auf genau die lokalen Kund:innen, die sonst
                 zwischen den Zähnen der üblichen Prospecting-Tools durchfallen.
@@ -124,7 +124,7 @@ export default function Home() {
         <div className="mx-auto max-w-[1267px] px-4 py-20 sm:px-6">
           <SectionHeading title="Ein Workflow. Vier Schritte. Vollautomatisch, auf Knopfdruck." />
           <p className="-mt-6 mb-8 max-w-2xl text-sm leading-relaxed text-soft sm:text-base">
-            Einmal Nische und Kriterien festlegen, den Rest übernimmt Thaw: kein manueller
+            Einmal Nische und Kriterien festlegen, den Rest übernimmt Frostbreaker: kein manueller
             Zwischenschritt, kein Warten auf einen Praktikanten, keine Excel-Liste von Hand.
           </p>
 
@@ -193,7 +193,7 @@ export default function Home() {
             <p className="text-sm leading-relaxed text-soft">
               <span className="font-medium text-ink">Bei reinen Versand-Tools ist eine Multi-Kunden-Verwaltung meist ein
               separat bepreistes Zusatzmodul,</span> oft mit einem eigenen Preis pro angelegtem
-              Kunden-Workspace, obendrauf auf ein Tool, das nur den Versand übernimmt. Bei Thaw
+              Kunden-Workspace, obendrauf auf ein Tool, das nur den Versand übernimmt. Bei Frostbreaker
               ist das von Anfang an Teil des Produkts.
             </p>
           </div>
@@ -206,7 +206,7 @@ export default function Home() {
           <div className="lg:col-span-2">
             <SectionHeading
               eyebrow="Mehr als Lead-Suche"
-              title="Die meisten Tools hören auf, sobald die Mail raus ist. Thaw nicht."
+              title="Die meisten Tools hören auf, sobald die Mail raus ist. Frostbreaker nicht."
             />
             <p className="max-w-md text-sm leading-relaxed text-soft sm:text-base">
               Über eine Verbindung zu eurem Versandtool fließen Antworten, Bounces und
@@ -240,7 +240,7 @@ export default function Home() {
           <div className="max-w-2xl lg:col-span-2">
             <p className="text-sm leading-relaxed text-soft sm:text-base">
               Die meisten Tools spucken einen Icebreaker aus, ohne dass ihr wisst, worauf er sich
-              stützt oder wie er klingt. Bei Thaw stellt ihr das selbst ein: pro Nische, pro
+              stützt oder wie er klingt. Bei Frostbreaker stellt ihr das selbst ein: pro Nische, pro
               Kampagne, so oft ihr wollt.
             </p>
             <ul className="mt-6 grid gap-4 text-sm text-soft">
@@ -311,7 +311,7 @@ export default function Home() {
 
       {/* USPs */}
       <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <SectionHeading eyebrow="Warum Thaw" title="Warum Thaw und nicht vier einzelne Tools" />
+        <SectionHeading eyebrow="Warum Frostbreaker" title="Warum Frostbreaker und nicht vier einzelne Tools" />
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {usps.map((u) => (
             <div key={u.title} className="rounded-xl border border-edge/60 bg-panel p-6">
@@ -380,7 +380,7 @@ export default function Home() {
             <thead>
               <tr className="border-b border-edge/60 bg-panel2 text-left">
                 <th className="px-5 py-3 font-medium text-faint"> </th>
-                <th className="px-5 py-3 font-medium text-ink">Thaw</th>
+                <th className="px-5 py-3 font-medium text-ink">Frostbreaker</th>
                 <th className="px-5 py-3 font-medium text-faint">Typischer Alternativ-Stack einer Agentur</th>
               </tr>
             </thead>
@@ -403,7 +403,7 @@ export default function Home() {
               <p className="text-xs font-medium uppercase tracking-wide text-faint">{label}</p>
               <div className="mt-3 grid grid-cols-2 gap-3">
                 <div>
-                  <p className="text-[10px] font-medium uppercase tracking-wide text-mute">Thaw</p>
+                  <p className="text-[10px] font-medium uppercase tracking-wide text-mute">Frostbreaker</p>
                   <p className="mt-1 text-sm text-ink">{s3}</p>
                 </div>
                 <div>
@@ -441,12 +441,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Thaw exists + honest trust building (early access, founder statement, powered by) */}
+      {/* Why Frostbreaker exists + honest trust building (early access, founder statement, powered by) */}
       <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <SectionHeading title="Warum es Thaw gibt" />
+        <SectionHeading title="Warum es Frostbreaker gibt" />
         <p className="max-w-3xl text-sm leading-relaxed text-soft sm:text-base">
           Outbound-Teams kombinieren heute meist vier bis fünf einzelne Tools, um vom ersten
-          Suchbegriff bis zur personalisierten, verifizierten E-Mail zu kommen. Thaw reduziert
+          Suchbegriff bis zur personalisierten, verifizierten E-Mail zu kommen. Frostbreaker reduziert
           diesen Workflow auf ein einziges Tool, mit voller Kostentransparenz statt
           Pauschal-Abos und ohne CSV-Hin-und-Her zwischen Anbietern.
         </p>
@@ -461,7 +461,7 @@ export default function Home() {
             </div>
             <h3 className="mt-4 text-sm font-semibold text-ink">Früher Zugang statt großer Kundenliste</h3>
             <p className="mt-1.5 text-sm leading-relaxed text-soft">
-              Thaw ist aktuell in aktiver Erprobung mit den ersten Partneragenturen. Bewusst eine
+              Frostbreaker ist aktuell in aktiver Erprobung mit den ersten Partneragenturen. Bewusst eine
               kleine, eng begleitete Gruppe statt eines anonymen Massenprodukts, jede Anpassung
               geht direkt in den nächsten Sprint.
             </p>
@@ -471,14 +471,14 @@ export default function Home() {
             <p className="text-xs font-medium uppercase tracking-wide text-faint">Vom Gründerteam</p>
             <p className="mt-3 text-sm italic leading-relaxed text-ink">
               „Die 33 Stunden gesparte Recherchezeit weiter oben auf dieser Seite sind aus unserer
-              eigenen Akquise, nicht aus einer Fallstudie. Wir bauen Thaw für das Problem, das wir
+              eigenen Akquise, nicht aus einer Fallstudie. Wir bauen Frostbreaker für das Problem, das wir
               selbst jeden Tag lösen mussten."
             </p>
             <div className="mt-4 flex items-center gap-2.5">
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-sky-500 text-xs font-bold text-white">
                 T
               </div>
-              <p className="text-xs text-mute">Gründerteam, Thaw</p>
+              <p className="text-xs text-mute">Gründerteam, Frostbreaker</p>
             </div>
           </div>
 
@@ -521,7 +521,7 @@ export default function Home() {
           Bereit für die ersten Leads ohne manuelles Research?
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-soft sm:text-base">
-          15 Minuten, wir zeigen euch live, wie Thaw für eure Nische aussieht. Kein
+          15 Minuten, wir zeigen euch live, wie Frostbreaker für eure Nische aussieht. Kein
           Verkaufsgespräch von der Stange, sondern eine echte Suche mit euren eigenen Kriterien.
         </p>
         <CTAButton className="mt-8" />
@@ -530,7 +530,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="border-t border-edge/60">
         <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 text-xs text-mute sm:flex-row sm:items-center sm:justify-between sm:px-6">
-          <span>© {new Date().getFullYear()} Thaw · Wien, Österreich</span>
+          <span>© {new Date().getFullYear()} Frostbreaker · Wien, Österreich</span>
           <div className="flex flex-wrap gap-x-4 gap-y-2">
             <a href="/impressum" className="hover:text-ink">Impressum</a>
             <a href="/datenschutz" className="hover:text-ink">Datenschutzerklärung</a>

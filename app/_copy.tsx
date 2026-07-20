@@ -36,7 +36,7 @@ export const painPoints = [
 ];
 
 export const steps = [
-  { n: "1", title: "Suchen", body: "Nische und Ort eingeben, Thaw findet automatisch passende Unternehmen, für jeden Kunden im eigenen Workspace." },
+  { n: "1", title: "Suchen", body: "Nische und Ort eingeben, Frostbreaker findet automatisch passende Unternehmen, für jeden Kunden im eigenen Workspace." },
   { n: "2", title: "Finden", body: "Entscheider:innen und E-Mail-Adressen werden automatisch ermittelt." },
   { n: "3", title: "Verifizieren", body: "Jede Adresse wird geprüft, bevor sie in eine Kampagne geht." },
   { n: "4", title: "Personalisieren & Exportieren", body: "Eine KI schreibt pro Lead eine individuelle Icebreaker-Zeile, danach direkt exportierbar, auch im Instantly-fertigen Format." },
@@ -51,7 +51,7 @@ export const usps = [
     title: "Individuelle KI-Zusammenfassung pro Lead",
     body: "Für jedes Unternehmen wird automatisch eine faktenbasierte Zusammenfassung erstellt, Grundlage für einen Icebreaker, der wirklich nach Recherche klingt. Ton, Regeln und verbotene Wörter sind vollständig einstellbar.",
     fact: "Persönliche E-Mails bekommen etwa doppelt so oft eine Antwort wie 08/15-Mails.",
-    sub: "Fast niemand macht das von Hand, weil es zu lange dauert. Thaw übernimmt das für euch, bei jeder einzelnen E-Mail.",
+    sub: "Fast niemand macht das von Hand, weil es zu lange dauert. Frostbreaker übernimmt das für euch, bei jeder einzelnen E-Mail.",
     source: "Woodpecker, Auswertung von über 20 Mio. E-Mails, 2026",
   },
   {
@@ -250,7 +250,7 @@ export const faqs = [
   },
   {
     q: "Wie unterscheidet sich das von Apollo/Hunter/Instantly?",
-    a: "Die machen jeweils einen Teil des Workflows gut. Thaw verbindet Suche, Anreicherung, Verifizierung und Personalisierung, damit ihr nicht zwischen mehreren Tools hin- und herexportiert. Zusätzlich bleibt Thaw auch nach dem Versand im Bild: Antworten werden automatisch eingeordnet, und das Dashboard zeigt gebuchte Meetings und Pipeline-Wert, nicht nur Öffnungsraten.",
+    a: "Die machen jeweils einen Teil des Workflows gut. Frostbreaker verbindet Suche, Anreicherung, Verifizierung und Personalisierung, damit ihr nicht zwischen mehreren Tools hin- und herexportiert. Zusätzlich bleibt Frostbreaker auch nach dem Versand im Bild: Antworten werden automatisch eingeordnet, und das Dashboard zeigt gebuchte Meetings und Pipeline-Wert, nicht nur Öffnungsraten.",
   },
   {
     q: "Wie schnell bin ich startklar?",

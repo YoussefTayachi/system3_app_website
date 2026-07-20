@@ -49,7 +49,7 @@ export function AgencyMockup() {
           <circle cx="18" cy="18" r="2" stroke="currentColor" strokeWidth="1.6" />
           <path d="m7.7 11 6.6-3M7.7 13l6.6 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
         </svg>
-        <span className="min-w-0 flex-1 truncate text-xs text-mute">app.thaw.io/report/muster-gmbh</span>
+        <span className="min-w-0 flex-1 truncate text-xs text-mute">app.frostbreaker.app/report/muster-gmbh</span>
         <span className="shrink-0 rounded-md border border-edge2 px-2 py-1 text-[11px] font-medium text-soft">Kopieren</span>
       </div>
     </div>
@@ -119,7 +119,7 @@ export function LocalReachMockup() {
           </div>
         </div>
         <div>
-          <p className="text-xs font-medium uppercase tracking-wide text-faint">Thaw, über Google Places</p>
+          <p className="text-xs font-medium uppercase tracking-wide text-faint">Frostbreaker, über Google Places</p>
           <div className="mt-2 space-y-1.5">
             {businesses.map((b) => (
               <div key={b.name} className="flex items-center gap-2.5 rounded-lg border border-emerald-500/30 bg-emerald-500/5 px-3 py-2">

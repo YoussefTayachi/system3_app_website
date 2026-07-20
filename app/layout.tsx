@@ -3,9 +3,9 @@ import { Analytics } from "@vercel/analytics/react";
 import "@fontsource-variable/inter";
 import "./globals.css";
 
-const title = "Thaw: Leads finden, anreichern und persönlich kontaktieren, ohne vier Tools zu bezahlen";
+const title = "Frostbreaker: Leads finden, anreichern und persönlich kontaktieren, ohne vier Tools zu bezahlen";
 const description =
-  "Thaw findet B2B-Leads, verifiziert E-Mails und schreibt individuelle Icebreaker automatisch, alles in einem Tool, mit eigenen API-Keys statt teurer Pauschale.";
+  "Frostbreaker findet B2B-Leads, verifiziert E-Mails und schreibt individuelle Icebreaker automatisch, alles in einem Tool, mit eigenen API-Keys statt teurer Pauschale.";
 
 export const metadata: Metadata = {
   title,
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 const orgJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "Thaw",
+  name: "Frostbreaker",
   description,
   areaServed: "DE-AT-CH",
 };

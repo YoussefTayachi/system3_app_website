@@ -1,7 +1,7 @@
 export const BOOKING_URL = "#book-a-demo"; // TODO: Cal.com/Calendly-Link einsetzen, sobald eingerichtet
 
 export function Logo() {
-  return <span className="text-3xl font-extrabold tracking-tighter text-[#0EA5E9]">thaw</span>;
+  return <span className="text-3xl font-extrabold tracking-tighter text-[#0EA5E9]">frostbreaker</span>;
 }
 
 export function CTAButton({ className = "", label }: { className?: string; label?: string }) {

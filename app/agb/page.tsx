@@ -1,6 +1,6 @@
 import { LegalShell } from "../_legal/LegalShell";
 
-export const metadata = { title: "AGB · Thaw" };
+export const metadata = { title: "AGB · Frostbreaker" };
 
 export default function AGB() {
   return (
@@ -9,8 +9,8 @@ export default function AGB() {
         <section>
           <h2 className="text-base font-semibold text-ink">1. Geltungsbereich</h2>
           <p className="mt-3">
-            Diese AGB gelten für alle Verträge zwischen [Firmenname] („Thaw“, „wir“) und Unternehmern (B2B) über die
-            Nutzung der Software Thaw zur Recherche, Anreicherung, Verifizierung und Personalisierung von
+            Diese AGB gelten für alle Verträge zwischen [Firmenname] („Frostbreaker“, „wir“) und Unternehmern (B2B) über die
+            Nutzung der Software Frostbreaker zur Recherche, Anreicherung, Verifizierung und Personalisierung von
             B2B-Kontaktdaten.
           </p>
         </section>
@@ -26,7 +26,7 @@ export default function AGB() {
         <section>
           <h2 className="text-base font-semibold text-ink">3. Leistungsumfang</h2>
           <p className="mt-3">
-            Thaw stellt eine Software zur Verfügung, mit der Kunden Unternehmen recherchieren, Ansprechpartner samt
+            Frostbreaker stellt eine Software zur Verfügung, mit der Kunden Unternehmen recherchieren, Ansprechpartner samt
             E-Mail-Adressen ermitteln, diese Adressen verifizieren und automatisiert personalisierte Textbausteine
             erstellen lassen können. Die konkret nutzbaren Datenquellen (z. B. Google Places, Hunter) können sich
             ändern.
@@ -38,16 +38,16 @@ export default function AGB() {
           <p className="mt-3">
             Kunden hinterlegen eigene API-Zugangsdaten Dritter (z. B. für Kartendienste, E-Mail-Anreicherung,
             KI-Textgenerierung) und tragen die dadurch beim jeweiligen Drittanbieter anfallenden Kosten selbst.
-            Zusätzlich fällt eine Nutzungsgebühr für Thaw an, die individuell vereinbart wird.
+            Zusätzlich fällt eine Nutzungsgebühr für Frostbreaker an, die individuell vereinbart wird.
           </p>
         </section>
 
         <section>
           <h2 className="text-base font-semibold text-ink">5. Pflichten des Kunden</h2>
           <p className="mt-3">
-            Der Kunde ist allein dafür verantwortlich, die mit Thaw recherchierten Kontakte im Einklang mit den für
+            Der Kunde ist allein dafür verantwortlich, die mit Frostbreaker recherchierten Kontakte im Einklang mit den für
             ihn geltenden Regeln zur Direktwerbung zu kontaktieren (u. a. TKG in Österreich, UWG in Deutschland).
-            Thaw stellt ein Werkzeug bereit, prüft aber nicht die rechtliche Zulässigkeit einzelner Kampagnen des
+            Frostbreaker stellt ein Werkzeug bereit, prüft aber nicht die rechtliche Zulässigkeit einzelner Kampagnen des
             Kunden.
           </p>
         </section>

@@ -1,6 +1,6 @@
 import { LegalShell } from "../_legal/LegalShell";
 
-export const metadata = { title: "Auftragsverarbeitungsvertrag · Thaw" };
+export const metadata = { title: "Auftragsverarbeitungsvertrag · Frostbreaker" };
 
 export default function AVV() {
   return (
@@ -9,7 +9,7 @@ export default function AVV() {
         <section>
           <p>
             Dieser Auftragsverarbeitungsvertrag nach Art. 28 DSGVO gilt ergänzend zu den AGB zwischen dem Kunden
-            (Verantwortlicher) und [Firmenname] („Thaw“, Auftragsverarbeiter), soweit Thaw im Auftrag des Kunden
+            (Verantwortlicher) und [Firmenname] („Frostbreaker“, Auftragsverarbeiter), soweit Frostbreaker im Auftrag des Kunden
             personenbezogene Daten von Ansprechpartnern bei Zielunternehmen verarbeitet.
           </p>
         </section>
@@ -32,13 +32,13 @@ export default function AVV() {
 
         <section>
           <h2 className="text-base font-semibold text-ink">3. Kreis der Betroffenen</h2>
-          <p className="mt-3">Ansprechpartner bei den vom Kunden über Thaw recherchierten Unternehmen.</p>
+          <p className="mt-3">Ansprechpartner bei den vom Kunden über Frostbreaker recherchierten Unternehmen.</p>
         </section>
 
         <section>
-          <h2 className="text-base font-semibold text-ink">4. Pflichten von Thaw</h2>
+          <h2 className="text-base font-semibold text-ink">4. Pflichten von Frostbreaker</h2>
           <p className="mt-3">
-            Thaw verarbeitet die Daten ausschließlich auf dokumentierte Weisung des Kunden, gewährleistet
+            Frostbreaker verarbeitet die Daten ausschließlich auf dokumentierte Weisung des Kunden, gewährleistet
             Vertraulichkeit, trifft angemessene technische und organisatorische Maßnahmen (u. a. Verschlüsselung,
             Zugriffskontrollen, EU-Hosting) und unterstützt den Kunden bei der Erfüllung von Betroffenenrechten.
           </p>
@@ -46,7 +46,7 @@ export default function AVV() {
 
         <section>
           <h2 className="text-base font-semibold text-ink">5. Unterauftragsverarbeiter</h2>
-          <p className="mt-3">Thaw setzt aktuell folgende Unterauftragsverarbeiter ein:</p>
+          <p className="mt-3">Frostbreaker setzt aktuell folgende Unterauftragsverarbeiter ein:</p>
           <ul className="mt-3 list-disc space-y-1.5 pl-5">
             <li>Supabase (Datenbank, EU-Region Frankfurt)</li>
             <li>Vercel Inc. (Hosting)</li>
@@ -64,7 +64,7 @@ export default function AVV() {
         <section>
           <h2 className="text-base font-semibold text-ink">6. Löschung und Rückgabe</h2>
           <p className="mt-3">
-            Nach Vertragsende löscht Thaw die im Auftrag verarbeiteten Daten oder gibt sie auf Wunsch des Kunden
+            Nach Vertragsende löscht Frostbreaker die im Auftrag verarbeiteten Daten oder gibt sie auf Wunsch des Kunden
             zurück, soweit keine gesetzliche Aufbewahrungspflicht entgegensteht.
           </p>
         </section>

@@ -1,6 +1,6 @@
 import { LegalShell } from "../_legal/LegalShell";
 
-export const metadata = { title: "Datenschutzerklärung · Thaw" };
+export const metadata = { title: "Datenschutzerklärung · Frostbreaker" };
 
 export default function Datenschutz() {
   return (
@@ -29,7 +29,7 @@ export default function Datenschutz() {
           <p className="mt-3">
             Über das Formular „Kostenlosen Icebreaker generieren“ könnt ihr freiwillig Firmenname, Website und
             E-Mail-Adresse angeben, um ein Beispiel für eine personalisierte E-Mail-Ansprache zu erhalten. Mit dem
-            Absenden stimmt ihr ausdrücklich zu, dass wir euch per E-Mail zu Thaw kontaktieren dürfen (Art. 6 Abs. 1
+            Absenden stimmt ihr ausdrücklich zu, dass wir euch per E-Mail zu Frostbreaker kontaktieren dürfen (Art. 6 Abs. 1
             lit. a DSGVO, Einwilligung). Diese Einwilligung könnt ihr jederzeit formlos per E-Mail an{" "}
             <a href="mailto:youtaybusiness@gmail.com" className="text-ink underline">[Kontakt-E-Mail]</a> widerrufen.
             Ohne diese Einwilligung wird das Formular nicht abgeschickt.

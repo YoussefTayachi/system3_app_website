@@ -1,6 +1,6 @@
 import { LegalShell } from "../_legal/LegalShell";
 
-export const metadata = { title: "Impressum · Thaw" };
+export const metadata = { title: "Impressum · Frostbreaker" };
 
 export default function Impressum() {
   return (
