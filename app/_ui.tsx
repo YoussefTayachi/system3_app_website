@@ -1,13 +1,22 @@
-export const BOOKING_URL = "#book-a-demo"; // TODO: Cal.com/Calendly-Link einsetzen, sobald eingerichtet
+"use client";
+import { useT } from "./language-provider";
 
-// Ziel fuer den primaeren Selfserve-CTA -- die neue Registrierungsseite in
-// der App. handle_new_user() legt dort automatisch eine 14-Tage-Trial an,
-// hier ist absichtlich keine Preis-Auswahl noetig: erst testen, Plan waehlt
-// man spaeter in /pricing bzw. beim Trial-Ende.
+// Echter Calendly-Link fuer den sekundaeren CTA ("Call buchen") sowie fuer
+// den Agentur-Preisplan (individuelle Preise -> Gespraech statt Checkout).
+export const BOOKING_URL = "https://calendly.com/youssef-tayachi-frostbreaker/30min";
+
+// Ziel fuer den primaeren Selfserve-CTA -- die Registrierungsseite in der
+// App. handle_new_user() legt dort automatisch eine 14-Tage-Trial an, hier
+// ist absichtlich keine Preis-Auswahl noetig: erst testen, Plan waehlt man
+// spaeter in /pricing bzw. beim Trial-Ende.
 export const TRIAL_URL = "https://app.frostbreaker.app/signup";
 
 export function Logo() {
-  return <span className="text-3xl font-extrabold tracking-tighter text-[#0EA5E9]">frostbreaker</span>;
+  return (
+    <a href="/" className="text-3xl font-extrabold tracking-tighter text-[#0EA5E9]">
+      frostbreaker
+    </a>
+  );
 }
 
 /**
@@ -15,20 +24,25 @@ export function Logo() {
  * und "secondary" (Call buchen, zurueckhaltender). So bleibt an jeder Stelle
  * der Seite dieselbe Anlaufstelle, statt dass CTA-Ziele pro Sektion einzeln
  * gepflegt werden muessen -- eine spaetere URL-Aenderung passiert nur hier.
+ * Labels kommen standardmaessig aus dem Dictionary (zweisprachig), lassen
+ * sich aber pro Aufrufstelle ueberschreiben (z. B. Preiskarten-Buttons).
  */
 export function CTAButton({
   className = "",
   label,
+  href,
   variant = "primary",
 }: {
   className?: string;
   label?: string;
+  href?: string;
   variant?: "primary" | "secondary";
 }) {
+  const { t } = useT();
   const isPrimary = variant === "primary";
   return (
     <a
-      href={isPrimary ? TRIAL_URL : BOOKING_URL}
+      href={href ?? (isPrimary ? TRIAL_URL : BOOKING_URL)}
       className={
         (isPrimary
           ? "inline-flex items-center justify-center whitespace-nowrap rounded-lg bg-ink px-3.5 py-2 text-xs font-medium text-surface shadow-sm transition-all hover:opacity-85 active:scale-[0.99] sm:px-5 sm:py-2.5 sm:text-sm "
@@ -36,7 +50,7 @@ export function CTAButton({
         className
       }
     >
-      {label ?? (isPrimary ? "Kostenlos testen" : "Oder Call buchen")}
+      {label ?? (isPrimary ? t.cta.primary : t.cta.secondary)}
     </a>
   );
 }
@@ -78,14 +92,17 @@ export function SectionHeading({ eyebrow, title }: { eyebrow?: string; title: st
 }
 
 export function FactBox({ fact, sub, source }: { fact: string; sub?: string; source: string }) {
+  const { t, lang } = useT();
   return (
     <div className="mt-4 rounded-lg border-l-4 border-sky-500 bg-sky-50 p-4">
       <div className="flex items-start gap-2">
-        <span className="mt-0.5 shrink-0 rounded bg-sky-500 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">Fakt</span>
+        <span className="mt-0.5 shrink-0 rounded bg-sky-500 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
+          {lang === "de" ? "Fakt" : "Fact"}
+        </span>
         <p className="text-sm font-semibold leading-snug text-ink">{fact}</p>
       </div>
       {sub && <p className="mt-2 text-sm leading-relaxed text-soft">{sub}</p>}
-      <p className="mt-2 text-xs text-mute">Quelle: {source}</p>
+      <p className="mt-2 text-xs text-mute">{lang === "de" ? "Quelle" : "Source"}: {source}</p>
     </div>
   );
 }

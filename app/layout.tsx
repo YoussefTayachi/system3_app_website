@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import "@fontsource-variable/inter";
 import "./globals.css";
+import { getLangServer } from "./lang";
+import { LanguageProvider } from "./language-provider";
 
 const title = "Frostbreaker: Leads finden, anreichern und persönlich kontaktieren, ohne vier Tools zu bezahlen";
 const description =
@@ -29,11 +31,17 @@ const orgJsonLd = {
   name: "Frostbreaker",
   description,
   areaServed: "DE-AT-CH",
+  founder: { "@type": "Person", name: "Youssef Tayachi" },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+// Sprache kommt aus einem Cookie (siehe app/lang.ts), wird hier serverseitig
+// gelesen und als Startwert an den LanguageProvider durchgereicht -- der
+// erste Client-Render ist dadurch identisch zum Server-Render, kein
+// Hydration-Mismatch/Flackern beim Umschalten.
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const lang = await getLangServer();
   return (
-    <html lang="de">
+    <html lang={lang}>
       <head>
         <script
           type="application/ld+json"
@@ -41,7 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
-        {children}
+        <LanguageProvider lang={lang}>{children}</LanguageProvider>
         <Analytics />
       </body>
     </html>
