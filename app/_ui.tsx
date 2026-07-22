@@ -1,20 +1,55 @@
 export const BOOKING_URL = "#book-a-demo"; // TODO: Cal.com/Calendly-Link einsetzen, sobald eingerichtet
 
+// Ziel fuer den primaeren Selfserve-CTA -- die neue Registrierungsseite in
+// der App. handle_new_user() legt dort automatisch eine 14-Tage-Trial an,
+// hier ist absichtlich keine Preis-Auswahl noetig: erst testen, Plan waehlt
+// man spaeter in /pricing bzw. beim Trial-Ende.
+export const TRIAL_URL = "https://app.frostbreaker.app/signup";
+
 export function Logo() {
   return <span className="text-3xl font-extrabold tracking-tighter text-[#0EA5E9]">frostbreaker</span>;
 }
 
-export function CTAButton({ className = "", label }: { className?: string; label?: string }) {
+/**
+ * Ein CTAButton, zwei Varianten -- "primary" (Selfserve-Trial, auffaellig)
+ * und "secondary" (Call buchen, zurueckhaltender). So bleibt an jeder Stelle
+ * der Seite dieselbe Anlaufstelle, statt dass CTA-Ziele pro Sektion einzeln
+ * gepflegt werden muessen -- eine spaetere URL-Aenderung passiert nur hier.
+ */
+export function CTAButton({
+  className = "",
+  label,
+  variant = "primary",
+}: {
+  className?: string;
+  label?: string;
+  variant?: "primary" | "secondary";
+}) {
+  const isPrimary = variant === "primary";
   return (
     <a
-      href={BOOKING_URL}
+      href={isPrimary ? TRIAL_URL : BOOKING_URL}
       className={
-        "inline-flex items-center justify-center whitespace-nowrap rounded-lg bg-ink px-3.5 py-2 text-xs font-medium text-surface shadow-sm transition-all hover:opacity-85 active:scale-[0.99] sm:px-5 sm:py-2.5 sm:text-sm " +
+        (isPrimary
+          ? "inline-flex items-center justify-center whitespace-nowrap rounded-lg bg-ink px-3.5 py-2 text-xs font-medium text-surface shadow-sm transition-all hover:opacity-85 active:scale-[0.99] sm:px-5 sm:py-2.5 sm:text-sm "
+          : "inline-flex items-center justify-center whitespace-nowrap rounded-lg border border-edge2 px-3.5 py-2 text-xs font-medium text-soft transition-colors hover:border-ink hover:text-ink sm:px-5 sm:py-2.5 sm:text-sm ") +
         className
       }
     >
-      {label ?? "Kostenlose Demo buchen"}
+      {label ?? (isPrimary ? "Kostenlos testen" : "Oder Call buchen")}
     </a>
+  );
+}
+
+/** Primaer- + Sekundaer-CTA nebeneinander (bzw. gestapelt auf Mobile), fuer
+ * Hero und finale CTA-Sektion -- ein Baustein statt zweimal CTAButton +
+ * Layout-Klassen an zwei Stellen synchron zu halten. */
+export function CTAGroup({ className = "" }: { className?: string }) {
+  return (
+    <div className={"flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4 " + className}>
+      <CTAButton variant="primary" />
+      <CTAButton variant="secondary" />
+    </div>
   );
 }
 

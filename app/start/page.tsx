@@ -1,4 +1,4 @@
-import { Logo, CTAButton, StatTile, FactBox } from "../_ui";
+import { Logo, CTAButton, CTAGroup, StatTile, FactBox } from "../_ui";
 import { AgencyMockup } from "../_mockups";
 import { heroStatTiles } from "../_copy";
 
@@ -33,8 +33,8 @@ export default function StartPage() {
           und ein Dashboard, das gebuchte Meetings und Pipeline-Wert zeigt, nicht nur Öffnungsraten.
         </p>
         <div className="mt-7 flex flex-col items-center gap-3">
-          <CTAButton />
-          <span className="text-xs text-mute">15 Minuten, live an eurer eigenen Nische, kein Skript von der Stange.</span>
+          <CTAGroup />
+          <span className="text-xs text-mute">14 Tage kostenlos, keine Kreditkarte nötig. Monatlich kündbar.</span>
         </div>
 
         <div className="mt-10 grid gap-3 sm:grid-cols-3">
@@ -67,7 +67,7 @@ export default function StartPage() {
         <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-soft">
           Kein Verkaufsgespräch von der Stange, sondern eine echte Suche mit euren eigenen Kriterien.
         </p>
-        <CTAButton className="mt-6" />
+        <CTAGroup className="mt-6" />
         <p className="mt-6 text-xs text-mute">
           <a href="/" className="underline hover:text-ink">Lieber erst alle Details ansehen?</a>
         </p>

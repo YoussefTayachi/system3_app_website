@@ -1,8 +1,9 @@
-import { Logo, CTAButton, Screenshot, SectionHeading, FactBox, StatTile } from "./_ui";
-import { AgencyMockup, PostSendMockup, LocalReachMockup } from "./_mockups";
+import { Logo, CTAButton, CTAGroup, Screenshot, SectionHeading, FactBox, StatTile } from "./_ui";
+import { AgencyMockup, PostSendMockup, LocalReachMockup, QualifiedLeadMockup } from "./_mockups";
 import {
   navLinks,
   painPoints,
+  pillars,
   steps,
   usps,
   integrations,
@@ -10,6 +11,8 @@ import {
   postSendFeatures,
   agencyFeatures,
   heroStatTiles,
+  pricingPlans,
+  starterExampleTiles,
   comparisonRows,
   faqs,
 } from "./_copy";
@@ -34,20 +37,22 @@ export default function Home() {
       <section className="dot-grid border-b border-edge/60">
         <div className="mx-auto max-w-[1267px] px-4 py-20 sm:px-6 lg:py-24">
           <div className="fade-up mx-auto max-w-3xl text-center">
+            <p className="mb-4 text-xs font-medium uppercase tracking-wide text-sky-600 dark:text-sky-400">
+              Der wohl direkteste KI-Einsatz für Kaltakquise
+            </p>
             <h1 className="text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl lg:text-5xl">
-              Lead-Gen und Cold Outreach für alle eure Kunden, aus einem Tool, unter eurem eigenen Namen.
+              Der direkteste Weg zu echten Ansprechpartnern, ohne vier Tools zu bezahlen.
             </h1>
             <p className="mt-5 text-base leading-relaxed text-soft sm:text-lg">
-              Ein Klick, und Frostbreaker sucht automatisch passende Unternehmen, findet die richtigen
-              Ansprechpartner, verifiziert die E-Mail-Adressen und schreibt für jeden Lead eine
-              individuelle Icebreaker-Zeile, vollautomatisch, für jeden Kunden im eigenen
-              Workspace. Kein manueller Zwischenschritt spart euch Stunden pro Kunde und macht
-              Cold Outreach zu einem der günstigsten Kanäle, die es gibt.
+              Frostbreaker findet lokale Unternehmen, identifiziert die richtige Person dahinter,
+              verifiziert die E-Mail-Adresse und schreibt eine individuelle Icebreaker-Zeile,
+              vollautomatisch. Kein info@, kein office@: nur echte Menschen, die man wirklich
+              erreichen kann.
             </p>
-            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
-              <CTAButton />
-              <span className="text-xs text-mute">15 Minuten, wir zeigen es live an eurer eigenen Nische.</span>
-            </div>
+            <CTAGroup className="mt-8" />
+            <p className="mt-3 text-xs text-mute">
+              14 Tage kostenlos, keine Kreditkarte nötig. Monatlich kündbar, keine Vertragslaufzeit.
+            </p>
             <div className="mt-6 inline-flex flex-wrap items-center justify-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-4 py-2">
               <span className="rounded bg-sky-500 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">Fakt</span>
               <span className="text-sm font-medium text-ink">
@@ -102,6 +107,32 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Qualifizierte Leads: Kernclaim, echte Ansprechpartner statt info@ */}
+      <section className="border-y border-edge/60 bg-panel2">
+        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+          <SectionHeading
+            eyebrow="Echte Menschen, keine info@-Adressen"
+            title="Jeder Lead ist eine Person, die man wirklich erreichen kann"
+          />
+          <div className="grid gap-10 lg:grid-cols-5 lg:items-start">
+            <div className="lg:col-span-2">
+              <p className="text-sm leading-relaxed text-soft sm:text-base">
+                Die meisten Tools liefern, was sie finden, inklusive info@, office@ und kontakt@-Adressen,
+                an denen niemand konkret zuständig ist. Frostbreaker filtert das automatisch heraus: nur
+                Adressen, die eindeutig einer echten Person zugeordnet sind, kommen überhaupt in eure
+                Leads-Liste.
+              </p>
+              <p className="mt-4 text-sm font-medium leading-relaxed text-ink sm:text-base">
+                Kein Reply-to-nowhere. Kein Antworten ins Leere. Nur echte Ansprechpartner.
+              </p>
+            </div>
+            <div className="lg:col-span-3">
+              <QualifiedLeadMockup />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Problem */}
       <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <SectionHeading title="Kommt dir bekannt vor?" />
@@ -114,6 +145,24 @@ export default function Home() {
             <div key={p.title} className="rounded-xl border border-edge/60 bg-panel p-6">
               <h3 className="text-sm font-semibold text-ink">{p.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-soft">{p.body}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Vier Saeulen: Geld/Umsatz/Zeit/Risiko sparen, je eine belegte Zahl statt Fliesstext */}
+      <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        <SectionHeading eyebrow="Der Effekt in vier Sätzen" title="Was sich für euch konkret ändert" />
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {pillars.map((p) => (
+            <div key={p.title} className="rounded-xl border border-edge/60 bg-panel p-6">
+              <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400">
+                {p.icon}
+              </div>
+              <h3 className="mt-4 text-sm font-semibold text-ink">{p.title}</h3>
+              <p className="mt-3 text-xl font-semibold tracking-tight text-ink">{p.stat}</p>
+              <p className="text-xs text-mute">{p.statLabel}</p>
+              <p className="mt-3 text-sm leading-relaxed text-soft">{p.body}</p>
             </div>
           ))}
         </div>
@@ -368,6 +417,57 @@ export default function Home() {
             Export in euer Versandtool mit dazu. Euer echtes Ergebnis hängt von eurer Nische und
             eurem Angebot ab.
           </p>
+          <p className="mt-3 font-medium text-soft">
+            Diese Zahlen zeigen das Potenzial bei unlimitierten Leads, verfügbar ab dem Agentur-Plan.
+            Auf Starter (bis 5.000 qualifizierte Leads/Monat) skalieren sie entsprechend kleiner:
+          </p>
+        </div>
+        <div className="mt-4 grid gap-3 sm:grid-cols-3">
+          {starterExampleTiles.map((s) => (
+            <StatTile key={s.label} value={s.value} label={s.label} />
+          ))}
+        </div>
+      </section>
+
+      {/* Preise */}
+      <section id="preise" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
+        <div className="mx-auto max-w-4xl px-4 py-20 sm:px-6">
+          <SectionHeading eyebrow="Preise" title="Feste Preise, sofort einsehbar, kein Verkaufsgespräch nötig" />
+          <div className="grid gap-6 sm:grid-cols-2">
+            {pricingPlans.map((plan) => (
+              <div
+                key={plan.id}
+                className={
+                  "relative flex flex-col rounded-xl border bg-panel p-6 " +
+                  (plan.highlighted ? "border-sky-500/50" : "border-edge/60")
+                }
+              >
+                {plan.highlighted && (
+                  <span className="absolute -top-3 right-6 rounded-full bg-sky-500 px-2.5 py-0.5 text-xs font-medium text-white shadow">
+                    Für Agenturen
+                  </span>
+                )}
+                <h3 className="text-sm font-semibold text-ink">{plan.label}</h3>
+                <p className="mt-1 flex items-baseline gap-1.5">
+                  <span className="text-3xl font-semibold tracking-tight text-ink">{plan.price}</span>
+                  <span className="text-sm text-faint">{plan.priceNote}</span>
+                </p>
+                <ul className="mt-4 flex-1 space-y-2 text-sm text-soft">
+                  {plan.features.map((f) => (
+                    <li key={f} className="flex items-start gap-2">
+                      <span className="mt-0.5 text-emerald-500">✓</span>
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+                <CTAButton className="mt-6 w-full" label="Kostenlos testen" />
+              </div>
+            ))}
+          </div>
+          <p className="mt-6 text-center text-xs text-mute">
+            14 Tage kostenlos testen, keine Kreditkarte nötig. Danach monatlich kündbar, keine
+            Mindestlaufzeit. Zusätzlich nur eure eigenen API-Kosten, live im Dashboard einsehbar.
+          </p>
         </div>
       </section>
 
@@ -518,13 +618,13 @@ export default function Home() {
       {/* Final CTA */}
       <section className="mx-auto max-w-3xl px-4 py-24 text-center sm:px-6">
         <h2 className="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
-          Bereit für die ersten Leads ohne manuelles Research?
+          Bereit für Leads, die wirklich jemand liest?
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-soft sm:text-base">
-          15 Minuten, wir zeigen euch live, wie Frostbreaker für eure Nische aussieht. Kein
-          Verkaufsgespräch von der Stange, sondern eine echte Suche mit euren eigenen Kriterien.
+          14 Tage kostenlos, keine Kreditkarte nötig. Monatlich kündbar. Wer lieber erst reden
+          möchte: 15 Minuten, wir zeigen es live an eurer eigenen Nische.
         </p>
-        <CTAButton className="mt-8" />
+        <CTAGroup className="mt-8" />
       </section>
 
       {/* Footer */}
