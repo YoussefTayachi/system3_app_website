@@ -1,13 +1,15 @@
 "use client";
-import { Logo, CTAButton, CTAGroup, Screenshot, SectionHeading, FactBox, StatTile } from "./_ui";
+import { Logo, CTAButton, CTAGroup, NavDropdown, Screenshot, SectionHeading, FactBox, StatTile } from "./_ui";
 import { AgencyMockup, PostSendMockup, LocalReachMockup, QualifiedLeadMockup } from "./_mockups";
+import { LeadCardStack } from "./_illustration";
+import { SavingsCalculator } from "./_calculator";
+import { Reveal } from "./reveal";
 import { pillarIcons, trustIcons, postSendIcons, agencyIcons } from "./_icons";
 import { useT, LanguageToggle } from "./language-provider";
 
 export default function Home() {
   const { t, lang } = useT();
   const navLinks = [
-    { href: "#produkt", label: t.nav.produkt },
     { href: "#agenturen", label: t.nav.agenturen },
     { href: "#preise", label: t.nav.preise },
     { href: "#vergleich", label: t.nav.vergleich },
@@ -21,9 +23,10 @@ export default function Home() {
       <header className="sticky top-0 z-10 border-b border-edge/60 bg-surface/90 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
           <Logo />
-          <nav className="hidden items-center gap-6 text-sm text-soft md:flex">
+          <nav className="hidden items-center gap-6 md:flex">
+            <NavDropdown label={t.nav.produkt} items={t.nav.produktItems} />
             {navLinks.map((l) => (
-              <a key={l.href} href={l.href} className="hover:text-ink">{l.label}</a>
+              <a key={l.href} href={l.href} className="text-sm text-soft hover:text-ink">{l.label}</a>
             ))}
           </nav>
           <div className="flex items-center gap-3">
@@ -35,35 +38,70 @@ export default function Home() {
 
       {/* Hero */}
       <section className="dot-grid border-b border-edge/60">
-        <div className="mx-auto max-w-[1267px] px-4 py-20 sm:px-6 lg:py-24">
-          <div className="fade-up mx-auto max-w-3xl text-center">
-            <p className="mb-4 text-xs font-medium uppercase tracking-wide text-sky-600 dark:text-sky-400">
-              {t.hero.eyebrow}
-            </p>
-            <h1 className="text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl lg:text-5xl">
-              {t.hero.h1}
-            </h1>
-            <p className="mt-5 text-base leading-relaxed text-soft sm:text-lg">{t.hero.body}</p>
-            <CTAGroup className="mt-8" />
-            <p className="mt-3 text-xs text-mute">{t.cta.trialNote}</p>
-            <div className="mt-6 inline-flex flex-wrap items-center justify-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-4 py-2">
-              <span className="rounded bg-sky-500 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
-                {lang === "de" ? "Fakt" : "Fact"}
-              </span>
-              <span className="text-sm font-medium text-ink">{t.hero.factBadge}</span>
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-20">
+          <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
+            <div className="fade-up">
+              <p className="mb-4 text-xs font-medium uppercase tracking-wide text-sky-600">
+                {t.hero.eyebrow}
+              </p>
+              <h1 className="font-display text-4xl font-semibold leading-[1.08] tracking-tight text-ink sm:text-5xl">
+                {t.hero.h1Pre}
+                <span className="italic text-sky-600">{t.hero.h1Accent}</span>
+                {t.hero.h1Post}
+              </h1>
+              <p className="mt-5 max-w-md text-base leading-relaxed text-soft sm:text-lg">{t.hero.body}</p>
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                <CTAButton href="#rechner" label={t.calculator.title} />
+                <CTAButton variant="secondary" />
+              </div>
+              <p className="mt-3 text-xs text-mute">{t.cta.trialNote}</p>
+              <div className="mt-6 inline-flex flex-wrap items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-4 py-2">
+                <span className="rounded bg-sky-500 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
+                  {lang === "de" ? "Fakt" : "Fact"}
+                </span>
+                <span className="text-sm font-medium text-ink">{t.hero.factBadge}</span>
+              </div>
+              <p className="mt-1.5 text-xs text-mute">{t.hero.factSource}</p>
             </div>
-            <p className="mt-1.5 text-xs text-mute">{t.hero.factSource}</p>
+
+            <div className="fade-up">
+              <LeadCardStack />
+            </div>
           </div>
-          <div className="fade-up mt-10">
-            <Screenshot src="/screenshots/alle-leads.png" alt={t.hero.screenshotAlt} />
-          </div>
-          <div className="fade-up mt-8 grid gap-3 sm:grid-cols-3">
+
+          <div className="fade-up mt-14 grid gap-3 sm:grid-cols-3">
             {t.heroStats.map((s) => (
               <StatTile key={s.label} value={s.value} label={s.label} />
             ))}
           </div>
+          <details className="fade-up group mt-6">
+            <summary className="cursor-pointer list-none text-center text-xs text-mute underline underline-offset-2 marker:content-none">
+              {t.hero.screenshotAlt}
+            </summary>
+            <div className="mt-4">
+              <Screenshot src="/screenshots/alle-leads.png" alt={t.hero.screenshotAlt} />
+            </div>
+          </details>
         </div>
       </section>
+
+      {/* Trust bar */}
+      <section className="border-b border-edge/60 bg-panel2 py-8">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <p className="mb-5 text-center text-[11px] font-medium uppercase tracking-wider text-mute">
+            {t.trustBar.heading}
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3">
+            {t.trustBar.partners.map((p) => (
+              <span key={p} className="text-sm font-medium text-faint">{p}</span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Sparpotenzial-Rechner: wichtigster Conversion-Baustein, bewusst
+          direkt nach dem Hero, nicht erst am Seitenende */}
+      <SavingsCalculator />
 
       {/* Warum die Lead-Quelle den Unterschied macht */}
       <section className="border-y border-edge/60 bg-panel2">
@@ -102,11 +140,13 @@ export default function Home() {
         <SectionHeading title={t.painPoints.title} />
         <p className="-mt-6 mb-8 max-w-2xl text-sm leading-relaxed text-soft sm:text-base">{t.painPoints.subtitle}</p>
         <div className="grid gap-5 sm:grid-cols-2">
-          {t.painPoints.items.map((p) => (
-            <div key={p.title} className="rounded-xl border border-edge/60 bg-panel p-6">
-              <h3 className="text-sm font-semibold text-ink">{p.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-soft">{p.body}</p>
-            </div>
+          {t.painPoints.items.map((p, i) => (
+            <Reveal key={p.title} delay={i * 60}>
+              <div className="rounded-2xl border border-edge/60 bg-panel p-6 hover-lift">
+                <h3 className="text-sm font-semibold text-ink">{p.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-soft">{p.body}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
       </section>
@@ -115,16 +155,18 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <SectionHeading eyebrow={t.pillars.eyebrow} title={t.pillars.title} />
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {t.pillars.items.map((p) => (
-            <div key={p.id} className="rounded-xl border border-edge/60 bg-panel p-6">
-              <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400">
-                {pillarIcons[p.id]}
+          {t.pillars.items.map((p, i) => (
+            <Reveal key={p.id} delay={i * 60}>
+              <div className="rounded-2xl border border-edge/60 bg-panel p-6 hover-lift">
+                <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400">
+                  {pillarIcons[p.id]}
+                </div>
+                <h3 className="mt-4 text-sm font-semibold text-ink">{p.title}</h3>
+                <p className="font-display mt-3 text-xl font-semibold tracking-tight text-ink">{p.stat}</p>
+                <p className="text-xs text-mute">{p.statLabel}</p>
+                <p className="mt-3 text-sm leading-relaxed text-soft">{p.body}</p>
               </div>
-              <h3 className="mt-4 text-sm font-semibold text-ink">{p.title}</h3>
-              <p className="mt-3 text-xl font-semibold tracking-tight text-ink">{p.stat}</p>
-              <p className="text-xs text-mute">{p.statLabel}</p>
-              <p className="mt-3 text-sm leading-relaxed text-soft">{p.body}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </section>
@@ -137,7 +179,7 @@ export default function Home() {
 
           <div className="grid gap-6 lg:grid-cols-4">
             {t.workflow.steps.map((s, i) => (
-              <div key={s.n} className="relative rounded-xl border border-edge/60 bg-panel p-5">
+              <div key={s.n} className="relative rounded-2xl border border-edge/60 bg-panel p-5">
                 <div className="flex h-9 w-9 items-center justify-center rounded-full bg-ink text-sm font-semibold text-surface">
                   {s.n}
                 </div>
@@ -183,7 +225,7 @@ export default function Home() {
               <AgencyMockup />
             </div>
           </div>
-          <div className="mt-8 rounded-xl border border-edge/60 bg-panel p-5">
+          <div className="mt-8 rounded-2xl border border-edge/60 bg-panel p-5">
             <p className="text-sm leading-relaxed text-soft">{t.agency.note}</p>
           </div>
         </div>
@@ -202,7 +244,7 @@ export default function Home() {
         </div>
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {t.postSend.features.map((f) => (
-            <div key={f.id} className="rounded-xl border border-edge/60 bg-panel p-6">
+            <div key={f.id} className="rounded-2xl border border-edge/60 bg-panel p-6 hover-lift">
               <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-panel2 text-ink">
                 {postSendIcons[f.id]}
               </div>
@@ -214,7 +256,7 @@ export default function Home() {
       </section>
 
       {/* AI Agent deep-dive */}
-      <section className="mx-auto max-w-[1267px] px-4 py-20 sm:px-6">
+      <section id="personalisierung" className="scroll-mt-20 mx-auto max-w-[1267px] px-4 py-20 sm:px-6">
         <SectionHeading eyebrow={t.personalization.eyebrow} title={t.personalization.title} />
         <div className="grid gap-10 lg:grid-cols-5 lg:items-start">
           <div className="max-w-2xl lg:col-span-2">
@@ -230,7 +272,7 @@ export default function Home() {
           </div>
 
           <div className="lg:col-span-3">
-            <div className="rounded-xl border border-edge/60 bg-panel p-6 shadow-sm">
+            <div className="rounded-2xl border border-edge/60 bg-panel p-6 shadow-sm">
               <p className="text-xs font-medium uppercase tracking-wide text-faint">{t.personalization.dataSourceLabel}</p>
               <div className="mt-2 flex flex-wrap gap-2">
                 {t.personalization.sourceOptions.map((o, i) => (
@@ -271,7 +313,7 @@ export default function Home() {
           <SectionHeading eyebrow={t.integrations.eyebrow} title={t.integrations.title} />
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
             {t.integrations.items.map((i) => (
-              <div key={i.name} className="rounded-xl border border-edge/60 bg-panel p-5 text-center">
+              <div key={i.name} className="rounded-2xl border border-edge/60 bg-panel p-5 text-center">
                 <p className="text-sm font-semibold text-ink">{i.name}</p>
                 <p className="mt-1 text-xs text-mute">{i.note}</p>
               </div>
@@ -285,7 +327,7 @@ export default function Home() {
         <SectionHeading eyebrow={t.usps.eyebrow} title={t.usps.title} />
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {t.usps.items.map((u) => (
-            <div key={u.title} className="rounded-xl border border-edge/60 bg-panel p-6">
+            <div key={u.title} className="rounded-2xl border border-edge/60 bg-panel p-6 hover-lift">
               <h3 className="text-sm font-semibold text-ink">{u.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-soft">{u.body}</p>
               {u.fact && <FactBox fact={u.fact} sub={u.sub} source={u.source!} />}
@@ -308,21 +350,21 @@ export default function Home() {
         <SectionHeading eyebrow={t.scaling.eyebrow} title={t.scaling.title} />
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {t.scaling.tiles.map((tile) => (
-            <div key={tile.label} className="rounded-xl border border-edge/60 bg-panel p-6">
+            <div key={tile.label} className="rounded-2xl border border-edge/60 bg-panel p-6 hover-lift">
               <p className="text-2xl font-semibold text-ink">{tile.value}</p>
               <p className="mt-1 text-sm text-soft">{tile.label}</p>
             </div>
           ))}
         </div>
-        <div className="mt-6 rounded-xl border border-edge/60 bg-panel2 p-5 text-xs leading-relaxed text-faint">
+        <div className="mt-6 rounded-2xl border border-edge/60 bg-panel2 p-5 text-xs leading-relaxed text-faint">
           <p className="font-medium text-soft">{t.scaling.methodologyLabel}</p>
           <p className="mt-1.5">{t.scaling.methodologyBody}</p>
-          <p className="mt-3 font-medium text-soft">{t.scaling.agencyOnlyNote}</p>
-        </div>
-        <div className="mt-4 grid gap-3 sm:grid-cols-3">
-          {t.scaling.starterTiles.map((s) => (
-            <StatTile key={s.label} value={s.value} label={s.label} />
-          ))}
+          <p className="mt-3 font-medium text-soft">
+            {t.scaling.agencyOnlyNote}{" "}
+            <a href="#rechner" className="text-sky-600 underline underline-offset-2 hover:text-sky-700">
+              {t.calculator.title} →
+            </a>
+          </p>
         </div>
       </section>
 
@@ -335,7 +377,7 @@ export default function Home() {
               <div
                 key={plan.id}
                 className={
-                  "relative flex flex-col rounded-xl border bg-panel p-6 " +
+                  "relative flex flex-col rounded-2xl border bg-panel p-6 hover-lift " +
                   (plan.highlighted ? "border-sky-500/50" : "border-edge/60")
                 }
               >
@@ -372,7 +414,7 @@ export default function Home() {
       {/* Comparison */}
       <section id="vergleich" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <SectionHeading title={t.comparison.title} />
-        <div className="hidden overflow-x-auto rounded-xl border border-edge/60 sm:block">
+        <div className="hidden overflow-x-auto rounded-2xl border border-edge/60 sm:block">
           <table className="w-full border-collapse text-sm">
             <thead>
               <tr className="border-b border-edge/60 bg-panel2 text-left">
@@ -395,7 +437,7 @@ export default function Home() {
 
         <div className="grid gap-4 sm:hidden">
           {t.comparison.rows.map(([label, s3, other]) => (
-            <div key={label} className="rounded-xl border border-edge/60 bg-panel p-4">
+            <div key={label} className="rounded-2xl border border-edge/60 bg-panel p-4">
               <p className="text-xs font-medium uppercase tracking-wide text-faint">{label}</p>
               <div className="mt-3 grid grid-cols-2 gap-3">
                 <div>
@@ -418,7 +460,7 @@ export default function Home() {
           <SectionHeading title={t.trust.title} />
           <div className="grid gap-5 sm:grid-cols-3">
             {t.trustBadges.map((b) => (
-              <div key={b.id} className="rounded-xl border border-edge/60 bg-panel p-6">
+              <div key={b.id} className="rounded-2xl border border-edge/60 bg-panel p-6 hover-lift">
                 <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-panel2 text-ink">
                   {trustIcons[b.id]}
                 </div>
@@ -443,7 +485,7 @@ export default function Home() {
         <p className="max-w-3xl text-sm leading-relaxed text-soft sm:text-base">{t.why.body}</p>
 
         <div className="mt-8 grid gap-5 lg:grid-cols-3">
-          <div className="rounded-xl border border-edge/60 bg-panel p-6">
+          <div className="rounded-2xl border border-edge/60 bg-panel p-6 hover-lift">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400">
               <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
                 <path d="M12 3v3m6.4 1.6-2.1 2.1M21 12h-3M6.7 9.7 4.6 7.6M3 12h3m1.7 4.3-2.1 2.1M12 18v3m4.3-1.7 2.1 2.1" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
@@ -454,7 +496,7 @@ export default function Home() {
             <p className="mt-1.5 text-sm leading-relaxed text-soft">{t.why.earlyAccess.body}</p>
           </div>
 
-          <a href="/kontakt" className="block rounded-xl border border-edge/60 bg-panel p-6 transition-colors hover:border-edge2">
+          <a href="/kontakt" className="hover-lift block rounded-2xl border border-edge/60 bg-panel p-6 transition-colors hover:border-edge2">
             <p className="text-xs font-medium uppercase tracking-wide text-faint">{t.why.founderLabel}</p>
             <p className="mt-3 text-sm italic leading-relaxed text-ink">{t.why.founderQuote}</p>
             <div className="mt-4 flex items-center gap-2.5">
@@ -467,7 +509,7 @@ export default function Home() {
             </div>
           </a>
 
-          <div className="rounded-xl border border-edge/60 bg-panel p-6">
+          <div className="rounded-2xl border border-edge/60 bg-panel p-6 hover-lift">
             <h3 className="text-sm font-semibold text-ink">{t.why.poweredBy.title}</h3>
             <p className="mt-1.5 text-sm leading-relaxed text-soft">{t.why.poweredBy.body}</p>
             <div className="mt-4 flex flex-wrap gap-2">
@@ -485,7 +527,7 @@ export default function Home() {
       <section id="faq" className="scroll-mt-20 border-t border-edge/60 bg-panel2">
         <div className="mx-auto max-w-3xl px-4 py-20 sm:px-6">
           <SectionHeading title={t.faq.title} />
-          <div className="divide-y divide-edge/60 rounded-xl border border-edge/60 bg-panel">
+          <div className="divide-y divide-edge/60 rounded-2xl border border-edge/60 bg-panel">
             {t.faq.items.map((f) => (
               <details key={f.q} className="group px-6 py-4">
                 <summary className="cursor-pointer list-none text-sm font-medium text-ink marker:content-none">

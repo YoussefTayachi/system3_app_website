@@ -9,11 +9,39 @@ import type { Lang } from "./lang";
 const de = {
   nav: {
     produkt: "Produkt",
+    produktItems: [
+      { label: "Workflow", href: "#produkt" },
+      { label: "Personalisierung", href: "#personalisierung" },
+      { label: "Integrationen", href: "#integrationen" },
+    ],
     agenturen: "Für Agenturen",
     preise: "Preise",
     vergleich: "Vergleich",
     faq: "FAQ",
     kontakt: "Kontakt",
+  },
+  trustBar: {
+    heading: "Läuft mit etablierten Diensten im Hintergrund",
+    partners: ["OpenAI", "Google Places", "Hunter.io", "NeverBounce", "Instantly"],
+  },
+  heroIllustration: {
+    verified: "Verifiziert · zustellbar",
+    icebreakerLabel: "KI-Icebreaker",
+    icebreakerExample: "„Eure Schreinerei hat seit 2019 keine neue Google-Bewertung, dabei sieht euer Portfolio richtig stark aus...“",
+    badgeStat: "2×",
+    badgeLabel: "Antwortrate durch echte Personalisierung",
+  },
+  calculator: {
+    eyebrow: "Interaktiv",
+    title: "Berechne dein Sparpotenzial",
+    subtitle: "Wie viele qualifizierte Leads willst du pro Monat erreichen? Wir rechnen live vor, was das für dich bedeutet.",
+    sliderLabel: "Qualifizierte Leads / Monat",
+    hoursUnit: "Std.",
+    hoursLabel: "manuelle Recherche gespart / Monat",
+    laborLabel: "Arbeitszeit-Gegenwert dafür",
+    meetingsLabel: "Meetings / Monat rechnerisch",
+    planPrefix: "Dafür passt der",
+    apiCostPrefix: "ca.",
   },
   cta: {
     primary: "Kostenlos testen",
@@ -22,7 +50,9 @@ const de = {
   },
   hero: {
     eyebrow: "Der wohl direkteste KI-Einsatz für Kaltakquise",
-    h1: "Der direkteste Weg zu echten Ansprechpartnern, ohne vier Tools zu bezahlen.",
+    h1Pre: "Echte Ansprechpartner finden, in ",
+    h1Accent: "8 Minuten",
+    h1Post: " statt von Hand.",
     body: "Frostbreaker findet lokale Unternehmen, identifiziert die richtige Person dahinter, verifiziert die E-Mail-Adresse und schreibt eine individuelle Icebreaker-Zeile, vollautomatisch. Kein info@, kein office@: nur echte Menschen, die man wirklich erreichen kann.",
     factBadge: "Agenturen bekommen im Schnitt 42 € zurück für jeden Euro, den sie in E-Mails stecken.",
     factSource: "Quelle: Litmus, State of Email 2025",
@@ -342,11 +372,39 @@ const de = {
 const en: typeof de = {
   nav: {
     produkt: "Product",
+    produktItems: [
+      { label: "Workflow", href: "#produkt" },
+      { label: "Personalization", href: "#personalisierung" },
+      { label: "Integrations", href: "#integrationen" },
+    ],
     agenturen: "For Agencies",
     preise: "Pricing",
     vergleich: "Comparison",
     faq: "FAQ",
     kontakt: "Contact",
+  },
+  trustBar: {
+    heading: "Runs on established services in the background",
+    partners: ["OpenAI", "Google Places", "Hunter.io", "NeverBounce", "Instantly"],
+  },
+  heroIllustration: {
+    verified: "Verified · deliverable",
+    icebreakerLabel: "AI icebreaker",
+    icebreakerExample: "\"Your joinery hasn't had a new Google review since 2019, yet your portfolio looks genuinely strong...\"",
+    badgeStat: "2×",
+    badgeLabel: "reply rate through real personalization",
+  },
+  calculator: {
+    eyebrow: "Interactive",
+    title: "Calculate your savings potential",
+    subtitle: "How many qualified leads do you want to reach per month? We'll calculate live what that means for you.",
+    sliderLabel: "Qualified leads / month",
+    hoursUnit: "hrs",
+    hoursLabel: "manual research saved / month",
+    laborLabel: "labor cost equivalent for that",
+    meetingsLabel: "meetings / month, calculated",
+    planPrefix: "That fits the",
+    apiCostPrefix: "approx.",
   },
   cta: {
     primary: "Start free trial",
@@ -355,7 +413,9 @@ const en: typeof de = {
   },
   hero: {
     eyebrow: "Arguably the most direct AI use case for cold outreach",
-    h1: "The most direct way to real decision-makers, without paying for four tools.",
+    h1Pre: "Find real decision-makers, in ",
+    h1Accent: "8 minutes",
+    h1Post: " instead of by hand.",
     body: "Frostbreaker finds local businesses, identifies the right person behind them, verifies the email address and writes an individual icebreaker line, fully automatically. No info@, no office@: only real people you can actually reach.",
     factBadge: "Agencies get an average of $42 back for every dollar they spend on email.",
     factSource: "Source: Litmus, State of Email 2025",

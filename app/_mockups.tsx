@@ -11,7 +11,7 @@ export function AgencyMockup() {
   const { t } = useT();
   const m = t.agencyMockup;
   return (
-    <div className="rounded-xl border border-edge/60 bg-panel p-6 shadow-sm">
+    <div className="rounded-2xl border border-edge/60 bg-panel p-6 shadow-sm">
       <p className="text-xs font-medium uppercase tracking-wide text-faint">{m.workspacesLabel}</p>
       <div className="mt-2 space-y-1.5">
         {m.workspaces.map((w) => (
@@ -64,7 +64,7 @@ export function PostSendMockup() {
   const { t } = useT();
   const m = t.postSendMockup;
   return (
-    <div className="rounded-xl border border-edge/60 bg-panel p-6 shadow-sm">
+    <div className="rounded-2xl border border-edge/60 bg-panel p-6 shadow-sm">
       <p className="text-xs font-medium uppercase tracking-wide text-faint">{m.incomingLabel}</p>
       <div className="mt-2 rounded-lg bg-panel2 p-4">
         <p className="text-sm leading-relaxed text-ink">{m.exampleReply}</p>
@@ -96,7 +96,7 @@ export function LocalReachMockup() {
   const { t } = useT();
   const m = t.localReachMockup;
   return (
-    <div className="rounded-xl border border-edge/60 bg-panel p-6 shadow-sm">
+    <div className="rounded-2xl border border-edge/60 bg-panel p-6 shadow-sm">
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <p className="text-xs font-medium uppercase tracking-wide text-faint">{m.typicalLabel}</p>
@@ -146,7 +146,7 @@ export function QualifiedLeadMockup() {
   const { t } = useT();
   const m = t.qualifiedMockup;
   return (
-    <div className="rounded-xl border border-edge/60 bg-panel p-6 shadow-sm">
+    <div className="rounded-2xl border border-edge/60 bg-panel p-6 shadow-sm">
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <p className="text-xs font-medium uppercase tracking-wide text-faint">{m.typicalLabel}</p>

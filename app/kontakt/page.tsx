@@ -26,13 +26,13 @@ export default function KontaktPage() {
         <h1 className="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">{c.title}</h1>
         <p className="mt-3 max-w-xl text-sm leading-relaxed text-soft sm:text-base">{c.intro}</p>
 
-        <div className="mt-10 grid gap-8 rounded-xl border border-edge/60 bg-panel p-6 sm:p-8 lg:grid-cols-5 lg:items-start">
+        <div className="mt-10 grid gap-8 rounded-2xl border border-edge/60 bg-panel p-6 sm:p-8 lg:grid-cols-5 lg:items-start">
           <div className="lg:col-span-2">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/team/youssef-tayachi.png"
               alt={c.name}
-              className="aspect-square w-full max-w-[220px] rounded-xl object-cover shadow-sm"
+              className="aspect-square w-full max-w-[220px] rounded-2xl object-cover shadow-sm"
             />
             <h2 className="mt-4 text-lg font-semibold text-ink">{c.name}</h2>
             <p className="text-sm text-mute">{c.role}</p>

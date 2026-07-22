@@ -45,8 +45,8 @@ export function CTAButton({
       href={href ?? (isPrimary ? TRIAL_URL : BOOKING_URL)}
       className={
         (isPrimary
-          ? "inline-flex items-center justify-center whitespace-nowrap rounded-lg bg-ink px-3.5 py-2 text-xs font-medium text-surface shadow-sm transition-all hover:opacity-85 active:scale-[0.99] sm:px-5 sm:py-2.5 sm:text-sm "
-          : "inline-flex items-center justify-center whitespace-nowrap rounded-lg border border-edge2 px-3.5 py-2 text-xs font-medium text-soft transition-colors hover:border-ink hover:text-ink sm:px-5 sm:py-2.5 sm:text-sm ") +
+          ? "inline-flex items-center justify-center whitespace-nowrap rounded-full bg-ink px-4 py-2.5 text-xs font-medium text-surface shadow-sm transition-all hover:opacity-85 hover:scale-[1.02] active:scale-[0.98] sm:px-6 sm:py-3 sm:text-sm "
+          : "inline-flex items-center justify-center whitespace-nowrap rounded-full border border-edge2 px-4 py-2.5 text-xs font-medium text-soft transition-colors hover:border-ink hover:text-ink sm:px-6 sm:py-3 sm:text-sm ") +
         className
       }
     >
@@ -67,13 +67,45 @@ export function CTAGroup({ className = "" }: { className?: string }) {
   );
 }
 
+/**
+ * Dropdown im Nav-Bereich, oeffnet sich per Hover (Desktop) und signalisiert
+ * allein durch seine Existenz mehr Tiefe/Reife als eine flache Ein-Klick-
+ * Navigation -- die Eintraege verlinken auf echte, bestehende Anker auf der
+ * Seite, keine Fake-Unterseiten.
+ */
+export function NavDropdown({ label, items }: { label: string; items: { label: string; href: string }[] }) {
+  return (
+    <div className="group relative">
+      <button className="flex items-center gap-1 text-sm text-soft transition-colors hover:text-ink">
+        {label}
+        <svg viewBox="0 0 24 24" fill="none" className="h-3.5 w-3.5 transition-transform group-hover:rotate-180">
+          <path d="m6 9 6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
+      <div className="invisible absolute left-0 top-full pt-3 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
+        <div className="w-52 rounded-2xl border border-edge/60 bg-panel p-2 shadow-lg shadow-ink/10">
+          {items.map((it) => (
+            <a
+              key={it.href}
+              href={it.href}
+              className="block rounded-lg px-3 py-2 text-sm text-soft transition-colors hover:bg-panel2 hover:text-ink"
+            >
+              {it.label}
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function Screenshot({ src, alt }: { src: string; alt: string }) {
   return (
     <a
       href={src}
       target="_blank"
       rel="noopener noreferrer"
-      className="group block overflow-hidden rounded-xl border border-edge/60 shadow-sm transition-shadow hover:shadow-md"
+      className="group block overflow-hidden rounded-2xl border border-edge/60 shadow-sm transition-shadow hover:shadow-md"
       title="Zum Vergrößern klicken"
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -115,8 +147,8 @@ export function FactBox({ fact, sub, source }: { fact: string; sub?: string; sou
  */
 export function StatTile({ value, label, dark = false }: { value: string; label: string; dark?: boolean }) {
   return (
-    <div className={dark ? "text-center" : "rounded-xl border border-edge/60 bg-panel p-5 text-center"}>
-      <p className={"text-2xl font-semibold tracking-tight sm:text-3xl " + (dark ? "text-surface" : "text-ink")}>
+    <div className={dark ? "text-center" : "rounded-2xl border border-edge/60 bg-panel p-5 text-center"}>
+      <p className={"font-display text-2xl font-semibold tracking-tight sm:text-3xl " + (dark ? "text-surface" : "text-ink")}>
         {value}
       </p>
       <p className={"mt-1 text-sm " + (dark ? "text-mute" : "text-soft")}>{label}</p>
@@ -129,5 +161,5 @@ export function StatTile({ value, label, dark = false }: { value: string; label:
  * auch klein noch lesbar bleibt -- gleiches Prinzip wie die bestehende
  * AI-Agent- und Icebreaker-Mockup-Karte). */
 export function MockupPanel({ children }: { children: React.ReactNode }) {
-  return <div className="rounded-xl border border-edge/60 bg-panel p-6 shadow-sm">{children}</div>;
+  return <div className="rounded-2xl border border-edge/60 bg-panel p-6 shadow-sm">{children}</div>;
 }
