@@ -1,14 +1,12 @@
 "use client";
 import { useT } from "./language-provider";
 
-// Echter Calendly-Link fuer den sekundaeren CTA ("Call buchen") sowie fuer
-// den Agentur-Preisplan (individuelle Preise -> Gespraech statt Checkout).
+// Echter Calendly-Link -- inzwischen das einzige CTA-Ziel auf der Website.
+// Kein Selfserve-Signup mehr direkt von der Website aus: jede/r Interessent:in
+// bucht zuerst ein kurzes Kennenlerngespraech, der Account wird danach manuell
+// freigeschaltet. Die Registrierungsseite in der App (/signup) existiert
+// weiterhin technisch, wird aber bewusst nirgends mehr von der Website aus verlinkt.
 export const BOOKING_URL = "https://calendly.com/youssef-tayachi-frostbreaker/30min";
-
-// Ziel fuer den primaeren Selfserve-CTA -- die Registrierungsseite in der
-// App. handle_new_user() legt dort automatisch eine 14-Tage-Trial an, hier
-// ist absichtlich keine Preis-Auswahl noetig: erst testen, Plan waehlt man
-// spaeter in /pricing bzw. beim Trial-Ende.
 export const TRIAL_URL = "https://app.frostbreaker.app/signup";
 
 export function Logo() {
@@ -20,10 +18,10 @@ export function Logo() {
 }
 
 /**
- * Ein CTAButton, zwei Varianten -- "primary" (Selfserve-Trial, auffaellig)
- * und "secondary" (Call buchen, zurueckhaltender). So bleibt an jeder Stelle
- * der Seite dieselbe Anlaufstelle, statt dass CTA-Ziele pro Sektion einzeln
- * gepflegt werden muessen -- eine spaetere URL-Aenderung passiert nur hier.
+ * Ein CTAButton, zwei visuelle Varianten -- "primary" (auffaellig, dunkel)
+ * und "secondary" (zurueckhaltender, outline) -- beide fuehren standardmaessig
+ * zum selben Ziel (Call buchen), es gibt keinen Selfserve-Pfad mehr auf der
+ * Website. Eine spaetere URL-Aenderung passiert nur an einer Stelle (BOOKING_URL).
  * Labels kommen standardmaessig aus dem Dictionary (zweisprachig), lassen
  * sich aber pro Aufrufstelle ueberschreiben (z. B. Preiskarten-Buttons).
  */
@@ -42,7 +40,7 @@ export function CTAButton({
   const isPrimary = variant === "primary";
   return (
     <a
-      href={href ?? (isPrimary ? TRIAL_URL : BOOKING_URL)}
+      href={href ?? BOOKING_URL}
       className={
         (isPrimary
           ? "inline-flex items-center justify-center whitespace-nowrap rounded-full bg-ink px-4 py-2.5 text-xs font-medium text-surface shadow-sm transition-all hover:opacity-85 hover:scale-[1.02] active:scale-[0.98] sm:px-6 sm:py-3 sm:text-sm "
@@ -60,9 +58,8 @@ export function CTAButton({
  * Layout-Klassen an zwei Stellen synchron zu halten. */
 export function CTAGroup({ className = "" }: { className?: string }) {
   return (
-    <div className={"flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4 " + className}>
+    <div className={"flex items-center justify-center " + className}>
       <CTAButton variant="primary" />
-      <CTAButton variant="secondary" />
     </div>
   );
 }

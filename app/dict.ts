@@ -251,7 +251,7 @@ const de = {
   },
   pricing: {
     eyebrow: "Preise",
-    title: "Feste Preise, sofort einsehbar, kein Verkaufsgespräch nötig",
+    title: "Feste Preise, sofort einsehbar, kurzes Kennenlerngespräch inklusive",
     agencyBadge: "Für Agenturen",
     note: "14 Tage kostenlos testen, keine Kreditkarte nötig. Danach monatlich kündbar, keine Mindestlaufzeit. Zusätzlich nur eure eigenen API-Kosten, live im Dashboard einsehbar.",
     plans: [
@@ -328,14 +328,14 @@ const de = {
       { q: "Woher weiß ich, dass eine gefundene E-Mail wirklich zu einer Person gehört?", a: "Frostbreaker filtert generische Adressen wie info@ oder office@ automatisch heraus. Nur E-Mails, die eindeutig einer Person zugeordnet sind, landen in eurer Leads-Liste." },
       { q: "Brauche ich eigene API-Keys? Ist das kompliziert?", a: "Einmal in den Einstellungen hinterlegt, läuft alles automatisch. In der kostenlosen Testphase führt euch die App Schritt für Schritt durch das Setup." },
       { q: "Wie unterscheidet sich das von Apollo/Hunter/Instantly?", a: "Die machen jeweils einen Teil des Workflows gut, mischen dabei aber meist personenbezogene und generische Adressen. Frostbreaker verbindet Suche, Anreicherung, Verifizierung und Personalisierung, filtert dabei automatisch auf echte Ansprechpartner, und bleibt auch nach dem Versand im Bild: Antworten lassen sich direkt in der App beantworten, das Dashboard zeigt gebuchte Meetings und Pipeline-Wert, nicht nur Öffnungsraten." },
-      { q: "Wie schnell bin ich startklar?", a: "Account anlegen, API-Keys eintragen, erste Suche starten, alles direkt selbst in der App. Wer das lieber einmal live gezeigt bekommt, kann stattdessen auch einen Call buchen." },
+      { q: "Wie schnell bin ich startklar?", a: "Ihr bucht ein kurzes Kennenlerngespräch (15 Minuten), wir schauen uns gemeinsam eure Nische an und schalten danach euren Account frei. Ab dann: API-Keys eintragen, erste Suche starten, direkt in der App." },
       { q: "Woher kommen die Zahlen zum Skalierungspotenzial?", a: "Aus einer offen gelegten Beispielrechnung, nicht aus einer Zusicherung: Versandkapazität nach Instantly-Hypergrowth-Plan, Recherchezeit und Antwortquote nach branchenüblichen Annahmen. Die Rechnung samt Annahmen steht direkt neben den Zahlen." },
       { q: "Was passiert mit meinen Daten, wenn ich kündige?", a: "Eure Daten werden nach Vertragsende gelöscht oder auf Wunsch zurückgegeben, geregelt im AVV. Es gibt keine automatische Weiternutzung nach Kündigung." },
     ],
   },
   finalCta: {
     title: "Bereit für Leads, die wirklich jemand liest?",
-    body: "14 Tage kostenlos, keine Kreditkarte nötig. Monatlich kündbar. Wer lieber erst reden möchte: 15 Minuten, wir zeigen es live an eurer eigenen Nische.",
+    body: "In einem kurzen Gespräch (15 Minuten) schauen wir uns eure Nische an und schalten euren Account frei. 14 Tage kostenlos, keine Kreditkarte nötig, danach monatlich kündbar.",
   },
   footer: {
     location: "Wien, Österreich",
@@ -614,7 +614,7 @@ const en: typeof de = {
   },
   pricing: {
     eyebrow: "Pricing",
-    title: "Fixed prices, visible immediately, no sales call needed",
+    title: "Fixed prices, visible immediately, quick intro call included",
     agencyBadge: "For agencies",
     note: "14 days free, no credit card required. Cancel anytime after, no minimum term. On top, only your own API costs, visible live in the dashboard.",
     plans: [
@@ -691,14 +691,14 @@ const en: typeof de = {
       { q: "How do I know a found email really belongs to a person?", a: "Frostbreaker automatically filters out generic addresses like info@ or office@. Only emails clearly assigned to a person make it into your leads list." },
       { q: "Do I need my own API keys? Is that complicated?", a: "Once entered in settings, everything runs automatically. During the free trial, the app walks you through setup step by step." },
       { q: "How is this different from Apollo/Hunter/Instantly?", a: "They each do part of the workflow well, but usually mix personal and generic addresses. Frostbreaker connects search, enrichment, verification and personalization, automatically filtering for real decision-makers, and stays in the loop after sending too: replies can be answered directly in the app, and the dashboard shows booked meetings and pipeline value, not just open rates." },
-      { q: "How fast can I get started?", a: "Create an account, add your API keys, start your first search, all directly in the app yourself. If you'd rather see it live once, you can book a call instead." },
+      { q: "How fast can I get started?", a: "You book a short intro call (15 minutes), we look at your niche together and unlock your account afterwards. From there: add your API keys, start your first search, directly in the app." },
       { q: "Where do the scaling potential numbers come from?", a: "From an openly disclosed example calculation, not a promise: sending capacity based on the Instantly Hypergrowth plan, research time and reply rate based on industry-typical assumptions. The calculation and its assumptions are shown right next to the numbers." },
       { q: "What happens to my data if I cancel?", a: "Your data is deleted after the contract ends, or returned on request, as governed by the DPA. There's no automatic continued use after cancellation." },
     ],
   },
   finalCta: {
     title: "Ready for leads someone actually reads?",
-    body: "14 days free, no credit card required. Cancel anytime. Prefer to talk first? 15 minutes, we'll show it live for your own niche.",
+    body: "In a short call (15 minutes) we look at your niche together and unlock your account. 14 days free, no credit card required, cancel anytime after that.",
   },
   footer: {
     location: "Vienna, Austria",

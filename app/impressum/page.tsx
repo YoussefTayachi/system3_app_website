@@ -9,8 +9,8 @@ export default function Impressum() {
         <section>
           <h2 className="text-base font-semibold text-ink">Angaben gemäß § 5 ECG, § 25 Mediengesetz</h2>
           <p className="mt-3">
-            [Firmenname]<br />
-            [Rechtsform, z. B. e.U. / GmbH]<br />
+            Youssef Tayachi<br />
+            Einzelunternehmer (Gewerbeanmeldung ausständig)<br />
             [Straße Hausnummer]<br />
             [PLZ Ort], Österreich
           </p>
@@ -18,14 +18,14 @@ export default function Impressum() {
 
         <section>
           <h2 className="text-base font-semibold text-ink">Vertretungsberechtigt</h2>
-          <p className="mt-3">[Name der vertretungsberechtigten Person(en)]</p>
+          <p className="mt-3">Youssef Tayachi</p>
         </section>
 
         <section>
           <h2 className="text-base font-semibold text-ink">Kontakt</h2>
           <p className="mt-3">
-            E-Mail: <a href="mailto:youtaybusiness@gmail.com" className="text-ink underline">[Kontakt-E-Mail]</a><br />
-            Telefon: [Telefonnummer, optional]
+            E-Mail: <a href="mailto:youssef.tayachi@frostbreaker.app" className="text-ink underline">youssef.tayachi@frostbreaker.app</a><br />
+            Telefon: <a href="tel:+436769004865" className="text-ink underline">+43 676 9004865</a>
           </p>
         </section>
 
@@ -37,15 +37,9 @@ export default function Impressum() {
         <section>
           <h2 className="text-base font-semibold text-ink">Firmenbuch / UID</h2>
           <p className="mt-3">
-            Firmenbuchnummer: [FN ...]<br />
-            Firmenbuchgericht: [Landesgericht ...]<br />
-            UID-Nummer: [ATU ...]
+            Aktuell als Einzelunternehmer ohne Firmenbucheintrag tätig, Gewerbeanmeldung befindet sich in Vorbereitung.
+            Firmenbuchnummer und UID-Nummer werden hier ergänzt, sobald die Gewerbeanmeldung abgeschlossen ist.
           </p>
-        </section>
-
-        <section>
-          <h2 className="text-base font-semibold text-ink">Mitgliedschaft</h2>
-          <p className="mt-3">Mitglied der Wirtschaftskammer Österreich, Fachgruppe [...]. Anwendbare Rechtsvorschrift: Gewerbeordnung (abrufbar unter www.ris.bka.gv.at).</p>
         </section>
 
         <section>

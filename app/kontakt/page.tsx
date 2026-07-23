@@ -1,5 +1,5 @@
 "use client";
-import { Logo, CTAButton, BOOKING_URL } from "../_ui";
+import { Logo, CTAButton, NavDropdown, BOOKING_URL } from "../_ui";
 import { useT, LanguageToggle } from "../language-provider";
 
 const EMAIL = "youssef.tayachi@frostbreaker.app";
@@ -9,11 +9,24 @@ const PHONE_HREF = "+436769004865";
 export default function KontaktPage() {
   const { t } = useT();
   const c = t.contactPage;
+  const navLinks = [
+    { href: "/#agenturen", label: t.nav.agenturen },
+    { href: "/#preise", label: t.nav.preise },
+    { href: "/#vergleich", label: t.nav.vergleich },
+    { href: "/#faq", label: t.nav.faq },
+  ];
+  const produktItems = t.nav.produktItems.map((item) => ({ ...item, href: "/" + item.href }));
   return (
     <div className="min-h-screen">
       <header className="sticky top-0 z-10 border-b border-edge/60 bg-surface/90 backdrop-blur">
-        <div className="mx-auto flex max-w-3xl items-center justify-between px-4 py-4 sm:px-6">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
           <Logo />
+          <nav className="hidden items-center gap-6 md:flex">
+            <NavDropdown label={t.nav.produkt} items={produktItems} />
+            {navLinks.map((l) => (
+              <a key={l.href} href={l.href} className="text-sm text-soft hover:text-ink">{l.label}</a>
+            ))}
+          </nav>
           <div className="flex items-center gap-3">
             <LanguageToggle />
             <CTAButton />
