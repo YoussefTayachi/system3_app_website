@@ -1,10 +1,10 @@
 "use client";
 import { Logo, CTAButton, CTAGroup, NavDropdown, Screenshot, SectionHeading, FactBox, StatTile } from "./_ui";
-import { AgencyMockup, PostSendMockup, LocalReachMockup, QualifiedLeadMockup } from "./_mockups";
+import { AgencyMockup, PostSendMockup, LocalReachMockup, QualifiedLeadMockup, SuppressionMockup, DeliverabilityMockup, CampaignMockup } from "./_mockups";
 import { LeadCardStack } from "./_illustration";
 import { SavingsCalculator } from "./_calculator";
 import { Reveal } from "./reveal";
-import { pillarIcons, trustIcons, postSendIcons, agencyIcons, workflowIcons } from "./_icons";
+import { pillarIcons, trustIcons, postSendIcons, agencyIcons, workflowIcons, featureIcons } from "./_icons";
 import { useT, LanguageToggle } from "./language-provider";
 
 export default function Home() {
@@ -339,6 +339,29 @@ export default function Home() {
               {u.fact && <FactBox fact={u.fact} sub={u.sub} source={u.source!} />}
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Weitere Features: Sperrliste, Zustellbarkeit, Kampagnen */}
+      <section className="border-y border-edge/60 bg-panel2">
+        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+          <SectionHeading eyebrow={t.features.eyebrow} title={t.features.title} />
+          <div className="grid gap-8 sm:grid-cols-3">
+            {t.features.items.map((f, i) => (
+              <Reveal key={f.id} delay={i * 80}>
+                <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400">
+                  {featureIcons[f.id]}
+                </div>
+                <h3 className="mt-4 text-sm font-semibold text-ink">{f.title}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-soft">{f.body}</p>
+                <div className="mt-5">
+                  {f.id === "suppression" && <SuppressionMockup />}
+                  {f.id === "deliverability" && <DeliverabilityMockup />}
+                  {f.id === "campaigns" && <CampaignMockup />}
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 

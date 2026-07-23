@@ -131,3 +131,26 @@ export const agencyIcons: Record<string, React.ReactNode> = {
     </svg>
   ),
 };
+
+export const featureIcons: Record<string, React.ReactNode> = {
+  suppression: (
+    <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
+      <path d="M12 2 3 6v6c0 5 3.8 8.7 9 10 5.2-1.3 9-5 9-10V6l-9-4Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+      <path d="M9 9l6 6M15 9l-6 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  ),
+  deliverability: (
+    <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
+      <path d="M12 2 3 6v6c0 5 3.8 8.7 9 10 5.2-1.3 9-5 9-10V6l-9-4Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+      <path d="m8.5 12.5 2.3 2.3L16 9.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+  campaigns: (
+    <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
+      <circle cx="5.5" cy="7" r="2" stroke="currentColor" strokeWidth="1.6" />
+      <circle cx="12" cy="12" r="2" stroke="currentColor" strokeWidth="1.6" />
+      <circle cx="18.5" cy="17" r="2" stroke="currentColor" strokeWidth="1.6" />
+      <path d="M7 8.3 10.5 10.7M13.5 13.3 17 15.7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  ),
+};
