@@ -11,7 +11,7 @@ export default function Impressum() {
           <p className="mt-3">
             Youssef Tayachi<br />
             Einzelunternehmer (Gewerbeanmeldung ausständig)<br />
-            Bernoullistraße<br />
+            Bernoullistraße, Tür 17<br />
             1220 Wien, Österreich
           </p>
         </section>
