@@ -79,6 +79,34 @@ export const postSendIcons: Record<string, React.ReactNode> = {
   ),
 };
 
+export const workflowIcons: Record<string, React.ReactNode> = {
+  "1": (
+    <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+      <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" strokeWidth="1.8" />
+      <path d="m19 19-4.3-4.3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  ),
+  "2": (
+    <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+      <circle cx="10" cy="8.5" r="3.2" stroke="currentColor" strokeWidth="1.8" />
+      <path d="M4.5 19c1-3.3 3.3-5 5.5-5s4.5 1.7 5.5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="m16.5 8.5 1.6 1.6 3-3.2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+  "3": (
+    <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+      <path d="M12 2 3 6v6c0 5 3.8 8.7 9 10 5.2-1.3 9-5 9-10V6l-9-4Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+      <path d="m8.5 12 2.3 2.3L16 9.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+  "4": (
+    <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+      <path d="m12 3 1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8L12 3Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+      <path d="M19 15.5 19.7 17l1.5.7-1.5.7-.7 1.5-.7-1.5-1.5-.7 1.5-.7.7-1.5Z" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
+    </svg>
+  ),
+};
+
 export const agencyIcons: Record<string, React.ReactNode> = {
   workspaces: (
     <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">

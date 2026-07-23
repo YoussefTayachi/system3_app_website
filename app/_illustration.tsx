@@ -60,7 +60,7 @@ export function LeadCardStack() {
         </div>
       </div>
 
-      <div className="animate-float absolute bottom-4 left-4 rounded-2xl bg-coral px-4 py-3 text-white shadow-lg shadow-coral/30" style={{ animationDelay: "1.5s" }}>
+      <div className="animate-float absolute bottom-4 left-4 rounded-2xl bg-emerald-500 px-4 py-3 text-white shadow-lg shadow-emerald-500/30" style={{ animationDelay: "1.5s" }}>
         <p className="font-display text-2xl font-semibold leading-none">{h.badgeStat}</p>
         <p className="mt-1 text-[11px] leading-tight opacity-90">{h.badgeLabel}</p>
       </div>

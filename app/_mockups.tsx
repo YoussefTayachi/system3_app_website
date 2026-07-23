@@ -145,40 +145,57 @@ export function LocalReachMockup() {
 export function QualifiedLeadMockup() {
   const { t } = useT();
   const m = t.qualifiedMockup;
+  const lead = m.rows[0];
+  const rejected = m.rows;
+
+  // Bewusst eine andere Komposition als LocalReachMockup (dort: zwei
+  // parallele Listen). Hier: ein "Pulk" verworfener generischer Adressen
+  // links, der sich zu EINER grossen, qualifizierten Lead-Karte rechts
+  // verdichtet -- illustriert den Filter-Vorgang selbst (viele Kandidaten
+  // rein, ein echter Ansprechpartner raus), nicht nur ein Vorher/Nachher.
   return (
-    <div className="rounded-2xl border border-edge/60 bg-panel p-6 shadow-sm">
-      <div className="grid gap-5 sm:grid-cols-2">
-        <div>
-          <p className="text-xs font-medium uppercase tracking-wide text-faint">{m.typicalLabel}</p>
-          <div className="mt-2 space-y-1.5">
-            {m.rows.map((r) => (
-              <div key={r.generic} className="flex items-center gap-2.5 rounded-lg border border-edge2 px-3 py-2 opacity-60">
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-panel2 text-mute">
-                  <svg viewBox="0 0 24 24" fill="none" className="h-3.5 w-3.5"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>
-                </span>
-                <div className="min-w-0">
-                  <p className="truncate text-sm text-faint line-through">{r.generic}</p>
-                  <p className="text-[11px] text-mute">{m.genericNote}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+    <div className="rounded-2xl border border-edge/60 bg-panel p-6 shadow-sm sm:p-8">
+      <div className="grid items-center gap-6 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1.2fr)]">
+        <div className="relative mx-auto h-32 w-full max-w-[220px] sm:h-40">
+          {rejected.map((r, i) => (
+            <div
+              key={r.generic}
+              className="absolute inset-x-0 flex items-center gap-2 rounded-lg border border-edge2 bg-panel2 px-3 py-2 opacity-70 shadow-sm"
+              style={{
+                top: `${i * 22}px`,
+                transform: `rotate(${(i - 1) * 4}deg)`,
+                zIndex: rejected.length - i,
+              }}
+            >
+              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-panel text-mute">
+                <svg viewBox="0 0 24 24" fill="none" className="h-3 w-3"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></svg>
+              </span>
+              <p className="truncate text-xs text-faint line-through">{r.generic}</p>
+            </div>
+          ))}
         </div>
-        <div>
-          <p className="text-xs font-medium uppercase tracking-wide text-faint">{m.frostbreakerLabel}</p>
-          <div className="mt-2 space-y-1.5">
-            {m.rows.map((r) => (
-              <div key={r.email} className="flex items-center gap-2.5 rounded-lg border border-emerald-500/30 bg-emerald-500/5 px-3 py-2">
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-emerald-500/15 text-emerald-600 dark:text-emerald-300">
-                  <svg viewBox="0 0 24 24" fill="none" className="h-3.5 w-3.5"><path d="m5 13 4 4L19 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                </span>
-                <div className="min-w-0">
-                  <p className="truncate text-sm font-medium text-ink">{r.name} · {r.role}</p>
-                  <p className="text-[11px] text-mute">{r.email}</p>
-                </div>
-              </div>
-            ))}
+
+        <div className="mx-auto text-mute sm:mx-0">
+          <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6 rotate-90 sm:rotate-0">
+            <path d="M4 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </div>
+
+        <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/5 p-4">
+          <div className="flex items-center gap-3">
+            <div className="font-display flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 text-sm font-semibold text-white">
+              {lead.name.split(" ").map((p) => p[0]).join("")}
+            </div>
+            <div className="min-w-0">
+              <p className="truncate text-sm font-semibold text-ink">{lead.name}</p>
+              <p className="text-xs text-mute">{lead.role}</p>
+            </div>
+            <svg viewBox="0 0 24 24" fill="none" className="ml-auto h-5 w-5 shrink-0 text-emerald-500">
+              <path d="m5 13 4 4L19 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </div>
+          <div className="mt-3 rounded-lg bg-panel px-3 py-2 text-xs text-soft">{lead.email}</div>
+          <p className="mt-2 text-[11px] text-mute">{m.frostbreakerLabel}</p>
         </div>
       </div>
     </div>

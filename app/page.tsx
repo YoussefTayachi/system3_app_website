@@ -4,7 +4,7 @@ import { AgencyMockup, PostSendMockup, LocalReachMockup, QualifiedLeadMockup } f
 import { LeadCardStack } from "./_illustration";
 import { SavingsCalculator } from "./_calculator";
 import { Reveal } from "./reveal";
-import { pillarIcons, trustIcons, postSendIcons, agencyIcons } from "./_icons";
+import { pillarIcons, trustIcons, postSendIcons, agencyIcons, workflowIcons } from "./_icons";
 import { useT, LanguageToggle } from "./language-provider";
 
 export default function Home() {
@@ -177,23 +177,29 @@ export default function Home() {
           <SectionHeading title={t.workflow.title} />
           <p className="-mt-6 mb-8 max-w-2xl text-sm leading-relaxed text-soft sm:text-base">{t.workflow.subtitle}</p>
 
-          <div className="grid gap-6 lg:grid-cols-4">
-            {t.workflow.steps.map((s, i) => (
-              <div key={s.n} className="relative rounded-2xl border border-edge/60 bg-panel p-5">
-                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-ink text-sm font-semibold text-surface">
-                  {s.n}
-                </div>
-                <h3 className="mt-4 text-sm font-semibold text-ink">{s.title}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-soft">{s.body}</p>
-                {i < t.workflow.steps.length - 1 && (
-                  <div className="pointer-events-none absolute -right-3 top-1/2 hidden -translate-y-1/2 text-edge3 lg:block">
-                    <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
-                      <path d="M4 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
+          <div className="relative grid gap-6 lg:grid-cols-4">
+            {/* Verbindende Linie hinter den Nummern-Badges, nur Desktop --
+                unterstreicht den Fluss zwischen den Schritten staerker als
+                die vorherigen einzelnen Pfeile zwischen gleichfarbigen Karten. */}
+            <div className="pointer-events-none absolute left-[12.5%] right-[12.5%] top-[34px] hidden h-px bg-gradient-to-r from-sky-300 via-amber-300 to-coral lg:block" />
+            {t.workflow.steps.map((s, i) => {
+              const accentBg = ["bg-sky-500/10", "bg-emerald-500/10", "bg-amber-500/10", "bg-coral-soft"][i];
+              const accentText = ["text-sky-600", "text-emerald-600", "text-amber-600", "text-coral"][i];
+              return (
+                <Reveal key={s.n} delay={i * 80}>
+                  <div className="relative rounded-2xl border border-edge/60 bg-panel p-5 hover-lift">
+                    <div className={`font-display relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl text-xl font-semibold ${accentBg} ${accentText}`}>
+                      {s.n}
+                    </div>
+                    <div className={`mt-4 flex items-center gap-2 ${accentText}`}>
+                      {workflowIcons[s.n]}
+                      <h3 className="text-sm font-semibold text-ink">{s.title}</h3>
+                    </div>
+                    <p className="mt-1.5 text-sm leading-relaxed text-soft">{s.body}</p>
                   </div>
-                )}
-              </div>
-            ))}
+                </Reveal>
+              );
+            })}
           </div>
 
           <FactBox fact={t.workflow.fact.fact} sub={t.workflow.fact.sub} source={t.workflow.fact.source} />
