@@ -11,8 +11,8 @@ export default function Impressum() {
           <p className="mt-3">
             Youssef Tayachi<br />
             Einzelunternehmer (Gewerbeanmeldung ausständig)<br />
-            [Straße Hausnummer]<br />
-            [PLZ Ort], Österreich
+            Bernoullistraße<br />
+            1220 Wien, Österreich
           </p>
         </section>
 
