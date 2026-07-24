@@ -28,13 +28,16 @@ const de = {
     badgeStat: "2×",
     badgeLabel: "mehr Antworten durch echte Personalisierung",
     inboxLabel: "Antworten, live aus dem Dashboard",
+    liveLabel: "Live",
     replies: [
       { name: "Markus Huber", company: "Schreinerei Huber", message: "Klingt gut, erzählt mir mehr!", status: "reply" },
       { name: "Julia Berger", company: "Zahnarztpraxis Berger", message: "Ja, gerne! Passt euch Dienstag 14 Uhr?", status: "meeting" },
       { name: "Elena Roth", company: "Café Sonnenblick", message: "Interessant, wann könnt ihr kurz telefonieren?", status: "reply" },
+      { name: "Sophie Wagner", company: "Fitnessstudio Wagner", message: "Super, schickt mir gerne einen Termin!", status: "meeting" },
     ],
     replyLabel: "Antwort",
     meetingLabel: "Meeting gebucht",
+    moreLabel: "+ 12 weitere Antworten diese Woche",
   },
   calculator: {
     eyebrow: "Interaktiv",
@@ -434,13 +437,16 @@ const en: typeof de = {
     badgeStat: "2×",
     badgeLabel: "more replies through real personalization",
     inboxLabel: "Replies, live from the dashboard",
+    liveLabel: "Live",
     replies: [
       { name: "Markus Huber", company: "Huber Joinery", message: "Sounds great, tell me more!", status: "reply" },
       { name: "Julia Berger", company: "Berger Dental Practice", message: "Yes, happy to! Does Tuesday 2pm work?", status: "meeting" },
       { name: "Elena Roth", company: "Café Sonnenblick", message: "Interesting, when can we hop on a call?", status: "reply" },
+      { name: "Sophie Wagner", company: "Wagner Fitness Studio", message: "Great, feel free to send me a time!", status: "meeting" },
     ],
     replyLabel: "Reply",
     meetingLabel: "Meeting booked",
+    moreLabel: "+ 12 more replies this week",
   },
   calculator: {
     eyebrow: "Interactive",
