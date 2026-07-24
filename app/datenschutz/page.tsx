@@ -9,8 +9,8 @@ export default function Datenschutz() {
         <section>
           <h2 className="text-base font-semibold text-ink">1. Verantwortlicher</h2>
           <p className="mt-3">
-            [Firmenname], [Adresse], Österreich. Kontakt für Datenschutzanfragen:{" "}
-            <a href="mailto:youtaybusiness@gmail.com" className="text-ink underline">[Kontakt-E-Mail]</a>.
+            Youssef Tayachi, Bernoullistraße 4/17, 1220 Wien, Österreich. Kontakt für Datenschutzanfragen:{" "}
+            <a href="mailto:youssef.tayachi@frostbreaker.app" className="text-ink underline">youssef.tayachi@frostbreaker.app</a>.
           </p>
         </section>
 
@@ -18,52 +18,66 @@ export default function Datenschutz() {
           <h2 className="text-base font-semibold text-ink">2. Welche Daten wir verarbeiten</h2>
           <p className="mt-3">
             Beim Besuch dieser Website verarbeiten wir technisch notwendige Daten (z. B. IP-Adresse, Zeitpunkt des
-            Zugriffs) für den Betrieb und die Sicherheit der Seite. Wenn ihr über das Icebreaker-Formular auf dieser
-            Seite euren Firmennamen, eure Website und eure E-Mail-Adresse angebt, verarbeiten wir diese Daten
-            zusätzlich für den unten beschriebenen Zweck.
+            Zugriffs, aufgerufene Seite) für den Betrieb und die Sicherheit der Seite. Ein eigenes Kontakt- oder
+            Anfrageformular gibt es auf dieser Website nicht: E-Mail-Adresse und Telefonnummer auf der Kontaktseite
+            sind direkte mailto:- bzw. tel:-Links, die euer eigenes E-Mail- oder Telefonprogramm öffnen, es werden
+            dabei keine Daten an uns übermittelt oder gespeichert.
           </p>
         </section>
 
         <section>
-          <h2 className="text-base font-semibold text-ink">3. Icebreaker-Demo und Kontaktaufnahme</h2>
+          <h2 className="text-base font-semibold text-ink">3. Cookies</h2>
           <p className="mt-3">
-            Über das Formular „Kostenlosen Icebreaker generieren“ könnt ihr freiwillig Firmenname, Website und
-            E-Mail-Adresse angeben, um ein Beispiel für eine personalisierte E-Mail-Ansprache zu erhalten. Mit dem
-            Absenden stimmt ihr ausdrücklich zu, dass wir euch per E-Mail zu Frostbreaker kontaktieren dürfen (Art. 6 Abs. 1
-            lit. a DSGVO, Einwilligung). Diese Einwilligung könnt ihr jederzeit formlos per E-Mail an{" "}
-            <a href="mailto:youtaybusiness@gmail.com" className="text-ink underline">[Kontakt-E-Mail]</a> widerrufen.
-            Ohne diese Einwilligung wird das Formular nicht abgeschickt.
+            Diese Website setzt ein einziges, technisch notwendiges Cookie (<code className="rounded bg-panel2 px-1 py-0.5 text-xs">lang</code>),
+            das eure gewählte Sprache (Deutsch/Englisch) für ein Jahr speichert. Es dient ausschließlich der
+            Funktion der Seite, keiner Analyse oder Werbung, und erfordert daher keine gesonderte Einwilligung.
           </p>
         </section>
 
         <section>
-          <h2 className="text-base font-semibold text-ink">4. Hosting und Auftragsverarbeiter</h2>
-          <p className="mt-3">Für den Betrieb dieser Website setzen wir folgende Dienstleister ein:</p>
-          <ul className="mt-3 list-disc space-y-1.5 pl-5">
-            <li>Vercel Inc. (Hosting der Website)</li>
-            <li>Supabase (Datenbank, Serverstandort Frankfurt/EU)</li>
-            <li>OpenAI (Erzeugung des Beispiel-Icebreakers aus den angegebenen Firmendaten)</li>
-          </ul>
+          <h2 className="text-base font-semibold text-ink">4. Reichweitenmessung</h2>
           <p className="mt-3">
-            Bei Anbietern mit Sitz außerhalb der EU (z. B. Vercel, OpenAI) stellen wir die datenschutzkonforme
-            Übermittlung über Standardvertragsklauseln der EU-Kommission sicher.
+            Wir nutzen Vercel Web Analytics zur anonymisierten, aggregierten Auswertung von Seitenaufrufen (z. B.
+            welche Unterseiten wie oft besucht werden). Der Dienst arbeitet cookie-frei und speichert keine
+            IP-Adressen oder sonstige Daten, die einzelne Besucher:innen identifizierbar machen.
           </p>
         </section>
 
         <section>
-          <h2 className="text-base font-semibold text-ink">5. Speicherdauer</h2>
+          <h2 className="text-base font-semibold text-ink">5. Terminbuchung über Calendly</h2>
           <p className="mt-3">
-            Über das Formular übermittelte Daten speichern wir, bis der Zweck der Kontaktaufnahme erfüllt ist oder ihr
-            der Speicherung widersprecht, längstens jedoch 24 Monate.
+            Über den Button „Call buchen" gelangt ihr auf die Terminbuchungsseite unseres Anbieters Calendly
+            (Calendly LLC, USA), die in einem neuen Tab außerhalb dieser Website geöffnet wird. Gebt ihr dort eure
+            Daten ein (z. B. Name, E-Mail-Adresse, gewünschter Termin), gilt dafür die Datenschutzerklärung von
+            Calendly, nicht diese hier. Wir erhalten von Calendly lediglich die zur Terminabwicklung notwendigen
+            Angaben.
           </p>
         </section>
 
         <section>
-          <h2 className="text-base font-semibold text-ink">6. Eure Rechte</h2>
+          <h2 className="text-base font-semibold text-ink">6. Hosting</h2>
+          <p className="mt-3">
+            Diese Website wird bei Vercel Inc. (USA) gehostet. Bei der Übermittlung an Anbieter mit Sitz außerhalb
+            der EU stellen wir die datenschutzkonforme Übermittlung über Standardvertragsklauseln der
+            EU-Kommission sicher.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-base font-semibold text-ink">7. Speicherdauer</h2>
+          <p className="mt-3">
+            Technische Zugriffsdaten (Server-Logs) werden automatisiert für einen kurzen, zur Fehleranalyse und
+            Absicherung der Systeme notwendigen Zeitraum gespeichert und danach gelöscht. Das Sprach-Cookie bleibt
+            höchstens ein Jahr auf eurem Gerät gespeichert oder bis ihr es selbst löscht.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-base font-semibold text-ink">8. Eure Rechte</h2>
           <p className="mt-3">
             Ihr habt das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung,
             Datenübertragbarkeit und Widerspruch bezüglich eurer personenbezogenen Daten. Wendet euch dazu an{" "}
-            <a href="mailto:youtaybusiness@gmail.com" className="text-ink underline">[Kontakt-E-Mail]</a>. Außerdem
+            <a href="mailto:youssef.tayachi@frostbreaker.app" className="text-ink underline">youssef.tayachi@frostbreaker.app</a>. Außerdem
             habt ihr das Recht, euch bei der österreichischen Datenschutzbehörde (dsb.gv.at) zu beschweren.
           </p>
         </section>
