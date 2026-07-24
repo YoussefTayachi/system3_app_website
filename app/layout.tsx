@@ -19,7 +19,7 @@ import { LanguageProvider } from "./language-provider";
 
 const title = "Frostbreaker: Leads finden, anreichern und persönlich kontaktieren, ohne vier Tools zu bezahlen";
 const description =
-  "Frostbreaker findet B2B-Leads, verifiziert E-Mails und schreibt individuelle Icebreaker automatisch, alles in einem Tool, mit eigenen API-Keys statt teurer Pauschale.";
+  "Frostbreaker findet B2B-Leads, verifiziert E-Mail-Adressen, liefert die Telefonnummer aus dem öffentlichen Eintrag mit und schreibt individuelle Icebreaker automatisch, alles in einem Tool, mit eigenen API-Keys statt teurer Pauschale.";
 
 // metadataBase macht aus dem generierten OG-Bild (app/opengraph-image.tsx)
 // eine absolute URL -- ohne das steht beim Teilen ein localhost-Link im

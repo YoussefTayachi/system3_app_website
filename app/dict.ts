@@ -60,11 +60,17 @@ const de = {
     eyebrow: "Der wohl direkteste KI-Einsatz für Kaltakquise",
     h1Pre: "Mindestens ",
     h1Accent: "5.000 echte Ansprechpartner",
-    h1Post: " pro Woche anschreiben, vollautomatisch.",
-    body: "Frostbreaker findet lokale Unternehmen, identifiziert die richtige Person dahinter, verifiziert die E-Mail-Adresse und schreibt eine individuelle Icebreaker-Zeile, vollautomatisch. Kein info@, kein office@: nur echte Menschen, die man wirklich erreichen kann.",
+    // "kontaktieren" statt "anschreiben": die App liefert neben der geprueften
+    // E-Mail auch die Telefonnummer aus dem oeffentlichen Eintrag, der Kanal
+    // ist also Sache der Kundin. Die Nummer wird bewusst nicht als "verifiziert"
+    // bezeichnet -- geprueft werden nur E-Mail-Adressen.
+    h1Post: " pro Woche kontaktieren, vollautomatisch.",
+    body: "Frostbreaker findet lokale Unternehmen, identifiziert die richtige Person dahinter und verifiziert ihre E-Mail-Adresse. Die Telefonnummer aus dem öffentlichen Eintrag kommt mit dazu: kein info@, kein office@, sondern echte Ansprechpartner, die ihr auf eurem Weg erreicht.",
     factBadge: "Agenturen bekommen im Schnitt 42 € zurück für jeden Euro, den sie in E-Mails stecken.",
     factSource: "Quelle: Litmus, State of Email 2025",
     screenshotAlt: "Frostbreaker Leads-Tabelle mit Firmen-Logos, Kontaktanzahl und E-Mail-Status",
+    dashboardAlt:
+      "Frostbreaker-Dashboard: 78 gefundene Firmen, 214 Kontakte, 168 mit E-Mail-Adresse, rund 33 Stunden gesparte Recherche bei 2,75 US-Dollar API-Kosten",
   },
   heroStats: [
     { value: "≈ 133 Std.", label: "manuelle Recherche gespart, pro 1.000 Leads" },
@@ -470,10 +476,12 @@ const en: typeof de = {
     h1Pre: "Reach at least ",
     h1Accent: "5,000 real decision-makers",
     h1Post: " a week, fully automatically.",
-    body: "Frostbreaker finds local businesses, identifies the right person behind them, verifies the email address and writes an individual icebreaker line, fully automatically. No info@, no office@: only real people you can actually reach.",
+    body: "Frostbreaker finds local businesses, identifies the right person behind them and verifies their email address. The phone number from the public listing comes with it: no info@, no office@, just real contacts you can reach your way.",
     factBadge: "Agencies get an average of $42 back for every dollar they spend on email.",
     factSource: "Source: Litmus, State of Email 2025",
     screenshotAlt: "Frostbreaker leads table with company logos, contact count and email status",
+    dashboardAlt:
+      "Frostbreaker dashboard: 78 companies found, 214 contacts, 168 with an email address, around 33 hours of research saved at 2.75 US dollars in API cost",
   },
   heroStats: [
     { value: "≈ 133 hrs", label: "manual research saved, per 1,000 leads" },

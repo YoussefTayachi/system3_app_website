@@ -16,7 +16,10 @@ export function LeadCardStack() {
   const replies = h.replies;
 
   return (
-    <div className="relative mx-auto w-full max-w-[420px]">
+    /* pt-14 haelt oben Platz frei, damit der 2x-Badge ueber der Karte sitzt
+       statt auf ihr: vorher ueberdeckte er das Status-Label der ersten Antwort
+       (gemessen 52x15px), weil er zusaetzlich per animate-float driftete. */
+    <div className="relative mx-auto w-full max-w-[420px] pt-14">
       <div className="rounded-3xl border border-edge/60 bg-panel p-4 shadow-xl shadow-ink/10 sm:p-5">
         <div className="mb-3 flex items-center gap-2 px-1">
           <span className="relative flex h-2 w-2">
@@ -63,9 +66,15 @@ export function LeadCardStack() {
         <p className="mt-3 px-1 text-center text-[11px] font-medium text-mute">{h.moreLabel}</p>
       </div>
 
-      <div className="animate-float absolute -right-4 -top-4 rounded-2xl bg-emerald-500 px-4 py-3 text-white shadow-lg shadow-emerald-500/30" style={{ animationDelay: "1.5s" }}>
+      {/* Eigene, flachere Schwebebewegung als die Karten: der Badge steht am
+          oberen Kartenrand und darf nicht so weit driften, dass er wieder
+          Inhalt verdeckt. */}
+      <div
+        className="animate-float-slow absolute right-0 top-0 flex items-center gap-2.5 rounded-2xl bg-emerald-600 px-4 py-2.5 text-white shadow-lg shadow-emerald-600/25"
+        style={{ animationDelay: "1.5s" }}
+      >
         <p className="font-display text-2xl font-semibold leading-none">{h.badgeStat}</p>
-        <p className="mt-1 max-w-[110px] text-[11px] leading-tight opacity-90">{h.badgeLabel}</p>
+        <p className="max-w-[120px] text-[11px] leading-tight text-emerald-50">{h.badgeLabel}</p>
       </div>
     </div>
   );

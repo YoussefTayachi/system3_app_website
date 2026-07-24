@@ -1,11 +1,11 @@
 "use client";
 import Image from "next/image";
-import { Logo, CTAButton, CTAGroup, NavDropdown, Screenshot, SectionHeading, FactBox, StatTile } from "./_ui";
+import { Logo, CTAButton, CTAGroup, NavDropdown, SectionHeading, FactBox, StatTile, BOOKING_URL } from "./_ui";
 import { AgencyMockup, PostSendMockup, LocalReachMockup, QualifiedLeadMockup, SuppressionMockup, DeliverabilityMockup, CampaignMockup } from "./_mockups";
 import { LeadCardStack } from "./_illustration";
 import { SavingsCalculator } from "./_calculator";
 import { Reveal } from "./reveal";
-import { pillarIcons, trustIcons, postSendIcons, agencyIcons, workflowIcons, featureIcons } from "./_icons";
+import { pillarIcons, trustIcons, postSendIcons, agencyIcons, workflowIcons, featureIcons, CheckIcon, CrossIcon } from "./_icons";
 import { useT, LanguageToggle } from "./language-provider";
 
 export default function Home() {
@@ -65,19 +65,21 @@ export default function Home() {
                 <span className="italic text-sky-600">{t.hero.h1Accent}</span>
                 {t.hero.h1Post}
               </h1>
-              <p className="mt-5 max-w-md text-base leading-relaxed text-soft sm:text-lg">{t.hero.body}</p>
-              <div className="mt-8 flex flex-wrap items-center gap-3">
+              <p className="mt-5 max-w-[46ch] text-base leading-relaxed text-soft sm:text-lg">{t.hero.body}</p>
+              {/* Der Sekundaer-CTA war optisch fast so stark wie der primaere;
+                  als reiner Textlink mit Pfeil bleibt er verfuegbar, ohne den
+                  Hauptweg zu verwaessern. */}
+              <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
                 <CTAButton href="#rechner" label={t.calculator.title} />
-                <CTAButton variant="secondary" />
+                <a
+                  href={BOOKING_URL}
+                  className="group inline-flex items-center gap-1.5 text-sm font-medium text-soft transition-colors hover:text-ink"
+                >
+                  {t.cta.secondary}
+                  <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
+                </a>
               </div>
-              <p className="mt-3 text-xs text-mute">{t.cta.trialNote}</p>
-              <div className="mt-6 inline-flex flex-wrap items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-4 py-2">
-                <span className="rounded bg-sky-500 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
-                  {lang === "de" ? "Fakt" : "Fact"}
-                </span>
-                <span className="text-sm font-medium text-ink">{t.hero.factBadge}</span>
-              </div>
-              <p className="mt-1.5 text-xs text-mute">{t.hero.factSource}</p>
+              <p className="mt-3.5 text-xs text-mute">{t.cta.trialNote}</p>
             </div>
 
             <div className="fade-up">
@@ -85,19 +87,42 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="fade-up mt-14 grid gap-3 sm:grid-cols-3">
+          <div className="fade-up mt-14 grid gap-x-10 gap-y-6 border-t border-edge2/70 pt-8 sm:grid-cols-3">
             {t.heroStats.map((s) => (
               <StatTile key={s.label} value={s.value} label={s.label} />
             ))}
           </div>
-          <details className="fade-up group mt-6">
-            <summary className="cursor-pointer list-none text-center text-xs text-mute underline underline-offset-2 marker:content-none">
-              {t.hero.screenshotAlt}
-            </summary>
-            <div className="mt-4">
-              <Screenshot src="/screenshots/alle-leads.png" alt={t.hero.screenshotAlt} />
-            </div>
-          </details>
+
+          <div className="fade-up mt-6 flex flex-wrap items-center gap-2 rounded-full border border-sky-200 bg-sky-50/70 px-4 py-2">
+            <span className="rounded bg-sky-600 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
+              {lang === "de" ? "Fakt" : "Fact"}
+            </span>
+            <span className="text-sm font-medium text-sky-950">{t.hero.factBadge}</span>
+            <span className="text-xs text-sky-900/55">{t.hero.factSource}</span>
+          </div>
+        </div>
+
+        {/* Echter Screenshot aus der App, angeschnitten. Lag vorher hinter einem
+            zugeklappten <details> -- der staerkste Beleg dafuer, dass hinter der
+            Seite ein fertiges Produkt steht, war einen Klick weit weggeraeumt.
+            Bewusst das Dashboard statt der Leads-Tabelle: dort sind die Zeilen
+            anonymisiert und wirken gross dargestellt wie ein Ladeplatzhalter,
+            waehrend das Dashboard echte Zahlen und die Zeitersparnis zeigt. */}
+        {/* Breiter als der Textcontainer: bei 1104px Breite schrumpft der
+            1689px-Screenshot auf 65% und die Zahlen werden unlesbar -- genau
+            die Zahlen sind aber der Beleg. */}
+        <div className="mx-auto mt-2 max-w-[1560px] px-4 sm:px-6">
+          <div className="screenshot-bleed relative overflow-hidden rounded-t-xl border-x border-t border-edge2/70 bg-panel shadow-2xl shadow-ink/10">
+            <Image
+              src="/screenshots/dashboard.png"
+              alt={t.hero.dashboardAlt}
+              width={1689}
+              height={957}
+              priority
+              sizes="100vw"
+              className="w-full"
+            />
+          </div>
         </div>
       </section>
 
@@ -358,13 +383,38 @@ export default function Home() {
       <section id="integrationen" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <SectionHeading eyebrow={t.integrations.eyebrow} title={t.integrations.title} />
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-            {t.integrations.items.map((i) => (
-              <div key={i.name} className="rounded-2xl border border-edge/60 bg-panel p-5 text-center">
-                <p className="text-sm font-semibold text-ink">{i.name}</p>
-                <p className="mt-1 text-xs text-mute">{i.note}</p>
-              </div>
-            ))}
+          {/* Vorher acht gleiche Kacheln, sechsmal mit demselben Text
+              "CSV-Import" -- die native Instantly-Anbindung, der eigentliche
+              Vorteil, ging darin unter. Jetzt fuehrt sie, der Rest steht als
+              ruhige Liste daneben. */}
+          <div className="grid gap-6 lg:grid-cols-3 lg:items-stretch">
+            {(() => {
+              const [featured, ...rest] = t.integrations.items;
+              return (
+                <>
+                  <div className="flex flex-col justify-between rounded-2xl border border-sky-300/70 bg-sky-50/50 p-6">
+                    <div>
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-sky-600 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white">
+                        {lang === "de" ? "Nativ" : "Native"}
+                      </span>
+                      <p className="font-display mt-4 text-2xl font-semibold tracking-[-0.02em] text-ink">
+                        {featured.name}
+                      </p>
+                    </div>
+                    <p className="mt-3 text-sm leading-relaxed text-sky-900/80">{featured.note}</p>
+                  </div>
+
+                  <ul className="grid grid-cols-2 gap-x-8 gap-y-0 lg:col-span-2 sm:grid-cols-3">
+                    {rest.map((i) => (
+                      <li key={i.name} className="flex flex-col justify-center border-t border-edge2/70 py-4">
+                        <p className="text-sm font-semibold text-ink">{i.name}</p>
+                        <p className="mt-0.5 text-xs text-mute">{i.note}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              );
+            })()}
           </div>
         </div>
       </section>
@@ -372,11 +422,14 @@ export default function Home() {
       {/* USPs */}
       <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <SectionHeading eyebrow={t.usps.eyebrow} title={t.usps.title} />
-        {/* Zweispaltiger Fliesssatz statt Kartenraster: die USPs sind Argumente
-            zum Lesen, keine scanbaren Kacheln. Column-Rule statt Boxen. */}
-        <div className="grid gap-x-14 sm:grid-cols-2">
+        {/* CSS-Spalten statt Raster: im Grid bekommen alle Zellen einer Zeile
+            die Hoehe der hoechsten -- Eintraege mit Fakten-Box sind gut doppelt
+            so hoch wie die ohne, wodurch bis zu 189px Leerraum in den kuerzeren
+            Nachbarn stehenblieb. Als Spalten fliessen die Eintraege nach ihrer
+            echten Hoehe, break-inside haelt sie zusammen. */}
+        <div className="sm:columns-2 sm:gap-x-14">
           {t.usps.items.map((u, i) => (
-            <Reveal key={u.title} delay={i * 50}>
+            <Reveal key={u.title} delay={i * 50} className="break-inside-avoid">
               <div className="border-t border-edge2/70 py-7">
                 <h3 className="font-display text-lg font-semibold leading-snug tracking-[-0.01em] text-ink">
                   {u.title}
@@ -471,8 +524,8 @@ export default function Home() {
                 </p>
                 <ul className="mt-4 flex-1 space-y-2 text-sm text-soft">
                   {plan.features.map((f) => (
-                    <li key={f} className="flex items-start gap-2">
-                      <span className="mt-0.5 text-emerald-500">✓</span>
+                    <li key={f} className="flex items-start gap-2.5">
+                      <CheckIcon />
                       {f}
                     </li>
                   ))}
@@ -492,12 +545,15 @@ export default function Home() {
       {/* Comparison */}
       <section id="vergleich" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <SectionHeading title={t.comparison.title} />
+        {/* Haken und Kreuz vor den Zellen: die Tabelle war reiner Fliesstext
+            und musste gelesen statt ueberflogen werden. Die Frostbreaker-Spalte
+            liegt zusaetzlich auf einem leichten Akzentgrund. */}
         <div className="hidden overflow-x-auto rounded-2xl border border-edge/60 sm:block">
           <table className="w-full border-collapse text-sm">
             <thead>
               <tr className="border-b border-edge/60 bg-panel2 text-left">
                 <th className="px-5 py-3 font-medium text-faint"> </th>
-                <th className="px-5 py-3 font-medium text-ink">{t.comparison.headerFrostbreaker}</th>
+                <th className="bg-sky-50/60 px-5 py-3 font-semibold text-ink">{t.comparison.headerFrostbreaker}</th>
                 <th className="px-5 py-3 font-medium text-faint">{t.comparison.headerOther}</th>
               </tr>
             </thead>
@@ -505,8 +561,18 @@ export default function Home() {
               {t.comparison.rows.map(([label, s3, other], i) => (
                 <tr key={label} className={i % 2 === 0 ? "bg-panel" : "bg-panel/60"}>
                   <td className="border-t border-edge/60 px-5 py-3 font-medium text-soft">{label}</td>
-                  <td className="border-t border-edge/60 px-5 py-3 text-ink">{s3}</td>
-                  <td className="border-t border-edge/60 px-5 py-3 text-faint">{other}</td>
+                  <td className="border-t border-edge/60 bg-sky-50/60 px-5 py-3 text-ink">
+                    <span className="flex items-start gap-2.5">
+                      <CheckIcon />
+                      {s3}
+                    </span>
+                  </td>
+                  <td className="border-t border-edge/60 px-5 py-3 text-faint">
+                    <span className="flex items-start gap-2.5">
+                      <CrossIcon />
+                      {other}
+                    </span>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -613,10 +679,20 @@ export default function Home() {
           <div className="divide-y divide-edge/60 rounded-2xl border border-edge/60 bg-panel">
             {t.faq.items.map((f) => (
               <details key={f.q} className="group px-6 py-4">
-                <summary className="flex min-h-6 cursor-pointer list-none items-center text-sm font-medium text-ink marker:content-none">
+                {/* Ohne Chevron war den 12 Fragen nicht anzusehen, dass sie
+                    aufklappbar sind -- 943px Seite ohne einen Hinweis darauf. */}
+                <summary className="flex min-h-6 cursor-pointer list-none items-center justify-between gap-4 text-sm font-medium text-ink marker:content-none">
                   {f.q}
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden
+                    className="h-4 w-4 shrink-0 text-faint transition-transform duration-200 group-open:-rotate-180"
+                  >
+                    <path d="m6 9 6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
                 </summary>
-                <p className="mt-2 text-sm leading-relaxed text-soft">{f.a}</p>
+                <p className="mt-2 max-w-[68ch] text-sm leading-relaxed text-soft">{f.a}</p>
               </details>
             ))}
           </div>

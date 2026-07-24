@@ -54,7 +54,7 @@ export default function OpengraphImage() {
               color: "#1c1b19",
             }}
           >
-            Mindestens 5.000 echte Ansprechpartner pro Woche anschreiben.
+            Mindestens 5.000 echte Ansprechpartner pro Woche kontaktieren.
           </div>
           <div
             style={{
@@ -65,8 +65,8 @@ export default function OpengraphImage() {
               color: "#57534e",
             }}
           >
-            Finden, verifizieren, personalisieren und versenden — in einem Tool
-            statt vier Abos.
+            Finden, verifizieren, personalisieren — E-Mail und Telefon in einem
+            Tool statt vier Abos.
           </div>
         </div>
 

@@ -2,6 +2,27 @@
 // stabiler id referenziert (id kommt aus dem jeweiligen dict-Eintrag), statt
 // pro Sprache dupliziert zu werden.
 
+/** Bestaetigung in der Vergleichstabelle. aria-hidden, weil die Zelle den
+ *  Sachverhalt daneben ausformuliert -- das Icon ist reine Lesehilfe. */
+export function CheckIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600">
+      <circle cx="12" cy="12" r="9.25" stroke="currentColor" strokeWidth="1.5" opacity="0.35" />
+      <path d="m8.2 12.3 2.6 2.6 5-5.4" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+/** Gegenstueck fuer die Spalte "typischer Alternativ-Stack". */
+export function CrossIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-edge3">
+      <circle cx="12" cy="12" r="9.25" stroke="currentColor" strokeWidth="1.5" opacity="0.35" />
+      <path d="m9 9 6 6M15 9l-6 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 export const pillarIcons: Record<string, React.ReactNode> = {
   money: (
     <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
