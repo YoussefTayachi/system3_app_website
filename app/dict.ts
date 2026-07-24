@@ -24,6 +24,42 @@ const de = {
     heading: "Läuft mit etablierten Diensten im Hintergrund",
     partners: ["OpenAI", "Google Places", "Hunter.io", "NeverBounce", "Instantly"],
   },
+  // Zahlen stammen aus einer echten Suche im eigenen Account (Dashboard-Screenshot
+  // im Hero). Bewusst keine konkreten Konkurrenzpreise: die aendern sich staendig
+  // und unbelegte Wettbewerbsangaben sind in DE/AT abmahnfaehig.
+  costProof: {
+    eyebrow: "Was ein Lead wirklich kostet",
+    title: "1,5 Cent pro Kontakt, nicht ein Credit pro Klick",
+    body: "Ihr hinterlegt eure eigenen API-Schlüssel und zahlt, was Google, OpenAI und Hunter tatsächlich berechnen. Kein Aufschlag, kein Credit-Paket, das am Monatsende verfällt. Im Dashboard steht nach jeder Suche, was sie gekostet hat.",
+    columns: [
+      {
+        id: "frostbreaker",
+        label: "Frostbreaker",
+        value: "3,94 $",
+        unit: "für 97 Firmen und 259 Kontakte",
+        note: "Echte Zahl aus einer Suche im eigenen Account, keine Hochrechnung.",
+        highlight: true,
+      },
+      {
+        id: "credits",
+        label: "Übliche Credit-Modelle",
+        value: "Pauschale",
+        unit: "Credits pro Monat, unabhängig vom Verbrauch",
+        note: "Nicht genutzte Credits verfallen meist, zusätzliche kosten extra.",
+        highlight: false,
+      },
+      {
+        id: "manual",
+        label: "Recherche von Hand",
+        value: "8 Min.",
+        unit: "pro Kontakt, gerechnet mit 45 € Stundensatz",
+        note: "Für dieselben 259 Kontakte rund 35 Stunden Arbeitszeit.",
+        highlight: false,
+      },
+    ],
+    footnote:
+      "Eure tatsächlichen Kosten hängen von Nische und Trefferquote ab. Die Zahl oben stammt aus einer konkreten Suche und ist keine Zusage.",
+  },
   heroIllustration: {
     badgeStat: "2×",
     badgeLabel: "mehr Antworten durch echte Personalisierung",
@@ -301,7 +337,7 @@ const de = {
   },
   pricing: {
     eyebrow: "Preise",
-    title: "Feste Preise, sofort einsehbar, kurzes Kennenlerngespräch inklusive",
+    title: "Feste Preise, sofort einsehbar, sofort startbar",
     agencyBadge: "Für Agenturen",
     note: "14 Tage kostenlos testen, keine Kreditkarte nötig. Danach monatlich kündbar, keine Mindestlaufzeit. Zusätzlich nur eure eigenen API-Kosten, live im Dashboard einsehbar.",
     plans: [
@@ -381,13 +417,13 @@ const de = {
       { q: "Was passiert, wenn ich aus Versehen einen Bestandskunden oder jemanden anschreibe, der sich abgemeldet hat?", a: "Genau dafür gibt es die eingebaute Sperrliste: einmal eingetragen, schließt Frostbreaker diese Kontakte und Domains automatisch aus jeder zukünftigen Suche und jedem Versand aus, ganz ohne dass ihr das bei jeder Kampagne manuell prüfen müsst. Bestandskunden und Opt-outs bleiben zuverlässig geschützt." },
       { q: "Kann ich prüfen, ob meine Versand-Domain überhaupt zustellfähig ist?", a: "Ja, direkt in der App: Frostbreaker prüft SPF, DKIM und DMARC eurer Sende-Domain per Live-DNS-Abfrage und zeigt in Klartext, was noch fehlt, dazu eine Warnung, wenn das Tagesvolumen pro Postfach riskant hoch wird. Kein separates Zustellbarkeits-Tool nötig." },
       { q: "Muss ich meine E-Mail-Kampagnen und Sequenzen in einem separaten Tool bauen?", a: "Nein. Kampagnen, Sequenzen inklusive Zeitplan und Anzahl der Follow-ups, und die Aktivierung laufen direkt in Frostbreaker, nativ an Instantly angebunden. Ihr wechselt für den Versand nicht in ein zweites Tool und müsst nichts per CSV hin- und herschieben." },
-      { q: "Wie schnell bin ich startklar?", a: "Ihr bucht ein 30-minütiges Gespräch, wir schauen uns gemeinsam an, wie ihr Frostbreaker für eure Ziele am effektivsten nutzt, und schalten danach euren Account frei. Ab dann: API-Keys eintragen, erste Suche starten, direkt in der App." },
+      { q: "Wie schnell bin ich startklar?", a: "Beim Starter-Plan sofort: Konto anlegen, API-Keys eintragen, erste Suche starten. Keine Freischaltung, keine Kreditkarte, 14 Tage kostenlos. Für den Agentur-Plan schauen wir vorher gemeinsam in einem kurzen Gespräch auf eure Kundenstruktur, weil dort mehrere Workspaces und das Whitelabel-Branding eingerichtet werden." },
       { q: "Was passiert mit meinen Daten, wenn ich kündige?", a: "Eure Daten werden nach Vertragsende gelöscht oder auf Wunsch zurückgegeben, geregelt im AVV. Es gibt keine automatische Weiternutzung nach Kündigung." },
     ],
   },
   finalCta: {
     title: "Lasst uns eure Kaltakquise automatisieren.",
-    body: "In einem 30-minütigen Gespräch schauen wir uns gemeinsam an, wie ihr Frostbreaker für eure Ziele und Bedürfnisse am effektivsten einsetzt. 14 Tage kostenlos, keine Kreditkarte nötig, danach monatlich kündbar.",
+    body: "Konto anlegen, API-Keys eintragen, erste Suche starten. 14 Tage kostenlos, keine Kreditkarte nötig, danach monatlich kündbar. Wenn ihr mehrere Kunden betreut, sprecht vorher kurz mit uns über den Agentur-Plan.",
   },
   footer: {
     location: "Wien, Österreich",
@@ -438,6 +474,39 @@ const en: typeof de = {
   trustBar: {
     heading: "Runs on established services in the background",
     partners: ["OpenAI", "Google Places", "Hunter.io", "NeverBounce", "Instantly"],
+  },
+  costProof: {
+    eyebrow: "What a lead actually costs",
+    title: "1.5 cents per contact, not one credit per click",
+    body: "You add your own API keys and pay exactly what Google, OpenAI and Hunter charge. No markup, no credit bundle that expires at the end of the month. After every search the dashboard shows what it cost.",
+    columns: [
+      {
+        id: "frostbreaker",
+        label: "Frostbreaker",
+        value: "$3.94",
+        unit: "for 97 companies and 259 contacts",
+        note: "Real number from one search in our own account, not a projection.",
+        highlight: true,
+      },
+      {
+        id: "credits",
+        label: "Typical credit models",
+        value: "Flat fee",
+        unit: "credits per month, regardless of usage",
+        note: "Unused credits usually expire, extra ones cost extra.",
+        highlight: false,
+      },
+      {
+        id: "manual",
+        label: "Manual research",
+        value: "8 min",
+        unit: "per contact, at a €45 hourly rate",
+        note: "For the same 259 contacts, roughly 35 hours of work.",
+        highlight: false,
+      },
+    ],
+    footnote:
+      "Your actual cost depends on niche and hit rate. The figure above comes from one specific search and is not a guarantee.",
   },
   heroIllustration: {
     badgeStat: "2×",
@@ -712,7 +781,7 @@ const en: typeof de = {
   },
   pricing: {
     eyebrow: "Pricing",
-    title: "Fixed prices, visible immediately, quick intro call included",
+    title: "Fixed prices, visible immediately, ready to start immediately",
     agencyBadge: "For agencies",
     note: "14 days free, no credit card required. Cancel anytime after, no minimum term. On top, only your own API costs, visible live in the dashboard.",
     plans: [
@@ -792,13 +861,13 @@ const en: typeof de = {
       { q: "What happens if I accidentally email an existing customer or someone who's opted out?", a: "That's exactly what the built-in suppression list is for: once added, Frostbreaker automatically excludes those contacts and domains from every future search and send, no manual checking required for every campaign. Existing customers and opt-outs stay reliably protected." },
       { q: "Can I check whether my sending domain is actually deliverable?", a: "Yes, directly in the app: Frostbreaker checks SPF, DKIM and DMARC for your sending domain via a live DNS lookup and shows in plain language what's still missing, plus a warning if your daily volume per mailbox gets risky. No separate deliverability tool needed." },
       { q: "Do I need to build my email campaigns and sequences in a separate tool?", a: "No. Campaigns, sequences including schedule and number of follow-ups, and activation all happen directly in Frostbreaker, natively connected to Instantly. You don't switch to a second tool to send, and there's no CSV shuffling." },
-      { q: "How fast can I get started?", a: "You book a 30-minute call, we look together at how to get the most out of Frostbreaker for your goals, and unlock your account afterwards. From there: add your API keys, start your first search, directly in the app." },
+      { q: "How fast can I get started?", a: "On the Starter plan, immediately: create an account, add your API keys, start your first search. No manual approval, no credit card, 14 days free. For the Agency plan we take a short call first, because multiple workspaces and white-label branding get set up together." },
       { q: "What happens to my data if I cancel?", a: "Your data is deleted after the contract ends, or returned on request, as governed by the DPA. There's no automatic continued use after cancellation." },
     ],
   },
   finalCta: {
     title: "Let's automate your cold outreach.",
-    body: "In a 30-minute call, we'll look together at how to get the most out of Frostbreaker for your specific goals and needs. 14 days free, no credit card required, cancel anytime after that.",
+    body: "Create an account, add your API keys, start your first search. 14 days free, no credit card required, cancel monthly after that. If you run outreach for several clients, talk to us about the Agency plan first.",
   },
   footer: {
     location: "Vienna, Austria",

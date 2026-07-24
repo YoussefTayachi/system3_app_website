@@ -154,6 +154,54 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Kostenbeweis direkt nach der Partnerleiste: "BYOK, volle
+          Kostentransparenz" war bisher eine Eigenschaft ohne Zahl. Die Zahl
+          ist das Argument, deshalb steht sie vor dem Rechner. */}
+      <section id="kosten" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        <SectionHeading eyebrow={t.costProof.eyebrow} title={t.costProof.title} />
+        <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">
+          {t.costProof.body}
+        </p>
+        <div className="grid gap-6 sm:grid-cols-3">
+          {t.costProof.columns.map((c, i) => (
+            <Reveal key={c.id} delay={i * 70}>
+              <div
+                className={
+                  "flex h-full flex-col rounded-2xl p-6 " +
+                  (c.highlight
+                    ? "border border-sky-300/70 bg-sky-50/50"
+                    : "border border-edge/60 bg-panel")
+                }
+              >
+                <p
+                  className={
+                    "text-[11px] font-medium uppercase tracking-[0.14em] " +
+                    (c.highlight ? "text-sky-700" : "text-faint")
+                  }
+                >
+                  {c.label}
+                </p>
+                <p className="font-display mt-4 text-[2.5rem] font-semibold leading-none tracking-[-0.03em] text-ink">
+                  {c.value}
+                </p>
+                <p className={"mt-2 text-sm " + (c.highlight ? "text-sky-900/80" : "text-soft")}>
+                  {c.unit}
+                </p>
+                <p
+                  className={
+                    "mt-4 border-t pt-4 text-xs leading-relaxed " +
+                    (c.highlight ? "border-sky-200/70 text-sky-900/60" : "border-edge/70 text-mute")
+                  }
+                >
+                  {c.note}
+                </p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+        <p className="mt-6 max-w-[70ch] text-xs leading-relaxed text-mute">{t.costProof.footnote}</p>
+      </section>
+
       {/* Sparpotenzial-Rechner: wichtigster Conversion-Baustein, bewusst
           direkt nach dem Hero, nicht erst am Seitenende */}
       <SavingsCalculator />
@@ -530,9 +578,13 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
+                {/* Starter startet die Testphase direkt, Agentur fuehrt bewusst
+                    ins Gespraech: mehrere Workspaces, Whitelabel und der Preis
+                    ab 199 EUR werden ohnehin besprochen. */}
                 <CTAButton
                   className="mt-6 w-full"
                   label={plan.ctaLabel}
+                  href={plan.id === "starter" ? undefined : BOOKING_URL}
                   variant={plan.id === "starter" ? "primary" : "secondary"}
                 />
               </div>

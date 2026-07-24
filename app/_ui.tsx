@@ -3,13 +3,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { useT } from "./language-provider";
 
-// Echter Calendly-Link -- inzwischen das einzige CTA-Ziel auf der Website.
-// Kein Selfserve-Signup mehr direkt von der Website aus: jede/r Interessent:in
-// bucht zuerst ein kurzes Kennenlerngespraech, der Account wird danach manuell
-// freigeschaltet. Die Registrierungsseite in der App (/signup) existiert
-// weiterhin technisch, wird aber bewusst nirgends mehr von der Website aus verlinkt.
+// Zwei Wege, bewusst nach Plan getrennt:
+//
+// Starter -> TRIAL_URL: direkte Anmeldung, 14 Tage ohne Kreditkarte. Vorher lief
+// auch dieser Knopf auf Calendly, hiess aber "Kostenlos testen" -- wer testen
+// will und einen Terminkalender sieht, springt ab. Die App bringt alles mit,
+// was Selfserve braucht (/signup, Stripe-Checkout, trial_ends_at).
+//
+// Agentur -> BOOKING_URL: mehrere Workspaces, Whitelabel und Preis ab 199 EUR
+// wollen ohnehin besprochen werden.
 export const BOOKING_URL = "https://calendly.com/youssef-tayachi-frostbreaker/30min";
-export const TRIAL_URL = "https://app.frostbreaker.app/signup";
+
+// Achtung: app.frostbreaker.app war hier eingetragen, loest aber nicht auf
+// (kein DNS-Eintrag) -- der wichtigste Knopf der Seite waere ins Leere gelaufen.
+// Bis die Wunschdomain auf das Vercel-Projekt zeigt, bleibt die erreichbare
+// Adresse stehen. Danach genuegt es, diese eine Zeile zu aendern.
+export const TRIAL_URL = "https://system3-app.vercel.app/signup";
 
 export function Logo() {
   return (
@@ -40,9 +49,12 @@ export function CTAButton({
 }) {
   const { t } = useT();
   const isPrimary = variant === "primary";
+  // Der primaere Knopf verspricht die Testphase und muss deshalb auch dorthin
+  // fuehren. Wo bewusst ein Gespraech gemeint ist (Agentur-Plan), wird href
+  // explizit auf BOOKING_URL gesetzt.
   return (
     <a
-      href={href ?? BOOKING_URL}
+      href={href ?? (isPrimary ? TRIAL_URL : BOOKING_URL)}
       className={
         (isPrimary
           ? "inline-flex items-center justify-center whitespace-nowrap rounded-full bg-ink px-4 py-2.5 text-xs font-medium text-surface shadow-sm transition-all hover:opacity-85 hover:scale-[1.02] active:scale-[0.98] sm:px-6 sm:py-3 sm:text-sm "
@@ -59,9 +71,19 @@ export function CTAButton({
  * Hero und finale CTA-Sektion -- ein Baustein statt zweimal CTAButton +
  * Layout-Klassen an zwei Stellen synchron zu halten. */
 export function CTAGroup({ className = "" }: { className?: string }) {
+  const { t } = useT();
   return (
-    <div className={"flex items-center justify-center " + className}>
+    <div className={"flex flex-wrap items-center justify-center gap-x-6 gap-y-3 " + className}>
       <CTAButton variant="primary" />
+      {/* Der Gespraechs-Weg bleibt erreichbar, aber klar untergeordnet -- sonst
+          konkurrieren zwei gleich starke Knoepfe um dieselbe Entscheidung. */}
+      <a
+        href={BOOKING_URL}
+        className="group inline-flex items-center gap-1.5 text-sm font-medium text-soft transition-colors hover:text-ink"
+      >
+        {t.cta.secondary}
+        <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
+      </a>
     </div>
   );
 }
