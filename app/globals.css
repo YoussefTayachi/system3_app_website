@@ -13,10 +13,15 @@
   --c-edge: #e9e8e6;
   --c-edge2: #d8d7d4;
   --c-edge3: #a9a8a2;
+  /* Textstufen sind gegen den hellsten *und* dunkelsten Flaechenton
+     (--c-panel #ffffff bis --c-panel2 #f5f5f4) auf WCAG-AA gerechnet.
+     Kontrast auf #f5f5f4, dem ungünstigsten Fall:
+     mute 4.54 · faint 6.22 · soft 6.99 · ink 16.3 -- die Abstufung bleibt
+     erhalten, jede Stufe besteht 4.5:1 auch bei 11-12px. */
   --c-ink: #1c1b19;
   --c-soft: #57534e;
-  --c-faint: #79766f;
-  --c-mute: #aaa79f;
+  --c-faint: #5d5b56;
+  --c-mute: #72706a;
   --c-coral: #ea5a3e;
   --c-coral-soft: #fdece7;
   color-scheme: light;
@@ -88,13 +93,97 @@ body {
 .hover-lift { transition: transform 0.2s ease, box-shadow 0.2s ease; }
 .hover-lift:hover { transform: translateY(-3px); box-shadow: 0 12px 24px -12px rgba(28, 27, 25, 0.16); }
 
-.dot-grid {
-  background-image: radial-gradient(var(--c-edge2) 1px, transparent 1px);
-  background-size: 22px 22px;
+/* Der Rechner-Slider ist das wichtigste interaktive Element der Seite, hatte
+   als nackter range-Input aber nur 8px Trefferflaeche. Die Bahn bleibt optisch
+   duenn, der Griff und die Gesamthoehe wachsen auf Touch-Mass. */
+.range-touch {
+  height: 44px;
+  background: transparent;
 }
+.range-touch::-webkit-slider-runnable-track {
+  height: 8px;
+  border-radius: 9999px;
+  background: var(--c-panel2);
+  border: 1px solid var(--c-edge2);
+}
+.range-touch::-moz-range-track {
+  height: 8px;
+  border-radius: 9999px;
+  background: var(--c-panel2);
+  border: 1px solid var(--c-edge2);
+}
+.range-touch::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 26px;
+  width: 26px;
+  margin-top: -10px;
+  border-radius: 9999px;
+  background: var(--c-ink);
+  border: 3px solid var(--c-panel);
+  box-shadow: 0 2px 6px -1px rgba(28, 27, 25, 0.35);
+  cursor: grab;
+}
+.range-touch::-moz-range-thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 9999px;
+  background: var(--c-ink);
+  border: 3px solid var(--c-panel);
+  box-shadow: 0 2px 6px -1px rgba(28, 27, 25, 0.35);
+  cursor: grab;
+}
+.range-touch:focus-visible::-webkit-slider-thumb {
+  outline: 2px solid var(--c-coral);
+  outline-offset: 2px;
+}
+.range-touch:focus-visible::-moz-range-thumb {
+  outline: 2px solid var(--c-coral);
+  outline-offset: 2px;
+}
+
+/* Inline-Rechtslinks: 20px hohe Textlinks unterschreiten das 24px-Minimum
+   aus WCAG 2.5.8; die Zeilenbox waechst, die Optik bleibt. */
+.tap-row a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+}
+
+/* Hero-Grund: gerichteter Lichtverlauf statt gekacheltem Punktraster. Das
+   Raster war ein generisches Deko-Muster ohne Bezug zum Produkt; der Verlauf
+   gibt dem Hero eine Lichtquelle oben links und laesst die Headline-Seite
+   heller wirken als die Illustrationsseite. */
+.hero-wash {
+  background-image:
+    radial-gradient(120% 90% at 8% -10%, rgba(14, 165, 233, 0.09), transparent 58%),
+    radial-gradient(80% 70% at 92% 8%, rgba(234, 90, 62, 0.055), transparent 62%);
+}
+
+/* Endlos laufende Partnerleiste. Die Liste wird im Markup zweimal gerendert,
+   deshalb genuegt eine Verschiebung um -50% fuer einen nahtlosen Loop. */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+}
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+.marquee-viewport:hover .marquee-track { animation-play-state: paused; }
 
 @media (prefers-reduced-motion: reduce) {
   .fade-up, .animate-float, .animate-float-slow { animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
   .hover-lift:hover { transform: none; }
+  /* Laufband anhalten und zentrieren statt nur einfrieren, sonst haengt die
+     Liste je nach Zeitpunkt halb aus dem Viewport. */
+  .marquee-track { animation: none; width: 100%; justify-content: center; flex-wrap: wrap; }
+  .marquee-track > *:nth-child(2) { display: none; }
+  .marquee-mask { -webkit-mask-image: none; mask-image: none; }
 }

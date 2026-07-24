@@ -5,3 +5,6 @@ out
 .DS_Store
 next-env.d.ts
 tsconfig.tsbuildinfo
+
+# Lokale Claude-Code-Helfer (Dev-Server-Konfig), nicht projektrelevant
+.claude/

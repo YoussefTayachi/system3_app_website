@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { Logo, CTAButton, NavDropdown, BOOKING_URL } from "../_ui";
 import { useT, LanguageToggle } from "../language-provider";
 
@@ -100,7 +101,7 @@ export default function KontaktPage() {
         </div>
 
         <p className="mt-8 text-center text-xs text-mute">
-          <a href="/" className="underline hover:text-ink">{c.backLabel}</a>
+          <Link href="/" className="underline hover:text-ink">{c.backLabel}</Link>
         </p>
       </section>
 

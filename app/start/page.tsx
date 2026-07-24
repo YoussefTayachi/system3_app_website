@@ -1,5 +1,6 @@
 "use client";
-import { Logo, CTAButton, CTAGroup, StatTile, FactBox } from "../_ui";
+import Link from "next/link";
+import { Logo, CTAGroup, StatTile, FactBox } from "../_ui";
 import { AgencyMockup } from "../_mockups";
 import { useT } from "../language-provider";
 
@@ -54,7 +55,7 @@ export default function StartPage() {
         <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-soft">{s.finalBody}</p>
         <CTAGroup className="mt-6" />
         <p className="mt-6 text-xs text-mute">
-          <a href="/" className="underline hover:text-ink">{s.backLink}</a>
+          <Link href="/" className="underline hover:text-ink">{s.backLink}</Link>
         </p>
       </section>
 

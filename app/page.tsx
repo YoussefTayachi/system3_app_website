@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { Logo, CTAButton, CTAGroup, NavDropdown, Screenshot, SectionHeading, FactBox, StatTile } from "./_ui";
 import { AgencyMockup, PostSendMockup, LocalReachMockup, QualifiedLeadMockup, SuppressionMockup, DeliverabilityMockup, CampaignMockup } from "./_mockups";
 import { LeadCardStack } from "./_illustration";
@@ -9,12 +10,16 @@ import { useT, LanguageToggle } from "./language-provider";
 
 export default function Home() {
   const { t, lang } = useT();
+  // Zwischen 768px und 1024px passen Logo, volle Navigation und CTA nicht
+  // nebeneinander (die Leiste lief ~30px ueber und erzeugte horizontales
+  // Scrollen). Statt die Navigation dort ganz auszublenden, erscheinen die
+  // sekundaeren Links erst ab lg; Preise und Kontakt bleiben immer sichtbar.
   const navLinks = [
-    { href: "#agenturen", label: t.nav.agenturen },
-    { href: "#preise", label: t.nav.preise },
-    { href: "#vergleich", label: t.nav.vergleich },
-    { href: "#faq", label: t.nav.faq },
-    { href: "/kontakt", label: t.nav.kontakt },
+    { href: "#agenturen", label: t.nav.agenturen, secondary: true },
+    { href: "#preise", label: t.nav.preise, secondary: false },
+    { href: "#vergleich", label: t.nav.vergleich, secondary: true },
+    { href: "#faq", label: t.nav.faq, secondary: true },
+    { href: "/kontakt", label: t.nav.kontakt, secondary: false },
   ];
 
   return (
@@ -23,10 +28,19 @@ export default function Home() {
       <header className="sticky top-0 z-10 border-b border-edge/60 bg-surface/90 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
           <Logo />
-          <nav className="hidden items-center gap-6 md:flex">
+          <nav className="hidden items-center gap-5 md:flex lg:gap-6">
             <NavDropdown label={t.nav.produkt} items={t.nav.produktItems} />
             {navLinks.map((l) => (
-              <a key={l.href} href={l.href} className="text-sm text-soft hover:text-ink">{l.label}</a>
+              <a
+                key={l.href}
+                href={l.href}
+                className={
+                  "text-sm text-soft transition-colors hover:text-ink " +
+                  (l.secondary ? "hidden lg:inline" : "")
+                }
+              >
+                {l.label}
+              </a>
             ))}
           </nav>
           <div className="flex items-center gap-3">
@@ -37,11 +51,13 @@ export default function Home() {
       </header>
 
       {/* Hero */}
-      <section className="dot-grid border-b border-edge/60">
+      <section className="hero-wash border-b border-edge/60">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-20">
           <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
             <div className="fade-up">
-              <p className="mb-4 text-xs font-medium uppercase tracking-wide text-sky-600">
+              {/* sky-700 statt sky-600: bei 12px Grossbuchstaben reicht
+                  sky-600 (3.9:1) nicht fuer WCAG AA. */}
+              <p className="mb-4 text-xs font-medium uppercase tracking-[0.14em] text-sky-700">
                 {t.hero.eyebrow}
               </p>
               <h1 className="font-display text-4xl font-semibold leading-[1.08] tracking-tight text-ink sm:text-5xl">
@@ -88,13 +104,27 @@ export default function Home() {
       {/* Trust bar */}
       <section className="border-b border-edge/60 bg-panel2 py-8">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <p className="mb-5 text-center text-[11px] font-medium uppercase tracking-wider text-mute">
+          <p className="mb-6 text-center text-[11px] font-medium uppercase tracking-[0.14em] text-mute">
             {t.trustBar.heading}
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3">
-            {t.trustBar.partners.map((p) => (
-              <span key={p} className="text-sm font-medium text-faint">{p}</span>
-            ))}
+          {/* Zwei identische Durchlaeufe nebeneinander ergeben den nahtlosen
+              Loop; der zweite ist rein dekorativ und fuer Screenreader aus. */}
+          <div className="marquee-viewport marquee-mask overflow-hidden">
+            <div className="marquee-track">
+              {[0, 1].map((copy) => (
+                <ul
+                  key={copy}
+                  aria-hidden={copy === 1}
+                  className="flex shrink-0 items-center gap-x-14 pr-14"
+                >
+                  {t.trustBar.partners.map((p) => (
+                    <li key={p} className="whitespace-nowrap text-sm font-medium text-faint">
+                      {p}
+                    </li>
+                  ))}
+                </ul>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -138,13 +168,19 @@ export default function Home() {
       {/* Problem */}
       <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <SectionHeading title={t.painPoints.title} />
-        <p className="-mt-6 mb-8 max-w-2xl text-sm leading-relaxed text-soft sm:text-base">{t.painPoints.subtitle}</p>
-        <div className="grid gap-5 sm:grid-cols-2">
+        <p className="-mt-6 mb-12 max-w-[60ch] text-base leading-relaxed text-soft">{t.painPoints.subtitle}</p>
+        {/* Bewusst ohne Karten: die Problem-Sektion soll sich rauer und
+            unaufgeraeumter lesen als die Loesungs-Sektionen danach, die
+            Karten benutzen. Hairline-Regeln statt Boxen. */}
+        <div className="grid gap-x-14 gap-y-0 sm:grid-cols-2">
           {t.painPoints.items.map((p, i) => (
             <Reveal key={p.title} delay={i * 60}>
-              <div className="rounded-2xl border border-edge/60 bg-panel p-6 hover-lift">
-                <h3 className="text-sm font-semibold text-ink">{p.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-soft">{p.body}</p>
+              <div className="group border-t border-edge2/70 py-7">
+                <h3 className="flex items-start gap-3 text-base font-semibold leading-snug text-ink">
+                  <span aria-hidden className="mt-[0.45em] h-1.5 w-1.5 shrink-0 rounded-full bg-coral" />
+                  {p.title}
+                </h3>
+                <p className="mt-2.5 pl-[1.125rem] text-sm leading-relaxed text-soft">{p.body}</p>
               </div>
             </Reveal>
           ))}
@@ -154,17 +190,22 @@ export default function Home() {
       {/* Vier Saeulen */}
       <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <SectionHeading eyebrow={t.pillars.eyebrow} title={t.pillars.title} />
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Stat-fuehrende Leiste statt vier weiterer Karten: die Zahl ist hier
+            das Argument, nicht die Box drumherum. Vertikale Hairlines trennen,
+            kein Kartenrahmen. */}
+        <div className="grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
           {t.pillars.items.map((p, i) => (
             <Reveal key={p.id} delay={i * 60}>
-              <div className="rounded-2xl border border-edge/60 bg-panel p-6 hover-lift">
-                <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400">
-                  {pillarIcons[p.id]}
+              <div className="h-full lg:border-l lg:border-edge2/70 lg:pl-7">
+                <div className="flex items-center gap-2.5 text-sky-600">
+                  <span className="[&>svg]:h-[18px] [&>svg]:w-[18px]">{pillarIcons[p.id]}</span>
+                  <h3 className="text-[13px] font-medium uppercase tracking-[0.1em] text-faint">{p.title}</h3>
                 </div>
-                <h3 className="mt-4 text-sm font-semibold text-ink">{p.title}</h3>
-                <p className="font-display mt-3 text-xl font-semibold tracking-tight text-ink">{p.stat}</p>
-                <p className="text-xs text-mute">{p.statLabel}</p>
-                <p className="mt-3 text-sm leading-relaxed text-soft">{p.body}</p>
+                <p className="font-display mt-5 text-[2.5rem] font-semibold leading-none tracking-[-0.03em] text-ink">
+                  {p.stat}
+                </p>
+                <p className="mt-2 text-xs leading-relaxed text-mute">{p.statLabel}</p>
+                <p className="mt-4 border-t border-edge/70 pt-4 text-sm leading-relaxed text-soft">{p.body}</p>
               </div>
             </Reveal>
           ))}
@@ -216,7 +257,7 @@ export default function Home() {
               <div className="mt-6 space-y-4">
                 {t.agency.features.map((f) => (
                   <div key={f.id} className="flex gap-3">
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-sky-500/10 text-sky-600">
                       {agencyIcons[f.id]}
                     </div>
                     <div>
@@ -286,7 +327,7 @@ export default function Home() {
                     key={o}
                     className={
                       i === 0
-                        ? "rounded-full border border-sky-500/60 bg-sky-500/10 px-3 py-1 text-xs font-medium text-sky-700 dark:text-sky-300"
+                        ? "rounded-full border border-sky-500/60 bg-sky-500/10 px-3 py-1 text-xs font-medium text-sky-700"
                         : "rounded-full border border-edge2 px-3 py-1 text-xs text-faint"
                     }
                   >
@@ -331,13 +372,19 @@ export default function Home() {
       {/* USPs */}
       <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <SectionHeading eyebrow={t.usps.eyebrow} title={t.usps.title} />
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {t.usps.items.map((u) => (
-            <div key={u.title} className="rounded-2xl border border-edge/60 bg-panel p-6 hover-lift">
-              <h3 className="text-sm font-semibold text-ink">{u.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-soft">{u.body}</p>
-              {u.fact && <FactBox fact={u.fact} sub={u.sub} source={u.source!} />}
-            </div>
+        {/* Zweispaltiger Fliesssatz statt Kartenraster: die USPs sind Argumente
+            zum Lesen, keine scanbaren Kacheln. Column-Rule statt Boxen. */}
+        <div className="grid gap-x-14 sm:grid-cols-2">
+          {t.usps.items.map((u, i) => (
+            <Reveal key={u.title} delay={i * 50}>
+              <div className="border-t border-edge2/70 py-7">
+                <h3 className="font-display text-lg font-semibold leading-snug tracking-[-0.01em] text-ink">
+                  {u.title}
+                </h3>
+                <p className="mt-2.5 text-sm leading-relaxed text-soft">{u.body}</p>
+                {u.fact && <FactBox fact={u.fact} sub={u.sub} source={u.source!} />}
+              </div>
+            </Reveal>
           ))}
         </div>
       </section>
@@ -349,7 +396,7 @@ export default function Home() {
           <div className="grid gap-8 sm:grid-cols-3">
             {t.features.items.map((f, i) => (
               <Reveal key={f.id} delay={i * 80}>
-                <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400">
+                <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-sky-500/10 text-sky-600">
                   {featureIcons[f.id]}
                 </div>
                 <h3 className="mt-4 text-sm font-semibold text-ink">{f.title}</h3>
@@ -368,9 +415,11 @@ export default function Home() {
       {/* Proof stat (real) */}
       <section className="border-y border-edge/60 bg-ink">
         <div className="mx-auto max-w-4xl px-4 py-16 text-center sm:px-6">
-          <p className="text-xs font-medium uppercase tracking-wide text-mute">{t.proofStat.label}</p>
-          <p className="mt-4 text-2xl font-semibold leading-snug text-surface sm:text-3xl">{t.proofStat.body}</p>
-          <p className="mt-4 text-sm text-mute">{t.proofStat.sub}</p>
+          <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-mute">{t.proofStat.label}</p>
+          <p className="font-display mt-5 text-[1.75rem] font-semibold leading-[1.25] tracking-[-0.02em] text-surface text-balance sm:text-4xl">
+            {t.proofStat.body}
+          </p>
+          <p className="mt-5 text-sm text-mute">{t.proofStat.sub}</p>
         </div>
       </section>
 
@@ -380,8 +429,8 @@ export default function Home() {
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {t.scaling.tiles.map((tile) => (
             <div key={tile.label} className="rounded-2xl border border-edge/60 bg-panel p-6 hover-lift">
-              <p className="text-2xl font-semibold text-ink">{tile.value}</p>
-              <p className="mt-1 text-sm text-soft">{tile.label}</p>
+              <p className="font-display text-3xl font-semibold tracking-[-0.02em] text-ink">{tile.value}</p>
+              <p className="mt-1.5 text-sm text-soft">{tile.label}</p>
             </div>
           ))}
         </div>
@@ -417,7 +466,7 @@ export default function Home() {
                 )}
                 <h3 className="text-sm font-semibold text-ink">{plan.label}</h3>
                 <p className="mt-1 flex items-baseline gap-1.5">
-                  <span className="text-3xl font-semibold tracking-tight text-ink">{plan.price}</span>
+                  <span className="font-display text-4xl font-semibold tracking-[-0.03em] text-ink">{plan.price}</span>
                   <span className="text-sm text-faint">{plan.priceNote}</span>
                 </p>
                 <ul className="mt-4 flex-1 space-y-2 text-sm text-soft">
@@ -498,7 +547,7 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <div className="mt-6 flex flex-wrap gap-x-4 gap-y-2 text-sm text-faint">
+          <div className="tap-row mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-faint">
             <a href="/datenschutz" className="hover:text-ink">{t.trust.links.datenschutz}</a>
             <span>·</span>
             <a href="/agb" className="hover:text-ink">{t.trust.links.agb}</a>
@@ -515,7 +564,7 @@ export default function Home() {
 
         <div className="mt-8 grid gap-5 lg:grid-cols-3">
           <div className="rounded-2xl border border-edge/60 bg-panel p-6 hover-lift">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400">
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-sky-500/10 text-sky-600">
               <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
                 <path d="M12 3v3m6.4 1.6-2.1 2.1M21 12h-3M6.7 9.7 4.6 7.6M3 12h3m1.7 4.3-2.1 2.1M12 18v3m4.3-1.7 2.1 2.1" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
                 <circle cx="12" cy="12" r="3.2" stroke="currentColor" strokeWidth="1.6" />
@@ -526,11 +575,16 @@ export default function Home() {
           </div>
 
           <a href="/kontakt" className="hover-lift block rounded-2xl border border-edge/60 bg-panel p-6 transition-colors hover:border-edge2">
-            <p className="text-xs font-medium uppercase tracking-wide text-faint">{t.why.founderLabel}</p>
-            <p className="mt-3 text-sm italic leading-relaxed text-ink">{t.why.founderQuote}</p>
+            <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-faint">{t.why.founderLabel}</p>
+            <p className="font-display mt-3 text-base italic leading-[1.5] text-ink">{t.why.founderQuote}</p>
             <div className="mt-4 flex items-center gap-2.5">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/team/youssef-tayachi.png" alt={t.why.founderName} className="h-8 w-8 rounded-full object-cover" />
+              <Image
+                src="/team/youssef-tayachi.png"
+                alt={t.why.founderName}
+                width={40}
+                height={40}
+                className="h-10 w-10 rounded-full object-cover"
+              />
               <div>
                 <p className="text-xs font-medium text-ink">{t.why.founderName}</p>
                 <p className="text-xs text-mute">{t.why.founderRole}</p>
@@ -559,7 +613,7 @@ export default function Home() {
           <div className="divide-y divide-edge/60 rounded-2xl border border-edge/60 bg-panel">
             {t.faq.items.map((f) => (
               <details key={f.q} className="group px-6 py-4">
-                <summary className="cursor-pointer list-none text-sm font-medium text-ink marker:content-none">
+                <summary className="flex min-h-6 cursor-pointer list-none items-center text-sm font-medium text-ink marker:content-none">
                   {f.q}
                 </summary>
                 <p className="mt-2 text-sm leading-relaxed text-soft">{f.a}</p>
@@ -571,16 +625,18 @@ export default function Home() {
 
       {/* Final CTA */}
       <section className="mx-auto max-w-3xl px-4 py-24 text-center sm:px-6">
-        <h2 className="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">{t.finalCta.title}</h2>
-        <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-soft sm:text-base">{t.finalCta.body}</p>
-        <CTAGroup className="mt-8" />
+        <h2 className="font-display text-[2rem] font-semibold leading-[1.12] tracking-[-0.025em] text-ink text-balance sm:text-[2.75rem]">
+          {t.finalCta.title}
+        </h2>
+        <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-soft">{t.finalCta.body}</p>
+        <CTAGroup className="mt-9" />
       </section>
 
       {/* Footer */}
       <footer className="border-t border-edge/60">
         <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 text-xs text-mute sm:flex-row sm:items-center sm:justify-between sm:px-6">
           <span>© {new Date().getFullYear()} Frostbreaker · {t.footer.location}</span>
-          <div className="flex flex-wrap gap-x-4 gap-y-2">
+          <div className="tap-row flex flex-wrap items-center gap-x-4 gap-y-2">
             <a href="/impressum" className="hover:text-ink">{t.footer.impressum}</a>
             <a href="/datenschutz" className="hover:text-ink">{t.footer.datenschutz}</a>
             <a href="/agb" className="hover:text-ink">{t.footer.agb}</a>

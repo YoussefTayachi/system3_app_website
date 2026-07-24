@@ -1,4 +1,6 @@
 "use client";
+import Image from "next/image";
+import Link from "next/link";
 import { useT } from "./language-provider";
 
 // Echter Calendly-Link -- inzwischen das einzige CTA-Ziel auf der Website.
@@ -11,9 +13,9 @@ export const TRIAL_URL = "https://app.frostbreaker.app/signup";
 
 export function Logo() {
   return (
-    <a href="/" className="text-3xl font-extrabold tracking-tighter text-[#0EA5E9]">
+    <Link href="/" className="text-3xl font-extrabold tracking-tighter text-[#0EA5E9]">
       frostbreaker
-    </a>
+    </Link>
   );
 }
 
@@ -105,8 +107,14 @@ export function Screenshot({ src, alt }: { src: string; alt: string }) {
       className="group block overflow-hidden rounded-2xl border border-edge/60 shadow-sm transition-shadow hover:shadow-md"
       title="Zum Vergrößern klicken"
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={src} alt={alt} className="w-full transition-transform duration-300 group-hover:scale-[1.02]" />
+      <Image
+        src={src}
+        alt={alt}
+        width={1690}
+        height={955}
+        sizes="(min-width: 1024px) 1024px, 100vw"
+        className="w-full transition-transform duration-300 group-hover:scale-[1.02]"
+      />
     </a>
   );
 }
@@ -114,24 +122,31 @@ export function Screenshot({ src, alt }: { src: string; alt: string }) {
 export function SectionHeading({ eyebrow, title }: { eyebrow?: string; title: string }) {
   return (
     <div className="mb-10 max-w-2xl">
-      {eyebrow && <p className="mb-2 text-xs font-medium uppercase tracking-wide text-faint">{eyebrow}</p>}
-      <h2 className="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">{title}</h2>
+      {eyebrow && (
+        <p className="mb-3 flex items-center gap-2.5 text-[11px] font-medium uppercase tracking-[0.14em] text-faint">
+          <span aria-hidden className="h-px w-6 bg-edge2" />
+          {eyebrow}
+        </p>
+      )}
+      <h2 className="font-display text-[1.75rem] font-semibold leading-[1.15] tracking-[-0.02em] text-ink text-balance sm:text-4xl">
+        {title}
+      </h2>
     </div>
   );
 }
 
 export function FactBox({ fact, sub, source }: { fact: string; sub?: string; source: string }) {
-  const { t, lang } = useT();
+  const { lang } = useT();
   return (
-    <div className="mt-4 rounded-lg border-l-4 border-sky-500 bg-sky-50 p-4">
-      <div className="flex items-start gap-2">
-        <span className="mt-0.5 shrink-0 rounded bg-sky-500 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
+    <div className="mt-4 rounded-xl border border-sky-200/70 bg-sky-50/70 p-4">
+      <div className="flex items-start gap-2.5">
+        <span className="mt-0.5 shrink-0 rounded bg-sky-600 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
           {lang === "de" ? "Fakt" : "Fact"}
         </span>
-        <p className="text-sm font-semibold leading-snug text-ink">{fact}</p>
+        <p className="text-sm font-semibold leading-snug text-sky-950">{fact}</p>
       </div>
-      {sub && <p className="mt-2 text-sm leading-relaxed text-soft">{sub}</p>}
-      <p className="mt-2 text-xs text-mute">{lang === "de" ? "Quelle" : "Source"}: {source}</p>
+      {sub && <p className="mt-2 text-sm leading-relaxed text-sky-900/80">{sub}</p>}
+      <p className="mt-2 text-xs text-sky-900/55">{lang === "de" ? "Quelle" : "Source"}: {source}</p>
     </div>
   );
 }

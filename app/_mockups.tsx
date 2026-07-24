@@ -29,7 +29,7 @@ export function AgencyMockup() {
               {(w.name.split(": ")[1] ?? w.name).slice(0, 1)}
             </span>
             <span className="min-w-0 flex-1 truncate">{w.name}</span>
-            {w.active && <span className="shrink-0 text-[10px] font-medium uppercase tracking-wide text-sky-600 dark:text-sky-300">{m.active}</span>}
+            {w.active && <span className="shrink-0 text-[10px] font-medium uppercase tracking-wide text-sky-600">{m.active}</span>}
           </div>
         ))}
       </div>
@@ -68,7 +68,7 @@ export function PostSendMockup() {
       <p className="text-xs font-medium uppercase tracking-wide text-faint">{m.incomingLabel}</p>
       <div className="mt-2 rounded-lg bg-panel2 p-4">
         <p className="text-sm leading-relaxed text-ink">{m.exampleReply}</p>
-        <span className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-xs font-medium text-emerald-600 dark:text-emerald-300">
+        <span className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-xs font-medium text-emerald-600">
           <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
           {m.statusInterested}
         </span>
@@ -119,7 +119,7 @@ export function LocalReachMockup() {
           <div className="mt-2 space-y-1.5">
             {m.businesses.map((b) => (
               <div key={b.name} className="flex items-center gap-2.5 rounded-lg border border-emerald-500/30 bg-emerald-500/5 px-3 py-2">
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-emerald-500/15 text-emerald-600 dark:text-emerald-300">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-emerald-500/15 text-emerald-600">
                   <svg viewBox="0 0 24 24" fill="none" className="h-3.5 w-3.5"><path d="m5 13 4 4L19 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
                 </span>
                 <div className="min-w-0">
@@ -226,7 +226,7 @@ export function SuppressionMockup() {
           <p className="text-xs text-mute">{m.blocked.note}</p>
         </div>
       </div>
-      <span className="mt-2 inline-block rounded-full bg-sky-500/10 px-2.5 py-1 text-[10px] font-medium text-sky-600 dark:text-sky-300">
+      <span className="mt-2 inline-block rounded-full bg-sky-500/10 px-2.5 py-1 text-[10px] font-medium text-sky-600">
         {m.blockedTag}
       </span>
       <div className="mt-4 flex items-center gap-3 rounded-lg bg-panel2 px-4 py-3">
@@ -253,7 +253,7 @@ export function DeliverabilityMockup() {
         {rows.map((r) => (
           <div key={r.label} className="flex items-center justify-between rounded-lg bg-panel2 px-3 py-2 text-sm">
             <span className="text-soft">{r.label}</span>
-            <span className={"flex items-center gap-1.5 text-xs font-medium " + (r.ok ? "text-emerald-600 dark:text-emerald-300" : "text-amber-600 dark:text-amber-300")}>
+            <span className={"flex items-center gap-1.5 text-xs font-medium " + (r.ok ? "text-emerald-600" : "text-amber-600")}>
               {r.ok ? (
                 <svg viewBox="0 0 24 24" fill="none" className="h-3.5 w-3.5"><path d="m5 13 4 4L19 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
               ) : (
@@ -280,7 +280,7 @@ export function CampaignMockup() {
     <div className="rounded-2xl border border-edge/60 bg-panel p-6 shadow-sm">
       <div className="flex items-center justify-between">
         <p className="text-xs font-medium uppercase tracking-wide text-faint">{m.label}</p>
-        <span className="flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-1 text-[10px] font-medium text-emerald-600 dark:text-emerald-300">
+        <span className="flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-1 text-[10px] font-medium text-emerald-600">
           <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
           {m.activeLabel}
         </span>

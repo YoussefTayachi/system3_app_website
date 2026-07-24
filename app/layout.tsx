@@ -21,17 +21,28 @@ const title = "Frostbreaker: Leads finden, anreichern und persönlich kontaktier
 const description =
   "Frostbreaker findet B2B-Leads, verifiziert E-Mails und schreibt individuelle Icebreaker automatisch, alles in einem Tool, mit eigenen API-Keys statt teurer Pauschale.";
 
+// metadataBase macht aus dem generierten OG-Bild (app/opengraph-image.tsx)
+// eine absolute URL -- ohne das steht beim Teilen ein localhost-Link im
+// og:image, den kein Crawler aufloesen kann.
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://system3-app-website.vercel.app";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title,
   description,
+  alternates: { canonical: "/" },
   openGraph: {
     title,
     description,
     type: "website",
     locale: "de_DE",
+    siteName: "Frostbreaker",
+    url: "/",
   },
   twitter: {
-    card: "summary",
+    // summary_large_image statt summary: das generierte Bild ist 1200x630,
+    // als "summary" wuerde es auf ein kleines Quadrat beschnitten.
+    card: "summary_large_image",
     title,
     description,
   },

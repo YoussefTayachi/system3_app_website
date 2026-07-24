@@ -68,9 +68,10 @@ export function SavingsCalculator() {
               step={100}
               value={leads}
               onChange={(e) => setLeads(Number(e.target.value))}
-              className="h-2 w-full cursor-pointer appearance-none rounded-full bg-panel2 accent-ink"
+              aria-valuetext={`${fmt(leads)} ${c.sliderLabel}`}
+              className="range-touch w-full cursor-pointer appearance-none bg-transparent"
             />
-            <div className="mt-2 flex justify-between text-[11px] text-mute">
+            <div className="flex justify-between text-[11px] text-mute">
               <span>100</span>
               <span>10.000</span>
             </div>

@@ -46,7 +46,7 @@ export default function Datenschutz() {
         <section>
           <h2 className="text-base font-semibold text-ink">5. Terminbuchung über Calendly</h2>
           <p className="mt-3">
-            Über den Button „Call buchen" gelangt ihr auf die Terminbuchungsseite unseres Anbieters Calendly
+            Über den Button „Call buchen“ gelangt ihr auf die Terminbuchungsseite unseres Anbieters Calendly
             (Calendly LLC, USA), die in einem neuen Tab außerhalb dieser Website geöffnet wird. Gebt ihr dort eure
             Daten ein (z. B. Name, E-Mail-Adresse, gewünschter Termin), gilt dafür die Datenschutzerklärung von
             Calendly, nicht diese hier. Wir erhalten von Calendly lediglich die zur Terminabwicklung notwendigen
