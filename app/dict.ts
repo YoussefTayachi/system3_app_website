@@ -9,10 +9,14 @@ import type { Lang } from "./lang";
 const de = {
   nav: {
     produkt: "Produkt",
+    // Absolute Pfade mit Anker, damit die Eintraege auch von Unterseiten aus
+    // funktionieren -- ein reines "#produkt" wuerde auf /funktionen ins Leere
+    // zeigen.
     produktItems: [
-      { label: "Workflow", href: "#produkt" },
-      { label: "Personalisierung", href: "#personalisierung" },
-      { label: "Integrationen", href: "#integrationen" },
+      { label: "Alle Funktionen", href: "/funktionen" },
+      { label: "Workflow", href: "/#produkt" },
+      { label: "Personalisierung", href: "/#personalisierung" },
+      { label: "Integrationen", href: "/#integrationen" },
     ],
     agenturen: "Für Agenturen",
     preise: "Preise",
@@ -59,6 +63,180 @@ const de = {
     ],
     footnote:
       "Eure tatsächlichen Kosten hängen von Nische und Trefferquote ab. Die Zahl oben stammt aus einer konkreten Suche und ist keine Zusage.",
+  },
+  // Eigene Funktionsseite: auf der Startseite standen die Detailfunktionen
+  // verteilt ueber zwoelf Sektionen. Wer wissen will, was drinsteckt, findet
+  // es jetzt an einem Ort, ohne die Startseite weiter zu verlaengern.
+  featuresPage: {
+    metaTitle: "Funktionen: von der Suche bis zur beantworteten Mail",
+    metaDescription:
+      "Alle Funktionen von Frostbreaker im Überblick: Lead-Suche über Google Maps und Firmendatenbank, Entscheider-Recherche, E-Mail-Verifizierung, KI-Personalisierung, Kampagnen, Zustellbarkeit und Sperrliste.",
+    eyebrow: "Funktionen",
+    title: "Von der Suche bis zur beantworteten Mail",
+    intro:
+      "Was in anderen Setups vier Abos und drei CSV-Exporte braucht, läuft hier in einem Durchgang. Diese Seite zeigt jeden Schritt einzeln.",
+    groups: [
+      {
+        id: "find",
+        eyebrow: "Finden",
+        title: "Zwei Quellen, eine Liste",
+        body: "Lokale Betriebe über Google Maps oder Unternehmen über die Firmendatenbank. Playbooks bringen fertige Kombinationen aus Suchbegriff und Filtern mit, das Lead-Abo lässt eine Liste wöchentlich oder täglich von allein weiterwachsen.",
+        bullets: [
+          "Umkreissuche mit Radius in Metern",
+          "Filter auf fehlende Website oder schwache Bewertung",
+          "Branchen-Playbooks für gängige Nischen",
+          "Lead-Abo: einmalig, wöchentlich oder täglich",
+        ],
+      },
+      {
+        id: "enrich",
+        eyebrow: "Anreichern",
+        title: "Die richtige Person statt der Zentrale",
+        body: "Eine KI-Websuche ermittelt, wer den Betrieb tatsächlich führt. Hunter liefert parallel Adressen aus der Domain. Rollen-Adressen wie info@ oder office@ werden automatisch aussortiert und zählen nicht als Lead.",
+        bullets: [
+          "Name und Rolle der Entscheider:innen",
+          "E-Mail-Verifizierung direkt in der Tabelle",
+          "Telefonnummer aus dem öffentlichen Google-Eintrag",
+          "Generische Adressen werden herausgefiltert",
+        ],
+      },
+      {
+        id: "personalize",
+        eyebrow: "Personalisieren",
+        title: "Der Icebreaker gehört euch",
+        body: "Der System-Prompt ist vollständig editierbar, bis zu fünf eigene Vorlagen sind möglich. Ihr legt Datenquelle, Wortlimit und verbotene Wörter fest und testet an einer echten Firma, bevor irgendetwas gespeichert wird.",
+        bullets: [
+          "Firmenbeschreibung, Website-Text oder beides",
+          "Bis zu fünf eigene Vorlagen",
+          "Wortlimit und Sperrliste für Floskeln",
+          "Live-Test vor dem Speichern",
+        ],
+      },
+      {
+        id: "send",
+        eyebrow: "Versenden",
+        title: "Kampagnen, Postfächer, Zustellbarkeit",
+        body: "Sequenzen mit Zeitplan und Follow-ups laufen nativ im Tool. Postfächer lassen sich per Massen-Upload verbinden, Warmup und Tagesvolumen sind pro Postfach sichtbar. SPF, DKIM und DMARC werden live per DNS geprüft.",
+        bullets: [
+          "Sequenzen starten und pausieren",
+          "Postfächer im Massen-Upload verbinden",
+          "Warmup und Tagesvolumen im Blick",
+          "SPF, DKIM und DMARC live geprüft",
+        ],
+      },
+      {
+        id: "protect",
+        eyebrow: "Absichern",
+        title: "Was nicht rausgehen darf, geht nicht raus",
+        body: "Bestandskunden und Abmeldungen landen auf der Sperrliste und werden vor jedem Versand automatisch abgeglichen. API-Schlüssel liegen verschlüsselt, gehostet wird in der EU.",
+        bullets: [
+          "Sperrliste für Kontakte und ganze Domains",
+          "Automatischer Abgleich vor jedem Versand",
+          "API-Schlüssel verschlüsselt gespeichert",
+          "EU-Hosting",
+        ],
+      },
+    ],
+    ctaTitle: "Am schnellsten versteht man es beim Ausprobieren",
+    ctaBody: "14 Tage kostenlos, keine Kreditkarte nötig, monatlich kündbar.",
+  },
+  // Die Seite argumentierte an prominenter Stelle gegen klassische
+  // Firmendatenbanken, obwohl die App genau das auch kann (Corporate-Modus
+  // ueber Hunter: Branche, Land, Mitarbeiterzahl). Wer B2B-Software an
+  // Mittelstaendler verkauft, las "nur fuer Handwerker" und ging wieder.
+  twoWays: {
+    eyebrow: "Zwei Wege zum Lead",
+    title: "Lokale Betriebe oder klassische Firmensuche, im selben Werkzeug",
+    body: "Ihr entscheidet pro Suche, woher die Firmen kommen. Beide Wege münden in dieselbe Liste, dieselbe Anreicherung und denselben Versand.",
+    modes: [
+      {
+        id: "local",
+        label: "Lokal",
+        title: "Über Google Maps",
+        body: "Nische und Ort eingeben, Umkreis festlegen. Findet den Handwerksbetrieb, die Praxis, das Restaurant, also genau die Betriebe, die in LinkedIn-basierten Datenbanken fehlen.",
+        points: ["Filter auf fehlende Website", "Filter auf schwache Bewertung", "Telefonnummer aus dem Eintrag"],
+      },
+      {
+        id: "corporate",
+        label: "Corporate",
+        title: "Über Firmendatenbank",
+        body: "Branche, Land, Stadt, Mitarbeiterzahl und Stichworte kombinieren. Für alle, die keine lokalen Betriebe suchen, sondern Unternehmen ab einer bestimmten Größe.",
+        points: ["Nach Branche und Größe", "Länderauswahl", "Freie Stichwörter"],
+      },
+    ],
+  },
+  // Nachbildungen echter App-Screens. Bewusst keine Screenshots aus dem
+  // laufenden Betrieb: dort stehen Namen realer Personen mit Rolle und
+  // Arbeitgeber, die ohne Einwilligung nicht ins Marketing gehoeren. Die
+  // Firmen hier sind erfunden und dieselben wie in den uebrigen Mockups.
+  appMockups: {
+    dashboard: {
+      title: "Dashboard",
+      subtitle: "Überblick über deine Lead-Pipeline",
+      stats: [
+        { label: "Suchen", value: "12" },
+        { label: "Firmen", value: "97" },
+        { label: "Kontakte", value: "259" },
+        { label: "Mit E-Mail", value: "168" },
+        { label: "Personalisiert", value: "152" },
+        { label: "API-Kosten", value: "3,94 $", sub: "87 Hunter-Credits" },
+      ],
+      savings: {
+        strong: "≈ 34,5 Stunden",
+        rest: "manuelle Recherche gespart",
+        cost: "entspricht ~1.550 € Personalkosten — bei 3,94 $ API-Kosten",
+      },
+    },
+    search: {
+      title: "Neue Suche",
+      subtitle: "Nische und Ort eingeben, der Rest läuft automatisch.",
+      playbookLabel: "Branchen-Playbook",
+      playbookValue: "Handwerk ohne Website",
+      tabs: ["Lokal (Google Maps)", "Corporate (Datenbank)"],
+      fields: [
+        { label: "Nische", value: "Schreinerei" },
+        { label: "Ort", value: "Wien" },
+        { label: "Max. Firmen", value: "50" },
+      ],
+      subscriptionLabel: "Lead-Abo",
+      subscriptionValue: "Wöchentlich",
+      subscriptionNote: "Neue Treffer landen automatisch in derselben Liste.",
+      cta: "Suche starten",
+    },
+    leads: {
+      title: "Alle Leads",
+      toolbar: { count: "97 Firmen · 259 Kontakte", verify: "E-Mails verifizieren", export: "Für Instantly exportieren", csv: "Excel-CSV" },
+      rows: [
+        { name: "Schreinerei Huber", domain: "schreinerei-huber.at", contacts: "3 Kontakte", withMail: "3 mit E-Mail", color: "#0EA5E9" },
+        { name: "Zahnarztpraxis Dr. Berger", domain: "zahnarzt-berger.at", contacts: "2 Kontakte", withMail: "2 mit E-Mail", color: "#8B5CF6" },
+        { name: "Café Sonnenblick", domain: "cafe-sonnenblick.at", contacts: "1 Kontakt", withMail: "1 mit E-Mail", color: "#F59E0B" },
+        { name: "Friseur Kaiser", domain: "friseur-kaiser.at", contacts: "2 Kontakte", withMail: "1 mit E-Mail", color: "#10B981" },
+      ],
+    },
+    leadDetail: {
+      label: "Aufgeklappter Lead",
+      person: "Markus Huber",
+      role: "Inhaber",
+      company: "Schreinerei Huber",
+      emailLabel: "E-Mail",
+      email: "m.huber@schreinerei-huber.at",
+      emailBadge: "verifiziert",
+      phoneLabel: "Telefon",
+      phone: "+43 1 5550142",
+      phoneBadge: "aus Google-Eintrag",
+      icebreakerLabel: "Icebreaker",
+      icebreaker:
+        "Fünf Mitarbeitende, eigene Werkstatt, aber Terminanfragen laufen weiter über das Kontaktformular.",
+    },
+    mailboxes: {
+      title: "Postfächer",
+      subtitle: "Warmup und Tagesvolumen pro Postfach",
+      rows: [
+        { address: "markus@eure-agentur.at", state: "Warmup aktiv", volume: "28 / 50", ok: true },
+        { address: "office@eure-agentur.at", state: "Warmup aktiv", volume: "42 / 50", ok: true },
+        { address: "hallo@eure-agentur.de", state: "Aufwärmphase", volume: "12 / 50", ok: false },
+      ],
+    },
   },
   heroIllustration: {
     badgeStat: "2×",
@@ -461,9 +639,10 @@ const en: typeof de = {
   nav: {
     produkt: "Product",
     produktItems: [
-      { label: "Workflow", href: "#produkt" },
-      { label: "Personalization", href: "#personalisierung" },
-      { label: "Integrations", href: "#integrationen" },
+      { label: "All features", href: "/funktionen" },
+      { label: "Workflow", href: "/#produkt" },
+      { label: "Personalization", href: "/#personalisierung" },
+      { label: "Integrations", href: "/#integrationen" },
     ],
     agenturen: "For Agencies",
     preise: "Pricing",
@@ -507,6 +686,169 @@ const en: typeof de = {
     ],
     footnote:
       "Your actual cost depends on niche and hit rate. The figure above comes from one specific search and is not a guarantee.",
+  },
+  featuresPage: {
+    metaTitle: "Features: from search to answered email",
+    metaDescription:
+      "Every Frostbreaker feature at a glance: lead search via Google Maps and company database, decision-maker research, email verification, AI personalization, campaigns, deliverability and suppression list.",
+    eyebrow: "Features",
+    title: "From search to answered email",
+    intro:
+      "What takes four subscriptions and three CSV exports elsewhere runs here in one pass. This page walks through every step.",
+    groups: [
+      {
+        id: "find",
+        eyebrow: "Find",
+        title: "Two sources, one list",
+        body: "Local businesses via Google Maps or companies via the database. Playbooks bring ready-made combinations of search term and filters, and a lead subscription keeps a list growing weekly or daily on its own.",
+        bullets: [
+          "Radius search in metres",
+          "Filter for missing website or weak rating",
+          "Industry playbooks for common niches",
+          "Lead subscription: once, weekly or daily",
+        ],
+      },
+      {
+        id: "enrich",
+        eyebrow: "Enrich",
+        title: "The right person, not the switchboard",
+        body: "An AI web search works out who actually runs the business. Hunter provides addresses from the domain in parallel. Role addresses like info@ or office@ are filtered out automatically and don't count as leads.",
+        bullets: [
+          "Name and role of the decision-maker",
+          "Email verification right in the table",
+          "Phone number from the public Google listing",
+          "Generic addresses filtered out",
+        ],
+      },
+      {
+        id: "personalize",
+        eyebrow: "Personalize",
+        title: "The icebreaker is yours",
+        body: "The system prompt is fully editable and you can keep up to five templates. You set the data source, the word limit and the banned words, and test against a real company before anything is saved.",
+        bullets: [
+          "Company description, website text or both",
+          "Up to five custom templates",
+          "Word limit and banned-phrase list",
+          "Live test before saving",
+        ],
+      },
+      {
+        id: "send",
+        eyebrow: "Send",
+        title: "Campaigns, mailboxes, deliverability",
+        body: "Sequences with schedule and follow-ups run natively in the tool. Mailboxes connect via bulk upload, warmup and daily volume are visible per mailbox. SPF, DKIM and DMARC are checked live via DNS.",
+        bullets: [
+          "Start and pause sequences",
+          "Connect mailboxes in bulk",
+          "Warmup and daily volume at a glance",
+          "SPF, DKIM and DMARC checked live",
+        ],
+      },
+      {
+        id: "protect",
+        eyebrow: "Protect",
+        title: "What must not go out, doesn't go out",
+        body: "Existing clients and opt-outs land on the suppression list and are checked automatically before every send. API keys are stored encrypted, hosting is in the EU.",
+        bullets: [
+          "Suppression list for contacts and whole domains",
+          "Automatic check before every send",
+          "API keys stored encrypted",
+          "EU hosting",
+        ],
+      },
+    ],
+    ctaTitle: "The fastest way to understand it is to try it",
+    ctaBody: "14 days free, no credit card required, cancel monthly.",
+  },
+  twoWays: {
+    eyebrow: "Two routes to a lead",
+    title: "Local businesses or classic company search, in the same tool",
+    body: "You decide per search where the companies come from. Both routes end up in the same list, the same enrichment and the same sending.",
+    modes: [
+      {
+        id: "local",
+        label: "Local",
+        title: "Via Google Maps",
+        body: "Enter niche and location, set the radius. Finds the trades business, the practice, the restaurant — exactly the companies missing from LinkedIn-based databases.",
+        points: ["Filter for missing website", "Filter for weak rating", "Phone number from the listing"],
+      },
+      {
+        id: "corporate",
+        label: "Corporate",
+        title: "Via company database",
+        body: "Combine industry, country, city, headcount and keywords. For everyone who isn't looking for local businesses but for companies above a certain size.",
+        points: ["By industry and size", "Country selection", "Free-text keywords"],
+      },
+    ],
+  },
+  appMockups: {
+    dashboard: {
+      title: "Dashboard",
+      subtitle: "Overview of your lead pipeline",
+      stats: [
+        { label: "Searches", value: "12" },
+        { label: "Companies", value: "97" },
+        { label: "Contacts", value: "259" },
+        { label: "With email", value: "168" },
+        { label: "Personalized", value: "152" },
+        { label: "API cost", value: "$3.94", sub: "87 Hunter credits" },
+      ],
+      savings: {
+        strong: "≈ 34.5 hours",
+        rest: "of manual research saved",
+        cost: "equals ~€1,550 in labour cost — at $3.94 API cost",
+      },
+    },
+    search: {
+      title: "New search",
+      subtitle: "Enter niche and location, the rest runs automatically.",
+      playbookLabel: "Industry playbook",
+      playbookValue: "Trades without a website",
+      tabs: ["Local (Google Maps)", "Corporate (database)"],
+      fields: [
+        { label: "Niche", value: "Carpentry" },
+        { label: "Location", value: "Vienna" },
+        { label: "Max. companies", value: "50" },
+      ],
+      subscriptionLabel: "Lead subscription",
+      subscriptionValue: "Weekly",
+      subscriptionNote: "New matches land in the same list automatically.",
+      cta: "Start search",
+    },
+    leads: {
+      title: "All leads",
+      toolbar: { count: "97 companies · 259 contacts", verify: "Verify emails", export: "Export to Instantly", csv: "Excel CSV" },
+      rows: [
+        { name: "Huber Carpentry", domain: "huber-carpentry.at", contacts: "3 contacts", withMail: "3 with email", color: "#0EA5E9" },
+        { name: "Dr. Berger Dental", domain: "berger-dental.at", contacts: "2 contacts", withMail: "2 with email", color: "#8B5CF6" },
+        { name: "Café Sonnenblick", domain: "cafe-sonnenblick.at", contacts: "1 contact", withMail: "1 with email", color: "#F59E0B" },
+        { name: "Kaiser Hair", domain: "kaiser-hair.at", contacts: "2 contacts", withMail: "1 with email", color: "#10B981" },
+      ],
+    },
+    leadDetail: {
+      label: "Expanded lead",
+      person: "Markus Huber",
+      role: "Owner",
+      company: "Huber Carpentry",
+      emailLabel: "Email",
+      email: "m.huber@huber-carpentry.at",
+      emailBadge: "verified",
+      phoneLabel: "Phone",
+      phone: "+43 1 5550142",
+      phoneBadge: "from Google listing",
+      icebreakerLabel: "Icebreaker",
+      icebreaker:
+        "Five employees, own workshop, yet appointment requests still run through the contact form.",
+    },
+    mailboxes: {
+      title: "Mailboxes",
+      subtitle: "Warmup and daily volume per mailbox",
+      rows: [
+        { address: "markus@your-agency.at", state: "Warmup active", volume: "28 / 50", ok: true },
+        { address: "office@your-agency.at", state: "Warmup active", volume: "42 / 50", ok: true },
+        { address: "hello@your-agency.de", state: "Warming up", volume: "12 / 50", ok: false },
+      ],
+    },
   },
   heroIllustration: {
     badgeStat: "2×",

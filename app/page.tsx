@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { Logo, CTAButton, CTAGroup, NavDropdown, SectionHeading, FactBox, StatTile, BOOKING_URL } from "./_ui";
 import { AgencyMockup, PostSendMockup, LocalReachMockup, QualifiedLeadMockup, SuppressionMockup, DeliverabilityMockup, CampaignMockup } from "./_mockups";
+import { DashboardMockup, SearchFormMockup, LeadsTableMockup, LeadDetailMockup, MailboxesMockup } from "./_app-mockups";
 import { LeadCardStack } from "./_illustration";
 import { SavingsCalculator } from "./_calculator";
 import { Reveal } from "./reveal";
@@ -202,6 +203,56 @@ export default function Home() {
         <p className="mt-6 max-w-[70ch] text-xs leading-relaxed text-mute">{t.costProof.footnote}</p>
       </section>
 
+      {/* Zwei Suchmodi. Die Seite argumentierte bisher nur gegen klassische
+          Datenbanken, obwohl die App den Corporate-Modus mitbringt -- wer
+          Unternehmen ab einer bestimmten Groesse sucht, fuehlte sich nicht
+          angesprochen. */}
+      <section className="border-y border-edge/60 bg-panel2">
+        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+          <SectionHeading eyebrow={t.twoWays.eyebrow} title={t.twoWays.title} />
+          <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.twoWays.body}</p>
+
+          <div className="grid gap-10 lg:grid-cols-5 lg:items-start">
+            <div className="space-y-5 lg:col-span-2">
+              {t.twoWays.modes.map((mode, i) => (
+                <Reveal key={mode.id} delay={i * 70}>
+                  <div
+                    className={
+                      "rounded-2xl border p-5 " +
+                      (i === 0 ? "border-sky-300/70 bg-sky-50/50" : "border-edge/60 bg-panel")
+                    }
+                  >
+                    <span
+                      className={
+                        "inline-flex rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide " +
+                        (i === 0 ? "bg-sky-600 text-white" : "bg-panel2 text-faint")
+                      }
+                    >
+                      {mode.label}
+                    </span>
+                    <h3 className="font-display mt-3 text-lg font-semibold tracking-[-0.01em] text-ink">
+                      {mode.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-soft">{mode.body}</p>
+                    <ul className="mt-4 space-y-1.5">
+                      {mode.points.map((p) => (
+                        <li key={p} className="flex items-start gap-2 text-xs text-soft">
+                          <CheckIcon />
+                          {p}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+            <div className="lg:col-span-3">
+              <SearchFormMockup />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Sparpotenzial-Rechner: wichtigster Conversion-Baustein, bewusst
           direkt nach dem Hero, nicht erst am Seitenende */}
       <SavingsCalculator />
@@ -231,8 +282,11 @@ export default function Home() {
               <p className="text-sm leading-relaxed text-soft sm:text-base">{t.qualifiedLeads.body1}</p>
               <p className="mt-4 text-sm font-medium leading-relaxed text-ink sm:text-base">{t.qualifiedLeads.body2}</p>
             </div>
-            <div className="lg:col-span-3">
+            <div className="space-y-5 lg:col-span-3">
               <QualifiedLeadMockup />
+              {/* Der aufgeklappte Lead zeigt, was am Ende wirklich in der
+                  Liste steht: Person, geprüfte Mail, Nummer aus dem Eintrag. */}
+              <LeadDetailMockup />
             </div>
           </div>
         </div>
