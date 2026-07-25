@@ -40,23 +40,96 @@ export function DashboardMockup() {
   return (
     <AppFrame>
       <div className="p-5 sm:p-6">
-        <p className="font-display text-lg font-semibold tracking-[-0.01em] text-ink">{m.title}</p>
-        <p className="mt-0.5 text-xs text-mute">{m.subtitle}</p>
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <p className="font-display text-lg font-semibold tracking-[-0.01em] text-ink">{m.title}</p>
+            <p className="mt-0.5 text-xs text-mute">{m.subtitle}</p>
+          </div>
+          {/* Als Beispiel gekennzeichnet: die Zahlen zeigen, wie eine gut
+              laufende Pipeline aussieht, und duerfen nicht als Zusage
+              missverstanden werden. */}
+          <span className="rounded-full border border-edge2 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wide text-faint">
+            {m.sampleBadge}
+          </span>
+        </div>
 
-        <div className="mt-5 grid grid-cols-2 divide-edge/70 overflow-hidden rounded-xl border border-edge/70 sm:grid-cols-3 lg:grid-cols-6 lg:divide-x">
+        <div className="mt-5 grid grid-cols-2 overflow-hidden rounded-xl border border-edge/70 sm:grid-cols-3 lg:grid-cols-6">
           {m.stats.map((s) => (
-            <div key={s.label} className="border-b border-edge/70 px-3.5 py-3 last:border-b-0 sm:border-b lg:border-b-0">
-              <p className="text-[10px] font-medium uppercase tracking-[0.1em] text-faint">{s.label}</p>
-              <p className="font-display mt-1 text-xl font-semibold tracking-[-0.02em] text-ink">{s.value}</p>
-              {s.sub && <p className="text-[10px] text-mute">{s.sub}</p>}
+            <div
+              key={s.label}
+              className={
+                "border-b border-r border-edge/70 px-3.5 py-3 last:border-r-0 " +
+                (s.accent ? "bg-sky-50/70" : "")
+              }
+            >
+              <p
+                className={
+                  "text-[10px] font-medium uppercase tracking-[0.1em] " +
+                  (s.accent ? "text-sky-700" : "text-faint")
+                }
+              >
+                {s.label}
+              </p>
+              <p
+                className={
+                  "font-display mt-1 text-xl font-semibold tracking-[-0.02em] " +
+                  (s.accent ? "text-sky-700" : "text-ink")
+                }
+              >
+                {s.value}
+              </p>
             </div>
           ))}
         </div>
 
-        <div className="mt-3 flex flex-wrap items-baseline gap-x-2 gap-y-1 rounded-xl border border-sky-200/70 bg-sky-50/60 px-4 py-3">
-          <span className="text-sm font-semibold text-ink">{m.savings.strong}</span>
-          <span className="text-sm text-soft">{m.savings.rest}</span>
-          <span className="text-xs text-sky-900/60">{m.savings.cost}</span>
+        <div className="mt-3 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 rounded-xl border border-sky-200/70 bg-sky-50/60 px-4 py-3">
+          <span className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+            <span className="text-sm font-semibold text-ink">{m.savings.strong}</span>
+            <span className="text-sm text-soft">{m.savings.rest}</span>
+            <span className="text-xs text-sky-900/60">{m.savings.cost}</span>
+          </span>
+          <span className="shrink-0 text-right">
+            <span className="block text-[10px] font-medium uppercase tracking-[0.1em] text-sky-900/50">
+              {m.costLabel}
+            </span>
+            <span className="font-display block text-base font-semibold tracking-[-0.02em] text-ink">
+              {m.costValue}
+            </span>
+          </span>
+        </div>
+
+        {/* Zweifarbige Balken in der Markenfarbe: heller Anteil sind neue
+            Leads, kraeftiger Anteil die Antworten darunter. Reines Markup,
+            keine Diagramm-Bibliothek. */}
+        <div className="mt-3 rounded-xl border border-edge/70 p-4">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <p className="text-sm font-medium text-ink">{m.chartTitle}</p>
+            <p className="text-[11px] text-mute">{m.chartRange}</p>
+          </div>
+
+          {/* h-full auf der Spalte ist noetig, sonst hat die prozentuale
+              Balkenhoehe keinen Bezugsrahmen und der Balken bleibt unsichtbar. */}
+          <div className="mt-4 flex h-24 items-end gap-1.5">
+            {m.chartBars.map(([lead, reply], i) => (
+              <div key={i} className="flex h-full flex-1 flex-col justify-end">
+                <div
+                  className="flex flex-col justify-end overflow-hidden rounded-t-[3px] bg-sky-200/70"
+                  style={{ height: `${lead}%` }}
+                >
+                  <div className="bg-sky-600" style={{ height: `${Math.round((reply / lead) * 100)}%` }} />
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-3 flex flex-wrap items-center gap-4 border-t border-edge/70 pt-3">
+            {m.chartLegend.map((label, i) => (
+              <span key={label} className="flex items-center gap-1.5 text-[11px] text-mute">
+                <span className={"h-2 w-2 rounded-sm " + (i === 0 ? "bg-sky-200" : "bg-sky-600")} />
+                {label}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </AppFrame>

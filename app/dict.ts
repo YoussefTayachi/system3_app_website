@@ -190,22 +190,39 @@ const de = {
   // Arbeitgeber, die ohne Einwilligung nicht ins Marketing gehoeren. Die
   // Firmen hier sind erfunden und dieselben wie in den uebrigen Mockups.
   appMockups: {
+    // Beispielansicht nach einigen Monaten Betrieb, kein echter Account. Die
+    // Zahlen sind bewusst untereinander stimmig gerechnet: 2.430 Kontakte zu
+    // denselben rund 1,5 Cent ergeben die 36,90 $, und 15 Meetings aus 2.430
+    // versendeten Mails entsprechen der Quote, mit der die Seite an anderer
+    // Stelle rechnet. So wirkt die Ansicht motivierend, ohne der eigenen
+    // Kostenaussage zu widersprechen.
     dashboard: {
       title: "Dashboard",
       subtitle: "Überblick über deine Lead-Pipeline",
+      sampleBadge: "Beispielansicht",
       stats: [
-        { label: "Suchen", value: "12" },
-        { label: "Firmen", value: "97" },
-        { label: "Kontakte", value: "259" },
-        { label: "Mit E-Mail", value: "168" },
-        { label: "Personalisiert", value: "152" },
-        { label: "API-Kosten", value: "3,94 $", sub: "alle Abfragen inklusive" },
+        { label: "Suchen", value: "62" },
+        { label: "Firmen", value: "890" },
+        { label: "Kontakte", value: "2.430" },
+        { label: "Mit E-Mail", value: "1.612" },
+        { label: "Antworten", value: "168", accent: true },
+        { label: "Meetings", value: "15", accent: true },
       ],
+      costLabel: "Abfragekosten gesamt",
+      costValue: "36,90 $",
       savings: {
-        strong: "≈ 34,5 Stunden",
+        strong: "≈ 324 Stunden",
         rest: "manuelle Recherche gespart",
-        cost: "entspricht ~1.550 € Personalkosten — bei 3,94 $ API-Kosten",
+        cost: "entspricht rund 14.500 € Personalkosten",
       },
+      chartTitle: "Neue Leads und Antworten",
+      chartRange: "letzte 14 Tage",
+      chartLegend: ["Neue Leads", "Antworten"],
+      // Paarweise: Balkenhoehe Leads, darin Anteil Antworten (jeweils 0-100).
+      chartBars: [
+        [34, 8], [46, 11], [41, 9], [58, 16], [52, 13], [67, 19], [61, 17],
+        [74, 22], [69, 20], [83, 27], [78, 24], [91, 31], [86, 29], [100, 36],
+      ],
     },
     // Bewusst Fahrschule statt eines Handwerksbetriebs: die Handwerker-Nische
     // taucht in den uebrigen Mockups schon auf, und der freie Suchbegriff soll
@@ -842,19 +859,29 @@ const en: typeof de = {
     dashboard: {
       title: "Dashboard",
       subtitle: "Overview of your lead pipeline",
+      sampleBadge: "Example view",
       stats: [
-        { label: "Searches", value: "12" },
-        { label: "Companies", value: "97" },
-        { label: "Contacts", value: "259" },
-        { label: "With email", value: "168" },
-        { label: "Personalized", value: "152" },
-        { label: "API cost", value: "$3.94", sub: "all lookups included" },
+        { label: "Searches", value: "62" },
+        { label: "Companies", value: "890" },
+        { label: "Contacts", value: "2,430" },
+        { label: "With email", value: "1,612" },
+        { label: "Replies", value: "168", accent: true },
+        { label: "Meetings", value: "15", accent: true },
       ],
+      costLabel: "Total lookup cost",
+      costValue: "$36.90",
       savings: {
-        strong: "≈ 34.5 hours",
+        strong: "≈ 324 hours",
         rest: "of manual research saved",
-        cost: "equals ~€1,550 in labour cost — at $3.94 API cost",
+        cost: "equals around €14,500 in labour cost",
       },
+      chartTitle: "New leads and replies",
+      chartRange: "last 14 days",
+      chartLegend: ["New leads", "Replies"],
+      chartBars: [
+        [34, 8], [46, 11], [41, 9], [58, 16], [52, 13], [67, 19], [61, 17],
+        [74, 22], [69, 20], [83, 27], [78, 24], [91, 31], [86, 29], [100, 36],
+      ],
     },
     search: {
       title: "New search",
