@@ -78,13 +78,13 @@ const de = {
     eyebrow: "Für Agenturen",
     title: "Ein Login. Ein Workspace pro Kunde. Kein neues Abo für jeden.",
     intro:
-      "Wenn ihr Kaltakquise für eure eigenen Kunden macht, ist die Kontenverwaltung meist das eigentliche Problem: pro Kunde ein Tool-Zugang, pro Kunde ein Abo, am Monatsende ein Report von Hand. Genau dafür ist der Agentur-Plan gebaut.",
+      "Pro Kunde ein Zugang, pro Kunde ein Abo, am Monatsende ein Report von Hand. Genau dafür ist der Agentur-Plan gebaut.",
     sections: [
       {
         id: "workspaces",
         eyebrow: "Getrennt",
         title: "Jeder Kunde in seinem eigenen Bereich",
-        body: "Leads, Kampagnen, Sperrlisten und Kontakte laufen pro Kunde sauber getrennt. Ihr wechselt im selben Login zwischen den Bereichen, statt euch aus- und wieder einzuloggen. Neue Kunden sind in Sekunden angelegt, ohne ein weiteres Abo abzuschließen.",
+        body: "Leads, Kampagnen und Sperrlisten laufen pro Kunde getrennt. Umschalten im selben Login, neue Kunden in Sekunden angelegt.",
         bullets: [
           "Unbegrenzte Workspaces im Plan enthalten",
           "Name, Logo und Akzentfarbe je Workspace",
@@ -95,7 +95,7 @@ const de = {
         id: "report",
         eyebrow: "Vorzeigbar",
         title: "Der Report, den ihr weiterreichen könnt",
-        body: "Ein Link pro Kunde zeigt die Kennzahlen im Look des Kunden, ohne dass er einen Account braucht. Einzelne Kontaktdaten bleiben dabei bewusst bei euch. Das ersetzt die Tabelle, die sonst am Monatsende von Hand entsteht.",
+        body: "Ein Link zeigt die Kennzahlen im Look des Kunden, ganz ohne Account. Ersetzt die Tabelle, die sonst am Monatsende von Hand entsteht.",
         bullets: [
           "Kein Login für den Endkunden nötig",
           "Im Branding des jeweiligen Kunden",
@@ -106,7 +106,7 @@ const de = {
         id: "costs",
         eyebrow: "Kalkulierbar",
         title: "Was ein Kunde euch kostet",
-        body: "Der Plan ist fix, die Abfragekosten hängen am Volumen. Für 1.000 qualifizierte Leads im Monat liegt ein Kunde bei rund 65 € Abfragekosten, unabhängig davon, wie viele Kunden ihr parallel betreut. Was ihr euren Kunden dafür berechnet, bleibt eure Entscheidung.",
+        body: "Der Plan ist fix, die Abfragekosten hängen am Volumen. Was ihr euren Kunden berechnet, bleibt eure Entscheidung.",
         bullets: [
           "199 € im Monat, unabhängig von der Kundenzahl",
           "≈ 65 € Abfragekosten je 1.000 Leads",
@@ -116,7 +116,7 @@ const de = {
     ],
     contrastTitle: "Was Multi-Kunden-Verwaltung sonst kostet",
     contrastBody:
-      "Bei reinen Versand-Tools ist die Verwaltung mehrerer Kunden meist ein separat bepreistes Zusatzmodul, oft mit eigenem Preis pro angelegtem Kundenkonto, und deckt dann nur den Versand ab. Recherche, Anreicherung und Reporting kommen obendrauf. Hier ist beides von Anfang an Teil des Produkts.",
+      "Bei reinen Versand-Tools ist Multi-Kunden-Verwaltung meist ein Zusatzmodul mit eigenem Preis pro Kundenkonto, und deckt dann nur den Versand ab. Recherche und Reporting kommen obendrauf. Hier ist beides von Anfang an dabei.",
     ctaTitle: "Sprecht kurz mit uns über eure Kundenstruktur",
     ctaBody:
       "Beim Agentur-Plan richten wir Workspaces und Branding gemeinsam ein, deshalb steht am Anfang ein kurzes Gespräch statt einer Selbstanmeldung. 30 Minuten, keine Präsentation.",
@@ -445,7 +445,10 @@ const de = {
     // ist also Sache der Kundin. Die Nummer wird bewusst nicht als "verifiziert"
     // bezeichnet -- geprueft werden nur E-Mail-Adressen.
     h1Post: " pro Woche kontaktieren, vollautomatisch.",
-    body: "Frostbreaker findet lokale Unternehmen, identifiziert die richtige Person dahinter und verifiziert ihre E-Mail-Adresse. Die Telefonnummer aus dem öffentlichen Eintrag kommt mit dazu: kein info@, kein office@, sondern echte Ansprechpartner, die ihr auf eurem Weg erreicht.",
+    // Bewusst kurz und nutzenorientiert: die Erklaerung, wie das funktioniert,
+    // liefern die Sektionen darunter. Wer im Hero schon alles erklaert bekommt,
+    // hat keinen Grund weiterzulesen.
+    body: "Kein info@, kein Ratespiel, keine vier Abos. Nur Ansprechpartner mit Namen und geprüfter Adresse, jede Woche neu.",
     factBadge: "Agenturen bekommen im Schnitt 42 € zurück für jeden Euro, den sie in E-Mails stecken.",
     factSource: "Quelle: Litmus, State of Email 2025",
     screenshotAlt: "Frostbreaker Leads-Tabelle mit Firmen-Logos, Kontaktanzahl und E-Mail-Status",
@@ -460,8 +463,8 @@ const de = {
   leadSource: {
     eyebrow: "Die Lead-Quelle macht den Unterschied",
     title: "Findet die kleinen, lokalen Unternehmen, die in klassischen Lead-Datenbanken kaum auftauchen",
-    body1: "Klassische B2B-Datenbanken bauen auf LinkedIn-Profilen und strukturierten Firmendaten auf, das bevorzugt Unternehmen mit digitaler Präsenz: Software-Firmen, größere Mittelständler, Agenturen selbst. Der Handwerksbetrieb, das Nachbarschaftsrestaurant, die Zahnarztpraxis, die kleine Kanzlei, oft genau die Betriebe, die Marketing am dringendsten bräuchten, weil sie selbst noch nie strukturiert investiert haben, tauchen dort kaum auf.",
-    body2: "Frostbreaker sucht stattdessen direkt über Google Places/Google Maps, wo praktisch jedes Unternehmen mit physischer Adresse gelistet ist, unabhängig von digitaler Reife. Für eine Agentur heißt das: Zugriff auf genau die lokalen Kund:innen, die sonst zwischen den Zähnen der üblichen Prospecting-Tools durchfallen.",
+    body1: "Klassische B2B-Datenbanken bauen auf LinkedIn-Profilen auf. Wer dort kein Profil pflegt, existiert für sie nicht.",
+    body2: "Frostbreaker sucht über Google Places, wo praktisch jeder Betrieb mit physischer Adresse gelistet ist.",
   },
   localReachMockup: {
     typicalLabel: "Typische B2B-Datenbank",
@@ -524,16 +527,6 @@ const de = {
       { title: "Bounce-Raten, die die Domain ruinieren", body: "Ungeprüfte Adressen killen die Zustellrate. Bei mehreren Kunden-Domains gleichzeitig merkt man's oft erst, wenn bei einem Kunden die Antwortquote plötzlich einbricht." },
       { title: "Generische Mails, die jeder erkennt", body: "„Hi {{Firstname}}, ich hab gesehen dass {{Company}}...“ mit Textbaustein-Personalisierung performt schlechter als gar keine, und schadet der eigenen Kundenbindung." },
       { title: "Info@ statt echtem Ansprechpartner", body: "Die Hälfte der „gefundenen“ Adressen landet in einem geteilten Postfach, das niemand konsequent liest. Cold Mail an info@ ist kaum besser als gar keine Mail." },
-    ],
-  },
-  pillars: {
-    eyebrow: "Der Effekt in vier Sätzen",
-    title: "Was sich für euch konkret ändert",
-    items: [
-      { id: "money", title: "Geld sparen", stat: "≈ 285 €", statLabel: "gespart pro Monat ggü. einem vergleichbaren 4-Tool-Stack", body: "Ihr zahlt nur eure echten API-Kosten, ≈ 65 € für 1.000 Leads, plus den Plan, keine Aufschläge. Ein vergleichbarer Aufbau aus separater Datenquelle, Versand-Tool und Automatisierung kostet üblicherweise ein Vielfaches davon." },
-      { id: "revenue", title: "Umsatz steigern", stat: "≈ 6", statLabel: "Meetings/Monat rechnerisch, bei 1.000 versendeten Mails", body: "Echte Personalisierung statt Textbausteine, jede Mail erreicht eine echte Person statt eine Rollen-Adresse." },
-      { id: "time", title: "Zeit sparen", stat: "≈ 133 Std.", statLabel: "manuelle Recherche gespart, pro 1.000 Leads", body: "Keine manuelle Suche, kein Adressraten, kein CSV-Jonglieren zwischen mehreren Tools." },
-      { id: "risk", title: "Risiko sparen", stat: "3-fach", statLabel: "Verifizierung, Zustellbarkeits-Check und Blockliste eingebaut", body: "Schützt Sender-Reputation und Domain, bevor es zum Problem wird, nicht danach. EU-Hosting, verschlüsselte Zugangsdaten." },
     ],
   },
   // Fachbegriffe, die im Fliesstext vorkommen und einer Erklaerung beim
@@ -635,20 +628,6 @@ const de = {
       { id: "automation", name: "Zapier", note: "geplant" },
     ],
   },
-  usps: {
-    eyebrow: "Warum Frostbreaker",
-    title: "Warum Frostbreaker und nicht vier einzelne Tools",
-    items: [
-      { title: "Alles in einem Tool, pro Kunde getrennt", body: "Suche, Anreicherung, Verifizierung, Personalisierung und Export laufen in einem einzigen Workflow, je Kunden-Workspace sauber getrennt. Kein CSV-Hin-und-Her zwischen vier Abos mehr." },
-      { title: "Individuelle KI-Zusammenfassung pro Lead", body: "Für jedes Unternehmen wird automatisch eine faktenbasierte Zusammenfassung erstellt, Grundlage für einen Icebreaker, der wirklich nach Recherche klingt. Ton, Regeln und verbotene Wörter sind vollständig einstellbar.", fact: "Persönliche E-Mails bekommen etwa doppelt so oft eine Antwort wie 08/15-Mails.", sub: "Fast niemand macht das von Hand, weil es zu lange dauert. Frostbreaker übernimmt das für euch, bei jeder einzelnen E-Mail.", source: "Woodpecker, Auswertung von über 20 Mio. E-Mails, 2026" },
-      { title: "E-Mail-Verifizierung eingebaut", body: "Jede gefundene Adresse wird geprüft, bevor sie in eine Kampagne geht. Das schützt eure Sender-Reputation, ohne ein zusätzliches Tool.", fact: "Geprüfte E-Mail-Adressen kommen etwa doppelt so oft an wie ungeprüfte.", sub: "Zu viele falsche Adressen und eure Mails landen im Spam statt im Postfach.", source: "Branchen-Benchmarks E-Mail-Zustellbarkeit, 2026" },
-      { title: "Bring Your Own Key: volle Kostentransparenz", body: "Ihr zahlt die tatsächlichen API-Kosten, keine versteckten Aufschläge. Im Dashboard seht ihr live, was eine Suche tatsächlich gekostet hat." },
-      { title: "DSGVO-bewusst gebaut", body: "EU-Hosting, verschlüsselte Speicherung von Zugangsdaten, Datensparsamkeit von Grund auf mitgedacht." },
-      { title: "Direkter Draht zum Team", body: "Kein Ticket-System. Ihr sprecht direkt mit den Leuten, die das Tool gebaut haben, inklusive echter Anpassungen auf Wunsch." },
-      { title: "Filtert nach echten Pain Points, nicht nur nach Branche und Ort", body: "Google-Bewertung und ob überhaupt eine Website existiert fließen direkt in die Suche ein. Der Icebreaker bezieht dieses Signal automatisch mit ein, zum Beispiel wenn ein Unternehmen seit Jahren keine aktuelle Bewertung oder gar keine Website hat, statt nur Firmenname und Branche zu kennen." },
-      { title: "Fertige Branchen-Playbooks statt eigenem Trial-and-Error", body: "Vorgefertigte Kombinationen aus Suchkriterien, Pain-Point-Filter und Personalisierungs-Hinweis für gängige Nischen, etwa Restaurants ohne aktuelle Website oder Handwerksbetriebe ohne Terminbuchung. Ein Klick statt tagelangem Herumprobieren mit Suchbegriffen." },
-    ],
-  },
   features: {
     eyebrow: "Mehr als nur Leads finden",
     title: "Was sonst noch mit drin steckt",
@@ -690,11 +669,6 @@ const de = {
     { id: "encryption", title: "Verschlüsselte API-Keys", body: "Eure Zugangsdaten werden verschlüsselt gespeichert, nie im Klartext." },
     { id: "byok", title: "BYOK-Kostenkontrolle", body: "Volle Transparenz über eure tatsächlichen API-Kosten, live im Dashboard." },
   ],
-  proofStat: {
-    label: "Kein Testimonial, echte Zahl aus dem eigenen Account",
-    body: "≈ 33 Stunden manuelle Recherche gespart, rund 1.500 € Arbeitskosten, bei $2,75 tatsächlichen API-Kosten.",
-    sub: "So sieht das für eine einzelne Suche im eigenen Dashboard aus: live, nicht nachgerechnet.",
-  },
   // Vorher standen hier vier Hochrechnungen (125.000 E-Mails, 16.700 Stunden,
   // "rund 100 Vollzeitstellen", 780 Meetings) samt einem Methodik-Absatz, der
   // selbst einraeumte, dass drei Schaetzungen miteinander multipliziert werden.
@@ -706,13 +680,6 @@ const de = {
     title: "Nicht beim Finden, sondern beim Versenden",
     body: "Neue Unternehmen zu finden ist praktisch unbegrenzt: Karten- und Firmendatenbank geben mehr her, als eine Agentur bearbeiten kann. Der Engpass sitzt am anderen Ende, beim Versand. Wie viele Postfächer ihr habt und wie viele Mails jedes davon am Tag verträgt, entscheidet über euer Volumen, nicht die Zahl der verfügbaren Leads.",
     bottleneckNote: "Deshalb sind Warmup-Status und Tagesvolumen pro Postfach direkt im Tool sichtbar, statt euch beim Versand allein zu lassen.",
-    starterLabel: "Realistisch auf dem Starter-Plan, gerechnet mit 1.000 Leads im Monat:",
-    starterTiles: [
-      { value: "≈ 133 Std.", label: "Recherchezeit gespart pro Monat" },
-      { value: "≈ 6.000 €", label: "Arbeitszeit-Gegenwert dafür" },
-      { value: "≈ 204 €", label: "Gesamtkosten inklusive Versand und Abfragen" },
-    ],
-    starterNote: "Gerechnet mit 8 Minuten Handarbeit pro Kontakt und 45 € Stundensatz. Euer Ergebnis hängt von Nische und Angebot ab.",
   },
   pricing: {
     eyebrow: "Preise",
@@ -896,13 +863,13 @@ const en: typeof de = {
     eyebrow: "For agencies",
     title: "One login. One workspace per client. No new subscription for each.",
     intro:
-      "If you run cold outreach for your own clients, account management is usually the real problem: one tool login per client, one subscription per client, and a hand-built report at the end of the month. That's what the Agency plan is for.",
+      "One login per client, one subscription per client, a hand-built report at month's end. That's what the Agency plan is for.",
     sections: [
       {
         id: "workspaces",
         eyebrow: "Separated",
         title: "Every client in their own space",
-        body: "Leads, campaigns, suppression lists and contacts stay cleanly separated per client. You switch between spaces inside the same login instead of signing out and back in. New clients are set up in seconds, without taking out another subscription.",
+        body: "Leads, campaigns and suppression lists stay separated per client. Switch inside the same login, new clients set up in seconds.",
         bullets: [
           "Unlimited workspaces included in the plan",
           "Name, logo and accent colour per workspace",
@@ -913,7 +880,7 @@ const en: typeof de = {
         id: "report",
         eyebrow: "Presentable",
         title: "The report you can hand over",
-        body: "One link per client shows the numbers in that client's look, without them needing an account. Individual contact details deliberately stay with you. It replaces the spreadsheet that otherwise gets built by hand each month.",
+        body: "One link shows the numbers in that client's look, no account needed. Replaces the spreadsheet that otherwise gets built by hand each month.",
         bullets: [
           "No login needed for the end client",
           "In the branding of that client",
@@ -924,7 +891,7 @@ const en: typeof de = {
         id: "costs",
         eyebrow: "Predictable",
         title: "What a client costs you",
-        body: "The plan is fixed, lookup costs follow volume. For 1,000 qualified leads a month, one client comes to roughly €65 in lookup cost, no matter how many clients you run in parallel. What you charge your clients for it stays your decision.",
+        body: "The plan is fixed, lookup costs follow volume. What you charge your clients for it stays your decision.",
         bullets: [
           "€199 a month, regardless of client count",
           "≈ €65 in lookup cost per 1,000 leads",
@@ -934,7 +901,7 @@ const en: typeof de = {
     ],
     contrastTitle: "What multi-client management usually costs",
     contrastBody:
-      "With pure sending tools, managing several clients is usually a separately priced add-on, often with its own price per client account, and then it only covers sending. Research, enrichment and reporting come on top. Here both are part of the product from the start.",
+      "With pure sending tools, multi-client management is usually a separately priced add-on with its own price per client account, and then it only covers sending. Research and reporting come on top. Here both are included from the start.",
     ctaTitle: "Talk to us briefly about your client setup",
     ctaBody:
       "On the Agency plan we set up workspaces and branding together, which is why a short call comes first rather than a self-service signup. 30 minutes, no slide deck.",
@@ -1232,7 +1199,7 @@ const en: typeof de = {
     h1Pre: "Reach at least ",
     h1Accent: "5,000 real decision-makers",
     h1Post: " a week, fully automatically.",
-    body: "Frostbreaker finds local businesses, identifies the right person behind them and verifies their email address. The phone number from the public listing comes with it: no info@, no office@, just real contacts you can reach your way.",
+    body: "No info@, no guesswork, no four subscriptions. Just decision-makers with a name and a verified address, every week.",
     factBadge: "Agencies get an average of $42 back for every dollar they spend on email.",
     factSource: "Source: Litmus, State of Email 2025",
     screenshotAlt: "Frostbreaker leads table with company logos, contact count and email status",
@@ -1247,8 +1214,8 @@ const en: typeof de = {
   leadSource: {
     eyebrow: "The lead source makes the difference",
     title: "Finds the small, local businesses that barely show up in classic lead databases",
-    body1: "Classic B2B databases are built on LinkedIn profiles and structured company data, which favors businesses with a digital presence: software companies, larger mid-sized firms, agencies themselves. The trades business, the neighborhood restaurant, the dental practice, the small law firm, often exactly the businesses that need marketing the most because they've never invested in it in a structured way, barely show up there.",
-    body2: "Frostbreaker instead searches directly via Google Places/Google Maps, where practically every business with a physical address is listed, regardless of digital maturity. For an agency, that means access to exactly the local clients that otherwise fall through the cracks of typical prospecting tools.",
+    body1: "Classic B2B databases are built on LinkedIn profiles. If a business doesn't keep one, it doesn't exist to them.",
+    body2: "Frostbreaker searches Google Places instead, where practically every business with a physical address is listed.",
   },
   localReachMockup: {
     typicalLabel: "Typical B2B database",
@@ -1303,16 +1270,6 @@ const en: typeof de = {
       { title: "Bounce rates that ruin the domain", body: "Unverified addresses kill deliverability. With several client domains at once, you often only notice once a client's reply rate suddenly collapses." },
       { title: "Generic emails everyone recognizes", body: "\"Hi {{Firstname}}, I saw that {{Company}}...\" with template-based personalization performs worse than none at all, and hurts client retention." },
       { title: "Info@ instead of a real contact", body: "Half of the \"found\" addresses land in a shared inbox nobody reads consistently. Cold email to info@ is barely better than no email at all." },
-    ],
-  },
-  pillars: {
-    eyebrow: "The effect in four sentences",
-    title: "What actually changes for you",
-    items: [
-      { id: "money", title: "Save money", stat: "≈ €285", statLabel: "saved per month vs. a comparable 4-tool stack", body: "You only pay your actual API costs, ≈ €65 for 1,000 leads, plus the plan, no markups. A comparable setup with a separate data source, sending tool and automation usually costs a multiple of that." },
-      { id: "revenue", title: "Grow revenue", stat: "≈ 6", statLabel: "meetings/month, calculated at 1,000 emails sent", body: "Real personalization instead of templates, every email reaches a real person instead of a role address." },
-      { id: "time", title: "Save time", stat: "≈ 133 hrs", statLabel: "manual research saved, per 1,000 leads", body: "No manual searching, no guessing addresses, no juggling CSVs between multiple tools." },
-      { id: "risk", title: "Reduce risk", stat: "3-fold", statLabel: "verification, deliverability check and blocklist built in", body: "Protects sender reputation and domain before it becomes a problem, not after. EU hosting, encrypted credentials." },
     ],
   },
   glossary: {
@@ -1411,20 +1368,6 @@ const en: typeof de = {
       { id: "automation", name: "Zapier", note: "planned" },
     ],
   },
-  usps: {
-    eyebrow: "Why Frostbreaker",
-    title: "Why Frostbreaker instead of four separate tools",
-    items: [
-      { title: "Everything in one tool, separated per client", body: "Search, enrichment, verification, personalization and export run in a single workflow, cleanly separated per client workspace. No more CSV back-and-forth between four subscriptions." },
-      { title: "Individual AI summary per lead", body: "For every business, a fact-based summary is generated automatically, the basis for an icebreaker that genuinely sounds researched. Tone, rules and forbidden words are fully configurable.", fact: "Personal emails get roughly twice the reply rate of generic ones.", sub: "Almost nobody does this by hand because it takes too long. Frostbreaker does it for you, for every single email.", source: "Woodpecker, analysis of over 20M emails, 2026" },
-      { title: "Built-in email verification", body: "Every found address is checked before it goes into a campaign. That protects your sender reputation, without an extra tool.", fact: "Verified email addresses land roughly twice as often as unverified ones.", sub: "Too many invalid addresses and your emails land in spam instead of the inbox.", source: "Industry benchmarks, email deliverability, 2026" },
-      { title: "Bring your own key: full cost transparency", body: "You pay the actual API costs, no hidden markups. See live in the dashboard what a search actually cost." },
-      { title: "Built with GDPR in mind", body: "EU hosting, encrypted credential storage, data minimization considered from the ground up." },
-      { title: "Direct line to the team", body: "No ticket system. You talk directly to the people who built the tool, including real customizations on request." },
-      { title: "Filters by real pain points, not just industry and location", body: "Google rating and whether a website even exists flow directly into the search. The icebreaker automatically factors this in, for example when a business hasn't had a recent review or has no website at all, instead of only knowing company name and industry." },
-      { title: "Ready-made industry playbooks instead of your own trial and error", body: "Pre-built combinations of search criteria, pain-point filters and personalization hints for common niches, such as restaurants without a current website or trades businesses without online booking. One click instead of days of trial and error with search terms." },
-    ],
-  },
   features: {
     eyebrow: "More than just finding leads",
     title: "What else is built in",
@@ -1466,23 +1409,11 @@ const en: typeof de = {
     { id: "encryption", title: "Encrypted API keys", body: "Your credentials are stored encrypted, never in plain text." },
     { id: "byok", title: "BYOK cost control", body: "Full transparency over your actual API costs, live in the dashboard." },
   ],
-  proofStat: {
-    label: "Not a testimonial, a real number from our own account",
-    body: "≈ 33 hours of manual research saved, roughly $1,600 in labor cost, at $2.75 in actual API costs.",
-    sub: "That's what a single search looks like in our own dashboard: live, not calculated after the fact.",
-  },
   scaling: {
     eyebrow: "Where the limit sits",
     title: "Not in finding, but in sending",
     body: "Finding new companies is practically unlimited: map and company database hold more than any agency can work through. The bottleneck sits at the other end, at sending. How many mailboxes you have and how many emails each of them tolerates per day decides your volume, not the number of available leads.",
     bottleneckNote: "That is why warmup status and daily volume per mailbox are visible right in the tool, instead of leaving you alone with the sending part.",
-    starterLabel: "Realistic on the Starter plan, calculated with 1,000 leads per month:",
-    starterTiles: [
-      { value: "≈ 133 hrs", label: "research time saved per month" },
-      { value: "≈ €6,000", label: "labour cost equivalent for that" },
-      { value: "≈ €204", label: "total cost including sending and lookups" },
-    ],
-    starterNote: "Calculated with 8 minutes of manual work per contact and a €45 hourly rate. Your result depends on niche and offer.",
   },
   pricing: {
     eyebrow: "Pricing",

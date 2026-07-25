@@ -23,33 +23,6 @@ export function CrossIcon() {
   );
 }
 
-export const pillarIcons: Record<string, React.ReactNode> = {
-  money: (
-    <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
-      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.6" />
-      <path d="M9.5 9.2c0-1.1 1.1-2 2.5-2s2.5.9 2.5 2-1.1 2-2.5 2-2.5.9-2.5 2 1.1 2 2.5 2 2.5-.9 2.5-2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M12 6v1.4M12 16.6V18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-  ),
-  revenue: (
-    <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
-      <path d="M4 20V10m6 10V4m6 16v-7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  ),
-  time: (
-    <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
-      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.6" />
-      <path d="M12 7v5l3.5 2" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  ),
-  risk: (
-    <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
-      <path d="M12 2 3 6v6c0 5 3.8 8.7 9 10 5.2-1.3 9-5 9-10V6l-9-4Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
-      <path d="m8.5 12 2.3 2.3L16 9.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  ),
-};
-
 export const trustIcons: Record<string, React.ReactNode> = {
   euHosting: (
     <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">

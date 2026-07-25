@@ -1,12 +1,12 @@
 "use client";
 import Image from "next/image";
 import { Logo, CTAButton, CTAGroup, NavDropdown, SectionHeading, FactBox, StatTile, GlossaryText, BOOKING_URL } from "./_ui";
-import { AgencyMockup, PostSendMockup, LocalReachMockup, QualifiedLeadMockup, SuppressionMockup, DeliverabilityMockup, CampaignMockup } from "./_mockups";
-import { DashboardMockup, UnifiedSearchMockup, LeadsTableMockup, LeadDetailMockup, MailboxesMockup, VerificationReportMockup } from "./_app-mockups";
+import { AgencyMockup, PostSendMockup, LocalReachMockup, QualifiedLeadAnimation, SuppressionMockup, DeliverabilityMockup, CampaignMockup } from "./_mockups";
+import { DashboardMockup, UnifiedSearchMockup, LeadsTableMockup, MailboxesMockup, VerificationReportMockup } from "./_app-mockups";
 import { LeadCardStack } from "./_illustration";
 import { SavingsCalculator } from "./_calculator";
 import { Reveal } from "./reveal";
-import { pillarIcons, trustIcons, postSendIcons, agencyIcons, workflowIcons, featureIcons, integrationIcons, CheckIcon, CrossIcon } from "./_icons";
+import { trustIcons, postSendIcons, agencyIcons, workflowIcons, featureIcons, integrationIcons, CheckIcon, CrossIcon } from "./_icons";
 import { useT, LanguageToggle } from "./language-provider";
 
 export default function Home() {
@@ -216,10 +216,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Sparpotenzial-Rechner: wichtigster Conversion-Baustein, bewusst
-          direkt nach dem Hero, nicht erst am Seitenende */}
-      <SavingsCalculator />
-
       {/* Warum die Lead-Quelle den Unterschied macht */}
       <section className="border-y border-edge/60 bg-panel2">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
@@ -236,7 +232,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Qualifizierte Leads: Kernclaim, echte Ansprechpartner statt info@ */}
+      {/* Qualifizierte Leads: Kernclaim, echte Ansprechpartner statt info@.
+          Statt zweier gestapelter Standbilder laeuft der Filtervorgang jetzt
+          als Animation ab -- das ist die Aussage selbst und spart eine ganze
+          Karte an Seitenhoehe. */}
       <section className="border-y border-edge/60 bg-panel2">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <SectionHeading eyebrow={t.qualifiedLeads.eyebrow} title={t.qualifiedLeads.title} />
@@ -245,11 +244,8 @@ export default function Home() {
               <p className="text-sm leading-relaxed text-soft sm:text-base">{t.qualifiedLeads.body1}</p>
               <p className="mt-4 text-sm font-medium leading-relaxed text-ink sm:text-base">{t.qualifiedLeads.body2}</p>
             </div>
-            <div className="space-y-5 lg:col-span-3">
-              <QualifiedLeadMockup />
-              {/* Der aufgeklappte Lead zeigt, was am Ende wirklich in der
-                  Liste steht: Person, geprüfte Mail, Nummer aus dem Eintrag. */}
-              <LeadDetailMockup />
+            <div className="lg:col-span-3">
+              <QualifiedLeadAnimation />
             </div>
           </div>
         </div>
@@ -274,6 +270,12 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Sparpotenzial-Rechner steht bewusst hier und nicht mehr direkt nach
+          dem Hero: wer rechnen soll, muss vorher wissen, was er ausrechnet.
+          Kostenbeweis, beide Suchwege, Lead-Qualitaet und Verifizierung sind
+          zu diesem Punkt gelesen. */}
+      <SavingsCalculator />
+
       {/* Problem */}
       <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <SectionHeading title={t.painPoints.title} />
@@ -290,31 +292,6 @@ export default function Home() {
                   {p.title}
                 </h3>
                 <p className="mt-2.5 pl-[1.125rem] text-sm leading-relaxed text-soft">{p.body}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* Vier Saeulen */}
-      <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <SectionHeading eyebrow={t.pillars.eyebrow} title={t.pillars.title} />
-        {/* Stat-fuehrende Leiste statt vier weiterer Karten: die Zahl ist hier
-            das Argument, nicht die Box drumherum. Vertikale Hairlines trennen,
-            kein Kartenrahmen. */}
-        <div className="grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
-          {t.pillars.items.map((p, i) => (
-            <Reveal key={p.id} delay={i * 60}>
-              <div className="h-full lg:border-l lg:border-edge2/70 lg:pl-7">
-                <div className="flex items-center gap-2.5 text-sky-600">
-                  <span className="[&>svg]:h-[18px] [&>svg]:w-[18px]">{pillarIcons[p.id]}</span>
-                  <h3 className="text-[13px] font-medium uppercase tracking-[0.1em] text-faint">{p.title}</h3>
-                </div>
-                <p className="font-display mt-5 text-[2.5rem] font-semibold leading-none tracking-[-0.03em] text-ink">
-                  {p.stat}
-                </p>
-                <p className="mt-2 text-xs leading-relaxed text-mute">{p.statLabel}</p>
-                <p className="mt-4 border-t border-edge/70 pt-4 text-sm leading-relaxed text-soft">{p.body}</p>
               </div>
             </Reveal>
           ))}
@@ -530,29 +507,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* USPs */}
-      <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <SectionHeading eyebrow={t.usps.eyebrow} title={t.usps.title} />
-        {/* CSS-Spalten statt Raster: im Grid bekommen alle Zellen einer Zeile
-            die Hoehe der hoechsten -- Eintraege mit Fakten-Box sind gut doppelt
-            so hoch wie die ohne, wodurch bis zu 189px Leerraum in den kuerzeren
-            Nachbarn stehenblieb. Als Spalten fliessen die Eintraege nach ihrer
-            echten Hoehe, break-inside haelt sie zusammen. */}
-        <div className="sm:columns-2 sm:gap-x-14">
-          {t.usps.items.map((u, i) => (
-            <Reveal key={u.title} delay={i * 50} className="break-inside-avoid">
-              <div className="border-t border-edge2/70 py-7">
-                <h3 className="font-display text-lg font-semibold leading-snug tracking-[-0.01em] text-ink">
-                  {u.title}
-                </h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-soft">{u.body}</p>
-                {u.fact && <FactBox fact={u.fact} sub={u.sub} source={u.source!} />}
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
       {/* Weitere Features: Sperrliste, Zustellbarkeit, Kampagnen */}
       <section className="border-y border-edge/60 bg-panel2">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
@@ -576,38 +530,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Proof stat (real) */}
-      <section className="border-y border-edge/60 bg-ink">
-        <div className="mx-auto max-w-4xl px-4 py-16 text-center sm:px-6">
-          <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-mute">{t.proofStat.label}</p>
-          <p className="font-display mt-5 text-[1.75rem] font-semibold leading-[1.25] tracking-[-0.02em] text-surface text-balance sm:text-4xl">
-            {t.proofStat.body}
-          </p>
-          <p className="mt-5 text-sm text-mute">{t.proofStat.sub}</p>
-        </div>
-      </section>
-
-      {/* Wo die Grenze liegt. Vorher standen hier vier Hochrechnungen, die
-          neben den nachgerechneten Zahlen weiter oben beliebig wirkten. */}
+      {/* Wo die Grenze liegt: die einzige Aussage dieser Sektion, die nicht
+          schon weiter oben steht. Die Kacheln daneben wiederholten die
+          Hero-Zahlen und den Rechner und sind deshalb raus. */}
       <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <SectionHeading eyebrow={t.scaling.eyebrow} title={t.scaling.title} />
-        <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
-          <div>
-            <p className="text-base leading-relaxed text-soft">{t.scaling.body}</p>
-            <p className="mt-4 text-sm leading-relaxed text-mute">{t.scaling.bottleneckNote}</p>
-          </div>
-          <div>
-            <p className="text-sm font-medium text-soft">{t.scaling.starterLabel}</p>
-            <div className="mt-4 grid gap-x-8 sm:grid-cols-3">
-              {t.scaling.starterTiles.map((tile) => (
-                <div key={tile.label} className="border-t border-edge2/70 py-4">
-                  <p className="font-display text-2xl font-semibold tracking-[-0.02em] text-ink">{tile.value}</p>
-                  <p className="mt-1 text-xs leading-relaxed text-soft">{tile.label}</p>
-                </div>
-              ))}
-            </div>
-            <p className="mt-3 text-xs leading-relaxed text-mute">{t.scaling.starterNote}</p>
-          </div>
+        <div className="max-w-3xl">
+          <p className="text-base leading-relaxed text-soft">{t.scaling.body}</p>
+          <p className="mt-4 text-sm leading-relaxed text-mute">{t.scaling.bottleneckNote}</p>
         </div>
       </section>
 

@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useRef, useState } from "react";
 import { StatTile } from "./_ui";
 import { useT } from "./language-provider";
 
@@ -136,51 +137,88 @@ export function LocalReachMockup() {
 }
 
 /**
- * Illustrierter Vorher/Nachher-Vergleich fuer den Qualifizierte-Leads-Filter:
- * generische Adresse (durchgestrichen, wie nicht-gelistete Firmen in
- * LocalReachMockup) vs. echte Person mit Name, Rolle und direktem Kontakt.
- * Gleiches visuelles Muster wie LocalReachMockup, bewusst wiederverwendet
- * statt eines neuen Layouts, damit die Seite konsistent bleibt.
+ * Animierte Fassung der Filter-Aussage: die generischen Rollen-Adressen werden
+ * nacheinander durchgestrichen, danach klappt der echte Ansprechpartner auf.
+ *
+ * Ersetzt zwei gestapelte Standbilder: der Vorgang selbst ist die Aussage,
+ * dafuer braucht es keine zweite Karte und keine zusaetzliche Seitenhoehe.
+ * Laeuft erst los, wenn die Sektion im Viewport steht.
  */
-export function QualifiedLeadMockup() {
+export function QualifiedLeadAnimation() {
   const { t } = useT();
   const m = t.qualifiedMockup;
   const lead = m.rows[0];
-  const rejected = m.rows;
+  const ref = useRef<HTMLDivElement>(null);
+  const [step, setStep] = useState(0);
 
-  // Bewusst eine andere Komposition als LocalReachMockup (dort: zwei
-  // parallele Listen). Hier: ein "Pulk" verworfener generischer Adressen
-  // links, der sich zu EINER grossen, qualifizierten Lead-Karte rechts
-  // verdichtet -- illustriert den Filter-Vorgang selbst (viele Kandidaten
-  // rein, ein echter Ansprechpartner raus), nicht nur ein Vorher/Nachher.
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    // Bei reduzierter Bewegung direkt der Endzustand: die Aussage steht dann
+    // als Standbild da, statt dass sie jemand verpasst.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setStep(m.rows.length + 1);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
+        let i = 0;
+        const timer = setInterval(() => {
+          i += 1;
+          setStep(i);
+          if (i > m.rows.length) clearInterval(timer);
+        }, 650);
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [m.rows.length]);
+
+  const revealed = step > m.rows.length;
+
   return (
-    <div className="rounded-2xl border border-edge/60 bg-panel p-6 shadow-sm sm:p-8">
-      <div className="grid items-center gap-6 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1.2fr)]">
-        <div className="relative mx-auto h-32 w-full max-w-[220px] sm:h-40">
-          {rejected.map((r, i) => (
-            <div
+    <div ref={ref} className="rounded-2xl border border-edge/60 bg-panel p-6 shadow-sm sm:p-8">
+      <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-faint">{m.typicalLabel}</p>
+      <ul className="mt-3 space-y-2">
+        {m.rows.map((r, i) => {
+          const struck = step > i;
+          return (
+            <li
               key={r.generic}
-              className="absolute inset-x-0 flex items-center gap-2 rounded-lg border border-edge2 bg-panel2 px-3 py-2 opacity-70 shadow-sm"
-              style={{
-                top: `${i * 22}px`,
-                transform: `rotate(${(i - 1) * 4}deg)`,
-                zIndex: rejected.length - i,
-              }}
+              className={
+                "flex items-center gap-2.5 rounded-lg border border-edge2 bg-panel2 px-3 py-2 transition-all duration-500 " +
+                (struck ? "opacity-45" : "opacity-100")
+              }
             >
-              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-panel text-mute">
-                <svg viewBox="0 0 24 24" fill="none" className="h-3 w-3"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></svg>
+              <span
+                className={
+                  "flex h-5 w-5 shrink-0 items-center justify-center rounded transition-colors duration-500 " +
+                  (struck ? "bg-coral-soft text-coral" : "bg-panel text-mute")
+                }
+              >
+                <svg viewBox="0 0 24 24" fill="none" className="h-3 w-3">
+                  <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                </svg>
               </span>
-              <p className="truncate text-xs text-faint line-through">{r.generic}</p>
-            </div>
-          ))}
-        </div>
+              <p className={"truncate text-xs transition-all duration-500 " + (struck ? "text-faint line-through" : "text-soft")}>
+                {r.generic}
+              </p>
+            </li>
+          );
+        })}
+      </ul>
+      <p className="mt-2 text-[11px] text-mute">{m.genericNote}</p>
 
-        <div className="mx-auto text-mute sm:mx-0">
-          <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6 rotate-90 sm:rotate-0">
-            <path d="M4 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </div>
-
+      <div
+        className={
+          "mt-5 overflow-hidden transition-all duration-700 ease-out " +
+          (revealed ? "max-h-72 opacity-100" : "max-h-0 opacity-0")
+        }
+      >
+        <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.12em] text-emerald-700">{m.frostbreakerLabel}</p>
         <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/5 p-4">
           <div className="flex items-center gap-3">
             <div className="font-display flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 text-sm font-semibold text-white">
@@ -195,7 +233,6 @@ export function QualifiedLeadMockup() {
             </svg>
           </div>
           <div className="mt-3 rounded-lg bg-panel px-3 py-2 text-xs text-soft">{lead.email}</div>
-          <p className="mt-2 text-[11px] text-mute">{m.frostbreakerLabel}</p>
         </div>
       </div>
     </div>
