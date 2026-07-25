@@ -28,7 +28,6 @@ export default function AgenturenPage() {
     { href: "/funktionen", label: t.featuresPage.eyebrow },
     { href: "/fuer-agenturen", label: t.nav.agenturen },
     { href: "/preise", label: t.nav.preise },
-    { href: "/#faq", label: t.nav.faq },
     { href: "/kontakt", label: t.nav.kontakt },
   ];
 

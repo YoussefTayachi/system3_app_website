@@ -1,12 +1,12 @@
 "use client";
 import Image from "next/image";
-import { Logo, CTAButton, CTAGroup, NavDropdown, SectionHeading, FactBox, StatTile, BOOKING_URL } from "./_ui";
+import { Logo, CTAButton, CTAGroup, NavDropdown, SectionHeading, FactBox, StatTile, GlossaryText, BOOKING_URL } from "./_ui";
 import { AgencyMockup, PostSendMockup, LocalReachMockup, QualifiedLeadMockup, SuppressionMockup, DeliverabilityMockup, CampaignMockup } from "./_mockups";
-import { DashboardMockup, SearchFormMockup, CorporateSearchMockup, LeadsTableMockup, LeadDetailMockup, MailboxesMockup, VerificationReportMockup } from "./_app-mockups";
+import { DashboardMockup, UnifiedSearchMockup, LeadsTableMockup, LeadDetailMockup, MailboxesMockup, VerificationReportMockup } from "./_app-mockups";
 import { LeadCardStack } from "./_illustration";
 import { SavingsCalculator } from "./_calculator";
 import { Reveal } from "./reveal";
-import { pillarIcons, trustIcons, postSendIcons, agencyIcons, workflowIcons, featureIcons, CheckIcon, CrossIcon } from "./_icons";
+import { pillarIcons, trustIcons, postSendIcons, agencyIcons, workflowIcons, featureIcons, integrationIcons, CheckIcon, CrossIcon } from "./_icons";
 import { useT, LanguageToggle } from "./language-provider";
 
 export default function Home() {
@@ -22,7 +22,6 @@ export default function Home() {
     { href: "/funktionen", label: t.featuresPage.eyebrow, secondary: true },
     { href: "/fuer-agenturen", label: t.nav.agenturen, secondary: true },
     { href: "/preise", label: t.nav.preise, secondary: false },
-    { href: "#faq", label: t.nav.faq, secondary: true },
     { href: "/kontakt", label: t.nav.kontakt, secondary: false },
   ];
 
@@ -122,35 +121,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Trust bar */}
-      <section className="border-b border-edge/60 bg-panel2 py-8">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <p className="mb-6 text-center text-[11px] font-medium uppercase tracking-[0.14em] text-mute">
-            {t.trustBar.heading}
-          </p>
-          {/* Zwei identische Durchlaeufe nebeneinander ergeben den nahtlosen
-              Loop; der zweite ist rein dekorativ und fuer Screenreader aus. */}
-          <div className="marquee-viewport marquee-mask overflow-hidden">
-            <div className="marquee-track">
-              {[0, 1].map((copy) => (
-                <ul
-                  key={copy}
-                  aria-hidden={copy === 1}
-                  className="flex shrink-0 items-center gap-x-14 pr-14"
-                >
-                  {t.trustBar.partners.map((p) => (
-                    <li key={p} className="whitespace-nowrap text-sm font-medium text-faint">
-                      {p}
-                    </li>
-                  ))}
-                </ul>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Kostenbeweis direkt nach der Partnerleiste: "BYOK, volle
+      {/* Kostenbeweis direkt nach dem Hero: "BYOK, volle
           Kostentransparenz" war bisher eine Eigenschaft ohne Zahl. Die Zahl
           ist das Argument, deshalb steht sie vor dem Rechner. */}
       <section id="kosten" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
@@ -207,38 +178,41 @@ export default function Home() {
           <SectionHeading eyebrow={t.twoWays.eyebrow} title={t.twoWays.title} />
           <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.twoWays.body}</p>
 
-          {/* Beide Wege bekommen dieselbe Flaeche, dieselbe Rahmung und je ein
-              eigenes Mockup. Vorher war "lokal" hervorgehoben und "corporate"
-              die blasse Alternative -- seit die Firmensuche ohne Abfragekosten
-              pro Firma auskommt, ist sie das nicht mehr. */}
-          <div className="grid gap-8 lg:grid-cols-2">
+          {/* Beide Wege bekommen dieselbe Flaeche und dieselbe Rahmung. Vorher
+              war "lokal" hervorgehoben und "corporate" die blasse Alternative
+              -- seit die Firmensuche ohne Abfragekosten pro Firma auskommt, ist
+              sie das nicht mehr.
+
+              Statt zweier Standbilder steht darunter eine einzige, bedienbare
+              Maske: das ist genau die Aussage der Sektion (ein Bildschirm, zwei
+              Quellen) und spart die Haelfte der Hoehe. */}
+          <div className="grid items-stretch gap-8 lg:grid-cols-2">
             {t.twoWays.modes.map((mode, i) => (
-              <Reveal key={mode.id} delay={i * 80}>
-                <div className="flex h-full flex-col gap-6">
-                  <div className="rounded-2xl border border-edge/60 bg-panel p-6">
-                    <span className="inline-flex rounded-full bg-ink px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-surface">
-                      {mode.label}
-                    </span>
-                    <h3 className="font-display mt-3 text-xl font-semibold tracking-[-0.015em] text-ink">
-                      {mode.title}
-                    </h3>
-                    <p className="mt-2.5 text-sm leading-relaxed text-soft">{mode.body}</p>
-                    <ul className="mt-5 space-y-2 border-t border-edge/70 pt-5">
-                      {mode.points.map((p) => (
-                        <li key={p} className="flex items-start gap-2.5 text-sm text-soft">
-                          <CheckIcon />
-                          {p}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="mt-auto">
-                    {i === 0 ? <SearchFormMockup /> : <CorporateSearchMockup />}
-                  </div>
+              <Reveal key={mode.id} delay={i * 80} className="h-full">
+                <div className="flex h-full flex-col rounded-2xl border border-edge/60 bg-panel p-6">
+                  <span className="inline-flex self-start rounded-full bg-ink px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-surface">
+                    {mode.label}
+                  </span>
+                  <h3 className="font-display mt-3 text-xl font-semibold tracking-[-0.015em] text-ink">
+                    {mode.title}
+                  </h3>
+                  <p className="mt-2.5 text-sm leading-relaxed text-soft">{mode.body}</p>
+                  <ul className="mt-5 space-y-2 border-t border-edge/70 pt-5">
+                    {mode.points.map((p) => (
+                      <li key={p} className="flex items-start gap-2.5 text-sm text-soft">
+                        <CheckIcon />
+                        {p}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </Reveal>
             ))}
           </div>
+
+          <Reveal className="mt-8">
+            <UnifiedSearchMockup />
+          </Reveal>
         </div>
       </section>
 
@@ -357,21 +331,32 @@ export default function Home() {
             {/* Verbindende Linie hinter den Nummern-Badges, nur Desktop --
                 unterstreicht den Fluss zwischen den Schritten staerker als
                 die vorherigen einzelnen Pfeile zwischen gleichfarbigen Karten. */}
-            <div className="pointer-events-none absolute left-[12.5%] right-[12.5%] top-[34px] hidden h-px bg-gradient-to-r from-sky-300 via-amber-300 to-coral lg:block" />
+            <div className="pointer-events-none absolute left-[12.5%] right-[12.5%] top-[48px] hidden h-px bg-gradient-to-r from-sky-300 via-amber-300 to-coral lg:block" />
             {t.workflow.steps.map((s, i) => {
               const accentBg = ["bg-sky-500/10", "bg-emerald-500/10", "bg-amber-500/10", "bg-coral-soft"][i];
               const accentText = ["text-sky-600", "text-emerald-600", "text-amber-600", "text-coral"][i];
               return (
-                <Reveal key={s.n} delay={i * 80}>
-                  <div className="relative rounded-2xl border border-edge/60 bg-panel p-5 hover-lift">
-                    <div className={`font-display relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl text-xl font-semibold ${accentBg} ${accentText}`}>
-                      {s.n}
+                <Reveal key={s.n} delay={i * 80} className="h-full">
+                  <div className="relative flex h-full flex-col rounded-2xl border border-edge/60 bg-panel p-5 hover-lift">
+                    {/* Icon im Badge statt der Nummer, Titel direkt daneben:
+                        spart eine Zeile pro Karte und macht den Schritt auf
+                        einen Blick erkennbar. Die Nummer bleibt als kleiner
+                        Kicker ueber dem Titel, damit die Reihenfolge lesbar
+                        bleibt. */}
+                    <div className="flex items-center gap-3.5">
+                      <div className={`relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl [&_svg]:h-6 [&_svg]:w-6 ${accentBg} ${accentText}`}>
+                        {workflowIcons[s.n]}
+                      </div>
+                      <div className="min-w-0">
+                        <p className={`font-display text-[11px] font-semibold uppercase tracking-[0.12em] ${accentText}`}>
+                          {t.workflow.stepLabel} {s.n}
+                        </p>
+                        <h3 className="mt-0.5 text-sm font-semibold leading-snug text-ink">{s.title}</h3>
+                      </div>
                     </div>
-                    <div className={`mt-4 flex items-center gap-2 ${accentText}`}>
-                      {workflowIcons[s.n]}
-                      <h3 className="text-sm font-semibold text-ink">{s.title}</h3>
-                    </div>
-                    <p className="mt-1.5 text-sm leading-relaxed text-soft">{s.body}</p>
+                    <p className="mt-4 text-sm leading-relaxed text-soft">
+                      <GlossaryText text={s.body} />
+                    </p>
                   </div>
                 </Reveal>
               );
@@ -527,9 +512,14 @@ export default function Home() {
 
                   <ul className="grid grid-cols-2 gap-x-8 gap-y-0 lg:col-span-2 sm:grid-cols-3">
                     {rest.map((i) => (
-                      <li key={i.name} className="flex flex-col justify-center border-t border-edge2/70 py-4">
-                        <p className="text-sm font-semibold text-ink">{i.name}</p>
-                        <p className="mt-0.5 text-xs text-mute">{i.note}</p>
+                      <li key={i.name} className="flex items-center gap-3 border-t border-edge2/70 py-4">
+                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-chip text-soft">
+                          {integrationIcons[i.id]}
+                        </span>
+                        <span className="min-w-0">
+                          <p className="text-sm font-semibold text-ink">{i.name}</p>
+                          <p className="mt-0.5 text-xs text-mute">{i.note}</p>
+                        </span>
                       </li>
                     ))}
                   </ul>

@@ -17,9 +17,9 @@ import { LanguageProvider } from "./language-provider";
 // gesamten Build. @fontsource ist dadurch robuster, ohne Nachteile bei
 // Performance (Variable Fonts, wird trotzdem vollstaendig subsettet/gecacht).
 
-const title = "Frostbreaker: Leads finden, anreichern und persönlich kontaktieren, ohne vier Tools zu bezahlen";
+const title = "Frostbreaker: find, enrich and personally contact leads without paying for four tools";
 const description =
-  "Frostbreaker findet B2B-Leads, verifiziert E-Mail-Adressen, liefert die Telefonnummer aus dem öffentlichen Eintrag mit und schreibt individuelle Icebreaker automatisch, alles in einem Tool, mit eigenen API-Keys statt teurer Pauschale.";
+  "Frostbreaker finds B2B leads, verifies email addresses, brings the phone number from the public listing along and writes individual icebreakers automatically. All in one tool, with your own API keys instead of an expensive flat rate.";
 
 // metadataBase macht aus dem generierten OG-Bild (app/opengraph-image.tsx)
 // eine absolute URL -- ohne das steht beim Teilen ein localhost-Link im
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     title,
     description,
     type: "website",
-    locale: "de_DE",
+    locale: "en_US",
     siteName: "Frostbreaker",
     url: "/",
   },
@@ -53,7 +53,7 @@ const orgJsonLd = {
   "@type": "Organization",
   name: "Frostbreaker",
   description,
-  areaServed: "DE-AT-CH",
+  areaServed: ["US", "GB", "CA", "AU", "DE", "AT", "CH"],
   founder: { "@type": "Person", name: "Youssef Tayachi" },
 };
 

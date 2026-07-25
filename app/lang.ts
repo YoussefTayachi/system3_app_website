@@ -10,5 +10,5 @@ export const COOKIE_NAME = "lang";
 export async function getLangServer(): Promise<Lang> {
   const store = await cookies();
   const v = store.get(COOKIE_NAME)?.value;
-  return v === "en" ? "en" : "de";
+  return v === "de" ? "de" : "en";
 }

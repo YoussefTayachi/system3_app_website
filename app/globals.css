@@ -160,30 +160,8 @@ body {
     radial-gradient(80% 70% at 92% 8%, rgba(234, 90, 62, 0.055), transparent 62%);
 }
 
-/* Endlos laufende Partnerleiste. Die Liste wird im Markup zweimal gerendert,
-   deshalb genuegt eine Verschiebung um -50% fuer einen nahtlosen Loop. */
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-.marquee-track {
-  display: flex;
-  width: max-content;
-  animation: marquee 32s linear infinite;
-}
-.marquee-mask {
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
-  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
-}
-.marquee-viewport:hover .marquee-track { animation-play-state: paused; }
-
 @media (prefers-reduced-motion: reduce) {
   .fade-up, .animate-float, .animate-float-slow { animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
   .hover-lift:hover { transform: none; }
-  /* Laufband anhalten und zentrieren statt nur einfrieren, sonst haengt die
-     Liste je nach Zeitpunkt halb aus dem Viewport. */
-  .marquee-track { animation: none; width: 100%; justify-content: center; flex-wrap: wrap; }
-  .marquee-track > *:nth-child(2) { display: none; }
-  .marquee-mask { -webkit-mask-image: none; mask-image: none; }
 }

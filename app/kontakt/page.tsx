@@ -14,7 +14,6 @@ export default function KontaktPage() {
     { href: "/#agenturen", label: t.nav.agenturen },
     { href: "/#preise", label: t.nav.preise },
     { href: "/#vergleich", label: t.nav.vergleich },
-    { href: "/#faq", label: t.nav.faq },
   ];
   const produktItems = t.nav.produktItems.map((item) => ({ ...item, href: "/" + item.href }));
   return (

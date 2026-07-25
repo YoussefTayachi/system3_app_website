@@ -29,10 +29,6 @@ const de = {
   // gleich dorthin geht. Jetzt Eigenschaften statt Anbieter -- die konkreten
   // Dienste stehen im FAQ, wo sie hingehoeren: wer BYOK nutzt, legt dort
   // ohnehin eigene Zugaenge an und muss es vor dem Kauf wissen.
-  trustBar: {
-    heading: "Ohne Vertragsbindung, ohne versteckte Kosten",
-    partners: ["EU-Hosting", "Verschlüsselte Zugangsdaten", "Keine Datenweitergabe", "Monatlich kündbar", "14 Tage kostenlos"],
-  },
   // Zahlen stammen aus einer echten Suche im eigenen Account (Dashboard-Screenshot
   // im Hero). Bewusst keine konkreten Konkurrenzpreise: die aendern sich staendig
   // und unbelegte Wettbewerbsangaben sind in DE/AT abmahnfaehig.
@@ -351,7 +347,7 @@ const de = {
       keywordsLabel: "Stichwörter",
       keywordsValue: "Performance, E-Commerce",
       noteLabel: "Abfragekosten pro Firma",
-      noteValue: "entfallen in diesem Modus",
+      noteValue: "Entfallen in diesem Modus",
       cta: "Suche starten",
     },
     leads: {
@@ -540,8 +536,17 @@ const de = {
       { id: "risk", title: "Risiko sparen", stat: "3-fach", statLabel: "Verifizierung, Zustellbarkeits-Check und Blockliste eingebaut", body: "Schützt Sender-Reputation und Domain, bevor es zum Problem wird, nicht danach. EU-Hosting, verschlüsselte Zugangsdaten." },
     ],
   },
+  // Fachbegriffe, die im Fliesstext vorkommen und einer Erklaerung beim
+  // Hovern bekommen (siehe GlossaryText in _ui.tsx). Bewusst kurz gehalten:
+  // ein Satz, den auch jemand ohne E-Mail-Technik-Hintergrund versteht.
+  glossary: {
+    SPF: "SPF: ein Eintrag in eurer Domain, der festlegt, welche Server in eurem Namen E-Mails verschicken dürfen.",
+    DKIM: "DKIM: eine digitale Signatur auf jeder E-Mail, an der der Empfänger erkennt, dass sie unterwegs nicht verändert wurde.",
+    DMARC: "DMARC: die Regel, was ein Empfänger mit E-Mails tun soll, die SPF oder DKIM nicht bestehen.",
+  },
   workflow: {
     title: "Ein Workflow. Vier Schritte. Vollautomatisch, auf Knopfdruck.",
+    stepLabel: "Schritt",
     subtitle: "Einmal Nische und Kriterien festlegen, den Rest übernimmt Frostbreaker: kein manueller Zwischenschritt, kein Warten auf einen Praktikanten, keine Excel-Liste von Hand.",
     steps: [
       { n: "1", title: "Suchen", body: "Nische und Ort eingeben, Frostbreaker findet automatisch passende Unternehmen, für jeden Kunden im eigenen Workspace." },
@@ -620,14 +625,14 @@ const de = {
     eyebrow: "Passt in euren Stack",
     title: "Exportiert direkt in die Tools, die ihr schon nutzt",
     items: [
-      { name: "Instantly", note: "Vollständig natives Kampagnen-Management, kein CSV-Export nötig" },
-      { name: "Smartlead", note: "CSV-Import" },
-      { name: "Lemlist", note: "CSV-Import" },
-      { name: "HubSpot", note: "CSV-Import" },
-      { name: "Pipedrive", note: "CSV-Import" },
-      { name: "Salesforce", note: "CSV-Import" },
-      { name: "Excel / Sheets", note: "Excel-CSV" },
-      { name: "Zapier", note: "geplant" },
+      { id: "instantly", name: "Instantly", note: "Vollständig natives Kampagnen-Management, kein CSV-Export nötig" },
+      { id: "sending", name: "Smartlead", note: "CSV-Import" },
+      { id: "sending", name: "Lemlist", note: "CSV-Import" },
+      { id: "crm", name: "HubSpot", note: "CSV-Import" },
+      { id: "crm", name: "Pipedrive", note: "CSV-Import" },
+      { id: "crm", name: "Salesforce", note: "CSV-Import" },
+      { id: "sheet", name: "Excel / Sheets", note: "Excel-CSV" },
+      { id: "automation", name: "Zapier", note: "geplant" },
     ],
   },
   usps: {
@@ -850,10 +855,6 @@ const en: typeof de = {
     vergleich: "Comparison",
     faq: "FAQ",
     kontakt: "Contact",
-  },
-  trustBar: {
-    heading: "No contract lock-in, no hidden cost",
-    partners: ["EU hosting", "Encrypted credentials", "No data sharing", "Cancel monthly", "14 days free"],
   },
   costProof: {
     eyebrow: "What a lead actually costs",
@@ -1140,7 +1141,7 @@ const en: typeof de = {
       keywordsLabel: "Keywords",
       keywordsValue: "Performance, e-commerce",
       noteLabel: "Per-company lookup cost",
-      noteValue: "none in this mode",
+      noteValue: "None in this mode",
       cta: "Start search",
     },
     leads: {
@@ -1314,8 +1315,14 @@ const en: typeof de = {
       { id: "risk", title: "Reduce risk", stat: "3-fold", statLabel: "verification, deliverability check and blocklist built in", body: "Protects sender reputation and domain before it becomes a problem, not after. EU hosting, encrypted credentials." },
     ],
   },
+  glossary: {
+    SPF: "SPF: a record on your domain that defines which servers are allowed to send email in your name.",
+    DKIM: "DKIM: a digital signature on every email that lets the recipient verify it wasn't altered in transit.",
+    DMARC: "DMARC: the rule telling recipients what to do with email that fails SPF or DKIM.",
+  },
   workflow: {
     title: "One workflow. Four steps. Fully automatic, at the push of a button.",
+    stepLabel: "Step",
     subtitle: "Set the niche and criteria once, Frostbreaker handles the rest: no manual step, no waiting on an intern, no hand-built spreadsheet.",
     steps: [
       { n: "1", title: "Search", body: "Enter a niche and location, Frostbreaker automatically finds matching businesses, for every client in their own workspace." },
@@ -1394,14 +1401,14 @@ const en: typeof de = {
     eyebrow: "Fits into your stack",
     title: "Exports directly into the tools you already use",
     items: [
-      { name: "Instantly", note: "Fully native campaign management, no CSV export needed" },
-      { name: "Smartlead", note: "CSV import" },
-      { name: "Lemlist", note: "CSV import" },
-      { name: "HubSpot", note: "CSV import" },
-      { name: "Pipedrive", note: "CSV import" },
-      { name: "Salesforce", note: "CSV import" },
-      { name: "Excel / Sheets", note: "Excel/CSV" },
-      { name: "Zapier", note: "planned" },
+      { id: "instantly", name: "Instantly", note: "Fully native campaign management, no CSV export needed" },
+      { id: "sending", name: "Smartlead", note: "CSV import" },
+      { id: "sending", name: "Lemlist", note: "CSV import" },
+      { id: "crm", name: "HubSpot", note: "CSV import" },
+      { id: "crm", name: "Pipedrive", note: "CSV import" },
+      { id: "crm", name: "Salesforce", note: "CSV import" },
+      { id: "sheet", name: "Excel / Sheets", note: "Excel/CSV" },
+      { id: "automation", name: "Zapier", note: "planned" },
     ],
   },
   usps: {

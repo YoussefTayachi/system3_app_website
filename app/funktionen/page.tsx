@@ -1,6 +1,6 @@
 "use client";
 import { Logo, CTAButton, CTAGroup, NavDropdown, SectionHeading } from "../_ui";
-import { DashboardMockup, SearchFormMockup, LeadsTableMockup, LeadDetailMockup, MailboxesMockup, AiAgentMockup, VerificationReportMockup } from "../_app-mockups";
+import { DashboardMockup, UnifiedSearchMockup, LeadsTableMockup, LeadDetailMockup, MailboxesMockup, AiAgentMockup, VerificationReportMockup } from "../_app-mockups";
 import { SuppressionMockup } from "../_mockups";
 import { Reveal } from "../reveal";
 import { CheckIcon } from "../_icons";
@@ -20,7 +20,7 @@ export default function FunktionenPage() {
   // Pro Gruppe die passende Nachbildung. Bewusst hier zugeordnet und nicht im
   // Dictionary: das Dictionary haelt Text, keine Komponenten.
   const visuals: Record<string, React.ReactNode> = {
-    find: <SearchFormMockup />,
+    find: <UnifiedSearchMockup />,
     // Verifizierung war bisher nur ein Textbullet ohne eigenes Bild -- genau
     // das Muster, das auf der Startseite schon eine eigene Sektion bekam.
     enrich: (
@@ -39,7 +39,6 @@ export default function FunktionenPage() {
     { href: "/funktionen", label: f.eyebrow },
     { href: "/#agenturen", label: t.nav.agenturen },
     { href: "/#preise", label: t.nav.preise },
-    { href: "/#faq", label: t.nav.faq },
     { href: "/kontakt", label: t.nav.kontakt },
   ];
 

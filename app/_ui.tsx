@@ -157,6 +157,36 @@ export function SectionHeading({ eyebrow, title }: { eyebrow?: string; title: st
   );
 }
 
+/**
+ * Rendert Fliesstext und hebt darin enthaltene Fachbegriffe (SPF, DKIM, DMARC)
+ * als abbr mit Erklaerung beim Hovern hervor. Besucher aus dem Zielmarkt sind
+ * ueberwiegend Agentur-/Vertriebsleute, keine E-Mail-Techniker -- die Begriffe
+ * bleiben stehen, weil sie Kompetenz signalisieren, brauchen aber eine
+ * Erklaerung an Ort und Stelle.
+ */
+export function GlossaryText({ text }: { text: string }) {
+  const { t } = useT();
+  const terms = Object.keys(t.glossary);
+  const parts = text.split(new RegExp(`\\b(${terms.join("|")})\\b`, "g"));
+  return (
+    <>
+      {parts.map((part, i) =>
+        terms.includes(part) ? (
+          <abbr
+            key={i}
+            title={t.glossary[part as keyof typeof t.glossary]}
+            className="cursor-help underline decoration-dotted decoration-from-font underline-offset-2"
+          >
+            {part}
+          </abbr>
+        ) : (
+          part
+        )
+      )}
+    </>
+  );
+}
+
 export function FactBox({ fact, sub, source }: { fact: string; sub?: string; source: string }) {
   const { lang } = useT();
   return (

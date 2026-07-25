@@ -128,6 +128,35 @@ export const workflowIcons: Record<string, React.ReactNode> = {
   ),
 };
 
+/** Kategorie-Icons fuer die Integrationsliste. Bewusst keine echten
+ *  Markenlogos: die duerfen nur nach den jeweiligen Brand Guidelines verwendet
+ *  werden und wuerden neben den eigenen Strichzeichnungen ohnehin fremd wirken. */
+export const integrationIcons: Record<string, React.ReactNode> = {
+  sending: (
+    <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
+      <path d="M21 3 10.5 13.5M21 3l-6.8 18-3.7-7.5L3 9.8 21 3Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+    </svg>
+  ),
+  crm: (
+    <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
+      <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="1.6" />
+      <circle cx="9" cy="10.5" r="2" stroke="currentColor" strokeWidth="1.6" />
+      <path d="M5.8 16c.6-1.7 1.8-2.5 3.2-2.5s2.6.8 3.2 2.5M14.5 9.5h4M14.5 13h4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  ),
+  sheet: (
+    <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
+      <rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" strokeWidth="1.6" />
+      <path d="M3 9.5h18M9.5 9.5V20M15 9.5V20" stroke="currentColor" strokeWidth="1.6" />
+    </svg>
+  ),
+  automation: (
+    <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
+      <path d="M13 2 4 13.5h6L11 22l9-11.5h-6L13 2Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+    </svg>
+  ),
+};
+
 export const agencyIcons: Record<string, React.ReactNode> = {
   workspaces: (
     <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
