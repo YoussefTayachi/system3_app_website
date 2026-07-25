@@ -106,11 +106,80 @@ export function SearchFormMockup() {
           ))}
         </div>
 
+        {/* Die Pain-Point-Filter sind der Grund, warum eine Liste zur
+            Zielgruppe wird statt nur eine Ortsliste zu sein. */}
+        <p className="mt-4 text-[10px] font-medium uppercase tracking-[0.1em] text-faint">{m.filterLabel}</p>
+        <div className="mt-1.5 flex flex-wrap gap-1.5">
+          {m.filters.map((f) => (
+            <span
+              key={f}
+              className="inline-flex items-center gap-1.5 rounded-full border border-sky-300/70 bg-sky-50/70 px-2.5 py-1 text-[11px] font-medium text-sky-800"
+            >
+              <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-sky-500" />
+              {f}
+            </span>
+          ))}
+        </div>
+
         <div className="mt-4 flex flex-wrap items-end justify-between gap-3 rounded-xl border border-edge/70 bg-panel2/50 px-4 py-3">
           <div>
             <p className="text-[10px] font-medium uppercase tracking-[0.1em] text-faint">{m.subscriptionLabel}</p>
             <p className="mt-1 text-sm font-semibold text-ink">{m.subscriptionValue}</p>
             <p className="mt-0.5 text-xs text-mute">{m.subscriptionNote}</p>
+          </div>
+          <span className="rounded-full bg-ink px-4 py-2 text-xs font-medium text-surface">{m.cta}</span>
+        </div>
+      </div>
+    </AppFrame>
+  );
+}
+
+/** Gegenstueck fuer die Firmendatenbank: dieselbe Maske, anderer Reiter,
+ *  andere Filter. Zeigt, dass beide Wege dasselbe Werkzeug sind. */
+export function CorporateSearchMockup() {
+  const { t } = useT();
+  const m = t.appMockups.corporateSearch;
+  return (
+    <AppFrame>
+      <div className="p-5 sm:p-6">
+        <p className="font-display text-lg font-semibold tracking-[-0.01em] text-ink">{m.title}</p>
+        <p className="mt-0.5 text-xs text-mute">{m.subtitle}</p>
+
+        <div className="mt-5 inline-flex rounded-lg bg-panel2 p-1">
+          {m.tabs.map((tab, i) => (
+            <span
+              key={tab}
+              className={
+                "rounded-md px-3 py-1.5 text-xs font-medium " +
+                (i === 1 ? "bg-sky-500/15 text-sky-700" : "text-faint")
+              }
+            >
+              {tab}
+            </span>
+          ))}
+        </div>
+
+        <div className="mt-4 grid gap-3 sm:grid-cols-2">
+          {m.fields.map((f) => (
+            <div key={f.label}>
+              <p className="text-[10px] font-medium uppercase tracking-[0.1em] text-faint">{f.label}</p>
+              <div className="mt-1.5 flex items-center justify-between rounded-lg border border-edge2 bg-field px-3 py-2 text-sm text-ink">
+                {f.value}
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden className="h-3.5 w-3.5 shrink-0 text-mute">
+                  <path d="m6 9 6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <p className="mt-4 text-[10px] font-medium uppercase tracking-[0.1em] text-faint">{m.keywordsLabel}</p>
+        <div className="mt-1.5 rounded-lg border border-edge2 bg-field px-3 py-2 text-sm text-ink">{m.keywordsValue}</div>
+
+        <div className="mt-4 flex flex-wrap items-end justify-between gap-3 rounded-xl border border-emerald-200/70 bg-emerald-50/50 px-4 py-3">
+          <div>
+            <p className="text-[10px] font-medium uppercase tracking-[0.1em] text-emerald-700/70">{m.noteLabel}</p>
+            <p className="mt-1 text-sm font-semibold text-emerald-800">{m.noteValue}</p>
           </div>
           <span className="rounded-full bg-ink px-4 py-2 text-xs font-medium text-surface">{m.cta}</span>
         </div>

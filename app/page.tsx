@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { Logo, CTAButton, CTAGroup, NavDropdown, SectionHeading, FactBox, StatTile, BOOKING_URL } from "./_ui";
 import { AgencyMockup, PostSendMockup, LocalReachMockup, QualifiedLeadMockup, SuppressionMockup, DeliverabilityMockup, CampaignMockup } from "./_mockups";
-import { DashboardMockup, SearchFormMockup, LeadsTableMockup, LeadDetailMockup, MailboxesMockup } from "./_app-mockups";
+import { DashboardMockup, SearchFormMockup, CorporateSearchMockup, LeadsTableMockup, LeadDetailMockup, MailboxesMockup } from "./_app-mockups";
 import { LeadCardStack } from "./_illustration";
 import { SavingsCalculator } from "./_calculator";
 import { Reveal } from "./reveal";
@@ -204,43 +204,37 @@ export default function Home() {
           <SectionHeading eyebrow={t.twoWays.eyebrow} title={t.twoWays.title} />
           <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.twoWays.body}</p>
 
-          <div className="grid gap-10 lg:grid-cols-5 lg:items-start">
-            <div className="space-y-5 lg:col-span-2">
-              {t.twoWays.modes.map((mode, i) => (
-                <Reveal key={mode.id} delay={i * 70}>
-                  <div
-                    className={
-                      "rounded-2xl border p-5 " +
-                      (i === 0 ? "border-sky-300/70 bg-sky-50/50" : "border-edge/60 bg-panel")
-                    }
-                  >
-                    <span
-                      className={
-                        "inline-flex rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide " +
-                        (i === 0 ? "bg-sky-600 text-white" : "bg-panel2 text-faint")
-                      }
-                    >
+          {/* Beide Wege bekommen dieselbe Flaeche, dieselbe Rahmung und je ein
+              eigenes Mockup. Vorher war "lokal" hervorgehoben und "corporate"
+              die blasse Alternative -- seit die Firmensuche ohne Abfragekosten
+              pro Firma auskommt, ist sie das nicht mehr. */}
+          <div className="grid gap-8 lg:grid-cols-2">
+            {t.twoWays.modes.map((mode, i) => (
+              <Reveal key={mode.id} delay={i * 80}>
+                <div className="flex h-full flex-col gap-6">
+                  <div className="rounded-2xl border border-edge/60 bg-panel p-6">
+                    <span className="inline-flex rounded-full bg-ink px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-surface">
                       {mode.label}
                     </span>
-                    <h3 className="font-display mt-3 text-lg font-semibold tracking-[-0.01em] text-ink">
+                    <h3 className="font-display mt-3 text-xl font-semibold tracking-[-0.015em] text-ink">
                       {mode.title}
                     </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-soft">{mode.body}</p>
-                    <ul className="mt-4 space-y-1.5">
+                    <p className="mt-2.5 text-sm leading-relaxed text-soft">{mode.body}</p>
+                    <ul className="mt-5 space-y-2 border-t border-edge/70 pt-5">
                       {mode.points.map((p) => (
-                        <li key={p} className="flex items-start gap-2 text-xs text-soft">
+                        <li key={p} className="flex items-start gap-2.5 text-sm text-soft">
                           <CheckIcon />
                           {p}
                         </li>
                       ))}
                     </ul>
                   </div>
-                </Reveal>
-              ))}
-            </div>
-            <div className="lg:col-span-3">
-              <SearchFormMockup />
-            </div>
+                  <div className="mt-auto">
+                    {i === 0 ? <SearchFormMockup /> : <CorporateSearchMockup />}
+                  </div>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
