@@ -24,9 +24,14 @@ const de = {
     faq: "FAQ",
     kontakt: "Kontakt",
   },
+  // Vorher standen hier die Namen der Dienste, die im Hintergrund laufen. Das
+  // las sich wie eine Zutatenliste und legte die Frage nahe, warum man nicht
+  // gleich dorthin geht. Jetzt Eigenschaften statt Anbieter -- die konkreten
+  // Dienste stehen im FAQ, wo sie hingehoeren: wer BYOK nutzt, legt dort
+  // ohnehin eigene Zugaenge an und muss es vor dem Kauf wissen.
   trustBar: {
-    heading: "Läuft mit etablierten Diensten im Hintergrund",
-    partners: ["OpenAI", "Google Places", "Hunter.io", "NeverBounce", "Instantly"],
+    heading: "Ohne Vertragsbindung, ohne versteckte Kosten",
+    partners: ["EU-Hosting", "Verschlüsselte Zugangsdaten", "Keine Datenweitergabe", "Monatlich kündbar", "14 Tage kostenlos"],
   },
   // Zahlen stammen aus einer echten Suche im eigenen Account (Dashboard-Screenshot
   // im Hero). Bewusst keine konkreten Konkurrenzpreise: die aendern sich staendig
@@ -34,7 +39,7 @@ const de = {
   costProof: {
     eyebrow: "Was ein Lead wirklich kostet",
     title: "1,5 Cent pro Kontakt, nicht ein Credit pro Klick",
-    body: "Ihr hinterlegt eure eigenen API-Schlüssel und zahlt, was Google, OpenAI und Hunter tatsächlich berechnen. Kein Aufschlag, kein Credit-Paket, das am Monatsende verfällt. Im Dashboard steht nach jeder Suche, was sie gekostet hat.",
+    body: "Ihr rechnet die Datenabfragen direkt zum Selbstkostenpreis ab, ohne Aufschlag und ohne Credit-Paket, das am Monatsende verfällt. Im Dashboard steht nach jeder Suche auf den Cent genau, was sie gekostet hat.",
     columns: [
       {
         id: "frostbreaker",
@@ -92,7 +97,7 @@ const de = {
         id: "enrich",
         eyebrow: "Anreichern",
         title: "Die richtige Person statt der Zentrale",
-        body: "Eine KI-Websuche ermittelt, wer den Betrieb tatsächlich führt. Hunter liefert parallel Adressen aus der Domain. Rollen-Adressen wie info@ oder office@ werden automatisch aussortiert und zählen nicht als Lead.",
+        body: "Die Frostbreaker-Recherche ermittelt, wer den Betrieb tatsächlich führt, und gleicht das mit den Adressen der Firmendomain ab. Rollen-Adressen wie info@ oder office@ werden automatisch aussortiert und zählen nicht als Lead.",
         bullets: [
           "Name und Rolle der Entscheider:innen",
           "E-Mail-Verifizierung direkt in der Tabelle",
@@ -179,7 +184,7 @@ const de = {
         { label: "Kontakte", value: "259" },
         { label: "Mit E-Mail", value: "168" },
         { label: "Personalisiert", value: "152" },
-        { label: "API-Kosten", value: "3,94 $", sub: "87 Hunter-Credits" },
+        { label: "API-Kosten", value: "3,94 $", sub: "alle Abfragen inklusive" },
       ],
       savings: {
         strong: "≈ 34,5 Stunden",
@@ -192,7 +197,7 @@ const de = {
       subtitle: "Nische und Ort eingeben, der Rest läuft automatisch.",
       playbookLabel: "Branchen-Playbook",
       playbookValue: "Handwerk ohne Website",
-      tabs: ["Lokal (Google Maps)", "Corporate (Datenbank)"],
+      tabs: ["Lokal (Kartensuche)", "Corporate (Datenbank)"],
       fields: [
         { label: "Nische", value: "Schreinerei" },
         { label: "Ort", value: "Wien" },
@@ -205,7 +210,7 @@ const de = {
     },
     leads: {
       title: "Alle Leads",
-      toolbar: { count: "97 Firmen · 259 Kontakte", verify: "E-Mails verifizieren", export: "Für Instantly exportieren", csv: "Excel-CSV" },
+      toolbar: { count: "97 Firmen · 259 Kontakte", verify: "E-Mails verifizieren", export: "In Kampagne übernehmen", csv: "Excel-CSV" },
       rows: [
         { name: "Schreinerei Huber", domain: "schreinerei-huber.at", contacts: "3 Kontakte", withMail: "3 mit E-Mail", color: "#0EA5E9" },
         { name: "Zahnarztpraxis Dr. Berger", domain: "zahnarzt-berger.at", contacts: "2 Kontakte", withMail: "2 mit E-Mail", color: "#8B5CF6" },
@@ -339,7 +344,7 @@ const de = {
     eyebrow: "Der Effekt in vier Sätzen",
     title: "Was sich für euch konkret ändert",
     items: [
-      { id: "money", title: "Geld sparen", stat: "≈ 285 €", statLabel: "gespart pro Monat ggü. einem vergleichbaren 4-Tool-Stack", body: "Ihr zahlt nur eure echten API-Kosten, ≈ 65 € für 1.000 Leads, plus den Plan, keine Aufschläge. Ein vergleichbarer Stack aus Datenquelle, Versand-Tool und Automatisierung (z. B. Apollo/Clay + Instantly + Zapier) kostet meist 250–650 €/Monat." },
+      { id: "money", title: "Geld sparen", stat: "≈ 285 €", statLabel: "gespart pro Monat ggü. einem vergleichbaren 4-Tool-Stack", body: "Ihr zahlt nur eure echten API-Kosten, ≈ 65 € für 1.000 Leads, plus den Plan, keine Aufschläge. Ein vergleichbarer Aufbau aus separater Datenquelle, Versand-Tool und Automatisierung kostet üblicherweise ein Vielfaches davon." },
       { id: "revenue", title: "Umsatz steigern", stat: "≈ 6", statLabel: "Meetings/Monat rechnerisch, bei 1.000 versendeten Mails", body: "Echte Personalisierung statt Textbausteine, jede Mail erreicht eine echte Person statt eine Rollen-Adresse." },
       { id: "time", title: "Zeit sparen", stat: "≈ 133 Std.", statLabel: "manuelle Recherche gespart, pro 1.000 Leads", body: "Keine manuelle Suche, kein Adressraten, kein CSV-Jonglieren zwischen mehreren Tools." },
       { id: "risk", title: "Risiko sparen", stat: "3-fach", statLabel: "Verifizierung, Zustellbarkeits-Check und Blockliste eingebaut", body: "Schützt Sender-Reputation und Domain, bevor es zum Problem wird, nicht danach. EU-Hosting, verschlüsselte Zugangsdaten." },
@@ -455,7 +460,7 @@ const de = {
     items: [
       { id: "suppression", title: "Bestandskunden und Opt-outs bleiben geschützt", body: "Einmal auf der Sperrliste, für immer ausgeschlossen: Frostbreaker prüft automatisch dagegen, bevor irgendjemand angeschrieben wird, egal ob neue Suche oder neue Kampagne." },
       { id: "deliverability", title: "Zustellbarkeit prüfen, bevor es zum Problem wird", body: "SPF, DKIM und DMARC eurer Sende-Domain live per DNS geprüft, in Klartext erklärt, dazu eine Warnung bei riskant hohem Tagesvolumen pro Postfach." },
-      { id: "campaigns", title: "Kampagnen und Sequenzen direkt im Tool", body: "Sequenz, Zeitplan, Anzahl der Follow-ups und Aktivierung, alles nativ in Frostbreaker, an Instantly angebunden. Kein Tool-Wechsel, kein CSV-Export." },
+      { id: "campaigns", title: "Kampagnen und Sequenzen direkt im Tool", body: "Sequenz, Zeitplan, Anzahl der Follow-ups und Aktivierung, alles nativ in Frostbreaker. Kein Tool-Wechsel, kein CSV-Export." },
     ],
   },
   suppressionMockup: {
@@ -528,7 +533,7 @@ const de = {
           "1 Workspace",
           "Bis 5.000 qualifizierte Leads/Monat",
           "Nur personenbezogene E-Mails, kein info@",
-          "Native Instantly-Kampagnen",
+          "Native Kampagnen und Sequenzen",
           "Zustellbarkeits-Check & Antwortverwaltung",
         ],
         ctaLabel: "Kostenlos testen",
@@ -580,7 +585,11 @@ const de = {
     founderQuote: "„Ich wollte schon immer etwas Eigenes aufbauen. Das größte Hindernis war nie die Idee, sondern Kunden zu finden: Kaltakquise per Hand, endlose Anrufe und E-Mails, ohne je zu wissen, ob es sich lohnt. Also habe ich mir selbst das Werkzeug gebaut, das mir gefehlt hat, seitdem geht mir der nächste Ansprechpartner nie mehr aus.“",
     founderName: "Youssef Tayachi",
     founderRole: "Gründer & CEO, Frostbreaker",
-    poweredBy: { title: "Läuft mit etablierten Diensten", body: "Keine Blackbox, sondern bekannte, geprüfte Anbieter im Hintergrund." },
+    poweredBy: {
+      title: "Ein Werkzeug statt vier",
+      body: "Suche, Recherche, Verifizierung, Personalisierung und Versand greifen ineinander, statt über CSV-Dateien verbunden zu werden.",
+      chips: ["Suchen", "Recherchieren", "Verifizieren", "Personalisieren", "Versenden"],
+    },
   },
   faq: {
     title: "Häufige Fragen",
@@ -590,11 +599,11 @@ const de = {
       { q: "Was kostet das?", a: "99 € im Monat für den Starter-Plan (1 Workspace, bis 5.000 qualifizierte Leads), 14 Tage kostenlos testen, danach monatlich kündbar. Der Agentur-Plan (mehrere Workspaces, unlimitiert) startet ab 199 € im Monat, abgestimmt auf eure Anzahl an Kunden-Workspaces, dafür sprechen wir kurz miteinander. Dazu kommen eure eigenen, transparent im Dashboard einsehbaren API-Kosten." },
       { q: "Kann ich jederzeit kündigen?", a: "Ja, monatlich, keine Mindestlaufzeit, keine Kündigungsfrist über den laufenden Monat hinaus." },
       { q: "Woher weiß ich, dass eine gefundene E-Mail wirklich zu einer Person gehört?", a: "Frostbreaker filtert generische Adressen wie info@ oder office@ automatisch heraus. Nur E-Mails, die eindeutig einer Person zugeordnet sind, landen in eurer Leads-Liste." },
-      { q: "Brauche ich eigene API-Keys? Ist das kompliziert?", a: "Einmal in den Einstellungen hinterlegt, läuft alles automatisch. In der kostenlosen Testphase führt euch die App Schritt für Schritt durch das Setup." },
-      { q: "Wie unterscheidet sich das von Apollo/Hunter/Instantly?", a: "Die machen jeweils einen Teil des Workflows gut, mischen dabei aber meist personenbezogene und generische Adressen. Frostbreaker verbindet Suche, Anreicherung, Verifizierung und Personalisierung, filtert dabei automatisch auf echte Ansprechpartner, und bleibt auch nach dem Versand im Bild: Antworten lassen sich direkt in der App beantworten, das Dashboard zeigt gebuchte Meetings und Pipeline-Wert, nicht nur Öffnungsraten." },
+      { q: "Welche Dienste laufen im Hintergrund, und brauche ich dort eigene Zugänge?", a: "Frostbreaker greift für die Kartensuche auf Google, für die Recherche auf OpenAI und für den Domain-Abgleich auf Hunter zu, optional NeverBounce für die Verifizierung und Instantly für den Versand. Ihr legt dort eigene Zugänge an und hinterlegt die Schlüssel einmal in den Einstellungen, verschlüsselt gespeichert. Genau deshalb zahlt ihr die Abfragen zum Selbstkostenpreis statt eines Aufschlags. Die App führt euch in der Testphase Schritt für Schritt durch das Setup." },
+      { q: "Warum nicht gleich direkt zu Hunter oder Apollo?", a: "Weil keiner dieser Dienste den ganzen Weg abdeckt. Hunter findet Adressen zu einer Domain, aber keine lokalen Betriebe ohne Firmendatenbank-Eintrag. Apollo listet Unternehmen, schreibt aber keine individuelle Zeile pro Lead. Versand-Tools versenden, recherchieren aber nicht. Wer das selbst zusammensteckt, zahlt drei bis vier Abos, exportiert CSV-Dateien hin und her und baut das Reporting von Hand. Frostbreaker ist die Verbindung dazwischen: eine Suche, eine Liste, ein Versand, ein Dashboard, inklusive Antworten und gebuchten Meetings." },
       { q: "Was passiert, wenn ich aus Versehen einen Bestandskunden oder jemanden anschreibe, der sich abgemeldet hat?", a: "Genau dafür gibt es die eingebaute Sperrliste: einmal eingetragen, schließt Frostbreaker diese Kontakte und Domains automatisch aus jeder zukünftigen Suche und jedem Versand aus, ganz ohne dass ihr das bei jeder Kampagne manuell prüfen müsst. Bestandskunden und Opt-outs bleiben zuverlässig geschützt." },
       { q: "Kann ich prüfen, ob meine Versand-Domain überhaupt zustellfähig ist?", a: "Ja, direkt in der App: Frostbreaker prüft SPF, DKIM und DMARC eurer Sende-Domain per Live-DNS-Abfrage und zeigt in Klartext, was noch fehlt, dazu eine Warnung, wenn das Tagesvolumen pro Postfach riskant hoch wird. Kein separates Zustellbarkeits-Tool nötig." },
-      { q: "Muss ich meine E-Mail-Kampagnen und Sequenzen in einem separaten Tool bauen?", a: "Nein. Kampagnen, Sequenzen inklusive Zeitplan und Anzahl der Follow-ups, und die Aktivierung laufen direkt in Frostbreaker, nativ an Instantly angebunden. Ihr wechselt für den Versand nicht in ein zweites Tool und müsst nichts per CSV hin- und herschieben." },
+      { q: "Muss ich meine E-Mail-Kampagnen und Sequenzen in einem separaten Tool bauen?", a: "Nein. Kampagnen, Sequenzen inklusive Zeitplan und Anzahl der Follow-ups, und die Aktivierung laufen direkt in Frostbreaker. Ihr wechselt für den Versand nicht in ein zweites Tool und müsst nichts per CSV hin- und herschieben." },
       { q: "Wie schnell bin ich startklar?", a: "Beim Starter-Plan sofort: Konto anlegen, API-Keys eintragen, erste Suche starten. Keine Freischaltung, keine Kreditkarte, 14 Tage kostenlos. Für den Agentur-Plan schauen wir vorher gemeinsam in einem kurzen Gespräch auf eure Kundenstruktur, weil dort mehrere Workspaces und das Whitelabel-Branding eingerichtet werden." },
       { q: "Was passiert mit meinen Daten, wenn ich kündige?", a: "Eure Daten werden nach Vertragsende gelöscht oder auf Wunsch zurückgegeben, geregelt im AVV. Es gibt keine automatische Weiternutzung nach Kündigung." },
     ],
@@ -651,13 +660,13 @@ const en: typeof de = {
     kontakt: "Contact",
   },
   trustBar: {
-    heading: "Runs on established services in the background",
-    partners: ["OpenAI", "Google Places", "Hunter.io", "NeverBounce", "Instantly"],
+    heading: "No contract lock-in, no hidden cost",
+    partners: ["EU hosting", "Encrypted credentials", "No data sharing", "Cancel monthly", "14 days free"],
   },
   costProof: {
     eyebrow: "What a lead actually costs",
     title: "1.5 cents per contact, not one credit per click",
-    body: "You add your own API keys and pay exactly what Google, OpenAI and Hunter charge. No markup, no credit bundle that expires at the end of the month. After every search the dashboard shows what it cost.",
+    body: "You settle the data lookups at cost, with no markup and no credit bundle that expires at the end of the month. After every search the dashboard shows to the cent what it cost.",
     columns: [
       {
         id: "frostbreaker",
@@ -712,7 +721,7 @@ const en: typeof de = {
         id: "enrich",
         eyebrow: "Enrich",
         title: "The right person, not the switchboard",
-        body: "An AI web search works out who actually runs the business. Hunter provides addresses from the domain in parallel. Role addresses like info@ or office@ are filtered out automatically and don't count as leads.",
+        body: "The Frostbreaker research works out who actually runs the business and matches that against the addresses on the company domain. Role addresses like info@ or office@ are filtered out automatically and don't count as leads.",
         bullets: [
           "Name and role of the decision-maker",
           "Email verification right in the table",
@@ -791,7 +800,7 @@ const en: typeof de = {
         { label: "Contacts", value: "259" },
         { label: "With email", value: "168" },
         { label: "Personalized", value: "152" },
-        { label: "API cost", value: "$3.94", sub: "87 Hunter credits" },
+        { label: "API cost", value: "$3.94", sub: "all lookups included" },
       ],
       savings: {
         strong: "≈ 34.5 hours",
@@ -804,7 +813,7 @@ const en: typeof de = {
       subtitle: "Enter niche and location, the rest runs automatically.",
       playbookLabel: "Industry playbook",
       playbookValue: "Trades without a website",
-      tabs: ["Local (Google Maps)", "Corporate (database)"],
+      tabs: ["Local (map search)", "Corporate (database)"],
       fields: [
         { label: "Niche", value: "Carpentry" },
         { label: "Location", value: "Vienna" },
@@ -817,7 +826,7 @@ const en: typeof de = {
     },
     leads: {
       title: "All leads",
-      toolbar: { count: "97 companies · 259 contacts", verify: "Verify emails", export: "Export to Instantly", csv: "Excel CSV" },
+      toolbar: { count: "97 companies · 259 contacts", verify: "Verify emails", export: "Add to campaign", csv: "Excel CSV" },
       rows: [
         { name: "Huber Carpentry", domain: "huber-carpentry.at", contacts: "3 contacts", withMail: "3 with email", color: "#0EA5E9" },
         { name: "Dr. Berger Dental", domain: "berger-dental.at", contacts: "2 contacts", withMail: "2 with email", color: "#8B5CF6" },
@@ -947,7 +956,7 @@ const en: typeof de = {
     eyebrow: "The effect in four sentences",
     title: "What actually changes for you",
     items: [
-      { id: "money", title: "Save money", stat: "≈ €285", statLabel: "saved per month vs. a comparable 4-tool stack", body: "You only pay your actual API costs, ≈ €65 for 1,000 leads, plus the plan, no markups. A comparable stack of data source, sending tool and automation (e.g. Apollo/Clay + Instantly + Zapier) usually costs €250–650/month." },
+      { id: "money", title: "Save money", stat: "≈ €285", statLabel: "saved per month vs. a comparable 4-tool stack", body: "You only pay your actual API costs, ≈ €65 for 1,000 leads, plus the plan, no markups. A comparable setup with a separate data source, sending tool and automation usually costs a multiple of that." },
       { id: "revenue", title: "Grow revenue", stat: "≈ 6", statLabel: "meetings/month, calculated at 1,000 emails sent", body: "Real personalization instead of templates, every email reaches a real person instead of a role address." },
       { id: "time", title: "Save time", stat: "≈ 133 hrs", statLabel: "manual research saved, per 1,000 leads", body: "No manual searching, no guessing addresses, no juggling CSVs between multiple tools." },
       { id: "risk", title: "Reduce risk", stat: "3-fold", statLabel: "verification, deliverability check and blocklist built in", body: "Protects sender reputation and domain before it becomes a problem, not after. EU hosting, encrypted credentials." },
@@ -1063,7 +1072,7 @@ const en: typeof de = {
     items: [
       { id: "suppression", title: "Existing customers and opt-outs stay protected", body: "Add someone to the suppression list once, and they're excluded for good: Frostbreaker automatically checks against it before anyone gets contacted, whether from a new search or a new campaign." },
       { id: "deliverability", title: "Check deliverability before it becomes a problem", body: "SPF, DKIM and DMARC for your sending domain, checked live via DNS and explained in plain language, plus a warning if your daily volume per mailbox gets risky." },
-      { id: "campaigns", title: "Campaigns and sequences right in the tool", body: "Sequence, schedule, number of follow-ups and activation, all natively in Frostbreaker, connected to Instantly. No switching tools, no CSV export." },
+      { id: "campaigns", title: "Campaigns and sequences right in the tool", body: "Sequence, schedule, number of follow-ups and activation, all natively in Frostbreaker. No switching tools, no CSV export." },
     ],
   },
   suppressionMockup: {
@@ -1136,7 +1145,7 @@ const en: typeof de = {
           "1 workspace",
           "Up to 5,000 qualified leads/month",
           "Personal emails only, no info@",
-          "Native Instantly campaigns",
+          "Native campaigns and sequences",
           "Deliverability check & reply management",
         ],
         ctaLabel: "Start free trial",
@@ -1188,7 +1197,11 @@ const en: typeof de = {
     founderQuote: "\"I always wanted to build something of my own. The hardest part was never the idea, it was finding clients: cold calls and emails by hand, hours of research, never knowing if any of it would land. So I built the tool I wish I'd had, and I've never run out of real decision-makers to reach since.\"",
     founderName: "Youssef Tayachi",
     founderRole: "Founder & CEO, Frostbreaker",
-    poweredBy: { title: "Runs on established services", body: "No black box, just well-known, vetted providers in the background." },
+    poweredBy: {
+      title: "One tool instead of four",
+      body: "Search, research, verification, personalization and sending interlock instead of being wired together through CSV files.",
+      chips: ["Search", "Research", "Verify", "Personalize", "Send"],
+    },
   },
   faq: {
     title: "Frequently asked questions",
@@ -1198,11 +1211,11 @@ const en: typeof de = {
       { q: "What does it cost?", a: "$99/month for the Starter plan (1 workspace, up to 5,000 qualified leads), 14 days free, cancel anytime after. The Agency plan (multiple workspaces, unlimited) starts from $199/month, tailored to your number of client workspaces, so let's have a quick chat about that. On top come your own API costs, transparently visible in the dashboard." },
       { q: "Can I cancel anytime?", a: "Yes, monthly, no minimum term, no notice period beyond the current month." },
       { q: "How do I know a found email really belongs to a person?", a: "Frostbreaker automatically filters out generic addresses like info@ or office@. Only emails clearly assigned to a person make it into your leads list." },
-      { q: "Do I need my own API keys? Is that complicated?", a: "Once entered in settings, everything runs automatically. During the free trial, the app walks you through setup step by step." },
-      { q: "How is this different from Apollo/Hunter/Instantly?", a: "They each do part of the workflow well, but usually mix personal and generic addresses. Frostbreaker connects search, enrichment, verification and personalization, automatically filtering for real decision-makers, and stays in the loop after sending too: replies can be answered directly in the app, and the dashboard shows booked meetings and pipeline value, not just open rates." },
+      { q: "Which services run in the background, and do I need my own accounts there?", a: "Frostbreaker uses Google for the map search, OpenAI for the research and Hunter for the domain match, optionally NeverBounce for verification and Instantly for sending. You create your own accounts there and enter the keys once in settings, stored encrypted. That is exactly why you pay for lookups at cost instead of a markup. During the trial the app walks you through setup step by step." },
+      { q: "Why not go straight to Hunter or Apollo?", a: "Because none of them covers the whole path. Hunter finds addresses for a domain, but not local businesses that aren't in a company database. Apollo lists companies but doesn't write an individual line per lead. Sending tools send but don't research. Stitching that together yourself means three or four subscriptions, CSV files going back and forth, and reporting built by hand. Frostbreaker is the connection in between: one search, one list, one send, one dashboard, including replies and booked meetings." },
       { q: "What happens if I accidentally email an existing customer or someone who's opted out?", a: "That's exactly what the built-in suppression list is for: once added, Frostbreaker automatically excludes those contacts and domains from every future search and send, no manual checking required for every campaign. Existing customers and opt-outs stay reliably protected." },
       { q: "Can I check whether my sending domain is actually deliverable?", a: "Yes, directly in the app: Frostbreaker checks SPF, DKIM and DMARC for your sending domain via a live DNS lookup and shows in plain language what's still missing, plus a warning if your daily volume per mailbox gets risky. No separate deliverability tool needed." },
-      { q: "Do I need to build my email campaigns and sequences in a separate tool?", a: "No. Campaigns, sequences including schedule and number of follow-ups, and activation all happen directly in Frostbreaker, natively connected to Instantly. You don't switch to a second tool to send, and there's no CSV shuffling." },
+      { q: "Do I need to build my email campaigns and sequences in a separate tool?", a: "No. Campaigns, sequences including schedule and number of follow-ups, and activation all happen directly in Frostbreaker. You don't switch to a second tool to send, and there's no CSV shuffling." },
       { q: "How fast can I get started?", a: "On the Starter plan, immediately: create an account, add your API keys, start your first search. No manual approval, no credit card, 14 days free. For the Agency plan we take a short call first, because multiple workspaces and white-label branding get set up together." },
       { q: "What happens to my data if I cancel?", a: "Your data is deleted after the contract ends, or returned on request, as governed by the DPA. There's no automatic continued use after cancellation." },
     ],

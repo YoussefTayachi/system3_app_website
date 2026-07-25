@@ -109,21 +109,13 @@ export default function Home() {
             Bewusst das Dashboard statt der Leads-Tabelle: dort sind die Zeilen
             anonymisiert und wirken gross dargestellt wie ein Ladeplatzhalter,
             waehrend das Dashboard echte Zahlen und die Zeitersparnis zeigt. */}
-        {/* Breiter als der Textcontainer: bei 1104px Breite schrumpft der
-            1689px-Screenshot auf 65% und die Zahlen werden unlesbar -- genau
-            die Zahlen sind aber der Beleg. */}
-        <div className="mx-auto mt-2 max-w-[1560px] px-4 sm:px-6">
-          <div className="screenshot-bleed relative overflow-hidden rounded-t-xl border-x border-t border-edge2/70 bg-panel shadow-2xl shadow-ink/10">
-            <Image
-              src="/screenshots/dashboard.png"
-              alt={t.hero.dashboardAlt}
-              width={1689}
-              height={957}
-              priority
-              sizes="100vw"
-              className="w-full"
-            />
-          </div>
+        {/* Nachbildung statt echtem Screenshot: im Original steht die Zahl der
+            verbrauchten Credits samt Anbietername im Bild, und das laesst sich
+            nicht herausretuschieren, ohne dass es auffaellt. Die Nachbildung
+            zeigt dieselben Kennzahlen, bleibt in jeder Groesse scharf und
+            passt sich dem Farbschema an. */}
+        <div className="mx-auto mt-2 max-w-5xl px-4 sm:px-6">
+          <DashboardMockup />
         </div>
       </section>
 
@@ -767,8 +759,13 @@ export default function Home() {
           <div className="rounded-2xl border border-edge/60 bg-panel p-6 hover-lift">
             <h3 className="text-sm font-semibold text-ink">{t.why.poweredBy.title}</h3>
             <p className="mt-1.5 text-sm leading-relaxed text-soft">{t.why.poweredBy.body}</p>
+            {/* Vorher standen hier die Namen der Dienste im Hintergrund. Das
+                las sich wie eine Zutatenliste und legte die Frage nahe, warum
+                man nicht gleich dorthin geht. Wer es wissen will, findet die
+                Antwort im FAQ -- inklusive der Begruendung, warum die Summe
+                mehr ist als ihre Teile. */}
             <div className="mt-4 flex flex-wrap gap-2">
-              {["OpenAI", "Google", "Hunter.io", "NeverBounce"].map((name) => (
+              {t.why.poweredBy.chips.map((name) => (
                 <span key={name} className="rounded-full border border-edge2 bg-panel2 px-3 py-1 text-xs font-medium text-soft">
                   {name}
                 </span>

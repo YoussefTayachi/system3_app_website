@@ -160,18 +160,6 @@ body {
     radial-gradient(80% 70% at 92% 8%, rgba(234, 90, 62, 0.055), transparent 62%);
 }
 
-/* Der Hero-Screenshot wird unten angeschnitten: nur der obere Teil der
-   Leads-Tabelle ist zu sehen, der Rest laeuft weich aus. Zeigt "es geht weiter"
-   ohne 955px Bildhoehe zu verbrauchen. */
-.screenshot-bleed {
-  max-height: 200px;
-  -webkit-mask-image: linear-gradient(to bottom, #000 58%, transparent);
-  mask-image: linear-gradient(to bottom, #000 58%, transparent);
-}
-@media (min-width: 640px) {
-  .screenshot-bleed { max-height: 380px; }
-}
-
 /* Endlos laufende Partnerleiste. Die Liste wird im Markup zweimal gerendert,
    deshalb genuegt eine Verschiebung um -50% fuer einen nahtlosen Loop. */
 @keyframes marquee {
