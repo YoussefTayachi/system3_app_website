@@ -72,6 +72,99 @@ const de = {
     footnote:
       "Eure tatsächlichen Kosten hängen von Nische und Trefferquote ab. Die Zahl oben stammt aus einer konkreten Suche und ist keine Zusage.",
   },
+  // Eigene Agenturseite. Agenturen sind die wertvollere Zielgruppe (199 € statt
+  // 99 €, mehrere Workspaces, laengere Bindung), bekamen auf der Startseite
+  // aber eine Sektion unter zwanzig anderen.
+  agencyPage: {
+    metaTitle: "Für Agenturen: ein Login, ein Workspace pro Kunde",
+    metaDescription:
+      "Betreut mehrere Kunden in getrennten Workspaces, mit eigenem Branding und teilbaren Reports ohne Login. Ein Abo statt eines pro Kunde.",
+    eyebrow: "Für Agenturen",
+    title: "Ein Login. Ein Workspace pro Kunde. Kein neues Abo für jeden.",
+    intro:
+      "Wenn ihr Kaltakquise für eure eigenen Kunden macht, ist die Kontenverwaltung meist das eigentliche Problem: pro Kunde ein Tool-Zugang, pro Kunde ein Abo, am Monatsende ein Report von Hand. Genau dafür ist der Agentur-Plan gebaut.",
+    sections: [
+      {
+        id: "workspaces",
+        eyebrow: "Getrennt",
+        title: "Jeder Kunde in seinem eigenen Bereich",
+        body: "Leads, Kampagnen, Sperrlisten und Kontakte laufen pro Kunde sauber getrennt. Ihr wechselt im selben Login zwischen den Bereichen, statt euch aus- und wieder einzuloggen. Neue Kunden sind in Sekunden angelegt, ohne ein weiteres Abo abzuschließen.",
+        bullets: [
+          "Unbegrenzte Workspaces im Plan enthalten",
+          "Name, Logo und Akzentfarbe je Workspace",
+          "Sperrliste pro Kunde, keine Überschneidungen",
+        ],
+      },
+      {
+        id: "report",
+        eyebrow: "Vorzeigbar",
+        title: "Der Report, den ihr weiterreichen könnt",
+        body: "Ein Link pro Kunde zeigt die Kennzahlen im Look des Kunden, ohne dass er einen Account braucht. Einzelne Kontaktdaten bleiben dabei bewusst bei euch. Das ersetzt die Tabelle, die sonst am Monatsende von Hand entsteht.",
+        bullets: [
+          "Kein Login für den Endkunden nötig",
+          "Im Branding des jeweiligen Kunden",
+          "Kontaktdaten bleiben bei euch",
+        ],
+      },
+      {
+        id: "costs",
+        eyebrow: "Kalkulierbar",
+        title: "Was ein Kunde euch kostet",
+        body: "Der Plan ist fix, die Abfragekosten hängen am Volumen. Für 1.000 qualifizierte Leads im Monat liegt ein Kunde bei rund 65 € Abfragekosten, unabhängig davon, wie viele Kunden ihr parallel betreut. Was ihr euren Kunden dafür berechnet, bleibt eure Entscheidung.",
+        bullets: [
+          "199 € im Monat, unabhängig von der Kundenzahl",
+          "≈ 65 € Abfragekosten je 1.000 Leads",
+          "Kein Aufpreis pro angelegtem Workspace",
+        ],
+      },
+    ],
+    contrastTitle: "Was Multi-Kunden-Verwaltung sonst kostet",
+    contrastBody:
+      "Bei reinen Versand-Tools ist die Verwaltung mehrerer Kunden meist ein separat bepreistes Zusatzmodul, oft mit eigenem Preis pro angelegtem Kundenkonto, und deckt dann nur den Versand ab. Recherche, Anreicherung und Reporting kommen obendrauf. Hier ist beides von Anfang an Teil des Produkts.",
+    ctaTitle: "Sprecht kurz mit uns über eure Kundenstruktur",
+    ctaBody:
+      "Beim Agentur-Plan richten wir Workspaces und Branding gemeinsam ein, deshalb steht am Anfang ein kurzes Gespräch statt einer Selbstanmeldung. 30 Minuten, keine Präsentation.",
+    ctaLabel: "Gespräch buchen",
+  },
+  // Eigene Preisseite. "Preise" ist der meistgeklickte Navigationspunkt, landete
+  // aber mitten in einer sehr langen Startseite zwischen zwei anderen Themen.
+  pricingPage: {
+    metaTitle: "Preise: 99 € oder 199 € im Monat, plus die tatsächlichen Abfragekosten",
+    metaDescription:
+      "Feste Monatspreise ohne Vertragsbindung, dazu die Abfragekosten zum Selbstkostenpreis. 14 Tage kostenlos testen, keine Kreditkarte nötig, monatlich kündbar.",
+    eyebrow: "Preise",
+    title: "Zwei Zahlen, keine Überraschungen",
+    intro:
+      "Ihr zahlt den Plan und die Abfragen, die eure Suchen tatsächlich auslösen. Sonst nichts. Keine Einrichtungsgebühr, keine Mindestlaufzeit, kein Credit-Paket, das am Monatsende verfällt.",
+    breakdownTitle: "Woraus sich eure Rechnung zusammensetzt",
+    breakdownIntro:
+      "Damit niemand von der ersten Abrechnung überrascht wird, hier beide Posten offen nebeneinander.",
+    breakdown: [
+      {
+        id: "plan",
+        label: "Fester Monatspreis",
+        value: "99 € oder 199 €",
+        body: "Je nach Plan. Monatlich kündbar, keine Mindestlaufzeit, keine Einrichtungsgebühr.",
+      },
+      {
+        id: "usage",
+        label: "Abfragen, zum Selbstkostenpreis",
+        value: "≈ 4 $ / 100 Firmen",
+        body: "Rechnet ihr über eure eigenen Zugänge direkt ab. Was eine Suche gekostet hat, steht danach im Dashboard.",
+      },
+    ],
+    breakdownExample:
+      "Beispiel: 1.000 qualifizierte Leads im Monat auf dem Starter-Plan ergeben rund 99 € plus etwa 65 € Abfragekosten.",
+    faqTitle: "Fragen zum Preis",
+    faq: [
+      { q: "Brauche ich für die Testphase eine Kreditkarte?", a: "Nein. Ihr legt ein Konto an und könnt 14 Tage lang alles ausprobieren, ohne Zahlungsdaten zu hinterlegen." },
+      { q: "Was passiert nach den 14 Tagen?", a: "Ohne aktives Abo pausiert der Account, gelöscht wird nichts. Ihr entscheidet danach, ob und mit welchem Plan ihr weitermacht." },
+      { q: "Kann ich zwischen den Plänen wechseln?", a: "Ja, in beide Richtungen. Der Wechsel wirkt zum nächsten Abrechnungszeitraum, Workspaces und Leads bleiben erhalten." },
+      { q: "Was zählt beim Starter-Plan gegen die 5.000 Leads?", a: "Nur qualifizierte Leads, also personenbezogene Adressen. Generische Adressen wie info@ zählen nicht mit, und eine Firma zählt einmal, auch wenn mehrere Personen gefunden werden." },
+      { q: "Kann ich jederzeit kündigen?", a: "Ja, monatlich, ohne Frist über den laufenden Monat hinaus und ohne Mindestlaufzeit." },
+      { q: "Was passiert mit meinen Daten, wenn ich kündige?", a: "Eure Daten werden nach Vertragsende gelöscht oder auf Wunsch zurückgegeben, geregelt im AVV. Es gibt keine Sperrfrist und keine Exportgebühr." },
+    ],
+  },
   // Eigene Funktionsseite: auf der Startseite standen die Detailfunktionen
   // verteilt ueber zwoelf Sektionen. Wer wissen will, was drinsteckt, findet
   // es jetzt an einem Ort, ohne die Startseite weiter zu verlaengern.
@@ -285,6 +378,25 @@ const de = {
       icebreakerLabel: "Icebreaker",
       icebreaker:
         "Fünf Mitarbeitende, eigene Werkstatt, aber Terminanfragen laufen weiter über das Kontaktformular.",
+    },
+    // Der Report aus Sicht des Endkunden: eigener Name, eigene Akzentfarbe,
+    // kein Login noetig. Fuer eine Agentur ist genau das der Kaufgrund, und
+    // bisher gab es dafuer kein Bild.
+    report: {
+      badge: "Ansicht für den Endkunden",
+      client: "Muster GmbH",
+      period: "Bericht · Oktober",
+      stats: [
+        { label: "Angeschrieben", value: "1.240" },
+        { label: "Antworten", value: "86" },
+        { label: "Meetings", value: "9" },
+      ],
+      progressLabel: "Ziel für den Monat",
+      progressValue: "9 von 10 Meetings",
+      progressPercent: 90,
+      urlLabel: "Teilbarer Link, ohne Login",
+      url: "report.frostbreaker.app/muster-gmbh",
+      note: "Einzelne Kontaktdaten sieht der Endkunde bewusst nicht.",
     },
     mailboxes: {
       title: "Postfächer",
@@ -553,23 +665,24 @@ const de = {
     body: "≈ 33 Stunden manuelle Recherche gespart, rund 1.500 € Arbeitskosten, bei $2,75 tatsächlichen API-Kosten.",
     sub: "So sieht das für eine einzelne Suche im eigenen Dashboard aus: live, nicht nachgerechnet.",
   },
+  // Vorher standen hier vier Hochrechnungen (125.000 E-Mails, 16.700 Stunden,
+  // "rund 100 Vollzeitstellen", 780 Meetings) samt einem Methodik-Absatz, der
+  // selbst einraeumte, dass drei Schaetzungen miteinander multipliziert werden.
+  // Neben den nachgerechneten Zahlen weiter oben wirkten sie beliebig -- und
+  // wer eine Zahl nicht glaubt, glaubt auch die daneben nicht mehr. Geblieben
+  // ist die Aussage, die ohne Annahmen auskommt.
   scaling: {
-    eyebrow: "Skalierungspotenzial",
-    title: "Was rechnerisch möglich ist, wenn ihr Vollgas gebt",
-    tiles: [
-      { value: "125.000", label: "personalisierte E-Mails pro Monat versendbar" },
-      { value: "bis 125.000", label: "erreichbare Unternehmen pro Monat" },
-      { value: "≈ 16.700 Std.", label: "manuelle Recherche gespart, rund 100 Vollzeitstellen/Monat" },
-      { value: "≈ 780", label: "qualifizierte Meetings pro Monat rechnerisch möglich" },
-    ],
-    methodologyLabel: "So kommen die Zahlen zustande, keine Garantie:",
-    methodologyBody: "Wir rechnen mit 125.000 verschickten E-Mails im Monat (möglich wären sogar bis zu 500.000). Neue Unternehmen zu finden ist praktisch unbegrenzt, der Versand ist der eigentliche Engpass. Für die Zeitersparnis rechnen wir mit rund 8 Minuten Handarbeit pro Kontakt, für die Kostenersparnis mit 45 € Stundenlohn. Für die Meetings rechnen wir mit 5% Antwortquote, davon ein Viertel positiv, davon die Hälfte führt zu einem Termin, branchenübliche Werte, keine Garantie. Fast die Hälfte aller Antworten kommt übrigens erst von der zweiten Mail, nicht von der ersten, deshalb zählt ein sauberer Export in euer Versandtool mit dazu. Euer echtes Ergebnis hängt von eurer Nische und eurem Angebot ab.",
-    agencyOnlyNote: "Diese Zahlen zeigen das Potenzial bei unlimitierten Leads, verfügbar ab dem Agentur-Plan. Auf Starter (bis 5.000 qualifizierte Leads/Monat) skalieren sie entsprechend kleiner:",
+    eyebrow: "Wo die Grenze liegt",
+    title: "Nicht beim Finden, sondern beim Versenden",
+    body: "Neue Unternehmen zu finden ist praktisch unbegrenzt: Karten- und Firmendatenbank geben mehr her, als eine Agentur bearbeiten kann. Der Engpass sitzt am anderen Ende, beim Versand. Wie viele Postfächer ihr habt und wie viele Mails jedes davon am Tag verträgt, entscheidet über euer Volumen, nicht die Zahl der verfügbaren Leads.",
+    bottleneckNote: "Deshalb sind Warmup-Status und Tagesvolumen pro Postfach direkt im Tool sichtbar, statt euch beim Versand allein zu lassen.",
+    starterLabel: "Realistisch auf dem Starter-Plan, gerechnet mit 1.000 Leads im Monat:",
     starterTiles: [
-      { value: "≈ 133 Std.", label: "Recherchezeit gespart / Monat" },
+      { value: "≈ 133 Std.", label: "Recherchezeit gespart pro Monat" },
       { value: "≈ 6.000 €", label: "Arbeitszeit-Gegenwert dafür" },
-      { value: "≈ 204 €", label: "Gesamtkosten (Frostbreaker + Versand + APIs)" },
+      { value: "≈ 204 €", label: "Gesamtkosten inklusive Versand und Abfragen" },
     ],
+    starterNote: "Gerechnet mit 8 Minuten Handarbeit pro Kontakt und 45 € Stundensatz. Euer Ergebnis hängt von Nische und Angebot ab.",
   },
   pricing: {
     eyebrow: "Preise",
@@ -748,6 +861,93 @@ const en: typeof de = {
     ],
     footnote:
       "Your actual cost depends on niche and hit rate. The figure above comes from one specific search and is not a guarantee.",
+  },
+  agencyPage: {
+    metaTitle: "For agencies: one login, one workspace per client",
+    metaDescription:
+      "Run several clients in separate workspaces, with their own branding and shareable reports that need no login. One subscription instead of one per client.",
+    eyebrow: "For agencies",
+    title: "One login. One workspace per client. No new subscription for each.",
+    intro:
+      "If you run cold outreach for your own clients, account management is usually the real problem: one tool login per client, one subscription per client, and a hand-built report at the end of the month. That's what the Agency plan is for.",
+    sections: [
+      {
+        id: "workspaces",
+        eyebrow: "Separated",
+        title: "Every client in their own space",
+        body: "Leads, campaigns, suppression lists and contacts stay cleanly separated per client. You switch between spaces inside the same login instead of signing out and back in. New clients are set up in seconds, without taking out another subscription.",
+        bullets: [
+          "Unlimited workspaces included in the plan",
+          "Name, logo and accent colour per workspace",
+          "Suppression list per client, no overlap",
+        ],
+      },
+      {
+        id: "report",
+        eyebrow: "Presentable",
+        title: "The report you can hand over",
+        body: "One link per client shows the numbers in that client's look, without them needing an account. Individual contact details deliberately stay with you. It replaces the spreadsheet that otherwise gets built by hand each month.",
+        bullets: [
+          "No login needed for the end client",
+          "In the branding of that client",
+          "Contact details stay with you",
+        ],
+      },
+      {
+        id: "costs",
+        eyebrow: "Predictable",
+        title: "What a client costs you",
+        body: "The plan is fixed, lookup costs follow volume. For 1,000 qualified leads a month, one client comes to roughly €65 in lookup cost, no matter how many clients you run in parallel. What you charge your clients for it stays your decision.",
+        bullets: [
+          "€199 a month, regardless of client count",
+          "≈ €65 in lookup cost per 1,000 leads",
+          "No surcharge per workspace created",
+        ],
+      },
+    ],
+    contrastTitle: "What multi-client management usually costs",
+    contrastBody:
+      "With pure sending tools, managing several clients is usually a separately priced add-on, often with its own price per client account, and then it only covers sending. Research, enrichment and reporting come on top. Here both are part of the product from the start.",
+    ctaTitle: "Talk to us briefly about your client setup",
+    ctaBody:
+      "On the Agency plan we set up workspaces and branding together, which is why a short call comes first rather than a self-service signup. 30 minutes, no slide deck.",
+    ctaLabel: "Book a call",
+  },
+  pricingPage: {
+    metaTitle: "Pricing: €99 or €199 per month, plus your actual lookup cost",
+    metaDescription:
+      "Fixed monthly prices with no lock-in, plus lookup costs at cost price. 14 days free, no credit card required, cancel monthly.",
+    eyebrow: "Pricing",
+    title: "Two numbers, no surprises",
+    intro:
+      "You pay for the plan and for the lookups your searches actually trigger. Nothing else. No setup fee, no minimum term, no credit bundle that expires at the end of the month.",
+    breakdownTitle: "What your invoice is made of",
+    breakdownIntro: "So nobody is surprised by the first invoice, here are both items side by side.",
+    breakdown: [
+      {
+        id: "plan",
+        label: "Fixed monthly price",
+        value: "€99 or €199",
+        body: "Depending on the plan. Cancel monthly, no minimum term, no setup fee.",
+      },
+      {
+        id: "usage",
+        label: "Lookups, at cost",
+        value: "≈ $4 / 100 companies",
+        body: "Settled directly through your own accounts. What a search cost appears in the dashboard afterwards.",
+      },
+    ],
+    breakdownExample:
+      "Example: 1,000 qualified leads a month on the Starter plan comes to roughly €99 plus about €65 in lookup cost.",
+    faqTitle: "Pricing questions",
+    faq: [
+      { q: "Do I need a credit card for the trial?", a: "No. You create an account and can try everything for 14 days without entering payment details." },
+      { q: "What happens after the 14 days?", a: "Without an active subscription the account pauses, nothing is deleted. You then decide whether and on which plan to continue." },
+      { q: "Can I switch between plans?", a: "Yes, in both directions. The change takes effect at the next billing period, workspaces and leads are kept." },
+      { q: "What counts towards the 5,000 leads on Starter?", a: "Only qualified leads, meaning person-specific addresses. Generic addresses like info@ don't count, and a company counts once even if several people are found." },
+      { q: "Can I cancel any time?", a: "Yes, monthly, with no notice beyond the current month and no minimum term." },
+      { q: "What happens to my data if I cancel?", a: "Your data is deleted after the contract ends, or returned on request, as set out in the DPA. There is no lock-in period and no export fee." },
+    ],
   },
   featuresPage: {
     metaTitle: "Features: from search to answered email",
@@ -941,6 +1141,22 @@ const en: typeof de = {
       icebreakerLabel: "Icebreaker",
       icebreaker:
         "Five employees, own workshop, yet appointment requests still run through the contact form.",
+    },
+    report: {
+      badge: "What the end client sees",
+      client: "Muster GmbH",
+      period: "Report · October",
+      stats: [
+        { label: "Contacted", value: "1,240" },
+        { label: "Replies", value: "86" },
+        { label: "Meetings", value: "9" },
+      ],
+      progressLabel: "Goal for the month",
+      progressValue: "9 of 10 meetings",
+      progressPercent: 90,
+      urlLabel: "Shareable link, no login",
+      url: "report.frostbreaker.app/muster-gmbh",
+      note: "Individual contact details are deliberately hidden from the end client.",
     },
     mailboxes: {
       title: "Mailboxes",
@@ -1206,22 +1422,17 @@ const en: typeof de = {
     sub: "That's what a single search looks like in our own dashboard: live, not calculated after the fact.",
   },
   scaling: {
-    eyebrow: "Scaling potential",
-    title: "What's mathematically possible if you go all-in",
-    tiles: [
-      { value: "125,000", label: "personalized emails sendable per month" },
-      { value: "up to 125,000", label: "reachable businesses per month" },
-      { value: "≈ 16,700 hrs", label: "manual research saved, roughly 100 full-time roles/month" },
-      { value: "≈ 780", label: "qualified meetings per month, calculated" },
-    ],
-    methodologyLabel: "How these numbers come about, no guarantee:",
-    methodologyBody: "We calculate with 125,000 emails sent per month (up to 500,000 would even be possible). Finding new businesses is practically unlimited, sending is the real bottleneck. For time savings we calculate roughly 8 minutes of manual work per contact, for cost savings a $50/hour wage. For meetings we calculate a 5% reply rate, a quarter of that positive, half of that leading to a meeting, industry-typical values, no guarantee. Nearly half of all replies actually come from the second email, not the first, which is why a clean export into your sending tool matters too. Your real results depend on your niche and your offer.",
-    agencyOnlyNote: "These numbers show the potential with unlimited leads, available from the Agency plan. On Starter (up to 5,000 qualified leads/month) they scale down accordingly:",
+    eyebrow: "Where the limit sits",
+    title: "Not in finding, but in sending",
+    body: "Finding new companies is practically unlimited: map and company database hold more than any agency can work through. The bottleneck sits at the other end, at sending. How many mailboxes you have and how many emails each of them tolerates per day decides your volume, not the number of available leads.",
+    bottleneckNote: "That is why warmup status and daily volume per mailbox are visible right in the tool, instead of leaving you alone with the sending part.",
+    starterLabel: "Realistic on the Starter plan, calculated with 1,000 leads per month:",
     starterTiles: [
-      { value: "≈ 133 hrs", label: "research time saved / month" },
-      { value: "≈ $6,500", label: "labor cost equivalent for that" },
-      { value: "≈ $220", label: "total cost (Frostbreaker + sending + APIs)" },
+      { value: "≈ 133 hrs", label: "research time saved per month" },
+      { value: "≈ €6,000", label: "labour cost equivalent for that" },
+      { value: "≈ €204", label: "total cost including sending and lookups" },
     ],
+    starterNote: "Calculated with 8 minutes of manual work per contact and a €45 hourly rate. Your result depends on niche and offer.",
   },
   pricing: {
     eyebrow: "Pricing",

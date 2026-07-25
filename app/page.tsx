@@ -15,10 +15,13 @@ export default function Home() {
   // nebeneinander (die Leiste lief ~30px ueber und erzeugte horizontales
   // Scrollen). Statt die Navigation dort ganz auszublenden, erscheinen die
   // sekundaeren Links erst ab lg; Preise und Kontakt bleiben immer sichtbar.
+  // Agenturen, Preise und der Vergleich haben eigene Seiten bekommen. Die
+  // Anker auf der Startseite bleiben bestehen, damit alte Links weiter
+  // funktionieren, die Navigation zeigt aber auf die vollstaendigen Seiten.
   const navLinks = [
-    { href: "#agenturen", label: t.nav.agenturen, secondary: true },
-    { href: "#preise", label: t.nav.preise, secondary: false },
-    { href: "#vergleich", label: t.nav.vergleich, secondary: true },
+    { href: "/funktionen", label: t.featuresPage.eyebrow, secondary: true },
+    { href: "/fuer-agenturen", label: t.nav.agenturen, secondary: true },
+    { href: "/preise", label: t.nav.preise, secondary: false },
     { href: "#faq", label: t.nav.faq, secondary: true },
     { href: "/kontakt", label: t.nav.kontakt, secondary: false },
   ];
@@ -385,8 +388,19 @@ export default function Home() {
               <AgencyMockup />
             </div>
           </div>
-          <div className="mt-8 rounded-2xl border border-edge/60 bg-panel p-5">
-            <p className="text-sm leading-relaxed text-soft">{t.agency.note}</p>
+          {/* Die Details -- Kosten pro Kunde, Report aus Endkundensicht,
+              Abgrenzung zu Versand-Tools -- stehen auf /fuer-agenturen. Hier
+              nur der Verweis, damit die Startseite nicht zwei Zielgruppen
+              gleichzeitig bedienen muss. */}
+          <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-edge/60 bg-panel p-5">
+            <p className="max-w-[58ch] text-sm leading-relaxed text-soft">{t.agency.note}</p>
+            <a
+              href="/fuer-agenturen"
+              className="group inline-flex shrink-0 items-center gap-1.5 text-sm font-medium text-sky-700 transition-colors hover:text-sky-800"
+            >
+              {t.nav.agenturen}
+              <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
+            </a>
           </div>
         </div>
       </section>
@@ -564,131 +578,67 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Scaling potential */}
+      {/* Wo die Grenze liegt. Vorher standen hier vier Hochrechnungen, die
+          neben den nachgerechneten Zahlen weiter oben beliebig wirkten. */}
       <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <SectionHeading eyebrow={t.scaling.eyebrow} title={t.scaling.title} />
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {t.scaling.tiles.map((tile) => (
-            <div key={tile.label} className="rounded-2xl border border-edge/60 bg-panel p-6 hover-lift">
-              <p className="font-display text-3xl font-semibold tracking-[-0.02em] text-ink">{tile.value}</p>
-              <p className="mt-1.5 text-sm text-soft">{tile.label}</p>
+        <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+          <div>
+            <p className="text-base leading-relaxed text-soft">{t.scaling.body}</p>
+            <p className="mt-4 text-sm leading-relaxed text-mute">{t.scaling.bottleneckNote}</p>
+          </div>
+          <div>
+            <p className="text-sm font-medium text-soft">{t.scaling.starterLabel}</p>
+            <div className="mt-4 grid gap-x-8 sm:grid-cols-3">
+              {t.scaling.starterTiles.map((tile) => (
+                <div key={tile.label} className="border-t border-edge2/70 py-4">
+                  <p className="font-display text-2xl font-semibold tracking-[-0.02em] text-ink">{tile.value}</p>
+                  <p className="mt-1 text-xs leading-relaxed text-soft">{tile.label}</p>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-        <div className="mt-6 rounded-2xl border border-edge/60 bg-panel2 p-5 text-xs leading-relaxed text-faint">
-          <p className="font-medium text-soft">{t.scaling.methodologyLabel}</p>
-          <p className="mt-1.5">{t.scaling.methodologyBody}</p>
-          <p className="mt-3 font-medium text-soft">
-            {t.scaling.agencyOnlyNote}{" "}
-            <a href="#rechner" className="text-sky-600 underline underline-offset-2 hover:text-sky-700">
-              {t.calculator.title} →
-            </a>
-          </p>
+            <p className="mt-3 text-xs leading-relaxed text-mute">{t.scaling.starterNote}</p>
+          </div>
         </div>
       </section>
 
-      {/* Preise */}
+      {/* Preis-Anriss. Die vollstaendigen Plaene, die Aufschluesselung beider
+          Rechnungsposten und der Vergleich stehen auf /preise -- hier bleibt
+          nur, was fuer die Entscheidung "weiterlesen oder nicht" reicht. Der
+          Anker #preise bleibt bestehen, damit bestehende Links funktionieren. */}
       <section id="preise" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
         <div className="mx-auto max-w-4xl px-4 py-20 sm:px-6">
           <SectionHeading eyebrow={t.pricing.eyebrow} title={t.pricing.title} />
-          <div className="grid gap-6 sm:grid-cols-2">
+          <div className="grid gap-5 sm:grid-cols-2">
             {t.pricing.plans.map((plan) => (
-              <div
+              <a
                 key={plan.id}
+                href="/preise"
                 className={
-                  "relative flex flex-col rounded-2xl border bg-panel p-6 hover-lift " +
-                  (plan.highlighted ? "border-sky-500/50" : "border-edge/60")
+                  "hover-lift flex items-baseline justify-between gap-4 rounded-2xl border bg-panel p-6 transition-colors " +
+                  (plan.highlighted ? "border-sky-500/50 hover:border-sky-500" : "border-edge/60 hover:border-edge2")
                 }
               >
-                {plan.highlighted && (
-                  <span className="absolute -top-3 right-6 rounded-full bg-sky-500 px-2.5 py-0.5 text-xs font-medium text-white shadow">
-                    {t.pricing.agencyBadge}
+                <span>
+                  <span className="block text-sm font-semibold text-ink">{plan.label}</span>
+                  <span className="font-display mt-1 block text-3xl font-semibold tracking-[-0.03em] text-ink">
+                    {plan.price}
                   </span>
-                )}
-                <h3 className="text-sm font-semibold text-ink">{plan.label}</h3>
-                <p className="mt-1 flex items-baseline gap-1.5">
-                  <span className="font-display text-4xl font-semibold tracking-[-0.03em] text-ink">{plan.price}</span>
-                  <span className="text-sm text-faint">{plan.priceNote}</span>
-                </p>
-                <ul className="mt-4 flex-1 space-y-2 text-sm text-soft">
-                  {plan.features.map((f) => (
-                    <li key={f} className="flex items-start gap-2.5">
-                      <CheckIcon />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-                {/* Starter startet die Testphase direkt, Agentur fuehrt bewusst
-                    ins Gespraech: mehrere Workspaces, Whitelabel und der Preis
-                    ab 199 EUR werden ohnehin besprochen. */}
-                <CTAButton
-                  className="mt-6 w-full"
-                  label={plan.ctaLabel}
-                  href={plan.id === "starter" ? undefined : BOOKING_URL}
-                  variant={plan.id === "starter" ? "primary" : "secondary"}
-                />
-              </div>
+                  <span className="mt-0.5 block text-xs text-faint">{plan.priceNote}</span>
+                </span>
+                <span aria-hidden className="shrink-0 text-lg text-mute">→</span>
+              </a>
             ))}
           </div>
-          <p className="mt-6 text-center text-xs text-mute">{t.pricing.note}</p>
+          <p className="mt-6 text-center text-sm text-soft">
+            <a href="/preise" className="font-medium text-sky-700 underline underline-offset-2 hover:text-sky-800">
+              {t.pricingPage.title} →
+            </a>
+          </p>
+          <p className="mt-2 text-center text-xs text-mute">{t.pricing.note}</p>
         </div>
       </section>
 
-      {/* Comparison */}
-      <section id="vergleich" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <SectionHeading title={t.comparison.title} />
-        {/* Haken und Kreuz vor den Zellen: die Tabelle war reiner Fliesstext
-            und musste gelesen statt ueberflogen werden. Die Frostbreaker-Spalte
-            liegt zusaetzlich auf einem leichten Akzentgrund. */}
-        <div className="hidden overflow-x-auto rounded-2xl border border-edge/60 sm:block">
-          <table className="w-full border-collapse text-sm">
-            <thead>
-              <tr className="border-b border-edge/60 bg-panel2 text-left">
-                <th className="px-5 py-3 font-medium text-faint"> </th>
-                <th className="bg-sky-50/60 px-5 py-3 font-semibold text-ink">{t.comparison.headerFrostbreaker}</th>
-                <th className="px-5 py-3 font-medium text-faint">{t.comparison.headerOther}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {t.comparison.rows.map(([label, s3, other], i) => (
-                <tr key={label} className={i % 2 === 0 ? "bg-panel" : "bg-panel/60"}>
-                  <td className="border-t border-edge/60 px-5 py-3 font-medium text-soft">{label}</td>
-                  <td className="border-t border-edge/60 bg-sky-50/60 px-5 py-3 text-ink">
-                    <span className="flex items-start gap-2.5">
-                      <CheckIcon />
-                      {s3}
-                    </span>
-                  </td>
-                  <td className="border-t border-edge/60 px-5 py-3 text-faint">
-                    <span className="flex items-start gap-2.5">
-                      <CrossIcon />
-                      {other}
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <div className="grid gap-4 sm:hidden">
-          {t.comparison.rows.map(([label, s3, other]) => (
-            <div key={label} className="rounded-2xl border border-edge/60 bg-panel p-4">
-              <p className="text-xs font-medium uppercase tracking-wide text-faint">{label}</p>
-              <div className="mt-3 grid grid-cols-2 gap-3">
-                <div>
-                  <p className="text-[10px] font-medium uppercase tracking-wide text-mute">{t.comparison.headerFrostbreaker}</p>
-                  <p className="mt-1 text-sm text-ink">{s3}</p>
-                </div>
-                <div>
-                  <p className="text-[10px] font-medium uppercase tracking-wide text-mute">{t.comparison.headerOther}</p>
-                  <p className="mt-1 text-sm text-faint">{other}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
 
       {/* Trust / DSGVO */}
       <section className="border-y border-edge/60 bg-panel2">
