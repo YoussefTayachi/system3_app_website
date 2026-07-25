@@ -483,6 +483,31 @@ const de = {
     body1: "Die meisten Tools liefern, was sie finden, inklusive info@, office@ und kontakt@-Adressen, an denen niemand konkret zuständig ist. Frostbreaker filtert das automatisch heraus: nur Adressen, die eindeutig einer echten Person zugeordnet sind, kommen überhaupt in eure Leads-Liste.",
     body2: "Kein Reply-to-nowhere. Kein Antworten ins Leere. Nur echte Ansprechpartner.",
   },
+  // Eigene Sektion statt eines Bullets unter sieben in "Warum Frostbreaker":
+  // ein Sales-Kontakt fand das Feature stark, aber erst live in der App, nicht
+  // beim Lesen der Website -- dasselbe Muster wie beim Kostenargument vorher.
+  // Direkt nach qualifiedLeads platziert: dort ist das Publikum schon im
+  // Thema Kontaktqualität, der naechste Schritt ist "und die Adresse geht
+  // auch wirklich zu".
+  verification: {
+    eyebrow: "Bevor eine Adresse eurer Domain schadet",
+    title: "Jede E-Mail wird geprüft, bevor sie in eine Kampagne geht",
+    body: "Eine ungültige Adresse kostet nicht nur einen Lead. Sie beschädigt eure Sender-Reputation, über alle Postfächer und alle Kunden hinweg, und das lässt sich nicht einfach zurückdrehen. Deshalb läuft die Prüfung automatisch vor jedem Versand, ohne ein zusätzliches Tool und ohne dass ihr manuell etwas anstoßen müsst.",
+    // Illustrative Zahlen (Beispielansicht, siehe reportBadge), konsistent
+    // mit der Groessenordnung der uebrigen Mockups auf der Seite.
+    reportBadge: "Beispielansicht",
+    reportLabel: "Ergebnis der letzten Prüfung",
+    reportChecked: "E-Mails geprüft",
+    reportCheckedValue: "105",
+    reportInvalid: "als ungültig erkannt und entfernt",
+    reportInvalidValue: "12",
+    reportRate: "Zustellrate danach",
+    reportRateValue: "96 %",
+    reportNote: "Automatisch vor jedem Versand, kein Extra-Tool nötig.",
+    fact: "Geprüfte E-Mail-Adressen kommen etwa doppelt so oft an wie ungeprüfte.",
+    factSub: "Zu viele falsche Adressen und eure Mails landen im Spam statt im Postfach.",
+    factSource: "Branchen-Benchmarks E-Mail-Zustellbarkeit, 2026",
+  },
   qualifiedMockup: {
     typicalLabel: "Typisches Tool",
     frostbreakerLabel: "Frostbreaker",
@@ -765,6 +790,7 @@ const de = {
       { q: "Was kostet das?", a: "99 € im Monat für den Starter-Plan (1 Workspace, bis 5.000 qualifizierte Leads), 14 Tage kostenlos testen, danach monatlich kündbar. Der Agentur-Plan (mehrere Workspaces, unlimitiert) startet ab 199 € im Monat, abgestimmt auf eure Anzahl an Kunden-Workspaces, dafür sprechen wir kurz miteinander. Dazu kommen eure eigenen, transparent im Dashboard einsehbaren API-Kosten." },
       { q: "Kann ich jederzeit kündigen?", a: "Ja, monatlich, keine Mindestlaufzeit, keine Kündigungsfrist über den laufenden Monat hinaus." },
       { q: "Woher weiß ich, dass eine gefundene E-Mail wirklich zu einer Person gehört?", a: "Frostbreaker filtert generische Adressen wie info@ oder office@ automatisch heraus. Nur E-Mails, die eindeutig einer Person zugeordnet sind, landen in eurer Leads-Liste." },
+      { q: "Was passiert, wenn ich aus Versehen an eine ungültige Adresse schreibe?", a: "Jede Adresse wird vor dem Versand geprüft, ungültige werden automatisch aussortiert. Das ist kein Nice-to-have: eine hohe Bounce-Rate beschädigt eure Sender-Reputation über alle Postfächer und alle Kunden hinweg, nicht nur die eine Kampagne. Die Prüfung läuft automatisch mit, ihr müsst nichts manuell anstoßen." },
       { q: "Welche Dienste laufen im Hintergrund, und brauche ich dort eigene Zugänge?", a: "Frostbreaker greift für die Kartensuche auf Google, für die Recherche auf OpenAI und für den Domain-Abgleich auf Hunter zu, optional NeverBounce für die Verifizierung und Instantly für den Versand. Ihr legt dort eigene Zugänge an und hinterlegt die Schlüssel einmal in den Einstellungen, verschlüsselt gespeichert. Genau deshalb zahlt ihr die Abfragen zum Selbstkostenpreis statt eines Aufschlags. Die App führt euch in der Testphase Schritt für Schritt durch das Setup." },
       { q: "Warum nicht gleich direkt zu Hunter oder Apollo?", a: "Weil keiner dieser Dienste den ganzen Weg abdeckt. Hunter findet Adressen zu einer Domain, aber keine lokalen Betriebe ohne Firmendatenbank-Eintrag. Apollo listet Unternehmen, schreibt aber keine individuelle Zeile pro Lead. Versand-Tools versenden, recherchieren aber nicht. Wer das selbst zusammensteckt, zahlt drei bis vier Abos, exportiert CSV-Dateien hin und her und baut das Reporting von Hand. Frostbreaker ist die Verbindung dazwischen: eine Suche, eine Liste, ein Versand, ein Dashboard, inklusive Antworten und gebuchten Meetings." },
       { q: "Was passiert, wenn ich aus Versehen einen Bestandskunden oder jemanden anschreibe, der sich abgemeldet hat?", a: "Genau dafür gibt es die eingebaute Sperrliste: einmal eingetragen, schließt Frostbreaker diese Kontakte und Domains automatisch aus jeder zukünftigen Suche und jedem Versand aus, ganz ohne dass ihr das bei jeder Kampagne manuell prüfen müsst. Bestandskunden und Opt-outs bleiben zuverlässig geschützt." },
@@ -1239,6 +1265,23 @@ const en: typeof de = {
     body1: "Most tools deliver whatever they find, including info@, office@ and contact@ addresses that nobody is specifically responsible for. Frostbreaker filters that out automatically: only addresses clearly assigned to a real person ever make it into your leads list.",
     body2: "No reply-to-nowhere. No answering into the void. Only real decision-makers.",
   },
+  verification: {
+    eyebrow: "Before an address hurts your domain",
+    title: "Every email is checked before it enters a campaign",
+    body: "An invalid address doesn't just cost you one lead. It damages your sender reputation, across every mailbox and every client, and that's not easy to undo. That's why the check runs automatically before every send, no extra tool, nothing to trigger manually.",
+    reportBadge: "Example view",
+    reportLabel: "Result of the last check",
+    reportChecked: "emails checked",
+    reportCheckedValue: "105",
+    reportInvalid: "flagged invalid and removed",
+    reportInvalidValue: "12",
+    reportRate: "delivery rate afterwards",
+    reportRateValue: "96%",
+    reportNote: "Automatic before every send, no extra tool needed.",
+    fact: "Verified email addresses arrive roughly twice as often as unverified ones.",
+    factSub: "Too many bad addresses and your emails land in spam instead of the inbox.",
+    factSource: "Industry benchmarks, email deliverability, 2026",
+  },
   qualifiedMockup: {
     typicalLabel: "Typical tool",
     frostbreakerLabel: "Frostbreaker",
@@ -1515,6 +1558,7 @@ const en: typeof de = {
       { q: "What does it cost?", a: "$99/month for the Starter plan (1 workspace, up to 5,000 qualified leads), 14 days free, cancel anytime after. The Agency plan (multiple workspaces, unlimited) starts from $199/month, tailored to your number of client workspaces, so let's have a quick chat about that. On top come your own API costs, transparently visible in the dashboard." },
       { q: "Can I cancel anytime?", a: "Yes, monthly, no minimum term, no notice period beyond the current month." },
       { q: "How do I know a found email really belongs to a person?", a: "Frostbreaker automatically filters out generic addresses like info@ or office@. Only emails clearly assigned to a person make it into your leads list." },
+      { q: "What happens if I accidentally send to an invalid address?", a: "Every address is checked before sending, invalid ones are filtered out automatically. This isn't a nice-to-have: a high bounce rate damages your sender reputation across every mailbox and every client, not just the one campaign. The check runs automatically, nothing to trigger manually." },
       { q: "Which services run in the background, and do I need my own accounts there?", a: "Frostbreaker uses Google for the map search, OpenAI for the research and Hunter for the domain match, optionally NeverBounce for verification and Instantly for sending. You create your own accounts there and enter the keys once in settings, stored encrypted. That is exactly why you pay for lookups at cost instead of a markup. During the trial the app walks you through setup step by step." },
       { q: "Why not go straight to Hunter or Apollo?", a: "Because none of them covers the whole path. Hunter finds addresses for a domain, but not local businesses that aren't in a company database. Apollo lists companies but doesn't write an individual line per lead. Sending tools send but don't research. Stitching that together yourself means three or four subscriptions, CSV files going back and forth, and reporting built by hand. Frostbreaker is the connection in between: one search, one list, one send, one dashboard, including replies and booked meetings." },
       { q: "What happens if I accidentally email an existing customer or someone who's opted out?", a: "That's exactly what the built-in suppression list is for: once added, Frostbreaker automatically excludes those contacts and domains from every future search and send, no manual checking required for every campaign. Existing customers and opt-outs stay reliably protected." },

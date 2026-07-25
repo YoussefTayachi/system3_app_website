@@ -504,3 +504,47 @@ export function MailboxesMockup() {
     </AppFrame>
   );
 }
+
+/** Zeigt das Ergebnis einer Verifizierung, nicht nur den Knopf dafuer. Bisher
+ *  visualisierte kein Mockup, was die Pruefung tatsaechlich bewirkt -- nur
+ *  "E-Mails verifizieren" als Aktion in der Leads-Tabelle. Drei Zahlen reichen,
+ *  um den Nutzen sofort sichtbar zu machen, statt ihn nur zu behaupten. */
+export function VerificationReportMockup() {
+  const { t } = useT();
+  const m = t.verification;
+  return (
+    <AppFrame>
+      <div className="p-5 sm:p-6">
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <p className="text-[10px] font-medium uppercase tracking-[0.1em] text-faint">{m.reportLabel}</p>
+          <span className="rounded-full border border-edge2 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wide text-faint">
+            {m.reportBadge}
+          </span>
+        </div>
+
+        <div className="mt-4 grid grid-cols-3 divide-x divide-edge/70 overflow-hidden rounded-xl border border-edge/70">
+          <div className="px-3.5 py-3.5">
+            <p className="font-display text-2xl font-semibold tracking-[-0.02em] text-ink">{m.reportCheckedValue}</p>
+            <p className="mt-1 text-xs leading-relaxed text-soft">{m.reportChecked}</p>
+          </div>
+          {/* Der ungueltig-erkannt-Wert steht bewusst in Amber statt Rot: er
+              ist das Ergebnis der Schutzfunktion, keine Fehlermeldung. */}
+          <div className="bg-amber-50/50 px-3.5 py-3.5">
+            <p className="font-display text-2xl font-semibold tracking-[-0.02em] text-amber-700">
+              {m.reportInvalidValue}
+            </p>
+            <p className="mt-1 text-xs leading-relaxed text-amber-900/70">{m.reportInvalid}</p>
+          </div>
+          <div className="bg-emerald-50/50 px-3.5 py-3.5">
+            <p className="font-display text-2xl font-semibold tracking-[-0.02em] text-emerald-700">
+              {m.reportRateValue}
+            </p>
+            <p className="mt-1 text-xs leading-relaxed text-emerald-900/70">{m.reportRate}</p>
+          </div>
+        </div>
+
+        <p className="mt-3 text-xs leading-relaxed text-mute">{m.reportNote}</p>
+      </div>
+    </AppFrame>
+  );
+}

@@ -1,6 +1,6 @@
 "use client";
 import { Logo, CTAButton, CTAGroup, NavDropdown, SectionHeading } from "../_ui";
-import { DashboardMockup, SearchFormMockup, LeadsTableMockup, LeadDetailMockup, MailboxesMockup, AiAgentMockup } from "../_app-mockups";
+import { DashboardMockup, SearchFormMockup, LeadsTableMockup, LeadDetailMockup, MailboxesMockup, AiAgentMockup, VerificationReportMockup } from "../_app-mockups";
 import { SuppressionMockup } from "../_mockups";
 import { Reveal } from "../reveal";
 import { CheckIcon } from "../_icons";
@@ -21,9 +21,12 @@ export default function FunktionenPage() {
   // Dictionary: das Dictionary haelt Text, keine Komponenten.
   const visuals: Record<string, React.ReactNode> = {
     find: <SearchFormMockup />,
+    // Verifizierung war bisher nur ein Textbullet ohne eigenes Bild -- genau
+    // das Muster, das auf der Startseite schon eine eigene Sektion bekam.
     enrich: (
       <div className="space-y-5">
         <LeadDetailMockup />
+        <VerificationReportMockup />
         <LeadsTableMockup />
       </div>
     ),

@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { Logo, CTAButton, CTAGroup, NavDropdown, SectionHeading, FactBox, StatTile, BOOKING_URL } from "./_ui";
 import { AgencyMockup, PostSendMockup, LocalReachMockup, QualifiedLeadMockup, SuppressionMockup, DeliverabilityMockup, CampaignMockup } from "./_mockups";
-import { DashboardMockup, SearchFormMockup, CorporateSearchMockup, LeadsTableMockup, LeadDetailMockup, MailboxesMockup } from "./_app-mockups";
+import { DashboardMockup, SearchFormMockup, CorporateSearchMockup, LeadsTableMockup, LeadDetailMockup, MailboxesMockup, VerificationReportMockup } from "./_app-mockups";
 import { LeadCardStack } from "./_illustration";
 import { SavingsCalculator } from "./_calculator";
 import { Reveal } from "./reveal";
@@ -277,6 +277,25 @@ export default function Home() {
                   Liste steht: Person, geprüfte Mail, Nummer aus dem Eintrag. */}
               <LeadDetailMockup />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Verifizierung als eigene Sektion statt eines Bullets unter sieben in
+          "Warum Frostbreaker": ein Sales-Kontakt fand das Feature stark, aber
+          erst live in der App, nicht beim Lesen der Website. Direkt danach
+          platziert, weil das Publikum hier schon im Thema Kontaktqualitaet
+          ist -- der naechste Schritt ist "und die Adresse geht auch wirklich
+          zu", nicht vier Sektionen weiter unten. */}
+      <section id="verifizierung" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        <SectionHeading eyebrow={t.verification.eyebrow} title={t.verification.title} />
+        <div className="grid gap-10 lg:grid-cols-5 lg:items-start">
+          <div className="lg:col-span-2">
+            <p className="text-sm leading-relaxed text-soft sm:text-base">{t.verification.body}</p>
+            <FactBox fact={t.verification.fact} sub={t.verification.factSub} source={t.verification.factSource} />
+          </div>
+          <div className="lg:col-span-3">
+            <VerificationReportMockup />
           </div>
         </div>
       </section>
