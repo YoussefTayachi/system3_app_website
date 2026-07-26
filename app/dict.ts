@@ -806,6 +806,85 @@ const de = {
     finalBody: "Kein Verkaufsgespräch von der Stange, sondern eine echte Suche mit euren eigenen Kriterien.",
     backLink: "Lieber erst alle Details ansehen?",
   },
+  legal: {
+    back: "Zurück zur Startseite",
+    footerLine: (year: number) => `© ${year} Frostbreaker · Wien, Österreich`,
+    impressumPage: {
+      updated: "Stand: Juli 2026",
+      identityHeading: "Angaben gemäß § 5 ECG, § 25 Mediengesetz",
+      identityLines: [
+        "Youssef Tayachi",
+        "Einzelunternehmer",
+        "Gewerbe: Dienstleistungen in der automatischen Datenverarbeitung und Informationstechnik",
+        "Bernoullistraße 4/17",
+        "1220 Wien, Österreich",
+      ],
+      authorityHeading: "Gewerbebehörde",
+      authorityText: "Magistrat der Stadt Wien, Magistratisches Bezirksamt für den 22. Bezirk.",
+      contactHeading: "Kontakt",
+      contactEmailLabel: "E-Mail:",
+      purposeHeading: "Unternehmensgegenstand",
+      purposeText: "Entwicklung und Betrieb von Software zur B2B-Lead-Recherche und -Anreicherung.",
+      liabilityHeading: "Haftungshinweis",
+      liabilityText:
+        "Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.",
+    },
+    privacyPage: {
+      updated: "Stand: Juli 2026",
+      controllerHeading: "1. Verantwortlicher",
+      controllerText: "Youssef Tayachi, Bernoullistraße 4/17, 1220 Wien, Österreich.",
+      controllerContactLabel: "Kontakt für Datenschutzanfragen:",
+      dataHeading: "2. Welche Daten wir verarbeiten",
+      dataText:
+        "Beim Besuch dieser Website verarbeiten wir technisch notwendige Zugriffsdaten (z. B. IP-Adresse, Zeitpunkt des Zugriffs, aufgerufene Seite) für Betrieb und Sicherheit der Seite. Ein Kontaktformular gibt es nicht: E-Mail auf der Kontaktseite ist ein direkter mailto-Link, der euer eigenes E-Mail-Programm öffnet, dabei werden keine Daten an uns übermittelt.",
+      cookiesHeading: "3. Cookies",
+      cookiesText:
+        "Diese Website setzt ein einziges, technisch notwendiges Cookie (lang) zur Sprachspeicherung, ein Jahr gültig. Keine Analyse, keine Werbung, keine Einwilligung erforderlich.",
+      analyticsHeading: "4. Reichweitenmessung",
+      analyticsText:
+        "Wir nutzen Vercel Web Analytics zur anonymisierten, cookie-freien Auswertung von Seitenaufrufen. Keine IP-Adressen oder sonstigen identifizierenden Daten werden gespeichert.",
+      calendlyHeading: "5. Terminbuchung über Calendly",
+      calendlyText:
+        "Der Button „Call buchen“ führt zu Calendly (Calendly LLC, USA), das in einem neuen Tab öffnet. Für dort eingegebene Daten gilt Calendlys Datenschutzerklärung, nicht diese hier.",
+      hostingHeading: "6. Hosting",
+      hostingText:
+        "Diese Website wird bei Vercel Inc. (USA) gehostet. Die Übermittlung erfolgt datenschutzkonform über Standardvertragsklauseln der EU-Kommission.",
+      retentionHeading: "7. Speicherdauer",
+      retentionText:
+        "Server-Logs werden automatisiert für einen kurzen, zur Fehleranalyse notwendigen Zeitraum gespeichert und danach gelöscht. Das Sprach-Cookie bleibt höchstens ein Jahr gespeichert.",
+      rightsHeading: "8. Eure Rechte",
+      rightsText:
+        "Ihr habt das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch. Wendet euch dazu an uns (Kontakt oben). Außerdem habt ihr das Recht, euch bei der österreichischen Datenschutzbehörde (dsb.gv.at) zu beschweren.",
+    },
+    termsPage: {
+      updated: "Stand: Juli 2026",
+      scopeHeading: "1. Geltungsbereich",
+      scopeText:
+        "Diese AGB gelten für alle Verträge zwischen Youssef Tayachi („Frostbreaker“, „wir“) und Unternehmern (B2B) über die Nutzung der Software Frostbreaker zur Recherche, Anreicherung, Verifizierung und Personalisierung von B2B-Kontaktdaten.",
+      formationHeading: "2. Vertragsschluss",
+      formationText:
+        "Ein Vertrag kommt zustande, wenn wir nach einem Demo-Gespräch ein individuelles Angebot erstellen und der Kunde dieses schriftlich (auch per E-Mail) annimmt.",
+      scopeOfServiceHeading: "3. Leistungsumfang",
+      scopeOfServiceText:
+        "Frostbreaker stellt eine Software bereit, mit der Kunden Unternehmen recherchieren, Ansprechpartner samt E-Mail-Adressen ermitteln, diese verifizieren und automatisiert personalisierte Textbausteine erstellen lassen können. Die nutzbaren Datenquellen (z. B. Google Places, Hunter) können sich ändern.",
+      byokHeading: "4. Bring Your Own Key (BYOK)",
+      byokText:
+        "Kunden hinterlegen eigene API-Zugangsdaten Dritter (z. B. Kartendienste, E-Mail-Anreicherung, KI-Textgenerierung) und tragen die dabei anfallenden Kosten selbst. Zusätzlich fällt eine individuell vereinbarte Nutzungsgebühr für Frostbreaker an.",
+      customerDutyHeading: "5. Pflichten des Kunden",
+      customerDutyText:
+        "Der Kunde ist allein dafür verantwortlich, recherchierte Kontakte im Einklang mit den für ihn geltenden Regeln zur Direktwerbung zu kontaktieren (u. a. TKG in Österreich, UWG in Deutschland). Frostbreaker stellt ein Werkzeug bereit, prüft aber nicht die rechtliche Zulässigkeit einzelner Kampagnen.",
+      availabilityHeading: "6. Verfügbarkeit",
+      availabilityText:
+        "Wir bemühen uns um hohe Verfügbarkeit, sichern jedoch keine bestimmte Uptime zu. Für die Verfügbarkeit von Drittanbieter-Diensten (z. B. Hunter, OpenAI) übernehmen wir keine Gewähr.",
+      liabilityHeading: "7. Haftung",
+      liabilityText:
+        "Wir haften unbeschränkt bei Vorsatz und grober Fahrlässigkeit sowie nach zwingenden gesetzlichen Vorschriften. Im Übrigen ist die Haftung auf den vertragstypisch vorhersehbaren Schaden begrenzt.",
+      termHeading: "8. Laufzeit und Kündigung",
+      termText: "Laufzeit und Kündigungsfristen werden im jeweiligen individuellen Angebot festgelegt.",
+      finalHeading: "9. Schlussbestimmungen",
+      finalText: "Es gilt österreichisches Recht unter Ausschluss des UN-Kaufrechts. Gerichtsstand ist, soweit gesetzlich zulässig, Wien.",
+    },
+  },
 };
 
 const en: typeof de = {
@@ -1539,6 +1618,85 @@ const en: typeof de = {
     finalHeading: "30 minutes, we'll show it live for your own niche",
     finalBody: "No off-the-shelf sales pitch, just a real search with your own criteria.",
     backLink: "Prefer to see all the details first?",
+  },
+  legal: {
+    back: "Back to homepage",
+    footerLine: (year: number) => `© ${year} Frostbreaker · Vienna, Austria`,
+    impressumPage: {
+      updated: "Last updated: July 2026",
+      identityHeading: "Information pursuant to § 5 ECG, § 25 Austrian Media Act",
+      identityLines: [
+        "Youssef Tayachi",
+        "Sole proprietor (Einzelunternehmer)",
+        "Trade: software development and data-processing services",
+        "Bernoullistraße 4/17",
+        "1220 Vienna, Austria",
+      ],
+      authorityHeading: "Regulating authority",
+      authorityText: "City of Vienna, District Authority for the 22nd district (Magistratisches Bezirksamt für den 22. Bezirk).",
+      contactHeading: "Contact",
+      contactEmailLabel: "Email:",
+      purposeHeading: "Business purpose",
+      purposeText: "Development and operation of software for B2B lead research and enrichment.",
+      liabilityHeading: "Liability notice",
+      liabilityText:
+        "Despite careful review, we assume no liability for the content of external links. Sole responsibility for linked pages lies with their respective operators.",
+    },
+    privacyPage: {
+      updated: "Last updated: July 2026",
+      controllerHeading: "1. Data controller",
+      controllerText: "Youssef Tayachi, Bernoullistraße 4/17, 1220 Vienna, Austria.",
+      controllerContactLabel: "Contact for privacy questions:",
+      dataHeading: "2. What data we process",
+      dataText:
+        "Visiting this site processes technically necessary access data (e.g. IP address, time of access, page requested) to operate and secure the site. There is no contact form: the email on the contact page is a plain mailto link that opens your own email client, no data is sent to us.",
+      cookiesHeading: "3. Cookies",
+      cookiesText:
+        "This site sets a single, technically necessary cookie (lang) to remember your language choice, valid for one year. No analytics, no advertising, no consent required.",
+      analyticsHeading: "4. Analytics",
+      analyticsText:
+        "We use Vercel Web Analytics for anonymized, cookie-free evaluation of page views. No IP addresses or other identifying data are stored.",
+      calendlyHeading: "5. Booking a call via Calendly",
+      calendlyText:
+        "The \"Book a call\" button leads to Calendly (Calendly LLC, USA), opening in a new tab. Data you enter there is governed by Calendly's own privacy policy, not this one.",
+      hostingHeading: "6. Hosting",
+      hostingText:
+        "This site is hosted by Vercel Inc. (USA). Transfers are safeguarded via the EU Commission's Standard Contractual Clauses.",
+      retentionHeading: "7. Retention",
+      retentionText:
+        "Server logs are kept automatically for a short period needed for troubleshooting, then deleted. The language cookie is kept for at most one year.",
+      rightsHeading: "8. Your rights",
+      rightsText:
+        "You have the right to access, rectification, erasure, restriction of processing, data portability, and objection. Contact us (see above) to exercise these. You also have the right to lodge a complaint with the Austrian data protection authority (dsb.gv.at).",
+    },
+    termsPage: {
+      updated: "Last updated: July 2026",
+      scopeHeading: "1. Scope",
+      scopeText:
+        "These terms apply to all contracts between Youssef Tayachi (\"Frostbreaker\", \"we\") and business customers (B2B) regarding use of the Frostbreaker software for researching, enriching, verifying, and personalizing B2B contact data.",
+      formationHeading: "2. Formation of contract",
+      formationText:
+        "A contract is formed once we issue an individual offer following a demo call and the customer accepts it in writing (including by email).",
+      scopeOfServiceHeading: "3. Scope of service",
+      scopeOfServiceText:
+        "Frostbreaker provides software that lets customers research companies, identify contacts with email addresses, verify them, and generate personalized copy automatically. The data sources used (e.g. Google Places, Hunter) may change.",
+      byokHeading: "4. Bring Your Own Key (BYOK)",
+      byokText:
+        "Customers provide their own third-party API credentials (e.g. mapping, email enrichment, AI text generation) and bear the resulting third-party costs themselves. An individually agreed usage fee for Frostbreaker applies in addition.",
+      customerDutyHeading: "5. Customer obligations",
+      customerDutyText:
+        "The customer is solely responsible for contacting researched leads in line with the direct-marketing rules that apply to them. Frostbreaker provides a tool but does not review the legal permissibility of individual customer campaigns.",
+      availabilityHeading: "6. Availability",
+      availabilityText:
+        "We aim for high availability but do not guarantee any specific uptime. We give no warranty for the availability of third-party services (e.g. Hunter, OpenAI).",
+      liabilityHeading: "7. Liability",
+      liabilityText:
+        "We are liable without limitation for intent and gross negligence and under mandatory statutory provisions. Otherwise, liability is limited to damage typically foreseeable under the contract.",
+      termHeading: "8. Term and termination",
+      termText: "Term and notice periods are set out in the relevant individual offer.",
+      finalHeading: "9. Final provisions",
+      finalText: "Austrian law applies, excluding the UN Convention on the International Sale of Goods. Venue is Vienna, to the extent permitted by law.",
+    },
   },
 };
 

@@ -1,63 +1,52 @@
+"use client";
 import { LegalShell } from "../_legal/LegalShell";
+import { useT } from "../language-provider";
 
-export const metadata = { title: "Impressum · Frostbreaker" };
+const CONTACT_EMAIL = "youssef.tayachi@frostbreaker.app";
 
+// EU-Streitschlichtung (ODR-Hinweis) bewusst weggelassen: die Pflicht dazu
+// betrifft Online-Verkaeufe an Verbraucher (B2C), Frostbreaker ist laut AGB
+// ausschliesslich B2B -- die Angabe waere hier nicht nur ueberfluessig,
+// sondern sachlich falsch platziert.
 export default function Impressum() {
+  const { t } = useT();
+  const l = t.legal.impressumPage;
   return (
-    <LegalShell title="Impressum" updated="Juli 2026">
+    <LegalShell title={t.footer.impressum} updated={l.updated}>
       <div className="space-y-8">
         <section>
-          <h2 className="text-base font-semibold text-ink">Angaben gemäß § 5 ECG, § 25 Mediengesetz</h2>
+          <h2 className="text-base font-semibold text-ink">{l.identityHeading}</h2>
           <p className="mt-3">
-            Youssef Tayachi<br />
-            Einzelunternehmer (Gewerbeanmeldung ausständig)<br />
-            Bernoullistraße 4/17<br />
-            1220 Wien, Österreich
+            {l.identityLines.map((line, i) => (
+              <span key={i}>
+                {line}
+                {i < l.identityLines.length - 1 && <br />}
+              </span>
+            ))}
           </p>
         </section>
 
         <section>
-          <h2 className="text-base font-semibold text-ink">Vertretungsberechtigt</h2>
-          <p className="mt-3">Youssef Tayachi</p>
+          <h2 className="text-base font-semibold text-ink">{l.authorityHeading}</h2>
+          <p className="mt-3">{l.authorityText}</p>
         </section>
 
         <section>
-          <h2 className="text-base font-semibold text-ink">Kontakt</h2>
+          <h2 className="text-base font-semibold text-ink">{l.contactHeading}</h2>
           <p className="mt-3">
-            E-Mail: <a href="mailto:youssef.tayachi@frostbreaker.app" className="text-ink underline">youssef.tayachi@frostbreaker.app</a><br />
-            Telefon: <a href="tel:+436769004865" className="text-ink underline">+43 676 9004865</a>
+            {l.contactEmailLabel}{" "}
+            <a href={`mailto:${CONTACT_EMAIL}`} className="text-ink underline">{CONTACT_EMAIL}</a>
           </p>
         </section>
 
         <section>
-          <h2 className="text-base font-semibold text-ink">Unternehmensgegenstand</h2>
-          <p className="mt-3">Entwicklung und Betrieb von Software zur B2B-Lead-Recherche und -Anreicherung.</p>
+          <h2 className="text-base font-semibold text-ink">{l.purposeHeading}</h2>
+          <p className="mt-3">{l.purposeText}</p>
         </section>
 
         <section>
-          <h2 className="text-base font-semibold text-ink">Firmenbuch / UID</h2>
-          <p className="mt-3">
-            Aktuell als Einzelunternehmer ohne Firmenbucheintrag tätig, Gewerbeanmeldung befindet sich in Vorbereitung.
-            Firmenbuchnummer und UID-Nummer werden hier ergänzt, sobald die Gewerbeanmeldung abgeschlossen ist.
-          </p>
-        </section>
-
-        <section>
-          <h2 className="text-base font-semibold text-ink">EU-Streitschlichtung</h2>
-          <p className="mt-3">
-            Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit, abrufbar unter{" "}
-            <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer" className="text-ink underline">
-              ec.europa.eu/consumers/odr
-            </a>. Wir sind zur Teilnahme an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle weder verpflichtet noch bereit.
-          </p>
-        </section>
-
-        <section>
-          <h2 className="text-base font-semibold text-ink">Haftungshinweis</h2>
-          <p className="mt-3">
-            Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den
-            Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.
-          </p>
+          <h2 className="text-base font-semibold text-ink">{l.liabilityHeading}</h2>
+          <p className="mt-3">{l.liabilityText}</p>
         </section>
       </div>
     </LegalShell>

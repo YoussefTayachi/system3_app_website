@@ -1,85 +1,56 @@
+"use client";
 import { LegalShell } from "../_legal/LegalShell";
-
-export const metadata = { title: "AGB · Frostbreaker" };
+import { useT } from "../language-provider";
 
 export default function AGB() {
+  const { t } = useT();
+  const l = t.legal.termsPage;
   return (
-    <LegalShell title="Allgemeine Geschäftsbedingungen" updated="Juli 2026">
+    <LegalShell title={t.footer.agb} updated={l.updated}>
       <div className="space-y-8">
         <section>
-          <h2 className="text-base font-semibold text-ink">1. Geltungsbereich</h2>
-          <p className="mt-3">
-            Diese AGB gelten für alle Verträge zwischen [Firmenname] („Frostbreaker“, „wir“) und Unternehmern (B2B) über die
-            Nutzung der Software Frostbreaker zur Recherche, Anreicherung, Verifizierung und Personalisierung von
-            B2B-Kontaktdaten.
-          </p>
+          <h2 className="text-base font-semibold text-ink">{l.scopeHeading}</h2>
+          <p className="mt-3">{l.scopeText}</p>
         </section>
 
         <section>
-          <h2 className="text-base font-semibold text-ink">2. Vertragsschluss</h2>
-          <p className="mt-3">
-            Ein Vertrag kommt zustande, wenn wir nach einem Demo-Gespräch ein individuelles Angebot erstellen und der
-            Kunde dieses schriftlich (auch per E-Mail) annimmt.
-          </p>
+          <h2 className="text-base font-semibold text-ink">{l.formationHeading}</h2>
+          <p className="mt-3">{l.formationText}</p>
         </section>
 
         <section>
-          <h2 className="text-base font-semibold text-ink">3. Leistungsumfang</h2>
-          <p className="mt-3">
-            Frostbreaker stellt eine Software zur Verfügung, mit der Kunden Unternehmen recherchieren, Ansprechpartner samt
-            E-Mail-Adressen ermitteln, diese Adressen verifizieren und automatisiert personalisierte Textbausteine
-            erstellen lassen können. Die konkret nutzbaren Datenquellen (z. B. Google Places, Hunter) können sich
-            ändern.
-          </p>
+          <h2 className="text-base font-semibold text-ink">{l.scopeOfServiceHeading}</h2>
+          <p className="mt-3">{l.scopeOfServiceText}</p>
         </section>
 
         <section>
-          <h2 className="text-base font-semibold text-ink">4. Bring Your Own Key (BYOK)</h2>
-          <p className="mt-3">
-            Kunden hinterlegen eigene API-Zugangsdaten Dritter (z. B. für Kartendienste, E-Mail-Anreicherung,
-            KI-Textgenerierung) und tragen die dadurch beim jeweiligen Drittanbieter anfallenden Kosten selbst.
-            Zusätzlich fällt eine Nutzungsgebühr für Frostbreaker an, die individuell vereinbart wird.
-          </p>
+          <h2 className="text-base font-semibold text-ink">{l.byokHeading}</h2>
+          <p className="mt-3">{l.byokText}</p>
         </section>
 
         <section>
-          <h2 className="text-base font-semibold text-ink">5. Pflichten des Kunden</h2>
-          <p className="mt-3">
-            Der Kunde ist allein dafür verantwortlich, die mit Frostbreaker recherchierten Kontakte im Einklang mit den für
-            ihn geltenden Regeln zur Direktwerbung zu kontaktieren (u. a. TKG in Österreich, UWG in Deutschland).
-            Frostbreaker stellt ein Werkzeug bereit, prüft aber nicht die rechtliche Zulässigkeit einzelner Kampagnen des
-            Kunden.
-          </p>
+          <h2 className="text-base font-semibold text-ink">{l.customerDutyHeading}</h2>
+          <p className="mt-3">{l.customerDutyText}</p>
         </section>
 
         <section>
-          <h2 className="text-base font-semibold text-ink">6. Verfügbarkeit</h2>
-          <p className="mt-3">
-            Wir bemühen uns um eine hohe Verfügbarkeit, sichern jedoch keine bestimmte Uptime zu. Wartungsarbeiten
-            werden nach Möglichkeit angekündigt. Für die Verfügbarkeit von Drittanbieter-Diensten (z. B. Hunter,
-            OpenAI) übernehmen wir keine Gewähr.
-          </p>
+          <h2 className="text-base font-semibold text-ink">{l.availabilityHeading}</h2>
+          <p className="mt-3">{l.availabilityText}</p>
         </section>
 
         <section>
-          <h2 className="text-base font-semibold text-ink">7. Haftung</h2>
-          <p className="mt-3">
-            Wir haften unbeschränkt bei Vorsatz und grober Fahrlässigkeit sowie nach zwingenden gesetzlichen
-            Vorschriften. Im Übrigen ist die Haftung auf den vertragstypisch vorhersehbaren Schaden begrenzt.
-          </p>
+          <h2 className="text-base font-semibold text-ink">{l.liabilityHeading}</h2>
+          <p className="mt-3">{l.liabilityText}</p>
         </section>
 
         <section>
-          <h2 className="text-base font-semibold text-ink">8. Laufzeit und Kündigung</h2>
-          <p className="mt-3">Laufzeit und Kündigungsfristen werden im jeweiligen individuellen Angebot festgelegt.</p>
+          <h2 className="text-base font-semibold text-ink">{l.termHeading}</h2>
+          <p className="mt-3">{l.termText}</p>
         </section>
 
         <section>
-          <h2 className="text-base font-semibold text-ink">9. Schlussbestimmungen</h2>
-          <p className="mt-3">
-            Es gilt österreichisches Recht unter Ausschluss des UN-Kaufrechts. Gerichtsstand ist, soweit gesetzlich
-            zulässig, [Gerichtsstand].
-          </p>
+          <h2 className="text-base font-semibold text-ink">{l.finalHeading}</h2>
+          <p className="mt-3">{l.finalText}</p>
         </section>
       </div>
     </LegalShell>
