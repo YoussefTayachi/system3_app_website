@@ -437,7 +437,7 @@ const de = {
     trialNote: "14 Tage kostenlos, keine Kreditkarte nötig. Monatlich kündbar, keine Vertragslaufzeit.",
   },
   hero: {
-    eyebrow: "Der wohl direkteste KI-Einsatz für Kaltakquise",
+    eyebrow: "Die #1 KI-Plattform für kalte B2B-Kundengewinnung",
     h1Pre: "Mindestens ",
     h1Accent: "5.000 echte Ansprechpartner",
     // "kontaktieren" statt "anschreiben": die App liefert neben der geprueften
@@ -1274,7 +1274,7 @@ const en: typeof de = {
     trialNote: "14 days free, no credit card required. Cancel anytime, no contract.",
   },
   hero: {
-    eyebrow: "Arguably the most direct AI use case for cold outreach",
+    eyebrow: "THE #1 AI PLATFORM FOR COLD B2B CLIENT ACQUISITION",
     h1Pre: "Reach at least ",
     h1Accent: "5,000 real decision-makers",
     h1Post: " a week, fully automatically.",
