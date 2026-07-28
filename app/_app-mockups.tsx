@@ -602,12 +602,18 @@ export function CopyCheckMockup() {
  * Kanban-Board fuer die Antwort-Pipeline (contacts.outreach_status), aehnlich
  * wie in der App der einzige direkt manipulierbare (Drag & Drop) Screen --
  * die Anlehnung an Pipedrive/Trello, die als Vorbild diente, steckt in der
- * Interaktion (Spalten, ziehbare Karten), nicht in erfundenen Zusatzdaten:
- * die Karten zeigen nur, was das echte Board auch zeigt (Avatar, Name,
- * Firma), keine Deal-Werte pro Spalte. Vier von sechs echten Stufen als
- * Ausschnitt, Farben und Reihenfolge stimmen mit lib/crm/stages.ts
- * (STAGE_DOT_CLS) in der App-Codebase ueberein -- hier als eigene
- * Tailwind-Klassen dupliziert, da die Website ein unabhaengiges Dictionary hat.
+ * Interaktion (Spalten, ziehbare Karten), nicht in erfundenen Zusatzdaten.
+ * Vier von sechs echten Stufen als Ausschnitt, Farben und Reihenfolge stimmen
+ * mit lib/crm/stages.ts (STAGE_DOT_CLS) in der App-Codebase ueberein -- hier
+ * als eigene Tailwind-Klassen dupliziert, da die Website ein unabhaengiges
+ * Dictionary hat.
+ *
+ * Darunter ein aufgeklappter Kontakt: Deals, Verlauf und Notiz-Feld -- genau
+ * das Argument fuer einen Wechsel von einem reinen Kanban-Tool. Die Begriffe
+ * (Deals/Verlauf/"Was war das Ergebnis? Was ist der naechste Schritt?"/Notiz
+ * speichern) sind woertlich aus dem echten Kontakt-Drawer der App uebernommen
+ * (apps/web/lib/i18n/dict.ts: dealsHeading/dealsEmpty/timelineHeading/
+ * notePlaceholder/noteSave), keine eigene Terminologie.
  */
 const PIPELINE_DOT_CLS: Record<string, string> = {
   new: "bg-mute",
@@ -664,6 +670,44 @@ export function PipelineMockup() {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="mt-4 rounded-lg border border-edge/70 bg-panel2/40 p-3">
+          <div className="flex items-center gap-2">
+            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-sky-500/15 text-[10px] font-semibold text-sky-700">
+              {m.detailLabel.slice(0, 1)}
+            </span>
+            <div className="min-w-0">
+              <p className="truncate text-[11px] font-semibold text-ink">{m.detailLabel}</p>
+              <p className="truncate text-[10px] text-mute">{m.detailSub}</p>
+            </div>
+          </div>
+
+          <p className="mt-3 text-[9px] font-medium uppercase tracking-[0.1em] text-faint">{m.dealsHeading}</p>
+          <p className="mt-1 rounded-md border border-dashed border-edge2 px-2.5 py-1.5 text-[10.5px] text-mute">
+            {m.dealsEmpty}
+          </p>
+
+          <p className="mt-3 text-[9px] font-medium uppercase tracking-[0.1em] text-faint">{m.historyHeading}</p>
+          <div className="mt-1 space-y-1">
+            {m.history.map((h, i) => (
+              <div key={i} className="flex items-center gap-1.5 text-[10.5px] text-soft">
+                <span className="shrink-0 rounded bg-chip px-1.5 py-0.5 text-[8.5px] font-medium uppercase text-faint">
+                  {h.tag}
+                </span>
+                {h.text}
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-3 flex items-center gap-1.5">
+            <span className="min-w-0 flex-1 truncate rounded-md border border-edge2 bg-field px-2.5 py-1.5 text-[10.5px] text-mute">
+              {m.notePlaceholder}
+            </span>
+            <span className="shrink-0 rounded-md bg-sky-600 px-2.5 py-1.5 text-[10px] font-medium text-white">
+              {m.noteSave}
+            </span>
+          </div>
         </div>
 
         <p className="mt-3 text-[11px] leading-relaxed text-mute">{m.note}</p>

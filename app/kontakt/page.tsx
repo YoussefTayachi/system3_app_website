@@ -23,6 +23,7 @@ export default function KontaktPage() {
           <Logo />
           <nav className="hidden items-center gap-6 md:flex">
             <NavDropdown label={t.nav.produkt} items={produktItems} />
+            <NavDropdown label={t.featuresPage.eyebrow} items={t.nav.funktionenItems} />
             {navLinks.map((l) => (
               <a key={l.href} href={l.href} className="text-sm text-soft hover:text-ink">{l.label}</a>
             ))}

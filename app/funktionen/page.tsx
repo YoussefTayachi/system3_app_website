@@ -38,7 +38,6 @@ export default function FunktionenPage() {
   };
 
   const navLinks = [
-    { href: "/funktionen", label: f.eyebrow },
     { href: "/#agenturen", label: t.nav.agenturen },
     { href: "/#preise", label: t.nav.preise },
     { href: "/kontakt", label: t.nav.kontakt },
@@ -51,6 +50,7 @@ export default function FunktionenPage() {
           <Logo />
           <nav className="hidden items-center gap-6 md:flex">
             <NavDropdown label={t.nav.produkt} items={t.nav.produktItems} />
+            <NavDropdown label={f.eyebrow} items={t.nav.funktionenItems} />
             {navLinks.map((l) => (
               <a key={l.href} href={l.href} className="text-sm text-soft hover:text-ink">
                 {l.label}

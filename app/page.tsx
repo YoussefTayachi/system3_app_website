@@ -19,7 +19,6 @@ export default function Home() {
   // Anker auf der Startseite bleiben bestehen, damit alte Links weiter
   // funktionieren, die Navigation zeigt aber auf die vollstaendigen Seiten.
   const navLinks = [
-    { href: "/funktionen", label: t.featuresPage.eyebrow, secondary: true },
     { href: "/fuer-agenturen", label: t.nav.agenturen, secondary: true },
     { href: "/preise", label: t.nav.preise, secondary: false },
     { href: "/kontakt", label: t.nav.kontakt, secondary: false },
@@ -33,6 +32,7 @@ export default function Home() {
           <Logo />
           <nav className="hidden items-center gap-5 md:flex lg:gap-6">
             <NavDropdown label={t.nav.produkt} items={t.nav.produktItems} />
+            <NavDropdown label={t.featuresPage.eyebrow} items={t.nav.funktionenItems} />
             {navLinks.map((l) => (
               <a
                 key={l.href}
