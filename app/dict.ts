@@ -245,6 +245,18 @@ const de = {
           "EU-Hosting",
         ],
       },
+      {
+        id: "pipeline",
+        eyebrow: "Nachverfolgen",
+        title: "Jede Antwort landet automatisch in der richtigen Spalte",
+        body: "Ein Kanban-Board für Antworten statt einer Tabelle mit Status-Spalte: Kontakte per Drag & Drop von Neu bis Kunde verschieben, dazu eine Aktivitäten-Zeitleiste pro Kontakt. Antworten aus Instantly werden automatisch einsortiert, ohne dass ihr das manuell nachpflegen müsst.",
+        bullets: [
+          "Sechs Stufen von Neu bis Kunde, per Drag & Drop",
+          "Antworten aus Instantly werden automatisch einsortiert",
+          "Notizen und Aktivitäten in einer Zeitleiste pro Kontakt",
+          "Direkt neben der Leads-Tabelle, kein zweites Tool",
+        ],
+      },
     ],
     ctaTitle: "Am schnellsten versteht man es beim Ausprobieren",
     ctaBody: "14 Tage kostenlos, keine Kreditkarte nötig, monatlich kündbar.",
@@ -471,6 +483,24 @@ const de = {
         ],
       },
       note: "Läuft beim Tippen mit, ganz ohne zusätzliches Tool.",
+    },
+    // Dieselben Personen/Firmen wie in heroIllustration.replies, damit die
+    // Beispielwelt der Seite zusammenhaengend bleibt -- erzaehlt nebenbei eine
+    // kleine Fortschrittsgeschichte ueber die Spalten hinweg. Nur vier von
+    // sechs echten Stufen gezeigt (Platzgruende in der Spaltenbreite), Farben
+    // und Reihenfolge stimmen mit lib/crm/stages.ts (STAGE_DOT_CLS) in der App
+    // ueberein. Karten zeigen nur, was das echte Board auch zeigt (Avatar,
+    // Name, Firma) -- keine erfundenen Deal-Werte pro Spalte.
+    pipeline: {
+      title: "Pipeline",
+      subtitle: "Antworten per Drag & Drop von Neu bis Kunde verschieben",
+      columns: [
+        { stage: "new", label: "Neu", cards: [{ initial: "S", name: "Sophie Wagner", company: "Fitnessstudio Wagner" }] },
+        { stage: "contacted", label: "Kontaktiert", cards: [{ initial: "E", name: "Elena Roth", company: "Café Sonnenblick" }] },
+        { stage: "replied", label: "Geantwortet", cards: [{ initial: "J", name: "Julia Berger", company: "Zahnarztpraxis Berger" }] },
+        { stage: "customer", label: "Kunde", cards: [{ initial: "M", name: "Markus Huber", company: "Schreinerei Huber" }] },
+      ],
+      note: "Antworten aus Instantly werden automatisch einsortiert.",
     },
   },
   heroIllustration: {
@@ -1172,6 +1202,18 @@ const en: typeof de = {
           "EU hosting",
         ],
       },
+      {
+        id: "pipeline",
+        eyebrow: "Follow-up",
+        title: "Every reply lands in the right column automatically",
+        body: "A kanban board for replies instead of a table with a status column: drag contacts from New to Customer, plus an activity timeline per contact. Replies from Instantly are sorted in automatically, no manual upkeep needed.",
+        bullets: [
+          "Six stages from New to Customer, drag and drop",
+          "Replies from Instantly are sorted in automatically",
+          "Notes and activity in a timeline per contact",
+          "Right next to the leads table, no second tool",
+        ],
+      },
     ],
     ctaTitle: "The fastest way to understand it is to try it",
     ctaBody: "14 days free, no credit card required, cancel monthly.",
@@ -1370,6 +1412,17 @@ const en: typeof de = {
         ],
       },
       note: "Runs while you type, no extra tool needed.",
+    },
+    pipeline: {
+      title: "Pipeline",
+      subtitle: "Drag replies from New to Customer",
+      columns: [
+        { stage: "new", label: "New", cards: [{ initial: "S", name: "Sophie Wagner", company: "Wagner Fitness Studio" }] },
+        { stage: "contacted", label: "Contacted", cards: [{ initial: "E", name: "Elena Roth", company: "Café Sonnenblick" }] },
+        { stage: "replied", label: "Replied", cards: [{ initial: "J", name: "Julia Berger", company: "Berger Dental Practice" }] },
+        { stage: "customer", label: "Customer", cards: [{ initial: "M", name: "Markus Huber", company: "Huber Joinery" }] },
+      ],
+      note: "Replies from Instantly are sorted in automatically.",
     },
   },
   heroIllustration: {

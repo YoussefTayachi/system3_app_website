@@ -598,6 +598,80 @@ export function CopyCheckMockup() {
   );
 }
 
+/**
+ * Kanban-Board fuer die Antwort-Pipeline (contacts.outreach_status), aehnlich
+ * wie in der App der einzige direkt manipulierbare (Drag & Drop) Screen --
+ * die Anlehnung an Pipedrive/Trello, die als Vorbild diente, steckt in der
+ * Interaktion (Spalten, ziehbare Karten), nicht in erfundenen Zusatzdaten:
+ * die Karten zeigen nur, was das echte Board auch zeigt (Avatar, Name,
+ * Firma), keine Deal-Werte pro Spalte. Vier von sechs echten Stufen als
+ * Ausschnitt, Farben und Reihenfolge stimmen mit lib/crm/stages.ts
+ * (STAGE_DOT_CLS) in der App-Codebase ueberein -- hier als eigene
+ * Tailwind-Klassen dupliziert, da die Website ein unabhaengiges Dictionary hat.
+ */
+const PIPELINE_DOT_CLS: Record<string, string> = {
+  new: "bg-mute",
+  contacted: "bg-blue-500",
+  replied: "bg-sky-500",
+  meeting_booked: "bg-violet-500",
+  customer: "bg-emerald-500",
+  not_interested: "bg-red-400",
+};
+const PIPELINE_AVATAR_CLS = [
+  "bg-sky-500/15 text-sky-700",
+  "bg-violet-500/15 text-violet-700",
+  "bg-amber-500/15 text-amber-700",
+  "bg-emerald-500/15 text-emerald-700",
+];
+
+export function PipelineMockup() {
+  const { t } = useT();
+  const m = t.appMockups.pipeline;
+
+  return (
+    <AppFrame>
+      <div className="p-5 sm:p-6">
+        <p className="font-display text-lg font-semibold tracking-[-0.01em] text-ink">{m.title}</p>
+        <p className="mt-0.5 text-xs text-mute">{m.subtitle}</p>
+
+        <div className="-mx-1 mt-4 flex gap-2 overflow-x-auto px-1 pb-1">
+          {m.columns.map((col, ci) => (
+            <div key={col.stage} className="w-32 shrink-0 rounded-lg border border-edge/70 bg-panel2/60 p-2">
+              <div className="flex items-center gap-1.5 px-0.5 pb-2">
+                <span className={"h-1.5 w-1.5 shrink-0 rounded-full " + (PIPELINE_DOT_CLS[col.stage] ?? "bg-mute")} />
+                <span className="min-w-0 flex-1 truncate text-[11px] font-semibold text-ink">{col.label}</span>
+                <span className="shrink-0 rounded-full bg-chip px-1.5 py-0.5 text-[9px] font-medium text-soft">
+                  {col.cards.length}
+                </span>
+              </div>
+              <div className="space-y-1.5">
+                {col.cards.map((card) => (
+                  <div key={card.name} className="rounded-md border border-edge/70 bg-panel px-2 py-1.5 shadow-sm">
+                    <div className="flex items-center gap-1.5">
+                      <span
+                        className={
+                          "flex h-4 w-4 shrink-0 items-center justify-center rounded-full text-[9px] font-semibold " +
+                          PIPELINE_AVATAR_CLS[ci % PIPELINE_AVATAR_CLS.length]
+                        }
+                      >
+                        {card.initial}
+                      </span>
+                      <span className="min-w-0 flex-1 truncate text-[10.5px] font-medium text-ink">{card.name}</span>
+                    </div>
+                    <p className="mt-0.5 truncate pl-[22px] text-[9.5px] text-faint">{card.company}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <p className="mt-3 text-[11px] leading-relaxed text-mute">{m.note}</p>
+      </div>
+    </AppFrame>
+  );
+}
+
 /** Zeigt das Ergebnis einer Verifizierung, nicht nur den Knopf dafuer. Bisher
  *  visualisierte kein Mockup, was die Pruefung tatsaechlich bewirkt -- nur
  *  "E-Mails verifizieren" als Aktion in der Leads-Tabelle. Drei Zahlen reichen,

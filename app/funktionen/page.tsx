@@ -1,6 +1,6 @@
 "use client";
 import { Logo, CTAButton, CTAGroup, NavDropdown, SectionHeading } from "../_ui";
-import { DashboardMockup, UnifiedSearchMockup, LeadsTableMockup, LeadDetailMockup, MailboxesMockup, AiAgentMockup, VerificationReportMockup, CopyCheckMockup } from "../_app-mockups";
+import { DashboardMockup, UnifiedSearchMockup, LeadsTableMockup, LeadDetailMockup, MailboxesMockup, AiAgentMockup, VerificationReportMockup, CopyCheckMockup, PipelineMockup } from "../_app-mockups";
 import { SuppressionMockup } from "../_mockups";
 import { Reveal } from "../reveal";
 import { CheckIcon } from "../_icons";
@@ -33,6 +33,7 @@ export default function FunktionenPage() {
     personalize: <AiAgentMockup />,
     check: <CopyCheckMockup />,
     send: <MailboxesMockup />,
+    pipeline: <PipelineMockup />,
     protect: <SuppressionMockup />,
   };
 
