@@ -498,6 +498,65 @@ export function MailboxesMockup() {
   );
 }
 
+/**
+ * Farbige Markierungen direkt im Beispieltext, nicht nur eine Zahl daneben --
+ * die Anlehnung an hemingwayapp.com, die als Vorbild diente. Ein Fund pro
+ * Ampelfarbe (blau = Fuellwort, gelb = Spam-Wort, rot = liegen gebliebener
+ * Platzhalter), damit auf den ersten Blick klar ist, was das Werkzeug
+ * ueberhaupt findet, ohne dass der Beispieltext wie ein einziger Fehlerhaufen
+ * wirkt. Die Kennzahlen darunter bleiben deshalb auch bewusst gemischt (zwei
+ * unauffaellig, eine auffaellig) statt komplett rot.
+ */
+const COPY_CHECK_MARK_CLS: Record<string, string> = {
+  info: "bg-sky-200/70 text-sky-900",
+  warning: "bg-amber-200/70 text-amber-900",
+  danger: "bg-red-200/70 text-red-900",
+};
+
+export function CopyCheckMockup() {
+  const { t } = useT();
+  const m = t.appMockups.copyCheck;
+  const sample = m.sample as { text: string; mark?: "info" | "warning" | "danger" }[];
+
+  return (
+    <AppFrame>
+      <div className="p-5 sm:p-6">
+        <p className="font-display text-lg font-semibold tracking-[-0.01em] text-ink">{m.title}</p>
+        <p className="mt-0.5 text-xs text-mute">{m.subtitle}</p>
+
+        <p className="mt-4 rounded-lg border border-edge/70 bg-panel2/40 px-3.5 py-3 text-sm leading-relaxed text-soft">
+          {sample.map((seg, i) =>
+            seg.mark ? (
+              <mark key={i} className={"rounded-sm px-0.5 " + COPY_CHECK_MARK_CLS[seg.mark]}>
+                {seg.text}
+              </mark>
+            ) : (
+              <span key={i}>{seg.text}</span>
+            )
+          )}
+        </p>
+
+        <div className="mt-4 grid grid-cols-3 divide-x divide-edge/70 overflow-hidden rounded-xl border border-edge/70">
+          <div className="px-3.5 py-3.5">
+            <p className="text-[10px] font-medium uppercase tracking-[0.1em] text-faint">{m.stats[0].label}</p>
+            <p className="font-display mt-1 text-lg font-semibold tracking-[-0.02em] text-emerald-700">{m.stats[0].value}</p>
+          </div>
+          <div className="bg-amber-50/50 px-3.5 py-3.5">
+            <p className="text-[10px] font-medium uppercase tracking-[0.1em] text-amber-700/70">{m.stats[1].label}</p>
+            <p className="font-display mt-1 text-lg font-semibold tracking-[-0.02em] text-amber-700">{m.stats[1].value}</p>
+          </div>
+          <div className="px-3.5 py-3.5">
+            <p className="text-[10px] font-medium uppercase tracking-[0.1em] text-faint">{m.stats[2].label}</p>
+            <p className="font-display mt-1 text-lg font-semibold tracking-[-0.02em] text-emerald-700">{m.stats[2].value}</p>
+          </div>
+        </div>
+
+        <p className="mt-3 text-[11px] leading-relaxed text-mute">{m.note}</p>
+      </div>
+    </AppFrame>
+  );
+}
+
 /** Zeigt das Ergebnis einer Verifizierung, nicht nur den Knopf dafuer. Bisher
  *  visualisierte kein Mockup, was die Pruefung tatsaechlich bewirkt -- nur
  *  "E-Mails verifizieren" als Aktion in der Leads-Tabelle. Drei Zahlen reichen,

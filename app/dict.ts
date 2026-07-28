@@ -210,6 +210,18 @@ const de = {
         ],
       },
       {
+        id: "check",
+        eyebrow: "Prüfen",
+        title: "Bevor die Mail rausgeht, nicht danach",
+        body: "Direkt im Sequenz-Editor: Lesbarkeit im Hemingway-Stil, klassische Spam-Trigger-Wörter und ein Hinweis, wenn der Text zu sehr nach KI klingt. Alles läuft beim Tippen im Browser, ohne ein zusätzliches Tool und ohne dass eure Texte irgendwohin geschickt werden.",
+        bullets: [
+          "Lesbarkeits-Score inkl. Schulstufe, Deutsch und Englisch",
+          "Spam-Trigger-Wörter direkt im Text markiert",
+          "Erkennt liegen gebliebene Platzhalter wie „[Firma]“",
+          "„Klingt nach KI“-Hinweis, klar als Heuristik gekennzeichnet",
+        ],
+      },
+      {
         id: "send",
         eyebrow: "Versenden",
         title: "Kampagnen, Postfächer, Zustellbarkeit",
@@ -402,6 +414,29 @@ const de = {
         { address: "office@eure-agentur.at", state: "Warmup aktiv", volume: "42 / 50", ok: true },
         { address: "hallo@eure-agentur.de", state: "Aufwärmphase", volume: "12 / 50", ok: false },
       ],
+    },
+    // Die Markierungen im Beispieltext sind bewusst nicht alle rot: eine
+    // Lesbarkeits- und KI-Klang-Note, die durchgehend gut ausfaellt, plus ein
+    // einzelner echter Treffer (Spam-Wort, liegen gebliebener Platzhalter)
+    // wirkt glaubwuerdiger als ein Text voller Warnungen.
+    copyCheck: {
+      title: "Copy Check",
+      subtitle: "Lesbarkeit, Spam-Risiko und KI-Klang direkt am Text",
+      sample: [
+        { text: "Hallo {{Vorname}}, ich habe gesehen, dass " },
+        { text: "[Firma]", mark: "danger" },
+        { text: " " },
+        { text: "eigentlich", mark: "info" },
+        { text: " schon stark aufgestellt ist. Wir bieten euch " },
+        { text: "garantiert", mark: "warning" },
+        { text: " mehr Anfragen." },
+      ],
+      stats: [
+        { label: "Lesbarkeit", value: "Leicht" },
+        { label: "Spam-Risiko", value: "Mittel" },
+        { label: "KI-Klang", value: "Unauffällig" },
+      ],
+      note: "Läuft beim Tippen mit, ganz ohne zusätzliches Tool.",
     },
   },
   heroIllustration: {
@@ -1068,6 +1103,18 @@ const en: typeof de = {
         ],
       },
       {
+        id: "check",
+        eyebrow: "Check",
+        title: "Caught before it sends, not after",
+        body: "Right in the sequence editor: Hemingway-style readability, classic spam-trigger words, and a flag when the copy reads too much like AI. Everything runs in the browser while you type, no extra tool and nothing you write gets sent anywhere.",
+        bullets: [
+          "Readability score incl. grade level, German and English",
+          "Spam-trigger words highlighted directly in the text",
+          "Catches leftover placeholders like “[Company]”",
+          "“Sounds like AI” flag, clearly marked as a heuristic",
+        ],
+      },
+      {
         id: "send",
         eyebrow: "Send",
         title: "Campaigns, mailboxes, deliverability",
@@ -1239,6 +1286,25 @@ const en: typeof de = {
         { address: "office@your-agency.at", state: "Warmup active", volume: "42 / 50", ok: true },
         { address: "hello@your-agency.de", state: "Warming up", volume: "12 / 50", ok: false },
       ],
+    },
+    copyCheck: {
+      title: "Copy Check",
+      subtitle: "Readability, spam risk and AI-sounding, right on the text",
+      sample: [
+        { text: "Hi {{firstName}}, I noticed " },
+        { text: "[Company]", mark: "danger" },
+        { text: " has " },
+        { text: "actually", mark: "info" },
+        { text: " grown a lot already. We can " },
+        { text: "guarantee", mark: "warning" },
+        { text: " you more leads." },
+      ],
+      stats: [
+        { label: "Readability", value: "Easy" },
+        { label: "Spam risk", value: "Medium" },
+        { label: "AI-sounding", value: "Unremarkable" },
+      ],
+      note: "Runs while you type, no extra tool needed.",
     },
   },
   heroIllustration: {
