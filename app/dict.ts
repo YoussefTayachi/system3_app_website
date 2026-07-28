@@ -415,27 +415,61 @@ const de = {
         { address: "hallo@eure-agentur.de", state: "Aufwärmphase", volume: "12 / 50", ok: false },
       ],
     },
-    // Die Markierungen im Beispieltext sind bewusst nicht alle rot: eine
-    // Lesbarkeits- und KI-Klang-Note, die durchgehend gut ausfaellt, plus ein
-    // einzelner echter Treffer (Spam-Wort, liegen gebliebener Platzhalter)
-    // wirkt glaubwuerdiger als ein Text voller Warnungen.
+    // Vorher/Nachher statt eines einzelnen Beispiels: ein einzelner Satz mit
+    // einem Treffer beweist nicht, dass das Werkzeug etwas bringt -- ein
+    // erkennbar schwacher KI-Entwurf mit vielen echten Fundstellen daneben
+    // gegen eine kurze, konkrete Mail mit sauberem Befund schon. Die
+    // Firma "Schreinerei Huber" ist dieselbe wie im Lead-Detail-Mockup, damit
+    // die Seite eine durchgehende Beispielwelt bleibt statt neue Namen ohne
+    // Zusammenhang einzufuehren. Alle Markierungen sind Phrasen, die die
+    // echte Pruefung auch tatsaechlich findet (siehe lib/email-quality in der
+    // App), keine erfundenen Beispiele.
     copyCheck: {
       title: "Copy Check",
       subtitle: "Lesbarkeit, Spam-Risiko und KI-Klang direkt am Text",
-      sample: [
-        { text: "Hallo {{Vorname}}, ich habe gesehen, dass " },
-        { text: "[Firma]", mark: "danger" },
-        { text: " " },
-        { text: "eigentlich", mark: "info" },
-        { text: " schon stark aufgestellt ist. Wir bieten euch " },
-        { text: "garantiert", mark: "warning" },
-        { text: " mehr Anfragen." },
-      ],
-      stats: [
-        { label: "Lesbarkeit", value: "Leicht" },
-        { label: "Spam-Risiko", value: "Mittel" },
-        { label: "KI-Klang", value: "Unauffällig" },
-      ],
+      badLabel: "Unbearbeiteter Entwurf",
+      goodLabel: "Nach dem Copy Check",
+      bad: {
+        subject: [
+          { text: "Kostenlos", mark: "warning" },
+          { text: ": " },
+          { text: "Jetzt handeln", mark: "warning" },
+          { text: " für mehr Anfragen" },
+          { text: "!!!", mark: "warning" },
+        ],
+        body: [
+          { text: "In der heutigen schnelllebigen Welt", mark: "warning" },
+          { text: " ist es für Handwerksbetriebe " },
+          { text: "eigentlich", mark: "info" },
+          { text: " wichtiger denn je, online sichtbar zu sein, und genau dabei kann Ihnen unser Tool " },
+          { text: "garantiert", mark: "warning" },
+          { text: " helfen, mehr Anfragen zu bekommen, ohne dass Sie dafür selbst noch etwas tun müssen.\n\nDie komplette Kampagne " },
+          { text: "wird dabei vollautomatisch für Sie erstellt", mark: "warning" },
+          { text: ". " },
+          { text: "Nur heute", mark: "warning" },
+          { text: " gibt es das Angebot.\n\nMit freundlichen Grüßen,\n" },
+          { text: "[Name einfügen]", mark: "danger" },
+        ],
+        stats: [
+          { label: "Lesbarkeit", value: "Schwer" },
+          { label: "Spam-Risiko", value: "Hoch" },
+          { label: "KI-Klang", value: "Auffällig" },
+        ],
+      },
+      good: {
+        subject: [{ text: "Kurze Frage zu eurem Fuhrpark" }],
+        body: [
+          {
+            text:
+              "Hallo Markus,\n\nich habe gesehen, dass ihr bei der Schreinerei Huber aktuell drei Fahrzeuge im Einsatz habt. Wir liefern Ersatzteile innerhalb von 24 Stunden, meist günstiger als der Vertragshändler.\n\nLohnt sich ein kurzer Call nächste Woche?\n\nViele Grüße,\nJulia",
+          },
+        ],
+        stats: [
+          { label: "Lesbarkeit", value: "Leicht" },
+          { label: "Spam-Risiko", value: "Gering" },
+          { label: "KI-Klang", value: "Unauffällig" },
+        ],
+      },
       note: "Läuft beim Tippen mit, ganz ohne zusätzliches Tool.",
     },
   },
@@ -1290,20 +1324,51 @@ const en: typeof de = {
     copyCheck: {
       title: "Copy Check",
       subtitle: "Readability, spam risk and AI-sounding, right on the text",
-      sample: [
-        { text: "Hi {{firstName}}, I noticed " },
-        { text: "[Company]", mark: "danger" },
-        { text: " has " },
-        { text: "actually", mark: "info" },
-        { text: " grown a lot already. We can " },
-        { text: "guarantee", mark: "warning" },
-        { text: " you more leads." },
-      ],
-      stats: [
-        { label: "Readability", value: "Easy" },
-        { label: "Spam risk", value: "Medium" },
-        { label: "AI-sounding", value: "Unremarkable" },
-      ],
+      badLabel: "Unedited draft",
+      goodLabel: "After Copy Check",
+      bad: {
+        subject: [
+          { text: "Free", mark: "warning" },
+          { text: ": " },
+          { text: "Act now", mark: "warning" },
+          { text: " for more leads" },
+          { text: "!!!", mark: "warning" },
+        ],
+        body: [
+          { text: "In today's fast-paced world", mark: "warning" },
+          { text: ", it's " },
+          { text: "actually", mark: "info" },
+          { text: " more important than ever for trade businesses to be visible online, and that's exactly where our tool can " },
+          { text: "guarantee", mark: "warning" },
+          { text: " more inquiries, without you having to lift a finger yourself.\n\nYour entire campaign " },
+          { text: "is built for you", mark: "warning" },
+          { text: " fully automatically. " },
+          { text: "Call now", mark: "warning" },
+          { text: ", this offer is " },
+          { text: "today only", mark: "warning" },
+          { text: ".\n\nBest regards,\n" },
+          { text: "[Insert name]", mark: "danger" },
+        ],
+        stats: [
+          { label: "Readability", value: "Hard" },
+          { label: "Spam risk", value: "High" },
+          { label: "AI-sounding", value: "Noticeable" },
+        ],
+      },
+      good: {
+        subject: [{ text: "Quick question about your fleet" }],
+        body: [
+          {
+            text:
+              "Hi Mark,\n\nI noticed Huber Carpentry currently runs three vehicles. We deliver spare parts within 24 hours, usually cheaper than the dealership.\n\nWorth a quick call next week?\n\nBest,\nJulia",
+          },
+        ],
+        stats: [
+          { label: "Readability", value: "Easy" },
+          { label: "Spam risk", value: "Low" },
+          { label: "AI-sounding", value: "Unremarkable" },
+        ],
+      },
       note: "Runs while you type, no extra tool needed.",
     },
   },

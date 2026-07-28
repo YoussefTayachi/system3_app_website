@@ -500,12 +500,12 @@ export function MailboxesMockup() {
 
 /**
  * Farbige Markierungen direkt im Beispieltext, nicht nur eine Zahl daneben --
- * die Anlehnung an hemingwayapp.com, die als Vorbild diente. Ein Fund pro
- * Ampelfarbe (blau = Fuellwort, gelb = Spam-Wort, rot = liegen gebliebener
- * Platzhalter), damit auf den ersten Blick klar ist, was das Werkzeug
- * ueberhaupt findet, ohne dass der Beispieltext wie ein einziger Fehlerhaufen
- * wirkt. Die Kennzahlen darunter bleiben deshalb auch bewusst gemischt (zwei
- * unauffaellig, eine auffaellig) statt komplett rot.
+ * die Anlehnung an hemingwayapp.com, die als Vorbild diente. Zwei Entwuerfe
+ * statt einem: ein einzelner Satz mit einem Treffer beweist nicht viel, ein
+ * erkennbar schwacher KI-Entwurf mit vielen echten Fundstellen (Spam-Woerter,
+ * KI-Floskel, Passiv, liegen gebliebener Platzhalter) gegen eine kurze,
+ * konkrete Mail mit sauberem Befund schon. Alle Markierungen sind Phrasen,
+ * die die echte Pruefung auch tatsaechlich findet, keine erfundenen Beispiele.
  */
 const COPY_CHECK_MARK_CLS: Record<string, string> = {
   info: "bg-sky-200/70 text-sky-900",
@@ -513,10 +513,73 @@ const COPY_CHECK_MARK_CLS: Record<string, string> = {
   danger: "bg-red-200/70 text-red-900",
 };
 
+type CopyCheckSegment = { text: string; mark?: "info" | "warning" | "danger" };
+
+function CopyCheckMark({ segments }: { segments: CopyCheckSegment[] }) {
+  return (
+    <>
+      {segments.map((seg, i) =>
+        seg.mark ? (
+          <mark key={i} className={"rounded-sm px-0.5 " + COPY_CHECK_MARK_CLS[seg.mark]}>
+            {seg.text}
+          </mark>
+        ) : (
+          <span key={i}>{seg.text}</span>
+        )
+      )}
+    </>
+  );
+}
+
+/** Ein Entwurf (Betreff + Text + drei Kennzahlen-Chips). "tone" steuert nur
+ *  das Label und die Chip-Farben -- die Markierungen im Text selbst kommen
+ *  unveraendert aus den Daten, ein guter Entwurf hat schlicht keine. */
+function CopyCheckExample({
+  label,
+  tone,
+  subject,
+  body,
+  stats,
+}: {
+  label: string;
+  tone: "bad" | "good";
+  subject: CopyCheckSegment[];
+  body: CopyCheckSegment[];
+  stats: { label: string; value: string }[];
+}) {
+  const chipCls =
+    tone === "bad"
+      ? "border-amber-300/70 bg-amber-50/60 text-amber-800"
+      : "border-emerald-300/70 bg-emerald-50/60 text-emerald-800";
+  const labelCls = tone === "bad" ? "text-amber-700" : "text-emerald-700";
+
+  return (
+    <div>
+      <p className={"text-[10px] font-medium uppercase tracking-[0.1em] " + labelCls}>{label}</p>
+      <div className="mt-1.5 rounded-lg border border-edge/70 bg-panel2/40 px-3.5 py-3">
+        <p className="border-b border-edge/60 pb-2 text-sm font-medium text-ink">
+          <CopyCheckMark segments={subject} />
+        </p>
+        <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-soft">
+          <CopyCheckMark segments={body} />
+        </p>
+      </div>
+      <div className="mt-2 flex flex-wrap gap-1.5">
+        {stats.map((s) => (
+          <span key={s.label} className={"rounded-full border px-2.5 py-1 text-[11px] font-medium " + chipCls}>
+            {s.label}: {s.value}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function CopyCheckMockup() {
   const { t } = useT();
   const m = t.appMockups.copyCheck;
-  const sample = m.sample as { text: string; mark?: "info" | "warning" | "danger" }[];
+  const bad = m.bad as { subject: CopyCheckSegment[]; body: CopyCheckSegment[]; stats: { label: string; value: string }[] };
+  const good = m.good as { subject: CopyCheckSegment[]; body: CopyCheckSegment[]; stats: { label: string; value: string }[] };
 
   return (
     <AppFrame>
@@ -524,34 +587,12 @@ export function CopyCheckMockup() {
         <p className="font-display text-lg font-semibold tracking-[-0.01em] text-ink">{m.title}</p>
         <p className="mt-0.5 text-xs text-mute">{m.subtitle}</p>
 
-        <p className="mt-4 rounded-lg border border-edge/70 bg-panel2/40 px-3.5 py-3 text-sm leading-relaxed text-soft">
-          {sample.map((seg, i) =>
-            seg.mark ? (
-              <mark key={i} className={"rounded-sm px-0.5 " + COPY_CHECK_MARK_CLS[seg.mark]}>
-                {seg.text}
-              </mark>
-            ) : (
-              <span key={i}>{seg.text}</span>
-            )
-          )}
-        </p>
-
-        <div className="mt-4 grid grid-cols-3 divide-x divide-edge/70 overflow-hidden rounded-xl border border-edge/70">
-          <div className="px-3.5 py-3.5">
-            <p className="text-[10px] font-medium uppercase tracking-[0.1em] text-faint">{m.stats[0].label}</p>
-            <p className="font-display mt-1 text-lg font-semibold tracking-[-0.02em] text-emerald-700">{m.stats[0].value}</p>
-          </div>
-          <div className="bg-amber-50/50 px-3.5 py-3.5">
-            <p className="text-[10px] font-medium uppercase tracking-[0.1em] text-amber-700/70">{m.stats[1].label}</p>
-            <p className="font-display mt-1 text-lg font-semibold tracking-[-0.02em] text-amber-700">{m.stats[1].value}</p>
-          </div>
-          <div className="px-3.5 py-3.5">
-            <p className="text-[10px] font-medium uppercase tracking-[0.1em] text-faint">{m.stats[2].label}</p>
-            <p className="font-display mt-1 text-lg font-semibold tracking-[-0.02em] text-emerald-700">{m.stats[2].value}</p>
-          </div>
+        <div className="mt-4 space-y-5">
+          <CopyCheckExample label={m.badLabel} tone="bad" subject={bad.subject} body={bad.body} stats={bad.stats} />
+          <CopyCheckExample label={m.goodLabel} tone="good" subject={good.subject} body={good.body} stats={good.stats} />
         </div>
 
-        <p className="mt-3 text-[11px] leading-relaxed text-mute">{m.note}</p>
+        <p className="mt-4 text-[11px] leading-relaxed text-mute">{m.note}</p>
       </div>
     </AppFrame>
   );
