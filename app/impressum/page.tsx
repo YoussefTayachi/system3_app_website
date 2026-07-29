@@ -32,6 +32,16 @@ export default function Impressum() {
         </section>
 
         <section>
+          <h2 className="text-base font-semibold text-ink">{l.chamberHeading}</h2>
+          <p className="mt-3">{l.chamberText}</p>
+        </section>
+
+        <section>
+          <h2 className="text-base font-semibold text-ink">{l.taxHeading}</h2>
+          <p className="mt-3">{l.taxText}</p>
+        </section>
+
+        <section>
           <h2 className="text-base font-semibold text-ink">{l.contactHeading}</h2>
           <p className="mt-3">
             {l.contactEmailLabel}{" "}

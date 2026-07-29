@@ -256,12 +256,11 @@ const de = {
         id: "protect",
         eyebrow: "Absichern",
         title: "Was nicht rausgehen darf, geht nicht raus",
-        body: "Bestandskunden und Abmeldungen landen auf der Sperrliste und werden vor jedem Versand automatisch abgeglichen. API-Schlüssel liegen verschlüsselt, gehostet wird in der EU.",
+        body: "Bestandskunden und Abmeldungen landen auf der Sperrliste und werden vor jedem Versand automatisch abgeglichen. API-Schlüssel liegen verschlüsselt gespeichert.",
         bullets: [
           "Sperrliste für Kontakte und ganze Domains",
           "Automatischer Abgleich vor jedem Versand",
           "API-Schlüssel verschlüsselt gespeichert",
-          "EU-Hosting",
         ],
       },
       {
@@ -795,7 +794,6 @@ const de = {
     activeLabel: "Aktiv",
   },
   trustBadges: [
-    { id: "euHosting", title: "EU-Hosting", body: "Server in Frankfurt, keine Datenübertragung außerhalb der EU." },
     { id: "encryption", title: "Verschlüsselte API-Keys", body: "Eure Zugangsdaten werden verschlüsselt gespeichert, nie im Klartext." },
     { id: "byok", title: "BYOK-Kostenkontrolle", body: "Volle Transparenz über eure tatsächlichen API-Kosten, live im Dashboard." },
   ],
@@ -860,7 +858,6 @@ const de = {
       ["Reporting für den Endkunden", "Teilbarer Report-Link im Look des Kunden", "Von Hand aus mehreren Tools zusammengebaut"],
       ["KI-Personalisierung pro Lead", "Ja, mit einstellbaren Regeln", "Teilweise, oft separates Tool nötig"],
       ["E-Mail-Verifizierung eingebaut", "Ja", "Separates Tool nötig"],
-      ["EU-Hosting", "Ja", "Unterschiedlich, meist US-Anbieter"],
       ["Nur echte Ansprechpartner, kein info@", "Automatisch gefiltert", "Meist ungefiltert"],
       ["Preistransparenz", "Feste Preise, 14 Tage kostenlos testen", "Meist individuelles Angebot, keine Testphase"],
       ["Support", "Direkter Draht zum Gründerteam", "Ticket-System"],
@@ -887,7 +884,6 @@ const de = {
   faq: {
     title: "Häufige Fragen",
     items: [
-      { q: "Ist das DSGVO-konform?", a: "Die App selbst ist datenschutzbewusst gebaut (EU-Hosting, Verschlüsselung, Datensparsamkeit). Wie ihr die gefundenen Kontakte anschreibt, unterliegt weiterhin den für euch geltenden Regeln zur Direktwerbung. Dazu beraten wir euch im Gespräch gerne konkret für eure Situation." },
       { q: "Kann ich das als Agentur für mehrere Kunden gleichzeitig nutzen?", a: "Ja, dafür gibt es eigene Workspaces pro Kunde, inklusive eigenem Namen, Logo und Akzentfarbe. Für jeden Workspace lässt sich ein Report-Link teilen, der eurem Endkunden aggregierte Kennzahlen im eigenen Look zeigt, ganz ohne dass der einen eigenen Account braucht." },
       { q: "Was kostet das?", a: "99 € im Monat für den Starter-Plan (1 Workspace, bis 5.000 qualifizierte Leads), 14 Tage kostenlos testen, danach monatlich kündbar. Der Agentur-Plan (mehrere Workspaces, unlimitiert) startet ab 199 € im Monat, abgestimmt auf eure Anzahl an Kunden-Workspaces, dafür sprechen wir kurz miteinander. Dazu kommen eure eigenen, transparent im Dashboard einsehbaren API-Kosten." },
       { q: "Kann ich jederzeit kündigen?", a: "Ja, monatlich, keine Mindestlaufzeit, keine Kündigungsfrist über den laufenden Monat hinaus." },
@@ -951,6 +947,11 @@ const de = {
       ],
       authorityHeading: "Gewerbebehörde",
       authorityText: "Magistrat der Stadt Wien, Magistratisches Bezirksamt für den 22. Bezirk.",
+      chamberHeading: "Kammerzugehörigkeit",
+      chamberText:
+        "Mitglied der Wirtschaftskammer Österreich (WKO), Fachgruppe Unternehmensberatung, Buchhaltung und Informationstechnologie (UBIT), Landesgremium Wien. Anwendbare Rechtsvorschrift: Gewerbeordnung 1994 (GewO), abrufbar unter ris.bka.gv.at.",
+      taxHeading: "Umsatzsteuer",
+      taxText: "Kleinunternehmer im Sinne des § 6 Abs. 1 Z 27 UStG. Es wird daher keine Umsatzsteuer ausgewiesen.",
       contactHeading: "Kontakt",
       contactEmailLabel: "E-Mail:",
       purposeHeading: "Unternehmensgegenstand",
@@ -993,13 +994,13 @@ const de = {
         "Diese AGB gelten für alle Verträge zwischen Youssef Tayachi („Frostbreaker“, „wir“) und Unternehmern (B2B) über die Nutzung der Software Frostbreaker zur Recherche, Anreicherung, Verifizierung und Personalisierung von B2B-Kontaktdaten.",
       formationHeading: "2. Vertragsschluss",
       formationText:
-        "Ein Vertrag kommt zustande, wenn wir nach einem Demo-Gespräch ein individuelles Angebot erstellen und der Kunde dieses schriftlich (auch per E-Mail) annimmt.",
+        "Für den Starter-Plan kommt ein Vertrag zustande, indem der Kunde ein Konto registriert und den Plan über die in der Software integrierte Zahlungsabwicklung abschließt. Für den Agentur-Plan kommt der Vertrag durch ein im Anschluss an ein Beratungsgespräch erstelltes individuelles Angebot und dessen schriftliche Annahme (auch per E-Mail) zustande.",
       scopeOfServiceHeading: "3. Leistungsumfang",
       scopeOfServiceText:
         "Frostbreaker stellt eine Software bereit, mit der Kunden Unternehmen recherchieren, Ansprechpartner samt E-Mail-Adressen ermitteln, diese verifizieren und automatisiert personalisierte Textbausteine erstellen lassen können. Die nutzbaren Datenquellen (z. B. Google Places, Hunter) können sich ändern.",
       byokHeading: "4. Bring Your Own Key (BYOK)",
       byokText:
-        "Kunden hinterlegen eigene API-Zugangsdaten Dritter (z. B. Kartendienste, E-Mail-Anreicherung, KI-Textgenerierung) und tragen die dabei anfallenden Kosten selbst. Zusätzlich fällt eine individuell vereinbarte Nutzungsgebühr für Frostbreaker an.",
+        "Kunden hinterlegen eigene API-Zugangsdaten Dritter (z. B. Kartendienste, E-Mail-Anreicherung, KI-Textgenerierung) und tragen die dabei anfallenden Kosten selbst. Zusätzlich fällt die Nutzungsgebühr für den gewählten Frostbreaker-Plan an (Starter zum jeweils aktuellen Listenpreis, Agentur gemäß individuellem Angebot), siehe frostbreaker.app/preise.",
       customerDutyHeading: "5. Pflichten des Kunden",
       customerDutyText:
         "Der Kunde ist allein dafür verantwortlich, recherchierte Kontakte im Einklang mit den für ihn geltenden Regeln zur Direktwerbung zu kontaktieren (u. a. TKG in Österreich, UWG in Deutschland). Frostbreaker stellt ein Werkzeug bereit, prüft aber nicht die rechtliche Zulässigkeit einzelner Kampagnen.",
@@ -1010,7 +1011,8 @@ const de = {
       liabilityText:
         "Wir haften unbeschränkt bei Vorsatz und grober Fahrlässigkeit sowie nach zwingenden gesetzlichen Vorschriften. Im Übrigen ist die Haftung auf den vertragstypisch vorhersehbaren Schaden begrenzt.",
       termHeading: "8. Laufzeit und Kündigung",
-      termText: "Laufzeit und Kündigungsfristen werden im jeweiligen individuellen Angebot festgelegt.",
+      termText:
+        "Verträge laufen monatlich und sind zum Ende des laufenden Monats ohne Kündigungsfrist und ohne Mindestlaufzeit kündigbar, sofern im individuellen Angebot für den Agentur-Plan nichts anderes vereinbart wird.",
       finalHeading: "9. Schlussbestimmungen",
       finalText: "Es gilt österreichisches Recht unter Ausschluss des UN-Kaufrechts. Gerichtsstand ist, soweit gesetzlich zulässig, Wien.",
     },
@@ -1235,12 +1237,11 @@ const en: typeof de = {
         id: "protect",
         eyebrow: "Protect",
         title: "What must not go out, doesn't go out",
-        body: "Existing clients and opt-outs land on the suppression list and are checked automatically before every send. API keys are stored encrypted, hosting is in the EU.",
+        body: "Existing clients and opt-outs land on the suppression list and are checked automatically before every send. API keys are stored encrypted.",
         bullets: [
           "Suppression list for contacts and whole domains",
           "Automatic check before every send",
           "API keys stored encrypted",
-          "EU hosting",
         ],
       },
       {
@@ -1717,7 +1718,6 @@ const en: typeof de = {
     activeLabel: "Active",
   },
   trustBadges: [
-    { id: "euHosting", title: "EU hosting", body: "Servers in Frankfurt, no data transfer outside the EU." },
     { id: "encryption", title: "Encrypted API keys", body: "Your credentials are stored encrypted, never in plain text." },
     { id: "byok", title: "BYOK cost control", body: "Full transparency over your actual API costs, live in the dashboard." },
   ],
@@ -1776,7 +1776,6 @@ const en: typeof de = {
       ["Client-facing reporting", "Shareable report link in the client's look", "Manually assembled from multiple tools"],
       ["AI personalization per lead", "Yes, with configurable rules", "Partial, often a separate tool needed"],
       ["Built-in email verification", "Yes", "Separate tool needed"],
-      ["EU hosting", "Yes", "Varies, mostly US providers"],
       ["Only real decision-makers, no info@", "Automatically filtered", "Usually unfiltered"],
       ["Price transparency", "Fixed prices, 14 days free trial", "Usually a custom quote, no trial"],
       ["Support", "Direct line to the founder", "Ticket system"],
@@ -1803,7 +1802,6 @@ const en: typeof de = {
   faq: {
     title: "Frequently asked questions",
     items: [
-      { q: "Is this GDPR-compliant?", a: "The app itself is built with privacy in mind (EU hosting, encryption, data minimization). How you contact the found leads is still subject to the direct-marketing rules that apply to you. We're happy to advise you on your specific situation in a call." },
       { q: "Can I use this as an agency for multiple clients at once?", a: "Yes, there are separate workspaces per client, including their own name, logo and accent color. Each workspace can share a report link that shows your client aggregated metrics in their own look, without them needing their own account." },
       { q: "What does it cost?", a: "$99/month for the Starter plan (1 workspace, up to 5,000 qualified leads), 14 days free, cancel anytime after. The Agency plan (multiple workspaces, unlimited) starts from $199/month, tailored to your number of client workspaces, so let's have a quick chat about that. On top come your own API costs, transparently visible in the dashboard." },
       { q: "Can I cancel anytime?", a: "Yes, monthly, no minimum term, no notice period beyond the current month." },
@@ -1867,6 +1865,11 @@ const en: typeof de = {
       ],
       authorityHeading: "Regulating authority",
       authorityText: "City of Vienna, District Authority for the 22nd district (Magistratisches Bezirksamt für den 22. Bezirk).",
+      chamberHeading: "Chamber membership",
+      chamberText:
+        "Member of the Austrian Federal Economic Chamber (WKO), professional section for management consultancy, accounting and information technology (UBIT), Vienna division. Governing law: Austrian Trade Act 1994 (Gewerbeordnung, GewO), available at ris.bka.gv.at.",
+      taxHeading: "VAT",
+      taxText: "Small business exempt from VAT under § 6 (1) 27 of the Austrian VAT Act (UStG); no VAT is shown on invoices.",
       contactHeading: "Contact",
       contactEmailLabel: "Email:",
       purposeHeading: "Business purpose",
@@ -1909,13 +1912,13 @@ const en: typeof de = {
         "These terms apply to all contracts between Youssef Tayachi (\"Frostbreaker\", \"we\") and business customers (B2B) regarding use of the Frostbreaker software for researching, enriching, verifying, and personalizing B2B contact data.",
       formationHeading: "2. Formation of contract",
       formationText:
-        "A contract is formed once we issue an individual offer following a demo call and the customer accepts it in writing (including by email).",
+        "For the Starter plan, a contract is formed when the customer registers an account and completes checkout for the plan through the payment processing built into the software. For the Agency plan, the contract is formed by an individual offer issued after a consultation call, accepted in writing by the customer (including by email).",
       scopeOfServiceHeading: "3. Scope of service",
       scopeOfServiceText:
         "Frostbreaker provides software that lets customers research companies, identify contacts with email addresses, verify them, and generate personalized copy automatically. The data sources used (e.g. Google Places, Hunter) may change.",
       byokHeading: "4. Bring Your Own Key (BYOK)",
       byokText:
-        "Customers provide their own third-party API credentials (e.g. mapping, email enrichment, AI text generation) and bear the resulting third-party costs themselves. An individually agreed usage fee for Frostbreaker applies in addition.",
+        "Customers provide their own third-party API credentials (e.g. mapping, email enrichment, AI text generation) and bear the resulting third-party costs themselves. The usage fee for the chosen Frostbreaker plan applies in addition (Starter at the current list price, Agency per individual offer), see frostbreaker.app/preise.",
       customerDutyHeading: "5. Customer obligations",
       customerDutyText:
         "The customer is solely responsible for contacting researched leads in line with the direct-marketing rules that apply to them. Frostbreaker provides a tool but does not review the legal permissibility of individual customer campaigns.",
@@ -1926,7 +1929,8 @@ const en: typeof de = {
       liabilityText:
         "We are liable without limitation for intent and gross negligence and under mandatory statutory provisions. Otherwise, liability is limited to damage typically foreseeable under the contract.",
       termHeading: "8. Term and termination",
-      termText: "Term and notice periods are set out in the relevant individual offer.",
+      termText:
+        "Contracts run monthly and can be cancelled as of the end of the current month, with no notice period and no minimum term, unless the individual offer for the Agency plan states otherwise.",
       finalHeading: "9. Final provisions",
       finalText: "Austrian law applies, excluding the UN Convention on the International Sale of Goods. Venue is Vienna, to the extent permitted by law.",
     },

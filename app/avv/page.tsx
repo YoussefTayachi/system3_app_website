@@ -9,7 +9,7 @@ export default function AVV() {
         <section>
           <p>
             Dieser Auftragsverarbeitungsvertrag nach Art. 28 DSGVO gilt ergänzend zu den AGB zwischen dem Kunden
-            (Verantwortlicher) und [Firmenname] („Frostbreaker“, Auftragsverarbeiter), soweit Frostbreaker im Auftrag des Kunden
+            (Verantwortlicher) und Youssef Tayachi („Frostbreaker“, Auftragsverarbeiter), soweit Frostbreaker im Auftrag des Kunden
             personenbezogene Daten von Ansprechpartnern bei Zielunternehmen verarbeitet.
           </p>
         </section>
@@ -40,7 +40,7 @@ export default function AVV() {
           <p className="mt-3">
             Frostbreaker verarbeitet die Daten ausschließlich auf dokumentierte Weisung des Kunden, gewährleistet
             Vertraulichkeit, trifft angemessene technische und organisatorische Maßnahmen (u. a. Verschlüsselung,
-            Zugriffskontrollen, EU-Hosting) und unterstützt den Kunden bei der Erfüllung von Betroffenenrechten.
+            Zugriffskontrollen) und unterstützt den Kunden bei der Erfüllung von Betroffenenrechten.
           </p>
         </section>
 
@@ -73,7 +73,7 @@ export default function AVV() {
           <h2 className="text-base font-semibold text-ink">7. Kontakt</h2>
           <p className="mt-3">
             Bei Fragen zu diesem AVV:{" "}
-            <a href="mailto:youtaybusiness@gmail.com" className="text-ink underline">[Kontakt-E-Mail]</a>.
+            <a href="mailto:youtaybusiness@gmail.com" className="text-ink underline">youtaybusiness@gmail.com</a>.
           </p>
         </section>
       </div>

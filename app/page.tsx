@@ -583,7 +583,7 @@ export default function Home() {
       <section className="border-y border-edge/60 bg-panel2">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <SectionHeading title={t.trust.title} />
-          <div className="grid gap-5 sm:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-2">
             {t.trustBadges.map((b) => (
               <div key={b.id} className="rounded-2xl border border-edge/60 bg-panel p-6 hover-lift">
                 <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-panel2 text-ink">
