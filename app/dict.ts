@@ -22,12 +22,17 @@ const de = {
     // Eintrag zeigt direkt auf den passenden Anker auf /funktionen (siehe
     // scroll-mt-20-Sektionen dort, id = groups[].id). Absolute Pfade, deshalb
     // -- anders als bei produktItems -- keine Praefix-Anpassung pro Seite noetig.
+    // Namen bewusst wie Produktnamen behandelt (unuebersetzt, identisch in
+    // beiden Sprachversionen), nicht wie generische Fachbegriffe -- nach
+    // Feedback, dass "Enrichment"/"Suppression List" fuer den Durchschnitts-
+    // nutzer zu technisch klingen. "Personalisierung"/"Personalization"
+    // bleibt bewusst uebersetzt (kein Produktname wie die anderen).
     funktionenItems: [
       { label: "Alle Funktionen", href: "/funktionen" },
-      { label: "Lead-Suche", href: "/funktionen#find" },
-      { label: "Anreicherung", href: "/funktionen#enrich" },
+      { label: "Lead Finder", href: "/funktionen#find" },
+      { label: "Decision Maker Finder", href: "/funktionen#enrich" },
       { label: "Personalisierung", href: "/funktionen#personalize" },
-      { label: "Copy Check", href: "/funktionen#check" },
+      { label: "Email Copy Coach", href: "/funktionen#check" },
       { label: "Kampagnen", href: "/funktionen#send" },
       { label: "Sperrliste", href: "/funktionen#protect" },
       { label: "Pipeline", href: "/funktionen#pipeline" },
@@ -1023,10 +1028,10 @@ const en: typeof de = {
     ],
     funktionenItems: [
       { label: "All features", href: "/funktionen" },
-      { label: "Lead search", href: "/funktionen#find" },
-      { label: "Enrichment", href: "/funktionen#enrich" },
+      { label: "Lead Finder", href: "/funktionen#find" },
+      { label: "Decision Maker Finder", href: "/funktionen#enrich" },
       { label: "Personalization", href: "/funktionen#personalize" },
-      { label: "Copy Check", href: "/funktionen#check" },
+      { label: "Email Copy Coach", href: "/funktionen#check" },
       { label: "Campaigns", href: "/funktionen#send" },
       { label: "Suppression list", href: "/funktionen#protect" },
       { label: "Pipeline", href: "/funktionen#pipeline" },
