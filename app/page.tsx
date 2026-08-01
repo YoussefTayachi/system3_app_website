@@ -45,6 +45,15 @@ export default function Home() {
                 {l.label}
               </a>
             ))}
+            {/* Zweites Angebot (Individualentwicklung). Wie die uebrigen
+                sekundaeren Links erst ab lg sichtbar, damit die Leiste
+                zwischen 768 und 1024px nicht wieder ueberlaeuft. */}
+            <a
+              href="/eigene-software"
+              className="hidden text-sm text-soft transition-colors hover:text-ink lg:inline"
+            >
+              {t.nav.custom}
+            </a>
           </nav>
           <div className="flex items-center gap-3">
             <LanguageToggle />

@@ -42,6 +42,10 @@ const de = {
     vergleich: "Vergleich",
     faq: "FAQ",
     kontakt: "Kontakt",
+    // Zweites, eigenstaendiges Angebot (Individualentwicklung) neben dem
+    // Produkt. Bewusst ein kurzes Substantiv wie die uebrigen Nav-Punkte --
+    // die einladende Frage steht als H1 auf der Zielseite, wo sie wirkt.
+    custom: "Eigene Software",
   },
   // Vorher standen hier die Namen der Dienste, die im Hintergrund laufen. Das
   // las sich wie eine Zutatenliste und legte die Frage nahe, warum man nicht
@@ -950,6 +954,89 @@ const de = {
     ctaButtonLabel: "30 Minuten Call buchen",
     backLabel: "Zurück zur Startseite",
   },
+  // Zweites Angebot neben dem Produkt: Individualentwicklung. Eigene Seite
+  // statt einer Sektion auf der Startseite, weil sich die Zielgruppen nicht
+  // ueberschneiden -- wer das Produkt sucht, soll nicht ueber Auftragsarbeit
+  // stolpern, und wer einen Entwickler sucht, nicht ueber Trial-Buttons.
+  // Ansprache bewusst "du" wie auf /kontakt (dort spricht ebenfalls Youssef
+  // persoenlich), nicht "ihr" wie auf der Agenturseite.
+  customPage: {
+    eyebrow: "Eigene Software",
+    title: "Willst du eine eigene App für dein Unternehmen?",
+    intro: "Ich bin der Entwickler hinter Frostbreaker. Wenn bei dir ein Teil der Arbeit an einer Tabelle hängt, an einem Schritt, den jemand von Hand abtippt, oder an fünf Tools, die per Copy-paste zusammengehalten werden: Genau das baue ich als ein System, das dir gehört.",
+    ctaLabel: "30 Minuten Call buchen",
+    sections: [
+      {
+        id: "build",
+        eyebrow: "Was ich baue",
+        title: "Ein System statt fünf Behelfslösungen",
+        body: "Kein Baukasten und keine Vorlage, die nachträglich passend gebogen wird. Ich schaue mir an, wie bei dir tatsächlich gearbeitet wird, und baue die Software darum herum.",
+        bullets: [
+          "Interne Werkzeuge, die eine Tabelle und das Übertragen von Hand zwischen zwei Systemen ersetzen",
+          "KI-Abläufe für Recherche, Anreicherung und Personalisierung, also die Arbeit, für die heute jemand liest und tippt",
+          "Kundenfähige Apps mit echtem Login, Abrechnung und Datenbank dahinter, kein Prototyp",
+          "Ein System, das dir gehört, statt mehrerer Abos, die über Zapier zusammenhängen",
+        ],
+      },
+      {
+        id: "ablauf",
+        eyebrow: "Wie wir zusammenarbeiten",
+        title: "Erst Klarheit, dann Angebot, dann Code",
+        body: "Der teuerste Fehler bei eigener Software ist, mit dem Bauen anzufangen, bevor klar ist, worin das Problem eigentlich besteht. Deshalb steht am Anfang ein Gespräch und kein Vertrag.",
+        bullets: [
+          "Ein Gespräch über deinen Ablauf: was heute wie lange dauert und wo es hakt",
+          "Ein schriftlicher Vorschlag mit festem Umfang und Preis, bevor ich anfange",
+          "Regelmäßig etwas Lauffähiges zum Anschauen, statt einer großen Übergabe am Ende",
+          "Code und Daten gehören dir, auch wenn wir danach getrennte Wege gehen",
+        ],
+      },
+    ],
+    proofEyebrow: "Der Beweis",
+    proofTitle: "Frostbreaker habe ich für mich selbst gebaut, nicht als Portfolio-Stück",
+    proofBody: "Diese Seite, die App dahinter und alles, was du hier siehst, kommt von mir. Ich entwickle also nicht nach einem Briefing für Software, die ich selbst nie benutzt habe: Ich baue die Art von Software, die ich täglich verwende, und merke deshalb früh, welche Stelle einen echten Nutzer später stört.",
+    proofStats: [
+      { value: "3 Wochen", label: "von der Idee zum laufenden System" },
+      { value: "800+", label: "verarbeitete Firmen im Live-Betrieb" },
+      { value: "6", label: "angebundene externe Dienste" },
+    ],
+    proofLinkLabel: "Die ganze Entstehung nachlesen",
+    ctaTitle: "Erzähl mir von deinem Ablauf",
+    ctaBody: "30 Minuten, ohne Präsentation. Wenn sich der Aufwand für dich nicht lohnt, sage ich dir das auch.",
+  },
+  customMockups: {
+    workaround: {
+      beforeLabel: "Heute",
+      // Ein Ablauf, den fast jeder Betrieb wiedererkennt -- bewusst nicht
+      // "Tool A/Tool B", das waere abstrakt geblieben.
+      beforeSteps: [
+        { label: "Anfrage per Mail", manual: false },
+        { label: "Tabelle", manual: false },
+        { label: "CRM", manual: true },
+        { label: "Rechnung", manual: true },
+      ],
+      manualLabel: "von Hand",
+      beforeNote: "Vier Stationen, zwei davon tippt jemand ab. Die Daten liegen an vier Orten.",
+      afterLabel: "Mit eigenem System",
+      afterTitle: "Ein Ablauf, eine Datenbank",
+      afterNote: "Ein Login, ein Ort für die Daten. Die Schritte dazwischen passieren automatisch.",
+    },
+    process: {
+      label: "Vom ersten Gespräch bis zur Übergabe",
+      steps: [
+        { when: "Schritt 1", title: "Gespräch über deinen Ablauf", note: "30 Minuten, unverbindlich" },
+        { when: "Schritt 2", title: "Angebot mit festem Umfang und Preis", note: "schriftlich, bevor ich anfange" },
+        { when: "Schritt 3", title: "Bauen in sichtbaren Zwischenständen", note: "regelmäßig etwas Lauffähiges zum Anschauen" },
+        { when: "Schritt 4", title: "Übergabe", note: "Code und Daten gehören dir" },
+      ],
+    },
+    stack: {
+      label: "Ein System, sechs angebundene Dienste",
+      services: ["Google Maps", "OpenAI", "Hunter", "NeverBounce", "Instantly", "Stripe"],
+      coreLabel: "Frostbreaker",
+      coreNote: "Next.js · FastAPI · Postgres",
+      footnote: "Zugangsschlüssel verschlüsselt pro Nutzer, Hosting in der EU.",
+    },
+  },
   startPage: {
     title: "Lead-Gen und Cold Outreach für alle eure Kunden, aus einem Tool, unter eurem eigenen Namen.",
     body: "Ein eigener Workspace pro Kunde, ein teilbarer Report-Link im Look des jeweiligen Kunden, und ein Dashboard, das gebuchte Meetings und Pipeline-Wert zeigt, nicht nur Öffnungsraten.",
@@ -1071,6 +1158,7 @@ const en: typeof de = {
     vergleich: "Comparison",
     faq: "FAQ",
     kontakt: "Contact",
+    custom: "Custom Software",
   },
   costProof: {
     eyebrow: "What a lead actually costs",
@@ -1895,6 +1983,81 @@ const en: typeof de = {
     ctaBody: "That same speed and range, data modeling, AI integration, payment integration, security architecture, clean integration of several third-party APIs, is what I bring to your own requirements. Whether that's internal automation, a customer-facing app, or extending an existing system.",
     ctaButtonLabel: "Book a 30-minute call",
     backLabel: "Back to homepage",
+  },
+  customPage: {
+    eyebrow: "Custom Software",
+    title: "Want your own app for your business?",
+    intro: "I'm the developer behind Frostbreaker. If part of your work runs on a spreadsheet, on a step someone retypes by hand, or on five tools held together by copy-paste: that's exactly what I build as one system you own.",
+    ctaLabel: "Book a 30-minute call",
+    sections: [
+      {
+        id: "build",
+        eyebrow: "What I build",
+        title: "One system instead of five workarounds",
+        body: "No page builder and no template bent into shape afterwards. I look at how the work actually happens at your company and build the software around that.",
+        bullets: [
+          "Internal tools that replace a spreadsheet and the manual copying between two systems",
+          "AI pipelines for research, enrichment and personalization, the work that today needs someone reading and typing",
+          "Customer-facing apps with real logins, billing and a database behind them, not a prototype",
+          "One system that belongs to you, instead of several subscriptions wired together through Zapier",
+        ],
+      },
+      {
+        id: "ablauf",
+        eyebrow: "How we'd work together",
+        title: "Clarity first, then a quote, then code",
+        body: "The most expensive mistake in custom software is starting to build before anyone knows what the problem actually is. So this starts with a conversation, not a contract.",
+        bullets: [
+          "A conversation about your process: what takes how long today and where it breaks",
+          "A written proposal with fixed scope and price before I start",
+          "Something working to look at regularly, instead of one big handover at the end",
+          "The code and the data are yours, even if we go separate ways afterwards",
+        ],
+      },
+    ],
+    proofEyebrow: "The proof",
+    proofTitle: "I built Frostbreaker for myself, not as a portfolio piece",
+    proofBody: "This site, the app behind it, and everything you see here came from me. So I'm not building from a brief for software I've never used myself: I build the kind of software I use daily, which is why I notice early which part will quietly annoy a real user later.",
+    proofStats: [
+      { value: "3 weeks", label: "from idea to a running system" },
+      { value: "800+", label: "companies processed in production" },
+      { value: "6", label: "external services integrated" },
+    ],
+    proofLinkLabel: "Read how it was built",
+    ctaTitle: "Tell me about your process",
+    ctaBody: "30 minutes, no slide deck. If it isn't worth building for you, I'll tell you that too.",
+  },
+  customMockups: {
+    workaround: {
+      beforeLabel: "Today",
+      beforeSteps: [
+        { label: "Email enquiry", manual: false },
+        { label: "Spreadsheet", manual: false },
+        { label: "CRM", manual: true },
+        { label: "Invoice", manual: true },
+      ],
+      manualLabel: "by hand",
+      beforeNote: "Four stations, two of them retyped by a person. The data lives in four places.",
+      afterLabel: "With your own system",
+      afterTitle: "One process, one database",
+      afterNote: "One login, one place for the data. The steps in between happen on their own.",
+    },
+    process: {
+      label: "From the first call to handover",
+      steps: [
+        { when: "Step 1", title: "A conversation about your process", note: "30 minutes, no obligation" },
+        { when: "Step 2", title: "A proposal with fixed scope and price", note: "in writing, before I start" },
+        { when: "Step 3", title: "Building in visible increments", note: "something working to look at, regularly" },
+        { when: "Step 4", title: "Handover", note: "the code and the data are yours" },
+      ],
+    },
+    stack: {
+      label: "One system, six connected services",
+      services: ["Google Maps", "OpenAI", "Hunter", "NeverBounce", "Instantly", "Stripe"],
+      coreLabel: "Frostbreaker",
+      coreNote: "Next.js · FastAPI · Postgres",
+      footnote: "Access keys encrypted per user, hosted in the EU.",
+    },
   },
   startPage: {
     title: "Lead-gen and cold outreach for all your clients, from one tool, under your own name.",

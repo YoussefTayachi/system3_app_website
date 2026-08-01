@@ -27,6 +27,12 @@ export default function KontaktPage() {
             {navLinks.map((l) => (
               <a key={l.href} href={l.href} className="text-sm text-soft hover:text-ink">{l.label}</a>
             ))}
+            <a
+              href="/eigene-software"
+              className="hidden text-sm text-soft transition-colors hover:text-ink lg:inline"
+            >
+              {t.nav.custom}
+            </a>
           </nav>
           <div className="flex items-center gap-3">
             <LanguageToggle />
