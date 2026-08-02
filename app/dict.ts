@@ -190,7 +190,7 @@ const de = {
   featuresPage: {
     metaTitle: "Funktionen: von der Suche bis zur beantworteten Mail",
     metaDescription:
-      "Alle Funktionen von Frostbreaker im Überblick: Lead-Suche über Google Maps und Firmendatenbank, Entscheider-Recherche, E-Mail-Verifizierung, KI-Personalisierung, Kampagnen, Zustellbarkeit und Sperrliste.",
+      "Alle Funktionen von Frostbreaker im Überblick: Lead-Suche über Google Maps, Firmendatenbank und Entscheider-Datenbank mit Technologie-Filter, Entscheider-Recherche, E-Mail-Verifizierung, KI-Personalisierung, Kampagnen, Zustellbarkeit und Sperrliste.",
     eyebrow: "Funktionen",
     title: "Von der Suche bis zur beantworteten Mail",
     intro:
@@ -199,8 +199,8 @@ const de = {
       {
         id: "find",
         eyebrow: "Finden",
-        title: "Zwei Quellen, eine Liste",
-        body: "Lokale Betriebe über Google Maps oder Unternehmen über die Firmendatenbank. Playbooks bringen fertige Kombinationen aus Suchbegriff und Filtern mit, das Lead-Abo lässt eine Liste wöchentlich oder täglich von allein weiterwachsen.",
+        title: "Drei Quellen, eine Liste",
+        body: "Lokale Betriebe über Google Maps, Unternehmen über die Firmendatenbank oder Entscheider samt verifizierter Adresse über die Massen-Lead-Suche, dort auch nach eingesetzter Technik wie Shopify filterbar. Playbooks bringen fertige Kombinationen aus Suchbegriff und Filtern mit, das Lead-Abo lässt eine Liste wöchentlich oder täglich von allein weiterwachsen.",
         bullets: [
           "Umkreissuche mit Radius in Metern",
           "Filter auf fehlende Website oder schwache Bewertung",
@@ -287,10 +287,13 @@ const de = {
   // Firmendatenbanken, obwohl die App genau das auch kann (Corporate-Modus
   // ueber Hunter: Branche, Land, Mitarbeiterzahl). Wer B2B-Software an
   // Mittelstaendler verkauft, las "nur fuer Handwerker" und ging wieder.
-  twoWays: {
-    eyebrow: "Zwei Wege zum Lead",
-    title: "Lokale Betriebe oder klassische Firmensuche, im selben Werkzeug",
-    body: "Ihr entscheidet pro Suche, woher die Firmen kommen. Beide Wege münden in dieselbe Liste, dieselbe Anreicherung und denselben Versand, und beide sind gleich viel wert.",
+  // Hiess bis zur Apollo-Integration "twoWays". Der Name ist mitgewandert,
+  // weil ein Schluessel, der "zwei" heisst und drei Eintraege haelt, beim
+  // naechsten Ausbau garantiert jemanden in die Irre fuehrt.
+  searchModes: {
+    eyebrow: "Drei Wege zum Lead",
+    title: "Lokale Betriebe, klassische Firmensuche oder Massen-Leads, im selben Werkzeug",
+    body: "Ihr entscheidet pro Suche, woher die Firmen kommen. Alle drei Wege münden in dieselbe Liste, dieselbe Anreicherung und denselben Versand.",
     modes: [
       {
         id: "local",
@@ -318,7 +321,49 @@ const de = {
           "Keine Abfragekosten pro Firma",
         ],
       },
+      {
+        id: "apollo",
+        label: "Massen-Leads",
+        title: "Über die Entscheider-Datenbank",
+        body: "Firma und Entscheider samt bereits verifizierter E-Mail in einem Schritt. Die angefragte Zahl ist hier die Zahl der Leads, keine Schätzung: bei den anderen Wegen wird die Adresse nachträglich recherchiert.",
+        points: [
+          "Entscheider und verifizierte Adresse in einem Schritt",
+          "Filter nach eingesetzter Technik, etwa Shopify",
+          "11 Hierarchiestufen vom Inhaber bis zur Fachkraft",
+          "Freie Jobtitel, Länder und Firmengröße",
+          "Bis zu 1.000 Leads pro Suche",
+        ],
+      },
     ],
+  },
+  // Der Technologie-Filter ist das staerkste Argument fuer eine konkrete
+  // Zielgruppe: er verwandelt "irgendwas mit E-Commerce" in eine belegbare
+  // Liste. Bewusst eine eigene Sektion statt eines Stichpunkts oben, weil er
+  // fuer Interessenten mit klarer Nische der Kaufgrund ist.
+  techFilter: {
+    eyebrow: "Technologie-Filter",
+    title: "Finde Firmen an der Technik, die sie wirklich einsetzen",
+    body: "Wer E-Commerce-Kunden sucht, tippt sonst „ecommerce\" als Stichwort ein und bekommt Agenturen, Blogs und Berater, die über E-Commerce schreiben. Der Technologie-Filter geht den umgekehrten Weg: Er erkennt am Shop selbst, welches System darunter läuft.",
+    points: [
+      {
+        title: "Stichwort rät, Technik belegt",
+        body: "Ein Stichwort trifft, worüber eine Firma spricht. Die eingesetzte Technik zeigt, was sie tatsächlich betreibt: ein Shopify-Shop hat Shopify im Quelltext, unabhängig davon, was auf der Über-uns-Seite steht.",
+      },
+      {
+        title: "Der Aufhänger für die erste Zeile",
+        body: "Wer weiß, dass ein Shop auf Shopware läuft und Klarna anbietet, schreibt eine erste Zeile, die nur zu dieser Firma passt. Genau daran erkennt ein Empfänger den Unterschied zwischen Serienmail und gemeinter Nachricht.",
+      },
+      {
+        title: "Passt zu dem, was ihr verkauft",
+        body: "Ihr baut Shopify-Apps, macht Shopware-Migrationen oder Klaviyo-Setups? Dann ist eure Zielgruppe keine Branche, sondern eine Technologie. Der Filter bildet genau das ab.",
+      },
+    ],
+    scaleLabel: "Katalog-Umfang",
+    scaleValue: "über 10.000 Technologien",
+    scaleNote: "Von den großen Shopsystemen bis zu einzelnen Zahlungs- und Bewertungs-Tools. Auf der Oberfläche steht eine kuratierte Auswahl, die für E-Commerce zählt.",
+    dachLabel: "Für den DACH-Markt",
+    dachValue: "Shopware, JTL, Oxid, PlentyMarkets",
+    dachNote: "Nicht nur die US-Systeme: die im deutschsprachigen Raum verbreiteten Shopsysteme sind genauso erfasst.",
   },
   // Nachbildungen echter App-Screens. Bewusst keine Screenshots aus dem
   // laufenden Betrieb: dort stehen Namen realer Personen mit Rolle und
@@ -367,7 +412,8 @@ const de = {
       subtitle: "Suchbegriff und Ort eingeben, der Rest läuft automatisch.",
       playbookLabel: "Branchen-Playbook",
       playbookValue: "Kein Playbook, frei eingestellt",
-      tabs: ["Lokal (Kartensuche)", "Corporate (Datenbank)"],
+      // Diese Liste steuert die Reiterleiste der Suchmaske auf der Startseite.
+      tabs: ["Lokal (Kartensuche)", "Corporate (Datenbank)", "Massen-Leads"],
       fields: [
         { label: "Suchbegriff", value: "Fahrschule" },
         { label: "Ort", value: "Hamburg" },
@@ -395,6 +441,65 @@ const de = {
       noteLabel: "Abfragekosten pro Firma",
       noteValue: "Entfallen in diesem Modus",
       cta: "Suche starten",
+    },
+    apolloSearch: {
+      title: "Neue Suche",
+      subtitle: "Zielgruppe, Entscheider und Technik in einem Schritt.",
+      tabs: ["Lokal (Kartensuche)", "Corporate (Datenbank)", "Massen-Leads"],
+      fields: [
+        { label: "Zielgruppe", value: "Nahrungsergänzung" },
+        { label: "Firmengröße", value: "11–50" },
+        { label: "Ziel: Leads mit E-Mail", value: "250" },
+      ],
+      titlesLabel: "Entscheider-Titel",
+      titlesValue: "Founder, Geschäftsführer, E-Commerce Manager",
+      chipsLabel: "Hierarchiestufe",
+      chips: ["Inhaber", "Founder", "C-Level", "Geschäftsführung"],
+      techLabel: "Eingesetzte Technik",
+      techChips: ["Shopify", "Klaviyo"],
+      noteLabel: "Was zurückkommt",
+      noteValue: "Firma, Entscheider und verifizierte E-Mail in einem Schritt",
+      cta: "Suche starten",
+    },
+    // Die Bezeichnungen stammen 1:1 aus lib/technologies.ts der App. Bewusst
+    // eine Auswahl statt aller Einträge: die Kachelwand soll überzeugen, nicht
+    // erschlagen. Die Zahl darunter nennt den vollen Umfang.
+    techFilter: {
+      title: "Eingesetzte Technik",
+      subtitle: "Wähle die Systeme, an denen sich deine Zielgruppe erkennen lässt.",
+      badge: "Anklickbar",
+      or: "oder",
+      groups: [
+        {
+          label: "Shopsysteme",
+          items: [
+            { id: "shopify", label: "Shopify" },
+            { id: "shopware", label: "Shopware" },
+            { id: "woocommerce", label: "WooCommerce" },
+            { id: "magento", label: "Magento" },
+            { id: "jtl", label: "JTL-Shop" },
+            { id: "oxid", label: "Oxid eShop" },
+            { id: "plentymarkets", label: "PlentyMarkets" },
+            { id: "prestashop", label: "PrestaShop" },
+          ],
+        },
+        {
+          label: "Tools, Zahlung & CMS",
+          items: [
+            { id: "klaviyo", label: "Klaviyo" },
+            { id: "gorgias", label: "Gorgias" },
+            { id: "klarna", label: "Klarna" },
+            { id: "recharge", label: "Recharge" },
+            { id: "trustedshops", label: "Trusted Shops" },
+            { id: "hubspot", label: "HubSpot" },
+            { id: "webflow", label: "Webflow" },
+          ],
+        },
+      ],
+      resultLabel: "Deine Zielgruppe",
+      resultEmpty: "Wähle oben mindestens ein System aus.",
+      result: (list: string) => `Firmen, die nachweislich ${list} einsetzen.`,
+      orNote: "Mehrfachauswahl gilt als ODER: eine Suche deckt damit den ganzen Shopsystem-Markt ab.",
     },
     leads: {
       title: "Alle Leads",
@@ -893,8 +998,8 @@ const de = {
       { q: "Kann ich jederzeit kündigen?", a: "Ja, monatlich, keine Mindestlaufzeit, keine Kündigungsfrist über den laufenden Monat hinaus." },
       { q: "Woher weiß ich, dass eine gefundene E-Mail wirklich zu einer Person gehört?", a: "Frostbreaker filtert generische Adressen wie info@ oder office@ automatisch heraus. Nur E-Mails, die eindeutig einer Person zugeordnet sind, landen in eurer Leads-Liste." },
       { q: "Was passiert, wenn ich aus Versehen an eine ungültige Adresse schreibe?", a: "Jede Adresse wird vor dem Versand geprüft, ungültige werden automatisch aussortiert. Das ist kein Nice-to-have: eine hohe Bounce-Rate beschädigt eure Sender-Reputation über alle Postfächer und alle Kunden hinweg, nicht nur die eine Kampagne. Die Prüfung läuft automatisch mit, ihr müsst nichts manuell anstoßen." },
-      { q: "Welche Dienste laufen im Hintergrund, und brauche ich dort eigene Zugänge?", a: "Frostbreaker greift für die Kartensuche auf Google, für die Recherche auf OpenAI und für den Domain-Abgleich auf Hunter zu, optional NeverBounce für die Verifizierung und Instantly für den Versand. Ihr legt dort eigene Zugänge an und hinterlegt die Schlüssel einmal in den Einstellungen, verschlüsselt gespeichert. Genau deshalb zahlt ihr die Abfragen zum Selbstkostenpreis statt eines Aufschlags. Die App führt euch in der Testphase Schritt für Schritt durch das Setup." },
-      { q: "Warum nicht gleich direkt zu Hunter oder Apollo?", a: "Weil keiner dieser Dienste den ganzen Weg abdeckt. Hunter findet Adressen zu einer Domain, aber keine lokalen Betriebe ohne Firmendatenbank-Eintrag. Apollo listet Unternehmen, schreibt aber keine individuelle Zeile pro Lead. Versand-Tools versenden, recherchieren aber nicht. Wer das selbst zusammensteckt, zahlt drei bis vier Abos, exportiert CSV-Dateien hin und her und baut das Reporting von Hand. Frostbreaker ist die Verbindung dazwischen: eine Suche, eine Liste, ein Versand, ein Dashboard, inklusive Antworten und gebuchten Meetings." },
+      { q: "Welche Dienste laufen im Hintergrund, und brauche ich dort eigene Zugänge?", a: "Frostbreaker greift für die Kartensuche auf Google, für die Recherche auf OpenAI und für den Domain-Abgleich auf Hunter zu, für die Massen-Leads samt Technologie-Filter auf Apollo, optional NeverBounce für die Verifizierung und Instantly für den Versand. Ihr legt dort eigene Zugänge an und hinterlegt die Schlüssel einmal in den Einstellungen, verschlüsselt gespeichert. Genau deshalb zahlt ihr die Abfragen zum Selbstkostenpreis statt eines Aufschlags. Die App führt euch in der Testphase Schritt für Schritt durch das Setup." },
+      { q: "Warum nicht gleich direkt zu Hunter oder Apollo?", a: "Weil keiner dieser Dienste den ganzen Weg abdeckt, und weil Frostbreaker sie gar nicht ersetzen will: Hunter und Apollo laufen als Datenquellen darin, mit euren eigenen Zugängen und zum Selbstkostenpreis. Der Unterschied liegt in dem, was davor und danach passiert. Hunter findet Adressen zu einer Domain, aber keine lokalen Betriebe ohne Firmendatenbank-Eintrag. Apollo liefert Entscheider samt verifizierter Adresse, schreibt aber keine individuelle Zeile pro Lead. Versand-Tools versenden, recherchieren aber nicht. Wer das selbst zusammensteckt, zahlt drei bis vier Abos, exportiert CSV-Dateien hin und her und baut das Reporting von Hand. Frostbreaker ist die Verbindung dazwischen: eine Suche, eine Liste, ein Versand, ein Dashboard, inklusive Antworten und gebuchten Meetings." },
       { q: "Was passiert, wenn ich aus Versehen einen Bestandskunden oder jemanden anschreibe, der sich abgemeldet hat?", a: "Genau dafür gibt es die eingebaute Sperrliste: einmal eingetragen, schließt Frostbreaker diese Kontakte und Domains automatisch aus jeder zukünftigen Suche und jedem Versand aus, ganz ohne dass ihr das bei jeder Kampagne manuell prüfen müsst. Bestandskunden und Opt-outs bleiben zuverlässig geschützt." },
       { q: "Kann ich prüfen, ob meine Versand-Domain überhaupt zustellfähig ist?", a: "Ja, direkt in der App: Frostbreaker prüft SPF, DKIM und DMARC eurer Sende-Domain per Live-DNS-Abfrage und zeigt in Klartext, was noch fehlt, dazu eine Warnung, wenn das Tagesvolumen pro Postfach riskant hoch wird. Kein separates Zustellbarkeits-Tool nötig." },
       { q: "Muss ich meine E-Mail-Kampagnen und Sequenzen in einem separaten Tool bauen?", a: "Nein. Kampagnen, Sequenzen inklusive Zeitplan und Anzahl der Follow-ups, und die Aktivierung laufen direkt in Frostbreaker. Ihr wechselt für den Versand nicht in ein zweites Tool und müsst nichts per CSV hin- und herschieben." },
@@ -1283,7 +1388,7 @@ const en: typeof de = {
   featuresPage: {
     metaTitle: "Features: from search to answered email",
     metaDescription:
-      "Every Frostbreaker feature at a glance: lead search via Google Maps and company database, decision-maker research, email verification, AI personalization, campaigns, deliverability and suppression list.",
+      "Every Frostbreaker feature at a glance: lead search via Google Maps, company database and a decision-maker database with technology filter, decision-maker research, email verification, AI personalization, campaigns, deliverability and suppression list.",
     eyebrow: "Features",
     title: "From search to answered email",
     intro:
@@ -1292,8 +1397,8 @@ const en: typeof de = {
       {
         id: "find",
         eyebrow: "Find",
-        title: "Two sources, one list",
-        body: "Local businesses via Google Maps or companies via the database. Playbooks bring ready-made combinations of search term and filters, and a lead subscription keeps a list growing weekly or daily on its own.",
+        title: "Three sources, one list",
+        body: "Local businesses via Google Maps, companies via the database, or decision makers with a verified address via the bulk-lead search, which also filters by the technology they run, such as Shopify. Playbooks bring ready-made combinations of search term and filters, and a lead subscription keeps a list growing weekly or daily on its own.",
         bullets: [
           "Radius search in metres",
           "Filter for missing website or weak rating",
@@ -1376,10 +1481,10 @@ const en: typeof de = {
     ctaTitle: "The fastest way to understand it is to try it",
     ctaBody: "14 days free, no credit card required, cancel monthly.",
   },
-  twoWays: {
-    eyebrow: "Two routes to a lead",
-    title: "Local businesses or classic company search, in the same tool",
-    body: "You decide per search where the companies come from. Both routes end up in the same list, the same enrichment and the same sending, and both are worth the same.",
+  searchModes: {
+    eyebrow: "Three routes to a lead",
+    title: "Local businesses, classic company search or bulk leads, in the same tool",
+    body: "You decide per search where the companies come from. All three routes end up in the same list, the same enrichment and the same sending.",
     modes: [
       {
         id: "local",
@@ -1407,7 +1512,45 @@ const en: typeof de = {
           "No per-company lookup cost",
         ],
       },
+      {
+        id: "apollo",
+        label: "Bulk leads",
+        title: "Via the decision-maker database",
+        body: "Company and decision maker with an already verified email in one step. Here the number you ask for is the number of leads, not an estimate: on the other routes the address is researched afterwards.",
+        points: [
+          "Decision maker and verified address in one step",
+          "Filter by the technology they run, such as Shopify",
+          "11 seniority levels from owner to individual contributor",
+          "Free-text job titles, countries and company size",
+          "Up to 1,000 leads per search",
+        ],
+      },
     ],
+  },
+  techFilter: {
+    eyebrow: "Technology filter",
+    title: "Find companies by the technology they actually run",
+    body: "Looking for e-commerce clients, you would normally type \"ecommerce\" as a keyword and get agencies, blogs and consultants who write about e-commerce. The technology filter works the other way round: it recognises from the shop itself which system is running underneath.",
+    points: [
+      {
+        title: "A keyword guesses, technology proves",
+        body: "A keyword matches what a company talks about. The technology it runs shows what it actually operates: a Shopify shop has Shopify in its source code, whatever the about page says.",
+      },
+      {
+        title: "The hook for your opening line",
+        body: "Knowing a shop runs on Shopware and offers Klarna lets you write a first line that fits only that company. That is exactly how a recipient tells a mass mail from a message meant for them.",
+      },
+      {
+        title: "Matches what you actually sell",
+        body: "Building Shopify apps, doing Shopware migrations or Klaviyo setups? Then your audience is not an industry, it is a technology. This filter maps precisely that.",
+      },
+    ],
+    scaleLabel: "Catalogue size",
+    scaleValue: "over 10,000 technologies",
+    scaleNote: "From the major shop systems down to individual payment and review tools. The interface shows a curated selection of what matters for e-commerce.",
+    dachLabel: "For the DACH market",
+    dachValue: "Shopware, JTL, Oxid, PlentyMarkets",
+    dachNote: "Not just the US systems: the shop platforms common in German-speaking markets are covered too.",
   },
   appMockups: {
     dashboard: {
@@ -1442,7 +1585,7 @@ const en: typeof de = {
       subtitle: "Enter search term and location, the rest runs automatically.",
       playbookLabel: "Industry playbook",
       playbookValue: "No playbook, set manually",
-      tabs: ["Local (map search)", "Corporate (database)"],
+      tabs: ["Local (map search)", "Corporate (database)", "Bulk leads"],
       fields: [
         { label: "Search term", value: "Driving school" },
         { label: "Location", value: "Hamburg" },
@@ -1470,6 +1613,62 @@ const en: typeof de = {
       noteLabel: "Per-company lookup cost",
       noteValue: "None in this mode",
       cta: "Start search",
+    },
+    apolloSearch: {
+      title: "New search",
+      subtitle: "Audience, decision makers and technology in one step.",
+      tabs: ["Local (map search)", "Corporate (database)", "Bulk leads"],
+      fields: [
+        { label: "Audience", value: "Supplements" },
+        { label: "Company size", value: "11–50" },
+        { label: "Target: leads with email", value: "250" },
+      ],
+      titlesLabel: "Decision-maker titles",
+      titlesValue: "Founder, Managing Director, E-Commerce Manager",
+      chipsLabel: "Seniority",
+      chips: ["Owner", "Founder", "C-suite", "Managing Director"],
+      techLabel: "Technology used",
+      techChips: ["Shopify", "Klaviyo"],
+      noteLabel: "What comes back",
+      noteValue: "Company, decision maker and verified email in one step",
+      cta: "Start search",
+    },
+    techFilter: {
+      title: "Technology used",
+      subtitle: "Pick the systems your audience can be recognised by.",
+      badge: "Clickable",
+      or: "or",
+      groups: [
+        {
+          label: "Shop systems",
+          items: [
+            { id: "shopify", label: "Shopify" },
+            { id: "shopware", label: "Shopware" },
+            { id: "woocommerce", label: "WooCommerce" },
+            { id: "magento", label: "Magento" },
+            { id: "jtl", label: "JTL-Shop" },
+            { id: "oxid", label: "Oxid eShop" },
+            { id: "plentymarkets", label: "PlentyMarkets" },
+            { id: "prestashop", label: "PrestaShop" },
+          ],
+        },
+        {
+          label: "Tools, payment & CMS",
+          items: [
+            { id: "klaviyo", label: "Klaviyo" },
+            { id: "gorgias", label: "Gorgias" },
+            { id: "klarna", label: "Klarna" },
+            { id: "recharge", label: "Recharge" },
+            { id: "trustedshops", label: "Trusted Shops" },
+            { id: "hubspot", label: "HubSpot" },
+            { id: "webflow", label: "Webflow" },
+          ],
+        },
+      ],
+      resultLabel: "Your audience",
+      resultEmpty: "Pick at least one system above.",
+      result: (list: string) => `Companies provably running ${list}.`,
+      orNote: "Multiple selections act as OR, so a single search can cover the entire shop-system market.",
     },
     leads: {
       title: "All leads",
@@ -1923,8 +2122,8 @@ const en: typeof de = {
       { q: "Can I cancel anytime?", a: "Yes, monthly, no minimum term, no notice period beyond the current month." },
       { q: "How do I know a found email really belongs to a person?", a: "Frostbreaker automatically filters out generic addresses like info@ or office@. Only emails clearly assigned to a person make it into your leads list." },
       { q: "What happens if I accidentally send to an invalid address?", a: "Every address is checked before sending, invalid ones are filtered out automatically. This isn't a nice-to-have: a high bounce rate damages your sender reputation across every mailbox and every client, not just the one campaign. The check runs automatically, nothing to trigger manually." },
-      { q: "Which services run in the background, and do I need my own accounts there?", a: "Frostbreaker uses Google for the map search, OpenAI for the research and Hunter for the domain match, optionally NeverBounce for verification and Instantly for sending. You create your own accounts there and enter the keys once in settings, stored encrypted. That is exactly why you pay for lookups at cost instead of a markup. During the trial the app walks you through setup step by step." },
-      { q: "Why not go straight to Hunter or Apollo?", a: "Because none of them covers the whole path. Hunter finds addresses for a domain, but not local businesses that aren't in a company database. Apollo lists companies but doesn't write an individual line per lead. Sending tools send but don't research. Stitching that together yourself means three or four subscriptions, CSV files going back and forth, and reporting built by hand. Frostbreaker is the connection in between: one search, one list, one send, one dashboard, including replies and booked meetings." },
+      { q: "Which services run in the background, and do I need my own accounts there?", a: "Frostbreaker uses Google for the map search, OpenAI for the research and Hunter for the domain match, Apollo for bulk leads including the technology filter, optionally NeverBounce for verification and Instantly for sending. You create your own accounts there and enter the keys once in settings, stored encrypted. That is exactly why you pay for lookups at cost instead of a markup. During the trial the app walks you through setup step by step." },
+      { q: "Why not go straight to Hunter or Apollo?", a: "Because none of them covers the whole path, and because Frostbreaker does not try to replace them: Hunter and Apollo run inside it as data sources, on your own accounts and at cost. The difference is what happens before and after. Hunter finds addresses for a domain, but not local businesses that aren't in a company database. Apollo returns decision makers with a verified address but doesn't write an individual line per lead. Sending tools send but don't research. Stitching that together yourself means three or four subscriptions, CSV files going back and forth, and reporting built by hand. Frostbreaker is the connection in between: one search, one list, one send, one dashboard, including replies and booked meetings." },
       { q: "What happens if I accidentally email an existing customer or someone who's opted out?", a: "That's exactly what the built-in suppression list is for: once added, Frostbreaker automatically excludes those contacts and domains from every future search and send, no manual checking required for every campaign. Existing customers and opt-outs stay reliably protected." },
       { q: "Can I check whether my sending domain is actually deliverable?", a: "Yes, directly in the app: Frostbreaker checks SPF, DKIM and DMARC for your sending domain via a live DNS lookup and shows in plain language what's still missing, plus a warning if your daily volume per mailbox gets risky. No separate deliverability tool needed." },
       { q: "Do I need to build my email campaigns and sequences in a separate tool?", a: "No. Campaigns, sequences including schedule and number of follow-ups, and activation all happen directly in Frostbreaker. You don't switch to a second tool to send, and there's no CSV shuffling." },

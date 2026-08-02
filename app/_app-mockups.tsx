@@ -162,12 +162,16 @@ function FieldBox({ label, value, chevron = false }: { label: string; value: str
  * App -- was die Kernaussage der Sektion ("derselbe Bildschirm, zwei Quellen")
  * belegt, statt sie nur zu behaupten. Die Werte bleiben Beispieldaten.
  */
+type SearchMode = "local" | "corporate" | "apollo";
+
 export function UnifiedSearchMockup() {
   const { t } = useT();
   const local = t.appMockups.search;
   const corporate = t.appMockups.corporateSearch;
-  const [mode, setMode] = useState<"local" | "corporate">("local");
-  const m = mode === "local" ? local : corporate;
+  const apollo = t.appMockups.apolloSearch;
+  const [mode, setMode] = useState<SearchMode>("local");
+  const m = mode === "local" ? local : mode === "corporate" ? corporate : apollo;
+  const MODES: SearchMode[] = ["local", "corporate", "apollo"];
 
   return (
     <AppFrame>
@@ -175,9 +179,11 @@ export function UnifiedSearchMockup() {
         <p className="font-display text-lg font-semibold tracking-[-0.01em] text-ink">{m.title}</p>
         <p className="mt-0.5 text-xs text-mute">{m.subtitle}</p>
 
-        <div className="mt-5 inline-flex rounded-lg bg-panel2 p-1" role="tablist">
+        {/* flex-wrap statt inline-flex: mit dem dritten Reiter passt die Leiste
+            auf schmalen Displays nicht mehr in eine Zeile. */}
+        <div className="mt-5 flex flex-wrap gap-1 rounded-lg bg-panel2 p-1 sm:inline-flex" role="tablist">
           {local.tabs.map((tab, i) => {
-            const value = i === 0 ? "local" : "corporate";
+            const value = MODES[i];
             const active = mode === value;
             return (
               <button
@@ -185,7 +191,7 @@ export function UnifiedSearchMockup() {
                 type="button"
                 role="tab"
                 aria-selected={active}
-                onClick={() => setMode(value as "local" | "corporate")}
+                onClick={() => setMode(value)}
                 className={
                   "rounded-md px-3 py-1.5 text-xs font-medium transition-colors " +
                   (active ? "bg-sky-500/15 text-sky-700" : "text-faint hover:text-soft")
@@ -230,7 +236,7 @@ export function UnifiedSearchMockup() {
               <span className="rounded-full bg-ink px-4 py-2 text-xs font-medium text-surface">{local.cta}</span>
             </div>
           </>
-        ) : (
+        ) : mode === "corporate" ? (
           <>
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
               {corporate.fields.map((f) => (
@@ -246,6 +252,52 @@ export function UnifiedSearchMockup() {
                 <p className="mt-1 text-sm font-semibold text-emerald-800">{corporate.noteValue}</p>
               </div>
               <span className="rounded-full bg-ink px-4 py-2 text-xs font-medium text-surface">{corporate.cta}</span>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="mt-4 grid gap-3 sm:grid-cols-3">
+              {apollo.fields.map((f) => (
+                <FieldBox key={f.label} label={f.label} value={f.value} />
+              ))}
+            </div>
+            <div className="mt-4">
+              <FieldBox label={apollo.titlesLabel} value={apollo.titlesValue} />
+            </div>
+
+            <p className="mt-4 text-[10px] font-medium uppercase tracking-[0.1em] text-faint">{apollo.chipsLabel}</p>
+            <div className="mt-1.5 flex flex-wrap gap-1.5">
+              {apollo.chips.map((c) => (
+                <span
+                  key={c}
+                  className="inline-flex items-center rounded-full border border-violet-300/70 bg-violet-50/70 px-2.5 py-1 text-[11px] font-medium text-violet-800"
+                >
+                  {c}
+                </span>
+              ))}
+            </div>
+
+            {/* Der Technologie-Filter taucht hier schon auf, damit der Uebergang
+                zur naechsten Sektion nicht aus dem Nichts kommt. */}
+            <p className="mt-4 text-[10px] font-medium uppercase tracking-[0.1em] text-faint">{apollo.techLabel}</p>
+            <div className="mt-1.5 flex flex-wrap gap-1.5">
+              {apollo.techChips.map((c) => (
+                <span
+                  key={c}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-violet-500/60 bg-violet-500/10 px-2.5 py-1 text-[11px] font-medium text-violet-800"
+                >
+                  <span aria-hidden>✓</span>
+                  {c}
+                </span>
+              ))}
+            </div>
+
+            <div className="mt-4 flex flex-wrap items-end justify-between gap-3 rounded-xl border border-violet-200/70 bg-violet-50/50 px-4 py-3">
+              <div>
+                <p className="text-[10px] font-medium uppercase tracking-[0.1em] text-violet-700/70">{apollo.noteLabel}</p>
+                <p className="mt-1 text-sm font-semibold text-violet-900">{apollo.noteValue}</p>
+              </div>
+              <span className="rounded-full bg-ink px-4 py-2 text-xs font-medium text-surface">{apollo.cta}</span>
             </div>
           </>
         )}
@@ -711,6 +763,101 @@ export function PipelineMockup() {
         </div>
 
         <p className="mt-3 text-[11px] leading-relaxed text-mute">{m.note}</p>
+      </div>
+    </AppFrame>
+  );
+}
+
+/**
+ * Der Technologie-Filter zum Anfassen. Bewusst bedienbar statt als Standbild:
+ * die Aussage der Sektion ist "du waehlst die Technik, nicht ein Stichwort" --
+ * das laesst sich zeigen, statt es zu behaupten.
+ *
+ * Die Kacheln tragen exakt die Bezeichnungen aus der App
+ * (apps/web/lib/technologies.ts), damit niemand auf der Website etwas
+ * auswaehlt, das er drinnen nicht wiederfindet.
+ *
+ * Wichtig fuer die Ehrlichkeit der Aussage: Mehrfachauswahl ist ein ODER, kein
+ * UND. Genau so verhaelt sich der Filter in der App
+ * (currently_using_any_of_technology_uids bzw. technology.match="any"), und
+ * genau so formuliert der Ergebnissatz unten. Ein UND zu suggerieren waere die
+ * verlockendere, aber falsche Aussage.
+ */
+export function TechFilterMockup() {
+  const { t } = useT();
+  const m = t.appMockups.techFilter;
+  const [picked, setPicked] = useState<string[]>(["shopify"]);
+
+  const all = m.groups.flatMap((g) => g.items);
+  const pickedLabels = all.filter((i) => picked.includes(i.id)).map((i) => i.label);
+
+  function toggle(id: string) {
+    setPicked((prev) => (prev.includes(id) ? prev.filter((v) => v !== id) : [...prev, id]));
+  }
+
+  // "Shopify", "Shopify oder Shopware", "Shopify, Shopware oder Klaviyo"
+  const joined =
+    pickedLabels.length <= 1
+      ? pickedLabels[0] ?? ""
+      : pickedLabels.slice(0, -1).join(", ") + ` ${m.or} ` + pickedLabels[pickedLabels.length - 1];
+
+  return (
+    <AppFrame>
+      <div className="p-5 sm:p-6">
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <p className="font-display text-lg font-semibold tracking-[-0.01em] text-ink">{m.title}</p>
+            <p className="mt-0.5 text-xs text-mute">{m.subtitle}</p>
+          </div>
+          <span className="rounded-full border border-edge2 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wide text-faint">
+            {m.badge}
+          </span>
+        </div>
+
+        {m.groups.map((group) => (
+          <div key={group.label} className="mt-4">
+            <p className="text-[10px] font-medium uppercase tracking-[0.1em] text-faint">{group.label}</p>
+            <div className="mt-2 flex flex-wrap gap-1.5">
+              {group.items.map((item) => {
+                const active = picked.includes(item.id);
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    aria-pressed={active}
+                    onClick={() => toggle(item.id)}
+                    // min-h 32px: die Kacheln sind echte Bedienelemente, keine
+                    // Deko wie die Chips in den uebrigen Mockups, und muessen
+                    // die 24px-Mindestflaeche aus WCAG 2.5.8 klar uebertreffen.
+                    className={
+                      "inline-flex min-h-[32px] items-center gap-1 rounded-lg border px-2.5 text-[11px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600 " +
+                      (active
+                        ? "border-violet-500/60 bg-violet-500/10 font-medium text-violet-800"
+                        : "border-edge2 text-faint hover:border-edge3 hover:text-soft")
+                    }
+                  >
+                    <span aria-hidden>{active ? "✓" : "+"}</span>
+                    {item.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+
+        {/* Ergebniszeile: macht aus der Auswahl einen Satz. Ohne sie waere das
+            hier eine huebsche Kachelwand, deren Wirkung man erraten muss. */}
+        <div className="mt-5 rounded-xl border border-violet-200/70 bg-violet-50/50 px-4 py-3.5">
+          <p className="text-[10px] font-medium uppercase tracking-[0.1em] text-violet-700/70">{m.resultLabel}</p>
+          {picked.length === 0 ? (
+            <p className="mt-1 text-sm leading-relaxed text-violet-900/70">{m.resultEmpty}</p>
+          ) : (
+            <>
+              <p className="mt-1 text-sm font-semibold leading-relaxed text-violet-900">{m.result(joined)}</p>
+              {picked.length > 1 && <p className="mt-1.5 text-xs text-violet-900/70">{m.orNote}</p>}
+            </>
+          )}
+        </div>
       </div>
     </AppFrame>
   );

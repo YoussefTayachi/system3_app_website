@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { Logo, CTAButton, CTAGroup, NavDropdown, SectionHeading, FactBox, StatTile, GlossaryText, BOOKING_URL } from "./_ui";
 import { AgencyMockup, PostSendMockup, LocalReachMockup, QualifiedLeadAnimation, SuppressionMockup, DeliverabilityMockup, CampaignMockup } from "./_mockups";
-import { DashboardMockup, UnifiedSearchMockup, LeadsTableMockup, MailboxesMockup, VerificationReportMockup } from "./_app-mockups";
+import { DashboardMockup, UnifiedSearchMockup, TechFilterMockup, LeadsTableMockup, MailboxesMockup, VerificationReportMockup } from "./_app-mockups";
 import { LeadCardStack } from "./_illustration";
 import { SavingsCalculator } from "./_calculator";
 import { Reveal } from "./reveal";
@@ -184,8 +184,8 @@ export default function Home() {
           angesprochen. */}
       <section className="border-y border-edge/60 bg-panel2">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-          <SectionHeading eyebrow={t.twoWays.eyebrow} title={t.twoWays.title} />
-          <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.twoWays.body}</p>
+          <SectionHeading eyebrow={t.searchModes.eyebrow} title={t.searchModes.title} />
+          <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.searchModes.body}</p>
 
           {/* Beide Wege bekommen dieselbe Flaeche und dieselbe Rahmung. Vorher
               war "lokal" hervorgehoben und "corporate" die blasse Alternative
@@ -195,8 +195,11 @@ export default function Home() {
               Statt zweier Standbilder steht darunter eine einzige, bedienbare
               Maske: das ist genau die Aussage der Sektion (ein Bildschirm, zwei
               Quellen) und spart die Haelfte der Hoehe. */}
-          <div className="grid items-stretch gap-8 lg:grid-cols-2">
-            {t.twoWays.modes.map((mode, i) => (
+          {/* Drei statt zwei Karten seit der Apollo-Quelle. Auf lg bekommen sie
+              je ein Drittel; darunter untereinander, weil drei Karten
+              nebeneinander auf Tablet-Breite unlesbar schmal wuerden. */}
+          <div className="grid items-stretch gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {t.searchModes.modes.map((mode, i) => (
               <Reveal key={mode.id} delay={i * 80} className="h-full">
                 <div className="flex h-full flex-col rounded-2xl border border-edge/60 bg-panel p-6">
                   <span className="inline-flex self-start rounded-full bg-ink px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-surface">
@@ -222,6 +225,53 @@ export default function Home() {
           <Reveal className="mt-8">
             <UnifiedSearchMockup />
           </Reveal>
+        </div>
+      </section>
+
+      {/* Technologie-Filter. Eigene Sektion, weil er fuer Interessenten mit
+          klarer Nische (Shopify-Agentur, Shopware-Dienstleister) der eigentliche
+          Kaufgrund ist -- als Stichpunkt in der Modus-Karte darueber wuerde er
+          untergehen. Bewusst auf dem hellen Grund zwischen zwei panel2-Bloecken,
+          damit die Sektion optisch als eigenes Kapitel liest. */}
+      <section id="technologie" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        <SectionHeading eyebrow={t.techFilter.eyebrow} title={t.techFilter.title} />
+        <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.techFilter.body}</p>
+
+        <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
+          <div className="space-y-4">
+            {t.techFilter.points.map((p, i) => (
+              <Reveal key={p.title} delay={i * 80}>
+                <div className="rounded-2xl border border-edge/60 bg-panel p-5">
+                  <h3 className="font-display text-lg font-semibold tracking-[-0.015em] text-ink">{p.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-soft">{p.body}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal delay={120}>
+            <TechFilterMockup />
+          </Reveal>
+        </div>
+
+        {/* Zwei Belege statt Superlative: der Katalogumfang und die Tatsache,
+            dass auch die DACH-Shopsysteme drin sind. Letzteres entscheidet fuer
+            deutschsprachige Interessenten, ob das Werkzeug ihren Markt kennt. */}
+        <div className="mt-8 grid gap-4 sm:grid-cols-2">
+          <div className="rounded-2xl border border-edge/60 bg-panel p-5">
+            <p className="text-[10px] font-medium uppercase tracking-[0.1em] text-faint">{t.techFilter.scaleLabel}</p>
+            <p className="font-display mt-1.5 text-2xl font-semibold tracking-[-0.02em] text-ink">
+              {t.techFilter.scaleValue}
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-soft">{t.techFilter.scaleNote}</p>
+          </div>
+          <div className="rounded-2xl border border-edge/60 bg-panel p-5">
+            <p className="text-[10px] font-medium uppercase tracking-[0.1em] text-faint">{t.techFilter.dachLabel}</p>
+            <p className="font-display mt-1.5 text-2xl font-semibold tracking-[-0.02em] text-ink">
+              {t.techFilter.dachValue}
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-soft">{t.techFilter.dachNote}</p>
+          </div>
         </div>
       </section>
 
