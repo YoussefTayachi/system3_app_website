@@ -9,6 +9,15 @@ import { Reveal } from "./reveal";
 import { trustIcons, postSendIcons, agencyIcons, workflowIcons, featureIcons, integrationIcons, CheckIcon, CrossIcon } from "./_icons";
 import { useT, LanguageToggle } from "./language-provider";
 
+/** Anbieter-Farben der drei Suchwege, deckungsgleich mit lib/search-source.ts
+ *  in der App. Wird hier oben gehalten, damit die Zuordnung an einer Stelle
+ *  steht und nicht in der JSX-Schleife versteckt ist. */
+const MODE_BADGE: Record<string, string> = {
+  local: "border-sky-500/40 bg-sky-500/10 text-sky-800",
+  corporate: "border-orange-500/40 bg-orange-500/10 text-orange-800",
+  apollo: "border-yellow-500/50 bg-yellow-500/10 text-yellow-800",
+};
+
 export default function Home() {
   const { t, lang } = useT();
   // Zwischen 768px und 1024px passen Logo, volle Navigation und CTA nicht
@@ -202,7 +211,19 @@ export default function Home() {
             {t.searchModes.modes.map((mode, i) => (
               <Reveal key={mode.id} delay={i * 80} className="h-full">
                 <div className="flex h-full flex-col rounded-2xl border border-edge/60 bg-panel p-6">
-                  <span className="inline-flex self-start rounded-full bg-ink px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-surface">
+                  {/* Farbe je Anbieter, angelehnt an dessen Markenfarbe (Hunter
+                      orange, Apollo gelb, Maps blau) und identisch zu den
+                      Quellen-Chips in der App -- wer sich hier informiert und
+                      sich danach anmeldet, erkennt dieselbe Zuordnung wieder.
+                      Getoente Flaeche mit dunklem Text derselben Farbe statt
+                      farbiger Flaeche mit weissem Text: Apollos Markengelb
+                      traegt weisse Schrift nicht (rund 1,3:1). */}
+                  <span
+                    className={
+                      "inline-flex self-start rounded-full border px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide " +
+                      (MODE_BADGE[mode.id] ?? "border-edge2 bg-chip text-soft")
+                    }
+                  >
                     {mode.label}
                   </span>
                   <h3 className="font-display mt-3 text-xl font-semibold tracking-[-0.015em] text-ink">
