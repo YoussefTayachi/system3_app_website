@@ -200,7 +200,7 @@ const de = {
         id: "find",
         eyebrow: "Finden",
         title: "Drei Quellen, eine Liste",
-        body: "Lokale Betriebe über Google Maps, Unternehmen über die Firmendatenbank oder Entscheider samt verifizierter Adresse über die Massen-Lead-Suche, dort auch nach eingesetzter Technik wie Shopify filterbar. Playbooks bringen fertige Kombinationen aus Suchbegriff und Filtern mit, das Lead-Abo lässt eine Liste wöchentlich oder täglich von allein weiterwachsen.",
+        body: "Lokale Betriebe über Google Maps, Unternehmen über Hunters Firmendatenbank oder Entscheider samt verifizierter Adresse über Apollo, dort auch nach eingesetzter Technik wie Shopify filterbar. Playbooks bringen fertige Kombinationen aus Suchbegriff und Filtern mit, das Lead-Abo lässt eine Liste wöchentlich oder täglich von allein weiterwachsen.",
         bullets: [
           "Umkreissuche mit Radius in Metern",
           "Filter auf fehlende Website oder schwache Bewertung",
@@ -292,13 +292,17 @@ const de = {
   // naechsten Ausbau garantiert jemanden in die Irre fuehrt.
   searchModes: {
     eyebrow: "Drei Wege zum Lead",
-    title: "Lokale Betriebe, klassische Firmensuche oder Massen-Leads, im selben Werkzeug",
+    title: "Orte, Firmen oder Entscheider, im selben Werkzeug gesucht",
     body: "Ihr entscheidet pro Suche, woher die Firmen kommen. Alle drei Wege münden in dieselbe Liste, dieselbe Anreicherung und denselben Versand.",
     modes: [
       {
+        // Benannt nach dem, WAS gesucht wird (Ort, Firma, Person), mit dem
+        // Anbieter dahinter. "Lokal/Corporate/Massen-Leads" beschrieb keinen
+        // Unterschied: "Corporate" sagt nichts, und "Massen-Leads" klang billig,
+        // obwohl es der hochwertigste Weg ist (Person samt gepruefter Adresse).
         id: "local",
-        label: "Lokal",
-        title: "Über die Kartensuche",
+        label: "Vor Ort",
+        title: "Über Google Maps",
         body: "Der Suchbegriff ist ein freies Feld: Fahrschule, Yogastudio, Tierarztpraxis, Autohaus, Hotel. Wenn es auf der Karte einen Eintrag hat, findet Frostbreaker es, unabhängig davon, wie digital der Betrieb aufgestellt ist.",
         points: [
           "Freier Suchbegriff, keine feste Branchenliste",
@@ -310,8 +314,8 @@ const de = {
       },
       {
         id: "corporate",
-        label: "Corporate",
-        title: "Über die Firmendatenbank",
+        label: "Firmen",
+        title: "Über Hunters Firmendatenbank",
         body: "28 Branchen, 9 Länder und 8 Größenklassen lassen sich frei kombinieren, dazu Stadt und eigene Stichwörter. Hier fallen keine Abfragekosten pro Firma an, weil die Adresse direkt aus der Recherche kommt.",
         points: [
           "28 Branchen von Software bis Zahnmedizin",
@@ -323,8 +327,8 @@ const de = {
       },
       {
         id: "apollo",
-        label: "Massen-Leads",
-        title: "Über die Entscheider-Datenbank",
+        label: "Entscheider",
+        title: "Über Apollos Entscheider-Datenbank",
         body: "Firma und Entscheider samt bereits verifizierter E-Mail in einem Schritt. Die angefragte Zahl ist hier die Zahl der Leads, keine Schätzung: bei den anderen Wegen wird die Adresse nachträglich recherchiert.",
         points: [
           "Entscheider und verifizierte Adresse in einem Schritt",
@@ -335,6 +339,44 @@ const de = {
         ],
       },
     ],
+  },
+  // Steht bewusst DIREKT hinter den drei Suchwegen: sobald dort "Hunter" und
+  // "Apollo" stehen, denkt jeder Fachkundige sofort "dann nehme ich die doch
+  // gleich selbst". Diesen Einwand erst in der FAQ zu beantworten, hiesse ihn
+  // die halbe Seite lang unbeantwortet mitlaufen zu lassen.
+  worksWith: {
+    eyebrow: "Ergänzt euren Stack",
+    title: "Ihr nutzt Apollo, Hunter oder Instantly bereits? Dann ist das hier kein Ersatz",
+    body: "Frostbreaker bringt keine eigene Datenbank und kein eigenes Postfach mit. Es läuft auf euren Zugängen, zum Selbstkostenpreis, und schließt die Lücken zwischen den Werkzeugen, die ihr ohnehin bezahlt.",
+    // Die ehrliche Fassung: erst sagen, was die Werkzeuge gut koennen, dann
+    // die Luecke benennen. Wer seine eigenen Tools schlechtgeredet bekommt,
+    // glaubt dem Rest der Seite nicht mehr.
+    rows: [
+      {
+        tool: "Apollo",
+        good: "Liefert Entscheider samt verifizierter Adresse und den Technologie-Filter.",
+        gap: "Schreibt keine individuelle Zeile pro Lead und weiß nichts von eurer Sperrliste oder davon, wer letzten Monat schon angeschrieben wurde.",
+      },
+      {
+        tool: "Hunter",
+        good: "Findet Adressen zu einer Domain und hat eine brauchbare Firmendatenbank.",
+        gap: "Kennt keine lokalen Betriebe ohne Datenbank-Eintrag: Handwerk, Gastronomie und Praxen fehlen dort schlicht.",
+      },
+      {
+        tool: "Instantly",
+        good: "Verschickt zuverlässig, wärmt Postfächer auf und rotiert sie sauber.",
+        gap: "Recherchiert nicht und personalisiert nicht. Was ihr hineingebt, entscheidet ihr woanders.",
+      },
+    ],
+    bridgeLabel: "Was Frostbreaker dazwischen erledigt",
+    bridge: [
+      "Eine Suche statt drei Oberflächen, mit demselben Ergebnis in einer Liste",
+      "Eine individuelle Eröffnungszeile pro Lead, aus der Recherche zur Firma",
+      "Sperrliste und Bestandskunden werden vor jeder Suche und jedem Versand geprüft",
+      "Antworten, Bounces und Meetings fließen in dasselbe Dashboard zurück",
+      "Pro Kunde ein eigener Workspace, ohne für jeden ein neues Abo zu buchen",
+    ],
+    note: "Alle Abfragen laufen über eure eigenen Zugänge. Frostbreaker schlägt nichts auf die Abfragekosten auf.",
   },
   // Der Technologie-Filter ist das staerkste Argument fuer eine konkrete
   // Zielgruppe: er verwandelt "irgendwas mit E-Commerce" in eine belegbare
@@ -467,7 +509,7 @@ const de = {
       playbookLabel: "Branchen-Playbook",
       playbookValue: "Kein Playbook, frei eingestellt",
       // Diese Liste steuert die Reiterleiste der Suchmaske auf der Startseite.
-      tabs: ["Lokal (Kartensuche)", "Corporate (Datenbank)", "Massen-Leads"],
+      tabs: ["Vor Ort (Google Maps)", "Firmen (Hunter)", "Entscheider (Apollo)"],
       fields: [
         { label: "Suchbegriff", value: "Fahrschule" },
         { label: "Ort", value: "Hamburg" },
@@ -483,7 +525,7 @@ const de = {
     corporateSearch: {
       title: "Neue Suche",
       subtitle: "Branche, Größe und Land kombinieren.",
-      tabs: ["Lokal (Kartensuche)", "Corporate (Datenbank)"],
+      tabs: ["Vor Ort (Google Maps)", "Firmen (Hunter)", "Entscheider (Apollo)"],
       fields: [
         { label: "Branche", value: "Marketing Services" },
         { label: "Land", value: "Deutschland" },
@@ -499,7 +541,7 @@ const de = {
     apolloSearch: {
       title: "Neue Suche",
       subtitle: "Zielgruppe, Entscheider und Technik in einem Schritt.",
-      tabs: ["Lokal (Kartensuche)", "Corporate (Datenbank)", "Massen-Leads"],
+      tabs: ["Vor Ort (Google Maps)", "Firmen (Hunter)", "Entscheider (Apollo)"],
       fields: [
         { label: "Zielgruppe", value: "Nahrungsergänzung" },
         { label: "Firmengröße", value: "11–50" },
@@ -961,7 +1003,19 @@ const de = {
   },
   integrations: {
     eyebrow: "Passt in euren Stack",
-    title: "Exportiert direkt in die Tools, die ihr schon nutzt",
+    title: "Liest aus euren Quellen, schreibt in eure Werkzeuge",
+    // Die Sektion zeigte bisher nur Ziele. Apollo, Hunter und Google fehlten
+    // deshalb komplett -- dabei ist genau das die Aussage: Frostbreaker sitzt
+    // zwischen den Diensten, die ihr ohnehin habt, und ersetzt keinen davon.
+    sourcesLabel: "Quellen, auf euren Zugängen",
+    sources: [
+      { name: "Google Maps", note: "Lokale Betriebe samt Telefonnummer" },
+      { name: "Hunter", note: "Firmendatenbank und Adressen zur Domain" },
+      { name: "Apollo", note: "Entscheider, verifizierte Adresse, Technologie-Filter" },
+      { name: "OpenAI", note: "Entscheider-Recherche und Eröffnungszeile" },
+      { name: "NeverBounce", note: "Adressprüfung vor dem Versand, optional" },
+    ],
+    targetsLabel: "Ziele",
     items: [
       { id: "instantly", name: "Instantly", note: "Vollständig natives Kampagnen-Management, kein CSV-Export nötig" },
       { id: "sending", name: "Smartlead", note: "CSV-Import" },
@@ -1105,7 +1159,7 @@ const de = {
       { q: "Kann ich jederzeit kündigen?", a: "Ja, monatlich, keine Mindestlaufzeit, keine Kündigungsfrist über den laufenden Monat hinaus." },
       { q: "Woher weiß ich, dass eine gefundene E-Mail wirklich zu einer Person gehört?", a: "Frostbreaker filtert generische Adressen wie info@ oder office@ automatisch heraus. Nur E-Mails, die eindeutig einer Person zugeordnet sind, landen in eurer Leads-Liste." },
       { q: "Was passiert, wenn ich aus Versehen an eine ungültige Adresse schreibe?", a: "Jede Adresse wird vor dem Versand geprüft, ungültige werden automatisch aussortiert. Das ist kein Nice-to-have: eine hohe Bounce-Rate beschädigt eure Sender-Reputation über alle Postfächer und alle Kunden hinweg, nicht nur die eine Kampagne. Die Prüfung läuft automatisch mit, ihr müsst nichts manuell anstoßen." },
-      { q: "Welche Dienste laufen im Hintergrund, und brauche ich dort eigene Zugänge?", a: "Frostbreaker greift für die Kartensuche auf Google, für die Recherche auf OpenAI und für den Domain-Abgleich auf Hunter zu, für die Massen-Leads samt Technologie-Filter auf Apollo, optional NeverBounce für die Verifizierung und Instantly für den Versand. Ihr legt dort eigene Zugänge an und hinterlegt die Schlüssel einmal in den Einstellungen, verschlüsselt gespeichert. Genau deshalb zahlt ihr die Abfragen zum Selbstkostenpreis statt eines Aufschlags. Die App führt euch in der Testphase Schritt für Schritt durch das Setup." },
+      { q: "Welche Dienste laufen im Hintergrund, und brauche ich dort eigene Zugänge?", a: "Frostbreaker greift für die Kartensuche auf Google, für die Recherche auf OpenAI und für den Domain-Abgleich auf Hunter zu, für die Entscheider-Suche samt Technologie-Filter auf Apollo, optional NeverBounce für die Verifizierung und Instantly für den Versand. Ihr legt dort eigene Zugänge an und hinterlegt die Schlüssel einmal in den Einstellungen, verschlüsselt gespeichert. Genau deshalb zahlt ihr die Abfragen zum Selbstkostenpreis statt eines Aufschlags. Die App führt euch in der Testphase Schritt für Schritt durch das Setup." },
       { q: "Warum nicht gleich direkt zu Hunter oder Apollo?", a: "Weil keiner dieser Dienste den ganzen Weg abdeckt, und weil Frostbreaker sie gar nicht ersetzen will: Hunter und Apollo laufen als Datenquellen darin, mit euren eigenen Zugängen und zum Selbstkostenpreis. Der Unterschied liegt in dem, was davor und danach passiert. Hunter findet Adressen zu einer Domain, aber keine lokalen Betriebe ohne Firmendatenbank-Eintrag. Apollo liefert Entscheider samt verifizierter Adresse, schreibt aber keine individuelle Zeile pro Lead. Versand-Tools versenden, recherchieren aber nicht. Wer das selbst zusammensteckt, zahlt drei bis vier Abos, exportiert CSV-Dateien hin und her und baut das Reporting von Hand. Frostbreaker ist die Verbindung dazwischen: eine Suche, eine Liste, ein Versand, ein Dashboard, inklusive Antworten und gebuchten Meetings." },
       { q: "Was passiert, wenn ich aus Versehen einen Bestandskunden oder jemanden anschreibe, der sich abgemeldet hat?", a: "Genau dafür gibt es die eingebaute Sperrliste: einmal eingetragen, schließt Frostbreaker diese Kontakte und Domains automatisch aus jeder zukünftigen Suche und jedem Versand aus, ganz ohne dass ihr das bei jeder Kampagne manuell prüfen müsst. Bestandskunden und Opt-outs bleiben zuverlässig geschützt." },
       { q: "Kann ich prüfen, ob meine Versand-Domain überhaupt zustellfähig ist?", a: "Ja, direkt in der App: Frostbreaker prüft SPF, DKIM und DMARC eurer Sende-Domain per Live-DNS-Abfrage und zeigt in Klartext, was noch fehlt, dazu eine Warnung, wenn das Tagesvolumen pro Postfach riskant hoch wird. Kein separates Zustellbarkeits-Tool nötig." },
@@ -1505,7 +1559,7 @@ const en: typeof de = {
         id: "find",
         eyebrow: "Find",
         title: "Three sources, one list",
-        body: "Local businesses via Google Maps, companies via the database, or decision makers with a verified address via the bulk-lead search, which also filters by the technology they run, such as Shopify. Playbooks bring ready-made combinations of search term and filters, and a lead subscription keeps a list growing weekly or daily on its own.",
+        body: "Local businesses via Google Maps, companies via Hunter's database, or decision makers with a verified address via Apollo, which also filters by the technology they run, such as Shopify. Playbooks bring ready-made combinations of search term and filters, and a lead subscription keeps a list growing weekly or daily on its own.",
         bullets: [
           "Radius search in metres",
           "Filter for missing website or weak rating",
@@ -1590,13 +1644,13 @@ const en: typeof de = {
   },
   searchModes: {
     eyebrow: "Three routes to a lead",
-    title: "Local businesses, classic company search or bulk leads, in the same tool",
+    title: "Places, companies or decision-makers, searched in the same tool",
     body: "You decide per search where the companies come from. All three routes end up in the same list, the same enrichment and the same sending.",
     modes: [
       {
         id: "local",
-        label: "Local",
-        title: "Via map search",
+        label: "On location",
+        title: "Via Google Maps",
         body: "The search term is a free text field: driving school, yoga studio, veterinary practice, car dealership, hotel. If it has a listing on the map, Frostbreaker finds it, no matter how digital the business is.",
         points: [
           "Free search term, no fixed industry list",
@@ -1608,8 +1662,8 @@ const en: typeof de = {
       },
       {
         id: "corporate",
-        label: "Corporate",
-        title: "Via company database",
+        label: "Companies",
+        title: "Via Hunter's company database",
         body: "28 industries, 9 countries and 8 size bands combine freely, plus city and your own keywords. No per-company lookup cost here, because the address comes straight out of the research.",
         points: [
           "28 industries from software to dentistry",
@@ -1621,8 +1675,8 @@ const en: typeof de = {
       },
       {
         id: "apollo",
-        label: "Bulk leads",
-        title: "Via the decision-maker database",
+        label: "Decision-makers",
+        title: "Via Apollo's decision-maker database",
         body: "Company and decision maker with an already verified email in one step. Here the number you ask for is the number of leads, not an estimate: on the other routes the address is researched afterwards.",
         points: [
           "Decision maker and verified address in one step",
@@ -1633,6 +1687,37 @@ const en: typeof de = {
         ],
       },
     ],
+  },
+  worksWith: {
+    eyebrow: "Complements your stack",
+    title: "Already using Apollo, Hunter or Instantly? Then this is not a replacement",
+    body: "Frostbreaker brings no database and no mailbox of its own. It runs on your accounts, at cost, and closes the gaps between the tools you already pay for.",
+    rows: [
+      {
+        tool: "Apollo",
+        good: "Delivers decision makers with a verified address, plus the technology filter.",
+        gap: "Doesn't write an individual line per lead, and knows nothing about your blocklist or who you already contacted last month.",
+      },
+      {
+        tool: "Hunter",
+        good: "Finds addresses for a domain and has a usable company database.",
+        gap: "Doesn't know local businesses without a database entry: trades, hospitality and practices are simply missing there.",
+      },
+      {
+        tool: "Instantly",
+        good: "Sends reliably, warms mailboxes up and rotates them cleanly.",
+        gap: "Doesn't research and doesn't personalise. What you feed it is decided somewhere else.",
+      },
+    ],
+    bridgeLabel: "What Frostbreaker does in between",
+    bridge: [
+      "One search instead of three interfaces, with the result in a single list",
+      "An individual opening line per lead, from the research on that company",
+      "Blocklist and existing customers are checked before every search and every send",
+      "Replies, bounces and meetings flow back into the same dashboard",
+      "One workspace per client, without booking a new subscription for each",
+    ],
+    note: "Every lookup runs on your own accounts. Frostbreaker adds no markup to lookup costs.",
   },
   techFilter: {
     eyebrow: "Technology filter",
@@ -1740,7 +1825,7 @@ const en: typeof de = {
       subtitle: "Enter search term and location, the rest runs automatically.",
       playbookLabel: "Industry playbook",
       playbookValue: "No playbook, set manually",
-      tabs: ["Local (map search)", "Corporate (database)", "Bulk leads"],
+      tabs: ["On location (Google Maps)", "Companies (Hunter)", "Decision-makers (Apollo)"],
       fields: [
         { label: "Search term", value: "Driving school" },
         { label: "Location", value: "Hamburg" },
@@ -1756,7 +1841,7 @@ const en: typeof de = {
     corporateSearch: {
       title: "New search",
       subtitle: "Combine industry, size and country.",
-      tabs: ["Local (map search)", "Corporate (database)"],
+      tabs: ["On location (Google Maps)", "Companies (Hunter)", "Decision-makers (Apollo)"],
       fields: [
         { label: "Industry", value: "Marketing Services" },
         { label: "Country", value: "Germany" },
@@ -1772,7 +1857,7 @@ const en: typeof de = {
     apolloSearch: {
       title: "New search",
       subtitle: "Audience, decision makers and technology in one step.",
-      tabs: ["Local (map search)", "Corporate (database)", "Bulk leads"],
+      tabs: ["On location (Google Maps)", "Companies (Hunter)", "Decision-makers (Apollo)"],
       fields: [
         { label: "Audience", value: "Supplements" },
         { label: "Company size", value: "11–50" },
@@ -2178,7 +2263,16 @@ const en: typeof de = {
   },
   integrations: {
     eyebrow: "Fits into your stack",
-    title: "Exports directly into the tools you already use",
+    title: "Reads from your sources, writes into your tools",
+    sourcesLabel: "Sources, on your own accounts",
+    sources: [
+      { name: "Google Maps", note: "Local businesses including phone number" },
+      { name: "Hunter", note: "Company database and addresses per domain" },
+      { name: "Apollo", note: "Decision makers, verified address, technology filter" },
+      { name: "OpenAI", note: "Decision-maker research and opening line" },
+      { name: "NeverBounce", note: "Address check before sending, optional" },
+    ],
+    targetsLabel: "Destinations",
     items: [
       { id: "instantly", name: "Instantly", note: "Fully native campaign management, no CSV export needed" },
       { id: "sending", name: "Smartlead", note: "CSV import" },

@@ -228,6 +228,58 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Steht bewusst DIREKT hinter den drei Suchwegen: sobald dort "Hunter"
+          und "Apollo" stehen, denkt jeder Fachkundige sofort "dann nehme ich
+          die doch gleich selbst". Diesen Einwand erst in der FAQ zu
+          beantworten, hiesse ihn die halbe Seite lang mitlaufen zu lassen. */}
+      <section id="ergaenzt" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        <SectionHeading eyebrow={t.worksWith.eyebrow} title={t.worksWith.title} />
+        <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.worksWith.body}</p>
+
+        <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
+          {/* Pro Werkzeug erst die Staerke, dann die Luecke. Wer seine eigenen
+              Tools schlechtgeredet bekommt, glaubt dem Rest der Seite nicht. */}
+          <div className="space-y-4">
+            {t.worksWith.rows.map((row, i) => (
+              <Reveal key={row.tool} delay={i * 80}>
+                <div className="rounded-2xl border border-edge/60 bg-panel p-5">
+                  <p className="font-display text-lg font-semibold tracking-[-0.015em] text-ink">{row.tool}</p>
+                  <div className="mt-3 space-y-2.5">
+                    <p className="flex gap-2.5 text-sm leading-relaxed text-soft">
+                      <CheckIcon />
+                      {row.good}
+                    </p>
+                    <p className="flex gap-2.5 text-sm leading-relaxed text-soft">
+                      <span aria-hidden className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
+                      {row.gap}
+                    </p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal delay={120}>
+            <div className="rounded-2xl border border-sky-300/70 bg-sky-50/50 p-6">
+              <p className="text-[10px] font-medium uppercase tracking-[0.1em] text-sky-700/80">
+                {t.worksWith.bridgeLabel}
+              </p>
+              <ul className="mt-4 space-y-3">
+                {t.worksWith.bridge.map((b) => (
+                  <li key={b} className="flex items-start gap-2.5 text-sm leading-relaxed text-sky-950">
+                    <CheckIcon />
+                    {b}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-5 border-t border-sky-200/70 pt-4 text-xs leading-relaxed text-sky-900/70">
+                {t.worksWith.note}
+              </p>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       {/* Technologie-Filter. Eigene Sektion, weil er fuer Interessenten mit
           klarer Nische (Shopify-Agentur, Shopware-Dienstleister) der eigentliche
           Kaufgrund ist -- als Stichpunkt in der Modus-Karte darueber wuerde er
@@ -584,6 +636,28 @@ export default function Home() {
       <section id="integrationen" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <SectionHeading eyebrow={t.integrations.eyebrow} title={t.integrations.title} />
+
+          {/* Die Quellen standen hier bisher gar nicht, obwohl sie die Haelfte
+              der Aussage sind: Frostbreaker liest aus Diensten, die dem Kunden
+              gehoeren, und schreibt in Werkzeuge, die er schon nutzt. Ohne die
+              linke Haelfte fehlte Apollo auf der Seite komplett. */}
+          <div className="mb-10">
+            <p className="text-[10px] font-medium uppercase tracking-[0.1em] text-faint">
+              {t.integrations.sourcesLabel}
+            </p>
+            <ul className="mt-3 grid grid-cols-2 gap-x-8 gap-y-0 sm:grid-cols-3 lg:grid-cols-5">
+              {t.integrations.sources.map((s) => (
+                <li key={s.name} className="border-t border-edge2/70 py-4">
+                  <p className="text-sm font-semibold text-ink">{s.name}</p>
+                  <p className="mt-0.5 text-xs leading-relaxed text-mute">{s.note}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <p className="mb-3 text-[10px] font-medium uppercase tracking-[0.1em] text-faint">
+            {t.integrations.targetsLabel}
+          </p>
           {/* Vorher acht gleiche Kacheln, sechsmal mit demselben Text
               "CSV-Import" -- die native Instantly-Anbindung, der eigentliche
               Vorteil, ging darin unter. Jetzt fuehrt sie, der Rest steht als
