@@ -691,7 +691,10 @@ const de = {
     factSource: "Quelle: Litmus, State of Email 2025",
     screenshotAlt: "Frostbreaker Leads-Tabelle mit Firmen-Logos, Kontaktanzahl und E-Mail-Status",
     dashboardAlt:
-      "Frostbreaker-Dashboard: 78 gefundene Firmen, 214 Kontakte, 168 mit E-Mail-Adresse, rund 33 Stunden gesparte Recherche bei 2,75 US-Dollar API-Kosten",
+      // Muss zu den Zahlen im Dashboard-Mockup passen (appMockups.dashboard).
+      // Stand vorher auf einem aelteren Zahlensatz -- Screenreader und
+      // Suchmaschinen bekamen dadurch andere Werte als das Auge.
+      "Frostbreaker-Dashboard: 890 gefundene Firmen, 2.430 Kontakte, 1.612 mit E-Mail-Adresse, rund 324 Stunden gesparte Recherche bei 36,90 US-Dollar Abfragekosten",
   },
   heroStats: [
     { value: "≈ 133 Std.", label: "manuelle Recherche gespart, pro 1.000 Leads" },
@@ -1832,7 +1835,7 @@ const en: typeof de = {
     factSource: "Source: Litmus, State of Email 2025",
     screenshotAlt: "Frostbreaker leads table with company logos, contact count and email status",
     dashboardAlt:
-      "Frostbreaker dashboard: 78 companies found, 214 contacts, 168 with an email address, around 33 hours of research saved at 2.75 US dollars in API cost",
+      "Frostbreaker dashboard: 890 companies found, 2,430 contacts, 1,612 with an email address, around 324 hours of research saved at 36.90 US dollars in lookup cost",
   },
   heroStats: [
     { value: "≈ 133 hrs", label: "manual research saved, per 1,000 leads" },
