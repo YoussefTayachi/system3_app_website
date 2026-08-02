@@ -632,11 +632,23 @@ const de = {
             { id: "webflow", label: "Webflow" },
           ],
         },
+        {
+          label: "Vertrieb & Lead-Gen",
+          items: [
+            { id: "apollo_io", label: "Apollo.io" },
+            { id: "outreach", label: "Outreach.io" },
+            { id: "salesloft", label: "SalesLoft" },
+            { id: "lemlist_tool", label: "lemlist" },
+            { id: "zoominfo", label: "ZoomInfo" },
+          ],
+        },
       ],
       resultLabel: "Deine Zielgruppe",
       resultEmpty: "Wähle oben mindestens ein System aus.",
       result: (list: string) => `Firmen, die nachweislich ${list} einsetzen.`,
-      orNote: "Mehrfachauswahl gilt als ODER: eine Suche deckt damit den ganzen Shopsystem-Markt ab.",
+      // Bewusst ohne "Shopsystem": seit die Vertriebs-Tools waehlbar sind,
+      // waere der Satz bei einer Auswahl wie Apollo.io + Outreach.io falsch.
+      orNote: "Mehrfachauswahl gilt als ODER: eine Suche deckt damit mehrere Systeme auf einmal ab, statt eine Suche pro System zu brauchen.",
     },
     leads: {
       title: "Alle Leads",
@@ -1943,11 +1955,21 @@ const en: typeof de = {
             { id: "webflow", label: "Webflow" },
           ],
         },
+        {
+          label: "Sales & lead gen",
+          items: [
+            { id: "apollo_io", label: "Apollo.io" },
+            { id: "outreach", label: "Outreach.io" },
+            { id: "salesloft", label: "SalesLoft" },
+            { id: "lemlist_tool", label: "lemlist" },
+            { id: "zoominfo", label: "ZoomInfo" },
+          ],
+        },
       ],
       resultLabel: "Your audience",
       resultEmpty: "Pick at least one system above.",
       result: (list: string) => `Companies provably running ${list}.`,
-      orNote: "Multiple selections act as OR, so a single search can cover the entire shop-system market.",
+      orNote: "Multiple selections act as OR, so one search covers several systems at once instead of needing one search per system.",
     },
     leads: {
       title: "All leads",
