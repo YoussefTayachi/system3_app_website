@@ -769,6 +769,66 @@ export function PipelineMockup() {
 }
 
 /**
+ * Anrufliste. Der zweite Kanal war auf der Website bisher unsichtbar, obwohl er
+ * das Argument gegen reine Versand-Tools ist: Nummer, Vorbereitung und Ergebnis
+ * am selben Ort wie der Lead.
+ *
+ * Die Gruppierung (Ueberfaellig/Heute/Spaeter) und die Bezeichnungen stammen aus
+ * apps/web/app/calls/ der App. Die Nummern sind erfunden, wie ueberall hier.
+ */
+export function CallListMockup() {
+  const { t } = useT();
+  const m = t.appMockups.calls;
+  return (
+    <AppFrame>
+      <div className="p-5 sm:p-6">
+        <p className="font-display text-lg font-semibold tracking-[-0.01em] text-ink">{m.title}</p>
+        <p className="mt-0.5 text-xs text-mute">{m.subtitle}</p>
+
+        <div className="mt-5 space-y-4">
+          {m.groups.map((group) => (
+            <div key={group.label}>
+              <div className="flex items-center gap-2">
+                <p className="text-[10px] font-medium uppercase tracking-[0.1em] text-faint">{group.label}</p>
+                {group.overdue && (
+                  <span className="rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-semibold text-amber-800">
+                    {group.count}
+                  </span>
+                )}
+              </div>
+              <div className="mt-2 space-y-2">
+                {group.rows.map((row) => (
+                  <div
+                    key={row.name}
+                    className={
+                      "rounded-xl border px-3.5 py-3 " +
+                      (group.overdue ? "border-amber-200/80 bg-amber-50/40" : "border-edge/70 bg-panel2/40")
+                    }
+                  >
+                    <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+                      <p className="text-sm font-semibold text-ink">{row.name}</p>
+                      {/* Die Nummer ist im Produkt ein tel:-Link. Hier bewusst nur
+                          dargestellt: ein echter Waehl-Link auf einer Marketingseite
+                          waere eine Falle, keine Funktion. */}
+                      <span className="font-mono text-xs text-sky-700">{row.phone}</span>
+                    </div>
+                    <p className="mt-0.5 text-xs text-mute">{row.role}</p>
+                    <p className="mt-2 border-t border-edge/60 pt-2 text-xs leading-relaxed text-soft">
+                      <span className="font-medium text-faint">{m.noteLabel}: </span>
+                      {row.note}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </AppFrame>
+  );
+}
+
+/**
  * Der Technologie-Filter zum Anfassen. Bewusst bedienbar statt als Standbild:
  * die Aussage der Sektion ist "du waehlst die Technik, nicht ein Stichwort" --
  * das laesst sich zeigen, statt es zu behaupten.

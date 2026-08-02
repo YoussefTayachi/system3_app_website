@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { Logo, CTAButton, CTAGroup, NavDropdown, SectionHeading, FactBox, StatTile, GlossaryText, BOOKING_URL } from "./_ui";
 import { AgencyMockup, PostSendMockup, LocalReachMockup, QualifiedLeadAnimation, SuppressionMockup, DeliverabilityMockup, CampaignMockup } from "./_mockups";
-import { DashboardMockup, UnifiedSearchMockup, TechFilterMockup, LeadsTableMockup, MailboxesMockup, VerificationReportMockup } from "./_app-mockups";
+import { DashboardMockup, UnifiedSearchMockup, TechFilterMockup, CallListMockup, LeadsTableMockup, MailboxesMockup, VerificationReportMockup } from "./_app-mockups";
 import { LeadCardStack } from "./_illustration";
 import { SavingsCalculator } from "./_calculator";
 import { Reveal } from "./reveal";
@@ -465,6 +465,65 @@ export default function Home() {
               <h3 className="mt-4 text-sm font-semibold text-ink">{f.title}</h3>
               <p className="mt-1.5 text-sm leading-relaxed text-soft">{f.body}</p>
             </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Telefon-Akquise. Der zweite Kanal fehlte auf der Seite komplett,
+          obwohl er das Argument gegen reine Versand-Tools ist: wer schon eines
+          hat, kauft kein zweites, aber er kauft den Kanal, den seines nicht
+          kann. Mockup links, Argumente rechts -- umgekehrt zur
+          Technologie-Sektion, damit die Seite beim Scrollen nicht in ein
+          Muster verfaellt. */}
+      <section id="telefon" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
+        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+          <SectionHeading eyebrow={t.phone.eyebrow} title={t.phone.title} />
+          <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.phone.body}</p>
+
+          <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
+            <Reveal>
+              <CallListMockup />
+            </Reveal>
+            <div className="space-y-4">
+              {t.phone.points.map((p, i) => (
+                <Reveal key={p.title} delay={i * 80}>
+                  <div className="rounded-2xl border border-edge/60 bg-panel p-5">
+                    <h3 className="font-display text-lg font-semibold tracking-[-0.015em] text-ink">{p.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-soft">{p.body}</p>
+                  </div>
+                </Reveal>
+              ))}
+              {/* Klarstellung, damit niemand eine Telefonanlage erwartet. */}
+              <p className="text-xs leading-relaxed text-mute">{t.phone.note}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Die zwei Gruende, aus denen ein Interessent NICHT kauft: "zu
+          kompliziert fuer mich" und "rechtlich zu heikel". Beide sind in der
+          App laengst beantwortet, standen hier aber nur als Nebensatz. */}
+      <section id="startklar" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        <SectionHeading eyebrow={t.safeStart.eyebrow} title={t.safeStart.title} />
+        <div className="grid items-stretch gap-8 lg:grid-cols-2">
+          {t.safeStart.cards.map((card, i) => (
+            <Reveal key={card.id} delay={i * 80} className="h-full">
+              <div className="flex h-full flex-col rounded-2xl border border-edge/60 bg-panel p-6">
+                <span className="inline-flex self-start rounded-full bg-ink px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-surface">
+                  {card.label}
+                </span>
+                <h3 className="font-display mt-3 text-xl font-semibold tracking-[-0.015em] text-ink">{card.title}</h3>
+                <p className="mt-2.5 text-sm leading-relaxed text-soft">{card.body}</p>
+                <ul className="mt-5 space-y-2 border-t border-edge/70 pt-5">
+                  {card.points.map((p) => (
+                    <li key={p} className="flex items-start gap-2.5 text-sm text-soft">
+                      <CheckIcon />
+                      {p}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
           ))}
         </div>
       </section>

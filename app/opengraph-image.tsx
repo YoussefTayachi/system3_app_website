@@ -54,7 +54,7 @@ export default function OpengraphImage() {
               color: "#1c1b19",
             }}
           >
-            Mindestens 5.000 echte Ansprechpartner pro Woche kontaktieren.
+            Mindestens 1.000 E-Mails pro Woche an echte Entscheider.
           </div>
           <div
             style={{

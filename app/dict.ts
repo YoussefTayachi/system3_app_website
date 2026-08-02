@@ -365,6 +365,60 @@ const de = {
     dachValue: "Shopware, JTL, Oxid, PlentyMarkets",
     dachNote: "Nicht nur die US-Systeme: die im deutschsprachigen Raum verbreiteten Shopsysteme sind genauso erfasst.",
   },
+  // Der zweite Kanal. Stand bisher nirgends auf der Seite, obwohl er das
+  // Argument gegen reine Versand-Tools ist: wer schon eines hat, kauft kein
+  // zweites, aber er kauft den Kanal, den sein jetziges Werkzeug nicht kann.
+  phone: {
+    eyebrow: "Zweiter Kanal",
+    title: "Wenn die Mail nicht reicht, steht die Nummer schon da",
+    body: "Kaltakquise endet nicht bei der E-Mail. Wer nach zwei Nachfassmails nicht antwortet, ist oft trotzdem erreichbar, nur eben am Telefon. Frostbreaker plant diese Anrufe an derselben Stelle, an der der Lead entstanden ist.",
+    points: [
+      {
+        title: "Vorbereitet statt kalt erwischt",
+        body: "Jede Zeile trägt die Nummer, die Rolle der Person und die Firmenzusammenfassung aus der Recherche. Ihr wisst vor dem Wählen, mit wem ihr sprecht und warum.",
+      },
+      {
+        title: "Nach Dringlichkeit sortiert",
+        body: "Überfällig, heute, später. Ein zugesagter Rückruf geht nicht mehr unter, weil er in einer Tabelle stand, die niemand geöffnet hat.",
+      },
+      {
+        title: "Das Ergebnis bleibt am Lead",
+        body: "Gesprächsnotiz und Ausgang werden am Kontakt gespeichert und setzen den Status. Der nächste Schritt steht damit im selben Verlauf wie die verschickten Mails.",
+      },
+    ],
+    note: "Gewählt wird mit dem eigenen Telefon: Frostbreaker ist keine Telefonanlage und rechnet keine Gesprächsminuten ab.",
+  },
+  // Die beiden Gruende, aus denen ein Interessent NICHT kauft: "zu kompliziert
+  // fuer mich" und "rechtlich zu heikel". Beide sind in der App laengst
+  // beantwortet, standen auf der Website aber nur als Nebensatz.
+  safeStart: {
+    eyebrow: "Ohne Vorwissen starten",
+    title: "Genau die zwei Dinge, an denen Kaltakquise sonst scheitert, sind eingebaut",
+    cards: [
+      {
+        id: "guide",
+        label: "Anleitung",
+        title: "Die Anleitung sitzt im Werkzeug, nicht in einem PDF",
+        body: "Zehn Kapitel erklären den ganzen Ablauf: warum Postfächer zwei bis vier Wochen aufgewärmt werden müssen, was SPF, DKIM und DMARC im Klartext bedeuten, welcher Suchweg zu welcher Zielgruppe passt. Dazu eine Checkliste, die zeigt, was noch fehlt.",
+        points: [
+          "Warnung vor dem teuersten Anfängerfehler: sofort loslegen ohne Warmup",
+          "Kaltakquise gehört nie auf die Hauptdomain, mit Begründung",
+          "Jede Seite verlinkt in das passende Kapitel",
+        ],
+      },
+      {
+        id: "optout",
+        label: "Rechtssicherheit",
+        title: "Der Abmeldelink ist Teil der Kampagne, kein Nachgedanke",
+        body: "Jede Kampagnenmail enthält einen Abmeldelink. Ein Klick trägt die Adresse dauerhaft in eure Sperrliste ein, und die wird vor jeder weiteren Suche und jeder weiteren Kampagne abgeglichen. Ihr müsst dafür nichts pflegen und nichts nachtragen.",
+        points: [
+          "Abgemeldete Empfänger tauchen in keiner neuen Suche mehr auf",
+          "Bestandskunden lassen sich per CSV auf einmal ausschließen",
+          "Der Abgleich läuft vor dem Versand, nicht danach",
+        ],
+      },
+    ],
+  },
   // Nachbildungen echter App-Screens. Bewusst keine Screenshots aus dem
   // laufenden Betrieb: dort stehen Namen realer Personen mit Rolle und
   // Arbeitgeber, die ohne Einwilligung nicht ins Marketing gehoeren. Die
@@ -460,6 +514,47 @@ const de = {
       noteLabel: "Was zurückkommt",
       noteValue: "Firma, Entscheider und verifizierte E-Mail in einem Schritt",
       cta: "Suche starten",
+    },
+    // Gruppierung und Bezeichnungen aus apps/web/app/calls/ der App.
+    // Firmen und Nummern erfunden, wie in allen Mockups hier.
+    calls: {
+      title: "Anrufliste",
+      subtitle: "Alles Fällige über alle Leads, mit Nummer und Vorbereitung.",
+      noteLabel: "Notiz zur Planung",
+      groups: [
+        {
+          label: "Überfällig",
+          overdue: true,
+          count: "1",
+          rows: [
+            {
+              name: "Schreinerei Huber",
+              role: "Markus Huber · Inhaber",
+              phone: "+43 662 884213",
+              note: "Hat auf die zweite Mail geantwortet, wollte Rückruf am Vormittag.",
+            },
+          ],
+        },
+        {
+          label: "Heute",
+          overdue: false,
+          count: "2",
+          rows: [
+            {
+              name: "Zahnarztpraxis Dr. Berger",
+              role: "Julia Berger · Praxisinhaberin",
+              phone: "+43 1 5324110",
+              note: "Termin bestätigt, Angebot zur Terminvergabe vorbereiten.",
+            },
+            {
+              name: "Café Sonnenblick",
+              role: "Elena Roth · Geschäftsführung",
+              phone: "+43 316 771902",
+              note: "Keine Website, Interesse an Online-Bestellung geäußert.",
+            },
+          ],
+        },
+      ],
     },
     // Die Bezeichnungen stammen 1:1 aus lib/technologies.ts der App. Bewusst
     // eine Auswahl statt aller Einträge: die Kachelwand soll überzeugen, nicht
@@ -672,17 +767,26 @@ const de = {
   cta: {
     primary: "Kostenlos testen",
     secondary: "Oder Call buchen",
-    trialNote: "14 Tage kostenlos, keine Kreditkarte nötig. Monatlich kündbar, keine Vertragslaufzeit.",
+    // Der Lead-Deckel der Testphase steht hier bewusst mit drin: die App
+    // erzwingt ihn hart (lib/plans.ts, TRIAL_LEAD_CAP = 500). Wer ihn erst
+    // beim Anschlagen bemerkt, erlebt genau den Moment, den diese Seite sonst
+    // vermeiden will.
+    trialNote: "14 Tage kostenlos, keine Kreditkarte nötig, bis zu 500 qualifizierte Leads. Monatlich kündbar, keine Vertragslaufzeit.",
   },
   hero: {
     eyebrow: "Die #1 KI-Plattform für kalte B2B-Kundengewinnung",
     h1Pre: "Mindestens ",
-    h1Accent: "5.000 echte Ansprechpartner",
+    // Stand vorher auf 5.000 pro Woche. Das war durch keinen Plan gedeckt:
+    // der Starter-Plan deckelt bei 5.000 qualifizierten Leads pro MONAT
+    // (lib/plans.ts, STARTER_MONTHLY_LEAD_CAP), und der guenstigste
+    // Instantly-Tarif erlaubt 5.000 Mails pro Monat. 1.000 pro Woche sind
+    // dagegen sauber gedeckt: 4.000 im Monat liegen unter beiden Grenzen.
+    h1Accent: "1.000 E-Mails pro Woche",
     // "kontaktieren" statt "anschreiben": die App liefert neben der geprueften
     // E-Mail auch die Telefonnummer aus dem oeffentlichen Eintrag, der Kanal
     // ist also Sache der Kundin. Die Nummer wird bewusst nicht als "verifiziert"
     // bezeichnet -- geprueft werden nur E-Mail-Adressen.
-    h1Post: " pro Woche kontaktieren, vollautomatisch.",
+    h1Post: " an echte Entscheider, vollautomatisch.",
     // Bewusst kurz und nutzenorientiert: die Erklaerung, wie das funktioniert,
     // liefern die Sektionen darunter. Wer im Hero schon alles erklaert bekommt,
     // hat keinen Grund weiterzulesen.
@@ -819,8 +923,8 @@ const de = {
     title: "Die meisten Tools hören auf, sobald die Mail raus ist. Frostbreaker nicht.",
     body: "Über eine Verbindung zu eurem Versandtool fließen Antworten, Bounces und Meeting-Ergebnisse zurück in dasselbe Dashboard, in dem die Leads gefunden wurden.",
     features: [
-      { id: "replies", title: "Antworten lesen und direkt beantworten", body: "Jede eingehende Antwort landet mit vollem Text in Frostbreaker, KI ordnet sie sofort ein (interessiert, kein Interesse, Rückfrage). Direkt aus der App heraus antworten, kein Wechsel zu einem separaten Tool." },
-      { id: "dashboard", title: "Umsatzbezogenes Dashboard statt nur Öffnungsrate", body: "Gebuchte Meetings, geschätzter Pipeline-Wert und Kosten pro Opportunity, direkt im selben Dashboard wie die Lead-Suche." },
+      { id: "replies", title: "Ein Posteingang für alle Postfächer", body: "Alle verbundenen Postfächer laufen in einem Posteingang zusammen, alle fünf Minuten synchronisiert, mit Zähler für Ungelesenes. Jede Antwort kommt mit vollem Text an, die KI ordnet sie ein (interessiert, kein Interesse, Rückfrage), und geantwortet wird direkt aus der App. Instantly müsst ihr dafür nicht mehr öffnen." },
+      { id: "dashboard", title: "Umsatz-Forecast statt nur Öffnungsrate", body: "Offene Pipeline, mit der Abschlusswahrscheinlichkeit gewichteter Forecast, gewonnen und verloren der letzten 30 Tage, dazu fällige und überfällige Aufgaben. Für die meisten Agenturen ersetzt das ein eigenes CRM-Abo." },
       { id: "status", title: "Lead-Status pro Kontakt, ohne separates CRM", body: "Kontaktiert, geantwortet, Meeting gebucht, Kunde geworden, alles direkt in der Leads-Tabelle nachvollziehbar." },
       { id: "deliverability", title: "SPF, DKIM, DMARC: geprüft, bevor ihr sendet", body: "Frostbreaker prüft eure Sende-Domain live per DNS-Abfrage und zeigt in Klartext, was zu tun ist, kein separates Tool nötig. Dazu Tagesvolumen pro Postfach auf einen Blick, mit Warnung bei riskant hohem Sendevolumen." },
     ],
@@ -925,7 +1029,7 @@ const de = {
     eyebrow: "Preise",
     title: "Feste Preise, sofort einsehbar, sofort startbar",
     agencyBadge: "Für Agenturen",
-    note: "14 Tage kostenlos testen, keine Kreditkarte nötig. Danach monatlich kündbar, keine Mindestlaufzeit. Zusätzlich nur eure eigenen API-Kosten, live im Dashboard einsehbar.",
+    note: "14 Tage kostenlos testen, keine Kreditkarte nötig, bis zu 500 qualifizierte Leads in der Testphase. Danach monatlich kündbar, keine Mindestlaufzeit. Zusätzlich nur eure eigenen API-Kosten, live im Dashboard einsehbar.",
     plans: [
       {
         id: "starter",
@@ -997,7 +1101,7 @@ const de = {
     title: "Häufige Fragen",
     items: [
       { q: "Kann ich das als Agentur für mehrere Kunden gleichzeitig nutzen?", a: "Ja, dafür gibt es eigene Workspaces pro Kunde, inklusive eigenem Namen, Logo und Akzentfarbe. Für jeden Workspace lässt sich ein Report-Link teilen, der eurem Endkunden aggregierte Kennzahlen im eigenen Look zeigt, ganz ohne dass der einen eigenen Account braucht." },
-      { q: "Was kostet das?", a: "99 € im Monat für den Starter-Plan (1 Workspace, bis 5.000 qualifizierte Leads), 14 Tage kostenlos testen, danach monatlich kündbar. Der Agentur-Plan (mehrere Workspaces, unlimitiert) startet ab 199 € im Monat, abgestimmt auf eure Anzahl an Kunden-Workspaces, dafür sprechen wir kurz miteinander. Dazu kommen eure eigenen, transparent im Dashboard einsehbaren API-Kosten." },
+      { q: "Was kostet das?", a: "99 € im Monat für den Starter-Plan (1 Workspace, bis 5.000 qualifizierte Leads pro Monat), 14 Tage kostenlos testen mit bis zu 500 qualifizierten Leads, danach monatlich kündbar. Der Agentur-Plan (mehrere Workspaces, unlimitiert) startet ab 199 € im Monat, abgestimmt auf eure Anzahl an Kunden-Workspaces, dafür sprechen wir kurz miteinander. Dazu kommen eure eigenen, transparent im Dashboard einsehbaren API-Kosten." },
       { q: "Kann ich jederzeit kündigen?", a: "Ja, monatlich, keine Mindestlaufzeit, keine Kündigungsfrist über den laufenden Monat hinaus." },
       { q: "Woher weiß ich, dass eine gefundene E-Mail wirklich zu einer Person gehört?", a: "Frostbreaker filtert generische Adressen wie info@ oder office@ automatisch heraus. Nur E-Mails, die eindeutig einer Person zugeordnet sind, landen in eurer Leads-Liste." },
       { q: "Was passiert, wenn ich aus Versehen an eine ungültige Adresse schreibe?", a: "Jede Adresse wird vor dem Versand geprüft, ungültige werden automatisch aussortiert. Das ist kein Nice-to-have: eine hohe Bounce-Rate beschädigt eure Sender-Reputation über alle Postfächer und alle Kunden hinweg, nicht nur die eine Kampagne. Die Prüfung läuft automatisch mit, ihr müsst nichts manuell anstoßen." },
@@ -1555,6 +1659,54 @@ const en: typeof de = {
     dachValue: "Shopware, JTL, Oxid, PlentyMarkets",
     dachNote: "Not just the US systems: the shop platforms common in German-speaking markets are covered too.",
   },
+  phone: {
+    eyebrow: "Second channel",
+    title: "When email isn't enough, the number is already there",
+    body: "Cold outreach doesn't end at email. Someone who ignores two follow-ups is often still reachable, just by phone. Frostbreaker plans those calls in the same place the lead came from.",
+    points: [
+      {
+        title: "Prepared, not caught cold",
+        body: "Every row carries the number, the person's role and the company summary from the research. You know who you are talking to, and why, before you dial.",
+      },
+      {
+        title: "Sorted by urgency",
+        body: "Overdue, today, later. A promised callback no longer slips because it sat in a spreadsheet nobody opened.",
+      },
+      {
+        title: "The outcome stays with the lead",
+        body: "Call note and result are saved on the contact and set its status. The next step then sits in the same history as the emails you sent.",
+      },
+    ],
+    note: "You dial with your own phone: Frostbreaker is not a phone system and does not bill call minutes.",
+  },
+  safeStart: {
+    eyebrow: "Start without prior knowledge",
+    title: "The two things cold outreach usually fails on are built in",
+    cards: [
+      {
+        id: "guide",
+        label: "Guide",
+        title: "The guide lives in the tool, not in a PDF",
+        body: "Ten chapters cover the whole flow: why mailboxes need two to four weeks of warmup, what SPF, DKIM and DMARC mean in plain language, which search route fits which audience. Plus a checklist showing what is still missing.",
+        points: [
+          "A warning about the most expensive beginner mistake: sending before warmup",
+          "Cold outreach never belongs on your main domain, with the reasoning",
+          "Every page links into the matching chapter",
+        ],
+      },
+      {
+        id: "optout",
+        label: "Legal safety",
+        title: "The opt-out link is part of the campaign, not an afterthought",
+        body: "Every campaign email contains an opt-out link. One click adds the address to your blocklist permanently, and that list is checked before every further search and every further campaign. Nothing to maintain, nothing to add by hand.",
+        points: [
+          "Opted-out recipients no longer appear in any new search",
+          "Existing customers can be excluded in bulk via CSV",
+          "The check runs before sending, not after",
+        ],
+      },
+    ],
+  },
   appMockups: {
     dashboard: {
       title: "Dashboard",
@@ -1635,6 +1787,45 @@ const en: typeof de = {
       noteLabel: "What comes back",
       noteValue: "Company, decision maker and verified email in one step",
       cta: "Start search",
+    },
+    calls: {
+      title: "Call list",
+      subtitle: "Everything due across all leads, with number and prep.",
+      noteLabel: "Planning note",
+      groups: [
+        {
+          label: "Overdue",
+          overdue: true,
+          count: "1",
+          rows: [
+            {
+              name: "Huber Joinery",
+              role: "Markus Huber · Owner",
+              phone: "+43 662 884213",
+              note: "Replied to the second email, asked for a callback in the morning.",
+            },
+          ],
+        },
+        {
+          label: "Today",
+          overdue: false,
+          count: "2",
+          rows: [
+            {
+              name: "Dr. Berger Dental",
+              role: "Julia Berger · Practice owner",
+              phone: "+43 1 5324110",
+              note: "Meeting confirmed, prepare the online booking offer.",
+            },
+            {
+              name: "Café Sonnenblick",
+              role: "Elena Roth · Managing director",
+              phone: "+43 316 771902",
+              note: "No website, expressed interest in online ordering.",
+            },
+          ],
+        },
+      ],
     },
     techFilter: {
       title: "Technology used",
@@ -1823,13 +2014,13 @@ const en: typeof de = {
   cta: {
     primary: "Start free trial",
     secondary: "Or book a call",
-    trialNote: "14 days free, no credit card required. Cancel anytime, no contract.",
+    trialNote: "14 days free, no credit card required, up to 500 qualified leads. Cancel monthly, no contract.",
   },
   hero: {
     eyebrow: "THE #1 AI PLATFORM FOR COLD B2B CLIENT ACQUISITION",
-    h1Pre: "Reach at least ",
-    h1Accent: "5,000 real decision-makers",
-    h1Post: " a week, fully automatically.",
+    h1Pre: "Send at least ",
+    h1Accent: "1,000 emails a week",
+    h1Post: " to real decision-makers, fully automatically.",
     body: "No info@, no guesswork, no four subscriptions. Just decision-makers with a name and a verified address, every week.",
     factBadge: "Agencies get an average of $42 back for every dollar they spend on email.",
     factSource: "Source: Litmus, State of Email 2025",
@@ -1949,8 +2140,8 @@ const en: typeof de = {
     title: "Most tools stop once the email is sent. Frostbreaker doesn't.",
     body: "Through a connection to your sending tool, replies, bounces and meeting outcomes flow back into the same dashboard where the leads were found.",
     features: [
-      { id: "replies", title: "Read replies and respond directly", body: "Every incoming reply lands in Frostbreaker with full text, AI classifies it instantly (interested, not interested, question). Reply directly from the app, no switching to a separate tool." },
-      { id: "dashboard", title: "Revenue-focused dashboard, not just open rate", body: "Meetings booked, estimated pipeline value and cost per opportunity, right in the same dashboard as lead search." },
+      { id: "replies", title: "One inbox for every mailbox", body: "All connected mailboxes come together in one inbox, synced every five minutes, with an unread counter. Every reply arrives with full text, AI classifies it (interested, not interested, question), and you reply straight from the app. You no longer need to open Instantly for this." },
+      { id: "dashboard", title: "Revenue forecast, not just open rate", body: "Open pipeline, a forecast weighted by close probability, won and lost over the last 30 days, plus due and overdue tasks. For most agencies that replaces a separate CRM subscription." },
       { id: "status", title: "Lead status per contact, no separate CRM needed", body: "Contacted, replied, meeting booked, became a customer, all trackable directly in the leads table." },
       { id: "deliverability", title: "SPF, DKIM, DMARC: checked before you send", body: "Frostbreaker checks your sending domain live via DNS lookup and shows in plain language what to fix, no separate tool needed. Plus daily volume per mailbox at a glance, with a warning at risky send volumes." },
     ],
@@ -2049,7 +2240,7 @@ const en: typeof de = {
     eyebrow: "Pricing",
     title: "Fixed prices, visible immediately, ready to start immediately",
     agencyBadge: "For agencies",
-    note: "14 days free, no credit card required. Cancel anytime after, no minimum term. On top, only your own API costs, visible live in the dashboard.",
+    note: "14 days free, no credit card required, up to 500 qualified leads during the trial. Cancel monthly after that, no minimum term. On top, only your own API costs, visible live in the dashboard.",
     plans: [
       {
         id: "starter",
@@ -2121,7 +2312,7 @@ const en: typeof de = {
     title: "Frequently asked questions",
     items: [
       { q: "Can I use this as an agency for multiple clients at once?", a: "Yes, there are separate workspaces per client, including their own name, logo and accent color. Each workspace can share a report link that shows your client aggregated metrics in their own look, without them needing their own account." },
-      { q: "What does it cost?", a: "$99/month for the Starter plan (1 workspace, up to 5,000 qualified leads), 14 days free, cancel anytime after. The Agency plan (multiple workspaces, unlimited) starts from $199/month, tailored to your number of client workspaces, so let's have a quick chat about that. On top come your own API costs, transparently visible in the dashboard." },
+      { q: "What does it cost?", a: "$99/month for the Starter plan (1 workspace, up to 5,000 qualified leads per month), 14 days free with up to 500 qualified leads, cancel monthly after that. The Agency plan (multiple workspaces, unlimited) starts from $199/month, tailored to your number of client workspaces, so let's have a quick chat about that. On top come your own API costs, transparently visible in the dashboard." },
       { q: "Can I cancel anytime?", a: "Yes, monthly, no minimum term, no notice period beyond the current month." },
       { q: "How do I know a found email really belongs to a person?", a: "Frostbreaker automatically filters out generic addresses like info@ or office@. Only emails clearly assigned to a person make it into your leads list." },
       { q: "What happens if I accidentally send to an invalid address?", a: "Every address is checked before sending, invalid ones are filtered out automatically. This isn't a nice-to-have: a high bounce rate damages your sender reputation across every mailbox and every client, not just the one campaign. The check runs automatically, nothing to trigger manually." },
