@@ -344,6 +344,51 @@ const de = {
   // "Apollo" stehen, denkt jeder Fachkundige sofort "dann nehme ich die doch
   // gleich selbst". Diesen Einwand erst in der FAQ zu beantworten, hiesse ihn
   // die halbe Seite lang unbeantwortet mitlaufen zu lassen.
+  // Der Einwand "ich habe Apollo und Instantly doch schon" laesst sich nicht
+  // mit Eigenschaften beantworten, sondern nur damit, wie ein Monat wirklich
+  // aussieht. Deshalb hier keine Feature-Liste, sondern zwei Ablaeufe
+  // nebeneinander: die Laenge der linken Spalte IST das Argument.
+  //
+  // Bewusst ohne Gesamtpreis im Text: die Tarife der Anbieter aendern sich,
+  // eine Zahl hier waere in drei Monaten falsch. Die Preise stehen an genau
+  // einer Stelle, im Preis-Abschnitt.
+  dailyDiff: {
+    eyebrow: "Der Unterschied im Alltag",
+    title: "Derselbe Monat, einmal mit und einmal ohne",
+    body: "Apollo findet Entscheider, Instantly verschickt zuverlässig. Beides bleibt. Die Frage ist, was zwischen den beiden passiert, und wie viel davon ihr von Hand macht.",
+    manualBadge: "Handarbeit",
+    before: {
+      label: "Heute: Apollo + Instantly",
+      countLabel: "Schritte",
+      count: "8",
+      manualLabel: "davon von Hand",
+      manualCount: "4",
+      steps: [
+        { text: "In Apollo filtern und 250 Leads als CSV exportieren.", manual: false },
+        { text: "Abmeldungen und Bestandskunden aus der CSV entfernen. Apollo kennt beides nicht, Instantly meldet es nicht zurück.", manual: true },
+        { text: "Für jeden Lead eine persönliche Zeile schreiben, oder auf generische Platzhalter ausweichen, die schlechter abschneiden als gar keine Personalisierung.", manual: true },
+        { text: "CSV bei Instantly hochladen und die Spalten zuordnen.", manual: false },
+        { text: "Kampagne und Nachfass-Sequenz aufbauen.", manual: false },
+        { text: "Antworten in Instantly lesen, Ergebnisse an anderer Stelle notieren.", manual: true },
+        { text: "Zahlen für den Kunden aus zwei Tools in einer Tabelle zusammensetzen.", manual: true },
+        { text: "Nächsten Monat von vorn. Apollo weiß nicht, wen ihr letzten Monat schon angeschrieben habt.", manual: false },
+      ],
+    },
+    after: {
+      label: "Mit Frostbreaker",
+      countLabel: "Schritte",
+      count: "4",
+      manualLabel: "davon von Hand",
+      manualCount: "0",
+      steps: [
+        "Eine Suche starten, mit denselben Filtern wie in Apollo, zusätzlich nach eingesetzter Technik.",
+        "Läuft von allein durch: Sperrliste geprüft, Adresse verifiziert, persönliche Zeile pro Firma geschrieben.",
+        "Kampagne direkt aus derselben Liste starten, ohne Export und ohne Spalten zuzuordnen.",
+        "Antworten, Meetings und der Kundenreport stehen im selben Dashboard.",
+      ],
+    },
+    note: "Frostbreaker ersetzt weder Apollo noch Instantly. Es ersetzt die Handarbeit dazwischen, und das CRM-Abo, das sonst als drittes dazukäme.",
+  },
   worksWith: {
     eyebrow: "Ergänzt euren Stack",
     title: "Ihr nutzt Apollo, Hunter oder Instantly bereits? Dann ist das hier kein Ersatz",
@@ -1699,6 +1744,43 @@ const en: typeof de = {
         ],
       },
     ],
+  },
+  dailyDiff: {
+    eyebrow: "The difference in practice",
+    title: "The same month, once with and once without",
+    body: "Apollo finds decision makers, Instantly sends reliably. Both stay. The question is what happens between the two, and how much of it you do by hand.",
+    manualBadge: "By hand",
+    before: {
+      label: "Today: Apollo + Instantly",
+      countLabel: "Steps",
+      count: "8",
+      manualLabel: "of those by hand",
+      manualCount: "4",
+      steps: [
+        { text: "Filter in Apollo and export 250 leads as a CSV.", manual: false },
+        { text: "Remove opt-outs and existing customers from the CSV. Apollo knows about neither, and Instantly never reports them back.", manual: true },
+        { text: "Write a personal line for every lead, or fall back to generic placeholders that perform worse than no personalisation at all.", manual: true },
+        { text: "Upload the CSV to Instantly and map the columns.", manual: false },
+        { text: "Build the campaign and the follow-up sequence.", manual: false },
+        { text: "Read replies in Instantly, record outcomes somewhere else.", manual: true },
+        { text: "Assemble the client's numbers from two tools into one spreadsheet.", manual: true },
+        { text: "Next month, start over. Apollo does not know who you contacted last month.", manual: false },
+      ],
+    },
+    after: {
+      label: "With Frostbreaker",
+      countLabel: "Steps",
+      count: "4",
+      manualLabel: "of those by hand",
+      manualCount: "0",
+      steps: [
+        "Start one search, with the same filters as in Apollo, plus the technology they run.",
+        "It runs on its own: blocklist checked, address verified, a personal line written per company.",
+        "Start the campaign straight from that same list, no export and no column mapping.",
+        "Replies, meetings and the client report sit in the same dashboard.",
+      ],
+    },
+    note: "Frostbreaker replaces neither Apollo nor Instantly. It replaces the manual work between them, and the CRM subscription that would otherwise be the third one.",
   },
   worksWith: {
     eyebrow: "Complements your stack",

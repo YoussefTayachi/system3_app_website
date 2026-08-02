@@ -253,6 +253,91 @@ export default function Home() {
           und "Apollo" stehen, denkt jeder Fachkundige sofort "dann nehme ich
           die doch gleich selbst". Diesen Einwand erst in der FAQ zu
           beantworten, hiesse ihn die halbe Seite lang mitlaufen zu lassen. */}
+      {/* Der Einwand "ich habe Apollo und Instantly doch schon" laesst sich
+          nicht mit einer Feature-Liste beantworten, sondern nur damit, wie ein
+          Monat wirklich aussieht. Deshalb zwei Ablaeufe nebeneinander: die
+          Laenge der linken Spalte und die vier Handarbeits-Marker SIND das
+          Argument, nicht der Text darueber. Die Zahlen oben nehmen das Ergebnis
+          vorweg, fuer alle, die nur scrollen. */}
+      <section id="alltag" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
+        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+          <SectionHeading eyebrow={t.dailyDiff.eyebrow} title={t.dailyDiff.title} />
+          <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.dailyDiff.body}</p>
+
+          <div className="grid items-start gap-6 lg:grid-cols-2">
+            {/* Vorher */}
+            <Reveal>
+              <div className="h-full rounded-2xl border border-amber-300/60 bg-panel p-6">
+                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-edge/70 pb-4">
+                  <p className="font-display text-lg font-semibold tracking-[-0.015em] text-ink">
+                    {t.dailyDiff.before.label}
+                  </p>
+                  <p className="text-xs text-mute">
+                    <span className="font-display text-xl font-semibold text-ink">{t.dailyDiff.before.count}</span>{" "}
+                    {t.dailyDiff.before.countLabel}
+                    {", "}
+                    <span className="font-semibold text-amber-700">{t.dailyDiff.before.manualCount}</span>{" "}
+                    {t.dailyDiff.before.manualLabel}
+                  </p>
+                </div>
+                <ol className="mt-4 space-y-3">
+                  {t.dailyDiff.before.steps.map((s, i) => (
+                    <li key={s.text} className="flex gap-3 text-sm leading-relaxed text-soft">
+                      <span
+                        className={
+                          "mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[11px] font-semibold " +
+                          (s.manual ? "bg-amber-100 text-amber-800" : "bg-chip text-faint")
+                        }
+                      >
+                        {i + 1}
+                      </span>
+                      <span>
+                        {s.text}
+                        {s.manual && (
+                          <span className="ml-1.5 whitespace-nowrap rounded-full bg-amber-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-800">
+                            {t.dailyDiff.manualBadge}
+                          </span>
+                        )}
+                      </span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </Reveal>
+
+            {/* Nachher */}
+            <Reveal delay={100}>
+              <div className="h-full rounded-2xl border border-sky-300/70 bg-sky-50/40 p-6">
+                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-sky-200/70 pb-4">
+                  <p className="font-display text-lg font-semibold tracking-[-0.015em] text-ink">
+                    {t.dailyDiff.after.label}
+                  </p>
+                  <p className="text-xs text-sky-900/70">
+                    <span className="font-display text-xl font-semibold text-ink">{t.dailyDiff.after.count}</span>{" "}
+                    {t.dailyDiff.after.countLabel}
+                    {", "}
+                    <span className="font-semibold text-sky-800">{t.dailyDiff.after.manualCount}</span>{" "}
+                    {t.dailyDiff.after.manualLabel}
+                  </p>
+                </div>
+                <ol className="mt-4 space-y-3">
+                  {t.dailyDiff.after.steps.map((s, i) => (
+                    <li key={s} className="flex gap-3 text-sm leading-relaxed text-sky-950">
+                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-sky-600 text-[11px] font-semibold text-white">
+                        {i + 1}
+                      </span>
+                      <span>{s}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </Reveal>
+          </div>
+
+          <p className="mt-6 max-w-[62ch] text-sm leading-relaxed text-mute">{t.dailyDiff.note}</p>
+        </div>
+      </section>
+
       <section id="ergaenzt" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <SectionHeading eyebrow={t.worksWith.eyebrow} title={t.worksWith.title} />
         <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.worksWith.body}</p>
