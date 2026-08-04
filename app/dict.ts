@@ -455,6 +455,150 @@ const de = {
   // Der zweite Kanal. Stand bisher nirgends auf der Seite, obwohl er das
   // Argument gegen reine Versand-Tools ist: wer schon eines hat, kauft kein
   // zweites, aber er kauft den Kanal, den sein jetziges Werkzeug nicht kann.
+  /**
+   * Die drei Abschnitte, die Frostbreaker von einem Versandwerkzeug trennen.
+   *
+   * Alle drei beschreiben etwas, das die App TUT, nicht etwas, das sie
+   * verspricht -- deshalb stehen ueberall Zahlen und Schwellen statt
+   * Adjektiven. Wer eine davon aendert, muss sie in der App nachschlagen:
+   * lib/campaign-readiness.ts, Migration 0074, lib/report/effectiveness.ts.
+   */
+  /**
+   * Inhalte der drei neuen Nachbildungen (_guard-mockups.tsx).
+   *
+   * Die Zahlen sind erfunden, aber im Bereich echter Werte gewaehlt: eine
+   * Bounce-Quote von 6,4 % liegt knapp ueber der Blocker-Schwelle von 5 %,
+   * die 29 % ungeprueften Adressen knapp ueber der Hinweis-Schwelle von 25 %.
+   * Wer die Schwellen in lib/campaign-readiness.ts aendert, sollte hier
+   * nachziehen, sonst zeigt das Bild eine Regel, die es nicht mehr gibt.
+   */
+  guardMockups: {
+    gate: {
+      frameTitle: "Vor dem Start",
+      blocked: "2 Sachen verhindern den Start",
+      button: "Kampagne anlegen",
+      checks: [
+        {
+          severity: "blocker",
+          title: "SPF fehlt: send.muster-gmbh.de",
+          body: "Ohne SPF kann der Empfänger nicht prüfen, ob die Mail wirklich von dieser Domain kommt. Sie landet im Spam.",
+        },
+        {
+          severity: "blocker",
+          title: "Bounce-Quote bei 6,4 % (32 von 500)",
+          body: "Ab 5 % greifen die Schutzmechanismen der Empfänger-Provider, und der Ruf der Domain trägt das dauerhaft mit.",
+        },
+        {
+          severity: "warning",
+          title: "118 von 406 Adressen (29 %) wurden nie geprüft",
+          body: "Ungeprüfte Adressen sind die häufigste Ursache für Bounces.",
+        },
+        {
+          severity: "warning",
+          title: "Erste Mail ist 164 Wörter lang (empfohlen: unter 90)",
+          body: "Der personalisierte Aufhänger ist mitgezählt.",
+        },
+        { severity: "ok", title: "DKIM ist für alle Absender-Domains gesetzt", body: "" },
+      ],
+    },
+    chain: {
+      frameTitle: "Ein Lead, drei Kanäle",
+      note: "Es entsteht immer nur ein nächster Schritt. Wer antwortet, fällt sofort aus der Kette.",
+      steps: [
+        {
+          day: "Tag 0",
+          title: "Die Mail geht raus",
+          body: "Personalisierter Aufhänger, geprüfte Adresse, deine eigenen Postfächer.",
+        },
+        {
+          day: "Tag 3 · keine Antwort",
+          title: "LinkedIn-Aufgabe erscheint",
+          body: "Nur wo ein Profil hinterlegt ist. Landet in der LinkedIn-Liste, nicht in einer Tabelle.",
+        },
+        {
+          day: "Tag 7 · immer noch still",
+          title: "Der Anruf steht in der Anrufliste",
+          body: "Nur wo eine Nummer da ist, und erst wenn die LinkedIn-Aufgabe erledigt ist.",
+        },
+      ],
+    },
+    effect: {
+      frameTitle: "Wirkung · nach Lead-Liste",
+      note: "Gemessen an Kontakten, nicht an Mails: eine Sequenz schickt mehrere Mails an dieselbe Person.",
+      stats: [
+        { label: "Angeschrieben", value: "406", strong: false },
+        { label: "Geantwortet", value: "11", strong: false },
+        { label: "Antwortquote", value: "2,7 %", strong: true },
+      ],
+      rows: [
+        { label: "Supplements US", value: "4,5 % · 2/44", percent: 4.5 },
+        { label: "Agenturen US", value: "1,7 % · 2/115", percent: 1.7 },
+        { label: "E-Com US", value: "1,2 % · 1/85", percent: 1.2 },
+        { label: "Agenturen DACH", value: "23 — zu wenig", percent: null },
+        { label: "Handwerk NRW", value: "18 — zu wenig", percent: null },
+      ],
+    },
+  },
+  guard: {
+    eyebrow: "Bevor du sendest",
+    title: "Das einzige Werkzeug für Kaltakquise, das dir Nein sagt",
+    body:
+      "Elf Prüfungen laufen, bevor eine Kampagne starten kann. Vier davon können sie aufhalten: fehlendes SPF oder DKIM, eine Bounce-Quote über fünf Prozent, eine Liste ohne sendbare Adresse. Das kostet dich nicht eine Kampagne, das kostet dich die Domain.",
+    points: [
+      {
+        title: "Blocker und Hinweise sind zweierlei",
+        body: "Ein Blocker ist etwas, das mit Sicherheit schiefgeht und dessen Schaden bleibt. Ein Hinweis macht schlechter, aber weder sicher noch dauerhaft. Diese Linie halten wir streng: eine Warnung, die auch mal nur eine Meinung ist, klickt man beim dritten Mal weg — und die echte gleich mit.",
+      },
+      {
+        title: "Du kannst trotzdem starten",
+        body: "Mit einem bewussten zweiten Klick, und du siehst vorher, was du in Kauf nimmst. Ein Torwart, an dem man nicht vorbeikommt, führt nur dazu, dass die Kampagne woanders angelegt wird.",
+      },
+      {
+        title: "Danach schaut jemand weiter hin",
+        body: "Täglich prüfen wir die DNS-Einträge jeder Absender-Domain. Klettert die Bounce-Quote im Betrieb über fünf Prozent, hält die App die Kampagne an und schreibt dir warum.",
+      },
+    ],
+  },
+  chain: {
+    eyebrow: "Drei Kanäle, eine Kette",
+    title: "Kein anderer hat E-Mail, LinkedIn und Telefon an einem Strang",
+    body:
+      "Instantly kennt dein Telefon nicht. Lemlist hat kein CRM. Pipedrive hat keine Kampagne. Hier ist es ein Vorgang, und er läuft, ohne dass du daran denken musst.",
+    points: [
+      {
+        title: "Immer genau ein nächster Schritt",
+        body: "Kein Lead bekommt gleichzeitig eine LinkedIn-Aufgabe und einen Anruf. Der Anruf entsteht erst, wenn die LinkedIn-Anfrage abgehakt ist.",
+      },
+      {
+        title: "Wer antwortet, fällt sofort raus",
+        body: "Die Kette gilt nur für Kontakte, die angeschrieben wurden und geschwiegen haben. Eine Antwort beendet sie im selben Moment.",
+      },
+      {
+        title: "Nur wo es etwas zu tun gibt",
+        body: "LinkedIn nur mit hinterlegtem Profil, Anruf nur mit Nummer. Eine Aufgabe ohne Adresse ist eine Recherche-Aufgabe, und die gehört nicht in eine Arbeitsliste.",
+      },
+    ],
+  },
+  honesty: {
+    eyebrow: "Was wir dir nicht vormachen",
+    title: "Eine Zahl, die nichts bedeutet, zeigen wir nicht",
+    body:
+      "Zwölf Mails und eine Antwort sind nicht „8,3 %“. Das sind zwölf Mails und eine Antwort. Unter dreißig angeschriebenen Kontakten schreiben wir „zu wenig“ statt einer Prozentzahl, und der Balken bleibt leer.",
+    points: [
+      {
+        title: "Dieselbe Regel beim A/B-Test",
+        body: "Kein Gewinner, solange nicht jede Fassung 50 Sendungen hinter sich hat und der Abstand einem Zufallstest standhält. Jedes andere Dashboard erklärt dir bei neun Antworten begeistert, Variante B habe deine Quote verdreifacht.",
+      },
+      {
+        title: "Gemessen an Kontakten, nicht an Mails",
+        body: "Eine Sequenz schickt drei bis vier Mails an dieselbe Person. Die eine Antwort darauf gehört nicht durch vier geteilt.",
+      },
+      {
+        title: "Abwesenheitsnotizen zählen nicht",
+        body: "Ein Autoresponder ist kein Mensch, der reagiert hat. Ihn mitzuzählen würde die Quote nach oben verfälschen — also genau in die Richtung, in die man sich gern täuschen lässt.",
+      },
+    ],
+  },
   phone: {
     eyebrow: "Zweiter Kanal",
     title: "Wenn die Mail nicht reicht, steht die Nummer schon da",
@@ -873,7 +1017,7 @@ const de = {
     trialNote: "14 Tage kostenlos, keine Kreditkarte nötig, bis zu 500 qualifizierte Leads. Monatlich kündbar, keine Vertragslaufzeit.",
   },
   hero: {
-    eyebrow: "Die #1 KI-Plattform für kalte B2B-Kundengewinnung",
+    eyebrow: "Die #1 Plattform für kalte B2B-Kundengewinnung",
     h1Pre: "Mindestens ",
     // Stand vorher auf 5.000 pro Woche. Das war durch keinen Plan gedeckt:
     // der Starter-Plan deckelt bei 5.000 qualifizierten Leads pro MONAT
@@ -1838,6 +1982,133 @@ const en: typeof de = {
     dachValue: "Shopware, JTL, Oxid, PlentyMarkets",
     dachNote: "Not just the US systems: the shop platforms common in German-speaking markets are covered too.",
   },
+  guardMockups: {
+    gate: {
+      frameTitle: "Before you start",
+      blocked: "2 things block the start",
+      button: "Create campaign",
+      checks: [
+        {
+          severity: "blocker",
+          title: "SPF missing: send.acme-labs.com",
+          body: "Without SPF the recipient cannot verify the mail really comes from this domain. It lands in spam.",
+        },
+        {
+          severity: "blocker",
+          title: "Bounce rate at 6.4% (32 of 500)",
+          body: "Past 5% the recipient providers' protections kick in, and the domain carries that permanently.",
+        },
+        {
+          severity: "warning",
+          title: "118 of 406 addresses (29%) were never verified",
+          body: "Unverified addresses are the most common cause of bounces.",
+        },
+        {
+          severity: "warning",
+          title: "First mail is 164 words long (recommended: under 90)",
+          body: "The personalised icebreaker is counted in.",
+        },
+        { severity: "ok", title: "DKIM is set for every sending domain", body: "" },
+      ],
+    },
+    chain: {
+      frameTitle: "One lead, three channels",
+      note: "There is always exactly one next step. Anyone who replies drops out of the chain immediately.",
+      steps: [
+        {
+          day: "Day 0",
+          title: "The email goes out",
+          body: "Personalised icebreaker, verified address, your own mailboxes.",
+        },
+        {
+          day: "Day 3 · no reply",
+          title: "LinkedIn task appears",
+          body: "Only where a profile is on file. Lands in the LinkedIn list, not in a spreadsheet.",
+        },
+        {
+          day: "Day 7 · still quiet",
+          title: "The call goes into the call list",
+          body: "Only where a number exists, and only once the LinkedIn task is done.",
+        },
+      ],
+    },
+    effect: {
+      frameTitle: "Effect · by lead list",
+      note: "Measured per contact, not per mail: a sequence sends several mails to the same person.",
+      stats: [
+        { label: "Contacted", value: "406", strong: false },
+        { label: "Replied", value: "11", strong: false },
+        { label: "Reply rate", value: "2.7%", strong: true },
+      ],
+      rows: [
+        { label: "Supplements US", value: "4.5% \u00b7 2/44", percent: 4.5 },
+        { label: "Agencies US", value: "1.7% \u00b7 2/115", percent: 1.7 },
+        { label: "E-Com US", value: "1.2% \u00b7 1/85", percent: 1.2 },
+        { label: "Agencies DACH", value: "23 \u2014 too few", percent: null },
+        { label: "Trades NRW", value: "18 \u2014 too few", percent: null },
+      ],
+    },
+  },
+  guard: {
+    eyebrow: "Before you send",
+    title: "The only cold outreach tool that tells you no",
+    body:
+      "Eleven checks run before a campaign can start. Four of them can stop it: missing SPF or DKIM, a bounce rate above five percent, a list with nothing sendable in it. Those do not cost you a campaign, they cost you the domain.",
+    points: [
+      {
+        title: "Blockers and notes are not the same thing",
+        body: "A blocker is something that will certainly go wrong and whose damage stays. A note makes things worse, but neither certainly nor permanently. We keep that line strict: a warning that is sometimes just an opinion gets clicked away by the third time, and the real one goes with it.",
+      },
+      {
+        title: "You can still start",
+        body: "With a deliberate second click, and you see what you are taking on first. A gate you cannot pass only means the campaign gets built somewhere else.",
+      },
+      {
+        title: "Someone keeps looking afterwards",
+        body: "Every sending domain's DNS records are checked daily. If the bounce rate climbs past five percent in flight, the app pauses the campaign and tells you why.",
+      },
+    ],
+  },
+  chain: {
+    eyebrow: "Three channels, one chain",
+    title: "Nobody else has email, LinkedIn and phone on one thread",
+    body:
+      "Instantly does not know your phone. Lemlist has no CRM. Pipedrive has no campaign. Here it is one process, and it runs without you remembering it.",
+    points: [
+      {
+        title: "Always exactly one next step",
+        body: "No lead gets a LinkedIn task and a call queued at the same time. The call only appears once the LinkedIn task is done.",
+      },
+      {
+        title: "Anyone who replies drops out immediately",
+        body: "The chain only applies to contacts who were mailed and stayed quiet. A reply ends it the same moment.",
+      },
+      {
+        title: "Only where there is something to do",
+        body: "LinkedIn only with a profile on file, a call only with a number. A task without an address is a research task, and that does not belong in a work list.",
+      },
+    ],
+  },
+  honesty: {
+    eyebrow: "What we will not fake",
+    title: "A number that means nothing does not get shown",
+    body:
+      "Twelve mails and one reply is not \u201c8.3%\u201d. It is twelve mails and one reply. Below thirty contacted people we print \u201ctoo few\u201d instead of a percentage, and the bar stays empty.",
+    points: [
+      {
+        title: "Same rule for A/B tests",
+        body: "No winner until every version has 50 sends and the gap survives a chance test. Every other dashboard will happily tell you variant B tripled your reply rate off nine replies.",
+      },
+      {
+        title: "Measured per contact, not per mail",
+        body: "A sequence sends three or four mails to the same person. The one reply should not be divided by four.",
+      },
+      {
+        title: "Out-of-office replies do not count",
+        body: "An autoresponder is not a person who reacted. Counting it would push the rate up, which is exactly the direction people like to be fooled in.",
+      },
+    ],
+  },
   phone: {
     eyebrow: "Second channel",
     title: "When email isn't enough, the number is already there",
@@ -2206,7 +2477,7 @@ const en: typeof de = {
     trialNote: "14 days free, no credit card required, up to 500 qualified leads. Cancel monthly, no contract.",
   },
   hero: {
-    eyebrow: "THE #1 AI PLATFORM FOR COLD B2B CLIENT ACQUISITION",
+    eyebrow: "THE #1 PLATFORM FOR COLD B2B CLIENT ACQUISITION",
     h1Pre: "Send at least ",
     h1Accent: "1,000 emails a week",
     h1Post: " to real decision-makers, fully automatically.",

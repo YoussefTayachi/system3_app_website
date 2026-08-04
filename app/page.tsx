@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Logo, CTAButton, CTAGroup, NavDropdown, SectionHeading, FactBox, StatTile, GlossaryText, BOOKING_URL } from "./_ui";
 import { AgencyMockup, PostSendMockup, LocalReachMockup, QualifiedLeadAnimation, SuppressionMockup, DeliverabilityMockup, CampaignMockup } from "./_mockups";
 import { DashboardMockup, UnifiedSearchMockup, TechFilterMockup, CallListMockup, LeadsTableMockup, MailboxesMockup, VerificationReportMockup } from "./_app-mockups";
+import { GateMockup, ChainMockup, EffectMockup } from "./_guard-mockups";
 import { LeadCardStack } from "./_illustration";
 import { SavingsCalculator } from "./_calculator";
 import { Reveal } from "./reveal";
@@ -633,6 +634,77 @@ export default function Home() {
           kann. Mockup links, Argumente rechts -- umgekehrt zur
           Technologie-Sektion, damit die Seite beim Scrollen nicht in ein
           Muster verfaellt. */}
+
+      {/* ---------------------------------------------------------------
+          Die drei Abschnitte, die Frostbreaker von einem Versandwerkzeug
+          trennen. Sie stehen bewusst NACH der Lead-Beschaffung und VOR den
+          Preisen: wer bis hierher gelesen hat, glaubt schon, dass die Leads
+          kommen. Die offene Frage ist ab hier, ob daraus etwas wird.
+          --------------------------------------------------------------- */}
+      <section id="torwart" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
+        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+          <SectionHeading eyebrow={t.guard.eyebrow} title={t.guard.title} />
+          <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.guard.body}</p>
+          <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+            <Reveal>
+              <GateMockup />
+            </Reveal>
+            <div className="space-y-4">
+              {t.guard.points.map((p, i) => (
+                <Reveal key={p.title} delay={i * 80}>
+                  <div className="rounded-2xl border border-edge/60 bg-panel p-5">
+                    <h3 className="font-display text-lg font-semibold tracking-[-0.015em] text-ink">{p.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-soft">{p.body}</p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="kette" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        <SectionHeading eyebrow={t.chain.eyebrow} title={t.chain.title} />
+        <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.chain.body}</p>
+        <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+          <div className="space-y-4 lg:order-2">
+            {t.chain.points.map((p, i) => (
+              <Reveal key={p.title} delay={i * 80}>
+                <div className="rounded-2xl border border-edge/60 bg-panel p-5">
+                  <h3 className="font-display text-lg font-semibold tracking-[-0.015em] text-ink">{p.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-soft">{p.body}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal className="lg:order-1">
+            <ChainMockup />
+          </Reveal>
+        </div>
+      </section>
+
+      <section id="ehrlich" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
+        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+          <SectionHeading eyebrow={t.honesty.eyebrow} title={t.honesty.title} />
+          <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.honesty.body}</p>
+          <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+            <Reveal>
+              <EffectMockup />
+            </Reveal>
+            <div className="space-y-4">
+              {t.honesty.points.map((p, i) => (
+                <Reveal key={p.title} delay={i * 80}>
+                  <div className="rounded-2xl border border-edge/60 bg-panel p-5">
+                    <h3 className="font-display text-lg font-semibold tracking-[-0.015em] text-ink">{p.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-soft">{p.body}</p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section id="telefon" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <SectionHeading eyebrow={t.phone.eyebrow} title={t.phone.title} />
