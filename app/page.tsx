@@ -6,17 +6,24 @@ import { DashboardMockup, UnifiedSearchMockup, TechFilterMockup, CallListMockup,
 import { GateMockup, ChainMockup, EffectMockup } from "./_guard-mockups";
 import { LeadCardStack } from "./_illustration";
 import { SavingsCalculator } from "./_calculator";
+import { SystemMap } from "./_system-map";
+import { AllInOneCompare } from "./_compare";
 import { Reveal } from "./reveal";
 import { trustIcons, postSendIcons, agencyIcons, workflowIcons, featureIcons, integrationIcons, CheckIcon, CrossIcon } from "./_icons";
 import { useT, LanguageToggle } from "./language-provider";
 
-/** Anbieter-Farben der drei Suchwege, deckungsgleich mit lib/search-source.ts
+/** Anbieter-Farben der vier Suchwege, deckungsgleich mit lib/search-source.ts
  *  in der App. Wird hier oben gehalten, damit die Zuordnung an einer Stelle
  *  steht und nicht in der JSX-Schleife versteckt ist. */
 const MODE_BADGE: Record<string, string> = {
   local: "border-sky-500/40 bg-sky-500/10 text-sky-800",
   corporate: "border-orange-500/40 bg-orange-500/10 text-orange-800",
   apollo: "border-yellow-500/50 bg-yellow-500/10 text-yellow-800",
+  // Prospeos Markenfarbe ist ein kraeftiges Rot. Wie bei den anderen dreien
+  // dieselbe Zuordnung wie die Quellen-Chips in der App (search-source.ts),
+  // damit sie jemand nach der Anmeldung wiedererkennt. Rot-800 als Textstufe,
+  // weil das Markenrot selbst als Schrift auf hellem Grund nicht traegt.
+  prospeo: "border-red-500/40 bg-red-500/10 text-red-800",
 };
 
 export default function Home() {
@@ -140,9 +147,28 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Kostenbeweis direkt nach dem Hero: "BYOK, volle
-          Kostentransparenz" war bisher eine Eigenschaft ohne Zahl. Die Zahl
-          ist das Argument, deshalb steht sie vor dem Rechner. */}
+      {/* Die Systemkarte, neu am 2026-08-06 (POSITIONIERUNG.md Abschnitt 3).
+          Steht bewusst an Position 2, direkt hinter dem Hero: sie beantwortet
+          "wie gross ist das hier?" in einem Bild. Der Rundgang weiter unten
+          erklaert dasselbe genauer, aber ueber sechs Bildschirme -- und wer
+          den Umfang nicht in den ersten Sekunden erfasst, kommt dort nie an.
+          Ersetzt an dieser Stelle den Kostenbeweis (#kosten), der bis heute
+          der zweite Abschnitt der Seite war. */}
+      <section id="system" className="scroll-mt-20 border-b border-edge/60 bg-panel2">
+        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+          <SectionHeading eyebrow={t.systemMap.eyebrow} title={t.systemMap.title} />
+          <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.systemMap.body}</p>
+          <Reveal>
+            <SystemMap />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Kostenbeweis: "BYOK, volle Kostentransparenz" war bisher eine
+          Eigenschaft ohne Zahl. Die Zahl ist das Argument, deshalb steht sie
+          vor dem Rechner.
+          Rueckt in Stufe 4 nach /preise -- ein Preisargument gehoert zur
+          Preisfrage, nicht vor das Produkt (POSITIONIERUNG.md Abschnitt 7). */}
       <section id="kosten" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <SectionHeading eyebrow={t.costProof.eyebrow} title={t.costProof.title} />
         <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">
@@ -205,10 +231,12 @@ export default function Home() {
               Statt zweier Standbilder steht darunter eine einzige, bedienbare
               Maske: das ist genau die Aussage der Sektion (ein Bildschirm, zwei
               Quellen) und spart die Haelfte der Hoehe. */}
-          {/* Drei statt zwei Karten seit der Apollo-Quelle. Auf lg bekommen sie
-              je ein Drittel; darunter untereinander, weil drei Karten
-              nebeneinander auf Tablet-Breite unlesbar schmal wuerden. */}
-          <div className="grid items-stretch gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {/* Vier Karten seit Prospeo (2026-08-05). Bewusst 2x2 statt vier
+              nebeneinander: bei vier Spalten auf 1280px bleiben je ~270px, und
+              die Punktlisten brechen dann auf drei Zeilen je Punkt um. Und
+              bewusst nicht lg:grid-cols-3 wie vorher -- das ergaebe 3+1 mit
+              einer Luecke, die sich als fehlende Karte liest. */}
+          <div className="grid items-stretch gap-8 md:grid-cols-2">
             {t.searchModes.modes.map((mode, i) => (
               <Reveal key={mode.id} delay={i * 80} className="h-full">
                 <div className="flex h-full flex-col rounded-2xl border border-edge/60 bg-panel p-6">
@@ -250,7 +278,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Steht bewusst DIREKT hinter den drei Suchwegen: sobald dort "Hunter"
+      {/* Steht bewusst DIREKT hinter den vier Suchwegen: sobald dort "Hunter"
           und "Apollo" stehen, denkt jeder Fachkundige sofort "dann nehme ich
           die doch gleich selbst". Diesen Einwand erst in der FAQ zu
           beantworten, hiesse ihn die halbe Seite lang mitlaufen zu lassen. */}
@@ -339,52 +367,20 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Hier stand bis zum 2026-08-06 der Abschnitt "Ihr nutzt Apollo schon?
+          Dann ist das hier kein Ersatz" -- als Einwandbehandlung gemeint, als
+          Selbsteinordnung wirksam: wir sind Zubehoer zu dem, was ihr schon
+          habt. Zubehoer wird bei der ersten Budgetkuerzung gestrichen.
+
+          Der Einwand ist real und bleibt beantwortet, aber in der
+          Gegenrichtung. Der Anker #ergaenzt bleibt bestehen, damit vorhandene
+          Links weiter funktionieren. Begruendung im Kopf von _compare.tsx. */}
       <section id="ergaenzt" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <SectionHeading eyebrow={t.worksWith.eyebrow} title={t.worksWith.title} />
-        <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.worksWith.body}</p>
-
-        <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
-          {/* Pro Werkzeug erst die Staerke, dann die Luecke. Wer seine eigenen
-              Tools schlechtgeredet bekommt, glaubt dem Rest der Seite nicht. */}
-          <div className="space-y-4">
-            {t.worksWith.rows.map((row, i) => (
-              <Reveal key={row.tool} delay={i * 80}>
-                <div className="rounded-2xl border border-edge/60 bg-panel p-5">
-                  <p className="font-display text-lg font-semibold tracking-[-0.015em] text-ink">{row.tool}</p>
-                  <div className="mt-3 space-y-2.5">
-                    <p className="flex gap-2.5 text-sm leading-relaxed text-soft">
-                      <CheckIcon />
-                      {row.good}
-                    </p>
-                    <p className="flex gap-2.5 text-sm leading-relaxed text-soft">
-                      <span aria-hidden className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
-                      {row.gap}
-                    </p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal delay={120}>
-            <div className="rounded-2xl border border-sky-300/70 bg-sky-50/50 p-6">
-              <p className="text-[10px] font-medium uppercase tracking-[0.1em] text-sky-700/80">
-                {t.worksWith.bridgeLabel}
-              </p>
-              <ul className="mt-4 space-y-3">
-                {t.worksWith.bridge.map((b) => (
-                  <li key={b} className="flex items-start gap-2.5 text-sm leading-relaxed text-sky-950">
-                    <CheckIcon />
-                    {b}
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-5 border-t border-sky-200/70 pt-4 text-xs leading-relaxed text-sky-900/70">
-                {t.worksWith.note}
-              </p>
-            </div>
-          </Reveal>
-        </div>
+        <SectionHeading eyebrow={t.compare.eyebrow} title={t.compare.title} />
+        <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.compare.body}</p>
+        <Reveal>
+          <AllInOneCompare />
+        </Reveal>
       </section>
 
       {/* Technologie-Filter. Eigene Sektion, weil er fuer Interessenten mit

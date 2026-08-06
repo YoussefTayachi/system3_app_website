@@ -291,9 +291,12 @@ const de = {
   // weil ein Schluessel, der "zwei" heisst und drei Eintraege haelt, beim
   // naechsten Ausbau garantiert jemanden in die Irre fuehrt.
   searchModes: {
-    eyebrow: "Drei Wege zum Lead",
+    // Seit dem 2026-08-05 vier statt drei Wege: Prospeo ist in der App live
+    // (SEARCH_SOURCE_LABELS im App-Repo kennt maps, corporate, apollo,
+    // prospeo). "Drei Wege" stand hier noch, als der vierte schon lief.
+    eyebrow: "Vier Wege zum Lead",
     title: "Orte, Firmen oder Entscheider, im selben Werkzeug gesucht",
-    body: "Ihr entscheidet pro Suche, woher die Firmen kommen. Alle drei Wege münden in dieselbe Liste, dieselbe Anreicherung und denselben Versand.",
+    body: "Ihr entscheidet pro Suche, woher die Firmen kommen. Alle vier Wege münden in dieselbe Liste, dieselbe Anreicherung und denselben Versand.",
     modes: [
       {
         // Benannt nach dem, WAS gesucht wird (Ort, Firma, Person), mit dem
@@ -338,9 +341,29 @@ const de = {
           "Bis zu 1.000 Leads pro Suche",
         ],
       },
+      {
+        // Steht bewusst NACH Apollo, obwohl es derselbe Suchtyp ist: die
+        // Reihenfolge folgt dem Umfang der Filter, und der Anlass-Filter
+        // ("schreibt gerade Stellen aus") ist das staerkste Argument der
+        // ganzen Sektion -- er gehoert ans Ende, wo er haengen bleibt.
+        // Tarifhinweise stehen dabei, weil sie an Prospeos Tarifen haengen,
+        // nicht an unseren: Technik und Stellen ab Starter, Traffic ab Pro
+        // (siehe lib/prospeo-query.ts im App-Repo).
+        id: "prospeo",
+        label: "Anlass",
+        title: "Über Prospeos Entscheider-Datenbank",
+        body: "Wie Apollo — Firma, Entscheider und geprüfte Adresse in einem Lauf. Der Unterschied sind die Filter: wer gerade Stellen ausschreibt, wie viel Website-Traffic eine Firma hat und wie schnell er wächst.",
+        points: [
+          "Schreibt gerade Stellen aus für eine bestimmte Rolle",
+          "Website-Traffic: Besuche pro Monat, Wachstum, Herkunftsländer",
+          "Eingesetzte Technik, erkannt über Wappalyzer",
+          "Umsatzklasse und Mitarbeiterzahl",
+          "Trefferzahl vorab prüfbar, bevor Credits fließen",
+        ],
+      },
     ],
   },
-  // Steht bewusst DIREKT hinter den drei Suchwegen: sobald dort "Hunter" und
+  // Steht bewusst DIREKT hinter den vier Suchwegen: sobald dort "Hunter" und
   // "Apollo" stehen, denkt jeder Fachkundige sofort "dann nehme ich die doch
   // gleich selbst". Diesen Einwand erst in der FAQ zu beantworten, hiesse ihn
   // die halbe Seite lang unbeantwortet mitlaufen zu lassen.
@@ -389,6 +412,62 @@ const de = {
     },
     note: "Frostbreaker ersetzt weder Apollo noch Instantly. Es ersetzt die Handarbeit dazwischen, und das CRM-Abo, das sonst als drittes dazukäme.",
   },
+  // ══════════════════════════════════════════════════════════════════════
+  // DIE VERGLEICHSTABELLE, neu am 2026-08-06. Ersetzt an Ort und Stelle den
+  // Abschnitt #ergaenzt ("Dann ist das hier kein Ersatz").
+  //
+  // Zu jeder Zeile der Beleg, damit sie beim naechsten Nachpruefen nicht neu
+  // recherchiert werden muss. "false" heisst durchgehend "gehoert nicht zum
+  // Leistungsumfang", nicht "funktioniert schlecht" -- nur der erste Satz
+  // ist belegbar, und nur er steht als "—" in der Tabelle.
+  // ══════════════════════════════════════════════════════════════════════
+  compare: {
+    eyebrow: "Vier Abos, oder dieses eine",
+    title: "Vier Abos machten das gestern. Eines macht es heute.",
+    body: "Jede Zeile ist ein Arbeitsschritt zwischen „ich kenne meine Nische“ und „ich habe einen Termin“. Die Frage ist nicht, welches Werkzeug das beste ist, sondern wie viele davon ihr braucht.",
+    featureHeader: "Arbeitsschritt",
+    tools: ["Apollo", "Hunter", "Instantly", "Pipedrive"],
+    usLabel: "Frostbreaker",
+    yes: "vorhanden",
+    no: "gehört nicht zum Leistungsumfang",
+    partial: "teilw.",
+    onlyUs: "Gibt es sonst in keinem der vier.",
+    alsoIn: "Auch in:",
+    rows: [
+      // Apollo und Hunter sind beides Entscheider- bzw. Firmendatenbanken --
+      // das ist ihr Kerngeschaeft und steht so auf der Seite darueber.
+      { id: "find", label: "Entscheider mit Namen und Rolle finden", tools: [true, true, false, false] },
+      { id: "verify", label: "E-Mail-Adresse verifizieren", tools: [true, true, false, false] },
+      // Kein Anbieter schreibt einen Aufhaenger aus recherchierten Fakten
+      // ZUR FIRMA. Platzhalter-Serienbriefe ({{company}}) koennen alle -- die
+      // Zeile ist deshalb bewusst eng formuliert.
+      { id: "opener", label: "Einen eigenen Aufhänger je Lead aus recherchierten Fakten schreiben", tools: [false, false, false, false] },
+      { id: "copycheck", label: "Den Text prüfen, bevor er rausgeht: Länge, Spam-Wörter, KI-Klang, nur ein CTA", tools: [false, false, false, false] },
+      { id: "send", label: "Kampagne und Sequenz starten", tools: [false, false, true, false] },
+      // Instantly waermt Postfaecher auf und zeigt Zustellbarkeit an, haelt
+      // den Start aber nicht auf. "Erzwingen" ist der Unterschied, deshalb
+      // teilw. statt vorhanden.
+      { id: "gate", label: "Den Start aufhalten, wenn SPF, DKIM oder die Bounce-Quote nicht stimmen", tools: [false, false, "partial", false] },
+      { id: "linkedin", label: "LinkedIn-Nachricht je Kontakt fertig einsetzen", tools: [false, false, false, false] },
+      // Pipedrive hat Aktivitaeten und Anrufe, aber ohne den recherchierten
+      // Kontext aus der Kaltakquise -- deshalb teilw.
+      { id: "calls", label: "Anrufliste mit Nummer, Kontext und Fälligkeit", tools: [false, false, false, "partial"] },
+      { id: "chain", label: "E-Mail, LinkedIn und Telefon als eine Kette mit genau einem nächsten Schritt", tools: [false, false, false, false] },
+      // Instantly kann A/B testen und zeigt die Antwortquote je Fassung. Bis
+      // zum TERMIN reicht die Zuordnung dort nicht -- genau darum teilw.,
+      // nicht "—". Die Zeile waere sonst angreifbar.
+      { id: "outcomes", label: "Eine Antwort ihrer Textfassung zuordnen, bis zum Termin statt bis zur Antwort", tools: [false, false, "partial", false] },
+      { id: "crm", label: "Deals, Aufgaben und Notizen am Kontakt", tools: [false, false, false, true] },
+    ],
+    closing:
+      "Apollo liefert Adressen. Instantly liefert Zustellung. Beide sagen dir, was passiert ist, keiner sagt dir warum. Frostbreaker schreibt den Text, verschickt ihn und sieht die Antwort darauf. Und wenn du bei Apollo bleiben willst: bleib dabei. Deine Schlüssel, dein Konto, kein Aufschlag.",
+    footnote:
+      "Stand August 2026, geprüft an den öffentlichen Leistungsbeschreibungen der Anbieter. „Teilweise“ heißt: vorhanden, aber nicht in dem Umfang, den die Zeile beschreibt. Ein Strich heißt „gehört nicht zum Leistungsumfang“, nicht „funktioniert schlecht“.",
+  },
+  // Wird seit dem 2026-08-06 nicht mehr gerendert: der Abschnitt #ergaenzt ist
+  // der Vergleichstabelle gewichen. Der Inhalt bleibt bis Stufe 5 stehen, weil
+  // die FAQ-Antwort auf "ich habe Apollo doch schon" daraus entsteht
+  // (POSITIONIERUNG.md Abschnitt 7).
   worksWith: {
     eyebrow: "Ergänzt euren Stack",
     title: "Ihr nutzt Apollo, Hunter oder Instantly bereits? Dann ist das hier kein Ersatz",
@@ -981,8 +1060,16 @@ const de = {
     },
   },
   heroIllustration: {
-    badgeStat: "2×",
-    badgeLabel: "mehr Antworten durch echte Personalisierung",
+    // War "2× mehr Antworten durch echte Personalisierung". Die Zahl war durch
+    // nichts gedeckt -- im eigenen Konto stehen 0,4 %, und ein "2×" braucht
+    // einen Vergleichswert, den wir nie gemessen haben. Der Ersatz beschreibt
+    // die Mechanik statt ein Ergebnis: drei Kanaele sind nachzaehlbar, eine
+    // Antwortquote ist es nicht.
+    // Kurz halten: die Pille steht ueber dem Hero-Bild und ist rund 110px
+    // breit. Die Aufzaehlung der drei Kanaele stand hier zuerst mit drin und
+    // brach mitten in "E-Mail" um -- sie steht ohnehin in der Kachel darunter.
+    badgeStat: "3",
+    badgeLabel: "Kanäle, eine Kette",
     inboxLabel: "Antworten, live aus dem Dashboard",
     liveLabel: "Live",
     replies: [
@@ -1003,7 +1090,6 @@ const de = {
     hoursUnit: "Std.",
     hoursLabel: "manuelle Recherche gespart / Monat",
     laborLabel: "Arbeitszeit-Gegenwert dafür",
-    meetingsLabel: "Meetings / Monat rechnerisch",
     planPrefix: "Dafür passt der",
     apiCostPrefix: "ca.",
   },
@@ -1016,24 +1102,44 @@ const de = {
     // vermeiden will.
     trialNote: "14 Tage kostenlos, keine Kreditkarte nötig, bis zu 500 qualifizierte Leads. Monatlich kündbar, keine Vertragslaufzeit.",
   },
+  // ══════════════════════════════════════════════════════════════════════
+  // NEUER HERO, 2026-08-06 (POSITIONIERUNG.md Abschnitt 2, Variante A)
+  //
+  // Vorher stand hier: "Mindestens 1.000 E-Mails pro Woche an echte
+  // Entscheider, vollautomatisch." Diese Zeile war erprobt und wurde am
+  // 05.08. bewusst behalten. Sie faellt jetzt aus drei Gruenden, die alle
+  // erst mit der neuen Positionierung entstanden sind:
+  //
+  //   1. Sie ist EINKANALIG. LinkedIn und Telefon kommen nicht vor -- genau
+  //      die beiden sind aber der Grund, warum die Kette funktioniert.
+  //   2. "Vollautomatisch" widerspricht dem eigenen Produkt. Der Torwart
+  //      haelt dich absichtlich auf, bei LinkedIn drueckst DU den
+  //      Absendeknopf (keine API, siehe #kanaele), angerufen wird von Hand.
+  //      Die Seite erklaert das zwei Abschnitte weiter unten ausfuehrlich.
+  //   3. Sie verkauft VOLUMEN -- und der Abschnitt "Wo die Grenze liegt"
+  //      nennt Volumen selbst als Engpass. 1.000/Woche sind ~143/Tag, also
+  //      mindestens drei aufgewaermte Postfaecher.
+  //
+  // Der Dreiklang "finden - erreichen - gewinnen" ist gleichzeitig die
+  // Gliederung der ganzen Startseite. Wer nur die Ueberschrift liest, hat
+  // die Struktur darunter schon verstanden.
+  //
+  // Der Eyebrow nannte vorher einen Rang ("Die #1 Plattform"). Auf einer
+  // Seite, deren Unterscheidungsmerkmal Ehrlichkeit ist, ist ein unbelegter
+  // Superlativ dieselbe Sorte Problem wie die 5-%-Quote im Rechner. Er nennt
+  // jetzt die Kategorie statt des Rangs -- und die Kategorie ist das, was
+  // wir besetzen wollen.
+  // ══════════════════════════════════════════════════════════════════════
   hero: {
-    eyebrow: "Die #1 Plattform für kalte B2B-Kundengewinnung",
-    h1Pre: "Mindestens ",
-    // Stand vorher auf 5.000 pro Woche. Das war durch keinen Plan gedeckt:
-    // der Starter-Plan deckelt bei 5.000 qualifizierten Leads pro MONAT
-    // (lib/plans.ts, STARTER_MONTHLY_LEAD_CAP), und der guenstigste
-    // Instantly-Tarif erlaubt 5.000 Mails pro Monat. 1.000 pro Woche sind
-    // dagegen sauber gedeckt: 4.000 im Monat liegen unter beiden Grenzen.
-    h1Accent: "1.000 E-Mails pro Woche",
-    // "kontaktieren" statt "anschreiben": die App liefert neben der geprueften
-    // E-Mail auch die Telefonnummer aus dem oeffentlichen Eintrag, der Kanal
-    // ist also Sache der Kundin. Die Nummer wird bewusst nicht als "verifiziert"
-    // bezeichnet -- geprueft werden nur E-Mail-Adressen.
-    h1Post: " an echte Entscheider, vollautomatisch.",
-    // Bewusst kurz und nutzenorientiert: die Erklaerung, wie das funktioniert,
-    // liefern die Sektionen darunter. Wer im Hero schon alles erklaert bekommt,
-    // hat keinen Grund weiterzulesen.
-    body: "Kein info@, kein Ratespiel, keine vier Abos. Nur Ansprechpartner mit Namen und geprüfter Adresse, jede Woche neu.",
+    eyebrow: "Kaltakquise von der Nische bis zum Kunden",
+    h1Pre: "Entscheider finden. Auf ",
+    h1Accent: "jedem Kanal",
+    h1Post: " erreichen. Zu Kunden machen.",
+    // Nennt alle drei Kanaele beim Namen, weil genau das der Unterschied zu
+    // jedem Sendetool ist. "Geprueft" bezieht sich bewusst nur auf die
+    // E-Mail-Adresse -- Telefonnummern kommen aus oeffentlichen Eintraegen
+    // und werden nicht verifiziert.
+    body: "Ein Werkzeug von der Nische bis zum Auftrag: geprüfte Entscheider, ein eigener Aufhänger für jeden, die E-Mail-Sequenz, die LinkedIn-Nachricht und die Telefonnummer. Alles im selben CRM.",
     factBadge: "Agenturen bekommen im Schnitt 42 € zurück für jeden Euro, den sie in E-Mails stecken.",
     factSource: "Quelle: Litmus, State of Email 2025",
     screenshotAlt: "Frostbreaker Leads-Tabelle mit Firmen-Logos, Kontaktanzahl und E-Mail-Status",
@@ -1043,11 +1149,72 @@ const de = {
       // Suchmaschinen bekamen dadurch andere Werte als das Auge.
       "Frostbreaker-Dashboard: 890 gefundene Firmen, 2.430 Kontakte, 1.612 mit E-Mail-Adresse, rund 324 Stunden gesparte Recherche bei 36,90 US-Dollar Abfragekosten",
   },
+  // Die drei Kacheln standen vorher auf gesparten Stunden, API-Kosten und
+  // "1 Tool statt vier Abos" -- zwei von drei fuehrten mit dem Preis, direkt
+  // unter einer Ueberschrift, die von Kundengewinnung handelt. Die Zahlen
+  // waren richtig, aber sie belegten das falsche Versprechen. Jetzt belegen
+  // sie den Dreiklang der Ueberschrift: finden, erreichen, alles an einem
+  // Ort. Alle drei sind nachzaehlbar, keine ist eine Prognose.
+  // Die Kostenzahlen sind nicht verloren -- sie stehen im Rechner und ziehen
+  // mit dem #kosten-Abschnitt nach /preise (POSITIONIERUNG.md Abschnitt 7).
   heroStats: [
-    { value: "≈ 133 Std.", label: "manuelle Recherche gespart, pro 1.000 Leads" },
-    { value: "65 €", label: "tatsächliche API-Kosten dafür" },
-    { value: "1 Tool", label: "statt vier einzelne Abos" },
+    { value: "4 Suchwege", label: "Karten, Firmen, Entscheider, Anlass" },
+    { value: "3 Kanäle", label: "E-Mail, LinkedIn, Telefon, als eine Kette" },
+    { value: "1 Login", label: "statt vier einzelne Abos" },
   ],
+  // Die Systemkarte, neu am 2026-08-06. Steht als zweiter Abschnitt, direkt
+  // nach dem Hero: sie beantwortet "wie gross ist das hier?" auf einen Blick,
+  // bevor irgendetwas im Einzelnen erklaert wird.
+  systemMap: {
+    eyebrow: "Das ganze Bild",
+    title: "Von der Nische bis zum Auftrag, ohne das Werkzeug zu wechseln",
+    body: "Drei Stufen und eine Rückkopplung. Alles darunter auf dieser Seite ist eine dieser vier Kästen im Einzelnen.",
+    stages: [
+      {
+        id: "find",
+        label: "Finden",
+        title: "Entscheider statt info@-Adressen",
+        items: ["Google Maps", "Hunter", "Apollo", "Prospeo"],
+        note: "Name, Rolle, geprüfte E-Mail-Adresse, Telefonnummer und LinkedIn-Profil, soweit öffentlich vorhanden.",
+      },
+      {
+        id: "contact",
+        label: "Kontaktieren",
+        title: "Drei Kanäle als eine Kette",
+        items: [
+          "E-Mail-Sequenz mit eigenem Aufhänger je Lead",
+          "LinkedIn-Nachricht, fertig eingesetzt",
+          "Anrufliste mit Nummer und Vorbereitung",
+        ],
+        note: "Wer nicht antwortet, rutscht zum nächsten Kanal. Wer antwortet, fällt sofort raus.",
+      },
+      {
+        id: "win",
+        label: "Gewinnen",
+        title: "Alles landet im selben CRM",
+        items: [
+          "Deals und gewichtete Prognose",
+          "Aufgaben mit genau einem nächsten Schritt",
+          "Notizen, Anrufe und Mails in einer Historie",
+        ],
+        note: "Der Anruf von gestern und die Mail von vor drei Wochen stehen untereinander, nicht in zwei Werkzeugen.",
+      },
+    ],
+    arrows: ["Name, Adresse, Nummer", "Antwort, Termin"],
+    loop: {
+      label: "Und beim nächsten Mal besser",
+      title: "Was zurückkommt, schreibt die nächste Kampagne",
+      body: "Jede Antwort trägt den Schritt und die Textfassung, auf die sie geantwortet hat. Damit lässt sich beantworten, was ein Sendetool nicht wissen kann und eine Lead-Datenbank nie zu sehen bekommt: welcher Text tatsächlich Termine gebracht hat.",
+      items: [
+        "Fassung A gegen B",
+        "Wochentag",
+        "Uhrzeit",
+        "Lead-Liste",
+        "Copy-Check vor dem Senden",
+        "SPF, DKIM, DMARC",
+      ],
+    },
+  },
   leadSource: {
     eyebrow: "Die Lead-Quelle macht den Unterschied",
     title: "Findet die kleinen, lokalen Unternehmen, die in klassischen Lead-Datenbanken kaum auftauchen",
@@ -1844,9 +2011,9 @@ const en: typeof de = {
     ctaBody: "14 days free, no credit card required, cancel monthly.",
   },
   searchModes: {
-    eyebrow: "Three routes to a lead",
+    eyebrow: "Four routes to a lead",
     title: "Places, companies or decision-makers, searched in the same tool",
-    body: "You decide per search where the companies come from. All three routes end up in the same list, the same enrichment and the same sending.",
+    body: "You decide per search where the companies come from. All four routes end up in the same list, the same enrichment and the same sending.",
     modes: [
       {
         id: "local",
@@ -1887,6 +2054,19 @@ const en: typeof de = {
           "Up to 1,000 leads per search",
         ],
       },
+      {
+        id: "prospeo",
+        label: "Trigger",
+        title: "Via Prospeo's decision-maker database",
+        body: "Like Apollo — company, decision maker and verified address in one run. The difference is the filters: who is hiring right now, how much website traffic a company gets, and how fast it is growing.",
+        points: [
+          "Currently hiring for a specific role",
+          "Website traffic: visits per month, growth, countries of origin",
+          "Technology in use, detected via Wappalyzer",
+          "Revenue band and headcount",
+          "Match count checkable up front, before credits are spent",
+        ],
+      },
     ],
   },
   dailyDiff: {
@@ -1925,6 +2105,36 @@ const en: typeof de = {
       ],
     },
     note: "Frostbreaker replaces neither Apollo nor Instantly. It replaces the manual work between them, and the CRM subscription that would otherwise be the third one.",
+  },
+  compare: {
+    eyebrow: "Four subscriptions, or this one",
+    title: "Four subscriptions did this yesterday. One does it today.",
+    body: "Every row is a step of work between “I know my niche” and “I have a meeting booked”. The question is not which tool is best, but how many of them you need.",
+    featureHeader: "Step of work",
+    tools: ["Apollo", "Hunter", "Instantly", "Pipedrive"],
+    usLabel: "Frostbreaker",
+    yes: "included",
+    no: "not part of the product",
+    partial: "partly",
+    onlyUs: "None of the four does this.",
+    alsoIn: "Also in:",
+    rows: [
+      { id: "find", label: "Find decision-makers with a name and a role", tools: [true, true, false, false] },
+      { id: "verify", label: "Verify the email address", tools: [true, true, false, false] },
+      { id: "opener", label: "Write an opener per lead from researched facts", tools: [false, false, false, false] },
+      { id: "copycheck", label: "Check the copy before it goes out: length, spam words, AI tone, one CTA only", tools: [false, false, false, false] },
+      { id: "send", label: "Start the campaign and the sequence", tools: [false, false, true, false] },
+      { id: "gate", label: "Hold the start back when SPF, DKIM or the bounce rate are off", tools: [false, false, "partial", false] },
+      { id: "linkedin", label: "Prepare the LinkedIn message per contact, ready to send", tools: [false, false, false, false] },
+      { id: "calls", label: "Call list with number, context and due date", tools: [false, false, false, "partial"] },
+      { id: "chain", label: "Email, LinkedIn and phone as one chain with exactly one next step", tools: [false, false, false, false] },
+      { id: "outcomes", label: "Attribute a reply to its copy version, through to the meeting rather than the reply", tools: [false, false, "partial", false] },
+      { id: "crm", label: "Deals, tasks and notes on the contact", tools: [false, false, false, true] },
+    ],
+    closing:
+      "Apollo delivers addresses. Instantly delivers deliverability. Both tell you what happened, neither tells you why. Frostbreaker writes the copy, sends it and sees the reply to it. And if you want to stay on Apollo: stay on Apollo. Your keys, your account, no markup.",
+    footnote:
+      "As of August 2026, checked against the providers' public product descriptions. “Partly” means: present, but not to the extent the row describes. A dash means “not part of the product”, not “works badly”.",
   },
   worksWith: {
     eyebrow: "Complements your stack",
@@ -2445,8 +2655,8 @@ const en: typeof de = {
     },
   },
   heroIllustration: {
-    badgeStat: "2×",
-    badgeLabel: "more replies through real personalization",
+    badgeStat: "3",
+    badgeLabel: "channels, one chain",
     inboxLabel: "Replies, live from the dashboard",
     liveLabel: "Live",
     replies: [
@@ -2467,7 +2677,6 @@ const en: typeof de = {
     hoursUnit: "hrs",
     hoursLabel: "manual research saved / month",
     laborLabel: "labor cost equivalent for that",
-    meetingsLabel: "meetings / month, calculated",
     planPrefix: "That fits the",
     apiCostPrefix: "approx.",
   },
@@ -2477,11 +2686,11 @@ const en: typeof de = {
     trialNote: "14 days free, no credit card required, up to 500 qualified leads. Cancel monthly, no contract.",
   },
   hero: {
-    eyebrow: "THE #1 PLATFORM FOR COLD B2B CLIENT ACQUISITION",
-    h1Pre: "Send at least ",
-    h1Accent: "1,000 emails a week",
-    h1Post: " to real decision-makers, fully automatically.",
-    body: "No info@, no guesswork, no four subscriptions. Just decision-makers with a name and a verified address, every week.",
+    eyebrow: "COLD OUTREACH FROM NICHE TO CLIENT",
+    h1Pre: "Find decision-makers. Reach them on ",
+    h1Accent: "every channel",
+    h1Post: ". Turn them into clients.",
+    body: "One tool from a niche to a signed deal: verified decision-makers, a personal opener for each one, the email sequence, the LinkedIn message and the phone number. All in the same CRM.",
     factBadge: "Agencies get an average of $42 back for every dollar they spend on email.",
     factSource: "Source: Litmus, State of Email 2025",
     screenshotAlt: "Frostbreaker leads table with company logos, contact count and email status",
@@ -2489,10 +2698,60 @@ const en: typeof de = {
       "Frostbreaker dashboard: 890 companies found, 2,430 contacts, 1,612 with an email address, around 324 hours of research saved at 36.90 US dollars in lookup cost",
   },
   heroStats: [
-    { value: "≈ 133 hrs", label: "manual research saved, per 1,000 leads" },
-    { value: "€65", label: "actual API cost for that" },
-    { value: "1 tool", label: "instead of four separate subscriptions" },
+    { value: "4 routes", label: "maps, companies, decision-makers, triggers" },
+    { value: "3 channels", label: "email, LinkedIn, phone, as one chain" },
+    { value: "1 login", label: "instead of four separate subscriptions" },
   ],
+  systemMap: {
+    eyebrow: "The whole picture",
+    title: "From a niche to a signed deal, without switching tools",
+    body: "Three stages and one feedback loop. Everything further down this page is one of those four boxes in detail.",
+    stages: [
+      {
+        id: "find",
+        label: "Find",
+        title: "Decision-makers, not info@ addresses",
+        items: ["Google Maps", "Hunter", "Apollo", "Prospeo"],
+        note: "Name, role, verified email address, phone number and LinkedIn profile, as far as they are publicly available.",
+      },
+      {
+        id: "contact",
+        label: "Contact",
+        title: "Three channels as one chain",
+        items: [
+          "Email sequence with its own opener per lead",
+          "LinkedIn message, already written out",
+          "Call list with number and prep",
+        ],
+        note: "Anyone who stays quiet moves to the next channel. Anyone who replies drops out immediately.",
+      },
+      {
+        id: "win",
+        label: "Win",
+        title: "Everything lands in the same CRM",
+        items: [
+          "Deals and a weighted forecast",
+          "Tasks with exactly one next step",
+          "Notes, calls and emails in one history",
+        ],
+        note: "Yesterday's call and the email from three weeks ago sit under one another, not in two tools.",
+      },
+    ],
+    arrows: ["Name, address, number", "Reply, meeting"],
+    loop: {
+      label: "And better next time",
+      title: "What comes back writes the next campaign",
+      body: "Every reply carries the step and the copy version it answered. That answers what a sending tool cannot know and a lead database never gets to see: which copy actually booked meetings.",
+      items: [
+        "Version A against B",
+        "Weekday",
+        "Time of day",
+        "Lead list",
+        "Copy check before sending",
+        "SPF, DKIM, DMARC",
+      ],
+    },
+  },
   leadSource: {
     eyebrow: "The lead source makes the difference",
     title: "Finds the small, local businesses that barely show up in classic lead databases",

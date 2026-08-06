@@ -11,19 +11,30 @@ import { SectionHeading } from "./_ui";
 const MIN_PER_LEAD = 8;
 const HOURLY_RATE = 45;
 const API_COST_PER_LEAD = 0.065;
-const REPLY_RATE = 0.05;
-const POSITIVE_RATE = 0.25;
-const MEETING_RATE = 0.5;
 const STARTER_CAP = 5000;
 
+// Die Termin-Zeile ist am 2026-08-06 ersatzlos entfallen, mit ihr die drei
+// Konstanten REPLY_RATE (5 %), POSITIVE_RATE (25 %) und MEETING_RATE (50 %).
+// Der Grund ist keine Geschmacksfrage: im eigenen Produktivkonto standen an
+// dem Tag 755 kontaktierte Personen, 3 Antworten und 1 Termin -- also 0,4 %
+// statt 5 %, Faktor 12. Der Rechner hat damit "≈ 6,3 Termine/Monat"
+// versprochen, waehrend zwei Bildschirme weiter unten der Abschnitt
+// "Was wir nicht behaupten" erklaert, dass wir unter 30 Kontakten nicht
+// einmal eine Prozentzahl zeigen. Von zwei widersprechenden Zahlen glaubt
+// man keine, und die geschenkte war die, die uns von den Wettbewerbern
+// unterscheidet.
+//
+// Was bleibt, ist rechnerisch gedeckt: 8 Min/Lead Recherche, 45 EUR/Std.,
+// 6,5 Ct API-Kosten je Lead. Wer die Termin-Prognose zurueckholen will,
+// braucht dafuer eine Quote aus einer nennbaren Quelle -- nicht diese drei
+// Zahlen wieder.
 function useCalc(leads: number) {
   return useMemo(() => {
     const hours = (leads * MIN_PER_LEAD) / 60;
     const laborValue = hours * HOURLY_RATE;
     const apiCost = leads * API_COST_PER_LEAD;
-    const meetings = leads * REPLY_RATE * POSITIVE_RATE * MEETING_RATE;
     const plan = leads <= STARTER_CAP ? "starter" : "agency";
-    return { hours, laborValue, apiCost, meetings, plan };
+    return { hours, laborValue, apiCost, plan };
   }, [leads]);
 }
 
@@ -34,8 +45,9 @@ function useCalc(leads: number) {
  * ersten CTA bekommt der Besucher sofort einen auf die eigene Zielgroesse
  * zugeschnittenen, live berechneten Wert zurueck -- niedrigere Huerde,
  * hoehere Relevanz. Nutzt exakt dieselbe, an anderer Stelle bereits offen
- * gelegte Methodik (8 Min/Lead, 45EUR/Std., 6,5 Ct API-Kosten/Lead,
- * 5%/25%/50%-Funnel), keine neue Zahl wird erfunden.
+ * gelegte Methodik (8 Min/Lead, 45EUR/Std., 6,5 Ct API-Kosten/Lead), keine
+ * neue Zahl wird erfunden -- siehe den Kommentar an useCalc dazu, warum die
+ * Termin-Prognose nicht mehr dabei ist.
  */
 export function SavingsCalculator() {
   const { t, lang } = useT();
@@ -77,7 +89,10 @@ export function SavingsCalculator() {
             </div>
           </div>
 
-          <div className="mt-8 grid gap-4 sm:grid-cols-3">
+          {/* Zwei Kacheln statt drei, seit die Termin-Prognose raus ist. Bewusst
+              sm:grid-cols-2 und nicht weiterhin -cols-3 mit einer Luecke: eine
+              leere dritte Spalte liest sich als fehlender Inhalt. */}
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
             <div className="rounded-2xl bg-panel2 p-5">
               <p className="font-display text-2xl font-semibold text-ink">{fmt(calc.hours)} {c.hoursUnit}</p>
               <p className="mt-1 text-xs text-mute">{c.hoursLabel}</p>
@@ -85,10 +100,6 @@ export function SavingsCalculator() {
             <div className="rounded-2xl bg-panel2 p-5">
               <p className="font-display text-2xl font-semibold text-ink">{fmt(calc.laborValue)} €</p>
               <p className="mt-1 text-xs text-mute">{c.laborLabel}</p>
-            </div>
-            <div className="rounded-2xl bg-panel2 p-5">
-              <p className="font-display text-2xl font-semibold text-ink">≈ {fmt(calc.meetings, 1)}</p>
-              <p className="mt-1 text-xs text-mute">{c.meetingsLabel}</p>
             </div>
           </div>
 
