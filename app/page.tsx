@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { Logo, CTAButton, CTAGroup, NavDropdown, SectionHeading, FactBox, StatTile, BOOKING_URL } from "./_ui";
+import { Logo, CTAButton, CTAGroup, NavDropdown, SectionHeading, FactBox, BOOKING_URL } from "./_ui";
 // SuppressionMockup, DeliverabilityMockup und CampaignMockup lagen im
 // Abschnitt "Mehr als nur Leads finden", der am 2026-08-06 von der
 // Startseite verschwunden ist. Die Komponenten bleiben fuer /funktionen.
@@ -131,9 +131,24 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="fade-up mt-14 grid gap-x-10 gap-y-6 border-t border-edge2/70 pt-8 sm:grid-cols-3">
-            {t.heroStats.map((s) => (
-              <StatTile key={s.label} value={s.value} label={s.label} />
+          {/* Die drei Versprechen. Hier standen bis zum 2026-08-06 drei
+              Kennzahlen: "4 Suchwege / 3 Kanaele / 1 Login". Alles
+              nachzaehlbar, alles Mechanik -- und niemand kauft vier Suchwege.
+              Auf der wichtigsten Flaeche der wichtigsten Seite muss stehen,
+              was man davon hat.
+
+              Kein grosses Zahlenelement mehr (StatTile), sondern Ueberschrift
+              plus Satz: ein Versprechen braucht einen Nebensatz, eine Zahl
+              nicht. Jedes der drei ist weiter unten mit einem Bild belegt --
+              Rundgang, Kette, "Nach Text". */}
+          <div className="fade-up mt-14 grid gap-x-10 gap-y-8 border-t border-edge2/70 pt-8 sm:grid-cols-3">
+            {t.heroPromises.map((p) => (
+              <div key={p.title}>
+                <p className="font-display text-lg font-semibold leading-snug tracking-[-0.015em] text-ink">
+                  {p.title}
+                </p>
+                <p className="mt-1.5 text-sm leading-relaxed text-soft">{p.body}</p>
+              </div>
             ))}
           </div>
 

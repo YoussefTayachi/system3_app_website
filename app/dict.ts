@@ -1252,28 +1252,28 @@ const de = {
       note: "Antworten aus Instantly werden automatisch einsortiert.",
     },
   },
+  // Nachgebaut, nicht abfotografiert. Zahlen erfunden, aber an den Schwellen
+  // gewaehlt, die das eigene Konto zeigt -- deshalb steht die
+  // Beispiel-Kennzeichnung sichtbar im Rahmen.
   heroIllustration: {
-    // War "2× mehr Antworten durch echte Personalisierung". Die Zahl war durch
-    // nichts gedeckt -- im eigenen Konto stehen 0,4 %, und ein "2×" braucht
-    // einen Vergleichswert, den wir nie gemessen haben. Der Ersatz beschreibt
-    // die Mechanik statt ein Ergebnis: drei Kanaele sind nachzaehlbar, eine
-    // Antwortquote ist es nicht.
-    // Kurz halten: die Pille steht ueber dem Hero-Bild und ist rund 110px
-    // breit. Die Aufzaehlung der drei Kanaele stand hier zuerst mit drin und
-    // brach mitten in "E-Mail" um -- sie steht ohnehin in der Kachel darunter.
-    badgeStat: "3",
-    badgeLabel: "Kanäle, eine Kette",
-    inboxLabel: "Antworten, live aus dem Dashboard",
-    liveLabel: "Live",
-    replies: [
-      { name: "Markus Huber", company: "Schreinerei Huber", message: "Klingt gut, erzählt mir mehr!", status: "reply" },
-      { name: "Julia Berger", company: "Zahnarztpraxis Berger", message: "Ja, gerne! Passt euch Dienstag 14 Uhr?", status: "meeting" },
-      { name: "Elena Roth", company: "Café Sonnenblick", message: "Interessant, wann könnt ihr kurz telefonieren?", status: "reply" },
-      { name: "Sophie Wagner", company: "Fitnessstudio Wagner", message: "Super, schickt mir gerne einen Termin!", status: "meeting" },
+    inboxLabel: "Posteingang",
+    exampleLabel: "Beispielansicht",
+    featured: {
+      initials: "JB",
+      name: "Julia Berger",
+      company: "Zahnarztpraxis Berger",
+      message: "„Ja, gerne! Passt euch Dienstag um 14 Uhr? Schickt mir vorher kurz, worum es genau geht.“",
+      outcome: "Termin gebucht",
+      when: "Di, 14:00",
+      dealNote: "Deal angelegt · 2.400 € · nächster Schritt: Angebot bis Freitag",
+    },
+    others: [
+      { initials: "MH", name: "Markus Huber", company: "Schreinerei Huber", status: "reply" },
+      { initials: "SW", name: "Sophie Wagner", company: "Fitnessstudio Wagner", status: "meeting" },
     ],
     replyLabel: "Antwort",
-    meetingLabel: "Meeting gebucht",
-    moreLabel: "+ 12 weitere Antworten diese Woche",
+    meetingLabel: "Termin",
+    footer: "Alle Postfächer in einem Eingang, alle fünf Minuten abgeglichen. Jede Antwort wird eingestuft und dem Kontakt zugeordnet.",
   },
   calculator: {
     eyebrow: "Interaktiv",
@@ -1342,18 +1342,28 @@ const de = {
       // Suchmaschinen bekamen dadurch andere Werte als das Auge.
       "Frostbreaker-Dashboard: 890 gefundene Firmen, 2.430 Kontakte, 1.612 mit E-Mail-Adresse, rund 324 Stunden gesparte Recherche bei 36,90 US-Dollar Abfragekosten",
   },
-  // Die drei Kacheln standen vorher auf gesparten Stunden, API-Kosten und
-  // "1 Tool statt vier Abos" -- zwei von drei fuehrten mit dem Preis, direkt
-  // unter einer Ueberschrift, die von Kundengewinnung handelt. Die Zahlen
-  // waren richtig, aber sie belegten das falsche Versprechen. Jetzt belegen
-  // sie den Dreiklang der Ueberschrift: finden, erreichen, alles an einem
-  // Ort. Alle drei sind nachzaehlbar, keine ist eine Prognose.
-  // Die Kostenzahlen sind nicht verloren -- sie stehen im Rechner und ziehen
-  // mit dem #kosten-Abschnitt nach /preise (POSITIONIERUNG.md Abschnitt 7).
-  heroStats: [
-    { value: "4 Suchwege", label: "Karten, Firmen, Entscheider, Anlass" },
-    { value: "3 Kanäle", label: "E-Mail, LinkedIn, Telefon, als eine Kette" },
-    { value: "1 Login", label: "statt vier einzelne Abos" },
+  // Die drei Zeilen unter dem Hero. Sie standen bis zum 2026-08-06 auf
+  // "4 Suchwege / 3 Kanaele / 1 Login" -- alles nachzaehlbar, aber alles
+  // MECHANIK. Niemand kauft vier Suchwege. Auf der wichtigsten Flaeche der
+  // wichtigsten Seite muss stehen, was man davon hat.
+  //
+  // Bewusst weiter ohne erfundene Ergebniszahl: eine Terminquote koennten wir
+  // nicht belegen, und die Seite hat gerade erst den Rechner davon befreit.
+  // Ein Versprechen in Worten ist etwas anderes als eine erfundene Zahl --
+  // jedes der drei ist unten auf der Seite mit einem Bild belegt.
+  heroPromises: [
+    {
+      title: "Vom Suchbegriff zum Termin",
+      body: "Finden, anschreiben, nachfassen, abschließen. Ohne das Werkzeug zu wechseln und ohne eine CSV dazwischen.",
+    },
+    {
+      title: "Kein Lead bleibt liegen",
+      body: "Schweigt die Mail, kommt LinkedIn. Schweigt LinkedIn, kommt der Anruf. Wer antwortet, fällt sofort raus.",
+    },
+    {
+      title: "Du weißt, was Termine bringt",
+      body: "Welche Textfassung wirklich funktioniert hat, kann dir sonst niemand sagen — wir schreiben sie und sehen die Antwort.",
+    },
   ],
   // Die Systemkarte, neu am 2026-08-06. Steht als zweiter Abschnitt, direkt
   // nach dem Hero: sie beantwortet "wie gross ist das hier?" auf einen Blick,
@@ -3019,19 +3029,24 @@ const en: typeof de = {
     },
   },
   heroIllustration: {
-    badgeStat: "3",
-    badgeLabel: "channels, one chain",
-    inboxLabel: "Replies, live from the dashboard",
-    liveLabel: "Live",
-    replies: [
-      { name: "Markus Huber", company: "Huber Joinery", message: "Sounds great, tell me more!", status: "reply" },
-      { name: "Julia Berger", company: "Berger Dental Practice", message: "Yes, happy to! Does Tuesday 2pm work?", status: "meeting" },
-      { name: "Elena Roth", company: "Café Sonnenblick", message: "Interesting, when can we hop on a call?", status: "reply" },
-      { name: "Sophie Wagner", company: "Wagner Fitness Studio", message: "Great, feel free to send me a time!", status: "meeting" },
+    inboxLabel: "Inbox",
+    exampleLabel: "Example view",
+    featured: {
+      initials: "JB",
+      name: "Julia Berger",
+      company: "Berger Dental Practice",
+      message: "“Yes, happy to! Does Tuesday at 2pm work? Send me a short note on what it is about beforehand.”",
+      outcome: "Meeting booked",
+      when: "Tue, 2:00pm",
+      dealNote: "Deal created · €2,400 · next step: proposal by Friday",
+    },
+    others: [
+      { initials: "MH", name: "Markus Huber", company: "Huber Joinery", status: "reply" },
+      { initials: "SW", name: "Sophie Wagner", company: "Wagner Fitness Studio", status: "meeting" },
     ],
     replyLabel: "Reply",
-    meetingLabel: "Meeting booked",
-    moreLabel: "+ 12 more replies this week",
+    meetingLabel: "Meeting",
+    footer: "Every mailbox in one inbox, synced every five minutes. Every reply is classified and attached to the contact.",
   },
   calculator: {
     eyebrow: "Interactive",
@@ -3061,10 +3076,19 @@ const en: typeof de = {
     dashboardAlt:
       "Frostbreaker dashboard: 890 companies found, 2,430 contacts, 1,612 with an email address, around 324 hours of research saved at 36.90 US dollars in lookup cost",
   },
-  heroStats: [
-    { value: "4 routes", label: "maps, companies, decision-makers, triggers" },
-    { value: "3 channels", label: "email, LinkedIn, phone, as one chain" },
-    { value: "1 login", label: "instead of four separate subscriptions" },
+  heroPromises: [
+    {
+      title: "From a search term to a meeting",
+      body: "Find, write, follow up, close. Without switching tools and without a CSV in between.",
+    },
+    {
+      title: "No lead is left behind",
+      body: "Email goes quiet, LinkedIn follows. LinkedIn goes quiet, the call does. Anyone who replies drops out at once.",
+    },
+    {
+      title: "You know what books meetings",
+      body: "Which copy version actually worked is something nobody else can tell you — we write it and we see the reply.",
+    },
   ],
   systemMap: {
     eyebrow: "The whole picture",

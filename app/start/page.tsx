@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { Logo, CTAGroup, StatTile, FactBox } from "../_ui";
+import { Logo, CTAGroup, FactBox } from "../_ui";
 import { AgencyMockup } from "../_mockups";
 import { useT } from "../language-provider";
 
@@ -33,9 +33,19 @@ export default function StartPage() {
           <span className="text-xs text-mute">{s.ctaNote}</span>
         </div>
 
-        <div className="mt-10 grid gap-3 sm:grid-cols-3">
-          {t.heroStats.map((stat) => (
-            <StatTile key={stat.label} value={stat.value} label={stat.label} />
+        {/* Bis zum 2026-08-06 standen hier dieselben drei Kennzahlen wie auf
+            der Startseite (4 Suchwege / 3 Kanaele / 1 Login). Die sind dort
+            durch drei Versprechen ersetzt worden, weil niemand Mechanik kauft
+            -- und auf dieser Seite gilt das erst recht: wer hier landet, ist
+            schon einen Klick weiter und will wissen, was er davon hat. */}
+        <div className="mt-10 grid gap-6 text-left sm:grid-cols-3">
+          {t.heroPromises.map((p) => (
+            <div key={p.title}>
+              <p className="font-display text-base font-semibold leading-snug tracking-[-0.015em] text-ink">
+                {p.title}
+              </p>
+              <p className="mt-1.5 text-sm leading-relaxed text-soft">{p.body}</p>
+            </div>
           ))}
         </div>
       </section>
