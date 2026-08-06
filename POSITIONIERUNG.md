@@ -478,10 +478,13 @@ müssen.
 
 **Der Haupt-CTA zeigt auf die Testphase** (Entscheidung vom 2026-08-06).
 
-**Stufe 5 — Feinschliff.**
-FAQ nimmt die verschobenen Einwände auf, `/funktionen` bekommt die Tiefe,
-Ankerlinks und Nav-Dropdown nachziehen, DE/EN gegenprüfen, Breakpoints
-375/768/1024/1440 durchgehen.
+**Stufe 5 — Feinschliff.** ✅ **umgesetzt am 2026-08-06** (`37fa949`)
+
+`/funktionen` hat die fünf freigewordenen Bilder aufgenommen, `#integrationen`
+ist ein Streifen, drei Einwände sind in der FAQ, 167 Zeilen toter Text sind
+raus. Nav und Anker sind nachgezogen, DE und EN geprüft.
+
+**Damit ist die Umstellung abgeschlossen.**
 
 **Jede Textänderung ist doppelt:** `dict.ts` hält DE und EN. Englisch ist
 Standard. Ein Abschnitt, der nur auf Deutsch existiert, fällt im Live-Betrieb
@@ -549,7 +552,22 @@ wurden — sie gehören hierher, nicht in eine Datei daneben:
 4. **`DashboardMockup` ist von der Startseite verschwunden.** Die Komponente
    bleibt in `_app-mockups.tsx`; `/funktionen` ist der naheliegende neue Ort.
 
-### Was nach Stufe 4 offen ist
+### Was nach Stufe 5 noch offen ist
+
+1. **Der Hero-Badge „Fakt: 42 € Rückfluss je Euro" (Litmus)** ist die letzte
+   fremde Zahl im oberen Bildschirm. Sie ist belegt und mit Quelle versehen,
+   aber sie handelt von E-Mail-Marketing allgemein, nicht von Kaltakquise —
+   und sie steht direkt neben drei Kacheln, die die eigene Mechanik zählen.
+2. **Die Testimonials sind unangetastet** (Entscheidung vom 05.08.). Sie
+   stehen jetzt in einer Seite, deren übrige Zahlen alle belegbar sind.
+3. **`/preise` und `/fuer-agenturen` tragen noch die alte Sprache.** Auf der
+   Startseite heißt es nicht mehr „mehr als Lead-Suche"; dort schon.
+4. **Keine Messung.** Sechs Stufen an einem Tag heißt: wenn die Zahlen sich
+   ändern, ist nicht unterscheidbar, was gewirkt hat. Das war die
+   ursprüngliche Begründung dafür, den Hero zu behalten — sie gilt jetzt für
+   die ganze Seite. Von hier an einzeln ändern.
+
+### Was nach Stufe 4 offen war *(erledigt in Stufe 5)*
 
 1. **`#integrationen` ist noch ein voller Abschnitt.** Abschnitt 7 sieht einen
    schmalen Logostreifen plus FAQ-Antwort vor. Der BYOK-Nebensatz steht
