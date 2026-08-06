@@ -173,7 +173,12 @@ Konkret, in der Reihenfolge, in der es mich getroffen hätte:
 Fünf Stufen, nach Wirkung je Aufwand sortiert. Stufe 1 und 2 sind die, die
 den Unterschied machen.
 
-### Stufe 1 — Den Widerspruch auflösen *(halber Tag, kein Design)*
+### Stufe 1 — Den Widerspruch auflösen ✅ **umgesetzt am 2026-08-06** (`68ccd5b`)
+
+Statt der geplanten Entschärfung wurde daraus die stärkste Zeile des
+Abschnitts: **„Behalte Apollo. Behalte Instantly. Kündige dein CRM."** Dazu
+die ehrliche Rechnung als eigener Block — das CRM kostet je Sitzplatz, unser
+Preis nicht. Bei sechs Leuten im Team dreht das die Rechnung um.
 
 Die Aussage „vier Abos werden eins" ist auf der Seite nicht haltbar und
 beschädigt genau die Glaubwürdigkeit, die der Rest aufbaut.
@@ -206,7 +211,14 @@ Das ist die Stufe, die ich nicht bauen kann und die am meisten bringt.
 **Was ich ausdrücklich nicht vorschlage:** Logos oder Zitate erfinden. Auf
 einer Seite mit dem Abschnitt „Was wir nicht behaupten" wäre das der Tod.
 
-### Stufe 3 — Die Testphase reparieren *(Produkt, nicht Website)*
+### Stufe 3 — Die Testphase reparieren ✅ **teilweise umgesetzt am 2026-08-06** (`6ca876a`)
+
+Die Testphase ist ersatzlos entfallen, jeder CTA führt auf das Gespräch, und
+die FAQ nennt die zwei bis vier Wochen Warmup als Grund. **Offen bleibt das
+Demo-Konto** — ohne einen Weg, das Produkt vor dem Gespräch zu sehen, bleibt
+Befund 3.5 bestehen.
+
+#### Ursprünglicher Plan
 
 Der 14-Tage-Test ist kürzer als das Warmup. Drei Wege, einer reicht:
 
@@ -220,7 +232,14 @@ Mein Vorschlag: **Demo-Konto plus geführter Einstieg.** Beides adressiert
 denselben Engpass, und der geführte Einstieg ist in deiner Phase ohnehin
 wertvoller als Selbstbedienung.
 
-### Stufe 4 — Für Agenturen sichtbar machen *(1 Tag)*
+### Stufe 4 — Für Agenturen sichtbar machen ✅ **umgesetzt am 2026-08-06** (`6ca876a`)
+
+Eyebrow, Abschnittsposition und Agenturpreis sind erledigt. **Die offene
+Frage steht weiter offen:** ist die Agentur *die* Zielgruppe oder eine von
+mehreren? Die Seite hat sich jetzt festgelegt — falls das zu eng ist, braucht
+sie zwei Einstiege.
+
+#### Ursprünglicher Plan
 
 | Wo | Änderung |
 |---|---|
