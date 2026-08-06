@@ -445,10 +445,19 @@ Drei Eingriffe, kein einziger neuer Rundgang.
 sechs Schritte in DE und EN texten. Abschnitt 3 einsetzen.
 → *Danach versteht jemand, der die App nie gesehen hat, was sie tut.*
 
-**Stufe 3 — Die vier Säulen.**
-Abschnitte 4–7: Kanäle, Kette, CRM, Verbesserung. `TimingMockup`,
-`InboxMockup`.
-→ *Danach ist jede Säule mit einem Bild belegt.*
+**Stufe 3 — Die vier Säulen.** ✅ **umgesetzt am 2026-08-06** (`083535f`)
+
+Drei der vier als eigene Abschnitte: `#kanaele` (neu), `#kette` (Sequenz
+ergänzt, umbenannt), `#crm` (aus `postSend`, umbenannt). Der frühere
+Telefon-Abschnitt ist in `#kanaele` aufgegangen — 23 Abschnitte sind 22.
+
+**Die vierte Säule hat bewusst keinen eigenen Abschnitt bekommen.** Die
+Messung wird bereits dreifach getragen: vom Hero-Bild, von der
+Rückkopplungsschleife der Systemkarte und von Schritt 6 des Rundgangs.
+`#ehrlich` bleibt unangetastet — *„eine Zahl, die nichts bedeutet, wird nicht
+gezeigt"* ist der Grund, warum man den Zahlen darüber glaubt, und eine vierte
+Erzählung derselben Sache wäre Wiederholung statt Nachdruck. `TimingMockup`
+und `InboxMockup` entfallen damit ebenfalls.
 
 **Stufe 4 — Aufräumen.**
 `scaling` raus, die fünf Beschaffungsabschnitte zu Abschnitt 10 verdichten,
