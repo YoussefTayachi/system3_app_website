@@ -590,12 +590,17 @@ const de = {
           body: "Personalisierter Aufhänger, geprüfte Adresse, deine eigenen Postfächer.",
         },
         {
-          day: "Tag 3 · keine Antwort",
+          day: "Tag 3, 7 und 12",
+          title: "Drei Follow-ups laufen nach",
+          body: "Dieselbe Sequenz, dieselben Postfächer. Wer antwortet, fällt sofort raus.",
+        },
+        {
+          day: "Tag 15 · keine Antwort",
           title: "LinkedIn-Aufgabe erscheint",
           body: "Nur wo ein Profil hinterlegt ist. Landet in der LinkedIn-Liste, nicht in einer Tabelle.",
         },
         {
-          day: "Tag 7 · immer noch still",
+          day: "Tag 20 · immer noch still",
           title: "Der Anruf steht in der Anrufliste",
           body: "Nur wo eine Nummer da ist, und erst wenn die LinkedIn-Aufgabe erledigt ist.",
         },
@@ -739,9 +744,72 @@ const de = {
       },
     ],
   },
+  // Die drei Kanaele als EIN Abschnitt, neu am 2026-08-06. Zieht den frueheren
+  // Telefon-Abschnitt (phone) hier herein: der stand als eigener Abschnitt
+  // weit unten, und LinkedIn kam ueberhaupt nur als eine Zeile in der Kette
+  // vor. Wenn der Hauptpunkt der App ist, dass man Entscheider ueber drei
+  // Kanaele erreicht, muessen die drei nebeneinander und gleich breit stehen.
+  //
+  // Aufbau je Karte bewusst "Was die App tut" / "Was du tust": die einzige
+  // ehrliche Art, den Unterschied zwischen den Kanaelen zu zeigen, ohne bei
+  // LinkedIn und Telefon eine Automatik zu behaupten, die es nicht gibt und
+  // aus gutem Grund nicht geben wird.
+  channels: {
+    eyebrow: "Drei Kanäle, ein Kontakt",
+    title: "Nicht drei Werkzeuge nebeneinander, sondern ein Vorgang",
+    body:
+      "Der Unterschied zwischen den Kanälen ist nicht, wie gut sie sind, sondern wie viel davon von allein läuft. Bei zweien bereitet die App alles vor und du drückst den letzten Knopf — das ist Absicht, nicht Lücke.",
+    appLabel: "Was die App tut",
+    youLabel: "Was du tust",
+    cards: [
+      {
+        id: "email",
+        label: "E-Mail",
+        title: "Sequenz mit eigenem Aufhänger je Kontakt",
+        app: [
+          "Adresse geprüft, bevor sie in die Kampagne kommt",
+          "Ein Aufhänger je Kontakt aus der Recherche zur Firma",
+          "Erstmail und drei Follow-ups über deine eigenen Postfächer",
+        ],
+        you: "Nichts. Dieser Kanal läuft von allein.",
+      },
+      {
+        id: "linkedin",
+        label: "LinkedIn",
+        title: "Die Nachricht steht, bevor du LinkedIn öffnest",
+        app: [
+          "Dieselben Platzhalter wie in der Mail-Kampagne",
+          "Derselbe Aufhänger, schon erzeugt und bezahlt",
+          "Mehrere benannte Vorlagen, eine davon als Standard",
+        ],
+        you: "Kopieren, Profil öffnen, einfügen, senden.",
+      },
+      {
+        id: "phone",
+        label: "Telefon",
+        title: "Vorbereitet statt kalt erwischt",
+        app: [
+          "Nummer aus dem öffentlichen Eintrag, kein Nachschlagen",
+          "Rolle, Firmenzusammenfassung und Gesprächsnotiz daneben",
+          "Nach Dringlichkeit sortiert: überfällig, heute, später",
+        ],
+        you: "Anrufen. Das Ergebnis bleibt am Kontakt.",
+      },
+    ],
+    protectionLabel: "Warum LinkedIn und Telefon nicht von allein senden",
+    protectionBody:
+      "LinkedIn bietet für Nachrichten keine Schnittstelle. Jedes Werkzeug, das trotzdem automatisch sendet, steuert einen Browser fern, verstößt gegen die Nutzungsbedingungen und riskiert die Sperrung — bei einem verkauften Produkt also die Konten der Kunden. Wir bereiten alles vor, den Absendeknopf drückst du. Dieselbe Haltung wie beim Torwart: lieber ein Schritt von Hand als ein verbranntes Konto.",
+    phoneNote:
+      "Angerufen wird mit deinem eigenen Telefon: Frostbreaker ist keine Telefonanlage und rechnet keine Gesprächsminuten ab.",
+  },
+  // Eyebrow und Titel geaendert am 2026-08-06: der Abschnitt #kanaele direkt
+  // darueber traegt jetzt "Drei Kanaele, ein Kontakt". Zwei benachbarte
+  // Abschnitte, die beide mit "Drei Kanaele" anfangen, liest man als
+  // Wiederholung und ueberspringt den zweiten. Dieser hier handelt nicht von
+  // den Kanaelen, sondern von der Reihenfolge zwischen ihnen.
   chain: {
-    eyebrow: "Drei Kanäle, eine Kette",
-    title: "Kein anderer hat E-Mail, LinkedIn und Telefon an einem Strang",
+    eyebrow: "Die Kette",
+    title: "Kein Lead bleibt liegen, und keiner bekommt zwei Aufgaben",
     body:
       "Instantly kennt dein Telefon nicht. Lemlist hat kein CRM. Pipedrive hat keine Kampagne. Hier ist es ein Vorgang, und er läuft, ohne dass du daran denken musst.",
     points: [
@@ -1480,10 +1548,15 @@ const de = {
     reportLinkLabel: "Report-Link für den Endkunden",
     copyLabel: "Kopieren",
   },
+  // Hiess bis zum 2026-08-06 "Mehr als Lead-Suche. Die meisten Tools hoeren
+  // auf, sobald die Mail raus ist." Das war gegen die Wettbewerber formuliert
+  // statt fuer die eigene Sache -- und ein Abschnitt, der mit dem Mangel
+  // anderer beginnt, verkauft den Mangel, nicht das Produkt. Er traegt jetzt
+  // die vierte Saeule: was aus einer Antwort wird.
   postSend: {
-    eyebrow: "Mehr als Lead-Suche",
-    title: "Die meisten Tools hören auf, sobald die Mail raus ist. Frostbreaker nicht.",
-    body: "Über eine Verbindung zu eurem Versandtool fließen Antworten, Bounces und Meeting-Ergebnisse zurück in dasselbe Dashboard, in dem die Leads gefunden wurden.",
+    eyebrow: "Nach dem Ja",
+    title: "Aus einer Antwort wird ein Vorgang, nicht eine Mail im Postfach",
+    body: "Jede Antwort wird eingeordnet und dem Kontakt zugeordnet. Daraus entsteht ein Deal mit Wert und Wahrscheinlichkeit, eine Aufgabe mit Fälligkeit, eine Notiz nach dem Anruf. Der Anruf von gestern und die Mail von vor drei Wochen stehen in derselben Historie.",
     features: [
       { id: "replies", title: "Ein Posteingang für alle Postfächer", body: "Alle verbundenen Postfächer laufen in einem Posteingang zusammen, alle fünf Minuten synchronisiert, mit Zähler für Ungelesenes. Jede Antwort kommt mit vollem Text an, die KI ordnet sie ein (interessiert, kein Interesse, Rückfrage), und geantwortet wird direkt aus der App. Instantly müsst ihr dafür nicht mehr öffnen." },
       { id: "dashboard", title: "Umsatz-Forecast statt nur Öffnungsrate", body: "Offene Pipeline, mit der Abschlusswahrscheinlichkeit gewichteter Forecast, gewonnen und verloren der letzten 30 Tage, dazu fällige und überfällige Aufgaben. Für die meisten Agenturen ersetzt das ein eigenes CRM-Abo." },
@@ -2383,12 +2456,17 @@ const en: typeof de = {
           body: "Personalised icebreaker, verified address, your own mailboxes.",
         },
         {
-          day: "Day 3 · no reply",
+          day: "Days 3, 7 and 12",
+          title: "Three follow-ups run after it",
+          body: "The same sequence, the same mailboxes. Anyone who replies drops out immediately.",
+        },
+        {
+          day: "Day 15 · no reply",
           title: "LinkedIn task appears",
           body: "Only where a profile is on file. Lands in the LinkedIn list, not in a spreadsheet.",
         },
         {
-          day: "Day 7 · still quiet",
+          day: "Day 20 · still quiet",
           title: "The call goes into the call list",
           body: "Only where a number exists, and only once the LinkedIn task is done.",
         },
@@ -2520,9 +2598,57 @@ const en: typeof de = {
       },
     ],
   },
+  channels: {
+    eyebrow: "Three channels, one contact",
+    title: "Not three tools side by side, but one process",
+    body:
+      "The difference between the channels is not how good they are, but how much of each runs on its own. On two of them the app prepares everything and you press the last button — that is deliberate, not a gap.",
+    appLabel: "What the app does",
+    youLabel: "What you do",
+    cards: [
+      {
+        id: "email",
+        label: "Email",
+        title: "A sequence with its own opener per contact",
+        app: [
+          "Address verified before it enters the campaign",
+          "One opener per contact, from the research on that company",
+          "First mail and three follow-ups through your own mailboxes",
+        ],
+        you: "Nothing. This channel runs on its own.",
+      },
+      {
+        id: "linkedin",
+        label: "LinkedIn",
+        title: "The message is written before you open LinkedIn",
+        app: [
+          "The same placeholders as in the email campaign",
+          "The same opener, already generated and paid for",
+          "Several named templates, one of them the default",
+        ],
+        you: "Copy, open the profile, paste, send.",
+      },
+      {
+        id: "phone",
+        label: "Phone",
+        title: "Prepared instead of caught cold",
+        app: [
+          "Number from the public listing, no looking it up",
+          "Role, company summary and call note next to it",
+          "Sorted by urgency: overdue, today, later",
+        ],
+        you: "Call. The outcome stays on the contact.",
+      },
+    ],
+    protectionLabel: "Why LinkedIn and phone do not send on their own",
+    protectionBody:
+      "LinkedIn offers no API for messages. Any tool that sends anyway drives a browser remotely, breaks the terms of service and risks suspension — in a product you sell, that means your customers' accounts. We prepare everything, you press send. The same stance as the gate: better one step by hand than a burnt account.",
+    phoneNote:
+      "You dial with your own phone: Frostbreaker is not a phone system and does not bill call minutes.",
+  },
   chain: {
-    eyebrow: "Three channels, one chain",
-    title: "Nobody else has email, LinkedIn and phone on one thread",
+    eyebrow: "The chain",
+    title: "No lead is left behind, and none gets two tasks at once",
     body:
       "Instantly does not know your phone. Lemlist has no CRM. Pipedrive has no campaign. Here it is one process, and it runs without you remembering it.",
     points: [
@@ -3140,9 +3266,9 @@ const en: typeof de = {
     copyLabel: "Copy",
   },
   postSend: {
-    eyebrow: "More than lead search",
-    title: "Most tools stop once the email is sent. Frostbreaker doesn't.",
-    body: "Through a connection to your sending tool, replies, bounces and meeting outcomes flow back into the same dashboard where the leads were found.",
+    eyebrow: "After the yes",
+    title: "A reply becomes a case, not an email in an inbox",
+    body: "Every reply is classified and attached to the contact. It becomes a deal with a value and a probability, a task with a due date, a note after the call. Yesterday's call and the email from three weeks ago sit in the same history.",
     features: [
       { id: "replies", title: "One inbox for every mailbox", body: "All connected mailboxes come together in one inbox, synced every five minutes, with an unread counter. Every reply arrives with full text, AI classifies it (interested, not interested, question), and you reply straight from the app. You no longer need to open Instantly for this." },
       { id: "dashboard", title: "Revenue forecast, not just open rate", body: "Open pipeline, a forecast weighted by close probability, won and lost over the last 30 days, plus due and overdue tasks. For most agencies that replaces a separate CRM subscription." },

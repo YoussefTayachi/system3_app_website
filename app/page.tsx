@@ -630,16 +630,25 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Post-send loop */}
-      <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <div className="grid gap-10 lg:grid-cols-5 lg:items-start">
-          <div className="lg:col-span-2">
-            <SectionHeading eyebrow={t.postSend.eyebrow} title={t.postSend.title} />
-            <p className="max-w-md text-sm leading-relaxed text-soft sm:text-base">{t.postSend.body}</p>
-          </div>
-          <div className="lg:col-span-3">
+      {/* Das CRM. Hiess bis zum 2026-08-06 "Mehr als Lead-Suche" und war damit
+          gegen die Wettbewerber formuliert statt fuer die eigene Sache. Der
+          Abschnitt traegt jetzt die vierte Saeule: was aus einer Antwort wird.
+
+          Zwei Bilder nebeneinander statt eines, weil das GENAU die Aussage
+          ist: links kommt eine Antwort herein und wird eingeordnet, rechts
+          steht, was daraus zu tun ist. Ein Bild allein zeigt nur die Haelfte
+          des Vorgangs. Die Anrufliste ist hier frei geworden, seit der
+          Telefon-Abschnitt in #kanaele aufgegangen ist. */}
+      <section id="crm" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        <SectionHeading eyebrow={t.postSend.eyebrow} title={t.postSend.title} />
+        <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.postSend.body}</p>
+        <div className="grid items-start gap-8 lg:grid-cols-2">
+          <Reveal>
             <PostSendMockup />
-          </div>
+          </Reveal>
+          <Reveal delay={80}>
+            <CallListMockup />
+          </Reveal>
         </div>
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {t.postSend.features.map((f) => (
@@ -689,6 +698,77 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Die drei Kanaele, neu am 2026-08-06 (POSITIONIERUNG.md Abschnitt 5).
+          Zieht den frueheren Abschnitt #telefon hier herein -- der stand als
+          eigener Abschnitt weit unten, und LinkedIn kam ueberhaupt nur als
+          eine Zeile in der Kette vor. Wenn der Hauptpunkt der App ist, dass
+          man Entscheider ueber drei Kanaele erreicht, muessen die drei
+          nebeneinander und gleich breit stehen.
+          Der Anker telefon bleibt erhalten, damit alte Links funktionieren. */}
+      <section id="kanaele" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
+        <span id="telefon" className="block scroll-mt-20" aria-hidden />
+        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+          <SectionHeading eyebrow={t.channels.eyebrow} title={t.channels.title} />
+          <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.channels.body}</p>
+
+          {/* Drei gleich breite Spalten, items-stretch: unterschiedlich hohe
+              Karten wuerden als Rangfolge gelesen, und der ganze Punkt ist,
+              dass die Kanaele gleichwertig sind. */}
+          <div className="grid items-stretch gap-6 md:grid-cols-3">
+            {t.channels.cards.map((c, i) => (
+              <Reveal key={c.id} delay={i * 80} className="h-full">
+                <div className="flex h-full flex-col rounded-2xl border border-edge/60 bg-panel p-6">
+                  <span className="inline-flex self-start rounded-full bg-ink px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-surface">
+                    {c.label}
+                  </span>
+                  <h3 className="font-display mt-3 text-xl font-semibold leading-snug tracking-[-0.015em] text-ink">
+                    {c.title}
+                  </h3>
+
+                  <p className="mt-5 text-[11px] font-medium uppercase tracking-[0.12em] text-faint">
+                    {t.channels.appLabel}
+                  </p>
+                  <ul className="mt-2.5 space-y-2">
+                    {c.app.map((a) => (
+                      <li key={a} className="flex items-start gap-2.5 text-sm leading-relaxed text-soft">
+                        <CheckIcon />
+                        {a}
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* "Was du tust" steht bewusst am Fuss jeder Karte und in der
+                      Akzentfarbe. Bei E-Mail ist die Zeile leer ("nichts"),
+                      und genau dieser Unterschied zwischen den drei Karten ist
+                      die Aussage -- er waere weg, wenn man die Zeile bei den
+                      automatischen Kanaelen einfach weglaesst. */}
+                  <div className="mt-auto border-t border-edge/70 pt-5">
+                    <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-faint">
+                      {t.channels.youLabel}
+                    </p>
+                    <p className="mt-2 border-l-2 border-coral pl-3 text-sm leading-relaxed text-ink">{c.you}</p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          {/* Der Satz, der die Handarbeit zum Verkaufsargument macht. Steht
+              unter den Karten und nicht in der LinkedIn-Karte: er gilt fuer
+              zwei der drei Kanaele, und als Fussnote in einer Spalte wuerde
+              ihn niemand lesen. */}
+          <Reveal className="mt-8">
+            <div className="rounded-2xl border border-edge2/70 bg-panel p-6">
+              <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-ink">
+                {t.channels.protectionLabel}
+              </p>
+              <p className="mt-2.5 max-w-[80ch] text-sm leading-relaxed text-soft">{t.channels.protectionBody}</p>
+              <p className="mt-3 text-xs leading-relaxed text-mute">{t.channels.phoneNote}</p>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       <section id="kette" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <SectionHeading eyebrow={t.chain.eyebrow} title={t.chain.title} />
         <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.chain.body}</p>
@@ -731,30 +811,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="telefon" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
-        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-          <SectionHeading eyebrow={t.phone.eyebrow} title={t.phone.title} />
-          <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.phone.body}</p>
-
-          <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
-            <Reveal>
-              <CallListMockup />
-            </Reveal>
-            <div className="space-y-4">
-              {t.phone.points.map((p, i) => (
-                <Reveal key={p.title} delay={i * 80}>
-                  <div className="rounded-2xl border border-edge/60 bg-panel p-5">
-                    <h3 className="font-display text-lg font-semibold tracking-[-0.015em] text-ink">{p.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-soft">{p.body}</p>
-                  </div>
-                </Reveal>
-              ))}
-              {/* Klarstellung, damit niemand eine Telefonanlage erwartet. */}
-              <p className="text-xs leading-relaxed text-mute">{t.phone.note}</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Hier stand bis zum 2026-08-06 der eigene Telefon-Abschnitt. Sein
+          Inhalt steckt jetzt in der dritten Spalte von #kanaele, samt der
+          Klarstellung, dass Frostbreaker keine Telefonanlage ist. Ein Kanal,
+          der als eigener Abschnitt zwischen zwei anderen Themen steht, wirkt
+          wie ein Nachtrag; nebeneinander wirken die drei gleichwertig.
+          Die CallListMockup ist damit auf der Startseite frei und uebernimmt
+          im CRM-Abschnitt die Aufgaben-Ansicht. */}
 
       {/* Die zwei Gruende, aus denen ein Interessent NICHT kauft: "zu
           kompliziert fuer mich" und "rechtlich zu heikel". Beide sind in der
