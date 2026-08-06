@@ -12,10 +12,15 @@ const de = {
     // Absolute Pfade mit Anker, damit die Eintraege auch von Unterseiten aus
     // funktionieren -- ein reines "#produkt" wuerde auf /funktionen ins Leere
     // zeigen.
+    // Ziele am 2026-08-06 nachgezogen. Der Workflow-Abschnitt (#produkt) und
+    // der Personalisierungs-Abschnitt sind von der Startseite verschwunden --
+    // beides steckt jetzt im Rundgang bzw. auf /funktionen. Ein Nav-Eintrag,
+    // der ins Leere zeigt, ist schlimmer als keiner.
     produktItems: [
       { label: "Alle Funktionen", href: "/funktionen" },
-      { label: "Workflow", href: "/#produkt" },
-      { label: "Personalisierung", href: "/#personalisierung" },
+      { label: "Rundgang", href: "/#rundgang" },
+      { label: "Drei Kanäle", href: "/#kanaele" },
+      { label: "Personalisierung", href: "/funktionen#personalize" },
       { label: "Integrationen", href: "/#integrationen" },
     ],
     // "Funktionen" als eigenes Dropdown statt eines einzelnen Links: jeder
@@ -290,12 +295,49 @@ const de = {
   // Hiess bis zur Apollo-Integration "twoWays". Der Name ist mitgewandert,
   // weil ein Schluessel, der "zwei" heisst und drei Eintraege haelt, beim
   // naechsten Ausbau garantiert jemanden in die Irre fuehrt.
+  // Die vier Beschaffungs-Themen, die am 2026-08-06 ihre eigenen Abschnitte
+  // verloren haben (Technologie-Filter, lokale Betriebe, keine info@-Adressen,
+  // Adresspruefung). Sie standen als vier volle Abschnitte zwischen Hero und
+  // Produkt -- gemeinsam mit den Suchwegen waren das fuenf Abschnitte ueber
+  // Beschaffung, also vier zu viel. Als kurze Karten unter den Suchwegen
+  // bleiben sie belegbar, ohne die Gewichtung der Seite zu kippen.
+  // Die Tiefe dazu gehoert auf /funktionen.
+  sourcesExtra: {
+    title: "Was mit jeder Suche mitläuft",
+    linkLabel: "Alles im Einzelnen auf der Funktionsseite",
+    items: [
+      {
+        id: "tech",
+        label: "Technologie-Filter",
+        title: "Firmen an ihrer Technik finden, nicht an Stichwörtern",
+        body: "Ein Stichwort trifft, worüber eine Firma redet. Die eingesetzte Technik zeigt, was sie betreibt: ein Shopify-Shop hat Shopify im Quelltext, egal was auf der Über-uns-Seite steht.",
+      },
+      {
+        id: "local",
+        label: "Lokale Betriebe",
+        title: "Auch die, die in keiner B2B-Datenbank stehen",
+        body: "Klassische Datenbanken bauen auf LinkedIn-Profilen auf. Wer keins pflegt, existiert dort nicht. Über Google Places ist praktisch jeder Betrieb mit Adresse zu finden.",
+      },
+      {
+        id: "person",
+        label: "Keine info@-Adressen",
+        title: "Jeder Lead ist eine Person, die man erreichen kann",
+        body: "Adressen wie info@, office@ oder kontakt@ werden aussortiert. In die Lead-Liste kommt nur, was eindeutig einer Person zugeordnet ist.",
+      },
+      {
+        id: "verify",
+        label: "Adressprüfung",
+        title: "Geprüft, bevor eine Adresse der Domain schadet",
+        body: "Eine ungültige Adresse kostet nicht einen Lead, sie kostet Ruf. Die Prüfung läuft automatisch vor jedem Versand, ohne zweites Werkzeug.",
+      },
+    ],
+  },
   searchModes: {
     // Seit dem 2026-08-05 vier statt drei Wege: Prospeo ist in der App live
     // (SEARCH_SOURCE_LABELS im App-Repo kennt maps, corporate, apollo,
     // prospeo). "Drei Wege" stand hier noch, als der vierte schon lief.
-    eyebrow: "Vier Wege zum Lead",
-    title: "Orte, Firmen oder Entscheider, im selben Werkzeug gesucht",
+    eyebrow: "Woher die Leads kommen",
+    title: "Vier Wege, ein Ergebnis: Menschen mit Namen und geprüfter Adresse",
     body: "Ihr entscheidet pro Suche, woher die Firmen kommen. Alle vier Wege münden in dieselbe Liste, dieselbe Anreicherung und denselben Versand.",
     modes: [
       {
@@ -946,7 +988,9 @@ const de = {
       playbookLabel: "Branchen-Playbook",
       playbookValue: "Kein Playbook, frei eingestellt",
       // Diese Liste steuert die Reiterleiste der Suchmaske auf der Startseite.
-      tabs: ["Vor Ort (Google Maps)", "Firmen (Hunter)", "Entscheider (Apollo)"],
+      // Vierter Reiter seit dem 2026-08-06: die Karten darueber nennen vier
+      // Suchwege, das Bild zeigte weiter drei.
+      tabs: ["Vor Ort (Maps)", "Firmen (Hunter)", "Entscheider (Apollo)", "Anlass (Prospeo)"],
       fields: [
         { label: "Suchbegriff", value: "Fahrschule" },
         { label: "Ort", value: "Hamburg" },
@@ -962,7 +1006,9 @@ const de = {
     corporateSearch: {
       title: "Neue Suche",
       subtitle: "Branche, Größe und Land kombinieren.",
-      tabs: ["Vor Ort (Google Maps)", "Firmen (Hunter)", "Entscheider (Apollo)"],
+      // Vierter Reiter seit dem 2026-08-06: die Karten darueber nennen vier
+      // Suchwege, das Bild zeigte weiter drei.
+      tabs: ["Vor Ort (Maps)", "Firmen (Hunter)", "Entscheider (Apollo)", "Anlass (Prospeo)"],
       fields: [
         { label: "Branche", value: "Marketing Services" },
         { label: "Land", value: "Deutschland" },
@@ -978,7 +1024,9 @@ const de = {
     apolloSearch: {
       title: "Neue Suche",
       subtitle: "Zielgruppe, Entscheider und Technik in einem Schritt.",
-      tabs: ["Vor Ort (Google Maps)", "Firmen (Hunter)", "Entscheider (Apollo)"],
+      // Vierter Reiter seit dem 2026-08-06: die Karten darueber nennen vier
+      // Suchwege, das Bild zeigte weiter drei.
+      tabs: ["Vor Ort (Maps)", "Firmen (Hunter)", "Entscheider (Apollo)", "Anlass (Prospeo)"],
       fields: [
         { label: "Zielgruppe", value: "Nahrungsergänzung" },
         { label: "Firmengröße", value: "11–50" },
@@ -1998,8 +2046,9 @@ const en: typeof de = {
     produkt: "Product",
     produktItems: [
       { label: "All features", href: "/funktionen" },
-      { label: "Workflow", href: "/#produkt" },
-      { label: "Personalization", href: "/#personalisierung" },
+      { label: "Walkthrough", href: "/#rundgang" },
+      { label: "Three channels", href: "/#kanaele" },
+      { label: "Personalization", href: "/funktionen#personalize" },
       { label: "Integrations", href: "/#integrationen" },
     ],
     funktionenItems: [
@@ -2235,9 +2284,39 @@ const en: typeof de = {
     ctaTitle: "The fastest way to understand it is to try it",
     ctaBody: "14 days free, no credit card required, cancel monthly.",
   },
+  sourcesExtra: {
+    title: "What runs along with every search",
+    linkLabel: "All of it in detail on the features page",
+    items: [
+      {
+        id: "tech",
+        label: "Technology filter",
+        title: "Find companies by what they run, not by keywords",
+        body: "A keyword matches what a company talks about. The technology it runs shows what it actually operates: a Shopify shop has Shopify in its source code, whatever the about page says.",
+      },
+      {
+        id: "local",
+        label: "Local businesses",
+        title: "Including the ones no B2B database lists",
+        body: "Classic databases are built on LinkedIn profiles. A business that keeps none does not exist to them. Via Google Places, practically every business with an address is findable.",
+      },
+      {
+        id: "person",
+        label: "No info@ addresses",
+        title: "Every lead is a person you can actually reach",
+        body: "Addresses like info@, office@ or contact@ are filtered out. Only what is clearly assigned to a real person makes it into the leads list.",
+      },
+      {
+        id: "verify",
+        label: "Address check",
+        title: "Verified before an address hurts your domain",
+        body: "An invalid address does not cost you one lead, it costs reputation. The check runs automatically before every send, with no second tool.",
+      },
+    ],
+  },
   searchModes: {
-    eyebrow: "Four routes to a lead",
-    title: "Places, companies or decision-makers, searched in the same tool",
+    eyebrow: "Where the leads come from",
+    title: "Four routes, one result: people with a name and a verified address",
     body: "You decide per search where the companies come from. All four routes end up in the same list, the same enrichment and the same sending.",
     modes: [
       {
@@ -2767,7 +2846,7 @@ const en: typeof de = {
       subtitle: "Enter search term and location, the rest runs automatically.",
       playbookLabel: "Industry playbook",
       playbookValue: "No playbook, set manually",
-      tabs: ["On location (Google Maps)", "Companies (Hunter)", "Decision-makers (Apollo)"],
+      tabs: ["On location (Maps)", "Companies (Hunter)", "Decision-makers (Apollo)", "Triggers (Prospeo)"],
       fields: [
         { label: "Search term", value: "Driving school" },
         { label: "Location", value: "Hamburg" },
@@ -2783,7 +2862,7 @@ const en: typeof de = {
     corporateSearch: {
       title: "New search",
       subtitle: "Combine industry, size and country.",
-      tabs: ["On location (Google Maps)", "Companies (Hunter)", "Decision-makers (Apollo)"],
+      tabs: ["On location (Maps)", "Companies (Hunter)", "Decision-makers (Apollo)", "Triggers (Prospeo)"],
       fields: [
         { label: "Industry", value: "Marketing Services" },
         { label: "Country", value: "Germany" },
@@ -2799,7 +2878,7 @@ const en: typeof de = {
     apolloSearch: {
       title: "New search",
       subtitle: "Audience, decision makers and technology in one step.",
-      tabs: ["On location (Google Maps)", "Companies (Hunter)", "Decision-makers (Apollo)"],
+      tabs: ["On location (Maps)", "Companies (Hunter)", "Decision-makers (Apollo)", "Triggers (Prospeo)"],
       fields: [
         { label: "Audience", value: "Supplements" },
         { label: "Company size", value: "11–50" },

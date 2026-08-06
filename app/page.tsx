@@ -1,20 +1,21 @@
 "use client";
 import Image from "next/image";
-import { Logo, CTAButton, CTAGroup, NavDropdown, SectionHeading, FactBox, StatTile, GlossaryText, BOOKING_URL } from "./_ui";
-import { AgencyMockup, PostSendMockup, LocalReachMockup, QualifiedLeadAnimation, SuppressionMockup, DeliverabilityMockup, CampaignMockup } from "./_mockups";
+import { Logo, CTAButton, CTAGroup, NavDropdown, SectionHeading, FactBox, StatTile, BOOKING_URL } from "./_ui";
+// SuppressionMockup, DeliverabilityMockup und CampaignMockup lagen im
+// Abschnitt "Mehr als nur Leads finden", der am 2026-08-06 von der
+// Startseite verschwunden ist. Die Komponenten bleiben fuer /funktionen.
+import { AgencyMockup, PostSendMockup } from "./_mockups";
 // DashboardMockup ist seit dem 2026-08-06 nicht mehr auf der Startseite: das
 // erste Bild ist jetzt die Ansicht "Nach Text". Die Komponente bleibt in
 // _app-mockups.tsx, /funktionen ist der naheliegende neue Ort dafuer.
-import { UnifiedSearchMockup, TechFilterMockup, CallListMockup, LeadsTableMockup, MailboxesMockup, VerificationReportMockup } from "./_app-mockups";
-import { GateMockup, ChainMockup, EffectMockup } from "./_guard-mockups";
+import { UnifiedSearchMockup, CallListMockup, LeadsTableMockup } from "./_app-mockups";
+import { GateMockup, ChainMockup, EffectMockup, CopyOutcomesHighlight } from "./_guard-mockups";
 import { LeadCardStack } from "./_illustration";
-import { SavingsCalculator } from "./_calculator";
 import { SystemMap } from "./_system-map";
 import { AllInOneCompare } from "./_compare";
 import { StepWalkthrough } from "./_walkthrough";
-import { CopyOutcomesHighlight } from "./_guard-mockups";
 import { Reveal } from "./reveal";
-import { trustIcons, postSendIcons, agencyIcons, workflowIcons, featureIcons, integrationIcons, CheckIcon, CrossIcon } from "./_icons";
+import { trustIcons, postSendIcons, agencyIcons, integrationIcons, CheckIcon } from "./_icons";
 import { useT, LanguageToggle } from "./language-provider";
 
 /** Anbieter-Farben der vier Suchwege, deckungsgleich mit lib/search-source.ts
@@ -102,9 +103,18 @@ export default function Home() {
               <p className="mt-5 max-w-[46ch] text-base leading-relaxed text-soft sm:text-lg">{t.hero.body}</p>
               {/* Der Sekundaer-CTA war optisch fast so stark wie der primaere;
                   als reiner Textlink mit Pfeil bleibt er verfuegbar, ohne den
-                  Hauptweg zu verwaessern. */}
+                  Hauptweg zu verwaessern.
+
+                  Der Haupt-CTA zeigte bis zum 2026-08-06 auf den Rechner
+                  ("Berechne dein Sparpotenzial"). Das war als niedrigere
+                  Huerde gedacht und hat als Kostenargument gewirkt: der
+                  wichtigste Knopf der Seite fuehrte auf eine Ersparnis,
+                  waehrend die Ueberschrift darueber von Kundengewinnung
+                  handelt. Seit der Rechner mit dem Kosten-Abschnitt nach
+                  unten gerueckt ist, waere der Anker ohnehin der falsche
+                  Einstieg. Jetzt die Testphase. */}
               <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
-                <CTAButton href="#rechner" label={t.calculator.title} />
+                <CTAButton />
                 <a
                   href={BOOKING_URL}
                   className="group inline-flex items-center gap-1.5 text-sm font-medium text-soft transition-colors hover:text-ink"
@@ -194,117 +204,184 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Kostenbeweis: "BYOK, volle Kostentransparenz" war bisher eine
-          Eigenschaft ohne Zahl. Die Zahl ist das Argument, deshalb steht sie
-          vor dem Rechner.
-          Rueckt in Stufe 4 nach /preise -- ein Preisargument gehoert zur
-          Preisfrage, nicht vor das Produkt (POSITIONIERUNG.md Abschnitt 7). */}
-      <section id="kosten" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <SectionHeading eyebrow={t.costProof.eyebrow} title={t.costProof.title} />
-        <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">
-          {t.costProof.body}
-        </p>
-        <div className="grid gap-6 sm:grid-cols-3">
-          {t.costProof.columns.map((c, i) => (
-            <Reveal key={c.id} delay={i * 70}>
-              <div
-                className={
-                  "flex h-full flex-col rounded-2xl p-6 " +
-                  (c.highlight
-                    ? "border border-sky-300/70 bg-sky-50/50"
-                    : "border border-edge/60 bg-panel")
-                }
-              >
-                <p
-                  className={
-                    "text-[11px] font-medium uppercase tracking-[0.14em] " +
-                    (c.highlight ? "text-sky-700" : "text-faint")
-                  }
-                >
-                  {c.label}
-                </p>
-                <p className="font-display mt-4 text-[2.5rem] font-semibold leading-none tracking-[-0.03em] text-ink">
-                  {c.value}
-                </p>
-                <p className={"mt-2 text-sm " + (c.highlight ? "text-sky-900/80" : "text-soft")}>
-                  {c.unit}
-                </p>
-                <p
-                  className={
-                    "mt-4 border-t pt-4 text-xs leading-relaxed " +
-                    (c.highlight ? "border-sky-200/70 text-sky-900/60" : "border-edge/70 text-mute")
-                  }
-                >
-                  {c.note}
-                </p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-        <p className="mt-6 max-w-[70ch] text-xs leading-relaxed text-mute">{t.costProof.footnote}</p>
-      </section>
-
-      {/* Zwei Suchmodi. Die Seite argumentierte bisher nur gegen klassische
-          Datenbanken, obwohl die App den Corporate-Modus mitbringt -- wer
-          Unternehmen ab einer bestimmten Groesse sucht, fuehlte sich nicht
-          angesprochen. */}
-      <section className="border-y border-edge/60 bg-panel2">
+      {/* Die drei Kanaele, neu am 2026-08-06 (POSITIONIERUNG.md Abschnitt 5).
+          Zieht den frueheren Abschnitt #telefon hier herein -- der stand als
+          eigener Abschnitt weit unten, und LinkedIn kam ueberhaupt nur als
+          eine Zeile in der Kette vor. Wenn der Hauptpunkt der App ist, dass
+          man Entscheider ueber drei Kanaele erreicht, muessen die drei
+          nebeneinander und gleich breit stehen.
+          Der Anker telefon bleibt erhalten, damit alte Links funktionieren. */}
+      <section id="kanaele" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
+        <span id="telefon" className="block scroll-mt-20" aria-hidden />
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-          <SectionHeading eyebrow={t.searchModes.eyebrow} title={t.searchModes.title} />
-          <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.searchModes.body}</p>
+          <SectionHeading eyebrow={t.channels.eyebrow} title={t.channels.title} />
+          <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.channels.body}</p>
 
-          {/* Beide Wege bekommen dieselbe Flaeche und dieselbe Rahmung. Vorher
-              war "lokal" hervorgehoben und "corporate" die blasse Alternative
-              -- seit die Firmensuche ohne Abfragekosten pro Firma auskommt, ist
-              sie das nicht mehr.
-
-              Statt zweier Standbilder steht darunter eine einzige, bedienbare
-              Maske: das ist genau die Aussage der Sektion (ein Bildschirm, zwei
-              Quellen) und spart die Haelfte der Hoehe. */}
-          {/* Vier Karten seit Prospeo (2026-08-05). Bewusst 2x2 statt vier
-              nebeneinander: bei vier Spalten auf 1280px bleiben je ~270px, und
-              die Punktlisten brechen dann auf drei Zeilen je Punkt um. Und
-              bewusst nicht lg:grid-cols-3 wie vorher -- das ergaebe 3+1 mit
-              einer Luecke, die sich als fehlende Karte liest. */}
-          <div className="grid items-stretch gap-8 md:grid-cols-2">
-            {t.searchModes.modes.map((mode, i) => (
-              <Reveal key={mode.id} delay={i * 80} className="h-full">
+          {/* Drei gleich breite Spalten, items-stretch: unterschiedlich hohe
+              Karten wuerden als Rangfolge gelesen, und der ganze Punkt ist,
+              dass die Kanaele gleichwertig sind. */}
+          <div className="grid items-stretch gap-6 md:grid-cols-3">
+            {t.channels.cards.map((c, i) => (
+              <Reveal key={c.id} delay={i * 80} className="h-full">
                 <div className="flex h-full flex-col rounded-2xl border border-edge/60 bg-panel p-6">
-                  {/* Farbe je Anbieter, angelehnt an dessen Markenfarbe (Hunter
-                      orange, Apollo gelb, Maps blau) und identisch zu den
-                      Quellen-Chips in der App -- wer sich hier informiert und
-                      sich danach anmeldet, erkennt dieselbe Zuordnung wieder.
-                      Getoente Flaeche mit dunklem Text derselben Farbe statt
-                      farbiger Flaeche mit weissem Text: Apollos Markengelb
-                      traegt weisse Schrift nicht (rund 1,3:1). */}
-                  <span
-                    className={
-                      "inline-flex self-start rounded-full border px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide " +
-                      (MODE_BADGE[mode.id] ?? "border-edge2 bg-chip text-soft")
-                    }
-                  >
-                    {mode.label}
+                  <span className="inline-flex self-start rounded-full bg-ink px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-surface">
+                    {c.label}
                   </span>
-                  <h3 className="font-display mt-3 text-xl font-semibold tracking-[-0.015em] text-ink">
-                    {mode.title}
+                  <h3 className="font-display mt-3 text-xl font-semibold leading-snug tracking-[-0.015em] text-ink">
+                    {c.title}
                   </h3>
-                  <p className="mt-2.5 text-sm leading-relaxed text-soft">{mode.body}</p>
-                  <ul className="mt-5 space-y-2 border-t border-edge/70 pt-5">
-                    {mode.points.map((p) => (
-                      <li key={p} className="flex items-start gap-2.5 text-sm text-soft">
+
+                  <p className="mt-5 text-[11px] font-medium uppercase tracking-[0.12em] text-faint">
+                    {t.channels.appLabel}
+                  </p>
+                  <ul className="mt-2.5 space-y-2">
+                    {c.app.map((a) => (
+                      <li key={a} className="flex items-start gap-2.5 text-sm leading-relaxed text-soft">
                         <CheckIcon />
-                        {p}
+                        {a}
                       </li>
                     ))}
                   </ul>
+
+                  {/* "Was du tust" steht bewusst am Fuss jeder Karte und in der
+                      Akzentfarbe. Bei E-Mail ist die Zeile leer ("nichts"),
+                      und genau dieser Unterschied zwischen den drei Karten ist
+                      die Aussage -- er waere weg, wenn man die Zeile bei den
+                      automatischen Kanaelen einfach weglaesst. */}
+                  <div className="mt-auto border-t border-edge/70 pt-5">
+                    <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-faint">
+                      {t.channels.youLabel}
+                    </p>
+                    <p className="mt-2 border-l-2 border-coral pl-3 text-sm leading-relaxed text-ink">{c.you}</p>
+                  </div>
                 </div>
               </Reveal>
             ))}
           </div>
 
+          {/* Der Satz, der die Handarbeit zum Verkaufsargument macht. Steht
+              unter den Karten und nicht in der LinkedIn-Karte: er gilt fuer
+              zwei der drei Kanaele, und als Fussnote in einer Spalte wuerde
+              ihn niemand lesen. */}
           <Reveal className="mt-8">
-            <UnifiedSearchMockup />
+            <div className="rounded-2xl border border-edge2/70 bg-panel p-6">
+              <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-ink">
+                {t.channels.protectionLabel}
+              </p>
+              <p className="mt-2.5 max-w-[80ch] text-sm leading-relaxed text-soft">{t.channels.protectionBody}</p>
+              <p className="mt-3 text-xs leading-relaxed text-mute">{t.channels.phoneNote}</p>
+            </div>
           </Reveal>
+        </div>
+      </section>
+
+      <section id="kette" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        <SectionHeading eyebrow={t.chain.eyebrow} title={t.chain.title} />
+        <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.chain.body}</p>
+        <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+          <div className="space-y-4 lg:order-2">
+            {t.chain.points.map((p, i) => (
+              <Reveal key={p.title} delay={i * 80}>
+                <div className="rounded-2xl border border-edge/60 bg-panel p-5">
+                  <h3 className="font-display text-lg font-semibold tracking-[-0.015em] text-ink">{p.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-soft">{p.body}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal className="lg:order-1">
+            <ChainMockup />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Das CRM. Hiess bis zum 2026-08-06 "Mehr als Lead-Suche" und war damit
+          gegen die Wettbewerber formuliert statt fuer die eigene Sache. Der
+          Abschnitt traegt jetzt die vierte Saeule: was aus einer Antwort wird.
+
+          Zwei Bilder nebeneinander statt eines, weil das GENAU die Aussage
+          ist: links kommt eine Antwort herein und wird eingeordnet, rechts
+          steht, was daraus zu tun ist. Ein Bild allein zeigt nur die Haelfte
+          des Vorgangs. Die Anrufliste ist hier frei geworden, seit der
+          Telefon-Abschnitt in #kanaele aufgegangen ist. */}
+      <section id="crm" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        <SectionHeading eyebrow={t.postSend.eyebrow} title={t.postSend.title} />
+        <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.postSend.body}</p>
+        <div className="grid items-start gap-8 lg:grid-cols-2">
+          <Reveal>
+            <PostSendMockup />
+          </Reveal>
+          <Reveal delay={80}>
+            <CallListMockup />
+          </Reveal>
+        </div>
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {t.postSend.features.map((f) => (
+            <div key={f.id} className="rounded-2xl border border-edge/60 bg-panel p-6 hover-lift">
+              <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-panel2 text-ink">
+                {postSendIcons[f.id]}
+              </div>
+              <h3 className="mt-4 text-sm font-semibold text-ink">{f.title}</h3>
+              <p className="mt-1.5 text-sm leading-relaxed text-soft">{f.body}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Telefon-Akquise. Der zweite Kanal fehlte auf der Seite komplett,
+          obwohl er das Argument gegen reine Versand-Tools ist: wer schon eines
+          hat, kauft kein zweites, aber er kauft den Kanal, den seines nicht
+          kann. Mockup links, Argumente rechts -- umgekehrt zur
+          Technologie-Sektion, damit die Seite beim Scrollen nicht in ein
+          Muster verfaellt. */}
+
+      {/* ---------------------------------------------------------------
+          Die drei Abschnitte, die Frostbreaker von einem Versandwerkzeug
+          trennen. Sie stehen bewusst NACH der Lead-Beschaffung und VOR den
+          Preisen: wer bis hierher gelesen hat, glaubt schon, dass die Leads
+          kommen. Die offene Frage ist ab hier, ob daraus etwas wird.
+          --------------------------------------------------------------- */}
+      <section id="torwart" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
+        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+          <SectionHeading eyebrow={t.guard.eyebrow} title={t.guard.title} />
+          <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.guard.body}</p>
+          <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+            <Reveal>
+              <GateMockup />
+            </Reveal>
+            <div className="space-y-4">
+              {t.guard.points.map((p, i) => (
+                <Reveal key={p.title} delay={i * 80}>
+                  <div className="rounded-2xl border border-edge/60 bg-panel p-5">
+                    <h3 className="font-display text-lg font-semibold tracking-[-0.015em] text-ink">{p.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-soft">{p.body}</p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="ehrlich" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
+        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+          <SectionHeading eyebrow={t.honesty.eyebrow} title={t.honesty.title} />
+          <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.honesty.body}</p>
+          <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+            <Reveal>
+              <EffectMockup />
+            </Reveal>
+            <div className="space-y-4">
+              {t.honesty.points.map((p, i) => (
+                <Reveal key={p.title} delay={i * 80}>
+                  <div className="rounded-2xl border border-edge/60 bg-panel p-5">
+                    <h3 className="font-display text-lg font-semibold tracking-[-0.015em] text-ink">{p.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-soft">{p.body}</p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -413,178 +490,102 @@ export default function Home() {
         </Reveal>
       </section>
 
-      {/* Technologie-Filter. Eigene Sektion, weil er fuer Interessenten mit
-          klarer Nische (Shopify-Agentur, Shopware-Dienstleister) der eigentliche
-          Kaufgrund ist -- als Stichpunkt in der Modus-Karte darueber wuerde er
-          untergehen. Bewusst auf dem hellen Grund zwischen zwei panel2-Bloecken,
-          damit die Sektion optisch als eigenes Kapitel liest. */}
-      <section id="technologie" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <SectionHeading eyebrow={t.techFilter.eyebrow} title={t.techFilter.title} />
-        <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.techFilter.body}</p>
+      {/* Zwei Suchmodi. Die Seite argumentierte bisher nur gegen klassische
+          Datenbanken, obwohl die App den Corporate-Modus mitbringt -- wer
+          Unternehmen ab einer bestimmten Groesse sucht, fuehlte sich nicht
+          angesprochen. */}
+      <section className="border-y border-edge/60 bg-panel2">
+        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+          <SectionHeading eyebrow={t.searchModes.eyebrow} title={t.searchModes.title} />
+          <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.searchModes.body}</p>
 
-        <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
-          <div className="space-y-4">
-            {t.techFilter.points.map((p, i) => (
-              <Reveal key={p.title} delay={i * 80}>
-                <div className="rounded-2xl border border-edge/60 bg-panel p-5">
-                  <h3 className="font-display text-lg font-semibold tracking-[-0.015em] text-ink">{p.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-soft">{p.body}</p>
+          {/* Beide Wege bekommen dieselbe Flaeche und dieselbe Rahmung. Vorher
+              war "lokal" hervorgehoben und "corporate" die blasse Alternative
+              -- seit die Firmensuche ohne Abfragekosten pro Firma auskommt, ist
+              sie das nicht mehr.
+
+              Statt zweier Standbilder steht darunter eine einzige, bedienbare
+              Maske: das ist genau die Aussage der Sektion (ein Bildschirm, zwei
+              Quellen) und spart die Haelfte der Hoehe. */}
+          {/* Vier Karten seit Prospeo (2026-08-05). Bewusst 2x2 statt vier
+              nebeneinander: bei vier Spalten auf 1280px bleiben je ~270px, und
+              die Punktlisten brechen dann auf drei Zeilen je Punkt um. Und
+              bewusst nicht lg:grid-cols-3 wie vorher -- das ergaebe 3+1 mit
+              einer Luecke, die sich als fehlende Karte liest. */}
+          <div className="grid items-stretch gap-8 md:grid-cols-2">
+            {t.searchModes.modes.map((mode, i) => (
+              <Reveal key={mode.id} delay={i * 80} className="h-full">
+                <div className="flex h-full flex-col rounded-2xl border border-edge/60 bg-panel p-6">
+                  {/* Farbe je Anbieter, angelehnt an dessen Markenfarbe (Hunter
+                      orange, Apollo gelb, Maps blau) und identisch zu den
+                      Quellen-Chips in der App -- wer sich hier informiert und
+                      sich danach anmeldet, erkennt dieselbe Zuordnung wieder.
+                      Getoente Flaeche mit dunklem Text derselben Farbe statt
+                      farbiger Flaeche mit weissem Text: Apollos Markengelb
+                      traegt weisse Schrift nicht (rund 1,3:1). */}
+                  <span
+                    className={
+                      "inline-flex self-start rounded-full border px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide " +
+                      (MODE_BADGE[mode.id] ?? "border-edge2 bg-chip text-soft")
+                    }
+                  >
+                    {mode.label}
+                  </span>
+                  <h3 className="font-display mt-3 text-xl font-semibold tracking-[-0.015em] text-ink">
+                    {mode.title}
+                  </h3>
+                  <p className="mt-2.5 text-sm leading-relaxed text-soft">{mode.body}</p>
+                  <ul className="mt-5 space-y-2 border-t border-edge/70 pt-5">
+                    {mode.points.map((p) => (
+                      <li key={p} className="flex items-start gap-2.5 text-sm text-soft">
+                        <CheckIcon />
+                        {p}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </Reveal>
             ))}
           </div>
 
-          <Reveal delay={120}>
-            <TechFilterMockup />
+          <Reveal className="mt-8">
+            <UnifiedSearchMockup />
           </Reveal>
-        </div>
 
-        {/* Zwei Belege statt Superlative: der Katalogumfang und die Tatsache,
-            dass auch die DACH-Shopsysteme drin sind. Letzteres entscheidet fuer
-            deutschsprachige Interessenten, ob das Werkzeug ihren Markt kennt. */}
-        <div className="mt-8 grid gap-4 sm:grid-cols-2">
-          <div className="rounded-2xl border border-edge/60 bg-panel p-5">
-            <p className="text-[10px] font-medium uppercase tracking-[0.1em] text-faint">{t.techFilter.scaleLabel}</p>
-            <p className="font-display mt-1.5 text-2xl font-semibold tracking-[-0.02em] text-ink">
-              {t.techFilter.scaleValue}
-            </p>
-            <p className="mt-2 text-sm leading-relaxed text-soft">{t.techFilter.scaleNote}</p>
-          </div>
-          <div className="rounded-2xl border border-edge/60 bg-panel p-5">
-            <p className="text-[10px] font-medium uppercase tracking-[0.1em] text-faint">{t.techFilter.dachLabel}</p>
-            <p className="font-display mt-1.5 text-2xl font-semibold tracking-[-0.02em] text-ink">
-              {t.techFilter.dachValue}
-            </p>
-            <p className="mt-2 text-sm leading-relaxed text-soft">{t.techFilter.dachNote}</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Warum die Lead-Quelle den Unterschied macht */}
-      <section className="border-y border-edge/60 bg-panel2">
-        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-          <SectionHeading eyebrow={t.leadSource.eyebrow} title={t.leadSource.title} />
-          <div className="grid gap-10 lg:grid-cols-5 lg:items-start">
-            <div className="lg:col-span-2">
-              <p className="text-sm leading-relaxed text-soft sm:text-base">{t.leadSource.body1}</p>
-              <p className="mt-4 text-sm leading-relaxed text-soft sm:text-base">{t.leadSource.body2}</p>
-            </div>
-            <div className="lg:col-span-3">
-              <LocalReachMockup />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Qualifizierte Leads: Kernclaim, echte Ansprechpartner statt info@.
-          Statt zweier gestapelter Standbilder laeuft der Filtervorgang jetzt
-          als Animation ab -- das ist die Aussage selbst und spart eine ganze
-          Karte an Seitenhoehe. */}
-      <section className="border-y border-edge/60 bg-panel2">
-        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-          <SectionHeading eyebrow={t.qualifiedLeads.eyebrow} title={t.qualifiedLeads.title} />
-          <div className="grid gap-10 lg:grid-cols-5 lg:items-start">
-            <div className="lg:col-span-2">
-              <p className="text-sm leading-relaxed text-soft sm:text-base">{t.qualifiedLeads.body1}</p>
-              <p className="mt-4 text-sm font-medium leading-relaxed text-ink sm:text-base">{t.qualifiedLeads.body2}</p>
-            </div>
-            <div className="lg:col-span-3">
-              <QualifiedLeadAnimation />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Verifizierung als eigene Sektion statt eines Bullets unter sieben in
-          "Warum Frostbreaker": ein Sales-Kontakt fand das Feature stark, aber
-          erst live in der App, nicht beim Lesen der Website. Direkt danach
-          platziert, weil das Publikum hier schon im Thema Kontaktqualitaet
-          ist -- der naechste Schritt ist "und die Adresse geht auch wirklich
-          zu", nicht vier Sektionen weiter unten. */}
-      <section id="verifizierung" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <SectionHeading eyebrow={t.verification.eyebrow} title={t.verification.title} />
-        <div className="grid gap-10 lg:grid-cols-5 lg:items-start">
-          <div className="lg:col-span-2">
-            <p className="text-sm leading-relaxed text-soft sm:text-base">{t.verification.body}</p>
-            <FactBox fact={t.verification.fact} sub={t.verification.factSub} source={t.verification.factSource} />
-          </div>
-          <div className="lg:col-span-3">
-            <VerificationReportMockup />
-          </div>
-        </div>
-      </section>
-
-      {/* Sparpotenzial-Rechner steht bewusst hier und nicht mehr direkt nach
-          dem Hero: wer rechnen soll, muss vorher wissen, was er ausrechnet.
-          Kostenbeweis, beide Suchwege, Lead-Qualitaet und Verifizierung sind
-          zu diesem Punkt gelesen. */}
-      <SavingsCalculator />
-
-      {/* Problem */}
-      <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <SectionHeading title={t.painPoints.title} />
-        <p className="-mt-6 mb-12 max-w-[60ch] text-base leading-relaxed text-soft">{t.painPoints.subtitle}</p>
-        {/* Bewusst ohne Karten: die Problem-Sektion soll sich rauer und
-            unaufgeraeumter lesen als die Loesungs-Sektionen danach, die
-            Karten benutzen. Hairline-Regeln statt Boxen. */}
-        <div className="grid gap-x-14 gap-y-0 sm:grid-cols-2">
-          {t.painPoints.items.map((p, i) => (
-            <Reveal key={p.title} delay={i * 60}>
-              <div className="group border-t border-edge2/70 py-7">
-                <h3 className="flex items-start gap-3 text-base font-semibold leading-snug text-ink">
-                  <span aria-hidden className="mt-[0.45em] h-1.5 w-1.5 shrink-0 rounded-full bg-coral" />
-                  {p.title}
-                </h3>
-                <p className="mt-2.5 pl-[1.125rem] text-sm leading-relaxed text-soft">{p.body}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* Solution */}
-      <section id="produkt" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
-        <div className="mx-auto max-w-[1267px] px-4 py-20 sm:px-6">
-          <SectionHeading title={t.workflow.title} />
-          <p className="-mt-6 mb-8 max-w-2xl text-sm leading-relaxed text-soft sm:text-base">{t.workflow.subtitle}</p>
-
-          <div className="relative grid gap-6 lg:grid-cols-4">
-            {/* Verbindende Linie hinter den Nummern-Badges, nur Desktop --
-                unterstreicht den Fluss zwischen den Schritten staerker als
-                die vorherigen einzelnen Pfeile zwischen gleichfarbigen Karten. */}
-            <div className="pointer-events-none absolute left-[12.5%] right-[12.5%] top-[48px] hidden h-px bg-gradient-to-r from-sky-300 via-amber-300 to-coral lg:block" />
-            {t.workflow.steps.map((s, i) => {
-              const accentBg = ["bg-sky-500/10", "bg-emerald-500/10", "bg-amber-500/10", "bg-coral-soft"][i];
-              const accentText = ["text-sky-600", "text-emerald-600", "text-amber-600", "text-coral"][i];
-              return (
-                <Reveal key={s.n} delay={i * 80} className="h-full">
-                  <div className="relative flex h-full flex-col rounded-2xl border border-edge/60 bg-panel p-5 hover-lift">
-                    {/* Icon im Badge statt der Nummer, Titel direkt daneben:
-                        spart eine Zeile pro Karte und macht den Schritt auf
-                        einen Blick erkennbar. Die Nummer bleibt als kleiner
-                        Kicker ueber dem Titel, damit die Reihenfolge lesbar
-                        bleibt. */}
-                    <div className="flex items-center gap-3.5">
-                      <div className={`relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl [&_svg]:h-6 [&_svg]:w-6 ${accentBg} ${accentText}`}>
-                        {workflowIcons[s.n]}
-                      </div>
-                      <div className="min-w-0">
-                        <p className={`font-display text-[11px] font-semibold uppercase tracking-[0.12em] ${accentText}`}>
-                          {t.workflow.stepLabel} {s.n}
-                        </p>
-                        <h3 className="mt-0.5 text-sm font-semibold leading-snug text-ink">{s.title}</h3>
-                      </div>
-                    </div>
-                    <p className="mt-4 text-sm leading-relaxed text-soft">
-                      <GlossaryText text={s.body} />
-                    </p>
+          {/* Die vier Beschaffungs-Themen, die am 2026-08-06 ihre eigenen
+              Abschnitte verloren haben. Sie standen als vier volle Abschnitte
+              zwischen Hero und Produkt -- zusammen mit den Suchwegen waren das
+              fuenf Abschnitte ueber Beschaffung, also vier zu viel. Als kurze
+              Karten bleiben sie belegbar, ohne die Gewichtung zu kippen; die
+              Bilder dazu (TechFilterMockup, LocalReachMockup,
+              QualifiedLeadAnimation, VerificationReportMockup) sind fuer
+              /funktionen frei geworden. */}
+          <div className="mt-14 border-t border-edge2/70 pt-10">
+            <h3 className="font-display text-xl font-semibold tracking-[-0.015em] text-ink">
+              {t.sourcesExtra.title}
+            </h3>
+            <div className="mt-6 grid items-stretch gap-5 md:grid-cols-2">
+              {t.sourcesExtra.items.map((it, i) => (
+                <Reveal key={it.id} delay={i * 70} className="h-full">
+                  <div className="flex h-full flex-col rounded-2xl border border-edge/60 bg-panel p-5">
+                    <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-faint">{it.label}</p>
+                    <h4 className="font-display mt-2 text-lg font-semibold leading-snug tracking-[-0.015em] text-ink">
+                      {it.title}
+                    </h4>
+                    <p className="mt-2 text-sm leading-relaxed text-soft">{it.body}</p>
                   </div>
                 </Reveal>
-              );
-            })}
+              ))}
+            </div>
+            <a
+              href="/funktionen"
+              className="group mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-soft transition-colors hover:text-ink"
+            >
+              {t.sourcesExtra.linkLabel}
+              <span aria-hidden className="transition-transform group-hover:translate-x-0.5">&rarr;</span>
+            </a>
           </div>
 
-          <FactBox fact={t.workflow.fact.fact} sub={t.workflow.fact.sub} source={t.workflow.fact.source} />
         </div>
       </section>
 
@@ -629,273 +630,48 @@ export default function Home() {
           </div>
         </div>
       </section>
+      {/* Kostenbeweis und Sparpotenzial-Rechner standen bis zum 2026-08-06
+          hier -- der Kostenbeweis sogar als zweiter Abschnitt der ganzen
+          Seite. Beides gibt es auf /preise bereits, Wort fuer Wort und mit
+          demselben Rechner. Ein Preisargument gehoert zur Preisfrage, nicht
+          vor das Produkt; und dieselbe Sache zweimal auf der Seite zu haben
+          heisst, sie zweimal pflegen zu muessen. Der Weg dorthin fuehrt ueber
+          den Preis-Abschnitt weiter unten und ueber die Navigation. */}
 
-      {/* Das CRM. Hiess bis zum 2026-08-06 "Mehr als Lead-Suche" und war damit
-          gegen die Wettbewerber formuliert statt fuer die eigene Sache. Der
-          Abschnitt traegt jetzt die vierte Saeule: was aus einer Antwort wird.
-
-          Zwei Bilder nebeneinander statt eines, weil das GENAU die Aussage
-          ist: links kommt eine Antwort herein und wird eingeordnet, rechts
-          steht, was daraus zu tun ist. Ein Bild allein zeigt nur die Haelfte
-          des Vorgangs. Die Anrufliste ist hier frei geworden, seit der
-          Telefon-Abschnitt in #kanaele aufgegangen ist. */}
-      <section id="crm" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <SectionHeading eyebrow={t.postSend.eyebrow} title={t.postSend.title} />
-        <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.postSend.body}</p>
-        <div className="grid items-start gap-8 lg:grid-cols-2">
-          <Reveal>
-            <PostSendMockup />
-          </Reveal>
-          <Reveal delay={80}>
-            <CallListMockup />
-          </Reveal>
-        </div>
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {t.postSend.features.map((f) => (
-            <div key={f.id} className="rounded-2xl border border-edge/60 bg-panel p-6 hover-lift">
-              <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-panel2 text-ink">
-                {postSendIcons[f.id]}
-              </div>
-              <h3 className="mt-4 text-sm font-semibold text-ink">{f.title}</h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-soft">{f.body}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Telefon-Akquise. Der zweite Kanal fehlte auf der Seite komplett,
-          obwohl er das Argument gegen reine Versand-Tools ist: wer schon eines
-          hat, kauft kein zweites, aber er kauft den Kanal, den seines nicht
-          kann. Mockup links, Argumente rechts -- umgekehrt zur
-          Technologie-Sektion, damit die Seite beim Scrollen nicht in ein
-          Muster verfaellt. */}
-
-      {/* ---------------------------------------------------------------
-          Die drei Abschnitte, die Frostbreaker von einem Versandwerkzeug
-          trennen. Sie stehen bewusst NACH der Lead-Beschaffung und VOR den
-          Preisen: wer bis hierher gelesen hat, glaubt schon, dass die Leads
-          kommen. Die offene Frage ist ab hier, ob daraus etwas wird.
-          --------------------------------------------------------------- */}
-      <section id="torwart" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
-        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-          <SectionHeading eyebrow={t.guard.eyebrow} title={t.guard.title} />
-          <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.guard.body}</p>
-          <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-            <Reveal>
-              <GateMockup />
-            </Reveal>
-            <div className="space-y-4">
-              {t.guard.points.map((p, i) => (
-                <Reveal key={p.title} delay={i * 80}>
-                  <div className="rounded-2xl border border-edge/60 bg-panel p-5">
-                    <h3 className="font-display text-lg font-semibold tracking-[-0.015em] text-ink">{p.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-soft">{p.body}</p>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Die drei Kanaele, neu am 2026-08-06 (POSITIONIERUNG.md Abschnitt 5).
-          Zieht den frueheren Abschnitt #telefon hier herein -- der stand als
-          eigener Abschnitt weit unten, und LinkedIn kam ueberhaupt nur als
-          eine Zeile in der Kette vor. Wenn der Hauptpunkt der App ist, dass
-          man Entscheider ueber drei Kanaele erreicht, muessen die drei
-          nebeneinander und gleich breit stehen.
-          Der Anker telefon bleibt erhalten, damit alte Links funktionieren. */}
-      <section id="kanaele" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
-        <span id="telefon" className="block scroll-mt-20" aria-hidden />
-        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-          <SectionHeading eyebrow={t.channels.eyebrow} title={t.channels.title} />
-          <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.channels.body}</p>
-
-          {/* Drei gleich breite Spalten, items-stretch: unterschiedlich hohe
-              Karten wuerden als Rangfolge gelesen, und der ganze Punkt ist,
-              dass die Kanaele gleichwertig sind. */}
-          <div className="grid items-stretch gap-6 md:grid-cols-3">
-            {t.channels.cards.map((c, i) => (
-              <Reveal key={c.id} delay={i * 80} className="h-full">
-                <div className="flex h-full flex-col rounded-2xl border border-edge/60 bg-panel p-6">
-                  <span className="inline-flex self-start rounded-full bg-ink px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-surface">
-                    {c.label}
+      {/* Preis-Anriss. Die vollstaendigen Plaene, die Aufschluesselung beider
+          Rechnungsposten und der Vergleich stehen auf /preise -- hier bleibt
+          nur, was fuer die Entscheidung "weiterlesen oder nicht" reicht. Der
+          Anker #preise bleibt bestehen, damit bestehende Links funktionieren. */}
+      <section id="preise" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
+        <div className="mx-auto max-w-4xl px-4 py-20 sm:px-6">
+          <SectionHeading eyebrow={t.pricing.eyebrow} title={t.pricing.title} />
+          <div className="grid gap-5 sm:grid-cols-2">
+            {t.pricing.plans.map((plan) => (
+              <a
+                key={plan.id}
+                href="/preise"
+                className={
+                  "hover-lift flex items-baseline justify-between gap-4 rounded-2xl border bg-panel p-6 transition-colors " +
+                  (plan.highlighted ? "border-sky-500/50 hover:border-sky-500" : "border-edge/60 hover:border-edge2")
+                }
+              >
+                <span>
+                  <span className="block text-sm font-semibold text-ink">{plan.label}</span>
+                  <span className="font-display mt-1 block text-3xl font-semibold tracking-[-0.03em] text-ink">
+                    {plan.price}
                   </span>
-                  <h3 className="font-display mt-3 text-xl font-semibold leading-snug tracking-[-0.015em] text-ink">
-                    {c.title}
-                  </h3>
-
-                  <p className="mt-5 text-[11px] font-medium uppercase tracking-[0.12em] text-faint">
-                    {t.channels.appLabel}
-                  </p>
-                  <ul className="mt-2.5 space-y-2">
-                    {c.app.map((a) => (
-                      <li key={a} className="flex items-start gap-2.5 text-sm leading-relaxed text-soft">
-                        <CheckIcon />
-                        {a}
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* "Was du tust" steht bewusst am Fuss jeder Karte und in der
-                      Akzentfarbe. Bei E-Mail ist die Zeile leer ("nichts"),
-                      und genau dieser Unterschied zwischen den drei Karten ist
-                      die Aussage -- er waere weg, wenn man die Zeile bei den
-                      automatischen Kanaelen einfach weglaesst. */}
-                  <div className="mt-auto border-t border-edge/70 pt-5">
-                    <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-faint">
-                      {t.channels.youLabel}
-                    </p>
-                    <p className="mt-2 border-l-2 border-coral pl-3 text-sm leading-relaxed text-ink">{c.you}</p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          {/* Der Satz, der die Handarbeit zum Verkaufsargument macht. Steht
-              unter den Karten und nicht in der LinkedIn-Karte: er gilt fuer
-              zwei der drei Kanaele, und als Fussnote in einer Spalte wuerde
-              ihn niemand lesen. */}
-          <Reveal className="mt-8">
-            <div className="rounded-2xl border border-edge2/70 bg-panel p-6">
-              <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-ink">
-                {t.channels.protectionLabel}
-              </p>
-              <p className="mt-2.5 max-w-[80ch] text-sm leading-relaxed text-soft">{t.channels.protectionBody}</p>
-              <p className="mt-3 text-xs leading-relaxed text-mute">{t.channels.phoneNote}</p>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      <section id="kette" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <SectionHeading eyebrow={t.chain.eyebrow} title={t.chain.title} />
-        <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.chain.body}</p>
-        <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-          <div className="space-y-4 lg:order-2">
-            {t.chain.points.map((p, i) => (
-              <Reveal key={p.title} delay={i * 80}>
-                <div className="rounded-2xl border border-edge/60 bg-panel p-5">
-                  <h3 className="font-display text-lg font-semibold tracking-[-0.015em] text-ink">{p.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-soft">{p.body}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-          <Reveal className="lg:order-1">
-            <ChainMockup />
-          </Reveal>
-        </div>
-      </section>
-
-      <section id="ehrlich" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
-        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-          <SectionHeading eyebrow={t.honesty.eyebrow} title={t.honesty.title} />
-          <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.honesty.body}</p>
-          <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-            <Reveal>
-              <EffectMockup />
-            </Reveal>
-            <div className="space-y-4">
-              {t.honesty.points.map((p, i) => (
-                <Reveal key={p.title} delay={i * 80}>
-                  <div className="rounded-2xl border border-edge/60 bg-panel p-5">
-                    <h3 className="font-display text-lg font-semibold tracking-[-0.015em] text-ink">{p.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-soft">{p.body}</p>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Hier stand bis zum 2026-08-06 der eigene Telefon-Abschnitt. Sein
-          Inhalt steckt jetzt in der dritten Spalte von #kanaele, samt der
-          Klarstellung, dass Frostbreaker keine Telefonanlage ist. Ein Kanal,
-          der als eigener Abschnitt zwischen zwei anderen Themen steht, wirkt
-          wie ein Nachtrag; nebeneinander wirken die drei gleichwertig.
-          Die CallListMockup ist damit auf der Startseite frei und uebernimmt
-          im CRM-Abschnitt die Aufgaben-Ansicht. */}
-
-      {/* Die zwei Gruende, aus denen ein Interessent NICHT kauft: "zu
-          kompliziert fuer mich" und "rechtlich zu heikel". Beide sind in der
-          App laengst beantwortet, standen hier aber nur als Nebensatz. */}
-      <section id="startklar" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <SectionHeading eyebrow={t.safeStart.eyebrow} title={t.safeStart.title} />
-        <div className="grid items-stretch gap-8 lg:grid-cols-2">
-          {t.safeStart.cards.map((card, i) => (
-            <Reveal key={card.id} delay={i * 80} className="h-full">
-              <div className="flex h-full flex-col rounded-2xl border border-edge/60 bg-panel p-6">
-                <span className="inline-flex self-start rounded-full bg-ink px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-surface">
-                  {card.label}
+                  <span className="mt-0.5 block text-xs text-faint">{plan.priceNote}</span>
                 </span>
-                <h3 className="font-display mt-3 text-xl font-semibold tracking-[-0.015em] text-ink">{card.title}</h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-soft">{card.body}</p>
-                <ul className="mt-5 space-y-2 border-t border-edge/70 pt-5">
-                  {card.points.map((p) => (
-                    <li key={p} className="flex items-start gap-2.5 text-sm text-soft">
-                      <CheckIcon />
-                      {p}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* AI Agent deep-dive */}
-      <section id="personalisierung" className="scroll-mt-20 mx-auto max-w-[1267px] px-4 py-20 sm:px-6">
-        <SectionHeading eyebrow={t.personalization.eyebrow} title={t.personalization.title} />
-        <div className="grid gap-10 lg:grid-cols-5 lg:items-start">
-          <div className="max-w-2xl lg:col-span-2">
-            <p className="text-sm leading-relaxed text-soft sm:text-base">{t.personalization.body}</p>
-            <ul className="mt-6 grid gap-4 text-sm text-soft">
-              {t.personalization.bullets.map((b) => (
-                <li key={b.label} className="flex gap-3">
-                  <span className="mt-0.5 text-ink">•</span>
-                  <span><span className="font-medium text-ink">{b.label}</span> {b.body}</span>
-                </li>
-              ))}
-            </ul>
+                <span aria-hidden className="shrink-0 text-lg text-mute">→</span>
+              </a>
+            ))}
           </div>
-
-          <div className="lg:col-span-3">
-            <div className="rounded-2xl border border-edge/60 bg-panel p-6 shadow-sm">
-              <p className="text-xs font-medium uppercase tracking-wide text-faint">{t.personalization.dataSourceLabel}</p>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {t.personalization.sourceOptions.map((o, i) => (
-                  <span
-                    key={o}
-                    className={
-                      i === 0
-                        ? "rounded-full border border-sky-500/60 bg-sky-500/10 px-3 py-1 text-xs font-medium text-sky-700"
-                        : "rounded-full border border-edge2 px-3 py-1 text-xs text-faint"
-                    }
-                  >
-                    {o}
-                  </span>
-                ))}
-              </div>
-
-              <p className="mt-5 text-xs font-medium uppercase tracking-wide text-faint">{t.personalization.promptLabel}</p>
-              <div className="mt-2 space-y-1.5 rounded-lg bg-panel2 p-4 font-mono text-[12px] leading-relaxed text-soft">
-                {t.personalization.promptLines.map((l) => (
-                  <p key={l}>{l}</p>
-                ))}
-              </div>
-
-              <p className="mt-5 text-xs font-medium uppercase tracking-wide text-faint">{t.personalization.forbiddenLabel}</p>
-              <div className="mt-2 flex flex-wrap gap-1.5">
-                {t.personalization.forbiddenWords.map((w) => (
-                  <span key={w} className="rounded bg-panel2 px-2 py-1 text-[11px] text-faint">{w}</span>
-                ))}
-              </div>
-            </div>
-          </div>
+          <p className="mt-6 text-center text-sm text-soft">
+            <a href="/preise" className="font-medium text-sky-700 underline underline-offset-2 hover:text-sky-800">
+              {t.pricingPage.title} →
+            </a>
+          </p>
+          <p className="mt-2 text-center text-xs text-mute">{t.pricing.note}</p>
         </div>
       </section>
 
@@ -966,74 +742,39 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Weitere Features: Sperrliste, Zustellbarkeit, Kampagnen */}
-      <section className="border-y border-edge/60 bg-panel2">
-        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-          <SectionHeading eyebrow={t.features.eyebrow} title={t.features.title} />
-          <div className="grid gap-8 sm:grid-cols-3">
-            {t.features.items.map((f, i) => (
-              <Reveal key={f.id} delay={i * 80}>
-                <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-sky-500/10 text-sky-600">
-                  {featureIcons[f.id]}
-                </div>
-                <h3 className="mt-4 text-sm font-semibold text-ink">{f.title}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-soft">{f.body}</p>
-                <div className="mt-5">
-                  {f.id === "suppression" && <SuppressionMockup />}
-                  {f.id === "deliverability" && <DeliverabilityMockup />}
-                  {f.id === "campaigns" && <CampaignMockup />}
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Hier stand bis zum 2026-08-06 der eigene Telefon-Abschnitt. Sein
+          Inhalt steckt jetzt in der dritten Spalte von #kanaele, samt der
+          Klarstellung, dass Frostbreaker keine Telefonanlage ist. Ein Kanal,
+          der als eigener Abschnitt zwischen zwei anderen Themen steht, wirkt
+          wie ein Nachtrag; nebeneinander wirken die drei gleichwertig.
+          Die CallListMockup ist damit auf der Startseite frei und uebernimmt
+          im CRM-Abschnitt die Aufgaben-Ansicht. */}
 
-      {/* Wo die Grenze liegt: die einzige Aussage dieser Sektion, die nicht
-          schon weiter oben steht. Die Kacheln daneben wiederholten die
-          Hero-Zahlen und den Rechner und sind deshalb raus. */}
-      <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <SectionHeading eyebrow={t.scaling.eyebrow} title={t.scaling.title} />
-        <div className="max-w-3xl">
-          <p className="text-base leading-relaxed text-soft">{t.scaling.body}</p>
-          <p className="mt-4 text-sm leading-relaxed text-mute">{t.scaling.bottleneckNote}</p>
-        </div>
-      </section>
-
-      {/* Preis-Anriss. Die vollstaendigen Plaene, die Aufschluesselung beider
-          Rechnungsposten und der Vergleich stehen auf /preise -- hier bleibt
-          nur, was fuer die Entscheidung "weiterlesen oder nicht" reicht. Der
-          Anker #preise bleibt bestehen, damit bestehende Links funktionieren. */}
-      <section id="preise" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
-        <div className="mx-auto max-w-4xl px-4 py-20 sm:px-6">
-          <SectionHeading eyebrow={t.pricing.eyebrow} title={t.pricing.title} />
-          <div className="grid gap-5 sm:grid-cols-2">
-            {t.pricing.plans.map((plan) => (
-              <a
-                key={plan.id}
-                href="/preise"
-                className={
-                  "hover-lift flex items-baseline justify-between gap-4 rounded-2xl border bg-panel p-6 transition-colors " +
-                  (plan.highlighted ? "border-sky-500/50 hover:border-sky-500" : "border-edge/60 hover:border-edge2")
-                }
-              >
-                <span>
-                  <span className="block text-sm font-semibold text-ink">{plan.label}</span>
-                  <span className="font-display mt-1 block text-3xl font-semibold tracking-[-0.03em] text-ink">
-                    {plan.price}
-                  </span>
-                  <span className="mt-0.5 block text-xs text-faint">{plan.priceNote}</span>
+      {/* Die zwei Gruende, aus denen ein Interessent NICHT kauft: "zu
+          kompliziert fuer mich" und "rechtlich zu heikel". Beide sind in der
+          App laengst beantwortet, standen hier aber nur als Nebensatz. */}
+      <section id="startklar" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        <SectionHeading eyebrow={t.safeStart.eyebrow} title={t.safeStart.title} />
+        <div className="grid items-stretch gap-8 lg:grid-cols-2">
+          {t.safeStart.cards.map((card, i) => (
+            <Reveal key={card.id} delay={i * 80} className="h-full">
+              <div className="flex h-full flex-col rounded-2xl border border-edge/60 bg-panel p-6">
+                <span className="inline-flex self-start rounded-full bg-ink px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-surface">
+                  {card.label}
                 </span>
-                <span aria-hidden className="shrink-0 text-lg text-mute">→</span>
-              </a>
-            ))}
-          </div>
-          <p className="mt-6 text-center text-sm text-soft">
-            <a href="/preise" className="font-medium text-sky-700 underline underline-offset-2 hover:text-sky-800">
-              {t.pricingPage.title} →
-            </a>
-          </p>
-          <p className="mt-2 text-center text-xs text-mute">{t.pricing.note}</p>
+                <h3 className="font-display mt-3 text-xl font-semibold tracking-[-0.015em] text-ink">{card.title}</h3>
+                <p className="mt-2.5 text-sm leading-relaxed text-soft">{card.body}</p>
+                <ul className="mt-5 space-y-2 border-t border-edge/70 pt-5">
+                  {card.points.map((p) => (
+                    <li key={p} className="flex items-start gap-2.5 text-sm text-soft">
+                      <CheckIcon />
+                      {p}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </section>
 
