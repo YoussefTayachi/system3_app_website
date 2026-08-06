@@ -77,8 +77,11 @@ export function PostSendMockup() {
 
       <p className="mt-5 text-xs font-medium uppercase tracking-wide text-faint">{m.dashboardLabel}</p>
       <div className="mt-2 grid grid-cols-3 gap-2.5">
-        <StatTile value="4" label={m.meetings} />
-        <StatTile value="2.400 €" label={m.pipeline} />
+        {/* Beispielzahlen am 2026-08-06 auf Agenturmassstab gehoben: ein
+            Kundenkonto mit einer laufenden Kampagne, nicht ein einzelner
+            Nutzer mit einer Testliste. */}
+        <StatTile value="23" label={m.meetings} />
+        <StatTile value="68.400 €" label={m.pipeline} />
         <StatTile value="1,4 %" label={m.bounce} />
       </div>
     </div>

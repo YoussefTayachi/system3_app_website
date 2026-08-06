@@ -383,7 +383,7 @@ export function CopyOutcomesHighlight() {
                 <span className="mt-2 block h-2 overflow-hidden rounded-full bg-chip">
                   <span
                     className={"block h-full rounded-full " + (r.best ? "bg-emerald-500" : "bg-sky-500")}
-                    style={{ width: Math.min(100, (r.percent ?? 0) * 12) + "%" }}
+                    style={{ width: Math.min(100, (r.percent ?? 0) * 8) + "%" }}
                   />
                 </span>
               </div>

@@ -219,6 +219,48 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Agency / white-label */}
+      <section id="agenturen" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
+        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+          <SectionHeading eyebrow={t.agency.eyebrow} title={t.agency.title} />
+          <div className="grid gap-10 lg:grid-cols-5 lg:items-start">
+            <div className="lg:col-span-2">
+              <p className="text-sm leading-relaxed text-soft sm:text-base">{t.agency.body}</p>
+              <div className="mt-6 space-y-4">
+                {t.agency.features.map((f) => (
+                  <div key={f.id} className="flex gap-3">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-sky-500/10 text-sky-600">
+                      {agencyIcons[f.id]}
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-semibold text-ink">{f.title}</h3>
+                      <p className="mt-1 text-sm leading-relaxed text-soft">{f.body}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="lg:col-span-3">
+              <AgencyMockup />
+            </div>
+          </div>
+          {/* Die Details -- Kosten pro Kunde, Report aus Endkundensicht,
+              Abgrenzung zu Versand-Tools -- stehen auf /fuer-agenturen. Hier
+              nur der Verweis, damit die Startseite nicht zwei Zielgruppen
+              gleichzeitig bedienen muss. */}
+          <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-edge/60 bg-panel p-5">
+            <p className="max-w-[58ch] text-sm leading-relaxed text-soft">{t.agency.note}</p>
+            <a
+              href="/fuer-agenturen"
+              className="group inline-flex shrink-0 items-center gap-1.5 text-sm font-medium text-sky-700 transition-colors hover:text-sky-800"
+            >
+              {t.nav.agenturen}
+              <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Die drei Kanaele, neu am 2026-08-06 (POSITIONIERUNG.md Abschnitt 5).
           Zieht den frueheren Abschnitt #telefon hier herein -- der stand als
           eigener Abschnitt weit unten, und LinkedIn kam ueberhaupt nur als
@@ -603,48 +645,6 @@ export default function Home() {
 
         </div>
       </section>
-
-      {/* Agency / white-label */}
-      <section id="agenturen" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
-        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-          <SectionHeading eyebrow={t.agency.eyebrow} title={t.agency.title} />
-          <div className="grid gap-10 lg:grid-cols-5 lg:items-start">
-            <div className="lg:col-span-2">
-              <p className="text-sm leading-relaxed text-soft sm:text-base">{t.agency.body}</p>
-              <div className="mt-6 space-y-4">
-                {t.agency.features.map((f) => (
-                  <div key={f.id} className="flex gap-3">
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-sky-500/10 text-sky-600">
-                      {agencyIcons[f.id]}
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-semibold text-ink">{f.title}</h3>
-                      <p className="mt-1 text-sm leading-relaxed text-soft">{f.body}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="lg:col-span-3">
-              <AgencyMockup />
-            </div>
-          </div>
-          {/* Die Details -- Kosten pro Kunde, Report aus Endkundensicht,
-              Abgrenzung zu Versand-Tools -- stehen auf /fuer-agenturen. Hier
-              nur der Verweis, damit die Startseite nicht zwei Zielgruppen
-              gleichzeitig bedienen muss. */}
-          <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-edge/60 bg-panel p-5">
-            <p className="max-w-[58ch] text-sm leading-relaxed text-soft">{t.agency.note}</p>
-            <a
-              href="/fuer-agenturen"
-              className="group inline-flex shrink-0 items-center gap-1.5 text-sm font-medium text-sky-700 transition-colors hover:text-sky-800"
-            >
-              {t.nav.agenturen}
-              <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
-            </a>
-          </div>
-        </div>
-      </section>
       {/* Kostenbeweis und Sparpotenzial-Rechner standen bis zum 2026-08-06
           hier -- der Kostenbeweis sogar als zweiter Abschnitt der ganzen
           Seite. Beides gibt es auf /preise bereits, Wort fuer Wort und mit
@@ -658,9 +658,12 @@ export default function Home() {
           nur, was fuer die Entscheidung "weiterlesen oder nicht" reicht. Der
           Anker #preise bleibt bestehen, damit bestehende Links funktionieren. */}
       <section id="preise" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
-        <div className="mx-auto max-w-4xl px-4 py-20 sm:px-6">
+        {/* max-w-5xl und drei Spalten seit dem 2026-08-06: der Agenturpreis
+            steht jetzt ausgeschrieben da, und drei Karten in einem
+            Zweier-Raster brechen auf 2+1 mit einer Luecke um. */}
+        <div className="mx-auto max-w-5xl px-4 py-20 sm:px-6">
           <SectionHeading eyebrow={t.pricing.eyebrow} title={t.pricing.title} />
-          <div className="grid gap-5 sm:grid-cols-2">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {t.pricing.plans.map((plan) => (
               <a
                 key={plan.id}

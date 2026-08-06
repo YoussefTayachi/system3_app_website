@@ -3,22 +3,24 @@ import Image from "next/image";
 import Link from "next/link";
 import { useT } from "./language-provider";
 
-// Zwei Wege, bewusst nach Plan getrennt:
+// ══════════════════════════════════════════════════════════════════════
+// EIN WEG: DAS GESPRAECH. Die 14-Tage-Testphase ist am 2026-08-06
+// ersatzlos entfallen, mit ihr jeder Selbstbedienungs-Einstieg.
 //
-// Starter -> TRIAL_URL: direkte Anmeldung, 14 Tage ohne Kreditkarte. Vorher lief
-// auch dieser Knopf auf Calendly, hiess aber "Kostenlos testen" -- wer testen
-// will und einen Terminkalender sieht, springt ab. Die App bringt alles mit,
-// was Selfserve braucht (/signup, Stripe-Checkout, trial_ends_at).
+// Der Grund steht in KONVERSION.md und ist keine Geschmacksfrage: die App
+// sagt selbst, dass Postfaecher zwei bis vier Wochen Warmup brauchen. Eine
+// Testphase von 14 Tagen ist damit KUERZER ALS DIE EINRICHTUNG -- wer sie
+// startet, kann in ihr gar nicht sehen, worum es geht, und kuendigt aus dem
+// richtigen Grund. Dazu kam die Huerde davor: erst bei bis zu fuenf
+// Anbietern Konten anlegen und Schluessel eintragen, bevor der erste
+// Bildschirm etwas zeigt.
 //
-// Agentur -> BOOKING_URL: mehrere Workspaces, Whitelabel und Preis ab 199 EUR
-// wollen ohnehin besprochen werden.
+// Fuer eine Agentur, die mehrere Kundendomains anfasst, ist das Gespraech
+// ohnehin der wahrscheinlichere erste Schritt. TRIAL_URL ist entfernt statt
+// auskommentiert -- ein Knopf, den es nicht mehr gibt, soll auch keinen
+// halben Verweis hinterlassen.
+// ══════════════════════════════════════════════════════════════════════
 export const BOOKING_URL = "https://calendly.com/youssef-tayachi-frostbreaker/30min";
-
-// Achtung: app.frostbreaker.app war hier eingetragen, loest aber nicht auf
-// (kein DNS-Eintrag) -- der wichtigste Knopf der Seite waere ins Leere gelaufen.
-// Bis die Wunschdomain auf das Vercel-Projekt zeigt, bleibt die erreichbare
-// Adresse stehen. Danach genuegt es, diese eine Zeile zu aendern.
-export const TRIAL_URL = "https://system3-app.vercel.app/signup";
 
 export function Logo() {
   return (
@@ -54,7 +56,7 @@ export function CTAButton({
   // explizit auf BOOKING_URL gesetzt.
   return (
     <a
-      href={href ?? (isPrimary ? TRIAL_URL : BOOKING_URL)}
+      href={href ?? BOOKING_URL}
       className={
         (isPrimary
           ? "inline-flex items-center justify-center whitespace-nowrap rounded-full bg-ink px-4 py-2.5 text-xs font-medium text-surface shadow-sm transition-all hover:opacity-85 hover:scale-[1.02] active:scale-[0.98] sm:px-6 sm:py-3 sm:text-sm "

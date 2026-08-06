@@ -1,6 +1,6 @@
 "use client";
 import { useT } from "./language-provider";
-import { TRIAL_URL } from "./_ui";
+import { BOOKING_URL } from "./_ui";
 import { Reveal } from "./reveal";
 import { LeadsTableMockup, AiAgentMockup, CopyCheckMockup, PipelineMockup } from "./_app-mockups";
 import { CopyOutcomesMockup, LinkedInMockup } from "./_guard-mockups";
@@ -111,7 +111,7 @@ export function StepWalkthrough() {
                   </p>
 
                   <a
-                    href={TRIAL_URL}
+                    href={BOOKING_URL}
                     className="group mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-soft transition-colors hover:text-ink"
                   >
                     {step.cta}
