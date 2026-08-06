@@ -440,7 +440,7 @@ Neuer Hero + neuer Badge + `SystemMap` + `AllInOneCompare` an Position 8.
 Drei Eingriffe, kein einziger neuer Rundgang.
 → *Danach sagt die Seite in den ersten zwei Bildschirmen, was sie ist.*
 
-**Stufe 2 — Der Rundgang.** *(die eigentliche Arbeit)*
+**Stufe 2 — Der Rundgang.** ✅ **umgesetzt am 2026-08-06** (`3e52c17`)
 `StepWalkthrough` bauen, `CopyOutcomesMockup` und `LinkedInMockup` zeichnen,
 sechs Schritte in DE und EN texten. Abschnitt 3 einsetzen.
 → *Danach versteht jemand, der die App nie gesehen hat, was sie tut.*
@@ -511,12 +511,23 @@ wurden — sie gehören hierher, nicht in eine Datei daneben:
    skaliert die Schrift mit — auf 375 px wären die Beschriftungen unter 10 px.
    Als DOM klappt die Karte unter `lg` auf eine Spalte um und bleibt lesbar.
 
-### Was Stufe 1 bewusst noch nicht enthält
+### Beim Umsetzen von Stufe 2 dazugekommen (2026-08-06)
 
-**Das Hero-Bild ist noch das alte** (`LeadCardStack` und `DashboardMockup`).
-Der Wechsel auf die Ansicht „Nach Text" braucht `CopyOutcomesMockup`, und der
-entsteht in Stufe 2 zusammen mit dem Rundgang. Bis dahin zeigt der obere
-Bildschirm die richtige *Aussage*, aber noch nicht das richtige *Bild*.
+1. **`CopyOutcomesMockup` hat eine kompakte Fassung.** Der Plan wollte das
+   Bild im Hero *und* als Schritt 6 — das wäre zweimal dasselbe Bild auf einer
+   Seite gewesen. Der Hero zeigt jetzt nur die Pointe (zwei A/B-Zeilen, eine
+   mit Terminen), der Rundgang die vollständige Tabelle mit Warnung und
+   „zu wenig"-Zeile.
+2. **Schritt 1 zeigt die Leads-Tabelle, nicht die Suchmaske.**
+   `UnifiedSearchMockup` steht schon im Suchwege-Abschnitt. Das *Ergebnis* ist
+   für „Entscheider raus" ohnehin der bessere Beleg als das Formular.
+3. **Die Fortschrittsspur hat keine Scroll-Verfolgung.** Sie bräuchte einen
+   zweiten IntersectionObserver — und die Spur soll auch dann etwas aussagen,
+   wenn JavaScript spät oder gar nicht läuft.
+4. **`DashboardMockup` ist von der Startseite verschwunden.** Die Komponente
+   bleibt in `_app-mockups.tsx`; `/funktionen` ist der naheliegende neue Ort.
+
+### Was noch offen ist
 
 **Der Haupt-CTA zeigt weiter auf den Rechner** (`#rechner`, „Berechne dein
 Sparpotenzial"). Der Code begründet ihn ausdrücklich als niedrigere Hürde
