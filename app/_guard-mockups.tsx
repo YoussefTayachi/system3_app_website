@@ -206,52 +206,47 @@ export function EffectMockup() {
  * Zahlen erfunden, aber an den echten Schwellen gewaehlt (30 Kontakte, und
  * Quoten im Bereich, den das eigene Konto tatsaechlich zeigt).
  */
-export function CopyOutcomesMockup({ compact = false }: { compact?: boolean }) {
+export function CopyOutcomesMockup() {
   const { t } = useT();
   const m = t.guardMockups.copyOutcomes;
-  // Der Hero zeigt nur die Pointe: zwei Fassungen desselben Schritts, eine
-  // davon mit Terminen. Die vollstaendige Tabelle steht in Schritt 6 des
-  // Rundgangs -- zweimal dasselbe Bild auf einer Seite laesst die Seite
-  // kuerzer wirken, als sie ist. Die Warnung und die "zu wenig"-Zeile
-  // brauchen den Kontext des Rundgangs, um zu tragen; im Hero waeren sie
-  // Erklaerung an einer Stelle, an der noch niemand eine Frage hat.
-  const rows = compact ? m.rows.filter((r) => r.variant) : m.rows;
+  const rows = m.rows;
 
   return (
     <AppFrame title={m.frameTitle}>
-      <div className="p-4 sm:p-5">
-        {!compact && (
-          <div className="mb-4 flex gap-2.5 rounded-xl border border-amber-500/35 bg-amber-500/[0.06] px-3.5 py-2.5">
-            <span aria-hidden className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
-            <p className="text-[11px] leading-relaxed text-soft">{m.warning}</p>
-          </div>
-        )}
+      <div className="p-5 sm:p-6">
+        <div className="mb-4 flex gap-2.5 rounded-xl border border-amber-500/35 bg-amber-500/[0.06] px-3.5 py-2.5">
+          <span aria-hidden className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
+          <p className="text-[12px] leading-relaxed text-soft">{m.warning}</p>
+        </div>
 
         <div className="flex items-baseline justify-between border-b border-edge/60 pb-2.5">
-          <p className="text-[12px] font-medium text-ink">{m.campaign}</p>
-          <p className="text-[11px] text-mute">{m.campaignCount}</p>
+          <p className="text-[13px] font-medium text-ink">{m.campaign}</p>
+          <p className="text-[12px] text-mute">{m.campaignCount}</p>
         </div>
 
         <div className="divide-y divide-edge/60">
           {rows.map((r) => (
             <div key={r.step + r.variant} className="py-3">
               <div className="flex items-center gap-2.5">
-                <span className="w-[74px] shrink-0 text-[12px] text-ink">{r.step}</span>
+                <span className="w-[80px] shrink-0 text-[13px] text-ink">{r.step}</span>
                 {/* Die Fassungs-Marke traegt bewusst den Buchstaben und nicht
                     nur eine Farbe -- A und B muessen auch dann unterscheidbar
                     sein, wenn die Farbe wegfaellt. */}
                 <span
                   className={
-                    "w-5 shrink-0 text-center text-[10px] font-bold " +
+                    "w-6 shrink-0 rounded text-center text-[11px] font-bold " +
                     (r.variant ? "rounded border border-edge2 bg-chip text-soft" : "text-transparent")
                   }
                 >
                   {r.variant || "·"}
                 </span>
-                <span className="w-[34px] shrink-0 text-right text-[11px] tabular-nums text-mute">
-                  {r.contacts}
-                </span>
-                <span className="h-2 flex-1 overflow-hidden rounded-full bg-chip">
+                {/* Die Kontaktzahl steht in der Unterzeile, nicht als eigene
+                    Spalte. Im Rundgang sitzt dieses Bild in einer halben
+                    Spaltenbreite; mit fuenf festen Spalten blieben dem Balken
+                    keine 60px, und ein Balken, den man nicht vergleichen kann,
+                    ist nur Dekoration. min-w, damit er auch im schmalsten Fall
+                    eine Laenge hat, die etwas aussagt. */}
+                <span className="h-2 min-w-[70px] flex-1 overflow-hidden rounded-full bg-chip">
                   {r.percent !== null && (
                     <span
                       className="block h-full rounded-full bg-sky-500"
@@ -261,7 +256,7 @@ export function CopyOutcomesMockup({ compact = false }: { compact?: boolean }) {
                 </span>
                 <span
                   className={
-                    "w-[84px] shrink-0 text-right text-[11px] tabular-nums " +
+                    "w-[92px] shrink-0 text-right text-[12px] tabular-nums " +
                     (r.percent === null ? "text-mute" : "text-soft")
                   }
                 >
@@ -271,18 +266,21 @@ export function CopyOutcomesMockup({ compact = false }: { compact?: boolean }) {
                     Sie ist der Grund, warum es diese Ansicht gibt. */}
                 <span
                   className={
-                    "w-[74px] shrink-0 text-right text-[11px] tabular-nums " +
+                    "w-[82px] shrink-0 text-right text-[12px] tabular-nums " +
                     (r.meetings ? "font-semibold text-emerald-700" : "text-edge3")
                   }
                 >
                   {r.meetings || "—"}
                 </span>
               </div>
-              <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 pl-[104px] text-[10px] text-mute">
+              <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 pl-[113px] text-[11px] text-mute">
+                <span>
+                  {r.contacts} {m.contactsWord}
+                </span>
                 <span>{r.interested}</span>
                 <span>{r.rejections}</span>
                 {r.best && (
-                  <span className="rounded-full bg-emerald-500/12 px-2 py-0.5 font-semibold text-emerald-700">
+                  <span className="rounded-full bg-emerald-500/12 px-2 py-0.5 text-[11px] font-semibold text-emerald-700">
                     {m.bestLabel}
                   </span>
                 )}
@@ -291,7 +289,128 @@ export function CopyOutcomesMockup({ compact = false }: { compact?: boolean }) {
           ))}
         </div>
 
-        <p className="mt-4 text-[11px] leading-relaxed text-mute">{compact ? m.noteShort : m.note}</p>
+        <p className="mt-5 text-[12px] leading-relaxed text-mute">{m.note}</p>
+      </div>
+    </AppFrame>
+  );
+}
+
+/**
+ * Dieselben Daten fuer den Hero -- aber als zwei grosse Vergleichskarten
+ * statt als Tabellenzeilen.
+ *
+ * ═══════════════════════════════════════════════════════════════════════
+ * WARUM NICHT EINFACH DIE TABELLE VON OBEN, NUR KUERZER
+ * ═══════════════════════════════════════════════════════════════════════
+ *
+ * Genau das war der erste Versuch, und es war der falsche. Eine
+ * Tabellenzeile mit 11px-Zahlen funktioniert IM RUNDGANG, wo man liest und
+ * vergleicht -- im Hero ist sie eine Briefmarke: zu klein, um von selbst
+ * gelesen zu werden, und zu unauffaellig, um jemanden zum Lesen zu bringen.
+ *
+ * Das erste Bild der Seite hat genau eine Aufgabe: in zwei Sekunden zeigen,
+ * dass wir etwas messen, das andere nicht messen koennen. Dafuer braucht es
+ * einen Vergleich mit ZWEI Seiten und eine Zahl, die man aus drei Metern
+ * Abstand sieht.
+ *
+ * Deshalb:
+ * - DIE TERMINZAHL IST DAS GROESSTE ELEMENT (Display-Schrift, 4xl). Sie ist
+ *   der Grund, warum es diese Ansicht gibt. Antwortquote und Balken stehen
+ *   daneben, in Lesegroesse statt in Kleingedruckt-Groesse.
+ * - DIE GEWINNERKARTE TRAEGT RAHMEN UND FLAECHE in Gruen, plus die Marke
+ *   "Beste Fassung". Der Zustand steht nie allein in der Farbe: die Marke
+ *   sagt dasselbe in Worten.
+ * - NEBENEINANDER AB sm, darunter gestapelt. Zwei Karten mit je einer
+ *   grossen Zahl vertragen sich auch untereinander -- der Vergleich bleibt
+ *   lesbar, weil beide Zahlen an derselben Stelle der Karte sitzen.
+ *
+ * Gruen ist bewusst dieselbe Farbe wie "Meeting gebucht" in den uebrigen
+ * Mockups, damit die Seite eine Welt bleibt.
+ */
+export function CopyOutcomesHighlight() {
+  const { t } = useT();
+  const m = t.guardMockups.copyOutcomes;
+  const rows = m.rows.filter((r) => r.variant);
+
+  return (
+    <AppFrame title={m.frameTitle}>
+      <div className="p-5 sm:p-7">
+        <div className="mb-5 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+          <p className="text-[15px] font-medium text-ink">{m.campaign}</p>
+          <p className="text-[13px] text-mute">{m.campaignCount}</p>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          {rows.map((r) => (
+            <div
+              key={r.variant}
+              className={
+                "rounded-2xl border p-5 " +
+                (r.best ? "border-emerald-500/45 bg-emerald-500/[0.06]" : "border-edge2/80 bg-panel2/50")
+              }
+            >
+              {/* Die Kontaktzahl steht auf BEIDEN Karten, nicht nur auf der
+                  Verliererkarte. Sonst laesst sich der Vergleich nicht
+                  nachpruefen -- und "B hat mehr Termine" waere wertlos, wenn
+                  B doppelt so viele Kontakte gehabt haette. Feste Hoehe der
+                  Kopfzeile, damit die Marke auf der Gewinnerkarte die beiden
+                  Karten nicht gegeneinander verschiebt. */}
+              <div className="flex min-h-[28px] items-center justify-between gap-3">
+                <div className="flex items-center gap-2">
+                  <p className="text-[14px] font-medium text-ink">
+                    {m.versionLabel} {r.variant}
+                  </p>
+                  {r.best && (
+                    <span className="rounded-full bg-emerald-500/15 px-2.5 py-1 text-[11px] font-semibold text-emerald-700">
+                      {m.bestLabel}
+                    </span>
+                  )}
+                </div>
+                <span className="shrink-0 text-[12px] text-mute">
+                  {r.contacts} {m.contactsWord}
+                </span>
+              </div>
+
+              {/* Antwortquote: Balken plus Zahl, aber sichtbar untergeordnet.
+                  Sie ist der Kontext, nicht die Aussage. */}
+              <div className="mt-4">
+                <div className="flex items-baseline justify-between gap-2">
+                  <span className="text-[13px] text-soft">
+                    {r.repliesNum} {m.repliesWord}
+                  </span>
+                  <span className="text-[13px] tabular-nums text-mute">{r.repliesPct}</span>
+                </div>
+                <span className="mt-2 block h-2 overflow-hidden rounded-full bg-chip">
+                  <span
+                    className={"block h-full rounded-full " + (r.best ? "bg-emerald-500" : "bg-sky-500")}
+                    style={{ width: Math.min(100, (r.percent ?? 0) * 12) + "%" }}
+                  />
+                </span>
+              </div>
+
+              {/* Die eigentliche Aussage. */}
+              <div className="mt-5 flex items-baseline gap-2.5 border-t border-edge/60 pt-4">
+                <span
+                  className={
+                    "font-display text-4xl font-semibold leading-none tabular-nums " +
+                    (r.best ? "text-emerald-700" : "text-ink")
+                  }
+                >
+                  {r.meetingsNum}
+                </span>
+                <span className={"text-[15px] " + (r.best ? "font-medium text-emerald-800" : "text-soft")}>
+                  {r.meetingsWord}
+                </span>
+              </div>
+
+              <p className="mt-2.5 text-[12px] leading-relaxed text-mute">
+                {r.interested} · {r.rejections}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <p className="mt-5 text-[13px] leading-relaxed text-soft">{m.noteShort}</p>
       </div>
     </AppFrame>
   );

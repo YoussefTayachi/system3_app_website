@@ -12,7 +12,7 @@ import { SavingsCalculator } from "./_calculator";
 import { SystemMap } from "./_system-map";
 import { AllInOneCompare } from "./_compare";
 import { StepWalkthrough } from "./_walkthrough";
-import { CopyOutcomesMockup } from "./_guard-mockups";
+import { CopyOutcomesHighlight } from "./_guard-mockups";
 import { Reveal } from "./reveal";
 import { trustIcons, postSendIcons, agencyIcons, workflowIcons, featureIcons, integrationIcons, CheckIcon, CrossIcon } from "./_icons";
 import { useT, LanguageToggle } from "./language-provider";
@@ -150,8 +150,12 @@ export default function Home() {
 
             Nachbildung statt echtem Screenshot -- im Original stehen Namen
             realer Personen mit Rolle und Arbeitgeber im Bild. */}
-        <div className="mx-auto mt-2 max-w-3xl px-4 sm:px-6">
-          <CopyOutcomesMockup compact />
+        {/* max-w-4xl statt -3xl: als Tabellenzeilen war das Bild hier eine
+            Briefmarke. Die Vergleichskarten brauchen die Breite, damit sie ab
+            sm nebeneinander stehen -- untereinander waere es zwar lesbar,
+            aber der Vergleich ist der ganze Punkt. */}
+        <div className="mx-auto mt-4 max-w-4xl px-4 sm:px-6">
+          <CopyOutcomesHighlight />
         </div>
       </section>
 
