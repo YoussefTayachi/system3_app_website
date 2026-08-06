@@ -15,7 +15,7 @@ import { SystemMap } from "./_system-map";
 import { AllInOneCompare } from "./_compare";
 import { StepWalkthrough } from "./_walkthrough";
 import { Reveal } from "./reveal";
-import { trustIcons, postSendIcons, agencyIcons, integrationIcons, CheckIcon } from "./_icons";
+import { trustIcons, postSendIcons, agencyIcons, CheckIcon } from "./_icons";
 import { useT, LanguageToggle } from "./language-provider";
 
 /** Anbieter-Farben der vier Suchwege, deckungsgleich mit lib/search-source.ts
@@ -676,68 +676,68 @@ export default function Home() {
       </section>
 
       {/* Integrations */}
+      {/* BYOK und die Integrationsliste, seit dem 2026-08-06 als schmaler
+          Streifen statt als voller Abschnitt (POSITIONIERUNG.md Abschnitt 7).
+
+          Der Abschnitt stand an Position 20 und war ueber sechzig Zeilen lang:
+          zehn Quellen mit Beschreibung, acht Ziele mit Icons, eine
+          hervorgehobene Instantly-Karte. BYOK ist ein gutes Argument, aber es
+          ist ein NEBENSATZ -- die Vergleichstabelle sagt inzwischen "deine
+          Schluessel, dein Konto, kein Aufschlag", und das reicht auf der
+          Startseite. Wer die Liste im Einzelnen sucht, findet sie auf
+          /funktionen und in der FAQ.
+
+          Bewusst zwei Zeilen Namen ohne Icons und ohne Beschreibung: es geht
+          hier nur um Wiedererkennung ("meine Werkzeuge sind dabei"), nicht um
+          Erklaerung. Instantly bleibt hervorgehoben, weil die native Anbindung
+          der einzige Eintrag ist, der etwas anderes bedeutet als die uebrigen. */}
       <section id="integrationen" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
-        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-          <SectionHeading eyebrow={t.integrations.eyebrow} title={t.integrations.title} />
+        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-12">
+            <div className="lg:w-[34%]">
+              <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-faint">
+                {t.integrations.eyebrow}
+              </p>
+              <h2 className="font-display mt-2 text-xl font-semibold leading-snug tracking-[-0.015em] text-ink">
+                {t.integrations.title}
+              </h2>
+            </div>
 
-          {/* Die Quellen standen hier bisher gar nicht, obwohl sie die Haelfte
-              der Aussage sind: Frostbreaker liest aus Diensten, die dem Kunden
-              gehoeren, und schreibt in Werkzeuge, die er schon nutzt. Ohne die
-              linke Haelfte fehlte Apollo auf der Seite komplett. */}
-          <div className="mb-10">
-            <p className="text-[10px] font-medium uppercase tracking-[0.1em] text-faint">
-              {t.integrations.sourcesLabel}
-            </p>
-            <ul className="mt-3 grid grid-cols-2 gap-x-8 gap-y-0 sm:grid-cols-3 lg:grid-cols-5">
-              {t.integrations.sources.map((s) => (
-                <li key={s.name} className="border-t border-edge2/70 py-4">
-                  <p className="text-sm font-semibold text-ink">{s.name}</p>
-                  <p className="mt-0.5 text-xs leading-relaxed text-mute">{s.note}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
+            <div className="lg:flex-1">
+              <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-faint">
+                {t.integrations.sourcesLabel}
+              </p>
+              <ul className="mt-2 flex flex-wrap gap-x-5 gap-y-1.5">
+                {t.integrations.sources.map((s) => (
+                  <li key={s.name} className="text-sm font-medium text-soft">
+                    {s.name}
+                  </li>
+                ))}
+              </ul>
 
-          <p className="mb-3 text-[10px] font-medium uppercase tracking-[0.1em] text-faint">
-            {t.integrations.targetsLabel}
-          </p>
-          {/* Vorher acht gleiche Kacheln, sechsmal mit demselben Text
-              "CSV-Import" -- die native Instantly-Anbindung, der eigentliche
-              Vorteil, ging darin unter. Jetzt fuehrt sie, der Rest steht als
-              ruhige Liste daneben. */}
-          <div className="grid gap-6 lg:grid-cols-3 lg:items-stretch">
-            {(() => {
-              const [featured, ...rest] = t.integrations.items;
-              return (
-                <>
-                  <div className="flex flex-col justify-between rounded-2xl border border-sky-300/70 bg-sky-50/50 p-6">
-                    <div>
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-sky-600 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white">
-                        {lang === "de" ? "Nativ" : "Native"}
+              <p className="mt-6 text-[11px] font-medium uppercase tracking-[0.12em] text-faint">
+                {t.integrations.targetsLabel}
+              </p>
+              <ul className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-1.5">
+                {t.integrations.items.map((i, n) => (
+                  <li
+                    key={i.name}
+                    className={
+                      n === 0
+                        ? "rounded-full border border-sky-300/70 bg-sky-50/60 px-3 py-1 text-sm font-semibold text-sky-900"
+                        : "text-sm font-medium text-soft"
+                    }
+                  >
+                    {i.name}
+                    {n === 0 && (
+                      <span className="ml-1.5 text-[10px] font-bold uppercase tracking-wide text-sky-700">
+                        {lang === "de" ? "nativ" : "native"}
                       </span>
-                      <p className="font-display mt-4 text-2xl font-semibold tracking-[-0.02em] text-ink">
-                        {featured.name}
-                      </p>
-                    </div>
-                    <p className="mt-3 text-sm leading-relaxed text-sky-900/80">{featured.note}</p>
-                  </div>
-
-                  <ul className="grid grid-cols-2 gap-x-8 gap-y-0 lg:col-span-2 sm:grid-cols-3">
-                    {rest.map((i) => (
-                      <li key={i.name} className="flex items-center gap-3 border-t border-edge2/70 py-4">
-                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-chip text-soft">
-                          {integrationIcons[i.id]}
-                        </span>
-                        <span className="min-w-0">
-                          <p className="text-sm font-semibold text-ink">{i.name}</p>
-                          <p className="mt-0.5 text-xs text-mute">{i.note}</p>
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </>
-              );
-            })()}
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>

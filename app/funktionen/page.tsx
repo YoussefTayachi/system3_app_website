@@ -1,7 +1,7 @@
 "use client";
 import { Logo, CTAButton, CTAGroup, NavDropdown, SectionHeading } from "../_ui";
-import { DashboardMockup, UnifiedSearchMockup, LeadsTableMockup, LeadDetailMockup, MailboxesMockup, AiAgentMockup, VerificationReportMockup, CopyCheckMockup, PipelineMockup } from "../_app-mockups";
-import { SuppressionMockup } from "../_mockups";
+import { DashboardMockup, UnifiedSearchMockup, LeadsTableMockup, LeadDetailMockup, MailboxesMockup, AiAgentMockup, VerificationReportMockup, CopyCheckMockup, PipelineMockup, TechFilterMockup } from "../_app-mockups";
+import { SuppressionMockup, LocalReachMockup, QualifiedLeadAnimation, CampaignMockup, DeliverabilityMockup } from "../_mockups";
 import { Reveal } from "../reveal";
 import { CheckIcon } from "../_icons";
 import { useT, LanguageToggle } from "../language-provider";
@@ -19,20 +19,45 @@ export default function FunktionenPage() {
 
   // Pro Gruppe die passende Nachbildung. Bewusst hier zugeordnet und nicht im
   // Dictionary: das Dictionary haelt Text, keine Komponenten.
+  // Fuenf Bilder sind am 2026-08-06 von der Startseite hierher gezogen, als
+  // dort fuenf Beschaffungs-Abschnitte zu einem wurden: TechFilterMockup,
+  // LocalReachMockup, QualifiedLeadAnimation, CampaignMockup und
+  // DeliverabilityMockup. Auf der Startseite kippten sie die Gewichtung, hier
+  // sind sie genau das, was die Seite verspricht -- jeder Schritt einzeln.
   const visuals: Record<string, React.ReactNode> = {
-    find: <UnifiedSearchMockup />,
+    find: (
+      <div className="space-y-5">
+        <UnifiedSearchMockup />
+        {/* Woher die Firmen kommen, die klassische B2B-Datenbanken nicht
+            kennen. Gehoert zum Finden und nicht zum Anreichern: es ist eine
+            Aussage ueber die QUELLE, nicht ueber den Kontakt. */}
+        <LocalReachMockup />
+      </div>
+    ),
+    tech: <TechFilterMockup />,
     // Verifizierung war bisher nur ein Textbullet ohne eigenes Bild -- genau
     // das Muster, das auf der Startseite schon eine eigene Sektion bekam.
     enrich: (
       <div className="space-y-5">
         <LeadDetailMockup />
+        {/* Das Aussortieren der info@-Adressen ist der Kern dieser Gruppe und
+            hatte hier bisher kein Bild. */}
+        <QualifiedLeadAnimation />
         <VerificationReportMockup />
         <LeadsTableMockup />
       </div>
     ),
     personalize: <AiAgentMockup />,
     check: <CopyCheckMockup />,
-    send: <MailboxesMockup />,
+    send: (
+      <div className="space-y-5">
+        <CampaignMockup />
+        <MailboxesMockup />
+        {/* Zustellbarkeit steht bewusst NACH den Postfaechern: erst sieht man,
+            womit gesendet wird, dann, was daran kaputtgehen kann. */}
+        <DeliverabilityMockup />
+      </div>
+    ),
     pipeline: <PipelineMockup />,
     protect: <SuppressionMockup />,
   };

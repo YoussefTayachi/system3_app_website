@@ -35,6 +35,7 @@ const de = {
     funktionenItems: [
       { label: "Alle Funktionen", href: "/funktionen" },
       { label: "Lead Finder", href: "/funktionen#find" },
+      { label: "Technologie-Filter", href: "/funktionen#tech" },
       { label: "Decision Maker Finder", href: "/funktionen#enrich" },
       { label: "Personalisierung", href: "/funktionen#personalize" },
       { label: "Email Copy Coach", href: "/funktionen#check" },
@@ -51,50 +52,6 @@ const de = {
     // Produkt. Bewusst ein kurzes Substantiv wie die uebrigen Nav-Punkte --
     // die einladende Frage steht als H1 auf der Zielseite, wo sie wirkt.
     custom: "Eigene Software",
-  },
-  // Vorher standen hier die Namen der Dienste, die im Hintergrund laufen. Das
-  // las sich wie eine Zutatenliste und legte die Frage nahe, warum man nicht
-  // gleich dorthin geht. Jetzt Eigenschaften statt Anbieter -- die konkreten
-  // Dienste stehen im FAQ, wo sie hingehoeren: wer BYOK nutzt, legt dort
-  // ohnehin eigene Zugaenge an und muss es vor dem Kauf wissen.
-  // Zahlen stammen aus einer echten Suche im eigenen Account (Dashboard-Screenshot
-  // im Hero). Bewusst keine konkreten Konkurrenzpreise: die aendern sich staendig
-  // und unbelegte Wettbewerbsangaben sind in DE/AT abmahnfaehig.
-  costProof: {
-    eyebrow: "Was ein Lead wirklich kostet",
-    title: "1,5 Cent pro Kontakt, nicht ein Credit pro Klick",
-    body: "Ihr rechnet die Datenabfragen direkt zum Selbstkostenpreis ab, ohne Aufschlag und ohne Credit-Paket, das am Monatsende verfällt. Im Dashboard steht nach jeder Suche auf den Cent genau, was sie gekostet hat.",
-    columns: [
-      {
-        id: "frostbreaker",
-        label: "Frostbreaker",
-        value: "≈ 4 $",
-        unit: "pro 100 Firmen mit rund 260 Kontakten",
-        // Gerundet, nicht hochgerechnet: gemessen wurden 3,94 $ fuer 97 Firmen
-        // mit 259 Kontakten. Beide Werte sind nach oben gerundet, damit die
-        // Angabe im Zweifel zu teuer statt zu guenstig ausfaellt.
-        note: "Gerundet aus einer echten Suche im eigenen Account: 3,94 $ für 97 Firmen mit 259 Kontakten.",
-        highlight: true,
-      },
-      {
-        id: "credits",
-        label: "Übliche Credit-Modelle",
-        value: "Pauschale",
-        unit: "Credits pro Monat, unabhängig vom Verbrauch",
-        note: "Nicht genutzte Credits verfallen meist, zusätzliche kosten extra.",
-        highlight: false,
-      },
-      {
-        id: "manual",
-        label: "Recherche von Hand",
-        value: "8 Min.",
-        unit: "pro Kontakt, gerechnet mit 45 € Stundensatz",
-        note: "Für dieselben rund 260 Kontakte etwa 35 Stunden Arbeitszeit.",
-        highlight: false,
-      },
-    ],
-    footnote:
-      "Eure tatsächlichen Kosten hängen von Nische und Trefferquote ab. Die Zahl oben stammt aus einer konkreten Suche und ist keine Zusage.",
   },
   // Eigene Agenturseite. Agenturen sind die wertvollere Zielgruppe (199 € statt
   // 99 €, mehrere Workspaces, laengere Bindung), bekamen auf der Startseite
@@ -204,13 +161,32 @@ const de = {
       {
         id: "find",
         eyebrow: "Finden",
-        title: "Drei Quellen, eine Liste",
-        body: "Lokale Betriebe über Google Maps, Unternehmen über Hunters Firmendatenbank oder Entscheider samt verifizierter Adresse über Apollo, dort auch nach eingesetzter Technik wie Shopify filterbar. Playbooks bringen fertige Kombinationen aus Suchbegriff und Filtern mit, das Lead-Abo lässt eine Liste wöchentlich oder täglich von allein weiterwachsen.",
+        // "Drei Quellen" stand hier noch, als Prospeo (seit 2026-08-05) schon
+        // der vierte Weg war.
+        title: "Vier Quellen, eine Liste",
+        body: "Lokale Betriebe über Google Maps, Unternehmen über Hunters Firmendatenbank, Entscheider samt verifizierter Adresse über Apollo, oder über Prospeo nach dem Anlass: wer gerade Stellen ausschreibt, wie viel Website-Traffic eine Firma hat und wie schnell er wächst. Playbooks bringen fertige Kombinationen aus Suchbegriff und Filtern mit, das Lead-Abo lässt eine Liste wöchentlich oder täglich von allein weiterwachsen.",
         bullets: [
           "Umkreissuche mit Radius in Metern",
           "Filter auf fehlende Website oder schwache Bewertung",
           "Branchen-Playbooks für gängige Nischen",
           "Lead-Abo: einmalig, wöchentlich oder täglich",
+        ],
+      },
+      // Neue Gruppe am 2026-08-06. Der Technologie-Filter hatte auf der
+      // Startseite einen eigenen Abschnitt und ist dort einer von vier kurzen
+      // Karten gewichen. Fuer Interessenten mit klarer Nische (Shopify-Agentur,
+      // Shopware-Dienstleister) ist er der eigentliche Kaufgrund -- die Tiefe
+      // gehoert deshalb hierher und nicht ins Nichts.
+      {
+        id: "tech",
+        eyebrow: "Eingrenzen",
+        title: "Firmen an ihrer Technik finden, nicht an Stichwörtern",
+        body: "Ein Stichwort trifft, worüber eine Firma redet. Die eingesetzte Technik zeigt, was sie betreibt: ein Shopify-Shop hat Shopify im Quelltext, egal was auf der Über-uns-Seite steht. Wer Shopify-Apps baut, Shopware-Migrationen macht oder Klaviyo einrichtet, verkauft nicht an eine Branche, sondern an eine Technik.",
+        bullets: [
+          "Über 10.000 Technologien im Katalog",
+          "Shopsysteme, Zahlung, CMS und Vertriebs-Tools",
+          "Auch die im DACH-Raum üblichen: Shopware, JTL, Oxid, PlentyMarkets",
+          "Der Aufhänger für die erste Zeile kommt aus derselben Erkennung",
         ],
       },
       {
@@ -1483,12 +1459,6 @@ const de = {
       },
     ],
   },
-  leadSource: {
-    eyebrow: "Die Lead-Quelle macht den Unterschied",
-    title: "Findet die kleinen, lokalen Unternehmen, die in klassischen Lead-Datenbanken kaum auftauchen",
-    body1: "Klassische B2B-Datenbanken bauen auf LinkedIn-Profilen auf. Wer dort kein Profil pflegt, existiert für sie nicht.",
-    body2: "Frostbreaker sucht über Google Places, wo praktisch jeder Betrieb mit physischer Adresse gelistet ist.",
-  },
   localReachMockup: {
     typicalLabel: "Typische B2B-Datenbank",
     frostbreakerLabel: "Frostbreaker, über Google Places",
@@ -1498,12 +1468,6 @@ const de = {
       { name: "Schreinerei Huber", sub: "Handwerksbetrieb, 6 Mitarbeitende" },
       { name: "Zahnarztpraxis Dr. Berger", sub: "Einzelpraxis" },
     ],
-  },
-  qualifiedLeads: {
-    eyebrow: "Echte Menschen, keine info@-Adressen",
-    title: "Jeder Lead ist eine Person, die man wirklich erreichen kann",
-    body1: "Die meisten Tools liefern, was sie finden, inklusive info@, office@ und kontakt@-Adressen, an denen niemand konkret zuständig ist. Frostbreaker filtert das automatisch heraus: nur Adressen, die eindeutig einer echten Person zugeordnet sind, kommen überhaupt in eure Leads-Liste.",
-    body2: "Kein Reply-to-nowhere. Kein Antworten ins Leere. Nur echte Ansprechpartner.",
   },
   // Eigene Sektion statt eines Bullets unter sieben in "Warum Frostbreaker":
   // ein Sales-Kontakt fand das Feature stark, aber erst live in der App, nicht
@@ -1540,18 +1504,6 @@ const de = {
       { generic: "kontakt@frisoer-kaiser.de", name: "Julia Kaiser", role: "Salonleitung", email: "j.kaiser@frisoer-kaiser.de" },
     ],
   },
-  painPoints: {
-    title: "Kommt dir bekannt vor?",
-    subtitle: "Jede Stunde manuelle Recherche ist eine Stunde, die weder abgerechnet noch für neue Kund:innen genutzt wird, und multipliziert sich mit jedem zusätzlichen Kunden-Account.",
-    items: [
-      { title: "Für jeden Kunden ein eigenes Tool-Chaos", body: "Ein Login für die Recherche, eins für den Versand, eine Tabelle fürs Reporting, pro Kunde von vorne. Am Monatsende wird der Report von Hand zusammengeschustert." },
-      { title: "Stunden im Research versenkt", body: "Google, LinkedIn, Impressum-Suche, E-Mail raten: Bevor die erste Mail für einen Kunden überhaupt raus ist, ist schon der halbe Tag weg." },
-      { title: "Vier Abos für einen Workflow", body: "Ein Tool für Kontakte, eins für Verifizierung, eins für Personalisierung, eins für den Versand, dazwischen CSV-Dateien von Hand exportiert, für jeden Kunden erneut." },
-      { title: "Bounce-Raten, die die Domain ruinieren", body: "Ungeprüfte Adressen killen die Zustellrate. Bei mehreren Kunden-Domains gleichzeitig merkt man's oft erst, wenn bei einem Kunden die Antwortquote plötzlich einbricht." },
-      { title: "Generische Mails, die jeder erkennt", body: "„Hi {{Firstname}}, ich hab gesehen dass {{Company}}...“ mit Textbaustein-Personalisierung performt schlechter als gar keine, und schadet der eigenen Kundenbindung." },
-      { title: "Info@ statt echtem Ansprechpartner", body: "Die Hälfte der „gefundenen“ Adressen landet in einem geteilten Postfach, das niemand konsequent liest. Cold Mail an info@ ist kaum besser als gar keine Mail." },
-    ],
-  },
   // Fachbegriffe, die im Fliesstext vorkommen und einer Erklaerung beim
   // Hovern bekommen (siehe GlossaryText in _ui.tsx). Bewusst kurz gehalten:
   // ein Satz, den auch jemand ohne E-Mail-Technik-Hintergrund versteht.
@@ -1559,18 +1511,6 @@ const de = {
     SPF: "SPF: ein Eintrag in eurer Domain, der festlegt, welche Server in eurem Namen E-Mails verschicken dürfen.",
     DKIM: "DKIM: eine digitale Signatur auf jeder E-Mail, an der der Empfänger erkennt, dass sie unterwegs nicht verändert wurde.",
     DMARC: "DMARC: die Regel, was ein Empfänger mit E-Mails tun soll, die SPF oder DKIM nicht bestehen.",
-  },
-  workflow: {
-    title: "Ein Workflow. Vier Schritte. Vollautomatisch, auf Knopfdruck.",
-    stepLabel: "Schritt",
-    subtitle: "Einmal Nische und Kriterien festlegen, den Rest übernimmt Frostbreaker: kein manueller Zwischenschritt, kein Warten auf einen Praktikanten, keine Excel-Liste von Hand.",
-    steps: [
-      { n: "1", title: "Suchen", body: "Nische und Ort eingeben, Frostbreaker findet automatisch passende Unternehmen, für jeden Kunden im eigenen Workspace." },
-      { n: "2", title: "Finden", body: "Entscheider:innen mit Namen werden automatisch ermittelt, keine info@- oder office@-Treffer." },
-      { n: "3", title: "Verifizieren", body: "Jede Adresse wird geprüft, bevor sie in eine Kampagne geht. Zusätzlich prüft Frostbreaker SPF, DKIM und DMARC eurer Sende-Domain, bevor überhaupt eine Kampagne live geht." },
-      { n: "4", title: "Personalisieren & Versenden", body: "Eine KI schreibt pro Lead eine individuelle Icebreaker-Zeile. Sequenz, Zeitplan und Aktivierung laufen danach direkt in Frostbreaker, kein Tool-Wechsel mehr nötig." },
-    ],
-    fact: { fact: "Kleine, gezielte Listen bekommen fast dreimal mehr Antworten als riesige Listen.", sub: "Lieber wenige, gut ausgewählte Unternehmen anschreiben als tausende wahllos.", source: "Woodpecker, mit Verweis auf Belkins-Analyse von 16,5 Mio. E-Mails, 2026" },
   },
   agency: {
     eyebrow: "Für Agenturen",
@@ -1708,18 +1648,6 @@ const de = {
     { id: "encryption", title: "Verschlüsselte API-Keys", body: "Eure Zugangsdaten werden verschlüsselt gespeichert, nie im Klartext." },
     { id: "byok", title: "BYOK-Kostenkontrolle", body: "Volle Transparenz über eure tatsächlichen API-Kosten, live im Dashboard." },
   ],
-  // Vorher standen hier vier Hochrechnungen (125.000 E-Mails, 16.700 Stunden,
-  // "rund 100 Vollzeitstellen", 780 Meetings) samt einem Methodik-Absatz, der
-  // selbst einraeumte, dass drei Schaetzungen miteinander multipliziert werden.
-  // Neben den nachgerechneten Zahlen weiter oben wirkten sie beliebig -- und
-  // wer eine Zahl nicht glaubt, glaubt auch die daneben nicht mehr. Geblieben
-  // ist die Aussage, die ohne Annahmen auskommt.
-  scaling: {
-    eyebrow: "Wo die Grenze liegt",
-    title: "Nicht beim Finden, sondern beim Versenden",
-    body: "Neue Unternehmen zu finden ist praktisch unbegrenzt: Karten- und Firmendatenbank geben mehr her, als eine Agentur bearbeiten kann. Der Engpass sitzt am anderen Ende, beim Versand. Wie viele Postfächer ihr habt und wie viele Mails jedes davon am Tag verträgt, entscheidet über euer Volumen, nicht die Zahl der verfügbaren Leads.",
-    bottleneckNote: "Deshalb sind Warmup-Status und Tagesvolumen pro Postfach direkt im Tool sichtbar, statt euch beim Versand allein zu lassen.",
-  },
   pricing: {
     eyebrow: "Preise",
     title: "Feste Preise, sofort einsehbar, sofort startbar",
@@ -1796,6 +1724,16 @@ const de = {
     title: "Häufige Fragen",
     items: [
       { q: "Kann ich das als Agentur für mehrere Kunden gleichzeitig nutzen?", a: "Ja, dafür gibt es eigene Workspaces pro Kunde, inklusive eigenem Namen, Logo und Akzentfarbe. Für jeden Workspace lässt sich ein Report-Link teilen, der eurem Endkunden aggregierte Kennzahlen im eigenen Look zeigt, ganz ohne dass der einen eigenen Account braucht." },
+      // Drei Fragen am 2026-08-06 dazugekommen. Sie beantworten die Einwaende,
+      // die vorher eigene Abschnitte hatten: der Kostenbeweis (1,5 Cent), der
+      // BYOK-Abschnitt und "dann nehme ich Apollo doch gleich selbst". Als
+      // Abschnitte standen sie vor dem Produkt und haben die Gewichtung
+      // gekippt; als FAQ-Antwort sind sie da, wo jemand tatsaechlich danach
+      // sucht. Die Apollo-Antwort ist bewusst umgedreht formuliert -- nicht
+      // "wir sind nur eine Ergaenzung", sondern was wir zusaetzlich tun.
+      { q: "Warum nicht gleich direkt zu Apollo oder Hunter?", a: "Weil die Adresse der Anfang ist, nicht das Ergebnis. Apollo liefert Entscheider samt gepruefter Adresse. Danach faengt die Arbeit an: ein eigener Aufhaenger je Kontakt, die Pruefung des Textes, der Abgleich mit Sperrliste und Bestandskunden, der Versand, die LinkedIn-Nachricht und der Anruf, wenn es still bleibt, und am Ende die Frage, welche Textfassung Termine gebracht hat. Genau das liegt zwischen Apollo und Instantly, und genau das macht Frostbreaker." },
+      { q: "Was kostet eine Abfrage wirklich?", a: "Rund 4 US-Dollar auf 100 Firmen mit etwa 260 Kontakten, also ungefaehr 1,5 Cent pro Kontakt. Die Zahl stammt aus einer echten Suche in unserem eigenen Konto (3,94 $ fuer 97 Firmen mit 259 Kontakten) und ist keine Zusage: euer Wert haengt an Nische und Trefferquote. Nach jeder Suche steht im Dashboard auf den Cent genau, was sie gekostet hat. Die vollstaendige Aufstellung steht auf der Preisseite." },
+      { q: "Muss ich eigene API-Schluessel mitbringen?", a: "Ja, und das ist Absicht. Die Abfragen laufen auf euren eigenen Zugaengen, ihr zahlt sie zum Selbstkostenpreis, wir schlagen nichts auf. Wer schon mit Apollo oder Instantly arbeitet, behaelt Konto und Konditionen und aendert nur, was dazwischen passiert. Die Schluessel werden verschluesselt gespeichert, und die App fuehrt euch in der Testphase Schritt fuer Schritt durch das Einrichten." },
       { q: "Was kostet das?", a: "99 € im Monat für den Starter-Plan (1 Workspace, bis 5.000 qualifizierte Leads pro Monat), 14 Tage kostenlos testen mit bis zu 500 qualifizierten Leads, danach monatlich kündbar. Der Agentur-Plan (mehrere Workspaces, unlimitiert) startet ab 199 € im Monat, abgestimmt auf eure Anzahl an Kunden-Workspaces, dafür sprechen wir kurz miteinander. Dazu kommen eure eigenen, transparent im Dashboard einsehbaren API-Kosten." },
       { q: "Kann ich jederzeit kündigen?", a: "Ja, monatlich, keine Mindestlaufzeit, keine Kündigungsfrist über den laufenden Monat hinaus." },
       { q: "Woher weiß ich, dass eine gefundene E-Mail wirklich zu einer Person gehört?", a: "Frostbreaker filtert generische Adressen wie info@ oder office@ automatisch heraus. Nur E-Mails, die eindeutig einer Person zugeordnet sind, landen in eurer Leads-Liste." },
@@ -2054,6 +1992,7 @@ const en: typeof de = {
     funktionenItems: [
       { label: "All features", href: "/funktionen" },
       { label: "Lead Finder", href: "/funktionen#find" },
+      { label: "Technology filter", href: "/funktionen#tech" },
       { label: "Decision Maker Finder", href: "/funktionen#enrich" },
       { label: "Personalization", href: "/funktionen#personalize" },
       { label: "Email Copy Coach", href: "/funktionen#check" },
@@ -2067,39 +2006,6 @@ const en: typeof de = {
     faq: "FAQ",
     kontakt: "Contact",
     custom: "Custom Software",
-  },
-  costProof: {
-    eyebrow: "What a lead actually costs",
-    title: "1.5 cents per contact, not one credit per click",
-    body: "You settle the data lookups at cost, with no markup and no credit bundle that expires at the end of the month. After every search the dashboard shows to the cent what it cost.",
-    columns: [
-      {
-        id: "frostbreaker",
-        label: "Frostbreaker",
-        value: "≈ $4",
-        unit: "per 100 companies with around 260 contacts",
-        note: "Rounded from a real search in our own account: $3.94 for 97 companies with 259 contacts.",
-        highlight: true,
-      },
-      {
-        id: "credits",
-        label: "Typical credit models",
-        value: "Flat fee",
-        unit: "credits per month, regardless of usage",
-        note: "Unused credits usually expire, extra ones cost extra.",
-        highlight: false,
-      },
-      {
-        id: "manual",
-        label: "Manual research",
-        value: "8 min",
-        unit: "per contact, at a €45 hourly rate",
-        note: "For those same ~260 contacts, roughly 35 hours of work.",
-        highlight: false,
-      },
-    ],
-    footnote:
-      "Your actual cost depends on niche and hit rate. The figure above comes from one specific search and is not a guarantee.",
   },
   agencyPage: {
     metaTitle: "For agencies: one login, one workspace per client",
@@ -2200,13 +2106,25 @@ const en: typeof de = {
       {
         id: "find",
         eyebrow: "Find",
-        title: "Three sources, one list",
-        body: "Local businesses via Google Maps, companies via Hunter's database, or decision makers with a verified address via Apollo, which also filters by the technology they run, such as Shopify. Playbooks bring ready-made combinations of search term and filters, and a lead subscription keeps a list growing weekly or daily on its own.",
+        title: "Four sources, one list",
+        body: "Local businesses via Google Maps, companies via Hunter's database, decision makers with a verified address via Apollo, or via Prospeo by trigger: who is hiring right now, how much website traffic a company gets and how fast it is growing. Playbooks bring ready-made combinations of search term and filters, and a lead subscription keeps a list growing weekly or daily on its own.",
         bullets: [
           "Radius search in metres",
           "Filter for missing website or weak rating",
           "Industry playbooks for common niches",
           "Lead subscription: once, weekly or daily",
+        ],
+      },
+      {
+        id: "tech",
+        eyebrow: "Narrow down",
+        title: "Find companies by what they run, not by keywords",
+        body: "A keyword matches what a company talks about. The technology it runs shows what it actually operates: a Shopify shop has Shopify in its source code, whatever the about page says. If you build Shopify apps, do Shopware migrations or set up Klaviyo, your audience is not an industry, it is a technology.",
+        bullets: [
+          "Over 10,000 technologies in the catalogue",
+          "Shop systems, payment, CMS and sales tools",
+          "Including the ones common in German-speaking markets: Shopware, JTL, Oxid, PlentyMarkets",
+          "The hook for your first line comes from the same detection",
         ],
       },
       {
@@ -3242,12 +3160,6 @@ const en: typeof de = {
       },
     ],
   },
-  leadSource: {
-    eyebrow: "The lead source makes the difference",
-    title: "Finds the small, local businesses that barely show up in classic lead databases",
-    body1: "Classic B2B databases are built on LinkedIn profiles. If a business doesn't keep one, it doesn't exist to them.",
-    body2: "Frostbreaker searches Google Places instead, where practically every business with a physical address is listed.",
-  },
   localReachMockup: {
     typicalLabel: "Typical B2B database",
     frostbreakerLabel: "Frostbreaker, via Google Places",
@@ -3257,12 +3169,6 @@ const en: typeof de = {
       { name: "Huber Joinery", sub: "Trades business, 6 employees" },
       { name: "Dr. Berger Dental", sub: "Solo practice" },
     ],
-  },
-  qualifiedLeads: {
-    eyebrow: "Real people, not info@ addresses",
-    title: "Every lead is a person you can actually reach",
-    body1: "Most tools deliver whatever they find, including info@, office@ and contact@ addresses that nobody is specifically responsible for. Frostbreaker filters that out automatically: only addresses clearly assigned to a real person ever make it into your leads list.",
-    body2: "No reply-to-nowhere. No answering into the void. Only real decision-makers.",
   },
   verification: {
     eyebrow: "Before an address hurts your domain",
@@ -3291,34 +3197,10 @@ const en: typeof de = {
       { generic: "contact@kaisersalon.com", name: "Julia Kaiser", role: "Salon Manager", email: "j.kaiser@kaisersalon.com" },
     ],
   },
-  painPoints: {
-    title: "Sound familiar?",
-    subtitle: "Every hour of manual research is an hour that's neither billed nor spent on new clients, and it multiplies with every additional client account.",
-    items: [
-      { title: "A separate tool chaos for every client", body: "One login for research, one for sending, one spreadsheet for reporting, starting over for every client. At month's end the report gets cobbled together by hand." },
-      { title: "Hours sunk into research", body: "Google, LinkedIn, imprint search, guessing emails: before the first email for a client even goes out, half the day is already gone." },
-      { title: "Four subscriptions for one workflow", body: "One tool for contacts, one for verification, one for personalization, one for sending, with CSV files exported by hand in between, for every client again." },
-      { title: "Bounce rates that ruin the domain", body: "Unverified addresses kill deliverability. With several client domains at once, you often only notice once a client's reply rate suddenly collapses." },
-      { title: "Generic emails everyone recognizes", body: "\"Hi {{Firstname}}, I saw that {{Company}}...\" with template-based personalization performs worse than none at all, and hurts client retention." },
-      { title: "Info@ instead of a real contact", body: "Half of the \"found\" addresses land in a shared inbox nobody reads consistently. Cold email to info@ is barely better than no email at all." },
-    ],
-  },
   glossary: {
     SPF: "SPF: a record on your domain that defines which servers are allowed to send email in your name.",
     DKIM: "DKIM: a digital signature on every email that lets the recipient verify it wasn't altered in transit.",
     DMARC: "DMARC: the rule telling recipients what to do with email that fails SPF or DKIM.",
-  },
-  workflow: {
-    title: "One workflow. Four steps. Fully automatic, at the push of a button.",
-    stepLabel: "Step",
-    subtitle: "Set the niche and criteria once, Frostbreaker handles the rest: no manual step, no waiting on an intern, no hand-built spreadsheet.",
-    steps: [
-      { n: "1", title: "Search", body: "Enter a niche and location, Frostbreaker automatically finds matching businesses, for every client in their own workspace." },
-      { n: "2", title: "Find", body: "Decision-makers with names are identified automatically, no info@ or office@ hits." },
-      { n: "3", title: "Verify", body: "Every address is checked before it goes into a campaign. Frostbreaker also checks SPF, DKIM and DMARC on your sending domain before any campaign goes live." },
-      { n: "4", title: "Personalize & Send", body: "An AI writes an individual icebreaker line per lead. Sequence, schedule and activation then run directly in Frostbreaker, no more switching tools." },
-    ],
-    fact: { fact: "Small, targeted lists get almost three times more replies than huge lists.", sub: "Better to write to a few well-chosen businesses than thousands at random.", source: "Woodpecker, citing Belkins' analysis of 16.5M emails, 2026" },
   },
   agency: {
     eyebrow: "For agencies",
@@ -3448,12 +3330,6 @@ const en: typeof de = {
     { id: "encryption", title: "Encrypted API keys", body: "Your credentials are stored encrypted, never in plain text." },
     { id: "byok", title: "BYOK cost control", body: "Full transparency over your actual API costs, live in the dashboard." },
   ],
-  scaling: {
-    eyebrow: "Where the limit sits",
-    title: "Not in finding, but in sending",
-    body: "Finding new companies is practically unlimited: map and company database hold more than any agency can work through. The bottleneck sits at the other end, at sending. How many mailboxes you have and how many emails each of them tolerates per day decides your volume, not the number of available leads.",
-    bottleneckNote: "That is why warmup status and daily volume per mailbox are visible right in the tool, instead of leaving you alone with the sending part.",
-  },
   pricing: {
     eyebrow: "Pricing",
     title: "Fixed prices, visible immediately, ready to start immediately",
@@ -3530,6 +3406,9 @@ const en: typeof de = {
     title: "Frequently asked questions",
     items: [
       { q: "Can I use this as an agency for multiple clients at once?", a: "Yes, there are separate workspaces per client, including their own name, logo and accent color. Each workspace can share a report link that shows your client aggregated metrics in their own look, without them needing their own account." },
+      { q: "Why not go straight to Apollo or Hunter myself?", a: "Because the address is the start, not the result. Apollo delivers decision makers with a verified address. The work begins after that: an opener per contact, a check on the copy, a match against your suppression list and existing customers, the sending, the LinkedIn message and the call when it stays quiet, and finally the question of which copy version booked meetings. All of that sits between Apollo and Instantly, and that is what Frostbreaker does." },
+      { q: "What does a lookup actually cost?", a: "Around 4 US dollars per 100 companies with roughly 260 contacts, so about 1.5 cents per contact. That figure comes from a real search in our own account ($3.94 for 97 companies with 259 contacts) and is not a promise: your number depends on niche and hit rate. After every search the dashboard shows to the cent what it cost. The full breakdown is on the pricing page." },
+      { q: "Do I have to bring my own API keys?", a: "Yes, and that is deliberate. The lookups run on your own accounts, you pay them at cost, we add no markup. If you already work with Apollo or Instantly, you keep the account and the terms and only change what happens in between. Keys are stored encrypted, and the app walks you through the setup during the trial." },
       { q: "What does it cost?", a: "$99/month for the Starter plan (1 workspace, up to 5,000 qualified leads per month), 14 days free with up to 500 qualified leads, cancel monthly after that. The Agency plan (multiple workspaces, unlimited) starts from $199/month, tailored to your number of client workspaces, so let's have a quick chat about that. On top come your own API costs, transparently visible in the dashboard." },
       { q: "Can I cancel anytime?", a: "Yes, monthly, no minimum term, no notice period beyond the current month." },
       { q: "How do I know a found email really belongs to a person?", a: "Frostbreaker automatically filters out generic addresses like info@ or office@. Only emails clearly assigned to a person make it into your leads list." },
