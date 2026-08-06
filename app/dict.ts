@@ -440,9 +440,20 @@ const de = {
   // ist belegbar, und nur er steht als "—" in der Tabelle.
   // ══════════════════════════════════════════════════════════════════════
   compare: {
-    eyebrow: "Vier Abos, oder dieses eine",
-    title: "Vier Abos machten das gestern. Eines macht es heute.",
-    body: "Jede Zeile ist ein Arbeitsschritt zwischen „ich kenne meine Nische“ und „ich habe einen Termin“. Die Frage ist nicht, welches Werkzeug das beste ist, sondern wie viele davon ihr braucht.",
+    // Hier stand "Vier Abos machten das gestern. Eines macht es heute." Das
+    // war die staerkste Zeile der Seite und leider nicht wahr: BYOK heisst,
+    // dass Apollo, Instantly, Hunter und OpenAI BLEIBEN. Aus vier Abos werden
+    // fuenf, und ein Agenturinhaber rechnet das in zwanzig Sekunden nach --
+    // ausgerechnet auf einer Seite, die einen ganzen Abschnitt darauf
+    // verwendet, keine Zahl zu schoenen.
+    //
+    // Die wahre Aussage verkauft besser als die falsche: wir bitten niemanden,
+    // seinen Stack auszureissen, und wir nennen genau den Posten, der
+    // tatsaechlich wegfaellt. Das CRM-Abo kostet je SITZPLATZ -- bei sechs
+    // Leuten im Team ist das der groessere Betrag, nicht unserer.
+    eyebrow: "Was bleibt, was wegfällt",
+    title: "Behalte Apollo. Behalte Instantly. Kündige dein CRM.",
+    body: "Jede Zeile ist ein Arbeitsschritt zwischen „ich kenne meine Nische“ und „ich habe einen Termin“. Die Frage ist nicht, welches Werkzeug das beste ist, sondern wer die Schritte macht, für die es keins gibt.",
     featureHeader: "Arbeitsschritt",
     tools: ["Apollo", "Hunter", "Instantly", "Pipedrive"],
     usLabel: "Frostbreaker",
@@ -478,7 +489,10 @@ const de = {
       { id: "crm", label: "Deals, Aufgaben und Notizen am Kontakt", tools: [false, false, false, true] },
     ],
     closing:
-      "Apollo liefert Adressen. Instantly liefert Zustellung. Beide sagen dir, was passiert ist, keiner sagt dir warum. Frostbreaker schreibt den Text, verschickt ihn und sieht die Antwort darauf. Und wenn du bei Apollo bleiben willst: bleib dabei. Deine Schlüssel, dein Konto, kein Aufschlag.",
+      "Apollo liefert Adressen. Instantly liefert Zustellung. Beide sagen dir, was passiert ist, keiner sagt dir warum. Frostbreaker schreibt den Text, verschickt ihn und sieht die Antwort darauf — auf deinen eigenen Zugängen, zu deinen Konditionen, ohne einen Cent Aufschlag.",
+    ledgerLabel: "Die Rechnung, ehrlich",
+    ledgerKeep: "Bleibt: Apollo, Hunter, Instantly, OpenAI — auf deinen Konten, zu deinen Konditionen. Wir schlagen nichts auf.",
+    ledgerDrop: "Fällt weg: das CRM-Abo je Sitzplatz und die Handarbeit dazwischen. Bei sechs Leuten im Team ist das der größere Posten, nicht unserer.",
     footnote:
       "Stand August 2026, geprüft an den öffentlichen Leistungsbeschreibungen der Anbieter. „Teilweise“ heißt: vorhanden, aber nicht in dem Umfang, den die Zeile beschreibt. Ein Strich heißt „gehört nicht zum Leistungsumfang“, nicht „funktioniert schlecht“.",
   },
@@ -1752,7 +1766,12 @@ const de = {
   why: {
     title: "Warum es Frostbreaker gibt",
     body: "Outbound-Teams kombinieren heute meist vier bis fünf einzelne Tools, um vom ersten Suchbegriff bis zur personalisierten, verifizierten E-Mail zu kommen. Frostbreaker reduziert diesen Workflow auf ein einziges Tool, mit voller Kostentransparenz statt Pauschal-Abos und ohne CSV-Hin-und-Her zwischen Anbietern.",
-    earlyAccess: { title: "Früher Zugang statt großer Kundenliste", body: "Frostbreaker ist aktuell in aktiver Erprobung mit den ersten Partneragenturen. Bewusst eine kleine, eng begleitete Gruppe statt eines anonymen Massenprodukts, jede Anpassung geht direkt in den nächsten Sprint." },
+    // Stand vorher auf "Frueher Zugang STATT grosser Kundenliste" -- das las
+    // sich wie eine Entschuldigung dafuer, keine Kunden zu haben, und genau so
+    // kommt es bei einem Fachkaeufer an. Dieselbe Tatsache, als Angebot
+    // formuliert: was er davon HAT, dass wir noch klein sind. Ohne erfundene
+    // Zahl, weil eine erfundene Zahl auf dieser Seite alles kaputtmacht.
+    earlyAccess: { title: "Ihr redet mit dem, der es baut", body: "Wir arbeiten gerade mit einer kleinen Zahl von Agenturen, jede eng begleitet. Das heißt für euch: die Einrichtung machen wir gemeinsam, ihr habt eine direkte Leitung statt eines Ticketsystems, und was euch fehlt, steht im nächsten Sprint statt auf einer Roadmap. Diese Nähe gibt es nur, solange die Gruppe klein ist." },
     founderLabel: "Vom Gründer",
     founderQuote: "„Ich wollte schon immer etwas Eigenes aufbauen. Das größte Hindernis war nie die Idee, sondern Kunden zu finden: Kaltakquise per Hand, endlose Anrufe und E-Mails, ohne je zu wissen, ob es sich lohnt. Also habe ich mir selbst das Werkzeug gebaut, das mir gefehlt hat, seitdem geht mir der nächste Ansprechpartner nie mehr aus.“",
     founderName: "Youssef Tayachi",
@@ -2372,9 +2391,9 @@ const en: typeof de = {
     note: "Frostbreaker replaces neither Apollo nor Instantly. It replaces the manual work between them, and the CRM subscription that would otherwise be the third one.",
   },
   compare: {
-    eyebrow: "Four subscriptions, or this one",
-    title: "Four subscriptions did this yesterday. One does it today.",
-    body: "Every row is a step of work between “I know my niche” and “I have a meeting booked”. The question is not which tool is best, but how many of them you need.",
+    eyebrow: "What stays, what goes",
+    title: "Keep Apollo. Keep Instantly. Cancel your CRM.",
+    body: "Every row is a step of work between “I know my niche” and “I have a meeting booked”. The question is not which tool is best, but who does the steps no tool covers.",
     featureHeader: "Step of work",
     tools: ["Apollo", "Hunter", "Instantly", "Pipedrive"],
     usLabel: "Frostbreaker",
@@ -2397,7 +2416,10 @@ const en: typeof de = {
       { id: "crm", label: "Deals, tasks and notes on the contact", tools: [false, false, false, true] },
     ],
     closing:
-      "Apollo delivers addresses. Instantly delivers deliverability. Both tell you what happened, neither tells you why. Frostbreaker writes the copy, sends it and sees the reply to it. And if you want to stay on Apollo: stay on Apollo. Your keys, your account, no markup.",
+      "Apollo delivers addresses. Instantly delivers deliverability. Both tell you what happened, neither tells you why. Frostbreaker writes the copy, sends it and sees the reply to it — on your own accounts, at your own rates, without a cent of markup.",
+    ledgerLabel: "The honest ledger",
+    ledgerKeep: "Stays: Apollo, Hunter, Instantly, OpenAI — on your accounts, at your rates. We add no markup.",
+    ledgerDrop: "Goes: the per-seat CRM subscription and the manual work in between. On a team of six, that is the bigger line item, not ours.",
     footnote:
       "As of August 2026, checked against the providers' public product descriptions. “Partly” means: present, but not to the extent the row describes. A dash means “not part of the product”, not “works badly”.",
   },
@@ -3394,16 +3416,19 @@ const en: typeof de = {
     note: "Setup happens together on a call, then cancel monthly with no minimum term. On top, only your own API costs, visible live in the dashboard.",
     plans: [
       {
+        // Stand auf "$99", waehrend die beiden Agentur-Stufen in Euro
+        // ausgezeichnet sind -- zwei Waehrungen in einer Preistabelle liest
+        // sich als Fehler und laesst an allen drei Zahlen zweifeln.
         id: "starter",
-        label: "Starter",
-        price: "$99",
+        label: "Single seat",
+        price: "€99",
         priceNote: "/ month",
         features: [
           "1 workspace",
-          "Up to 5,000 qualified leads/month",
-          "Personal emails only, no info@",
-          "Native campaigns and sequences",
-          "Deliverability check & reply management",
+          "For your own sales",
+          "All four search routes, all three channels",
+          "CRM, pipeline and analysis",
+          "Deliverability check and the gate",
         ],
         ctaLabel: "Book a call",
         highlighted: false,
@@ -3463,7 +3488,7 @@ const en: typeof de = {
   why: {
     title: "Why Frostbreaker exists",
     body: "Outbound teams today usually combine four to five separate tools to get from the first search term to a personalized, verified email. Frostbreaker reduces this workflow to a single tool, with full cost transparency instead of flat-rate subscriptions and no CSV back-and-forth between providers.",
-    earlyAccess: { title: "Early access instead of a big customer list", body: "Frostbreaker is currently in active testing with the first partner agencies. Deliberately a small, closely supported group instead of an anonymous mass product, every adjustment goes straight into the next sprint." },
+    earlyAccess: { title: "You talk to the person building it", body: "We work with a small number of agencies right now, each one closely supported. For you that means: we do the setup together, you get a direct line instead of a ticket system, and what you are missing goes into the next sprint rather than onto a roadmap. That closeness only exists while the group is small." },
     founderLabel: "From the founder",
     founderQuote: "\"I always wanted to build something of my own. The hardest part was never the idea, it was finding clients: cold calls and emails by hand, hours of research, never knowing if any of it would land. So I built the tool I wish I'd had, and I've never run out of real decision-makers to reach since.\"",
     founderName: "Youssef Tayachi",

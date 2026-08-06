@@ -174,11 +174,41 @@ export function AllInOneCompare() {
         })}
       </ul>
 
+      {/* ═══════════════════════════════════════════════════════════════
+          DIE EHRLICHE RECHNUNG. Neu am 2026-08-06.
+
+          Vorher behauptete die Ueberschrift dieses Abschnitts, aus vier Abos
+          wuerde eines. Das stimmte nicht: BYOK heisst, dass Apollo, Instantly,
+          Hunter und OpenAI bleiben -- aus vier werden fuenf. Ein
+          Agenturinhaber rechnet das in zwanzig Sekunden nach, und auf einer
+          Seite mit dem Abschnitt "Was wir dir nicht vormachen" kostet so ein
+          Widerspruch mehr, als die Zeile je eingebracht hat.
+
+          Diese zwei Zeilen machen die Rechnung stattdessen selbst auf. Sie
+          verkaufen besser als die falsche Zeile, weil sie den Posten nennen,
+          der WIRKLICH wegfaellt: das CRM kostet je Sitzplatz, unser Preis
+          nicht. Bei sechs Leuten im Team dreht das die Rechnung um.
+
+          Bewusst gruen/grau statt gruen/rot: was bleibt, ist kein Verlust.
+          ═══════════════════════════════════════════════════════════════ */}
+      <div className="mt-8 rounded-2xl border border-edge2/70 bg-panel2/50 p-5 sm:p-6">
+        <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-ink">{c.ledgerLabel}</p>
+        <ul className="mt-3 space-y-2.5">
+          <li className="flex gap-3 text-sm leading-relaxed text-soft">
+            <span aria-hidden className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-edge3" />
+            {c.ledgerKeep}
+          </li>
+          <li className="flex gap-3 text-sm leading-relaxed text-soft">
+            <span aria-hidden className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500" />
+            {c.ledgerDrop}
+          </li>
+        </ul>
+      </div>
+
       {/* Der Absatz, der den echten Einwand beantwortet. Steht bewusst UNTER
           der Tabelle: erst der Umfang, dann die Antwort auf "dann nehme ich
-          die doch gleich selbst". Der letzte Halbsatz ist die gesamte
-          BYOK-Erwaehnung auf der Startseite -- ein Nebensatz, kein Abschnitt. */}
-      <p className="mt-8 max-w-[72ch] text-base leading-relaxed text-soft">{c.closing}</p>
+          die doch gleich selbst". */}
+      <p className="mt-6 max-w-[72ch] text-base leading-relaxed text-soft">{c.closing}</p>
       <p className="mt-3 max-w-[72ch] text-xs leading-relaxed text-mute">{c.footnote}</p>
     </div>
   );
