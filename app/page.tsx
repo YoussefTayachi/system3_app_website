@@ -2,12 +2,17 @@
 import Image from "next/image";
 import { Logo, CTAButton, CTAGroup, NavDropdown, SectionHeading, FactBox, StatTile, GlossaryText, BOOKING_URL } from "./_ui";
 import { AgencyMockup, PostSendMockup, LocalReachMockup, QualifiedLeadAnimation, SuppressionMockup, DeliverabilityMockup, CampaignMockup } from "./_mockups";
-import { DashboardMockup, UnifiedSearchMockup, TechFilterMockup, CallListMockup, LeadsTableMockup, MailboxesMockup, VerificationReportMockup } from "./_app-mockups";
+// DashboardMockup ist seit dem 2026-08-06 nicht mehr auf der Startseite: das
+// erste Bild ist jetzt die Ansicht "Nach Text". Die Komponente bleibt in
+// _app-mockups.tsx, /funktionen ist der naheliegende neue Ort dafuer.
+import { UnifiedSearchMockup, TechFilterMockup, CallListMockup, LeadsTableMockup, MailboxesMockup, VerificationReportMockup } from "./_app-mockups";
 import { GateMockup, ChainMockup, EffectMockup } from "./_guard-mockups";
 import { LeadCardStack } from "./_illustration";
 import { SavingsCalculator } from "./_calculator";
 import { SystemMap } from "./_system-map";
 import { AllInOneCompare } from "./_compare";
+import { StepWalkthrough } from "./_walkthrough";
+import { CopyOutcomesMockup } from "./_guard-mockups";
 import { Reveal } from "./reveal";
 import { trustIcons, postSendIcons, agencyIcons, workflowIcons, featureIcons, integrationIcons, CheckIcon, CrossIcon } from "./_icons";
 import { useT, LanguageToggle } from "./language-provider";
@@ -131,19 +136,22 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Echter Screenshot aus der App, angeschnitten. Lag vorher hinter einem
-            zugeklappten <details> -- der staerkste Beleg dafuer, dass hinter der
-            Seite ein fertiges Produkt steht, war einen Klick weit weggeraeumt.
-            Bewusst das Dashboard statt der Leads-Tabelle: dort sind die Zeilen
-            anonymisiert und wirken gross dargestellt wie ein Ladeplatzhalter,
-            waehrend das Dashboard echte Zahlen und die Zeitersparnis zeigt. */}
-        {/* Nachbildung statt echtem Screenshot: im Original steht die Zahl der
-            verbrauchten Credits samt Anbietername im Bild, und das laesst sich
-            nicht herausretuschieren, ohne dass es auffaellt. Die Nachbildung
-            zeigt dieselben Kennzahlen, bleibt in jeder Groesse scharf und
-            passt sich dem Farbschema an. */}
-        <div className="mx-auto mt-2 max-w-5xl px-4 sm:px-6">
-          <DashboardMockup />
+        {/* Das erste Bild der Seite. Bis zum 2026-08-06 stand hier das
+            Dashboard mit Lead-Zahlen -- also genau das Bild, das jeder
+            Wettbewerber auch zeigen kann: gefundene Firmen, Kontakte,
+            gesparte Stunden.
+
+            Jetzt die Ansicht "Nach Text". Sie zeigt, was uns unterscheidet:
+            welche Textfassung Termine gebracht hat. Instantly sieht die
+            Antwort, hat den Text aber nicht geschrieben; Apollo schreibt
+            weder Text noch sieht es die Antwort. Wer nur den oberen
+            Bildschirm sieht, hat damit schon verstanden, dass hier etwas
+            gemessen wird, das andere nicht messen koennen.
+
+            Nachbildung statt echtem Screenshot -- im Original stehen Namen
+            realer Personen mit Rolle und Arbeitgeber im Bild. */}
+        <div className="mx-auto mt-2 max-w-3xl px-4 sm:px-6">
+          <CopyOutcomesMockup compact />
         </div>
       </section>
 
@@ -161,6 +169,24 @@ export default function Home() {
           <Reveal>
             <SystemMap />
           </Reveal>
+        </div>
+      </section>
+
+      {/* Der Rundgang, Position 3 (POSITIONIERUNG.md Abschnitt 4). Die
+          Systemkarte darueber sagt, WIE GROSS es ist; hier steht, WAS jeweils
+          passiert. Sechs Schritte, sechs Bildschirme, die auf dieser Seite
+          sonst nicht vorkommen. Gestaltungsregeln im Kopf von
+          _walkthrough.tsx. */}
+      <section id="rundgang" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        <SectionHeading eyebrow={t.walkthrough.eyebrow} title={t.walkthrough.title} />
+        <p className="-mt-6 mb-14 max-w-[62ch] text-base leading-relaxed text-soft">{t.walkthrough.body}</p>
+        <StepWalkthrough />
+        {/* Der Haupt-CTA steht erst NACH Schritt 6, nicht dazwischen: die
+            Mini-CTAs an den Schritten sind die kleinen Ausstiege, dieser
+            hier ist der eigentliche. */}
+        <div className="mt-16 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-edge2/70 pt-10">
+          <CTAButton />
+          <p className="text-xs text-mute">{t.cta.trialNote}</p>
         </div>
       </section>
 

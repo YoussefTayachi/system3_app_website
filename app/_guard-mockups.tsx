@@ -171,3 +171,192 @@ export function EffectMockup() {
     </AppFrame>
   );
 }
+
+/**
+ * Die Ansicht "Nach Text" -- das Bild, das es bis zum 2026-08-06 nirgends auf
+ * der Website gab, obwohl es die einzige Funktion zeigt, die kein
+ * Wettbewerber hat.
+ *
+ * Instantly sieht die Antwort, hat den Text aber nicht geschrieben. Apollo
+ * schreibt weder Text noch sieht es die Antwort. Frostbreaker hat beide
+ * Haelften -- es erzeugt den Aufhaenger UND sieht, was zurueckkommt. Seit
+ * Migration 0076 ist die Zuordnung Antwort -> Schritt -> Textfassung gebaut.
+ *
+ * ═══════════════════════════════════════════════════════════════════════
+ * DREI DINGE, DIE DAS BILD ABSICHTLICH ZEIGT
+ * ═══════════════════════════════════════════════════════════════════════
+ *
+ * 1. DIE AUSZEICHNUNG HAENGT AN TERMINEN, NICHT AN ANTWORTEN. In der App
+ *    fiel genau das am 06.08. auf: der "beste Schritt" stand gruen ueber
+ *    einer Zeile mit zwei Absagen und null Interessierten, weil die Auswahl
+ *    auf "mehr Antworten gewinnt" zurueckfiel. Der Rueckfall ist raus, und
+ *    das Bild hier zeigt den korrigierten Zustand: ausgezeichnet wird die
+ *    Fassung mit Terminen, nicht die mit der hoechsten Quote.
+ * 2. EINE ZEILE OHNE ZAHL. Schritt 3 hat 24 Kontakte und zeigt deshalb
+ *    "24 -- zu wenig" statt einer Prozentzahl. Dieselbe 30er-Schwelle wie im
+ *    EffectMockup darueber, und dieselbe Aussage: eine Zahl, die nichts
+ *    bedeutet, wird nicht gezeigt.
+ * 3. DIE WARNUNG STEHT UEBER DER TABELLE, nicht darunter. Sie ist nicht das
+ *    Kleingedruckte, sondern die Lesehilfe fuer alles darunter.
+ *
+ * Balken fuenffach ueberhoeht, wie im EffectMockup: ein massstabsgetreuer
+ * Balken fuer 3 % ist ein unsichtbarer Strich. Sie taugen zum VERGLEICHEN
+ * zweier Zeilen, nicht zum Ablesen -- die Zahl steht daneben.
+ *
+ * Zahlen erfunden, aber an den echten Schwellen gewaehlt (30 Kontakte, und
+ * Quoten im Bereich, den das eigene Konto tatsaechlich zeigt).
+ */
+export function CopyOutcomesMockup({ compact = false }: { compact?: boolean }) {
+  const { t } = useT();
+  const m = t.guardMockups.copyOutcomes;
+  // Der Hero zeigt nur die Pointe: zwei Fassungen desselben Schritts, eine
+  // davon mit Terminen. Die vollstaendige Tabelle steht in Schritt 6 des
+  // Rundgangs -- zweimal dasselbe Bild auf einer Seite laesst die Seite
+  // kuerzer wirken, als sie ist. Die Warnung und die "zu wenig"-Zeile
+  // brauchen den Kontext des Rundgangs, um zu tragen; im Hero waeren sie
+  // Erklaerung an einer Stelle, an der noch niemand eine Frage hat.
+  const rows = compact ? m.rows.filter((r) => r.variant) : m.rows;
+
+  return (
+    <AppFrame title={m.frameTitle}>
+      <div className="p-4 sm:p-5">
+        {!compact && (
+          <div className="mb-4 flex gap-2.5 rounded-xl border border-amber-500/35 bg-amber-500/[0.06] px-3.5 py-2.5">
+            <span aria-hidden className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
+            <p className="text-[11px] leading-relaxed text-soft">{m.warning}</p>
+          </div>
+        )}
+
+        <div className="flex items-baseline justify-between border-b border-edge/60 pb-2.5">
+          <p className="text-[12px] font-medium text-ink">{m.campaign}</p>
+          <p className="text-[11px] text-mute">{m.campaignCount}</p>
+        </div>
+
+        <div className="divide-y divide-edge/60">
+          {rows.map((r) => (
+            <div key={r.step + r.variant} className="py-3">
+              <div className="flex items-center gap-2.5">
+                <span className="w-[74px] shrink-0 text-[12px] text-ink">{r.step}</span>
+                {/* Die Fassungs-Marke traegt bewusst den Buchstaben und nicht
+                    nur eine Farbe -- A und B muessen auch dann unterscheidbar
+                    sein, wenn die Farbe wegfaellt. */}
+                <span
+                  className={
+                    "w-5 shrink-0 text-center text-[10px] font-bold " +
+                    (r.variant ? "rounded border border-edge2 bg-chip text-soft" : "text-transparent")
+                  }
+                >
+                  {r.variant || "·"}
+                </span>
+                <span className="w-[34px] shrink-0 text-right text-[11px] tabular-nums text-mute">
+                  {r.contacts}
+                </span>
+                <span className="h-2 flex-1 overflow-hidden rounded-full bg-chip">
+                  {r.percent !== null && (
+                    <span
+                      className="block h-full rounded-full bg-sky-500"
+                      style={{ width: Math.min(100, r.percent * 5) + "%" }}
+                    />
+                  )}
+                </span>
+                <span
+                  className={
+                    "w-[84px] shrink-0 text-right text-[11px] tabular-nums " +
+                    (r.percent === null ? "text-mute" : "text-soft")
+                  }
+                >
+                  {r.replies}
+                </span>
+                {/* Die Termin-Spalte ist die einzige mit Farbe und Gewicht.
+                    Sie ist der Grund, warum es diese Ansicht gibt. */}
+                <span
+                  className={
+                    "w-[74px] shrink-0 text-right text-[11px] tabular-nums " +
+                    (r.meetings ? "font-semibold text-emerald-700" : "text-edge3")
+                  }
+                >
+                  {r.meetings || "—"}
+                </span>
+              </div>
+              <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 pl-[104px] text-[10px] text-mute">
+                <span>{r.interested}</span>
+                <span>{r.rejections}</span>
+                {r.best && (
+                  <span className="rounded-full bg-emerald-500/12 px-2 py-0.5 font-semibold text-emerald-700">
+                    {m.bestLabel}
+                  </span>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <p className="mt-4 text-[11px] leading-relaxed text-mute">{compact ? m.noteShort : m.note}</p>
+      </div>
+    </AppFrame>
+  );
+}
+
+/**
+ * Die LinkedIn-Arbeitsliste.
+ *
+ * Der Satz, den dieses Bild belegen muss: DIE NACHRICHT STEHT, BEVOR DU
+ * LINKEDIN OEFFNEST. Nicht eine Vorlage zum Ausfuellen -- die eingesetzte,
+ * versandfertige Nachricht.
+ *
+ * Der Aufhaenger steht als eigener, hervorgehobener Absatz. Das ist der
+ * eigentliche Punkt: es ist DERSELBE Aufhaenger wie in der Mail, schon
+ * erzeugt und bezahlt. In der App trugen 214 von 230 Kontakten, die nur ein
+ * LinkedIn-Profil haben, bereits einen -- er lag nur nirgends sichtbar.
+ *
+ * Dass ein Mensch sendet, ist kein Mangel, sondern das Verkaufsargument:
+ * LinkedIn bietet fuer Nachrichten keine API. Jedes Werkzeug, das trotzdem
+ * automatisch sendet, steuert einen Browser fern und riskiert die Sperrung --
+ * bei einem verkauften Produkt also die Konten der Kunden. Deshalb zeigt das
+ * Bild drei Knoepfe und keinen "Senden"-Knopf, und der Text daneben
+ * formuliert das als Schutz.
+ */
+export function LinkedInMockup() {
+  const { t } = useT();
+  const m = t.guardMockups.linkedin;
+
+  return (
+    <AppFrame title={m.frameTitle}>
+      <div className="p-4 sm:p-5">
+        <div className="flex flex-wrap items-start justify-between gap-2 border-b border-edge/60 pb-3">
+          <div>
+            <p className="text-[13px] font-medium text-ink">{m.name}</p>
+            <p className="text-[11px] text-mute">{m.role}</p>
+          </div>
+          <span className="rounded-full border border-edge2 bg-chip px-2.5 py-1 text-[10px] text-soft">
+            {m.template}
+          </span>
+        </div>
+
+        <div className="mt-3 space-y-2.5 rounded-xl border border-edge2/70 bg-panel2/60 p-3.5">
+          <p className="text-[12px] leading-relaxed text-soft">{m.greeting}</p>
+          {/* Der Aufhaenger als eigener Absatz mit Marke: er ist das, was
+              diese Nachricht von einem Serienbrief unterscheidet, und er
+              stammt aus derselben Recherche wie die Mail. */}
+          <div className="rounded-lg border border-coral/30 bg-coral-soft px-3 py-2.5">
+            <p className="mb-1 text-[9px] font-bold uppercase tracking-[0.1em] text-ink">{m.hookLabel}</p>
+            <p className="text-[12px] leading-relaxed text-soft">{m.hook}</p>
+          </div>
+          <p className="text-[12px] leading-relaxed text-soft">{m.pitch}</p>
+          <p className="text-[12px] leading-relaxed text-soft">{m.signoff}</p>
+        </div>
+
+        <div className="mt-3 flex flex-wrap gap-2">
+          <span className="rounded-lg bg-ink px-3 py-1.5 text-[11px] font-medium text-surface">{m.buttons[0]}</span>
+          {m.buttons.slice(1).map((b) => (
+            <span key={b} className="rounded-lg border border-edge2 bg-panel px-3 py-1.5 text-[11px] text-soft">
+              {b}
+            </span>
+          ))}
+        </div>
+
+        <p className="mt-3.5 text-[11px] leading-relaxed text-mute">{m.note}</p>
+      </div>
+    </AppFrame>
+  );
+}

@@ -617,6 +617,88 @@ const de = {
         { label: "Handwerk NRW", value: "18 — zu wenig", percent: null },
       ],
     },
+    // Die Ansicht "Nach Text". Zahlen erfunden, aber an den echten Schwellen:
+    // die 30er-Grenze fuer "zu wenig" ist dieselbe wie in der App, und die
+    // Quoten liegen in dem Bereich, den das eigene Konto tatsaechlich zeigt.
+    // Wichtig fuer spaetere Aenderungen: Fassung B fuehrt bei den TERMINEN,
+    // nicht bei der Antwortquote -- genau darum geht es in der Warnung
+    // darueber. Wer die Zahlen anfasst, muss diese Reihenfolge erhalten.
+    copyOutcomes: {
+      frameTitle: "Wirkung · nach Text",
+      warning:
+        "Die Antwortquote allein ist die falsche Zielgröße: eine Fassung kann führen und trotzdem nur Absagen sammeln. Die Spalte, die zählt, sind Termine.",
+      campaign: "E-Com DACH · Support-Automatisierung",
+      campaignCount: "212 Kontakte",
+      bestLabel: "Beste Fassung",
+      rows: [
+        {
+          step: "Schritt 1",
+          variant: "A",
+          contacts: "106",
+          percent: 3.8,
+          replies: "4 · 3,8 %",
+          meetings: "1 Termin",
+          interested: "1 Interessiert",
+          rejections: "2 Absagen",
+          best: false,
+        },
+        {
+          step: "Schritt 1",
+          variant: "B",
+          contacts: "106",
+          percent: 6.6,
+          replies: "7 · 6,6 %",
+          meetings: "3 Termine",
+          interested: "4 Interessiert",
+          rejections: "1 Absage",
+          best: true,
+        },
+        {
+          step: "Schritt 2",
+          variant: "",
+          contacts: "183",
+          percent: 1.1,
+          replies: "2 · 1,1 %",
+          meetings: "",
+          interested: "— Interessiert",
+          rejections: "1 Absage",
+          best: false,
+        },
+        {
+          step: "Schritt 3",
+          variant: "",
+          contacts: "24",
+          percent: null,
+          replies: "24 — zu wenig",
+          meetings: "",
+          interested: "— Interessiert",
+          rejections: "— Absagen",
+          best: false,
+        },
+      ],
+      note: "Die Zuordnung kommt aus dem Versand selbst: eine Antwort trägt den Schritt der Mail, auf die sie antwortet. Unter 30 Kontakten steht keine Prozentzahl.",
+      // Kurzfassung fuer den Hero: dort steht nur die Pointe (zwei Fassungen,
+      // eine mit Terminen), und die braucht einen Satz, keine Methodik.
+      noteShort: "Zwei Fassungen desselben Schritts. B hat weniger Absagen und drei Termine — das sieht man nur, wenn dasselbe Werkzeug den Text schreibt und die Antwort empfängt.",
+    },
+    // Die LinkedIn-Arbeitsliste. Der Aufhaenger ist bewusst derselbe Ton wie
+    // die erzeugten Aufhaenger in der App: eine Beobachtung aus der Recherche,
+    // keine Schmeichelei, kein "ich bewundere". Die Verbotswoerter-Liste im
+    // AiAgentMockup nennt genau die Woerter, die hier nicht vorkommen duerfen.
+    linkedin: {
+      frameTitle: "LinkedIn · Nachricht steht",
+      name: "Brian Marver",
+      role: "Co-Founder & CEO · 5 Star Nutrition",
+      template: "Vorlage: Standard ★",
+      greeting: "Hi Brian,",
+      hookLabel: "Aufhänger, je Kontakt erzeugt",
+      hook: "Dass ihr den Versand 2024 auf drei Lager umgestellt habt und trotzdem bei Lieferung am Folgetag geblieben seid, ist der Grund für diese Nachricht.",
+      pitch:
+        "Ich baue Software, die Firmen wie 5 Star Nutrition die Arbeit abnimmt, die sonst zwischen fünf Werkzeugen liegen bleibt. Kein Pitch, ich wollte mich erst mal vernetzen.",
+      signoff: "Beste Grüße, Youssef",
+      buttons: ["Kopieren", "Profil öffnen ↗", "Als gesendet vermerken"],
+      note: "Derselbe Aufhänger wie in der Mail, schon erzeugt und bezahlt. Gesendet wird von dir: LinkedIn hat keine Schnittstelle für Nachrichten, und ein Werkzeug, das trotzdem automatisch sendet, riskiert dein Konto.",
+    },
   },
   guard: {
     eyebrow: "Bevor du sendest",
@@ -1214,6 +1296,57 @@ const de = {
         "SPF, DKIM, DMARC",
       ],
     },
+  },
+  // Der Rundgang. Reihenfolge = der Dreiklang aus dem Hero: finden (1),
+  // kontaktieren (2-4), gewinnen (5), besser werden (6). Wer die Schritte
+  // umsortiert, bricht diesen Bogen -- und die Bilder in _walkthrough.tsx
+  // haengen an der Reihenfolge dieses Arrays, nicht an einer id.
+  walkthrough: {
+    eyebrow: "In sechs Schritten",
+    title: "Was zwischen deiner Nische und dem ersten Termin passiert",
+    body: "Für jemanden, der die App nie gesehen hat. Jeder Schritt mit dem Bildschirm, auf dem er stattfindet.",
+    stepLabel: "Schritt",
+    steps: [
+      {
+        title: "Nische rein, Entscheider raus",
+        body: "Branche, Ort, Größe, eingesetzte Technik, oder wer gerade Stellen ausschreibt. Was zurückkommt, ist keine Firmenliste, sondern eine Liste von Menschen: Name, Rolle, geprüfte Adresse, Telefonnummer.",
+        detail: "Rollen-Adressen wie info@ oder office@ fallen automatisch raus. An eine Adresse, für die niemand zuständig ist, schreibt man nicht kalt an.",
+        cta: "So sieht es in echt aus",
+      },
+      {
+        title: "Jeder bekommt seinen eigenen ersten Satz",
+        body: "Aus der Recherche zur Firma entsteht ein Aufhänger je Kontakt. Du bestimmst die Quelle, den Ton und die Wörter, die nicht vorkommen dürfen — und testest an einer echten Firma, bevor etwas gespeichert wird.",
+        detail: "Kein Serienbrief mit dem Firmennamen an der richtigen Stelle. Platzhalter-Personalisierung schneidet messbar schlechter ab als gar keine.",
+        cta: "Den Agenten ansehen",
+      },
+      {
+        title: "Zwei lesen gegen, bevor etwas rausgeht",
+        body: "Der Copy-Check prüft Länge, Spam-Wörter, KI-Klang und ob wirklich nur eine Handlungsaufforderung drinsteht. Der Torwart prüft danach die Technik: SPF, DKIM, Bounce-Quote, sendbare Adressen.",
+        detail: "Vier der elf Prüfungen können den Start aufhalten. Das kostet dich nicht eine Kampagne, das kostet dich sonst die Domain.",
+        cta: "Die Prüfungen ansehen",
+      },
+      {
+        title: "Wenn die Mails schweigen, steht die Nachricht schon",
+        body: "Nach Erstmail und drei Follow-ups erscheint eine LinkedIn-Aufgabe, aber nur dort, wo ein Profil hinterlegt ist. Die Nachricht ist bereits eingesetzt, mit demselben Aufhänger wie die Mail. Bleibt es weiter still, kommt der Anruf, mit Nummer und Vorbereitung.",
+        detail: "Immer genau ein nächster Schritt, nie zwei gleichzeitig. Wer antwortet, fällt im selben Moment aus der Kette.",
+        cta: "Die Kette ansehen",
+      },
+      {
+        title: "Die Antwort landet im CRM, nicht im Postfach",
+        body: "Jede Antwort wird eingestuft und dem Kontakt zugeordnet. Daraus wird ein Deal mit Wert und Wahrscheinlichkeit, eine Aufgabe mit Fälligkeit, eine Notiz nach dem Anruf.",
+        detail: "Der Anruf von gestern und die Mail von vor drei Wochen stehen in derselben Historie. Ohne ein zweites Abo dafür.",
+        cta: "Die Pipeline ansehen",
+      },
+      {
+        title: "Und jetzt weißt du, was funktioniert hat",
+        body: "Je Schritt und je Textfassung: wie viele geantwortet haben, wie viele abgesagt haben, und wie viele daraus einen Termin gemacht haben. Dazu Wochentag und Uhrzeit.",
+        detail: "Instantly sieht die Antwort, hat den Text aber nicht geschrieben. Apollo schreibt weder Text noch sieht es die Antwort. Diese Ansicht kann es nur geben, wenn beide Hälften im selben Werkzeug liegen.",
+        // Bewusst NICHT "Kostenlos testen": der Haupt-CTA direkt darunter sagt
+        // genau das, und zwei gleiche Knoepfe untereinander lesen sich als
+        // Versehen.
+        cta: "Die Auswertung ansehen",
+      },
+    ],
   },
   leadSource: {
     eyebrow: "Die Lead-Quelle macht den Unterschied",
@@ -2258,6 +2391,76 @@ const en: typeof de = {
         { label: "Trades NRW", value: "18 \u2014 too few", percent: null },
       ],
     },
+    copyOutcomes: {
+      frameTitle: "Effect \u00b7 by copy",
+      warning:
+        "Reply rate alone is the wrong target: a version can lead and still collect nothing but rejections. The column that counts is meetings.",
+      campaign: "E-Com DACH \u00b7 support automation",
+      campaignCount: "212 contacts",
+      bestLabel: "Best version",
+      rows: [
+        {
+          step: "Step 1",
+          variant: "A",
+          contacts: "106",
+          percent: 3.8,
+          replies: "4 \u00b7 3.8%",
+          meetings: "1 meeting",
+          interested: "1 interested",
+          rejections: "2 rejections",
+          best: false,
+        },
+        {
+          step: "Step 1",
+          variant: "B",
+          contacts: "106",
+          percent: 6.6,
+          replies: "7 \u00b7 6.6%",
+          meetings: "3 meetings",
+          interested: "4 interested",
+          rejections: "1 rejection",
+          best: true,
+        },
+        {
+          step: "Step 2",
+          variant: "",
+          contacts: "183",
+          percent: 1.1,
+          replies: "2 \u00b7 1.1%",
+          meetings: "",
+          interested: "\u2014 interested",
+          rejections: "1 rejection",
+          best: false,
+        },
+        {
+          step: "Step 3",
+          variant: "",
+          contacts: "24",
+          percent: null,
+          replies: "24 \u2014 too few",
+          meetings: "",
+          interested: "\u2014 interested",
+          rejections: "\u2014 rejections",
+          best: false,
+        },
+      ],
+      note: "The attribution comes from the sending itself: a reply carries the step of the mail it answers. Below 30 contacts no percentage is shown.",
+      noteShort: "Two versions of the same step. B has fewer rejections and three meetings — you only see that when the same tool writes the copy and receives the reply.",
+    },
+    linkedin: {
+      frameTitle: "LinkedIn \u00b7 message ready",
+      name: "Brian Marver",
+      role: "Co-Founder & CEO \u00b7 5 Star Nutrition",
+      template: "Template: Default \u2605",
+      greeting: "Hi Brian,",
+      hookLabel: "Opener, generated per contact",
+      hook: "You moved fulfilment onto three warehouses in 2024 and still kept next-day delivery, which is why I am writing.",
+      pitch:
+        "I build software that takes off companies like 5 Star Nutrition the work that otherwise gets stuck between five separate tools. No pitch, I just wanted to connect first.",
+      signoff: "Best, Youssef",
+      buttons: ["Copy", "Open profile \u2197", "Mark as sent"],
+      note: "The same opener as in the email, already generated and paid for. You send it: LinkedIn has no messaging API, and a tool that sends anyway puts your account at risk.",
+    },
   },
   guard: {
     eyebrow: "Before you send",
@@ -2751,6 +2954,50 @@ const en: typeof de = {
         "SPF, DKIM, DMARC",
       ],
     },
+  },
+  walkthrough: {
+    eyebrow: "In six steps",
+    title: "What happens between your niche and the first meeting",
+    body: "For someone who has never seen the app. Every step with the screen it happens on.",
+    stepLabel: "Step",
+    steps: [
+      {
+        title: "Niche in, decision-makers out",
+        body: "Industry, location, size, the technology they run, or who is hiring right now. What comes back is not a list of companies but a list of people: name, role, verified address, phone number.",
+        detail: "Role addresses like info@ or office@ are filtered out automatically. You do not cold-email an address nobody is responsible for.",
+        cta: "See it for real",
+      },
+      {
+        title: "Everyone gets their own first sentence",
+        body: "An opener per contact, written from the research on that company. You set the source, the tone and the words that must not appear — and test it on a real company before anything is saved.",
+        detail: "Not a mail merge with the company name in the right slot. Placeholder personalisation measurably performs worse than none at all.",
+        cta: "See the agent",
+      },
+      {
+        title: "Two of them read it before anything goes out",
+        body: "The copy check looks at length, spam words, AI tone and whether there really is only one call to action. The gate then checks the technical side: SPF, DKIM, bounce rate, sendable addresses.",
+        detail: "Four of the eleven checks can hold the start back. That does not cost you a campaign, it otherwise costs you the domain.",
+        cta: "See the checks",
+      },
+      {
+        title: "When the emails stay quiet, the message is already written",
+        body: "After the first mail and three follow-ups a LinkedIn task appears, but only where a profile is on file. The message is already filled in, with the same opener as the email. If it stays quiet after that, the call comes up, with number and prep.",
+        detail: "Always exactly one next step, never two at once. Anyone who replies drops out of the chain the same moment.",
+        cta: "See the chain",
+      },
+      {
+        title: "The reply lands in the CRM, not in an inbox",
+        body: "Every reply is classified and attached to the contact. It becomes a deal with a value and a probability, a task with a due date, a note after the call.",
+        detail: "Yesterday's call and the email from three weeks ago sit in the same history. Without a second subscription for it.",
+        cta: "See the pipeline",
+      },
+      {
+        title: "And now you know what actually worked",
+        body: "Per step and per copy version: how many replied, how many said no, and how many turned into a meeting. Plus weekday and time of day.",
+        detail: "Instantly sees the reply but did not write the copy. Apollo neither writes the copy nor sees the reply. This view can only exist when both halves sit in the same tool.",
+        cta: "See the analysis",
+      },
+    ],
   },
   leadSource: {
     eyebrow: "The lead source makes the difference",
