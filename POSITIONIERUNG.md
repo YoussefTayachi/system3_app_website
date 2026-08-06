@@ -459,11 +459,24 @@ gezeigt"* ist der Grund, warum man den Zahlen darüber glaubt, und eine vierte
 Erzählung derselben Sache wäre Wiederholung statt Nachdruck. `TimingMockup`
 und `InboxMockup` entfallen damit ebenfalls.
 
-**Stufe 4 — Aufräumen.**
-`scaling` raus, die fünf Beschaffungsabschnitte zu Abschnitt 10 verdichten,
-`#kosten` und `#integrationen` verschieben, `#agenturen` zur Verweiskarte,
-Reihenfolge auf die Liste aus Abschnitt 3 umstellen.
-→ *Danach stimmt die Gewichtung. 23 Abschnitte sind 12.*
+**Stufe 4 — Aufräumen.** ✅ **umgesetzt am 2026-08-06** (`9e5d2d9`)
+
+23 inhaltliche Abschnitte sind **17**, nicht 12. Die Differenz ist bewusst:
+
+| Nicht gestrichen | Warum |
+|---|---|
+| `#torwart` | *„Das einzige Werkzeug für Kaltakquise, das dir Nein sagt"* ist eine der stärksten Aussagen der Seite. Der Plan wollte ihn in Abschnitt 3 verdichten — als Halbsatz in einer Aufzählung verliert er alles |
+| `#startklar` | Beantwortet die zwei Gründe, aus denen jemand *nicht* kauft: zu kompliziert und rechtlich heikel. Beides gehört nicht in eine FAQ |
+| `#agenturen` | Blieb als voller Abschnitt statt als Verweiskarte. Agenturen sind ein eigenes Segment; eine Karte mit Link verkauft es nicht |
+| `#integrationen` | Blieb vorerst voll. Der Logostreifen aus Abschnitt 7 ist noch offen |
+| `trust` · `why` · `faq` | Der Plan zählte sie als einen Abschnitt. Sie sind drei — inhaltlich zurecht |
+
+**Zusätzlich gestrichen, was der Plan nicht vorsah:** `#kosten` und der
+Rechner. Beide stehen auf `/preise` bereits, Wort für Wort und mit demselben
+Rechner. Dieselbe Sache zweimal auf der Seite heißt, sie zweimal pflegen zu
+müssen.
+
+**Der Haupt-CTA zeigt auf die Testphase** (Entscheidung vom 2026-08-06).
 
 **Stufe 5 — Feinschliff.**
 FAQ nimmt die verschobenen Einwände auf, `/funktionen` bekommt die Tiefe,
@@ -536,13 +549,23 @@ wurden — sie gehören hierher, nicht in eine Datei daneben:
 4. **`DashboardMockup` ist von der Startseite verschwunden.** Die Komponente
    bleibt in `_app-mockups.tsx`; `/funktionen` ist der naheliegende neue Ort.
 
-### Was noch offen ist
+### Was nach Stufe 4 offen ist
 
-**Der Haupt-CTA zeigt weiter auf den Rechner** (`#rechner`, „Berechne dein
-Sparpotenzial"). Der Code begründet ihn ausdrücklich als niedrigere Hürde
-gegenüber „Kostenlos testen". Mit der neuen Gewichtung führt der wichtigste
-Knopf der Seite auf ein Kostenargument — und in Stufe 4 zieht der Rechner
-ohnehin nach `/preise`, dann bricht der Anker. **Zu entscheiden vor Stufe 4.**
+1. **`#integrationen` ist noch ein voller Abschnitt.** Abschnitt 7 sieht einen
+   schmalen Logostreifen plus FAQ-Antwort vor. Der BYOK-Nebensatz steht
+   inzwischen in der Vergleichstabelle — der Abschnitt ist damit eher
+   Wiederholung als Argument.
+2. **Die FAQ hat die verschobenen Einwände noch nicht aufgenommen** (*Was
+   kostet es wirklich? · Brauche ich eigene API-Keys? · Warum nicht direkt zu
+   Apollo?*). Das ist der Rest von Stufe 5.
+3. **`/funktionen` hat die Tiefe noch nicht bekommen**, die von der Startseite
+   verschwunden ist: Technologie-Filter mit Slug-Liste, Verifizierungsbericht,
+   der Personalisierungs-Abschnitt, `DashboardMockup`, `TechFilterMockup`,
+   `LocalReachMockup`, `QualifiedLeadAnimation`, `VerificationReportMockup`,
+   `SuppressionMockup`, `DeliverabilityMockup`, `CampaignMockup`,
+   `MailboxesMockup`. Alle Komponenten sind erhalten und ungenutzt.
+4. **Sprachblöcke gegenprüfen** — DE und EN wurden bei jedem Schritt parallel
+   gepflegt, aber nie vollständig nebeneinander gelesen.
 
 ---
 
