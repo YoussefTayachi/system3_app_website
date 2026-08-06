@@ -408,6 +408,7 @@ Sechs. Alles andere ist Umstellen und Umschreiben.
 | **`CopyOutcomesMockup`** | `app/_app-mockups.tsx` | „Nach Text": Schritt · Fassung A/B · Kontakte · Antworten · Absagen · **Termine** | **1** |
 | **`LinkedInMockup`** | `app/_app-mockups.tsx` | Ein Kontakt mit fertig eingesetzter Nachricht, Aufhänger als eigener Absatz, drei Knöpfe | **1** |
 | **`StepWalkthrough`** | `app/_walkthrough.tsx` | Der Rahmen: Nummer, Text, Bild, Wechselseite, Fortschrittsspur | **2** |
+| ✅ `SystemMap` und `AllInOneCompare` sind am 2026-08-06 gebaut. | | | |
 | **`TimingMockup`** | `app/_app-mockups.tsx` | Wochentag und Uhrzeit-Blöcke, klein, neben `CopyOutcomesMockup` | **3** |
 | **`InboxMockup`** | `app/_app-mockups.tsx` | Posteingang mit eingestufter Antwort und drei Entwürfen | **3** |
 
@@ -426,7 +427,7 @@ kein Wettbewerber hat, und es gibt bisher kein einziges Bild davon.
 
 Sechs Stufen. Jede ist für sich deploybar und einzeln überprüfbar.
 
-**Stufe 0 — Die Widersprüche raus.** *(~1 Stunde, kein Design)*
+**Stufe 0 — Die Widersprüche raus.** ✅ **umgesetzt am 2026-08-06** (`4aa266b`)
 Der Rechner (`_calculator.tsx`) rechnet mit `REPLY_RATE = 0.05` und wirft
 „≈ 6,3 Termine/Monat" aus. Gemessen im eigenen Konto: 0,4 % und 1 Termin auf
 755 Kontakte — Faktor 12. Auf einer Seite, die einen Abschnitt „Was wir nicht
@@ -434,7 +435,7 @@ behaupten" hat, ist das die gefährlichste Zeile. Dazu: der „2×"-Badge, und
 „drei Suchwege" sind seit dem 05.08. **vier** (Prospeo).
 → *Danach widerspricht die Seite sich nicht mehr selbst. Schützt alles Weitere.*
 
-**Stufe 1 — Die Positionierung steht oben.** *(der größte Effekt)*
+**Stufe 1 — Die Positionierung steht oben.** ✅ **umgesetzt am 2026-08-06** (`4aa266b`)
 Neuer Hero + neuer Badge + `SystemMap` + `AllInOneCompare` an Position 8.
 Drei Eingriffe, kein einziger neuer Rundgang.
 → *Danach sagt die Seite in den ersten zwei Bildschirmen, was sie ist.*
@@ -491,6 +492,37 @@ Getroffen am 2026-08-06:
 | **Vergleichstabelle** | **Namentlich:** Apollo · Hunter · Instantly · Pipedrive. Zulässig, solange die Angaben stimmen — deshalb gilt die Regel aus Abschnitt 6 strikt: nur Belegbares, kein „✗", kein Preisvergleich, und die Tabelle wird nachgezogen, wenn ein Anbieter nachzieht |
 
 Damit ist nichts mehr offen. Umsetzung beginnt mit Stufe 0.
+
+### Beim Umsetzen dazugekommen (2026-08-06)
+
+Drei Dinge, die im Plan so nicht standen und die beim Bauen entschieden
+wurden — sie gehören hierher, nicht in eine Datei daneben:
+
+1. **Der Eyebrow fällt mit.** Er lautete „Die #1 Plattform für kalte
+   B2B-Kundengewinnung". Ein unbelegter Superlativ ist auf dieser Seite
+   dieselbe Sorte Problem wie die 5-%-Quote im Rechner. Er nennt jetzt die
+   Kategorie statt eines Rangs: *„Kaltakquise von der Nische bis zum Kunden."*
+2. **Die drei Kacheln unter dem Hero wechseln mit.** Zwei von drei führten mit
+   dem Preis (gesparte Stunden, API-Kosten), direkt unter einer Überschrift
+   über Kundengewinnung. Jetzt: vier Suchwege · drei Kanäle · ein Login. Die
+   Kostenzahlen sind nicht verloren, sie stehen im Rechner und ziehen mit
+   `#kosten` nach `/preise`.
+3. **Die Systemkarte ist DOM, nicht SVG.** Ein SVG mit festem `viewBox`
+   skaliert die Schrift mit — auf 375 px wären die Beschriftungen unter 10 px.
+   Als DOM klappt die Karte unter `lg` auf eine Spalte um und bleibt lesbar.
+
+### Was Stufe 1 bewusst noch nicht enthält
+
+**Das Hero-Bild ist noch das alte** (`LeadCardStack` und `DashboardMockup`).
+Der Wechsel auf die Ansicht „Nach Text" braucht `CopyOutcomesMockup`, und der
+entsteht in Stufe 2 zusammen mit dem Rundgang. Bis dahin zeigt der obere
+Bildschirm die richtige *Aussage*, aber noch nicht das richtige *Bild*.
+
+**Der Haupt-CTA zeigt weiter auf den Rechner** (`#rechner`, „Berechne dein
+Sparpotenzial"). Der Code begründet ihn ausdrücklich als niedrigere Hürde
+gegenüber „Kostenlos testen". Mit der neuen Gewichtung führt der wichtigste
+Knopf der Seite auf ein Kostenargument — und in Stufe 4 zieht der Rechner
+ohnehin nach `/preise`, dann bricht der Anker. **Zu entscheiden vor Stufe 4.**
 
 ---
 
