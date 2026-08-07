@@ -53,59 +53,130 @@ const de = {
     // die einladende Frage steht als H1 auf der Zielseite, wo sie wirkt.
     custom: "Eigene Software",
   },
-  // Eigene Agenturseite. Agenturen sind die wertvollere Zielgruppe (199 € statt
-  // 99 €, mehrere Workspaces, laengere Bindung), bekamen auf der Startseite
-  // aber eine Sektion unter zwanzig anderen.
+  // ══════════════════════════════════════════════════════════════════════
+  // DIE AGENTURSEITE. Am 2026-08-06 von drei auf sechs Abschnitte plus einen
+  // Ehrlichkeits-Block ausgebaut.
+  //
+  // Agenturen sind die Hauptzielgruppe -- der Hero der Startseite sagt das
+  // seit heute auch. Die eigene Seite bestand aber aus Workspaces, Report und
+  // Kosten: drei Eigenschaften, kein Alltag. Ein Inhaber mit zehn Leuten
+  // fragt sich nicht "gibt es Workspaces", sondern "wie sieht damit mein
+  // Montagmorgen aus, wie schnell ist ein neuer Kunde drin, und was passiert
+  // am Monatsende".
+  //
+  // Der Ehrlichkeits-Block ist der wichtigste Teil: Team-Zugaenge gibt es
+  // NICHT. workspaces.owner_id = auth.uid() ist im App-Repo die einzige
+  // Zugriffsregel, eine Mitglieder-Tabelle existiert nicht. Fuer ein Team von
+  // zehn ist das der entscheidende Punkt, und wer ihn erst im Gespraech
+  // erfaehrt, fuehlt sich hereingelegt. Auf einer Seite mit dem Abschnitt
+  // "Was wir dir nicht vormachen" gibt es dazu ohnehin keine Alternative.
+  // ══════════════════════════════════════════════════════════════════════
   agencyPage: {
-    metaTitle: "Für Agenturen: ein Login, ein Workspace pro Kunde",
+    metaTitle: "Für Agenturen: Kaltakquise für mehrere Kunden in einem Werkzeug",
     metaDescription:
-      "Betreut mehrere Kunden in getrennten Workspaces, mit eigenem Branding und teilbaren Reports ohne Login. Ein Abo statt eines pro Kunde.",
+      "Für Agenturen, die täglich E-Mail, LinkedIn und Telefon für ihre Kunden bespielen: ein Workspace je Kunde, getrennte Sperrlisten, Reports ohne Login und die Auswertung, welche Textfassung Termine gebracht hat.",
     eyebrow: "Für Agenturen",
-    title: "Ein Login. Ein Workspace pro Kunde. Kein neues Abo für jeden.",
+    title: "Acht Kunden. Drei Kanäle. Jeden Tag.",
     intro:
-      "Pro Kunde ein Zugang, pro Kunde ein Abo, am Monatsende ein Report von Hand. Genau dafür ist der Agentur-Plan gebaut.",
+      "Ihr macht Kaltakquise für andere. Das heißt jeden Morgen: mehrere Postfächer, mehrere Sperrlisten, mehrere Zielgruppen — und am Monatsende eine Tabelle, die jemand von Hand baut. Diese Seite handelt von diesem Alltag, nicht von Funktionen.",
+    ctaLabel: "Gespräch buchen",
     sections: [
+      {
+        id: "day",
+        eyebrow: "Der Montagmorgen",
+        title: "Eine Arbeitsliste statt acht offener Tabs",
+        body: "Wer heute anzurufen ist, wem eine LinkedIn-Nachricht fehlt, wer geantwortet hat. Je Kunde eine Liste, im selben Login, sortiert nach Dringlichkeit statt nach Eingang. Und kein Kontakt bekommt zwei Aufgaben gleichzeitig.",
+        bullets: [
+          "Anrufliste mit Nummer, Rolle und Gesprächsnotiz aus der Recherche",
+          "LinkedIn-Nachricht fertig eingesetzt — kopieren, öffnen, senden",
+          "Überfällig, heute, später statt einer Liste von allem",
+          "Wer antwortet, fällt im selben Moment aus der Kette",
+        ],
+      },
       {
         id: "workspaces",
         eyebrow: "Getrennt",
-        title: "Jeder Kunde in seinem eigenen Bereich",
-        body: "Leads, Kampagnen und Sperrlisten laufen pro Kunde getrennt. Umschalten im selben Login, neue Kunden in Sekunden angelegt.",
+        title: "Kunde A erfährt nie von Kunde B",
+        body: "Leads, Kampagnen und Sperrlisten laufen je Kunde getrennt. Das ist keine Bequemlichkeit, sondern Haftung: ein Bestandskunde von A, der eine Kaltmail für B bekommt, kostet euch A.",
         bullets: [
-          "Unbegrenzte Workspaces im Plan enthalten",
+          "Sperrliste je Kunde, keine Überschneidung",
           "Name, Logo und Akzentfarbe je Workspace",
-          "Sperrliste pro Kunde, keine Überschneidungen",
+          "Umschalten im selben Login, ohne Ab- und Anmelden",
+          "Unbegrenzt Workspaces im jeweiligen Plan",
+        ],
+      },
+      {
+        id: "onboarding",
+        eyebrow: "Am ersten Tag",
+        title: "Ein neuer Kunde ist am selben Tag startklar",
+        body: "Was heute Tage dauert — Konten anlegen, Listen übertragen, Sequenzen nachbauen — ist hier eine Checkliste. Die erste Suche läuft sofort. Bis die erste Kampagne rausgeht, wartet ihr das Postfach-Warmup ab, und das dauert zwei bis vier Wochen. Daran führt kein Werkzeug vorbei, unseres auch nicht.",
+        bullets: [
+          "Workspace anlegen und Branding setzen: zwei Minuten",
+          "Bestandskunden des Kunden per CSV in die Sperrliste",
+          "Zielgruppe als gespeicherte Suche, nicht als Briefing-Dokument",
+          "Lead-Abo: die Liste wächst wöchentlich von allein weiter",
         ],
       },
       {
         id: "report",
-        eyebrow: "Vorzeigbar",
-        title: "Der Report, den ihr weiterreichen könnt",
-        body: "Ein Link zeigt die Kennzahlen im Look des Kunden, ganz ohne Account. Ersetzt die Tabelle, die sonst am Monatsende von Hand entsteht.",
+        eyebrow: "Am Monatsende",
+        title: "Der Bericht baut sich selbst",
+        body: "Ein Link je Kunde, im Look des Kunden, ohne Account. Er zeigt Kontaktiert, Antworten und Termine — und keine einzige Kontaktadresse.",
         bullets: [
           "Kein Login für den Endkunden nötig",
-          "Im Branding des jeweiligen Kunden",
-          "Kontaktdaten bleiben bei euch",
+          "Kontaktdaten bleiben bei euch, nicht beim Kunden",
+          "Ersetzt die Tabelle, die sonst am Monatsende entsteht",
+          "Jederzeit aktuell statt zum Stichtag",
+        ],
+      },
+      {
+        id: "learning",
+        eyebrow: "Der Vorteil, den nur ihr habt",
+        title: "Nach dem dritten Kunden wisst ihr, was in einer Nische wirkt",
+        body: "Für jede Kampagne steht da, welche Textfassung Termine gebracht hat. Nicht Antworten — Termine. Ein Sendetool kann das nicht sagen, weil es den Text nicht geschrieben hat, und eine Lead-Datenbank sieht die Antwort nie. Nach ein paar Kunden habt ihr etwas, das keine Agentur kaufen kann: eine Sammlung von Eröffnungen, von denen ihr wisst, dass sie Termine gebracht haben.",
+        bullets: [
+          "Je Schritt und Textfassung: Antworten, Absagen, Termine",
+          "Dazu Wochentag, Uhrzeit und Lead-Liste",
+          "Was bei einem Kunden funktioniert hat, nehmt ihr zum nächsten mit",
+          "Unter 30 Kontakten zeigen wir keine Quote — auch euch nicht",
         ],
       },
       {
         id: "costs",
         eyebrow: "Kalkulierbar",
-        title: "Was ein Kunde euch kostet",
-        body: "Der Plan ist fix, die Abfragekosten hängen am Volumen. Was ihr euren Kunden berechnet, bleibt eure Entscheidung.",
+        title: "Was ein Kunde euch kostet, und was ihr ihm berechnet",
+        body: "Der Plan ist fix, die Abfragekosten hängen am Volumen und laufen über eure eigenen Zugänge. Was ihr euren Kunden dafür berechnet, bleibt eure Entscheidung — wir sehen es nicht und schlagen nichts auf.",
         bullets: [
-          "199 € im Monat, unabhängig von der Kundenzahl",
-          "≈ 65 € Abfragekosten je 1.000 Leads",
-          "Kein Aufpreis pro angelegtem Workspace",
+          "199 € für bis zu fünf Kunden, 349 € für bis zu zwölf",
+          "≈ 65 € Abfragekosten je 1.000 Leads, zum Selbstkostenpreis",
+          "Kein Aufpreis je Workspace, kein Aufpreis je Report",
+          "Was wegfällt: das CRM-Abo, das je Sitzplatz kostet",
         ],
       },
     ],
-    contrastTitle: "Was Multi-Kunden-Verwaltung sonst kostet",
+    honestTitle: "Drei Dinge, die ihr vor dem Gespräch wissen solltet",
+    honestBody:
+      "Wenn ihr täglich für zehn Leute Kaltakquise organisiert, sind das die Punkte, an denen es hakt. Sie erst im Gespräch zu erfahren, wäre die schlechtere Reihenfolge.",
+    honestItems: [
+      {
+        title: "Ein Login, noch keine Team-Zugänge",
+        body: "Heute gehören alle Workspaces einem Konto. Eigene Zugänge je Mitarbeiter mit Rollen und Rechten gibt es noch nicht. Für ein Team von zehn ist das der Punkt, an dem ihr uns fragen solltet, bevor ihr euch entscheidet.",
+      },
+      {
+        title: "LinkedIn sendet nicht von allein",
+        body: "Die Nachricht steht fertig da, gesendet wird von euch. LinkedIn hat dafür keine Schnittstelle, und ein Werkzeug, das trotzdem automatisch sendet, riskiert die Konten eurer Leute. Angerufen wird ebenfalls von euch — wir sind keine Telefonanlage.",
+      },
+      {
+        title: "Zwei bis vier Wochen, bevor die erste Mail rausgeht",
+        body: "Frische Postfächer brauchen Warmup. Wer am ersten Tag sendet, verbrennt die Domain des Kunden. Genau deshalb gibt es hier keine 14-Tage-Testphase, sondern eine gemeinsame Einrichtung.",
+      },
+    ],
+    contrastTitle: "Was ein reines Sendetool an dieser Stelle verlangt",
     contrastBody:
-      "Bei reinen Versand-Tools ist Multi-Kunden-Verwaltung meist ein Zusatzmodul mit eigenem Preis pro Kundenkonto, und deckt dann nur den Versand ab. Recherche und Reporting kommen obendrauf. Hier ist beides von Anfang an dabei.",
-    ctaTitle: "Sprecht kurz mit uns über eure Kundenstruktur",
+      "Mehrere Kundenkonten sind dort meist ein eigener Posten, oft je Workspace bepreist — auf einem Werkzeug, das nur versendet. Recherche, Personalisierung, Anrufe und der Bericht kommen dann noch dazu. Hier ist das ein Plan.",
+    ctaTitle: "Reden wir über eure Kundenstruktur",
     ctaBody:
-      "Beim Agentur-Plan richten wir Workspaces und Branding gemeinsam ein, deshalb steht am Anfang ein kurzes Gespräch statt einer Selbstanmeldung. 30 Minuten, keine Präsentation.",
-    ctaLabel: "Gespräch buchen",
+      "Dreißig Minuten: wie viele Kunden, welche Zielgruppen, wie euer Team heute arbeitet. Wir richten den ersten Workspace gemeinsam ein. Kein Verkaufsgespräch, keine Folien.",
   },
   // Eigene Preisseite. "Preise" ist der meistgeklickte Navigationspunkt, landete
   // aber mitten in einer sehr langen Startseite zwischen zwei anderen Themen.
@@ -1549,6 +1620,7 @@ const de = {
     DMARC: "DMARC: die Regel, was ein Empfänger mit E-Mails tun soll, die SPF oder DKIM nicht bestehen.",
   },
   agency: {
+    pageLink: "Wie das im Agenturalltag aussieht",
     eyebrow: "Für Agenturen",
     title: "Mehrere Kunden verwalten, ohne für jeden ein neues Abo aufzumachen",
     body: "Betreut ihr Lead-Gen oder Cold Outreach für eure eigenen Kunden? Dann läuft jeder Kunde in einem eigenen, sauber getrennten Workspace, im Look dieses Kunden, unter einem einzigen Login für euer Team.",
@@ -2070,55 +2142,111 @@ const en: typeof de = {
     custom: "Custom Software",
   },
   agencyPage: {
-    metaTitle: "For agencies: one login, one workspace per client",
+    metaTitle: "For agencies: cold outreach for several clients in one tool",
     metaDescription:
-      "Run several clients in separate workspaces, with their own branding and shareable reports that need no login. One subscription instead of one per client.",
+      "For agencies running email, LinkedIn and phone for their clients every day: one workspace per client, separate suppression lists, reports without a login, and the analysis of which copy version booked meetings.",
     eyebrow: "For agencies",
-    title: "One login. One workspace per client. No new subscription for each.",
+    title: "Eight clients. Three channels. Every day.",
     intro:
-      "One login per client, one subscription per client, a hand-built report at month's end. That's what the Agency plan is for.",
+      "You run cold outreach for other people. That means every morning: several mailboxes, several suppression lists, several audiences — and at month's end a spreadsheet somebody builds by hand. This page is about that daily reality, not about features.",
+    ctaLabel: "Book a call",
     sections: [
+      {
+        id: "day",
+        eyebrow: "Monday morning",
+        title: "One work list instead of eight open tabs",
+        body: "Who needs a call today, who is missing a LinkedIn message, who replied. One list per client, in the same login, sorted by urgency rather than by arrival. And no contact ever gets two tasks at once.",
+        bullets: [
+          "Call list with number, role and a prep note from the research",
+          "LinkedIn message already filled in — copy, open, send",
+          "Overdue, today, later instead of a list of everything",
+          "Anyone who replies drops out of the chain the same moment",
+        ],
+      },
       {
         id: "workspaces",
         eyebrow: "Separated",
-        title: "Every client in their own space",
-        body: "Leads, campaigns and suppression lists stay separated per client. Switch inside the same login, new clients set up in seconds.",
+        title: "Client A never hears about client B",
+        body: "Leads, campaigns and suppression lists run separately per client. That is not convenience, it is liability: an existing customer of A who receives a cold email for B costs you A.",
         bullets: [
-          "Unlimited workspaces included in the plan",
-          "Name, logo and accent colour per workspace",
           "Suppression list per client, no overlap",
+          "Name, logo and accent colour per workspace",
+          "Switch inside the same login, no signing out",
+          "Unlimited workspaces within your plan",
+        ],
+      },
+      {
+        id: "onboarding",
+        eyebrow: "On day one",
+        title: "A new client is ready the same day",
+        body: "What takes days today — creating accounts, moving lists, rebuilding sequences — is a checklist here. The first search runs immediately. Before the first campaign goes out you wait for mailbox warmup, and that takes two to four weeks. No tool gets around it, ours included.",
+        bullets: [
+          "Create the workspace and set the branding: two minutes",
+          "Import that client's existing customers into the suppression list via CSV",
+          "The audience lives as a saved search, not as a briefing document",
+          "Lead subscription: the list keeps growing weekly on its own",
         ],
       },
       {
         id: "report",
-        eyebrow: "Presentable",
-        title: "The report you can hand over",
-        body: "One link shows the numbers in that client's look, no account needed. Replaces the spreadsheet that otherwise gets built by hand each month.",
+        eyebrow: "At month's end",
+        title: "The report builds itself",
+        body: "One link per client, in that client's look, without an account. It shows contacted, replies and meetings — and not a single contact address.",
         bullets: [
           "No login needed for the end client",
-          "In the branding of that client",
-          "Contact details stay with you",
+          "Contact details stay with you, not with the client",
+          "Replaces the spreadsheet that otherwise gets built at month's end",
+          "Always current instead of as of a cut-off date",
+        ],
+      },
+      {
+        id: "learning",
+        eyebrow: "The advantage only you get",
+        title: "By the third client you know what works in a niche",
+        body: "For every campaign it says which copy version booked meetings. Not replies — meetings. A sending tool cannot tell you that because it did not write the copy, and a lead database never sees the reply. After a few clients you have something no agency can buy: a set of openers you know booked meetings.",
+        bullets: [
+          "Per step and per copy version: replies, rejections, meetings",
+          "Plus weekday, time of day and lead list",
+          "What worked for one client, you take to the next",
+          "Below 30 contacts we show no rate — not even to you",
         ],
       },
       {
         id: "costs",
         eyebrow: "Predictable",
-        title: "What a client costs you",
-        body: "The plan is fixed, lookup costs follow volume. What you charge your clients for it stays your decision.",
+        title: "What a client costs you, and what you charge them",
+        body: "The plan is fixed, lookup costs follow volume and run on your own accounts. What you charge your clients for it stays your decision — we do not see it and we add no markup.",
         bullets: [
-          "€199 a month, regardless of client count",
-          "≈ €65 in lookup cost per 1,000 leads",
-          "No surcharge per workspace created",
+          "€199 for up to five clients, €349 for up to twelve",
+          "≈ €65 in lookup costs per 1,000 leads, at cost price",
+          "No surcharge per workspace, no surcharge per report",
+          "What goes away: the CRM subscription that charges per seat",
         ],
       },
     ],
-    contrastTitle: "What multi-client management usually costs",
+    honestTitle: "Three things you should know before the call",
+    honestBody:
+      "If you organise cold outreach for ten people every day, these are the points where it gets tight. Learning them on the call would be the worse order.",
+    honestItems: [
+      {
+        title: "One login, no team accounts yet",
+        body: "Today all workspaces belong to one account. Individual logins per employee with roles and permissions do not exist yet. For a team of ten this is the point to ask us about before you decide.",
+      },
+      {
+        title: "LinkedIn does not send on its own",
+        body: "The message sits there ready, you send it. LinkedIn has no API for it, and a tool that sends anyway risks your people's accounts. You make the calls yourself too — we are not a phone system.",
+      },
+      {
+        title: "Two to four weeks before the first email goes out",
+        body: "Fresh mailboxes need warmup. Sending on day one burns your client's domain. That is exactly why there is no 14-day trial here, but a guided setup instead.",
+      },
+    ],
+    contrastTitle: "What a pure sending tool asks for at this point",
     contrastBody:
-      "With pure sending tools, multi-client management is usually a separately priced add-on with its own price per client account, and then it only covers sending. Research and reporting come on top. Here both are included from the start.",
-    ctaTitle: "Talk to us briefly about your client setup",
+      "Multiple client accounts are usually a separate line item there, often priced per workspace — on a tool that only sends. Research, personalisation, calls and the report all come on top. Here it is one plan.",
+    ctaTitle: "Let's talk about your client setup",
     ctaBody:
-      "On the Agency plan we set up workspaces and branding together, which is why a short call comes first rather than a self-service signup. 30 minutes, no slide deck.",
-    ctaLabel: "Book a call",
+      "Thirty minutes: how many clients, which audiences, how your team works today. We set up the first workspace together. Not a sales pitch, no slide deck.",
   },
   pricingPage: {
     metaTitle: "Pricing: €99 or €199 per month, plus your actual lookup cost",
@@ -3282,6 +3410,7 @@ const en: typeof de = {
     DMARC: "DMARC: the rule telling recipients what to do with email that fails SPF or DKIM.",
   },
   agency: {
+    pageLink: "What that looks like day to day",
     eyebrow: "For agencies",
     title: "Manage multiple clients without opening a new subscription for each one",
     body: "Running lead-gen or cold outreach for your own clients? Each client runs in its own, cleanly separated workspace, in that client's look, under a single login for your team.",

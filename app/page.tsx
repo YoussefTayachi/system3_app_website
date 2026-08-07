@@ -15,7 +15,7 @@ import { SystemMap } from "./_system-map";
 import { AllInOneCompare } from "./_compare";
 import { StepWalkthrough } from "./_walkthrough";
 import { Reveal } from "./reveal";
-import { trustIcons, postSendIcons, agencyIcons, CheckIcon } from "./_icons";
+import { trustIcons, postSendIcons, CheckIcon } from "./_icons";
 import { useT, LanguageToggle } from "./language-provider";
 
 /** Anbieter-Farben der vier Suchwege, deckungsgleich mit lib/search-source.ts
@@ -219,44 +219,58 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Agency / white-label */}
+      {/* ═══════════════════════════════════════════════════════════════
+          DER AGENTUR-BLOCK, am 2026-08-06 von einem vollen Abschnitt auf ein
+          Band gekuerzt.
+
+          Agenturen sind die Hauptzielgruppe -- der Hero sagt das inzwischen
+          in der ersten Zeile. Genau deshalb ist ein eigener Abschnitt "Fuer
+          Agenturen" mitten in der Seite falsch: er liest sich wie ein Segment
+          unter mehreren und wiederholt, was oben schon steht.
+
+          Was hier bleibt, ist der eine Beleg, dass die Mehrkunden-Sache echt
+          ist -- ein Bild und drei Zeilen. Der Alltag (Montagmorgen, neuer
+          Kunde, Monatsende, was ihr ueber alle Kunden lernt) steht auf
+          /fuer-agenturen, und dorthin fuehrt hier ein deutlicher Weg statt
+          eines Textlinks am Rand. ═══════════════════════════════════════ */}
       <section id="agenturen" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
-        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-          <SectionHeading eyebrow={t.agency.eyebrow} title={t.agency.title} />
-          <div className="grid gap-10 lg:grid-cols-5 lg:items-start">
-            <div className="lg:col-span-2">
-              <p className="text-sm leading-relaxed text-soft sm:text-base">{t.agency.body}</p>
-              <div className="mt-6 space-y-4">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+            <div>
+              <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-faint">
+                {t.agency.eyebrow}
+              </p>
+              <h2 className="font-display mt-2 max-w-[20ch] text-2xl font-semibold leading-[1.15] tracking-[-0.02em] text-ink sm:text-[1.75rem]">
+                {t.agency.title}
+              </h2>
+              <p className="mt-4 max-w-[52ch] text-base leading-relaxed text-soft">{t.agency.body}</p>
+
+              {/* Nur die Ueberschriften der drei Punkte, ohne Fliesstext und
+                  ohne Icons: das Band soll belegen, nicht erklaeren. */}
+              <ul className="mt-6 space-y-2.5">
                 {t.agency.features.map((f) => (
-                  <div key={f.id} className="flex gap-3">
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-sky-500/10 text-sky-600">
-                      {agencyIcons[f.id]}
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-semibold text-ink">{f.title}</h3>
-                      <p className="mt-1 text-sm leading-relaxed text-soft">{f.body}</p>
-                    </div>
-                  </div>
+                  <li key={f.id} className="flex items-start gap-2.5 text-sm leading-relaxed text-soft">
+                    <CheckIcon />
+                    {f.title}
+                  </li>
                 ))}
-              </div>
+              </ul>
+
+              {/* Ein Knopf statt eines Textlinks: fuer die Hauptzielgruppe ist
+                  das der zweitwichtigste Weg der Seite, gleich nach dem
+                  Gespraech. */}
+              <a
+                href="/fuer-agenturen"
+                className="group mt-7 inline-flex items-center gap-2 rounded-full border border-edge2 bg-panel px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:border-ink"
+              >
+                {t.agency.pageLink}
+                <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
+              </a>
             </div>
-            <div className="lg:col-span-3">
+
+            <Reveal>
               <AgencyMockup />
-            </div>
-          </div>
-          {/* Die Details -- Kosten pro Kunde, Report aus Endkundensicht,
-              Abgrenzung zu Versand-Tools -- stehen auf /fuer-agenturen. Hier
-              nur der Verweis, damit die Startseite nicht zwei Zielgruppen
-              gleichzeitig bedienen muss. */}
-          <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-edge/60 bg-panel p-5">
-            <p className="max-w-[58ch] text-sm leading-relaxed text-soft">{t.agency.note}</p>
-            <a
-              href="/fuer-agenturen"
-              className="group inline-flex shrink-0 items-center gap-1.5 text-sm font-medium text-sky-700 transition-colors hover:text-sky-800"
-            >
-              {t.nav.agenturen}
-              <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
-            </a>
+            </Reveal>
           </div>
         </div>
       </section>

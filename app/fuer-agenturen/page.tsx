@@ -1,7 +1,8 @@
 "use client";
 import { Logo, CTAButton, NavDropdown, SectionHeading, BOOKING_URL } from "../_ui";
 import { AgencyMockup } from "../_mockups";
-import { ReportMockup } from "../_app-mockups";
+import { ReportMockup, CallListMockup } from "../_app-mockups";
+import { CopyOutcomesMockup } from "../_guard-mockups";
 import { Reveal } from "../reveal";
 import { CheckIcon } from "../_icons";
 import { useT, LanguageToggle } from "../language-provider";
@@ -19,9 +20,17 @@ export default function AgenturenPage() {
   const { t } = useT();
   const a = t.agencyPage;
 
+  // Vier von sechs Abschnitten haben jetzt ein Bild. Vorher waren es zwei --
+  // und ausgerechnet der Alltag ("wie sieht mein Montagmorgen aus") und der
+  // Vorteil, den nur eine Agentur hat, standen als reiner Text da.
+  //
+  // "onboarding" und "costs" bleiben bewusst ohne Bild: eine Checkliste und
+  // eine Rechnung sind Text, und ein Mockup dazu waere Dekoration.
   const visuals: Record<string, React.ReactNode> = {
+    day: <CallListMockup />,
     workspaces: <AgencyMockup />,
     report: <ReportMockup />,
+    learning: <CopyOutcomesMockup />,
   };
 
   const navLinks = [
@@ -104,9 +113,46 @@ export default function AgenturenPage() {
         );
       })}
 
+      {/* ═══════════════════════════════════════════════════════════════
+          DER EHRLICHKEITS-BLOCK. Neu am 2026-08-06 und der wichtigste
+          Abschnitt dieser Seite.
+
+          Der erste Punkt ist eine echte Luecke: es gibt KEINE Team-Zugaenge.
+          Im App-Repo ist workspaces.owner_id = auth.uid() die einzige
+          Zugriffsregel, eine Mitglieder-Tabelle existiert nicht. Alle
+          Workspaces gehoeren einem Konto.
+
+          Fuer eine Agentur mit zehn Leuten ist genau das die erste Frage nach
+          dem Preis. Wer die Antwort erst im Gespraech bekommt, fuehlt sich
+          hereingelegt -- und auf einer Seite, deren staerkstes Argument der
+          Abschnitt "Was wir dir nicht vormachen" ist, waere Verschweigen
+          ohnehin nicht zu halten.
+
+          Steht bewusst VOR dem Abschluss-CTA: wer nach diesem Abschnitt noch
+          klickt, kommt vorbereitet ins Gespraech. Das ist weniger Termine,
+          aber besser vorqualifizierte. ═══════════════════════════════════ */}
+      <section className="border-b border-edge/60 bg-panel2">
+        <div className="mx-auto max-w-4xl px-4 py-20 sm:px-6">
+          <SectionHeading title={a.honestTitle} />
+          <p className="-mt-4 max-w-[62ch] text-sm leading-relaxed text-soft sm:text-base">{a.honestBody}</p>
+          <div className="mt-8 grid items-stretch gap-5 md:grid-cols-3">
+            {a.honestItems.map((h, i) => (
+              <Reveal key={h.title} delay={i * 70} className="h-full">
+                <div className="flex h-full flex-col rounded-2xl border border-edge/60 bg-panel p-5">
+                  <h3 className="font-display text-lg font-semibold leading-snug tracking-[-0.015em] text-ink">
+                    {h.title}
+                  </h3>
+                  <p className="mt-2.5 text-sm leading-relaxed text-soft">{h.body}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Ohne Anbieternamen und ohne erfundene Preise: die Aussage laesst sich
           belegen, eine konkrete Zahl fuer fremde Tools nicht. */}
-      <section className="border-b border-edge/60 bg-panel2">
+      <section className="border-b border-edge/60">
         <div className="mx-auto max-w-3xl px-4 py-20 sm:px-6">
           <SectionHeading title={a.contrastTitle} />
           <p className="-mt-4 text-sm leading-relaxed text-soft sm:text-base">{a.contrastBody}</p>
