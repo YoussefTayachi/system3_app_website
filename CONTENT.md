@@ -192,15 +192,27 @@ Vorher nicht auswerten.
 
 ---
 
-## 8. Offene Entscheidungen
+## 8. Entscheidungen
 
-1. **Sprache.** Deutsch trifft deine Zielgruppe (DACH-Agenturen), Englisch hat
-   ein Vielfaches an Reichweite und passt zur englischen Website. Beides
-   parallel halte ich für einen Fehler — doppelte Arbeit, halbe Frequenz.
-2. **Gesicht vor der Kamera oder nicht.** Mit Gesicht läuft es in diesem Feld
-   deutlich besser und du wirst als Person erkennbar (auch für Arbeitgeber).
-   Ohne Gesicht geht nur Bildschirm plus Stimme oder Text — machbar, aber
-   langsamer.
-3. **Instagram und TikTok gleichzeitig oder erst eins.** Dieselben Videos
-   funktionieren auf beiden. Ich würde beide bespielen, aber nur auf einem
-   antworten, bis absehbar ist, wo deine Leute sind.
+Getroffen am 2026-08-06:
+
+| Frage | Entscheidung |
+|---|---|
+| **Sprache** | **Englisch.** Passt zur englischen Website, deutlich mehr Reichweite, und es arbeitet für die Jobsuche international mit. Der Preis: ein Teil des Publikums kommt aus Märkten, die du nie bedienen wirst — die Beiträge müssen deshalb auf *Kompetenz* einzahlen, nicht auf Reichweite |
+| **Format** | **Gesicht plus Bildschirm.** Läuft in diesem Feld deutlich besser und macht dich als Person erkennbar |
+| **Taktung** | **Drei Beiträge die Woche**, ein Stapel alle drei Wochen |
+| **Plattform** | Beide bespielen, dieselben Videos. Antworten zunächst nur dort, wo die ersten Agenturleute auftauchen |
+
+Der erste Stapel steht in `CONTENT-BACKLOG.md`, zehn Beiträge, filmfertig.
+
+### Eine Folge der Englisch-Entscheidung
+
+Auf Englisch ist die Nische voll. Was dich dort trägt, ist nicht das Thema
+„Cold Email", sondern deine Haltung dazu: **du bist der, der die Zahl weglässt,
+wenn sie nichts bedeutet.** Jeder Beitrag muss diese Haltung tragen, sonst
+gehst du in einem Feld unter, in dem tausend Leute dasselbe Thema lauter
+bespielen.
+
+Deshalb steht Beitrag 01 an erster Stelle und nicht ein Ratgeber: wer mit der
+eigenen schlechtesten Zahl anfängt, kann danach über alles reden, ohne wie ein
+Verkäufer zu klingen.
