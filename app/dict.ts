@@ -85,7 +85,7 @@ const de = {
         id: "day",
         eyebrow: "Der Montagmorgen",
         title: "Eine Arbeitsliste statt acht offener Tabs",
-        body: "Wer heute anzurufen ist, wem eine LinkedIn-Nachricht fehlt, wer geantwortet hat. Je Kunde eine Liste, im selben Login, sortiert nach Dringlichkeit statt nach Eingang. Und kein Kontakt bekommt zwei Aufgaben gleichzeitig.",
+        body: "Wer heute anzurufen ist, wem eine LinkedIn-Nachricht fehlt, wer geantwortet hat. Je Kunde eine Liste, sortiert nach Dringlichkeit statt nach Eingang. Jede Person im Team arbeitet mit ihrem eigenen Zugang darin, und kein Kontakt bekommt zwei Aufgaben gleichzeitig.",
         bullets: [
           "Anrufliste mit Nummer, Rolle und Gesprächsnotiz aus der Recherche",
           "LinkedIn-Nachricht fertig eingesetzt — kopieren, öffnen, senden",
@@ -99,9 +99,9 @@ const de = {
         title: "Kunde A erfährt nie von Kunde B",
         body: "Leads, Kampagnen und Sperrlisten laufen je Kunde getrennt. Das ist keine Bequemlichkeit, sondern Haftung: ein Bestandskunde von A, der eine Kaltmail für B bekommt, kostet euch A.",
         bullets: [
+          "Eigener Zugang je Person, mit Rolle: Admin oder Mitglied",
           "Sperrliste je Kunde, keine Überschneidung",
           "Name, Logo und Akzentfarbe je Workspace",
-          "Umschalten im selben Login, ohne Ab- und Anmelden",
           "Unbegrenzt Workspaces im jeweiligen Plan",
         ],
       },
@@ -1567,9 +1567,12 @@ const de = {
     pageLink: "Wie das im Agenturalltag aussieht",
     eyebrow: "Für Agenturen",
     title: "Mehrere Kunden verwalten, ohne für jeden ein neues Abo aufzumachen",
-    body: "Betreut ihr Lead-Gen oder Cold Outreach für eure eigenen Kunden? Dann läuft jeder Kunde in einem eigenen, sauber getrennten Workspace, im Look dieses Kunden, unter einem einzigen Login für euer Team.",
+    // "unter einem einzigen Login fuer euer Team" hiess bis zum 2026-08-06
+    // woertlich: ein geteiltes Passwort. Seit Migration 0081 gibt es echte
+    // Zugaenge je Person mit zwei Rollen, und die Zeile sagt das jetzt.
+    body: "Betreut ihr Lead-Gen oder Cold Outreach für eure eigenen Kunden? Dann läuft jeder Kunde in einem eigenen, sauber getrennten Workspace, im Look dieses Kunden — und jede Person in eurem Team hat ihren eigenen Zugang.",
     features: [
-      { id: "workspaces", title: "Ein Login, ein Workspace pro Kunde", body: "Leads, Kampagnen und Kontakte laufen pro Kunde sauber getrennt, ohne für jeden ein eigenes Abo abzuschließen. Workspaces lassen sich in Sekunden anlegen, umbenennen oder wieder entfernen." },
+      { id: "workspaces", title: "Eigene Zugänge, ein Workspace pro Kunde", body: "Jede Person im Team hat einen eigenen Zugang mit Rolle — Admin oder Mitglied. Leads, Kampagnen und Sperrlisten laufen pro Kunde sauber getrennt, ohne für jeden ein eigenes Abo." },
       { id: "branding", title: "Branding pro Kunden-Workspace", body: "Name, Logo und Akzentfarbe lassen sich je Workspace hinterlegen, damit das, was der Endkunde sieht, nach der Agentur aussieht, nicht nach einem fremden Tool im Hintergrund." },
       { id: "reportLink", title: "Teilbarer Report-Link, ohne Login für den Endkunden", body: "Ein Link pro Workspace zeigt aggregierte Kennzahlen im Look des jeweiligen Kunden, ganz ohne dass der einen eigenen Account braucht. Einzelne Kontaktdaten sieht der Endkunde dabei bewusst nicht." },
     ],
@@ -2040,7 +2043,7 @@ const en: typeof de = {
         id: "day",
         eyebrow: "Monday morning",
         title: "One work list instead of eight open tabs",
-        body: "Who needs a call today, who is missing a LinkedIn message, who replied. One list per client, in the same login, sorted by urgency rather than by arrival. And no contact ever gets two tasks at once.",
+        body: "Who needs a call today, who is missing a LinkedIn message, who replied. One list per client, sorted by urgency rather than by arrival. Everyone on the team works in it with their own login, and no contact ever gets two tasks at once.",
         bullets: [
           "Call list with number, role and a prep note from the research",
           "LinkedIn message already filled in — copy, open, send",
@@ -2054,9 +2057,9 @@ const en: typeof de = {
         title: "Client A never hears about client B",
         body: "Leads, campaigns and suppression lists run separately per client. That is not convenience, it is liability: an existing customer of A who receives a cold email for B costs you A.",
         bullets: [
+          "Own login per person, with a role: admin or member",
           "Suppression list per client, no overlap",
           "Name, logo and accent colour per workspace",
-          "Switch inside the same login, no signing out",
           "Unlimited workspaces within your plan",
         ],
       },
@@ -3245,9 +3248,9 @@ const en: typeof de = {
     pageLink: "What that looks like day to day",
     eyebrow: "For agencies",
     title: "Manage multiple clients without opening a new subscription for each one",
-    body: "Running lead-gen or cold outreach for your own clients? Each client runs in its own, cleanly separated workspace, in that client's look, under a single login for your team.",
+    body: "Running lead-gen or cold outreach for your own clients? Each client runs in its own, cleanly separated workspace, in that client's look — and every person on your team gets their own login.",
     features: [
-      { id: "workspaces", title: "One login, one workspace per client", body: "Leads, campaigns and contacts run cleanly separated per client, without a separate subscription for each one. Workspaces can be created, renamed or removed in seconds." },
+      { id: "workspaces", title: "Own logins, one workspace per client", body: "Every person on the team gets their own login with a role — admin or member. Leads, campaigns and suppression lists run cleanly separated per client, without a separate subscription for each one." },
       { id: "branding", title: "Branding per client workspace", body: "Name, logo and accent color can be set per workspace, so what the client sees looks like the agency's own tool, not something foreign in the background." },
       { id: "reportLink", title: "Shareable report link, no login required for the client", body: "A link per workspace shows aggregated metrics in that client's look, without them needing their own account. Individual contact data is deliberately not shown to the client." },
     ],
