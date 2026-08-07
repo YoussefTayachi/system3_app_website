@@ -145,30 +145,13 @@ const de = {
         id: "costs",
         eyebrow: "Kalkulierbar",
         title: "Was ein Kunde euch kostet, und was ihr ihm berechnet",
-        body: "Der Plan ist fix, die Abfragekosten hängen am Volumen und laufen über eure eigenen Zugänge. Was ihr euren Kunden dafür berechnet, bleibt eure Entscheidung — wir sehen es nicht und schlagen nichts auf.",
+        body: "Ein fester Monatsbetrag, der zu eurer Kundenzahl passt — wir legen ihn im Gespräch gemeinsam fest. Die Abfragekosten laufen daneben über eure eigenen Zugänge, zum Selbstkostenpreis. Was ihr euren Kunden dafür berechnet, bleibt eure Entscheidung: wir sehen es nicht und schlagen nichts auf.",
         bullets: [
-          "199 € für bis zu fünf Kunden, 349 € für bis zu zwölf",
-          "≈ 65 € Abfragekosten je 1.000 Leads, zum Selbstkostenpreis",
+          "Ein Betrag, unabhängig davon, wie viele Workspaces ihr anlegt",
           "Kein Aufpreis je Workspace, kein Aufpreis je Report",
+          "Abfragekosten zum Selbstkostenpreis, live im Dashboard sichtbar",
           "Was wegfällt: das CRM-Abo, das je Sitzplatz kostet",
         ],
-      },
-    ],
-    honestTitle: "Drei Dinge, die ihr vor dem Gespräch wissen solltet",
-    honestBody:
-      "Wenn ihr täglich für zehn Leute Kaltakquise organisiert, sind das die Punkte, an denen es hakt. Sie erst im Gespräch zu erfahren, wäre die schlechtere Reihenfolge.",
-    honestItems: [
-      {
-        title: "Ein Login, noch keine Team-Zugänge",
-        body: "Heute gehören alle Workspaces einem Konto. Eigene Zugänge je Mitarbeiter mit Rollen und Rechten gibt es noch nicht. Für ein Team von zehn ist das der Punkt, an dem ihr uns fragen solltet, bevor ihr euch entscheidet.",
-      },
-      {
-        title: "LinkedIn sendet nicht von allein",
-        body: "Die Nachricht steht fertig da, gesendet wird von euch. LinkedIn hat dafür keine Schnittstelle, und ein Werkzeug, das trotzdem automatisch sendet, riskiert die Konten eurer Leute. Angerufen wird ebenfalls von euch — wir sind keine Telefonanlage.",
-      },
-      {
-        title: "Zwei bis vier Wochen, bevor die erste Mail rausgeht",
-        body: "Frische Postfächer brauchen Warmup. Wer am ersten Tag sendet, verbrennt die Domain des Kunden. Genau deshalb gibt es hier keine 14-Tage-Testphase, sondern eine gemeinsame Einrichtung.",
       },
     ],
     contrastTitle: "Was ein reines Sendetool an dieser Stelle verlangt",
@@ -177,45 +160,6 @@ const de = {
     ctaTitle: "Reden wir über eure Kundenstruktur",
     ctaBody:
       "Dreißig Minuten: wie viele Kunden, welche Zielgruppen, wie euer Team heute arbeitet. Wir richten den ersten Workspace gemeinsam ein. Kein Verkaufsgespräch, keine Folien.",
-  },
-  // Eigene Preisseite. "Preise" ist der meistgeklickte Navigationspunkt, landete
-  // aber mitten in einer sehr langen Startseite zwischen zwei anderen Themen.
-  pricingPage: {
-    metaTitle: "Preise: 99 € oder 199 € im Monat, plus die tatsächlichen Abfragekosten",
-    metaDescription:
-      "Feste Monatspreise ohne Vertragsbindung, dazu die Abfragekosten zum Selbstkostenpreis. Eingerichtet wird gemeinsam im Gespräch, monatlich kündbar.",
-    eyebrow: "Preise",
-    title: "Alle Preise im Einzelnen",
-    intro:
-      "Ihr zahlt den Plan und die Abfragen, die eure Suchen tatsächlich auslösen. Sonst nichts. Keine Einrichtungsgebühr, keine Mindestlaufzeit, kein Credit-Paket, das am Monatsende verfällt.",
-    breakdownTitle: "Woraus sich eure Rechnung zusammensetzt",
-    breakdownIntro:
-      "Damit niemand von der ersten Abrechnung überrascht wird, hier beide Posten offen nebeneinander.",
-    breakdown: [
-      {
-        id: "plan",
-        label: "Fester Monatspreis",
-        value: "99 € oder 199 €",
-        body: "Je nach Plan. Monatlich kündbar, keine Mindestlaufzeit, keine Einrichtungsgebühr.",
-      },
-      {
-        id: "usage",
-        label: "Abfragen, zum Selbstkostenpreis",
-        value: "≈ 4 $ / 100 Firmen",
-        body: "Rechnet ihr über eure eigenen Zugänge direkt ab. Was eine Suche gekostet hat, steht danach im Dashboard.",
-      },
-    ],
-    breakdownExample:
-      "Beispiel: 1.000 qualifizierte Leads im Monat auf dem Starter-Plan ergeben rund 99 € plus etwa 65 € Abfragekosten.",
-    faqTitle: "Fragen zum Preis",
-    faq: [
-      { q: "Wie läuft der Einstieg ab?", a: "In dreißig Minuten schauen wir gemeinsam auf eure Kundenstruktur, richten den ersten Workspace ein und verbinden die API-Zugänge. Zahlungsdaten braucht es dafür nicht — die kommen erst, wenn ihr weitermachen wollt." },
-      { q: "Was passiert, wenn ich nicht weitermache?", a: "Ohne aktives Abo pausiert der Account, gelöscht wird nichts. Ihr entscheidet, ob und mit welchem Plan ihr weitermacht." },
-      { q: "Kann ich zwischen den Plänen wechseln?", a: "Ja, in beide Richtungen. Der Wechsel wirkt zum nächsten Abrechnungszeitraum, Workspaces und Leads bleiben erhalten." },
-      { q: "Was zählt beim Starter-Plan gegen die 5.000 Leads?", a: "Nur qualifizierte Leads, also personenbezogene Adressen. Generische Adressen wie info@ zählen nicht mit, und eine Firma zählt einmal, auch wenn mehrere Personen gefunden werden." },
-      { q: "Kann ich jederzeit kündigen?", a: "Ja, monatlich, ohne Frist über den laufenden Monat hinaus und ohne Mindestlaufzeit." },
-      { q: "Was passiert mit meinen Daten, wenn ich kündige?", a: "Eure Daten werden nach Vertragsende gelöscht oder auf Wunsch zurückgegeben, geregelt im AVV. Es gibt keine Sperrfrist und keine Exportgebühr." },
-    ],
   },
   // Eigene Funktionsseite: auf der Startseite standen die Detailfunktionen
   // verteilt ueber zwoelf Sektionen. Wer wissen will, was drinsteckt, findet
@@ -1756,65 +1700,6 @@ const de = {
     { id: "encryption", title: "Verschlüsselte API-Keys", body: "Eure Zugangsdaten werden verschlüsselt gespeichert, nie im Klartext." },
     { id: "byok", title: "BYOK-Kostenkontrolle", body: "Volle Transparenz über eure tatsächlichen API-Kosten, live im Dashboard." },
   ],
-  pricing: {
-    eyebrow: "Preise",
-    title: "Feste Preise, sofort einsehbar, sofort startbar",
-    agencyBadge: "Für Agenturen",
-    note: "Eingerichtet wird gemeinsam im Gespräch, danach monatlich kündbar und ohne Mindestlaufzeit. Zusätzlich nur eure eigenen API-Kosten, live im Dashboard einsehbar.",
-    // Drei Stufen statt zwei, und der Agenturpreis steht ausgeschrieben da.
-    // Vorher: "ab 199 € -- dafür sprechen wir kurz miteinander". Fuer einen
-    // Agenturinhaber ist das ein Signal, dass es teuer wird und verhandelt
-    // werden muss; er rechnet dann mit dem Schlimmsten und klickt weg. Ein
-    // ausgeschriebener Preis kostet ein bisschen Verhandlungsspielraum und
-    // spart jedes Gespraech, das nur der Preisfrage wegen stattfindet.
-    plans: [
-      {
-        id: "starter",
-        label: "Einzelplatz",
-        price: "99 €",
-        priceNote: "/ Monat",
-        features: [
-          "1 Workspace",
-          "Für den eigenen Vertrieb",
-          "Alle vier Suchwege, alle drei Kanäle",
-          "CRM, Pipeline und Auswertung",
-          "Zustellbarkeits-Check und Torwart",
-        ],
-        ctaLabel: "Gespräch buchen",
-        highlighted: false,
-      },
-      {
-        id: "agency",
-        label: "Agentur",
-        price: "199 €",
-        priceNote: "/ Monat",
-        features: [
-          "Bis 5 Kunden-Workspaces",
-          "Whitelabel-Reports je Kunde",
-          "Kunden-Branding: Name, Logo, Akzentfarbe",
-          "Alles aus Einzelplatz",
-          "Gemeinsame Einrichtung je Kunde",
-        ],
-        ctaLabel: "Gespräch buchen",
-        highlighted: true,
-      },
-      {
-        id: "agencyPlus",
-        label: "Agentur Plus",
-        price: "349 €",
-        priceNote: "/ Monat",
-        features: [
-          "Bis 12 Kunden-Workspaces",
-          "Alles aus Agentur",
-          "Mehrere Team-Zugänge",
-          "Priority Support",
-          "Ab 13 Kunden sprechen wir über eine Staffel",
-        ],
-        ctaLabel: "Gespräch buchen",
-        highlighted: false,
-      },
-    ],
-  },
   comparison: {
     title: "Im Vergleich",
     headerFrostbreaker: "Frostbreaker",
@@ -1866,9 +1751,9 @@ const de = {
       // sucht. Die Apollo-Antwort ist bewusst umgedreht formuliert -- nicht
       // "wir sind nur eine Ergaenzung", sondern was wir zusaetzlich tun.
       { q: "Warum nicht gleich direkt zu Apollo oder Hunter?", a: "Weil die Adresse der Anfang ist, nicht das Ergebnis. Apollo liefert Entscheider samt gepruefter Adresse. Danach faengt die Arbeit an: ein eigener Aufhaenger je Kontakt, die Pruefung des Textes, der Abgleich mit Sperrliste und Bestandskunden, der Versand, die LinkedIn-Nachricht und der Anruf, wenn es still bleibt, und am Ende die Frage, welche Textfassung Termine gebracht hat. Genau das liegt zwischen Apollo und Instantly, und genau das macht Frostbreaker." },
-      { q: "Was kostet eine Abfrage wirklich?", a: "Rund 4 US-Dollar auf 100 Firmen mit etwa 260 Kontakten, also ungefaehr 1,5 Cent pro Kontakt. Die Zahl stammt aus einer echten Suche in unserem eigenen Konto (3,94 $ fuer 97 Firmen mit 259 Kontakten) und ist keine Zusage: euer Wert haengt an Nische und Trefferquote. Nach jeder Suche steht im Dashboard auf den Cent genau, was sie gekostet hat. Die vollstaendige Aufstellung steht auf der Preisseite." },
+      { q: "Was kosten die Abfragen?", a: "Genau das, was Google, Hunter, Apollo, Prospeo, OpenAI und NeverBounce euch berechnen — nicht mehr. Die Abfragen laufen über eure eigenen Zugänge, wir schlagen keinen Cent auf. Nach jeder Suche steht im Dashboard auf den Cent genau, was sie gekostet hat, und die Summe je Monat steht daneben. Was ihr tatsächlich zahlt, hängt an Nische, Trefferquote und Volumen — das rechnen wir im Gespräch an euren Zahlen durch." },
       { q: "Muss ich eigene API-Schluessel mitbringen?", a: "Ja, und das ist Absicht. Die Abfragen laufen auf euren eigenen Zugaengen, ihr zahlt sie zum Selbstkostenpreis, wir schlagen nichts auf. Wer schon mit Apollo oder Instantly arbeitet, behaelt Konto und Konditionen und aendert nur, was dazwischen passiert. Die Schluessel werden verschluesselt gespeichert, und wir richten sie im ersten Gespraech gemeinsam ein — das ist der Teil, an dem sonst die meisten haengenbleiben." },
-      { q: "Was kostet das?", a: "99 € im Monat für einen Workspace, 199 € für bis zu fünf Kunden, 349 € für bis zu zwölf. Monatlich kündbar, keine Einrichtungsgebühr. Dazu kommen eure eigenen, transparent im Dashboard einsehbaren API-Kosten — wir schlagen darauf nichts auf. Es gibt keine Selbstbedienungs-Testphase: wir richten den ersten Workspace im Gespräch gemeinsam ein." },
+      { q: "Was kostet das?", a: "Ein fester Monatsbetrag, den wir im Gespräch gemeinsam festlegen. Er hängt daran, wie viele Kunden ihr betreut — nicht daran, wie viele Leads ihr zieht, und nicht daran, wie viele Workspaces ihr anlegt. Wir nennen ihn im ersten Gespräch, nicht nach drei Runden. Dazu kommen eure eigenen Abfragekosten zum Selbstkostenpreis, live im Dashboard einsehbar. Monatlich kündbar, keine Einrichtungsgebühr." },
       { q: "Kann ich jederzeit kündigen?", a: "Ja, monatlich, keine Mindestlaufzeit, keine Kündigungsfrist über den laufenden Monat hinaus." },
       { q: "Woher weiß ich, dass eine gefundene E-Mail wirklich zu einer Person gehört?", a: "Frostbreaker filtert generische Adressen wie info@ oder office@ automatisch heraus. Nur E-Mails, die eindeutig einer Person zugeordnet sind, landen in eurer Leads-Liste." },
       { q: "Was passiert, wenn ich aus Versehen an eine ungültige Adresse schreibe?", a: "Jede Adresse wird vor dem Versand geprüft, ungültige werden automatisch aussortiert. Das ist kein Nice-to-have: eine hohe Bounce-Rate beschädigt eure Sender-Reputation über alle Postfächer und alle Kunden hinweg, nicht nur die eine Kampagne. Die Prüfung läuft automatisch mit, ihr müsst nichts manuell anstoßen." },
@@ -2215,30 +2100,13 @@ const en: typeof de = {
         id: "costs",
         eyebrow: "Predictable",
         title: "What a client costs you, and what you charge them",
-        body: "The plan is fixed, lookup costs follow volume and run on your own accounts. What you charge your clients for it stays your decision — we do not see it and we add no markup.",
+        body: "One fixed monthly amount that fits your number of clients — we set it together on the call. Lookup costs run alongside it on your own accounts, at cost price. What you charge your clients for it stays your decision: we do not see it and we add no markup.",
         bullets: [
-          "€199 for up to five clients, €349 for up to twelve",
-          "≈ €65 in lookup costs per 1,000 leads, at cost price",
+          "One amount, no matter how many workspaces you create",
           "No surcharge per workspace, no surcharge per report",
+          "Lookup costs at cost price, visible live in the dashboard",
           "What goes away: the CRM subscription that charges per seat",
         ],
-      },
-    ],
-    honestTitle: "Three things you should know before the call",
-    honestBody:
-      "If you organise cold outreach for ten people every day, these are the points where it gets tight. Learning them on the call would be the worse order.",
-    honestItems: [
-      {
-        title: "One login, no team accounts yet",
-        body: "Today all workspaces belong to one account. Individual logins per employee with roles and permissions do not exist yet. For a team of ten this is the point to ask us about before you decide.",
-      },
-      {
-        title: "LinkedIn does not send on its own",
-        body: "The message sits there ready, you send it. LinkedIn has no API for it, and a tool that sends anyway risks your people's accounts. You make the calls yourself too — we are not a phone system.",
-      },
-      {
-        title: "Two to four weeks before the first email goes out",
-        body: "Fresh mailboxes need warmup. Sending on day one burns your client's domain. That is exactly why there is no 14-day trial here, but a guided setup instead.",
       },
     ],
     contrastTitle: "What a pure sending tool asks for at this point",
@@ -2247,42 +2115,6 @@ const en: typeof de = {
     ctaTitle: "Let's talk about your client setup",
     ctaBody:
       "Thirty minutes: how many clients, which audiences, how your team works today. We set up the first workspace together. Not a sales pitch, no slide deck.",
-  },
-  pricingPage: {
-    metaTitle: "Pricing: €99 or €199 per month, plus your actual lookup cost",
-    metaDescription:
-      "Fixed monthly prices with no lock-in, plus lookup costs at cost price. Setup happens together on a call, cancel monthly.",
-    eyebrow: "Pricing",
-    title: "All prices in detail",
-    intro:
-      "You pay for the plan and for the lookups your searches actually trigger. Nothing else. No setup fee, no minimum term, no credit bundle that expires at the end of the month.",
-    breakdownTitle: "What your invoice is made of",
-    breakdownIntro: "So nobody is surprised by the first invoice, here are both items side by side.",
-    breakdown: [
-      {
-        id: "plan",
-        label: "Fixed monthly price",
-        value: "€99 or €199",
-        body: "Depending on the plan. Cancel monthly, no minimum term, no setup fee.",
-      },
-      {
-        id: "usage",
-        label: "Lookups, at cost",
-        value: "≈ $4 / 100 companies",
-        body: "Settled directly through your own accounts. What a search cost appears in the dashboard afterwards.",
-      },
-    ],
-    breakdownExample:
-      "Example: 1,000 qualified leads a month on the Starter plan comes to roughly €99 plus about €65 in lookup cost.",
-    faqTitle: "Pricing questions",
-    faq: [
-      { q: "How does getting started work?", a: "In thirty minutes we look at your client setup together, set up the first workspace and connect the API accounts. No payment details needed for that — those only come when you decide to continue." },
-      { q: "What happens if I do not continue?", a: "Without an active subscription the account pauses, nothing is deleted. You decide whether and on which plan to continue." },
-      { q: "Can I switch between plans?", a: "Yes, in both directions. The change takes effect at the next billing period, workspaces and leads are kept." },
-      { q: "What counts towards the 5,000 leads on Starter?", a: "Only qualified leads, meaning person-specific addresses. Generic addresses like info@ don't count, and a company counts once even if several people are found." },
-      { q: "Can I cancel any time?", a: "Yes, monthly, with no notice beyond the current month and no minimum term." },
-      { q: "What happens to my data if I cancel?", a: "Your data is deleted after the contract ends, or returned on request, as set out in the DPA. There is no lock-in period and no export fee." },
-    ],
   },
   featuresPage: {
     metaTitle: "Features: from search to answered email",
@@ -3538,62 +3370,6 @@ const en: typeof de = {
     { id: "encryption", title: "Encrypted API keys", body: "Your credentials are stored encrypted, never in plain text." },
     { id: "byok", title: "BYOK cost control", body: "Full transparency over your actual API costs, live in the dashboard." },
   ],
-  pricing: {
-    eyebrow: "Pricing",
-    title: "Fixed prices, visible immediately, ready to start immediately",
-    agencyBadge: "For agencies",
-    note: "Setup happens together on a call, then cancel monthly with no minimum term. On top, only your own API costs, visible live in the dashboard.",
-    plans: [
-      {
-        // Stand auf "$99", waehrend die beiden Agentur-Stufen in Euro
-        // ausgezeichnet sind -- zwei Waehrungen in einer Preistabelle liest
-        // sich als Fehler und laesst an allen drei Zahlen zweifeln.
-        id: "starter",
-        label: "Single seat",
-        price: "€99",
-        priceNote: "/ month",
-        features: [
-          "1 workspace",
-          "For your own sales",
-          "All four search routes, all three channels",
-          "CRM, pipeline and analysis",
-          "Deliverability check and the gate",
-        ],
-        ctaLabel: "Book a call",
-        highlighted: false,
-      },
-      {
-        id: "agency",
-        label: "Agency",
-        price: "€199",
-        priceNote: "/ month",
-        features: [
-          "Up to 5 client workspaces",
-          "White-label reports per client",
-          "Client branding: name, logo, accent colour",
-          "Everything in Single seat",
-          "Guided setup per client",
-        ],
-        ctaLabel: "Book a call",
-        highlighted: true,
-      },
-      {
-        id: "agencyPlus",
-        label: "Agency Plus",
-        price: "€349",
-        priceNote: "/ month",
-        features: [
-          "Up to 12 client workspaces",
-          "Everything in Agency",
-          "Multiple team logins",
-          "Priority support",
-          "From 13 clients we talk about a tier",
-        ],
-        ctaLabel: "Book a call",
-        highlighted: false,
-      },
-    ],
-  },
   comparison: {
     title: "Comparison",
     headerFrostbreaker: "Frostbreaker",
@@ -3633,9 +3409,9 @@ const en: typeof de = {
     items: [
       { q: "Can I use this as an agency for multiple clients at once?", a: "Yes, there are separate workspaces per client, including their own name, logo and accent color. Each workspace can share a report link that shows your client aggregated metrics in their own look, without them needing their own account." },
       { q: "Why not go straight to Apollo or Hunter myself?", a: "Because the address is the start, not the result. Apollo delivers decision makers with a verified address. The work begins after that: an opener per contact, a check on the copy, a match against your suppression list and existing customers, the sending, the LinkedIn message and the call when it stays quiet, and finally the question of which copy version booked meetings. All of that sits between Apollo and Instantly, and that is what Frostbreaker does." },
-      { q: "What does a lookup actually cost?", a: "Around 4 US dollars per 100 companies with roughly 260 contacts, so about 1.5 cents per contact. That figure comes from a real search in our own account ($3.94 for 97 companies with 259 contacts) and is not a promise: your number depends on niche and hit rate. After every search the dashboard shows to the cent what it cost. The full breakdown is on the pricing page." },
+      { q: "What do the lookups cost?", a: "Exactly what Google, Hunter, Apollo, Prospeo, OpenAI and NeverBounce charge you — nothing more. The lookups run on your own accounts and we add not a cent. After every search the dashboard shows to the cent what it cost, with the monthly total next to it. What you actually pay depends on niche, hit rate and volume — we work that through on your numbers on the call." },
       { q: "Do I have to bring my own API keys?", a: "Yes, and that is deliberate. The lookups run on your own accounts, you pay them at cost, we add no markup. If you already work with Apollo or Instantly, you keep the account and the terms and only change what happens in between. Keys are stored encrypted, and we set them up together on the first call — that is the step most people get stuck on." },
-      { q: "What does it cost?", a: "€99/month for one workspace, €199 for up to five clients, €349 for up to twelve. Cancel monthly, no setup fee. On top come your own API costs, transparently visible in the dashboard — we add no markup. There is no self-service trial: we set up the first workspace together on the call." },
+      { q: "What does it cost?", a: "One fixed monthly amount that we set together on the call. It depends on how many clients you run — not on how many leads you pull, and not on how many workspaces you create. We name it on the first call, not after three rounds. On top come your own lookup costs at cost price, visible live in the dashboard. Cancel monthly, no setup fee." },
       { q: "Can I cancel anytime?", a: "Yes, monthly, no minimum term, no notice period beyond the current month." },
       { q: "How do I know a found email really belongs to a person?", a: "Frostbreaker automatically filters out generic addresses like info@ or office@. Only emails clearly assigned to a person make it into your leads list." },
       { q: "What happens if I accidentally send to an invalid address?", a: "Every address is checked before sending, invalid ones are filtered out automatically. This isn't a nice-to-have: a high bounce rate damages your sender reputation across every mailbox and every client, not just the one campaign. The check runs automatically, nothing to trigger manually." },

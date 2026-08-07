@@ -64,7 +64,6 @@ export default function FunktionenPage() {
 
   const navLinks = [
     { href: "/#agenturen", label: t.nav.agenturen },
-    { href: "/#preise", label: t.nav.preise },
     { href: "/kontakt", label: t.nav.kontakt },
   ];
 

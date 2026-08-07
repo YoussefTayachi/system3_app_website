@@ -26,7 +26,6 @@ export default function EigeneSoftwarePage() {
   const navLinks = [
     { href: "/funktionen", label: t.featuresPage.eyebrow },
     { href: "/fuer-agenturen", label: t.nav.agenturen },
-    { href: "/preise", label: t.nav.preise },
     { href: "/kontakt", label: t.nav.kontakt },
   ];
 

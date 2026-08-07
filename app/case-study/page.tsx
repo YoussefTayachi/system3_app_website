@@ -8,7 +8,6 @@ export default function CaseStudyPage() {
   const c = t.caseStudyPage;
   const navLinks = [
     { href: "/#agenturen", label: t.nav.agenturen },
-    { href: "/#preise", label: t.nav.preise },
     { href: "/#vergleich", label: t.nav.vergleich },
   ];
   const produktItems = t.nav.produktItems.map((item) => ({ ...item, href: "/" + item.href }));

@@ -14,6 +14,18 @@ const nextConfig = {
   // statisches HTML. Der Build laeuft trotzdem durch, weshalb es leicht
   // unbemerkt bleibt. Explizit gesetzt kann das nicht mehr passieren.
   outputFileTracingRoot: projectRoot,
+
+  // /preise ist am 2026-08-06 geloescht worden: der Preis wird individuell im
+  // Gespraech festgelegt, und eine Seite, die drei Zahlen zeigt und danach
+  // doch verhandelt, ist schlechter als gar keine. Die Umleitung steht hier,
+  // damit bestehende Links -- aus Mails, aus Angeboten, aus Suchmaschinen --
+  // nicht auf 404 laufen, sondern dort landen, wo die Preisfrage jetzt
+  // beantwortet wird. Dauerhaft (308), weil die Seite nicht wiederkommt.
+  async redirects() {
+    return [
+      { source: "/preise", destination: "/kontakt", permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;

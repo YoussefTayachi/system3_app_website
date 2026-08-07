@@ -43,7 +43,6 @@ export default function Home() {
   // funktionieren, die Navigation zeigt aber auf die vollstaendigen Seiten.
   const navLinks = [
     { href: "/fuer-agenturen", label: t.nav.agenturen, secondary: true },
-    { href: "/preise", label: t.nav.preise, secondary: false },
     { href: "/kontakt", label: t.nav.kontakt, secondary: false },
   ];
 
@@ -671,41 +670,13 @@ export default function Home() {
           Rechnungsposten und der Vergleich stehen auf /preise -- hier bleibt
           nur, was fuer die Entscheidung "weiterlesen oder nicht" reicht. Der
           Anker #preise bleibt bestehen, damit bestehende Links funktionieren. */}
-      <section id="preise" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
-        {/* max-w-5xl und drei Spalten seit dem 2026-08-06: der Agenturpreis
-            steht jetzt ausgeschrieben da, und drei Karten in einem
-            Zweier-Raster brechen auf 2+1 mit einer Luecke um. */}
-        <div className="mx-auto max-w-5xl px-4 py-20 sm:px-6">
-          <SectionHeading eyebrow={t.pricing.eyebrow} title={t.pricing.title} />
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {t.pricing.plans.map((plan) => (
-              <a
-                key={plan.id}
-                href="/preise"
-                className={
-                  "hover-lift flex items-baseline justify-between gap-4 rounded-2xl border bg-panel p-6 transition-colors " +
-                  (plan.highlighted ? "border-sky-500/50 hover:border-sky-500" : "border-edge/60 hover:border-edge2")
-                }
-              >
-                <span>
-                  <span className="block text-sm font-semibold text-ink">{plan.label}</span>
-                  <span className="font-display mt-1 block text-3xl font-semibold tracking-[-0.03em] text-ink">
-                    {plan.price}
-                  </span>
-                  <span className="mt-0.5 block text-xs text-faint">{plan.priceNote}</span>
-                </span>
-                <span aria-hidden className="shrink-0 text-lg text-mute">→</span>
-              </a>
-            ))}
-          </div>
-          <p className="mt-6 text-center text-sm text-soft">
-            <a href="/preise" className="font-medium text-sky-700 underline underline-offset-2 hover:text-sky-800">
-              {t.pricingPage.title} →
-            </a>
-          </p>
-          <p className="mt-2 text-center text-xs text-mute">{t.pricing.note}</p>
-        </div>
-      </section>
+      {/* Hier stand bis zum 2026-08-06 ein Preis-Anriss mit drei Plaenen und
+          ein Link auf /preise. Beides ist ersatzlos entfallen: der Preis wird
+          individuell im Gespraech festgelegt, und eine Seite, die drei Zahlen
+          zeigt und danach doch verhandelt, ist schlechter als eine, die gar
+          keine zeigt. /preise ist geloescht und leitet auf /kontakt um, damit
+          bestehende Links nicht ins Leere laufen. */}
+
 
       {/* Integrations */}
       {/* BYOK und die Integrationsliste, seit dem 2026-08-06 als schmaler
