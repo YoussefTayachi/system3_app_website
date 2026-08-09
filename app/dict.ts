@@ -1723,6 +1723,44 @@ const de = {
     title: "Datenschutz ist keine Checkbox, sondern Teil der Architektur",
     links: { datenschutz: "Datenschutzerklärung", agb: "AGB", avv: "AVV" },
   },
+  // ══════════════════════════════════════════════════════════════════════
+  // DER ERSTE GENANNTE KUNDE, neu am 2026-08-09.
+  //
+  // Bis hierher belegte die Seite alles mit eigenen Bildern und eigenen
+  // Zahlen. Genau das ist die Luecke, die KONVERSION.md benennt: niemand
+  // ausser dem Gruender bestaetigt, dass es funktioniert. Ein Name, den man
+  // anklicken und nachschlagen kann, ist die einzige Antwort darauf -- und
+  // RETAIYN ist der Idealfall, weil die Agentur selbst genau das macht,
+  // wovon die Seite handelt: Kundengewinnung und -betreuung fuer fremde
+  // Marken, ueber mehrere Kanaele, mit mehreren Kundenkonten parallel.
+  //
+  // Bewusst KEINE Ergebniszahl und KEIN Zitat. Die Zusammenarbeit ist neu,
+  // gemessen ist noch nichts, und eine Zahl ohne Messung dahinter macht auf
+  // dieser Seite alles andere unglaubwuerdig -- dieselbe Begruendung wie bei
+  // why.earlyAccess. Alles, was hier steht, laesst sich auf retaiyn.com
+  // nachpruefen. `pending` haelt den Platz fuer die echten Zahlen frei und
+  // macht aus der Luecke ein Argument statt einer Verlegenheit.
+  // ══════════════════════════════════════════════════════════════════════
+  customer: {
+    // Kurzform fuer den Hero: klein, aber ueber der Falz.
+    stripLabel: "Im Einsatz bei",
+    eyebrow: "Kunde",
+    title: "Eine Agentur, die damit arbeitet",
+    name: "RETAIYN",
+    url: "https://www.retaiyn.com",
+    urlLabel: "retaiyn.com",
+    logoAlt: "Logo der Agentur RETAIYN",
+    descriptor: "Customer Experience & Automation für E-Commerce",
+    body:
+      "RETAIYN übernimmt für E-Commerce-Marken den Kundenservice und das Marketing: Support-Automatisierung, WhatsApp- und E-Mail-Kampagnen. Mehrere Kundenkonten, mehrere Kanäle, jeden Tag — also genau der Alltag, für den Frostbreaker gebaut ist.",
+    facts: [
+      { label: "Branche", value: "E-Commerce, DACH" },
+      { label: "Leistungen", value: "Customer Support & Automation, WhatsApp, E-Mail" },
+      { label: "Passt, weil", value: "Outbound für mehrere Kundenkonten in einem Werkzeug läuft" },
+    ],
+    pending:
+      "Die Ergebnisse aus der Zusammenarbeit stehen hier, sobald genug gemessen ist. Wir schreiben keine Zahl hin, die wir nicht selbst nachrechnen können.",
+  },
   why: {
     title: "Warum es Frostbreaker gibt",
     body: "Outbound-Teams kombinieren heute meist vier bis fünf einzelne Tools, um vom ersten Suchbegriff bis zur personalisierten, verifizierten E-Mail zu kommen. Frostbreaker reduziert diesen Workflow auf ein einziges Tool, mit voller Kostentransparenz statt Pauschal-Abos und ohne CSV-Hin-und-Her zwischen Anbietern.",
@@ -3392,6 +3430,25 @@ const en: typeof de = {
   trust: {
     title: "Privacy isn't a checkbox, it's part of the architecture",
     links: { datenschutz: "Privacy Policy", agb: "Terms", avv: "DPA" },
+  },
+  customer: {
+    stripLabel: "Working with",
+    eyebrow: "Client",
+    title: "An agency that runs on it",
+    name: "RETAIYN",
+    url: "https://www.retaiyn.com",
+    urlLabel: "retaiyn.com",
+    logoAlt: "Logo of the agency RETAIYN",
+    descriptor: "Customer experience & automation for e-commerce",
+    body:
+      "RETAIYN runs customer service and marketing for e-commerce brands: support automation, WhatsApp and email campaigns. Several client accounts, several channels, every day — exactly the workday Frostbreaker was built for.",
+    facts: [
+      { label: "Industry", value: "E-commerce, DACH" },
+      { label: "Services", value: "Customer support & automation, WhatsApp, email" },
+      { label: "Why it fits", value: "Outbound for several client accounts in one tool" },
+    ],
+    pending:
+      "The numbers from this partnership go here as soon as there is enough to measure. We don't put up a figure we can't recalculate ourselves.",
   },
   why: {
     title: "Why Frostbreaker exists",

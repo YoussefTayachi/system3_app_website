@@ -14,6 +14,7 @@ import { LeadCardStack } from "./_illustration";
 import { SystemMap } from "./_system-map";
 import { AllInOneCompare } from "./_compare";
 import { StepWalkthrough } from "./_walkthrough";
+import { CustomerStrip, CustomerSection } from "./_customers";
 import { Reveal } from "./reveal";
 import { trustIcons, postSendIcons, CheckIcon } from "./_icons";
 import { useT, LanguageToggle } from "./language-provider";
@@ -123,6 +124,12 @@ export default function Home() {
                 </a>
               </div>
               <p className="mt-3.5 text-xs text-mute">{t.cta.trialNote}</p>
+
+              {/* Der einzige fremde Name ueber der Falz. Er steht bewusst
+                  NACH dem Knopf: wer schon klickt, soll nicht aufgehalten
+                  werden, wer zoegert, findet hier den ersten Beleg, der
+                  nicht von uns selbst kommt. */}
+              <CustomerStrip className="mt-7" />
             </div>
 
             <div className="fade-up">
@@ -273,6 +280,14 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Der Kundenbeleg steht direkt hinter dem Agentur-Band, weil dort die
+          Behauptung faellt ("mehrere Kunden in einem Werkzeug") -- und eine
+          Agentur, die genau das tut, ist die Antwort darauf an der Stelle,
+          an der die Frage entsteht. Ohne Flaechenton zwischen zwei Baendern
+          mit bg-panel2: das hebt die Karte heraus, statt sie im dritten
+          grauen Block hintereinander verschwinden zu lassen. */}
+      <CustomerSection className="border-b border-edge/60" />
 
       {/* Die drei Kanaele, neu am 2026-08-06 (POSITIONIERUNG.md Abschnitt 5).
           Zieht den frueheren Abschnitt #telefon hier herein -- der stand als

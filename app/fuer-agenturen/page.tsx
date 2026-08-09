@@ -3,6 +3,7 @@ import { Logo, CTAButton, NavDropdown, SectionHeading, BOOKING_URL } from "../_u
 import { AgencyMockup } from "../_mockups";
 import { ReportMockup, CallListMockup } from "../_app-mockups";
 import { CopyOutcomesMockup } from "../_guard-mockups";
+import { CustomerStrip, CustomerSection } from "../_customers";
 import { Reveal } from "../reveal";
 import { CheckIcon } from "../_icons";
 import { useT, LanguageToggle } from "../language-provider";
@@ -75,6 +76,10 @@ export default function AgenturenPage() {
           <div className="mt-8">
             <CTAButton href={BOOKING_URL} label={a.ctaLabel} />
           </div>
+          {/* Auf dieser Seite wiegt der Name schwerer als auf der Startseite:
+              wer hier landet, ist selbst eine Agentur und liest den Beleg
+              als "jemand wie ich", nicht als "irgendein Kunde". */}
+          <CustomerStrip className="mt-7" />
         </div>
       </section>
 
@@ -112,6 +117,11 @@ export default function AgenturenPage() {
         );
       })}
 
+
+      {/* Nach den sechs Abschnitten ueber den Agentur-Alltag und vor der
+          Kostenfrage: an dieser Stelle ist alles behauptet, und der Leser
+          fragt sich, ob es das auch ausserhalb dieser Seite gibt. */}
+      <CustomerSection className="border-b border-edge/60 bg-panel2" />
 
       {/* Ohne Anbieternamen und ohne erfundene Preise: die Aussage laesst sich
           belegen, eine konkrete Zahl fuer fremde Tools nicht. */}
