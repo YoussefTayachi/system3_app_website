@@ -25,8 +25,8 @@ import { useT } from "./language-provider";
  * DREI REGELN, DAMIT DIE TABELLE KEINE ANGRIFFSFLAECHE WIRD
  * ═══════════════════════════════════════════════════════════════════════
  *
- * 1. KEIN "✗" BEI WETTBEWERBERN, nur "—" (nicht vorhanden) und "teilw.".
- *    Ein Kreuz behauptet ein Versagen; ein Strich stellt fest, dass etwas
+ * 1. KEIN "✗" BEI WETTBEWERBERN, nur "○" (nicht vorhanden) und "teilw.".
+ *    Ein Kreuz behauptet ein Versagen; ein leerer Kreis stellt fest, dass etwas
  *    nicht zum Leistungsumfang gehoert. Nur der zweite Satz ist belegbar.
  * 2. KEIN PREISVERGLEICH in der Tabelle. Tarife aendern sich, die Tabelle
  *    nicht -- eine Preiszeile hier waere in drei Monaten falsch.
@@ -82,7 +82,7 @@ function Cell({ state, labels }: { state: Support; labels: { yes: string; no: st
   return (
     <>
       <span aria-hidden className="text-edge3">
-        —
+        ○
       </span>
       <span className="sr-only">{labels.no}</span>
     </>

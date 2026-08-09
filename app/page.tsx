@@ -281,12 +281,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Der Kundenbeleg steht direkt hinter dem Agentur-Band, weil dort die
-          Behauptung faellt ("mehrere Kunden in einem Werkzeug") -- und eine
-          Agentur, die genau das tut, ist die Antwort darauf an der Stelle,
-          an der die Frage entsteht. Ohne Flaechenton zwischen zwei Baendern
-          mit bg-panel2: das hebt die Karte heraus, statt sie im dritten
-          grauen Block hintereinander verschwinden zu lassen. */}
+      {/* Der Kundenbeleg steht direkt hinter dem Agentur-Band. Dort hat die
+          Seite gerade erklaert, was sie fuer Agenturen kann -- und die
+          naechste Frage eines Agenturinhabers ist immer dieselbe: macht das
+          ausser euch jemand? Der Abschnitt beantwortet sie mit einem Namen
+          und dreht sie im Spiegel-Block sofort auf den Leser zurueck.
+
+          Ohne Flaechenton zwischen zwei Baendern mit bg-panel2: das hebt die
+          Karte heraus, statt sie im dritten grauen Block hintereinander
+          verschwinden zu lassen. */}
       <CustomerSection className="border-b border-edge/60" />
 
       {/* Die drei Kanaele, neu am 2026-08-06 (POSITIONIERUNG.md Abschnitt 5).

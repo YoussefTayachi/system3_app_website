@@ -65,7 +65,7 @@ export default function OpengraphImage() {
               color: "#57534e",
             }}
           >
-            Finden, verifizieren, personalisieren — E-Mail und Telefon in einem
+            Finden, verifizieren, personalisieren. E-Mail und Telefon in einem
             Tool statt vier Abos.
           </div>
         </div>

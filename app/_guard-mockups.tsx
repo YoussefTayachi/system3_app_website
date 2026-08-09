@@ -270,7 +270,7 @@ export function CopyOutcomesMockup() {
                     (r.meetings ? "font-semibold text-emerald-700" : "text-edge3")
                   }
                 >
-                  {r.meetings || "—"}
+                  {r.meetings || "0"}
                 </span>
               </div>
               <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 pl-[113px] text-[11px] text-mute">

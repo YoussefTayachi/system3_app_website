@@ -11,7 +11,7 @@ import type { Metadata } from "next";
 // Bewusst auf Englisch: Zielgruppe dieser Seite sind US-Empfaenger (siehe
 // docs/KALTAKQUISE-VORLAGEN.md in der App). Der Seiteninhalt selbst bleibt
 // ueber den Sprachumschalter zweisprachig.
-const title = "Custom software development — Youssef Tayachi, Frostbreaker";
+const title = "Custom software development · Youssef Tayachi, Frostbreaker";
 const description =
   "I build internal tools, AI pipelines and customer-facing apps as one system you own, instead of five subscriptions wired together. Frostbreaker is the proof: built solo, running in production.";
 
