@@ -10,6 +10,7 @@ import { AgencyMockup, PostSendMockup } from "./_mockups";
 // _app-mockups.tsx, /funktionen ist der naheliegende neue Ort dafuer.
 import { UnifiedSearchMockup, CallListMockup, LeadsTableMockup } from "./_app-mockups";
 import { GateMockup, ChainMockup, EffectMockup, CopyOutcomesHighlight } from "./_guard-mockups";
+import { OfferMapMockup, CoachFindingMockup, type OfferMapMockupProps } from "./_offer-mockups";
 import { LeadCardStack } from "./_illustration";
 import { SystemMap } from "./_system-map";
 import { AllInOneCompare } from "./_compare";
@@ -32,6 +33,35 @@ const MODE_BADGE: Record<string, string> = {
   // weil das Markenrot selbst als Schrift auf hellem Grund nicht traegt.
   prospeo: "border-red-500/40 bg-red-500/10 text-red-800",
 };
+
+/**
+ * Eine der drei Aussagen im Angebot-Abschnitt: Nummer, Ueberschrift,
+ * Fliesstext.
+ *
+ * Die Nummernscheibe traegt dieselbe Form und dieselbe Farbe wie die vier
+ * Eckennummern in der Angebotskarte darunter (_offer-mockups.tsx). Damit
+ * liest man Text und Bild als ein Gefuege statt als zwei getrennte Listen.
+ * Nur drei Vorkommen, deshalb ein Bauteil hier oben statt dreimal dasselbe
+ * Markup im Abschnitt.
+ */
+function OfferPoint({ n, title, body }: { n: number; title: string; body: string }) {
+  return (
+    <div className="max-w-[64ch]">
+      <div className="flex items-baseline gap-3">
+        <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-sky-500/12 text-[11px] font-bold text-sky-700">
+          {n}
+        </span>
+        <h3 className="font-display text-xl font-semibold leading-snug tracking-[-0.015em] text-ink sm:text-[1.375rem]">
+          {title}
+        </h3>
+      </div>
+      {/* Eingerueckt auf die Textkante der Ueberschrift (24px Scheibe + 12px
+          Abstand = 36px): der Fliesstext haengt dadurch an der Ueberschrift
+          und nicht an der Nummer. */}
+      <p className="mt-3 pl-9 text-base leading-relaxed text-soft">{body}</p>
+    </div>
+  );
+}
 
 export default function Home() {
   const { t, lang } = useT();
@@ -223,6 +253,125 @@ export default function Home() {
           <CTAButton />
           <p className="text-xs text-mute">{t.cta.trialNote}</p>
         </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════
+          DER ANGEBOT-ABSCHNITT (ANGEBOT-VERMARKTUNG.md, Stufe 2a).
+
+          WARUM AN DIESER STELLE
+          Der Rundgang darueber endet bei "jetzt weisst du, was funktioniert
+          hat". Die naechste Frage des Lesers ist "und wer schreibt das
+          alles?" -- die beantwortet dieser Abschnitt. Vor dem Rundgang
+          stuende er als Vorbedingung und hielte die Erzaehlung auf.
+          `walkthrough.steps[1].detail` verweist woertlich auf "gleich im
+          Abschnitt darunter": wer den Abschnitt verschiebt, macht den Satz
+          falsch.
+
+          KEIN EIGENER FLAECHENTON
+          Der Abschnitt liegt auf dem Seitengrund wie #rundgang und #kette.
+          bg-panel2 waere hier ein zweites graues Band unmittelbar vor dem
+          Agentur-Band -- genau der Fall, den der Kommentar vor
+          CustomerSection weiter unten schon einmal beschreibt. Getrennt wird
+          ueber Abstand, nicht ueber Farbe oder eine Linie.
+
+          WO REVEAL LIEGT UND WO NICHT
+          Nur um die beiden Bilder, wie in #system und #ergaenzt. Der
+          Observer prueft 15 % der Flaeche DES ZIELS (reveal.tsx,
+          threshold 0.15) -- ein Ziel, das hoeher ist als das 6,67-fache des
+          Fensters, erreicht diesen Anteil nie und bleibt dauerhaft auf
+          opacity 0. Gemessen am 2026-08-13: der Abschnitt ist auf 375 Pixeln
+          rund 5390 Pixel hoch, bei 812 Pixeln Fensterhoehe das 6,6-fache --
+          ein Reveal um das Ganze waere genau dort gescheitert, wo es niemand
+          nachsieht. Ueberschrift und Fliesstext bleiben aus einem zweiten
+          Grund ausserhalb: wer ueber /#angebot hereinspringt (Menuepunkt in
+          nav.produktItems), stuende bis zur Hydration sonst vor einem
+          unsichtbaren Abschnitt. Und id und scroll-mt traegt das
+          section-Element selbst, ausserhalb jedes Reveal: .reveal startet mit
+          translateY(18px) (globals.css), das verschoebe waehrend der
+          Animation das Sprungziel.
+          ═══════════════════════════════════════════════════════════════ */}
+      <section id="angebot" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        <SectionHeading eyebrow={t.offerSection.eyebrow} title={t.offerSection.title} />
+        <p className="-mt-6 max-w-[62ch] text-base leading-relaxed text-soft">{t.offerSection.body}</p>
+
+        {/* Jede Aussage steht UEBER ihrem Beleg, nicht daneben. Zwei Gruende:
+            die Angebotskarte legt sich erst ab 52rem Kartenbreite ueber Kreuz
+            (darunter ist sie eine Spalte), und der Coach-Befund ist der
+            staerkste Einzelbeleg der Seite -- in einer halben Spalte waere er
+            ein drittes Kaertchen. Die dritte Aussage hat bewusst kein Bild;
+            sie leitet zu den Grenzen ueber. */}
+        <div className="mt-16">
+          <OfferPoint n={1} title={t.offerSection.points[0].title} body={t.offerSection.points[0].body} />
+          {/* Die Zusicherung ist noetig, nicht kosmetisch: `corners` ist im
+              Bauteil ein 4-Tupel und `nodes` ein 3-Tupel (genau vier Ecken,
+              genau drei Felder -- das sind die zwoelf Fragen, von denen der
+              Text daneben spricht). `type Dictionary = typeof de` leitet aus
+              den Literalen in dict.ts aber gewoehnliche Arrays ab, und ein
+              Array ist einem Tupel nicht zuweisbar. Ohne das `as` bricht
+              `npx tsc --noEmit` an dieser Zeile ab (nachgemessen am
+              2026-08-13): TS2322, "Target requires 4 element(s) but source
+              may have fewer". */}
+          <Reveal className="mt-8">
+            <OfferMapMockup {...(t.offerSection.offerMap as OfferMapMockupProps)} />
+          </Reveal>
+
+          <div className="mt-16">
+            <OfferPoint n={2} title={t.offerSection.points[1].title} body={t.offerSection.points[1].body} />
+          </div>
+          {/* coachFinding besteht nur aus Zeichenketten -- hier braucht es
+              keine Zusicherung. */}
+          <Reveal className="mt-8">
+            <CoachFindingMockup {...t.offerSection.coachFinding} />
+          </Reveal>
+
+          <div className="mt-16">
+            <OfferPoint n={3} title={t.offerSection.points[2].title} body={t.offerSection.points[2].body} />
+          </div>
+        </div>
+
+        {/* ─────────────────────────────────────────────────────────────
+            DIE GRENZEN. Ausdruecklich nicht das Kleingedruckte.
+
+            Anders gesetzt als die drei Aussagen (weisse Flaeche statt
+            Seitengrund, Ueberschrift eine Stufe unter der Abschnitts-
+            ueberschrift, Zeilen mit fester Beschriftungsspalte), aber an
+            keiner Stelle leiser: der Fliesstext hat dieselbe Groesse wie
+            oben (text-base -- die uebrigen Kartenraster dieser Seite stehen
+            auf text-sm), und der Block ist die groesste zusammenhaengende
+            Flaeche des Abschnitts.
+
+            Weiss statt bg-panel2: ein grauer Kasten am Fuss eines Abschnitts
+            liest sich als Anhang. Weiss auf dem Seitengrund hebt ihn an.
+            ───────────────────────────────────────────────────────────── */}
+        <div className="mt-20 rounded-3xl border border-edge2/70 bg-panel px-5 py-8 sm:px-10 sm:py-10">
+          <h3 className="font-display max-w-[26ch] text-2xl font-semibold leading-[1.15] tracking-[-0.02em] text-ink sm:text-[1.75rem]">
+            {t.offerSection.limitsTitle}
+          </h3>
+          {/* Zwei Spalten erst ab lg. Darunter blieben von den 17rem
+              Beschriftungsspalte fuer den Fliesstext rund 30 Zeichen je
+              Zeile uebrig -- gestapelt liest er sich in voller Breite. */}
+          <div className="mt-7 divide-y divide-edge/80 border-t border-edge/80">
+            {t.offerSection.limits.map((l) => (
+              <div
+                key={l.title}
+                className="grid gap-x-10 gap-y-2 py-7 lg:grid-cols-[minmax(0,17rem)_minmax(0,1fr)]"
+              >
+                <h4 className="font-display text-xl font-semibold leading-snug tracking-[-0.015em] text-ink">
+                  {l.title}
+                </h4>
+                <p className="max-w-[70ch] text-base leading-relaxed text-soft">{l.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Der Schlusssatz: eine Stufe groesser als Fliesstext und in Ink,
+            aber ohne Kasten und ohne Knopf. Er ordnet ein, er verkauft
+            nicht -- ein CTA an dieser Stelle waere der dritte auf einer
+            Bildschirmhoehe (Rundgang darueber, Agentur-Band darunter). */}
+        <p className="mt-14 max-w-[68ch] text-base leading-relaxed text-ink sm:text-[17px] sm:leading-[1.7]">
+          {t.offerSection.closing}
+        </p>
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════

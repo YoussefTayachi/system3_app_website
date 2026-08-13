@@ -19,6 +19,11 @@ const de = {
     produktItems: [
       { label: "Alle Funktionen", href: "/funktionen" },
       { label: "Rundgang", href: "/#rundgang" },
+      // Gehoert zu den Startseiten-Ankern, nicht zu den /funktionen-Ankern
+      // darunter: der Abschnitt steht direkt hinter dem Rundgang. Bewusst ohne
+      // "THAW" -- die Figur darf auf der Seite auftauchen, aber kein
+      // Menuepunkt und keine Ueberschrift traegt ihren Namen.
+      { label: "Dein Angebot", href: "/#angebot" },
       { label: "Drei Kanäle", href: "/#kanaele" },
       { label: "Personalisierung", href: "/funktionen#personalize" },
       { label: "Integrationen", href: "/#integrationen" },
@@ -38,7 +43,12 @@ const de = {
       { label: "Technologie-Filter", href: "/funktionen#tech" },
       { label: "Decision Maker Finder", href: "/funktionen#enrich" },
       { label: "Personalisierung", href: "/funktionen#personalize" },
-      { label: "Email Copy Coach", href: "/funktionen#check" },
+      // Hiess bis zum 2026-08-13 "Email Copy Coach" und wurde damit fuer die
+      // Schreibfunktion gehalten, die seither im Angebot steckt. Dieser Punkt
+      // ist etwas anderes: die Pruefung im Browser waehrend des Tippens.
+      // Deshalb hier eine Beschreibung statt eines Produktnamens -- dieselbe
+      // Ausnahme wie bei "Personalisierung".
+      { label: "Textcheck beim Tippen", href: "/funktionen#check" },
       { label: "Kampagnen", href: "/funktionen#send" },
       { label: "Sperrliste", href: "/funktionen#protect" },
       { label: "Pipeline", href: "/funktionen#pipeline" },
@@ -418,13 +428,17 @@ const de = {
       countLabel: "Schritte",
       count: "8",
       manualLabel: "davon von Hand",
-      manualCount: "4",
+      // Vier bis zum 2026-08-13. Der Aufbau der Sequenz stand als Nicht-
+      // Handarbeit da -- ausgerechnet der groesste Block, den die App abnimmt.
+      // Damit rechnete die Seite die eigene Ersparnis aus der eigenen
+      // Rechnung heraus.
+      manualCount: "5",
       steps: [
         { text: "In Apollo filtern und 250 Leads als CSV exportieren.", manual: false },
         { text: "Abmeldungen und Bestandskunden aus der CSV entfernen. Apollo kennt beides nicht, Instantly meldet es nicht zurück.", manual: true },
         { text: "Für jeden Lead eine persönliche Zeile schreiben, oder auf generische Platzhalter ausweichen, die schlechter abschneiden als gar keine Personalisierung.", manual: true },
         { text: "CSV bei Instantly hochladen und die Spalten zuordnen.", manual: false },
-        { text: "Kampagne und Nachfass-Sequenz aufbauen.", manual: false },
+        { text: "Kampagne und Nachfass-Sequenz aufbauen: vier Stufen, für jede ein Betreff und ein Text, und das für jede Zielgruppe neu.", manual: true },
         { text: "Antworten in Instantly lesen, Ergebnisse an anderer Stelle notieren.", manual: true },
         { text: "Zahlen für den Kunden aus zwei Tools in einer Tabelle zusammensetzen.", manual: true },
         { text: "Nächsten Monat von vorn. Apollo weiß nicht, wen ihr letzten Monat schon angeschrieben habt.", manual: false },
@@ -433,13 +447,19 @@ const de = {
     after: {
       label: "Mit Frostbreaker",
       countLabel: "Schritte",
-      count: "4",
+      count: "5",
       manualLabel: "davon von Hand",
-      manualCount: "0",
+      // Eins, nicht null. Das Angebot tippt ein Mensch, und eine Null neben
+      // einem Abschnitt "Was wir dir nicht vormachen" waere teurer als die
+      // ehrliche Eins. Welcher der fuenf Schritte gemeint ist, steht im Text
+      // des Schritts selbst -- die Nachher-Spalte kennt keinen Handarbeits-
+      // Marker (siehe page.tsx, dort sind die Schritte reiner Text).
+      manualCount: "1",
       steps: [
+        "Das Angebot einmal ausfüllen, von Hand: zwölf Fragen, sieben davon aus deiner Website vorgeschlagen. Einmal, nicht je Kampagne.",
         "Eine Suche starten, mit denselben Filtern wie in Apollo, zusätzlich nach eingesetzter Technik.",
         "Läuft von allein durch: Sperrliste geprüft, Adresse verifiziert, persönliche Zeile pro Firma geschrieben.",
-        "Kampagne direkt aus derselben Liste starten, ohne Export und ohne Spalten zuzuordnen.",
+        "Kampagne direkt aus derselben Liste starten: die vier Stufen stehen bereits im Formular, aus dem Angebot geschrieben.",
         "Antworten, Meetings und der Kundenreport stehen im selben Dashboard.",
       ],
     },
@@ -486,7 +506,40 @@ const de = {
       // ZUR FIRMA. Platzhalter-Serienbriefe ({{company}}) koennen alle -- die
       // Zeile ist deshalb bewusst eng formuliert.
       { id: "opener", label: "Einen eigenen Aufhänger je Lead aus recherchierten Fakten schreiben", tools: [false, false, false, false] },
-      { id: "copycheck", label: "Den Text prüfen, bevor er rausgeht: Länge, Spam-Wörter, KI-Klang, nur ein CTA", tools: [false, false, false, false] },
+      // Alle drei koennen Sequenztexte per KI erzeugen -- deshalb teilw. und
+      // nicht der leere Kreis. Der Unterschied steht in den beiden Haelften
+      // der Zeile: EIN dauerhaft hinterlegtes Angebot als Quelle, und ZWEI
+      // eigenstaendige Fassungen je Stufe. Geprueft am 2026-08-13:
+      //  - Apollo: knowledge.apollo.io/hc/en-us/articles/4409231193101-Create-a-Sequence
+      //    schreibt "AI-assisted ... using information set in the content
+      //    center". Die zweite Fassung ist Handarbeit --
+      //    .../4410749683597-Use-an-A-B-Test-in-a-Sequence sagt woertlich
+      //    "copy your initial email to version B and make tweaks".
+      //  - Hunter: help.hunter.io/en/articles/11999872-using-the-ai-writing-
+      //    assistant-in-hunter-s-email-sequences erzeugt Folgemails; A/B
+      //    schliesst dort die Personalisierung aus.
+      //  - Instantly: instantly.ai/blog/instantly-features/ (AI Sequence
+      //    Generator); Variation entsteht ueber Spintax, nicht als zweite
+      //    eigenstaendige Fassung.
+      //  - Pipedrive: pipedrive.com/en/products/ai-crm/ai-email-writer
+      //    schreibt eine Einzelmail aus einem Prompt -- keine Sequenz, keine
+      //    Fassungen. Deshalb als einziges der Strich.
+      { id: "sequence", label: "Aus einem einmal hinterlegten Angebot alle vier Stufen schreiben, je zwei eigenständige Fassungen", tools: ["partial", "partial", "partial", false] },
+      // Die enge Formulierung ist der ganze Punkt. "Prueft den Text, bevor er
+      // rausgeht" waere fuer Instantly falsch -- deren AI Spam Words Checker
+      // sitzt genau dort (help.instantly.ai/en/articles/9921051-ai-spam-words-
+      // checker, geprueft 2026-08-13). Was keiner der vier macht, ist das
+      // NACHMESSEN gegen feste Sequenzregeln samt Benennung des Verstosses.
+      // Ein Prompt sagt bitte, eine Pruefung sagt nein (lib/copy/playbook.ts
+      // im App-Repo). Die vier genannten Regeln stehen dort als Funktionen.
+      { id: "rulecheck", label: "Den erzeugten Text gegen feste Sequenzregeln nachmessen und den Verstoß benennen: jede Stufe kürzer als die vorherige, ein Betreff über alle vier, keine Terminbitte, kein wörtlich übernommenes Angebotsfeld", tools: [false, false, false, false] },
+      // Instantly stand hier bis zum 2026-08-13 auf dem Strich. Das war nicht
+      // mehr haltbar: der AI Spam Words Checker sitzt im Sequenz-Editor
+      // (help.instantly.ai/en/articles/9921051-ai-spam-words-checker) und
+      // deckt damit einen der vier genannten Punkte ab. Eine Zeile, die ein
+      // Fachkaeufer mit einem Klick kippt, kostet die Glaubwuerdigkeit ALLER
+      // Zeilen -- auch der beiden sauber belegten darueber.
+      { id: "copycheck", label: "Den Text prüfen, bevor er rausgeht: Länge, Spam-Wörter, KI-Klang, nur ein CTA", tools: [false, false, "partial", false] },
       { id: "send", label: "Kampagne und Sequenz starten", tools: [false, false, true, false] },
       // Instantly waermt Postfaecher auf und zeigt Zustellbarkeit an, haelt
       // den Start aber nicht auf. "Erzwingen" ist der Unterschied, deshalb
@@ -508,8 +561,12 @@ const de = {
     ledgerLabel: "Die Rechnung, ehrlich",
     ledgerKeep: "Bleibt: Apollo, Hunter, Instantly, OpenAI, auf deinen Konten, zu deinen Konditionen. Wir schlagen nichts auf.",
     ledgerDrop: "Fällt weg: das CRM-Abo je Sitzplatz und die Handarbeit dazwischen. Bei sechs Leuten im Team ist das der größere Posten, nicht unserer.",
+    // Bewusst ohne Links: eine Adresse veraltet schneller als der Befund, und
+    // eine tote Adresse unter einer Vergleichstabelle liest sich wie ein
+    // zurueckgezogener Beleg. Die Quellen stehen als Kommentar an der
+    // jeweiligen Zeile.
     footnote:
-      "Stand August 2026, geprüft an den öffentlichen Leistungsbeschreibungen der Anbieter. „Teilweise“ heißt: vorhanden, aber nicht in dem Umfang, den die Zeile beschreibt. Ein Strich heißt „gehört nicht zum Leistungsumfang“, nicht „funktioniert schlecht“.",
+      "Geprüft am 13. August 2026 an den öffentlichen Leistungsbeschreibungen und Hilfecentern der Anbieter. „Teilweise“ heißt: vorhanden, aber nicht in dem Umfang, den die Zeile beschreibt. Ein Strich heißt „gehört nicht zum Leistungsumfang“, nicht „funktioniert schlecht“. Apollo, Hunter und Instantly erzeugen Sequenztexte per KI. „Teilweise“ heißt in der Schreibzeile deshalb: eine Sequenz entsteht, aber nicht zwei eigenständige Fassungen je Stufe aus einem dauerhaft hinterlegten Angebot.",
   },
   // Wird seit dem 2026-08-06 nicht mehr gerendert: der Abschnitt #ergaenzt ist
   // der Vergleichstabelle gewichen. Der Inhalt bleibt bis Stufe 5 stehen, weil
@@ -1478,7 +1535,13 @@ const de = {
       {
         title: "Jeder bekommt seinen eigenen ersten Satz",
         body: "Aus der Recherche zur Firma entsteht ein Aufhänger je Kontakt. Du bestimmst die Quelle, den Ton und die Wörter, die nicht vorkommen dürfen, und testest an einer echten Firma, bevor etwas gespeichert wird.",
-        detail: "Kein Serienbrief mit dem Firmennamen an der richtigen Stelle. Platzhalter-Personalisierung schneidet messbar schlechter ab als gar keine.",
+        // Bis zum 2026-08-13 stand hier der Satz gegen Platzhalter-
+        // Personalisierung. Der stimmt weiter, liess den Schritt aber wie die
+        // ganze Schreibfunktion aussehen -- gemeint ist die EINE Zeile, die je
+        // Firma verschieden ist. Der Verweis auf den Angebot-Abschnitt steht
+        // als Text und nicht als Link: `detail` wird in _walkthrough.tsx als
+        // reiner String gerendert.
+        detail: "Es ist die eine Zeile, die je Firma verschieden ist, kein Serienbrief mit dem Firmennamen an der richtigen Stelle. Was danach kommt — Problem, Nutzen, die eine Frage — steht in deinem Angebot, gleich im Abschnitt darunter.",
         cta: "Den Agenten ansehen",
       },
       {
@@ -1509,6 +1572,144 @@ const de = {
         cta: "Die Auswertung ansehen",
       },
     ],
+  },
+  // ══════════════════════════════════════════════════════════════════════
+  // DER ANGEBOT-ABSCHNITT. Gehoert auf die Startseite zwischen Rundgang und
+  // Agentur-Band; eingehaengt wird er in page.tsx unter dem Anker #angebot.
+  //
+  // Der Aufhaenger ist nicht ausgedacht, er steht woertlich so in Migration
+  // 0090 des App-Repos: die App wusste alles ueber den Empfaenger und nichts
+  // ueber den Absender. Das ist die ehrlichste Zeile, die dieser Abschnitt
+  // haben kann -- sie gibt eine Luecke zu, bevor sie das Gegenmittel zeigt.
+  //
+  // WELCHE ZAHLEN HIER STEHEN DUERFEN
+  //
+  // Nur die sechs, die MECHANIK beschreiben und kein Ergebnis versprechen,
+  // und alle stehen so im Code des App-Repos: 12 Felder, davon 7
+  // vorgeschlagen (SUGGESTED_FIELDS in lib/copy/offer-from-website.ts) · 4
+  // Stufen mit je 2 Fassungen · Tag 0/3/5/7 (PLAYBOOK_DELAYS) · 90/70/50/35
+  // Woerter (STEP_MAX_WORDS) · hoechstens 5 Befunde (MAX_FINDINGS in
+  // lib/copy/coach-prompt.ts). KEINE Stundenersparnis, kein Gehaltsvergleich,
+  // keine Prozentangabe -- die gaebe es nur erfunden, und der Abschnitt
+  // daneben verspricht ausdruecklich, nichts zu behaupten, was nicht belegt
+  // ist.
+  //
+  // `limits` ist der wichtigste Teil und darf beim Setzen nicht kleiner
+  // werden als `points`. Ein Werkzeug, das seine eigenen Grenzen nennt, wird
+  // beim Rest geglaubt.
+  // ══════════════════════════════════════════════════════════════════════
+  offerSection: {
+    eyebrow: "Dein Angebot",
+    title: "Die App wusste alles über den Empfänger und nichts über dich",
+    body: "Firma, Rolle, eingesetzte Technik, recherchierte Beschreibung: über den Empfänger stand alles in der Datenbank. Was du verkaufst, stand nirgends. Also fing jede Kampagne mit vier leeren Textfeldern an, und für die meisten endet Akquise genau dort. Seit es das Angebot gibt, beantwortest du das einmal, und die Mails entstehen daraus.",
+    points: [
+      {
+        title: "Zwölf Fragen, einmal beantwortet",
+        body: "Was du verkaufst, an wen, woran dein Käufer hängen bleibt, was er davon hat, worum du bittest. Sieben der zwölf Antworten liest die App aus deiner eigenen Website und schlägt sie dir vor — du bestätigst sie einzeln, statt sie abzutippen. Fünf bleiben leer, und zwar mit Absicht.",
+      },
+      {
+        title: "Der Coach liest gegen und schreibt einen besseren Satz daneben",
+        body: "Höchstens fünf Befunde, und keiner ohne Gegenvorschlag. Nicht „das ist zu vage“, sondern der fertige Ersatztext mit einem Knopf, der ihn einsetzt. Sind zwei Felder vertauscht — dein Beleg steht im Ergebnisfeld —, zieht die Karte einen Pfeil zwischen beide. Ein Formular hat für so einen Befund keinen Ort.",
+      },
+      {
+        title: "Daraus entstehen acht Texte",
+        body: "Vier Stufen an Tag 0, 3, 5 und 7, je zwei eigenständige Fassungen, ein Betreff über alle vier. Jede Stufe ist kürzer als die vorherige: 90, 70, 50, 35 Wörter. Wer bei Schweigen mehr schreibt, läuft hinterher. Die LinkedIn-Nachricht kommt aus derselben Quelle.",
+      },
+    ],
+    limitsTitle: "Was sie dir nicht abnimmt",
+    limits: [
+      {
+        title: "Die fünf Felder, die eine Website nicht hergibt",
+        body: "Was du nach einem Ja schickst, wie lange das Ansehen dauert, deine eine Frage, warum Käufer zögern, und der Ton: diese fünf schlägt die App absichtlich nicht vor. Auf fast jeder Website steht an dieser Stelle „Termin buchen“ — und genau das ist die kleine Frage nicht, um die es geht. Ein Vorschlag wäre geraten, und geraten hieße: es steht etwas in deinem Angebot, das niemand entschieden hat.",
+      },
+      {
+        title: "Ohne Beleg behauptet sie keinen",
+        body: "Lässt du das Belegfeld leer, wird daraus eine ausdrückliche Anweisung, in der Mail nichts zu behaupten: kein Kunde, keine Zahl, kein Jahr. Ein Junior improvisiert an dieser Stelle. Eine erfundene Referenz fällt nicht dir auf, sondern dem Empfänger, und dann ist der Kontakt verbrannt.",
+      },
+      {
+        title: "Der Entwurf landet im Formular, nicht in der Leitung",
+        body: "Die acht Texte stehen danach im Kampagnenformular. Dort liest ein Mensch sie, bevor sie an tausend Adressen gehen, und ändert, was ihm nicht passt. Der Torwart prüft danach die Technik wie bisher.",
+      },
+    ],
+    closing: "Das ist die Arbeit, für die man sonst jemanden im Vertrieb einstellt und ein halbes Jahr einarbeitet: das Angebot verstehen, es in vier Mails übersetzen, jede Stufe zweimal schreiben und keine Behauptung aufstellen, die nicht trägt. Wie viele Stunden dich das spart, sagen wir nicht — wir haben es nicht gemessen. Was die App tut, steht hier, Regel für Regel.",
+    // ────────────────────────────────────────────────────────────────────
+    // Die Texte der beiden Bilder (_offer-mockups.tsx). Erfundene Firma,
+    // dieselbe wie im Rest der Seite (Nordwind Coffee), damit die Seite eine
+    // Welt bleibt. Keine Ergebniszahl im Bild -- die Prozentangabe aus dem
+    // Platzhalter ist bewusst weggefallen: eine Zahl neben einem erfundenen
+    // Kundennamen liest sich als echtes Ergebnis, und der Befund traegt auch
+    // ohne sie.
+    //
+    // Der Inhalt bildet den Fehler nach, der dem Betreiber am 2026-08-13 im
+    // eigenen Angebot passiert ist: im Ergebnisfeld stand der Beleg (ein
+    // Kundenname), im Belegfeld ein Wahlspruch. Genau darauf zeigt der
+    // bernsteinfarbene Pfeil, und deshalb muss die dritte Ecke in dieser
+    // Reihenfolge stehen: Ergebnis, Mechanismus, Beleg. Der Pfeil ist im
+    // Bauteil fest auf Ecke 3, Knoten 1 → Knoten 3 verdrahtet.
+    // ────────────────────────────────────────────────────────────────────
+    offerMap: {
+      frameTitle: "Angebot · Beispiel",
+      corners: [
+        {
+          title: "Wer schreibt an wen",
+          nodes: [
+            { label: "Was verkaufst du?", value: "Wir bauen die Anfrageformulare von Onlineshops um." },
+            { label: "An wen?", value: "Shopware-Händler, 10 bis 50 Mitarbeitende, DACH." },
+            { label: "Wie soll es klingen?", value: "Direkt, keine Fachwörter, kein Hype." },
+          ],
+        },
+        {
+          title: "Woran der Leser hängt",
+          nodes: [
+            { label: "Welches Problem hat er vorher?", value: "Es kommen Anfragen, aber viel weniger, als der Besuch hergibt." },
+            { label: "Woran genau bleibt er hängen?", value: "Das Anfrageformular fragt neun Pflichtfelder ab." },
+            { label: "Warum lässt das zögern?", value: "Sie fangen an, sehen neun Pflichtfelder und brechen ab." },
+          ],
+        },
+        {
+          title: "Was er davon hat",
+          nodes: [
+            { label: "Was ist danach anders?", value: "Bei Nordwind Coffee schicken seitdem deutlich mehr Besucher die Anfrage ab." },
+            { label: "Wie entsteht das Ergebnis?", value: "Drei Pflichtfelder statt neun, der Rest kommt in der Antwortmail." },
+            { label: "Womit kannst du das belegen?", value: "Wir sind seit Jahren die Richtigen dafür." },
+          ],
+        },
+        {
+          title: "Worum du bittest",
+          nodes: [
+            { label: "Was schickst du, wenn er Ja sagt?", value: "Ein Bild eures Formulars mit den drei Feldern, die bleiben." },
+            { label: "Wie lange braucht er dafür?", value: "90 Sekunden" },
+            { label: "Die eine Frage", value: "Soll ich dir die drei Felder schicken?" },
+          ],
+        },
+      ],
+      hub: {
+        name: "THAW",
+        state: "liest die zwölf Felder gegeneinander",
+        button: "Angebot prüfen",
+      },
+      findingLabel: "Dein Beleg steht im Ergebnisfeld — und im Belegfeld steht ein Wahlspruch.",
+      note: "Zwölf Felder, vier Gruppen. Jede Linie dazwischen ist eine Regel, an der geprüft wird.",
+    },
+    coachFinding: {
+      frameTitle: "Angebot · Prüfung",
+      group: "Worum du bittest",
+      fieldLabel: "Die eine Frage, auf die er Ja oder Nein sagt",
+      severity: "Blocker",
+      beforeLabel: "Du hattest geschrieben",
+      // Dieselbe Anrede wie im Kartenbild ("Soll ich dir ...") -- das Angebot
+      // dort ist auf Du gestellt, und zwei Anreden im selben Beispiel lesen
+      // sich als Fehler im Bild statt als Fehler im Text.
+      before: "Hast du nächste Woche 15 Minuten für ein kurzes Kennenlernen?",
+      verdictLabel: "Der Befund",
+      verdict:
+        "Das ist eine Terminbitte — die größte Bitte, die eine erste Mail stellen kann, und deshalb die, die am häufigsten übergangen wird.",
+      proposalLabel: "Stattdessen",
+      proposal: "Soll ich dir die drei Felder schicken, die von euren neun bleiben würden?",
+      apply: "Übernehmen",
+      dismiss: "Passt so",
+      note: "Kein Befund ohne Gegenvorschlag, und höchstens fünf. Mehr wäre eine Mängelliste und keine Beurteilung.",
+    },
   },
   localReachMockup: {
     typicalLabel: "Typische B2B-Datenbank",
@@ -2071,6 +2272,7 @@ const en: typeof de = {
     produktItems: [
       { label: "All features", href: "/funktionen" },
       { label: "Walkthrough", href: "/#rundgang" },
+      { label: "Your offer", href: "/#angebot" },
       { label: "Three channels", href: "/#kanaele" },
       { label: "Personalization", href: "/funktionen#personalize" },
       { label: "Integrations", href: "/#integrationen" },
@@ -2081,7 +2283,7 @@ const en: typeof de = {
       { label: "Technology filter", href: "/funktionen#tech" },
       { label: "Decision Maker Finder", href: "/funktionen#enrich" },
       { label: "Personalization", href: "/funktionen#personalize" },
-      { label: "Email Copy Coach", href: "/funktionen#check" },
+      { label: "Copy check as you type", href: "/funktionen#check" },
       { label: "Campaigns", href: "/funktionen#send" },
       { label: "Suppression list", href: "/funktionen#protect" },
       { label: "Pipeline", href: "/funktionen#pipeline" },
@@ -2390,13 +2592,13 @@ const en: typeof de = {
       countLabel: "Steps",
       count: "8",
       manualLabel: "of those by hand",
-      manualCount: "4",
+      manualCount: "5",
       steps: [
         { text: "Filter in Apollo and export 250 leads as a CSV.", manual: false },
         { text: "Remove opt-outs and existing customers from the CSV. Apollo knows about neither, and Instantly never reports them back.", manual: true },
         { text: "Write a personal line for every lead, or fall back to generic placeholders that perform worse than no personalisation at all.", manual: true },
         { text: "Upload the CSV to Instantly and map the columns.", manual: false },
-        { text: "Build the campaign and the follow-up sequence.", manual: false },
+        { text: "Build the campaign and the follow-up sequence: four steps, a subject line and a body for each, and all of it again for the next audience.", manual: true },
         { text: "Read replies in Instantly, record outcomes somewhere else.", manual: true },
         { text: "Assemble the client's numbers from two tools into one spreadsheet.", manual: true },
         { text: "Next month, start over. Apollo does not know who you contacted last month.", manual: false },
@@ -2405,13 +2607,14 @@ const en: typeof de = {
     after: {
       label: "With Frostbreaker",
       countLabel: "Steps",
-      count: "4",
+      count: "5",
       manualLabel: "of those by hand",
-      manualCount: "0",
+      manualCount: "1",
       steps: [
+        "Fill in your offer once, by hand: twelve questions, seven of them suggested from your own website. Once, not per campaign.",
         "Start one search, with the same filters as in Apollo, plus the technology they run.",
         "It runs on its own: blocklist checked, address verified, a personal line written per company.",
-        "Start the campaign straight from that same list, no export and no column mapping.",
+        "Start the campaign straight from that same list: the four steps are already in the form, written from your offer.",
         "Replies, meetings and the client report sit in the same dashboard.",
       ],
     },
@@ -2433,7 +2636,9 @@ const en: typeof de = {
       { id: "find", label: "Find decision-makers with a name and a role", tools: [true, true, false, false] },
       { id: "verify", label: "Verify the email address", tools: [true, true, false, false] },
       { id: "opener", label: "Write an opener per lead from researched facts", tools: [false, false, false, false] },
-      { id: "copycheck", label: "Check the copy before it goes out: length, spam words, AI tone, one CTA only", tools: [false, false, false, false] },
+      { id: "sequence", label: "Write all four steps from one offer you filled in once, two independent versions each", tools: ["partial", "partial", "partial", false] },
+      { id: "rulecheck", label: "Measure the generated copy against fixed sequence rules and name the breach: every step shorter than the one before, one subject line across all four, no meeting request, no offer field copied word for word", tools: [false, false, false, false] },
+      { id: "copycheck", label: "Check the copy before it goes out: length, spam words, AI tone, one CTA only", tools: [false, false, "partial", false] },
       { id: "send", label: "Start the campaign and the sequence", tools: [false, false, true, false] },
       { id: "gate", label: "Hold the start back when SPF, DKIM or the bounce rate are off", tools: [false, false, "partial", false] },
       { id: "linkedin", label: "Prepare the LinkedIn message per contact, ready to send", tools: [false, false, false, false] },
@@ -2448,7 +2653,7 @@ const en: typeof de = {
     ledgerKeep: "Stays: Apollo, Hunter, Instantly, OpenAI, on your accounts, at your rates. We add no markup.",
     ledgerDrop: "Goes: the per-seat CRM subscription and the manual work in between. On a team of six, that is the bigger line item, not ours.",
     footnote:
-      "As of August 2026, checked against the providers' public product descriptions. “Partly” means: present, but not to the extent the row describes. A dash means “not part of the product”, not “works badly”.",
+      "Checked on 13 August 2026 against the providers' public product descriptions and help centres. “Partly” means: present, but not to the extent the row describes. A dash means “not part of the product”, not “works badly”. Apollo, Hunter and Instantly all generate sequence copy with AI. In the writing row, “partly” therefore means: a sequence comes out, but not two independent versions per step from an offer you keep on file.",
   },
   worksWith: {
     eyebrow: "Complements your stack",
@@ -3237,7 +3442,7 @@ const en: typeof de = {
       {
         title: "Everyone gets their own first sentence",
         body: "An opener per contact, written from the research on that company. You set the source, the tone and the words that must not appear, and test it on a real company before anything is saved.",
-        detail: "Not a mail merge with the company name in the right slot. Placeholder personalisation measurably performs worse than none at all.",
+        detail: "It is the one line that differs per company, not a mail merge with the company name in the right slot. What follows it — the problem, the payoff, the one question — comes from your offer, in the section right below.",
         cta: "See the agent",
       },
       {
@@ -3265,6 +3470,101 @@ const en: typeof de = {
         cta: "See the analysis",
       },
     ],
+  },
+  offerSection: {
+    eyebrow: "Your offer",
+    title: "The app knew everything about the recipient and nothing about you",
+    body: "Company, role, the technology they run, a researched description: everything about the recipient was in the database. What you sell was nowhere. So every campaign started with four empty text fields, and for most people that is where outreach ends. Now you answer that once, and the emails are written from it.",
+    points: [
+      {
+        title: "Twelve questions, answered once",
+        body: "What you sell, to whom, where your buyer gets stuck, what they get out of it, what you are asking for. Seven of the twelve answers are read off your own website and offered to you — you confirm them one by one instead of typing them. Five stay empty, and that is deliberate.",
+      },
+      {
+        title: "The coach argues back, and writes a better sentence next to it",
+        body: "Five findings at most, and none without a replacement. Not “that is too vague”, but the finished sentence with a button that puts it in. When two fields have swapped places — your proof sitting in the outcome field — the map draws an arrow between them. A form has nowhere to put a finding like that.",
+      },
+      {
+        title: "Eight pieces of copy come out of it",
+        body: "Four steps on day 0, 3, 5 and 7, two independent versions each, one subject line across all four. Every step is shorter than the one before it: 90, 70, 50, 35 words. Write more when nobody answers and you are chasing. The LinkedIn message comes from the same source.",
+      },
+    ],
+    limitsTitle: "What it does not do for you",
+    limits: [
+      {
+        title: "The five fields a website cannot give you",
+        body: "What you send once they say yes, how long it takes them to look, your one question, why buyers hesitate, and the tone: those five are deliberately never suggested. Almost every website says “book a call” in that spot — and a call is exactly what the small question is not. A suggestion there would be a guess, and a guess means something sits in your offer that nobody decided.",
+      },
+      {
+        title: "No proof on file, no claim made",
+        body: "Leave the proof field empty and it turns into an explicit instruction to claim nothing in the email: no client, no figure, no number of years. A junior would improvise here. An invented reference is not spotted by you, it is spotted by the recipient, and then that contact is gone.",
+      },
+      {
+        title: "The draft lands in the form, not on the wire",
+        body: "The eight pieces of copy go into the campaign form. A person reads them there before they go to a thousand addresses, and changes whatever does not fit. The gate then checks the technical side, as it always did.",
+      },
+    ],
+    closing: "This is the work you would otherwise hire someone in sales for and spend half a year training them on: understand the offer, turn it into four emails, write every step twice, and claim nothing that does not hold. How many hours it saves you, we will not say — we have not measured it. What the app does is right here, rule by rule.",
+    offerMap: {
+      frameTitle: "Offer · Example",
+      corners: [
+        {
+          title: "Who writes to whom",
+          nodes: [
+            { label: "What do you sell?", value: "We rebuild the enquiry forms of online shops." },
+            { label: "To whom?", value: "Shopware merchants, 10 to 50 staff, German-speaking Europe." },
+            { label: "How should it sound?", value: "Direct, no jargon, no hype." },
+          ],
+        },
+        {
+          title: "Where the reader is stuck",
+          nodes: [
+            { label: "What do they struggle with beforehand?", value: "Enquiries do come in, but far fewer than the traffic should give them." },
+            { label: "Where exactly do they get stuck?", value: "The enquiry form asks for nine required fields." },
+            { label: "Why does that make buyers hesitate?", value: "They start it, see nine required fields and give up." },
+          ],
+        },
+        {
+          title: "What they get out of it",
+          nodes: [
+            { label: "What is different afterwards?", value: "At Nordwind Coffee, far more visitors send the enquiry now." },
+            { label: "How does the result happen?", value: "Three required fields instead of nine, the rest comes in the reply." },
+            { label: "What backs that up?", value: "We have been the right people for this for years." },
+          ],
+        },
+        {
+          title: "What you are asking for",
+          nodes: [
+            { label: "What do you send once they say yes?", value: "A picture of your form with the three fields that would stay." },
+            { label: "How long does that take them?", value: "90 seconds" },
+            { label: "The one question", value: "Want me to send you the three fields?" },
+          ],
+        },
+      ],
+      hub: {
+        name: "THAW",
+        state: "reads the twelve fields against each other",
+        button: "Check the offer",
+      },
+      findingLabel: "Your proof is sitting in the outcome field — and the proof field holds a slogan.",
+      note: "Twelve fields, four groups. Every line between them is a rule the offer is checked against.",
+    },
+    coachFinding: {
+      frameTitle: "Offer · Check",
+      group: "What you are asking for",
+      fieldLabel: "The one question they answer yes or no to",
+      severity: "Blocker",
+      beforeLabel: "You had written",
+      before: "Would you have 15 minutes next week for a quick intro call?",
+      verdictLabel: "The finding",
+      verdict:
+        "That is a meeting request — the biggest thing a first email can ask for, and therefore the one that gets passed over most often.",
+      proposalLabel: "Instead",
+      proposal: "Want me to send you the three fields that would be left of your nine?",
+      apply: "Apply",
+      dismiss: "Leave it",
+      note: "No finding without a replacement, and five at most. More would be a defect list, not a judgement.",
+    },
   },
   localReachMockup: {
     typicalLabel: "Typical B2B database",
