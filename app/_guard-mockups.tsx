@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useT } from "./language-provider";
 
 /**
@@ -66,7 +66,14 @@ export function GateMockup() {
           );
         })}
 
-        <div className="rounded-xl border border-red-500/40 bg-red-500/[0.08] px-3.5 py-2.5 text-[12px] font-semibold text-red-600 dark:text-red-400">
+        {/* Kein dark:-Gegenstueck. Diese Website ist hell und nur hell --
+            globals.css setzt color-scheme: light und es gibt keine dunklen
+            Tokens. Die dark:-Variante feuert in Tailwind v4 aber trotzdem, sie
+            haengt an prefers-color-scheme. Wer sein System auf dunkel stellt,
+            bekam dadurch helle Schrift auf der weiterhin weissen Flaeche:
+            text-red-400 auf dem Panel gemessen 2,6:1, text-sky-400 sogar 2,0:1
+            (13.08.2026). Verlangt sind 4,5:1. */}
+        <div className="rounded-xl border border-red-500/40 bg-red-500/[0.08] px-3.5 py-2.5 text-[12px] font-semibold text-red-600">
           {m.blocked}
         </div>
 
@@ -102,10 +109,10 @@ export function ChainMockup() {
           />
           {m.steps.map((s, i) => (
             <li key={s.title} className={"relative pl-11 " + (i < m.steps.length - 1 ? "pb-6" : "")}>
-              <span className="absolute left-0 top-0 grid h-8 w-8 place-items-center rounded-full border-2 border-sky-500/70 bg-panel text-[11px] font-bold text-sky-600 dark:text-sky-400">
+              <span className="absolute left-0 top-0 grid h-8 w-8 place-items-center rounded-full border-2 border-sky-500/70 bg-panel text-[11px] font-bold text-sky-600">
                 {i + 1}
               </span>
-              <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-sky-600 dark:text-sky-400">{s.day}</p>
+              <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-sky-600">{s.day}</p>
               <p className="mt-0.5 text-[14px] font-semibold text-ink">{s.title}</p>
               <p className="mt-1 text-[12px] leading-relaxed text-soft">{s.body}</p>
             </li>
@@ -182,9 +189,9 @@ export function EffectMockup() {
  * Haelften -- es erzeugt den Aufhaenger UND sieht, was zurueckkommt. Seit
  * Migration 0076 ist die Zuordnung Antwort -> Schritt -> Textfassung gebaut.
  *
- * ═══════════════════════════════════════════════════════════════════════
+ * â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
  * DREI DINGE, DIE DAS BILD ABSICHTLICH ZEIGT
- * ═══════════════════════════════════════════════════════════════════════
+ * â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
  *
  * 1. DIE AUSZEICHNUNG HAENGT AN TERMINEN, NICHT AN ANTWORTEN. In der App
  *    fiel genau das am 06.08. auf: der "beste Schritt" stand gruen ueber
@@ -238,7 +245,7 @@ export function CopyOutcomesMockup() {
                     (r.variant ? "rounded border border-edge2 bg-chip text-soft" : "text-transparent")
                   }
                 >
-                  {r.variant || "·"}
+                  {r.variant || "Â·"}
                 </span>
                 {/* Die Kontaktzahl steht in der Unterzeile, nicht als eigene
                     Spalte. Im Rundgang sitzt dieses Bild in einer halben
@@ -299,9 +306,9 @@ export function CopyOutcomesMockup() {
  * Dieselben Daten fuer den Hero -- aber als zwei grosse Vergleichskarten
  * statt als Tabellenzeilen.
  *
- * ═══════════════════════════════════════════════════════════════════════
+ * â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
  * WARUM NICHT EINFACH DIE TABELLE VON OBEN, NUR KUERZER
- * ═══════════════════════════════════════════════════════════════════════
+ * â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
  *
  * Genau das war der erste Versuch, und es war der falsche. Eine
  * Tabellenzeile mit 11px-Zahlen funktioniert IM RUNDGANG, wo man liest und
@@ -404,7 +411,7 @@ export function CopyOutcomesHighlight() {
               </div>
 
               <p className="mt-2.5 text-[12px] leading-relaxed text-mute">
-                {r.interested} · {r.rejections}
+                {r.interested} Â· {r.rejections}
               </p>
             </div>
           ))}
