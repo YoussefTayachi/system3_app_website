@@ -14,7 +14,13 @@ export default function KontaktPage() {
     { href: "/#agenturen", label: t.nav.agenturen },
     { href: "/#vergleich", label: t.nav.vergleich },
   ];
-  const produktItems = t.nav.produktItems.map((item) => ({ ...item, href: "/" + item.href }));
+  // Direkt durchgereicht, ohne Praefix: die Hrefs in produktItems sind bereits
+  // absolut ("/funktionen", "/#rundgang"). Bis zum 13.08.2026 stand hier
+  // '"/" + item.href' -- ein Rest aus der Zeit relativer Hrefs. Daraus wurde
+  // "//funktionen", und das ist eine protokollrelative URL: am Live-Stand
+  // aufgeloest zu https://funktionen/ (gemessen auf frostbreaker.app/kontakt).
+  // Jeder Eintrag des Produkt-Menues zeigte auf dieser Seite ins Leere.
+  const produktItems = t.nav.produktItems;
   return (
     <div className="min-h-screen">
       <header className="sticky top-0 z-10 border-b border-edge/60 bg-surface/90 backdrop-blur">

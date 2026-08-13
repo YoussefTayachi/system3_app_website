@@ -10,7 +10,10 @@ export default function CaseStudyPage() {
     { href: "/#agenturen", label: t.nav.agenturen },
     { href: "/#vergleich", label: t.nav.vergleich },
   ];
-  const produktItems = t.nav.produktItems.map((item) => ({ ...item, href: "/" + item.href }));
+  // Ohne Praefix, siehe die ausfuehrliche Begruendung in kontakt/page.tsx:
+  // '"/" + item.href' erzeugte "//funktionen", eine protokollrelative URL, die
+  // der Browser als Host aufloest. Am 13.08.2026 auf beiden Seiten behoben.
+  const produktItems = t.nav.produktItems;
 
   return (
     <div className="min-h-screen">
