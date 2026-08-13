@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useT } from "./language-provider";
 
 /**
@@ -189,9 +189,9 @@ export function EffectMockup() {
  * Haelften -- es erzeugt den Aufhaenger UND sieht, was zurueckkommt. Seit
  * Migration 0076 ist die Zuordnung Antwort -> Schritt -> Textfassung gebaut.
  *
- * â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+ * ═══════════════════════════════════════════════════════════════════════
  * DREI DINGE, DIE DAS BILD ABSICHTLICH ZEIGT
- * â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+ * ═══════════════════════════════════════════════════════════════════════
  *
  * 1. DIE AUSZEICHNUNG HAENGT AN TERMINEN, NICHT AN ANTWORTEN. In der App
  *    fiel genau das am 06.08. auf: der "beste Schritt" stand gruen ueber
@@ -220,7 +220,13 @@ export function CopyOutcomesMockup() {
 
   return (
     <AppFrame title={m.frameTitle}>
-      <div className="p-5 sm:p-6">
+      {/* @container: die Zeile unten ist eine Tabelle mit festen Spalten, und
+          wie breit sie sein darf, haengt an der BREITE DIESER KARTE, nicht am
+          Fenster -- genauso wie im OfferMapMockup. Im Rundgang steht das Bild
+          ab lg in einer halben Spalte (auf 1440 gemessen 488px), auf 768 aber
+          ueber die volle Breite: `sm:` waere in beiden Faellen erfuellt und
+          traefe trotzdem zwei voellig verschiedene Platzverhaeltnisse. */}
+      <div className="@container p-5 sm:p-6">
         <div className="mb-4 flex gap-2.5 rounded-xl border border-amber-500/35 bg-amber-500/[0.06] px-3.5 py-2.5">
           <span aria-hidden className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
           <p className="text-[12px] leading-relaxed text-soft">{m.warning}</p>
@@ -234,26 +240,39 @@ export function CopyOutcomesMockup() {
         <div className="divide-y divide-edge/60">
           {rows.map((r) => (
             <div key={r.step + r.variant} className="py-3">
-              <div className="flex items-center gap-2.5">
-                <span className="w-[80px] shrink-0 text-[13px] text-ink">{r.step}</span>
+              {/* Die Spaltenbreiten sind zweistufig. Gemessen am 13.08.2026
+                  (Chrome 151, Deutsch, der laengere Fall): "Schritt 2" braucht
+                  54px, "26, zu wenig" 72px, "17 Termine" 63px. Die urspruenglich
+                  einzige Stufe (80/24/70/92/82 + 4x10 Abstand = 388px + 40px
+                  Innenabstand = 428px) passte in der halben Spalte ab lg, aber
+                  nicht in die 341px, die die Karte auf einem 375px-Fenster hat:
+                  der Rahmen ist overflow-hidden und schnitt die TERMIN-SPALTE
+                  weg -- ausgerechnet die, wegen der es diese Ansicht gibt.
+                  Darum enge Spalten als Ausgangslage und die grosszuegigen erst
+                  ab 26rem Kartenbreite. */}
+              <div className="flex items-center gap-1.5 @min-[26rem]:gap-2.5">
+                <span className="w-[56px] shrink-0 text-[13px] text-ink @min-[26rem]:w-[80px]">{r.step}</span>
                 {/* Die Fassungs-Marke traegt bewusst den Buchstaben und nicht
                     nur eine Farbe -- A und B muessen auch dann unterscheidbar
                     sein, wenn die Farbe wegfaellt. */}
                 <span
                   className={
-                    "w-6 shrink-0 rounded text-center text-[11px] font-bold " +
+                    "w-5 shrink-0 rounded text-center text-[11px] font-bold @min-[26rem]:w-6 " +
                     (r.variant ? "rounded border border-edge2 bg-chip text-soft" : "text-transparent")
                   }
                 >
-                  {r.variant || "Â·"}
+                  {r.variant || "·"}
                 </span>
                 {/* Die Kontaktzahl steht in der Unterzeile, nicht als eigene
                     Spalte. Im Rundgang sitzt dieses Bild in einer halben
                     Spaltenbreite; mit fuenf festen Spalten blieben dem Balken
                     keine 60px, und ein Balken, den man nicht vergleichen kann,
-                    ist nur Dekoration. min-w, damit er auch im schmalsten Fall
-                    eine Laenge hat, die etwas aussagt. */}
-                <span className="h-2 min-w-[70px] flex-1 overflow-hidden rounded-full bg-chip">
+                    ist nur Dekoration. Deshalb faellt er unter 17rem
+                    Kartenbreite ganz weg statt zum Strich zu schrumpfen: auf
+                    einem 320px-Fenster blieben ihm 4px. Die Zahl daneben sagt
+                    ohnehin dasselbe genauer -- verloren geht nur der Vergleich
+                    auf einen Blick, und der ist bei 4px auch verloren. */}
+                <span className="hidden h-2 min-w-0 flex-1 overflow-hidden rounded-full bg-chip @min-[17rem]:block @min-[26rem]:min-w-[70px]">
                   {r.percent !== null && (
                     <span
                       className="block h-full rounded-full bg-sky-500"
@@ -263,7 +282,7 @@ export function CopyOutcomesMockup() {
                 </span>
                 <span
                   className={
-                    "w-[92px] shrink-0 text-right text-[12px] tabular-nums " +
+                    "w-[74px] shrink-0 text-right text-[12px] tabular-nums @min-[26rem]:w-[92px] " +
                     (r.percent === null ? "text-mute" : "text-soft")
                   }
                 >
@@ -273,14 +292,17 @@ export function CopyOutcomesMockup() {
                     Sie ist der Grund, warum es diese Ansicht gibt. */}
                 <span
                   className={
-                    "w-[82px] shrink-0 text-right text-[12px] tabular-nums " +
+                    "w-[70px] shrink-0 text-right text-[12px] tabular-nums @min-[26rem]:w-[82px] " +
                     (r.meetings ? "font-semibold text-emerald-700" : "text-edge3")
                   }
                 >
                   {r.meetings || "0"}
                 </span>
               </div>
-              <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 pl-[113px] text-[11px] text-mute">
+              {/* Einzug bis zum Beginn des Balkens, damit die Unterzeile unter
+                  den Zahlen haengt und nicht unter dem Schritt-Namen. Faellt
+                  mit den Spaltenbreiten oben: 56+6+20 bzw. 80+10+24. */}
+              <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 pl-[82px] text-[11px] text-mute @min-[26rem]:pl-[113px]">
                 <span>
                   {r.contacts} {m.contactsWord}
                 </span>
@@ -306,9 +328,9 @@ export function CopyOutcomesMockup() {
  * Dieselben Daten fuer den Hero -- aber als zwei grosse Vergleichskarten
  * statt als Tabellenzeilen.
  *
- * â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+ * ═══════════════════════════════════════════════════════════════════════
  * WARUM NICHT EINFACH DIE TABELLE VON OBEN, NUR KUERZER
- * â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+ * ═══════════════════════════════════════════════════════════════════════
  *
  * Genau das war der erste Versuch, und es war der falsche. Eine
  * Tabellenzeile mit 11px-Zahlen funktioniert IM RUNDGANG, wo man liest und
@@ -411,7 +433,7 @@ export function CopyOutcomesHighlight() {
               </div>
 
               <p className="mt-2.5 text-[12px] leading-relaxed text-mute">
-                {r.interested} Â· {r.rejections}
+                {r.interested} · {r.rejections}
               </p>
             </div>
           ))}

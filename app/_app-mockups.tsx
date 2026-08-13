@@ -365,9 +365,14 @@ export function LeadDetailMockup() {
       <div className="p-5 sm:p-6">
         <p className="text-[10px] font-medium uppercase tracking-[0.1em] text-faint">{m.label}</p>
 
+        {/* Initiale aus dem Woerterbuch, nicht fest im Bauteil. Bis zum
+            13.08.2026 stand hier "MH" -- die Initialen eines erfundenen
+            Namens, den das Woerterbuch laengst nicht mehr traegt. Ein
+            hartkodierter Rest im Bild widerspricht dem Text daneben, und das
+            faellt niemandem auf, der nur die Sprachdatei pflegt. */}
         <div className="mt-3 flex items-start gap-3">
           <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-sky-500/15 text-sm font-semibold text-sky-700">
-            MH
+            {m.person.trim().charAt(0).toUpperCase()}
           </span>
           <div className="min-w-0">
             <p className="text-sm font-semibold text-ink">{m.person}</p>
@@ -467,11 +472,13 @@ export function ReportMockup() {
       <div className="p-5 sm:p-6">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div className="flex items-center gap-2.5">
+            {/* Wie beim Lead-Detail: die Initiale kommt aus dem Woerterbuch.
+                Hier stand "M" fuer eine erfundene "Muster GmbH". */}
             <span
               className="flex h-8 w-8 items-center justify-center rounded-lg text-xs font-semibold text-white"
               style={{ backgroundColor: accent }}
             >
-              M
+              {m.client.trim().charAt(0).toUpperCase()}
             </span>
             <div>
               <p className="text-sm font-semibold text-ink">{m.client}</p>

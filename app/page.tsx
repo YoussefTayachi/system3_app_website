@@ -74,6 +74,13 @@ export default function Home() {
   // funktionieren, die Navigation zeigt aber auf die vollstaendigen Seiten.
   const navLinks = [
     { href: "/fuer-agenturen", label: t.nav.agenturen, secondary: true },
+    // Zweite Segmentseite, dieselbe Behandlung wie die erste: erst ab lg.
+    // Nachgemessen am 2026-08-13 auf allen sechs Leisten in Deutsch (Chrome,
+    // Breite der Leiste gegen ihren Kasten): mit dem Link ab md sichtbar lief
+    // /eigene-software bei 900px 58px ueber und erzeugte 34px Querscrollen,
+    // bei 768px waren es 190px. Ab 1024px passt die volle Leiste auf jeder
+    // der sechs Seiten (Rest 0px) -- deshalb lg und nicht md.
+    { href: "/fuer-saas", label: t.nav.saas, secondary: true },
     { href: "/kontakt", label: t.nav.kontakt, secondary: false },
   ];
 

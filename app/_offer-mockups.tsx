@@ -17,11 +17,13 @@ import { useId } from "react";
  * Wie bei allen Mockups dieser Seite. Im echten Betrieb steht in diesen
  * Feldern das Angebot eines zahlenden Kunden -- sein Preis, seine Referenzen,
  * sein Aufhaenger. Das ist das Geschaeftsgeheimnis der Kunden und gehoert
- * nicht ins Marketing. Firmennamen hier sind erfunden und dieselben wie in
- * `_mockups.tsx` (Nordwind Coffee), damit die Seite eine Welt bleibt. Zahlen
- * (34 %, acht Wochen, 90 Sekunden) sind erfunden, aber an den echten
- * Schwellen gewaehlt: die App verlangt im Ergebnisfeld eine Zahl MIT
- * Zeitrahmen und in der Pruefzeit eine Zahl mit Einheit.
+ * nicht ins Marketing.
+ *
+ * Die einzige Ausnahme, seit dem 2026-08-13: RETAIYN, unser erster Kunde, mit
+ * ausdruecklicher Zustimmung des Betreibers und ausschliesslich mit Saetzen,
+ * die auf retaiyn.com oeffentlich stehen. Kein Preis, keine Referenz eines
+ * Dritten. Es gibt auf dieser Website genau zwei Namen: Frostbreaker und
+ * RETAIYN -- keine erfundene dritte Firma mehr (BEISPIELE.md).
  *
  * Zweiter Grund: die echte Karte ist erst ab rund 1600 Pixeln Fensterbreite
  * vollstaendig zu sehen (sie misst ihre Knoten zur Laufzeit und zieht
@@ -645,10 +647,21 @@ export function CoachFindingMockup({
    `page.tsx` treten die Woerterbuch-Eintraege an diese Stelle; wer sie dann
    hier stehen laesst, hat zwei Wahrheiten.
 
-   Firmenname erfunden (Nordwind Coffee, wie im Rest der Seite), Zahlen
-   erfunden. Der Inhalt bildet absichtlich den Fehler aus der App vom
-   2026-08-13 nach: der Beleg steht im Ergebnisfeld, und im Belegfeld steht
-   ein Wahlspruch.
+   Seit dem 2026-08-13 keine erfundene Firma und keine erfundene Zahl mehr
+   (BEISPIELE.md): das Angebotsprofil gehoert RETAIYN, unserem ersten Kunden,
+   Feld fuer Feld aus deren eigenen Saetzen von retaiyn.com. Die Prozentwerte
+   sind RETAIYNs Aussagen ueber sich selbst und duerfen nur deshalb hier
+   stehen, weil sie sichtbar in beschrifteten Formularfeldern eines
+   Kundenangebots stehen und nicht in einer Auswertung.
+
+   Der Fehler, den das Bild zeigt, entsteht aus diesem Material von allein:
+   im Ergebnisfeld steht das Versprechen, im Belegfeld ein Wahlspruch, und
+   der eigentliche Beleg (ueber 200 betreute Brands, 2,5 Mio. EUR ARR im
+   Portfolio) steht nirgends. Darauf zeigt der bernsteinfarbene Pfeil.
+
+   Die Fassung hier muss mit `offerSection.offerMap` und
+   `offerSection.coachFinding` in `app/dict.ts` uebereinstimmen -- sonst
+   stehen zwei Wahrheiten in zwei Welten.
 
    Beim Ausprobieren aufgelaufen (2026-08-13): diese Objekte lassen sich nur
    aus einem Client-Modul heraus benutzen. Diese Datei traegt "use client";
@@ -663,33 +676,33 @@ export const DEMO_OFFER_MAP: OfferMapMockupProps = {
     {
       title: "Wer schreibt an wen",
       nodes: [
-        { label: "Was verkaufst du?", value: "Wir bauen Anfrageformulare von Onlineshops um." },
-        { label: "An wen?", value: "Shopware-Händler, 10 bis 50 Mitarbeiter, DACH." },
-        { label: "Wie soll es klingen?", value: "Direkt, keine Fachwörter, kein Hype." },
+        { label: "Was verkaufst du?", value: "Customer Experience für E-Commerce: E-Mail, WhatsApp und Support verbunden statt isoliert." },
+        { label: "An wen?", value: "E-Commerce-Shops und -Brands, häufig schon mit Klaviyo oder WhatsApp im Einsatz." },
+        { label: "Wie soll es klingen?", value: "Beratend und konkret, keine Fachwörter, kein Hype." },
       ],
     },
     {
       title: "Woran der Leser hängt",
       nodes: [
-        { label: "Welches Problem hat er vorher?", value: "Anfragen kommen an, aber kaum jemand schließt sie ab." },
-        { label: "Woran genau bleibt er hängen?", value: "Das Anfrageformular fragt neun Pflichtfelder ab." },
-        { label: "Warum lässt das zögern?", value: "Sie fangen an, sehen neun Felder und brechen ab." },
+        { label: "Welches Problem hat er vorher?", value: "E-Mail, WhatsApp und Customer Support werden unabhängig voneinander betrachtet." },
+        { label: "Woran genau bleibt er hängen?", value: "Brüche in der Customer Journey, ungenutzte Umsatzpotenziale, unnötig hohe operative Aufwände." },
+        { label: "Warum lässt das zögern?", value: "Jedes der drei Systeme läuft für sich, deshalb fällt der Bruch dazwischen niemandem zu." },
       ],
     },
     {
       title: "Was er davon hat",
       nodes: [
-        { label: "Was ist danach anders?", value: "34 % mehr abgeschickte Anfragen bei Nordwind Coffee, in acht Wochen." },
-        { label: "Wie entsteht das Ergebnis?", value: "Drei Pflichtfelder statt neun, der Rest kommt in der Antwortmail." },
-        { label: "Womit kannst du das belegen?", value: "Wir sind seit Jahren die Richtigen dafür." },
+        { label: "Was ist danach anders?", value: "Bis zu 70 % des Kundensupports automatisiert, bis zu 30 % Mehrumsatz." },
+        { label: "Wie entsteht das Ergebnis?", value: "E-Mail, WhatsApp und Support laufen als ein Ablauf statt als drei." },
+        { label: "Womit kannst du das belegen?", value: "Mehr als eine klassische Agentur: strategische Beratung mit operativer Exzellenz." },
       ],
     },
     {
       title: "Worum du bittest",
       nodes: [
-        { label: "Was schickst du, wenn er Ja sagt?", value: "Ein Bild eures Formulars mit den drei Feldern, die bleiben." },
+        { label: "Was schickst du, wenn er Ja sagt?", value: "Eine Übersicht der drei Stellen, an denen E-Mail, WhatsApp und Support bei euch auseinanderlaufen." },
         { label: "Wie lange braucht er dafür?", value: "90 Sekunden" },
-        { label: "Die eine Frage", value: "Soll ich dir die drei Felder schicken?" },
+        { label: "Die eine Frage", value: "Kostenloses Erstgespräch vereinbaren." },
       ],
     },
   ],
@@ -698,8 +711,8 @@ export const DEMO_OFFER_MAP: OfferMapMockupProps = {
     state: "liest die zwölf Felder gegeneinander",
     button: "Angebot prüfen",
   },
-  findingLabel: "Dein Beleg steht im Ergebnisfeld — und im Belegfeld steht ein Wahlspruch.",
-  note: "Zwölf Felder, vier Gruppen. Jede Linie dazwischen ist eine Regel, an der geprüft wird.",
+  findingLabel: "Im Ergebnisfeld steht ein Versprechen, im Belegfeld ein Wahlspruch. Der Beleg für das Versprechen steht nirgends.",
+  note: "Zwölf Felder, vier Gruppen. Jede Linie dazwischen ist eine Regel, an der geprüft wird. Ausgefüllt mit den eigenen Sätzen unseres ersten Kunden RETAIYN, von dessen Website.",
 };
 
 export const DEMO_COACH_FINDING: CoachFindingMockupProps = {
@@ -708,12 +721,12 @@ export const DEMO_COACH_FINDING: CoachFindingMockupProps = {
   fieldLabel: "Die eine Frage, auf die er Ja oder Nein sagt",
   severity: "Blocker",
   beforeLabel: "Du hattest geschrieben",
-  before: "Hätten Sie nächste Woche 15 Minuten für ein kurzes Kennenlerngespräch?",
+  before: "Kostenloses Erstgespräch vereinbaren.",
   verdictLabel: "THAW",
   verdict:
-    "Das ist eine Terminbitte — die größte Bitte, die eine erste Mail stellen kann, und deshalb die, die am häufigsten übergangen wird.",
+    "Auf einer Website ist der Satz richtig. Am Ende einer ersten Mail ist er eine Terminbitte — die größte Bitte, die sie stellen kann, und deshalb die, die am häufigsten übergangen wird.",
   proposalLabel: "Stattdessen",
-  proposal: "Soll ich dir die drei Felder schicken, die von euren neun bleiben würden?",
+  proposal: "Soll ich dir die drei Stellen schicken, an denen E-Mail, WhatsApp und Support bei euch heute auseinanderlaufen?",
   apply: "Übernehmen",
   dismiss: "Passt so",
   note: "Kein Befund ohne Gegenvorschlag: Was THAW bemängelt, schreibt er daneben neu.",

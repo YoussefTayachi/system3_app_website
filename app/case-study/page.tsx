@@ -7,8 +7,10 @@ export default function CaseStudyPage() {
   const { t } = useT();
   const c = t.caseStudyPage;
   const navLinks = [
-    { href: "/#agenturen", label: t.nav.agenturen },
-    { href: "/#vergleich", label: t.nav.vergleich },
+    { href: "/#agenturen", label: t.nav.agenturen, secondary: false },
+    // Erst ab lg -- siehe die Messwerte im Kopf von app/page.tsx.
+    { href: "/fuer-saas", label: t.nav.saas, secondary: true },
+    { href: "/#vergleich", label: t.nav.vergleich, secondary: false },
   ];
   // Ohne Praefix, siehe die ausfuehrliche Begruendung in kontakt/page.tsx:
   // '"/" + item.href' erzeugte "//funktionen", eine protokollrelative URL, die
@@ -24,7 +26,13 @@ export default function CaseStudyPage() {
             <NavDropdown label={t.nav.produkt} items={produktItems} />
             <NavDropdown label={t.featuresPage.eyebrow} items={t.nav.funktionenItems} />
             {navLinks.map((l) => (
-              <a key={l.href} href={l.href} className="text-sm text-soft hover:text-ink">{l.label}</a>
+              <a
+                key={l.href}
+                href={l.href}
+                className={"text-sm text-soft hover:text-ink " + (l.secondary ? "hidden lg:inline" : "")}
+              >
+                {l.label}
+              </a>
             ))}
             <a
               href="/eigene-software"

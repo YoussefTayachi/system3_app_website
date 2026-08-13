@@ -415,8 +415,71 @@ Sechs. Alles andere ist Umstellen und Umschreiben.
 **Regel für alle Mockups** (aus `_app-mockups.tsx` übernommen): **nachgebaut,
 nicht abfotografiert.** Im echten Betrieb stehen dort Namen realer Personen mit
 Rolle und Arbeitgeber; die gehören ohne Einwilligung nicht ins Marketing —
-erst recht nicht auf eine Seite, die mit Datensparsamkeit wirbt. Zahlen werden
-erfunden, aber an den echten Schwellen gewählt.
+erst recht nicht auf eine Seite, die mit Datensparsamkeit wirbt.
+
+### Namen: nur Frostbreaker und RETAIYN *(neu am 2026-08-13, ersetzt die alte Regel)*
+
+Hier stand bis heute: *„Firmennamen werden erfunden, Zahlen werden erfunden,
+aber an den echten Schwellen gewählt."* **Die erste Hälfte gilt nicht mehr.**
+
+> Auf dieser Website kommen genau zwei Firmen namentlich vor: **Frostbreaker**
+> und **RETAIYN**. Alles andere ist entweder abstrakt oder es steht nicht da.
+
+**Warum die Regel kippt:**
+
+1. **Die Einwilligung liegt vor.** RETAIYN ist seit dem 2026-08-09 als echter
+   Kunde auf der Seite (`_customers.tsx`, `dict.customer`). Der Betreiber hat
+   deren Einverständnis, ihre Angaben zu verwenden. Der Grund für erfundene
+   Namen — fehlende Einwilligung — besteht damit für genau diese eine Firma
+   nicht mehr. Für alle anderen besteht er unverändert fort; die Regel wird
+   nicht gelockert, sie wird **auf zwei Namen verengt**.
+2. **Erfundene Namen lehren nichts.** Ein Besucher, der auf drei Seiten drei
+   erfundene Branchen sieht — eine Schreinerei, ein Café, eine
+   Nahrungsergänzungsmarke —, baut sich kein Bild, sondern legt jedes wieder
+   ab. Zwei Namen, die überall wiederkehren, werden beim dritten Mal
+   wiedererkannt. Konsistenz ist hier kein Ordnungssinn, sondern die einzige
+   Art, wie ein Beispiel überhaupt haften bleibt.
+3. **Ein echter Name ist ein Beleg, ein erfundener ist Dekoration.** Die Seite
+   verzichtet an jeder anderen Stelle auf unbelegte Behauptungen. Erfundene
+   Firmen sind der letzte Ort, an dem sie noch so tut, als hätte sie mehr
+   vorzuweisen, als sie hat.
+
+**Die Besetzung, die durchgehend trägt:** Das gezeigte **Konto** gehört
+Frostbreaker, der gezeigte **Lead** ist RETAIYN. Denn RETAIYN ist ein Lead,
+den Frostbreaker über genau diesen Weg gewonnen hat — damit ist jeder Name auf
+jedem Bildschirm echt und untereinander stimmig. Einzige Umkehrung: wo das
+**Angebot eines Nutzers** im Formular steht (`offerSection.offerMap`,
+`coachFinding`), ist RETAIYN der Kontoinhaber.
+
+**Die Grenze für RETAIYNs eigene Zahlen.** Die 70 % automatisierter Support,
+die 30 % Mehrumsatz, die über 200 betreuten Brands und die 2,5 Mio. € ARR sind
+RETAIYNs Aussagen **über sich selbst**. Sie dürfen nur dort stehen, wo sichtbar
+ist, dass sie aus RETAIYNs Angebotsprofil stammen — also als Eingabe in ein
+Formularfeld, das erkennbar dem Kunden gehört. Als Frostbreaker-Ergebnis
+ausgegeben wären sie erfunden. Faustregel: **in einem beschrifteten
+Formularfeld ja, in einer Kennzahlenkachel oder einer Auswertung nein.**
+
+**Und die Nebenwirkung, die den ganzen Umbau teuer macht:**
+
+> Sobald der Name echt ist, wird jede Zahl daneben zu einer Aussage über diese
+> Firma.
+
+„Deal angelegt · 18.000 €" ist neben einer erfundenen Firma eine Attrappe und
+neben RETAIYN eine Behauptung über deren Ausgaben. Deshalb gilt: **erst die
+Zahlen behandeln, dann die Namen tauschen** — nie umgekehrt.
+
+**Zahlen bleiben erfunden**, wo es keine echten gibt, aber sie werden an den
+echten Schwellen gewählt **und im Rahmen sichtbar als Beispiel gekennzeichnet**
+(`sampleBadge`, `reportBadge`, „Beispielansicht"). Ergebniszahlen zu einem
+namentlich genannten Kunden gibt es nicht und werden nicht erfunden.
+
+Sprachen: **RETAIYN heißt in beiden Sprachen RETAIYN.** Die EN-Hälfte von
+`dict.ts` übersetzt die erfundenen Namen heute (Schreinerei Huber → Huber
+Joinery); mit echten Namen entfällt das ersatzlos.
+
+Die vollständige Bestandsaufnahme jeder Fundstelle, die Entscheidung je
+Stelle, die Zahlen ohne Ersatz und die Reihenfolge stehen in
+**`BEISPIELE.md`**.
 
 `CopyOutcomesMockup` ist der wichtigste: er zeigt die einzige Funktion, die
 kein Wettbewerber hat, und es gibt bisher kein einziges Bild davon.

@@ -29,7 +29,8 @@ export function AgencyMockup() {
             >
               {(w.name.split(": ")[1] ?? w.name).slice(0, 1)}
             </span>
-            <span className="min-w-0 flex-1 truncate">{w.name}</span>
+            {/* w-0 statt min-w-0 -- siehe Messnotiz am Report-Link unten. */}
+            <span className="w-0 flex-1 truncate">{w.name}</span>
             {w.active && <span className="shrink-0 text-[10px] font-medium uppercase tracking-wide text-sky-600">{m.active}</span>}
           </div>
         ))}
@@ -49,7 +50,16 @@ export function AgencyMockup() {
           <circle cx="18" cy="18" r="2" stroke="currentColor" strokeWidth="1.6" />
           <path d="m7.7 11 6.6-3M7.7 13l6.6 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
         </svg>
-        <span className="min-w-0 flex-1 truncate text-xs text-mute">app.frostbreaker.app/report/muster-gmbh</span>
+        {/* w-0, nicht min-w-0. Gemessen am 13.08.2026 (Chrome 151, 375px): die
+            Karte steht auf der Startseite in einem Raster ohne feste
+            Spaltenbreite, und `truncate` heisst white-space:nowrap. min-w-0
+            erlaubt dem Kind zwar zu SCHRUMPFEN, senkt aber seinen Beitrag zur
+            MINDESTBREITE des Rasters nicht: die Karte forderte 417px, das
+            Dokument scrollte dadurch seitlich. Mit w-0 (flex-1 zieht es danach
+            wieder auf) faellt der Beitrag auf 0 -- Karte gemessen 187px.
+            overflow-hidden am Elternteil hilft hier NICHT (gemessen: weiterhin
+            417px), es versteckt den Ueberlauf nur. */}
+        <span className="w-0 flex-1 truncate text-xs text-mute">{m.reportUrl}</span>
         <span className="shrink-0 rounded-md border border-edge2 px-2 py-1 text-[11px] font-medium text-soft">{m.copyLabel}</span>
       </div>
     </div>

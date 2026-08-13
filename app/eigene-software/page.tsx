@@ -24,9 +24,13 @@ export default function EigeneSoftwarePage() {
   const c = t.customPage;
 
   const navLinks = [
-    { href: "/funktionen", label: t.featuresPage.eyebrow },
-    { href: "/fuer-agenturen", label: t.nav.agenturen },
-    { href: "/kontakt", label: t.nav.kontakt },
+    { href: "/funktionen", label: t.featuresPage.eyebrow, secondary: false },
+    { href: "/fuer-agenturen", label: t.nav.agenturen, secondary: false },
+    // Erst ab lg -- siehe die Messwerte im Kopf von app/page.tsx. Diese
+    // Leiste ist die vollste der sechs (sie traegt zusaetzlich den Namen der
+    // eigenen Seite), sie lief mit dem Link ab md bei 900px als einzige ueber.
+    { href: "/fuer-saas", label: t.nav.saas, secondary: true },
+    { href: "/kontakt", label: t.nav.kontakt, secondary: false },
   ];
 
   // Pro Sektion das passende Visual -- wie auf /funktionen bewusst hier
@@ -45,7 +49,14 @@ export default function EigeneSoftwarePage() {
           <nav className="hidden items-center gap-6 md:flex">
             <NavDropdown label={t.nav.produkt} items={t.nav.produktItems} />
             {navLinks.map((l) => (
-              <a key={l.href} href={l.href} className="text-sm text-soft transition-colors hover:text-ink">
+              <a
+                key={l.href}
+                href={l.href}
+                className={
+                  "text-sm text-soft transition-colors hover:text-ink " +
+                  (l.secondary ? "hidden lg:inline" : "")
+                }
+              >
                 {l.label}
               </a>
             ))}

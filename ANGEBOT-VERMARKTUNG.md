@@ -350,9 +350,17 @@ ist doppelt — `dict.ts` erzwingt DE und EN über `type Dictionary = typeof de`
 - **Wer:** `ui-designer` (zeichnet), `copywriter` (die Beispieltexte darin,
   DE+EN).
 - **Fertig, wenn:** die Regel aus `POSITIONIERUNG.md` Abschnitt 9 eingehalten
-  ist — **nachgebaut, nicht abfotografiert**, erfundene Firmennamen, Kopfkommentar
-  nennt den echten Bildschirm und welche Zahlen erfunden sind. Nur semantische
-  Tokens, kein rohes Hex, Dunkelmodus geprüft.
+  ist — **nachgebaut, nicht abfotografiert**, Kopfkommentar nennt den echten
+  Bildschirm und welche Zahlen erfunden sind. Nur semantische Tokens, kein
+  rohes Hex.
+
+  **Geändert am 13.08.2026:** hier stand „erfundene Firmennamen". Diese
+  Vorgabe gilt nicht mehr. Beispiele sind ausschließlich **Frostbreaker
+  selbst oder RETAIYN** (erster Kunde, Einverständnis liegt vor) — die
+  Begründung und die Grenze für RETAIYNs eigene Zahlen stehen in
+  `POSITIONIERUNG.md` Abschnitt 9 und in `BEISPIELE.md`. Der Satz ist hier
+  ausdrücklich stehen geblieben, weil ein Plandokument, das die alte Regel
+  weiterträgt, sie in ein paar Wochen zurückbringt.
 
 ---
 

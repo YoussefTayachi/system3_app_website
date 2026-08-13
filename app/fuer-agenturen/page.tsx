@@ -36,8 +36,11 @@ export default function AgenturenPage() {
 
   const navLinks = [
     { href: "/funktionen", label: t.featuresPage.eyebrow },
-    { href: "/fuer-agenturen", label: t.nav.agenturen },
-    { href: "/kontakt", label: t.nav.kontakt },
+    { href: "/fuer-agenturen", label: t.nav.agenturen, secondary: false },
+    // Schwesterseite, erst ab lg -- siehe die Messwerte im Kopf von
+    // app/page.tsx: ab md sichtbar laeuft die Leiste unter 1024px ueber.
+    { href: "/fuer-saas", label: t.nav.saas, secondary: true },
+    { href: "/kontakt", label: t.nav.kontakt, secondary: false },
   ];
 
   return (
@@ -48,7 +51,11 @@ export default function AgenturenPage() {
           <nav className="hidden items-center gap-6 md:flex">
             <NavDropdown label={t.nav.produkt} items={t.nav.produktItems} />
             {navLinks.map((l) => (
-              <a key={l.href} href={l.href} className="text-sm text-soft hover:text-ink">
+              <a
+                key={l.href}
+                href={l.href}
+                className={"text-sm text-soft hover:text-ink " + (l.secondary ? "hidden lg:inline" : "")}
+              >
                 {l.label}
               </a>
             ))}
@@ -93,8 +100,21 @@ export default function AgenturenPage() {
             className={"scroll-mt-20 border-b border-edge/60 " + (flipped ? "bg-panel2" : "")}
           >
             <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+              {/* min-w-0 an beiden Rasterkindern, gleiche Ursache wie in
+                  _walkthrough.tsx: eine Rasterspalte ist minmax(auto, 1fr),
+                  und `auto` meint die MINDESTBREITE des breitesten Kindes.
+                  Unter lg liegen Text und Bild in derselben Spur -- ein Bild
+                  mit grosser Mindestbreite zog die Spur und damit auch den
+                  Text auf. Am Live-Stand gemessen (13.08.2026, Chrome 151,
+                  375px Fenster): die Textspalte rechnete mit 398px, obwohl
+                  ihre eigene Mindestbreite 110px betraegt, und die Seite
+                  scrollte bis 446px seitlich. */}
               <div className={visual ? "grid gap-10 lg:grid-cols-5 lg:items-center lg:gap-14" : ""}>
-                <div className={visual ? "lg:col-span-2 " + (flipped ? "lg:order-2" : "") : "max-w-3xl"}>
+                <div
+                  className={
+                    visual ? "min-w-0 lg:col-span-2 " + (flipped ? "lg:order-2" : "") : "max-w-3xl"
+                  }
+                >
                   <SectionHeading eyebrow={s.eyebrow} title={s.title} />
                   <p className="-mt-4 text-sm leading-relaxed text-soft sm:text-base">{s.body}</p>
                   <ul className="mt-6 space-y-2.5">
@@ -107,7 +127,7 @@ export default function AgenturenPage() {
                   </ul>
                 </div>
                 {visual && (
-                  <div className={"lg:col-span-3 " + (flipped ? "lg:order-1" : "")}>
+                  <div className={"min-w-0 lg:col-span-3 " + (flipped ? "lg:order-1" : "")}>
                     <Reveal>{visual}</Reveal>
                   </div>
                 )}

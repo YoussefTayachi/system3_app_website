@@ -93,8 +93,17 @@ export function StepWalkthrough() {
                 {i + 1}
               </span>
 
+              {/* min-w-0 an beiden Rasterkindern: eine Rasterspalte ist von
+                  Haus aus minmax(auto, 1fr), und `auto` heisst hier die
+                  MINDESTBREITE des breitesten Kindes. Unter lg liegen Text und
+                  Mockup in derselben Spur -- ein Mockup mit 578px Mindestbreite
+                  zog die Spur (und damit auch den Text) auf 578px auf, und das
+                  Dokument scrollte auf 375px Fenster bis 594px seitlich
+                  (Chrome 151, 13.08.2026). Mit min-w-0 darf die Spur schmaler
+                  werden als ihr Inhalt; was dann nicht passt, regelt jedes
+                  Mockup selbst. */}
               <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
-                <div className={imageRight ? "" : "lg:order-2"}>
+                <div className={"min-w-0 " + (imageRight ? "" : "lg:order-2")}>
                   <p className="font-display mb-2 text-sm font-semibold text-edge3 lg:hidden">
                     {w.stepLabel} {i + 1} / {w.steps.length}
                   </p>
@@ -121,7 +130,7 @@ export function StepWalkthrough() {
                   </a>
                 </div>
 
-                <Reveal className={imageRight ? "" : "lg:order-1"}>
+                <Reveal className={"min-w-0 " + (imageRight ? "" : "lg:order-1")}>
                   <Mockup />
                 </Reveal>
               </div>

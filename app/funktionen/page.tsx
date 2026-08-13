@@ -63,8 +63,10 @@ export default function FunktionenPage() {
   };
 
   const navLinks = [
-    { href: "/#agenturen", label: t.nav.agenturen },
-    { href: "/kontakt", label: t.nav.kontakt },
+    { href: "/#agenturen", label: t.nav.agenturen, secondary: false },
+    // Erst ab lg -- siehe die Messwerte im Kopf von app/page.tsx.
+    { href: "/fuer-saas", label: t.nav.saas, secondary: true },
+    { href: "/kontakt", label: t.nav.kontakt, secondary: false },
   ];
 
   return (
@@ -76,7 +78,11 @@ export default function FunktionenPage() {
             <NavDropdown label={t.nav.produkt} items={t.nav.produktItems} />
             <NavDropdown label={f.eyebrow} items={t.nav.funktionenItems} />
             {navLinks.map((l) => (
-              <a key={l.href} href={l.href} className="text-sm text-soft hover:text-ink">
+              <a
+                key={l.href}
+                href={l.href}
+                className={"text-sm text-soft hover:text-ink " + (l.secondary ? "hidden lg:inline" : "")}
+              >
                 {l.label}
               </a>
             ))}
