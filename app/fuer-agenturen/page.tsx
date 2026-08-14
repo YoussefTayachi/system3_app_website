@@ -34,14 +34,10 @@ export default function AgenturenPage() {
     learning: <CopyOutcomesMockup />,
   };
 
-  const navLinks = [
-    { href: "/funktionen", label: t.featuresPage.eyebrow },
-    { href: "/fuer-agenturen", label: t.nav.agenturen, secondary: false },
-    // Schwesterseite, erst ab lg -- siehe die Messwerte im Kopf von
-    // app/page.tsx: ab md sichtbar laeuft die Leiste unter 1024px ueber.
-    { href: "/fuer-saas", label: t.nav.saas, secondary: true },
-    { href: "/kontakt", label: t.nav.kontakt, secondary: false },
-  ];
+  // Die Kopfleiste steht seit dem 14.08.2026 ausgeschrieben statt als
+  // navLinks-Liste da: uebrig sind zwei Links, dazwischen gehoert das Menue
+  // "Fuer wen". Diese Seite steckt selbst darin und ist dort als aktueller
+  // Eintrag markiert. Messwerte im Kopf von app/page.tsx.
 
   return (
     <div className="min-h-screen pb-16 sm:pb-0">
@@ -50,15 +46,19 @@ export default function AgenturenPage() {
           <Logo />
           <nav className="hidden items-center gap-6 md:flex">
             <NavDropdown label={t.nav.produkt} items={t.nav.produktItems} />
-            {navLinks.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                className={"text-sm text-soft hover:text-ink " + (l.secondary ? "hidden lg:inline" : "")}
-              >
-                {l.label}
-              </a>
-            ))}
+            <a href="/funktionen" className="text-sm text-soft hover:text-ink">
+              {t.featuresPage.eyebrow}
+            </a>
+            {/* Reihenfolge wie auf allen sieben Seiten: Produkt, Funktionen,
+                Fuer wen, Kontakt -- vom Angebot zur Zielgruppe zum Gespraech. */}
+            <NavDropdown
+              label={t.nav.fuerWen}
+              items={t.nav.fuerWenItems}
+              className="hidden lg:block"
+            />
+            <a href="/kontakt" className="text-sm text-soft hover:text-ink">
+              {t.nav.kontakt}
+            </a>
             <a
               href="/eigene-software"
               className="hidden text-sm text-soft transition-colors hover:text-ink lg:inline"

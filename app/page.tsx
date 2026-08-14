@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { Logo, CTAButton, CTAGroup, NavDropdown, SectionHeading, FactBox, BOOKING_URL } from "./_ui";
+import { Logo, CTAButton, CTAGroup, NavDropdown, SectionHeading, BOOKING_URL } from "./_ui";
 // SuppressionMockup, DeliverabilityMockup und CampaignMockup lagen im
 // Abschnitt "Mehr als nur Leads finden", der am 2026-08-06 von der
 // Startseite verschwunden ist. Die Komponenten bleiben fuer /funktionen.
@@ -8,8 +8,12 @@ import { AgencyMockup, PostSendMockup } from "./_mockups";
 // DashboardMockup ist seit dem 2026-08-06 nicht mehr auf der Startseite: das
 // erste Bild ist jetzt die Ansicht "Nach Text". Die Komponente bleibt in
 // _app-mockups.tsx, /funktionen ist der naheliegende neue Ort dafuer.
-import { UnifiedSearchMockup, CallListMockup, LeadsTableMockup } from "./_app-mockups";
-import { GateMockup, ChainMockup, EffectMockup, CopyOutcomesHighlight } from "./_guard-mockups";
+// UnifiedSearchMockup ist am 2026-08-14 mit dem Suchwege-Abschnitt frei
+// geworden und steht seither nur noch auf /funktionen#find, wo sie schon
+// vorher stand. LeadsTableMockup wurde hier seit dem Umbau des Rundgangs
+// gar nicht mehr gerendert, nur noch importiert.
+import { CallListMockup } from "./_app-mockups";
+import { GateMockup, EffectMockup } from "./_guard-mockups";
 import { OfferMapMockup, CoachFindingMockup, type OfferMapMockupProps } from "./_offer-mockups";
 import { LeadCardStack } from "./_illustration";
 import { SystemMap } from "./_system-map";
@@ -17,22 +21,8 @@ import { AllInOneCompare } from "./_compare";
 import { StepWalkthrough } from "./_walkthrough";
 import { CustomerStrip, CustomerSection } from "./_customers";
 import { Reveal } from "./reveal";
-import { trustIcons, postSendIcons, CheckIcon } from "./_icons";
+import { postSendIcons, CheckIcon } from "./_icons";
 import { useT, LanguageToggle } from "./language-provider";
-
-/** Anbieter-Farben der vier Suchwege, deckungsgleich mit lib/search-source.ts
- *  in der App. Wird hier oben gehalten, damit die Zuordnung an einer Stelle
- *  steht und nicht in der JSX-Schleife versteckt ist. */
-const MODE_BADGE: Record<string, string> = {
-  local: "border-sky-500/40 bg-sky-500/10 text-sky-800",
-  corporate: "border-orange-500/40 bg-orange-500/10 text-orange-800",
-  apollo: "border-yellow-500/50 bg-yellow-500/10 text-yellow-800",
-  // Prospeos Markenfarbe ist ein kraeftiges Rot. Wie bei den anderen dreien
-  // dieselbe Zuordnung wie die Quellen-Chips in der App (search-source.ts),
-  // damit sie jemand nach der Anmeldung wiedererkennt. Rot-800 als Textstufe,
-  // weil das Markenrot selbst als Schrift auf hellem Grund nicht traegt.
-  prospeo: "border-red-500/40 bg-red-500/10 text-red-800",
-};
 
 /**
  * Eine der drei Aussagen im Angebot-Abschnitt: Nummer, Ueberschrift,
@@ -65,24 +55,37 @@ function OfferPoint({ n, title, body }: { n: number; title: string; body: string
 
 export default function Home() {
   const { t, lang } = useT();
+  // ────────────────────────────────────────────────────────────────────
+  // DIE KOPFLEISTE. Hier stehen die Messwerte, auf die die uebrigen sechs
+  // Seiten verweisen.
+  // ────────────────────────────────────────────────────────────────────
+  //
   // Zwischen 768px und 1024px passen Logo, volle Navigation und CTA nicht
-  // nebeneinander (die Leiste lief ~30px ueber und erzeugte horizontales
-  // Scrollen). Statt die Navigation dort ganz auszublenden, erscheinen die
-  // sekundaeren Links erst ab lg; Preise und Kontakt bleiben immer sichtbar.
-  // Agenturen, Preise und der Vergleich haben eigene Seiten bekommen. Die
-  // Anker auf der Startseite bleiben bestehen, damit alte Links weiter
-  // funktionieren, die Navigation zeigt aber auf die vollstaendigen Seiten.
-  const navLinks = [
-    { href: "/fuer-agenturen", label: t.nav.agenturen, secondary: true },
-    // Zweite Segmentseite, dieselbe Behandlung wie die erste: erst ab lg.
-    // Nachgemessen am 2026-08-13 auf allen sechs Leisten in Deutsch (Chrome,
-    // Breite der Leiste gegen ihren Kasten): mit dem Link ab md sichtbar lief
-    // /eigene-software bei 900px 58px ueber und erzeugte 34px Querscrollen,
-    // bei 768px waren es 190px. Ab 1024px passt die volle Leiste auf jeder
-    // der sechs Seiten (Rest 0px) -- deshalb lg und nicht md.
-    { href: "/fuer-saas", label: t.nav.saas, secondary: true },
-    { href: "/kontakt", label: t.nav.kontakt, secondary: false },
-  ];
+  // nebeneinander (die Leiste lief ueber und erzeugte horizontales Scrollen).
+  // Deshalb erscheint alles Sekundaere erst ab lg.
+  //
+  // Am 14.08.2026 kam als dritter Zielgruppen-Link "Unser Kunde" dazu, und
+  // damit lief die Leiste auch OBERHALB von lg ueber: `max-w-6xl` deckelt den
+  // Platz ab 1152px bei 1104px (Leiste komplett, inkl. Logo und CTA) -- der
+  // Platz waechst also nicht mehr mit dem Fenster. Nachgemessen in Chrome auf
+  // Deutsch, natuerliche Breite der Leiste gegen ihren Kasten:
+  //
+  //   1280/1440px  /, /funktionen 1121 · /kontakt, /case-study 1130 · Rest 1103
+  //   1024px       verfuegbar 961, benoetigt 1103 bis 1130
+  //
+  // Auf vier von sieben Seiten brachen die Beschriftungen dadurch zweizeilig
+  // um ("Fuer / Agenturen") und die Leiste wurde doppelt so hoch; bei 1024px
+  // kamen auf /kontakt und /case-study 4px Querscrollen dazu. Ein hoeherer
+  // Breakpoint half nicht -- der Deckel gilt fuer jede Fensterbreite ab 1152px.
+  //
+  // Loesung: die drei Zielgruppenseiten stecken in EINEM Menue ("Fuer wen",
+  // siehe nav.fuerWenItems). Drei Links plus Abstaende waren 311px, das Menue
+  // ist rund 96px breit -- gespart sind ~215px, und die Leiste bleibt auf
+  // allen sieben Seiten einzeilig.
+  //
+  // Das Menue selbst bleibt bei lg, so wie die drei Links, die es ersetzt:
+  // ab md sichtbar braeuchte es bei 768px etwa 110px, die dort nirgends frei
+  // sind (verfuegbar 705px, benoetigt danach 660 bis 794).
 
   return (
     <div className="min-h-screen pb-16 sm:pb-0">
@@ -93,18 +96,16 @@ export default function Home() {
           <nav className="hidden items-center gap-5 md:flex lg:gap-6">
             <NavDropdown label={t.nav.produkt} items={t.nav.produktItems} />
             <NavDropdown label={t.featuresPage.eyebrow} items={t.nav.funktionenItems} />
-            {navLinks.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                className={
-                  "text-sm text-soft transition-colors hover:text-ink " +
-                  (l.secondary ? "hidden lg:inline" : "")
-                }
-              >
-                {l.label}
-              </a>
-            ))}
+            {/* Die drei Zielgruppenseiten, seit dem 14.08.2026 als ein Menue
+                statt als drei Links -- Begruendung und Messwerte oben. */}
+            <NavDropdown
+              label={t.nav.fuerWen}
+              items={t.nav.fuerWenItems}
+              className="hidden lg:block"
+            />
+            <a href="/kontakt" className="text-sm text-soft transition-colors hover:text-ink">
+              {t.nav.kontakt}
+            </a>
             {/* Zweites Angebot (Individualentwicklung). Wie die uebrigen
                 sekundaeren Links erst ab lg sichtbar, damit die Leiste
                 zwischen 768 und 1024px nicht wieder ueberlaeuft. */}
@@ -194,37 +195,17 @@ export default function Home() {
               </div>
             ))}
           </div>
-
-          <div className="fade-up mt-6 flex flex-wrap items-center gap-2 rounded-full border border-sky-200 bg-sky-50/70 px-4 py-2">
-            <span className="rounded bg-sky-600 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
-              {lang === "de" ? "Fakt" : "Fact"}
-            </span>
-            <span className="text-sm font-medium text-sky-950">{t.hero.factBadge}</span>
-            <span className="text-xs text-sky-900/55">{t.hero.factSource}</span>
-          </div>
         </div>
 
-        {/* Das erste Bild der Seite. Bis zum 2026-08-06 stand hier das
-            Dashboard mit Lead-Zahlen -- also genau das Bild, das jeder
-            Wettbewerber auch zeigen kann: gefundene Firmen, Kontakte,
-            gesparte Stunden.
-
-            Jetzt die Ansicht "Nach Text". Sie zeigt, was uns unterscheidet:
-            welche Textfassung Termine gebracht hat. Instantly sieht die
-            Antwort, hat den Text aber nicht geschrieben; Apollo schreibt
-            weder Text noch sieht es die Antwort. Wer nur den oberen
-            Bildschirm sieht, hat damit schon verstanden, dass hier etwas
-            gemessen wird, das andere nicht messen koennen.
-
-            Nachbildung statt echtem Screenshot -- im Original stehen Namen
-            realer Personen mit Rolle und Arbeitgeber im Bild. */}
-        {/* max-w-4xl statt -3xl: als Tabellenzeilen war das Bild hier eine
-            Briefmarke. Die Vergleichskarten brauchen die Breite, damit sie ab
-            sm nebeneinander stehen -- untereinander waere es zwar lesbar,
-            aber der Vergleich ist der ganze Punkt. */}
-        <div className="mx-auto mt-4 max-w-4xl px-4 sm:px-6">
-          <CopyOutcomesHighlight />
-        </div>
+        {/* Der Hero trug bis zum 2026-08-14 zwei Elemente mehr: ein
+            Fakten-Abzeichen ("42 Euro zurueck fuer jeden Euro", Litmus) und
+            darunter CopyOutcomesHighlight, eine zweite Fassung der Ansicht
+            "Nach Text". Beides ist gefallen (VEREINFACHUNG.md 1.2): die Zahl
+            ist geliehen und auf einer Seite, die keine unbelegte Zahl zeigt,
+            ein Fremdkoerper -- und das Bild war eine Vorschau auf ein Bild,
+            das vier Bildschirme tiefer in Rundgang Schritt 6 noch einmal
+            kommt. Der Hero traegt jetzt: Ueberschrift, Fliesstext, zwei CTAs,
+            Kundenstreifen, ein Bild, drei Versprechen. */}
       </section>
 
       {/* Die Systemkarte, neu am 2026-08-06 (POSITIONIERUNG.md Abschnitt 3).
@@ -275,7 +256,7 @@ export default function Home() {
           falsch.
 
           KEIN EIGENER FLAECHENTON
-          Der Abschnitt liegt auf dem Seitengrund wie #rundgang und #kette.
+          Der Abschnitt liegt auf dem Seitengrund wie #rundgang darueber.
           bg-panel2 waere hier ein zweites graues Band unmittelbar vor dem
           Agentur-Band -- genau der Fall, den der Kommentar vor
           CustomerSection weiter unten schon einmal beschreibt. Getrennt wird
@@ -297,7 +278,18 @@ export default function Home() {
           translateY(18px) (globals.css), das verschoebe waehrend der
           Animation das Sprungziel.
           ═══════════════════════════════════════════════════════════════ */}
-      <section id="angebot" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
+      {/* Haarlinie statt Flaechenwechsel. Der Rundgang davor ist 4214 Pixel
+          hoch, dieser Abschnitt 3469 -- fast 8000 Pixel derselben Flaeche ohne
+          Orientierungspunkt (gemessen 14.08.2026, 1440px). Eine eigene Flaeche
+          scheidet aus: der naechste Abschnitt (#agenturen) ist bereits grau,
+          zwei graue Bloecke hintereinander waeren dieselbe Wand in anderer
+          Farbe. Die Hausregel gibt hier die Reihenfolge vor -- erst Abstand,
+          dann Trennlinie; der Abstand steht mit py-20 auf beiden Seiten schon,
+          getragen hat er bei dieser Laenge nicht. */}
+      <section
+        id="angebot"
+        className="scroll-mt-20 mx-auto max-w-6xl border-t border-edge/60 px-4 py-20 sm:px-6"
+      >
         <SectionHeading eyebrow={t.offerSection.eyebrow} title={t.offerSection.title} />
         <p className="-mt-6 max-w-[62ch] text-base leading-relaxed text-soft">{t.offerSection.body}</p>
 
@@ -309,6 +301,16 @@ export default function Home() {
             sie leitet zu den Grenzen ueber. */}
         <div className="mt-16">
           <OfferPoint n={1} title={t.offerSection.points[0].title} body={t.offerSection.points[0].body} />
+          {/* Die Einordnung steht UEBER dem Bild, nicht darunter. Sie stand
+              bis zum 14.08.2026 in offerMap.note, also unter der Karte -- und
+              damit hinter den Prozentzahlen im Ergebnisfeld. Wer von oben
+              liest, hatte "bis zu 70 %" da laengst als unsere Zahl gelesen.
+              Es sind retaiyns eigene Angaben ueber ihr eigenes Angebot, und
+              das muss dastehen, bevor die Zahl auftaucht. Kein eigener
+              OfferPoint: die Nummerierung gehoert den drei Aussagen. */}
+          <p className="mt-6 max-w-[62ch] border-l-2 border-edge2 pl-4 text-sm leading-relaxed text-soft">
+            {t.offerSection.caseIntro}
+          </p>
           {/* Die Zusicherung ist noetig, nicht kosmetisch: `corners` ist im
               Bauteil ein 4-Tupel und `nodes` ein 3-Tupel (genau vier Ecken,
               genau drei Felder -- das sind die zwoelf Fragen, von denen der
@@ -519,25 +521,22 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="kette" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <SectionHeading eyebrow={t.chain.eyebrow} title={t.chain.title} />
-        <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.chain.body}</p>
-        <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-          <div className="space-y-4 lg:order-2">
-            {t.chain.points.map((p, i) => (
-              <Reveal key={p.title} delay={i * 80}>
-                <div className="rounded-2xl border border-edge/60 bg-panel p-5">
-                  <h3 className="font-display text-lg font-semibold tracking-[-0.015em] text-ink">{p.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-soft">{p.body}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-          <Reveal className="lg:order-1">
-            <ChainMockup />
-          </Reveal>
-        </div>
-      </section>
+      {/* Der Abschnitt #kette stand bis zum 2026-08-14 hier. Er ist gefallen,
+          weil Rundgang Schritt 4 dasselbe sagt und zwei seiner drei Karten
+          dort woertlich stehen ("Immer genau ein naechster Schritt", "Wer
+          antwortet, faellt sofort raus"). ChainMockup ist dorthin gewandert
+          und hat LinkedInMockup abgeloest -- der Schritt beschreibt die ganze
+          Kette, nicht nur die LinkedIn-Nachricht, und das Bild soll sagen,
+          was der Text sagt.
+
+          BEWUSST OHNE leeren Marker, anders als bei #telefon weiter oben.
+          Der Telefon-Abschnitt ist UMGEZOGEN -- sein Marker sitzt in
+          #kanaele, also dort, wo sein Inhalt heute steht, und ein Sprung
+          darauf landet beim Richtigen. Die Kette ist nicht umgezogen: was
+          von ihr uebrig ist, steckt mitten im Rundgang, und ein Marker an
+          dieser Stelle wuerde zwischen #kanaele und #crm landen, wo nichts
+          mehr ueber die Kette steht. Ein Anker, der irgendwohin fuehrt, ist
+          schlechter als keiner. Dasselbe gilt fuer #alltag weiter unten. */}
 
       {/* Das CRM. Hiess bis zum 2026-08-06 "Mehr als Lead-Suche" und war damit
           gegen die Wettbewerber formuliert statt fuer die eigene Sache. Der
@@ -572,24 +571,56 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Telefon-Akquise. Der zweite Kanal fehlte auf der Seite komplett,
-          obwohl er das Argument gegen reine Versand-Tools ist: wer schon eines
-          hat, kauft kein zweites, aber er kauft den Kanal, den seines nicht
-          kann. Mockup links, Argumente rechts -- umgekehrt zur
-          Technologie-Sektion, damit die Seite beim Scrollen nicht in ein
-          Muster verfaellt. */}
+      {/* ═══════════════════════════════════════════════════════════════
+          EIN ABSCHNITT AUS ZWEIEN, seit dem 2026-08-14.
 
-      {/* ---------------------------------------------------------------
-          Die drei Abschnitte, die Frostbreaker von einem Versandwerkzeug
-          trennen. Sie stehen bewusst NACH der Lead-Beschaffung und VOR den
-          Preisen: wer bis hierher gelesen hat, glaubt schon, dass die Leads
-          kommen. Die offene Frage ist ab hier, ob daraus etwas wird.
-          --------------------------------------------------------------- */}
+          Hier standen #torwart ("die App sagt Nein, BEVOR du sendest") und
+          #ehrlich ("die App beschoenigt keine Zahl, NACHDEM du gesendet
+          hast") als zwei volle Abschnitte hintereinander, beide auf bg-panel2,
+          beide mit Augenbraue, Ueberschrift, Einleitung, einem Bild und drei
+          Karten. Sie sind zwei Haelften derselben Haltung; getrennt kostete
+          sie zweimal die volle Hoehe und war beim Scrollen nicht als zwei
+          Abschnitte erkennbar.
+
+          Jetzt ein Abschnitt mit zwei Bildern und vier Karten. Die zweite
+          Haelfte behaelt ihre eigene Ueberschrift (h3, eine Stufe unter der
+          Abschnittsueberschrift) -- ohne sie waere "Zwoelf Mails und eine
+          Antwort sind nicht 8,3 %" nur ein weiterer Absatz, und es ist der
+          schaerfste Satz von beiden.
+
+          Bild abwechselnd links/rechts, wie im Rundgang: zwei gleich gebaute
+          Haelften untereinander lesen sich sonst als dieselbe Aussage zweimal.
+          Der Anker #ehrlich steht in keinem Menuepunkt, bleibt aber als
+          leerer Marker an der Stelle stehen, an der sein Abschnitt begann.
+          ═══════════════════════════════════════════════════════════════ */}
       <section id="torwart" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <SectionHeading eyebrow={t.guard.eyebrow} title={t.guard.title} />
           <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.guard.body}</p>
-          <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+          {/* SPALTENVERHAELTNIS UND SENKRECHTE AUSRICHTUNG, 2026-08-14.
+              Beide Haelften hatten zwei gleich breite Spalten und
+              items-start. Seit der Verschmelzung tragen sie je zwei Karten
+              statt drei, und in der ersten Haelfte stand das Bild damit
+              allein: nachgemessen bei 1440px in Deutsch GateMockup 540px
+              gegen 331px Kartenspalte -- 209px sichtbares Loch rechts unten,
+              das sich wie eine fehlende dritte Karte liest.
+
+              Zwei Aenderungen, beide gemessen (1440px, Deutsch):
+              1. Das Bild bekommt 1,25 von 2 Anteilen. Die Nachbildungen sind
+                 dichte App-Ansichten und werden bei 670 statt 536 Pixeln
+                 spuerbar lesbarer; die Karten stehen mit 402px immer noch
+                 breiter als die drei Kanalkarten weiter oben (368px bei
+                 derselben Fensterbreite). Nebenwirkung: das Bild wird
+                 flacher (540 -> 522), die schmaleren Karten werden hoeher
+                 (331 -> 400) -- der Rest des Lochs schrumpft auf 122px.
+              2. items-center statt items-start verteilt diesen Rest auf
+                 oben und unten. Ein halbierter Abstand ueber und unter der
+                 Kartenspalte liest sich als Paarung, ein ganzer darunter als
+                 Fehlstelle.
+              Die zweite Haelfte bekommt dasselbe gespiegelt (0,75 / 1,25),
+              damit die beiden Haelften nicht unterschiedlich gebaut wirken.
+              Unter lg ist beides wirkungslos: dort ist das Raster einspaltig. */}
+          <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)]">
             <Reveal>
               <GateMockup />
             </Reveal>
@@ -604,119 +635,37 @@ export default function Home() {
               ))}
             </div>
           </div>
-        </div>
-      </section>
 
-      <section id="ehrlich" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
-        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-          <SectionHeading eyebrow={t.honesty.eyebrow} title={t.honesty.title} />
-          <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.honesty.body}</p>
-          <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-            <Reveal>
-              <EffectMockup />
-            </Reveal>
-            <div className="space-y-4">
-              {t.honesty.points.map((p, i) => (
-                <Reveal key={p.title} delay={i * 80}>
-                  <div className="rounded-2xl border border-edge/60 bg-panel p-5">
-                    <h3 className="font-display text-lg font-semibold tracking-[-0.015em] text-ink">{p.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-soft">{p.body}</p>
-                  </div>
-                </Reveal>
-              ))}
+          {/* Die zweite Haelfte: was nach dem Senden passiert. Trennlinie und
+              Abstand statt eines zweiten Flaechentons -- der Abschnitt liegt
+              ohnehin schon auf bg-panel2. */}
+          <span id="ehrlich" className="block scroll-mt-20" aria-hidden />
+          <div className="mt-16 border-t border-edge2/70 pt-14">
+            <h3 className="font-display max-w-[26ch] text-2xl font-semibold leading-[1.15] tracking-[-0.02em] text-ink sm:text-[1.75rem]">
+              {t.honesty.title}
+            </h3>
+            <p className="mt-4 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.honesty.body}</p>
+            {/* Gespiegelt zur ersten Haelfte: das Bild steht rechts und
+                bekommt dieselben 1,25 Anteile. */}
+            <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)]">
+              <div className="space-y-4 lg:order-1">
+                {t.honesty.points.map((p, i) => (
+                  <Reveal key={p.title} delay={i * 80}>
+                    <div className="rounded-2xl border border-edge/60 bg-panel p-5">
+                      <h4 className="font-display text-lg font-semibold tracking-[-0.015em] text-ink">{p.title}</h4>
+                      <p className="mt-2 text-sm leading-relaxed text-soft">{p.body}</p>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+              <Reveal className="lg:order-2">
+                <EffectMockup />
+              </Reveal>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Steht bewusst DIREKT hinter den vier Suchwegen: sobald dort "Hunter"
-          und "Apollo" stehen, denkt jeder Fachkundige sofort "dann nehme ich
-          die doch gleich selbst". Diesen Einwand erst in der FAQ zu
-          beantworten, hiesse ihn die halbe Seite lang mitlaufen zu lassen. */}
-      {/* Der Einwand "ich habe Apollo und Instantly doch schon" laesst sich
-          nicht mit einer Feature-Liste beantworten, sondern nur damit, wie ein
-          Monat wirklich aussieht. Deshalb zwei Ablaeufe nebeneinander: die
-          Laenge der linken Spalte und die vier Handarbeits-Marker SIND das
-          Argument, nicht der Text darueber. Die Zahlen oben nehmen das Ergebnis
-          vorweg, fuer alle, die nur scrollen. */}
-      <section id="alltag" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
-        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-          <SectionHeading eyebrow={t.dailyDiff.eyebrow} title={t.dailyDiff.title} />
-          <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.dailyDiff.body}</p>
-
-          <div className="grid items-start gap-6 lg:grid-cols-2">
-            {/* Vorher */}
-            <Reveal>
-              <div className="h-full rounded-2xl border border-amber-300/60 bg-panel p-6">
-                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-edge/70 pb-4">
-                  <p className="font-display text-lg font-semibold tracking-[-0.015em] text-ink">
-                    {t.dailyDiff.before.label}
-                  </p>
-                  <p className="text-xs text-mute">
-                    <span className="font-display text-xl font-semibold text-ink">{t.dailyDiff.before.count}</span>{" "}
-                    {t.dailyDiff.before.countLabel}
-                    {", "}
-                    <span className="font-semibold text-amber-700">{t.dailyDiff.before.manualCount}</span>{" "}
-                    {t.dailyDiff.before.manualLabel}
-                  </p>
-                </div>
-                <ol className="mt-4 space-y-3">
-                  {t.dailyDiff.before.steps.map((s, i) => (
-                    <li key={s.text} className="flex gap-3 text-sm leading-relaxed text-soft">
-                      <span
-                        className={
-                          "mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[11px] font-semibold " +
-                          (s.manual ? "bg-amber-100 text-amber-800" : "bg-chip text-faint")
-                        }
-                      >
-                        {i + 1}
-                      </span>
-                      <span>
-                        {s.text}
-                        {s.manual && (
-                          <span className="ml-1.5 whitespace-nowrap rounded-full bg-amber-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-800">
-                            {t.dailyDiff.manualBadge}
-                          </span>
-                        )}
-                      </span>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            </Reveal>
-
-            {/* Nachher */}
-            <Reveal delay={100}>
-              <div className="h-full rounded-2xl border border-sky-300/70 bg-sky-50/40 p-6">
-                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-sky-200/70 pb-4">
-                  <p className="font-display text-lg font-semibold tracking-[-0.015em] text-ink">
-                    {t.dailyDiff.after.label}
-                  </p>
-                  <p className="text-xs text-sky-900/70">
-                    <span className="font-display text-xl font-semibold text-ink">{t.dailyDiff.after.count}</span>{" "}
-                    {t.dailyDiff.after.countLabel}
-                    {", "}
-                    <span className="font-semibold text-sky-800">{t.dailyDiff.after.manualCount}</span>{" "}
-                    {t.dailyDiff.after.manualLabel}
-                  </p>
-                </div>
-                <ol className="mt-4 space-y-3">
-                  {t.dailyDiff.after.steps.map((s, i) => (
-                    <li key={s} className="flex gap-3 text-sm leading-relaxed text-sky-950">
-                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-sky-600 text-[11px] font-semibold text-white">
-                        {i + 1}
-                      </span>
-                      <span>{s}</span>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            </Reveal>
-          </div>
-
-          <p className="mt-6 max-w-[62ch] text-sm leading-relaxed text-mute">{t.dailyDiff.note}</p>
-        </div>
-      </section>
 
       {/* Hier stand bis zum 2026-08-06 der Abschnitt "Ihr nutzt Apollo schon?
           Dann ist das hier kein Ersatz" -- als Einwandbehandlung gemeint, als
@@ -734,104 +683,22 @@ export default function Home() {
         </Reveal>
       </section>
 
-      {/* Zwei Suchmodi. Die Seite argumentierte bisher nur gegen klassische
-          Datenbanken, obwohl die App den Corporate-Modus mitbringt -- wer
-          Unternehmen ab einer bestimmten Groesse sucht, fuehlte sich nicht
-          angesprochen. */}
-      <section className="border-y border-edge/60 bg-panel2">
-        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-          <SectionHeading eyebrow={t.searchModes.eyebrow} title={t.searchModes.title} />
-          <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.searchModes.body}</p>
+      {/* Der Abschnitt "Woher die Leads kommen" samt "Was mit jeder Suche
+          mitlaeuft" stand bis zum 2026-08-14 hier: acht Karten, zwanzig
+          Aufzaehlungspunkte und eine bedienbare Suchmaske, der textlastigste
+          Block der Startseite. Er ist gefallen, weil /funktionen ihn
+          vollstaendig abbildet -- die Gruppe find ist der Suchwege-Block in
+          kurz, tech und enrich sind zwei der vier Zusatzkarten, send und
+          protect decken die uebrigen ab. UnifiedSearchMockup steht dort
+          ohnehin schon.
 
-          {/* Beide Wege bekommen dieselbe Flaeche und dieselbe Rahmung. Vorher
-              war "lokal" hervorgehoben und "corporate" die blasse Alternative
-              -- seit die Firmensuche ohne Abfragekosten pro Firma auskommt, ist
-              sie das nicht mehr.
+          Vier Anbieternamen als farbige Kacheln beantworteten hier
+          ausserdem eine Frage, die niemand gestellt hat ("woher kommen die
+          Daten?"), und legten die nahe, die man nicht hoeren will: warum
+          gehe ich dann nicht gleich dorthin? Die Antwort darauf steht in
+          der Vergleichstabelle darueber und in der FAQ -- dort ist sie
+          Argument statt Auslage. */}
 
-              Statt zweier Standbilder steht darunter eine einzige, bedienbare
-              Maske: das ist genau die Aussage der Sektion (ein Bildschirm, zwei
-              Quellen) und spart die Haelfte der Hoehe. */}
-          {/* Vier Karten seit Prospeo (2026-08-05). Bewusst 2x2 statt vier
-              nebeneinander: bei vier Spalten auf 1280px bleiben je ~270px, und
-              die Punktlisten brechen dann auf drei Zeilen je Punkt um. Und
-              bewusst nicht lg:grid-cols-3 wie vorher -- das ergaebe 3+1 mit
-              einer Luecke, die sich als fehlende Karte liest. */}
-          <div className="grid items-stretch gap-8 md:grid-cols-2">
-            {t.searchModes.modes.map((mode, i) => (
-              <Reveal key={mode.id} delay={i * 80} className="h-full">
-                <div className="flex h-full flex-col rounded-2xl border border-edge/60 bg-panel p-6">
-                  {/* Farbe je Anbieter, angelehnt an dessen Markenfarbe (Hunter
-                      orange, Apollo gelb, Maps blau) und identisch zu den
-                      Quellen-Chips in der App -- wer sich hier informiert und
-                      sich danach anmeldet, erkennt dieselbe Zuordnung wieder.
-                      Getoente Flaeche mit dunklem Text derselben Farbe statt
-                      farbiger Flaeche mit weissem Text: Apollos Markengelb
-                      traegt weisse Schrift nicht (rund 1,3:1). */}
-                  <span
-                    className={
-                      "inline-flex self-start rounded-full border px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide " +
-                      (MODE_BADGE[mode.id] ?? "border-edge2 bg-chip text-soft")
-                    }
-                  >
-                    {mode.label}
-                  </span>
-                  <h3 className="font-display mt-3 text-xl font-semibold tracking-[-0.015em] text-ink">
-                    {mode.title}
-                  </h3>
-                  <p className="mt-2.5 text-sm leading-relaxed text-soft">{mode.body}</p>
-                  <ul className="mt-5 space-y-2 border-t border-edge/70 pt-5">
-                    {mode.points.map((p) => (
-                      <li key={p} className="flex items-start gap-2.5 text-sm text-soft">
-                        <CheckIcon />
-                        {p}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal className="mt-8">
-            <UnifiedSearchMockup />
-          </Reveal>
-
-          {/* Die vier Beschaffungs-Themen, die am 2026-08-06 ihre eigenen
-              Abschnitte verloren haben. Sie standen als vier volle Abschnitte
-              zwischen Hero und Produkt -- zusammen mit den Suchwegen waren das
-              fuenf Abschnitte ueber Beschaffung, also vier zu viel. Als kurze
-              Karten bleiben sie belegbar, ohne die Gewichtung zu kippen; die
-              Bilder dazu (TechFilterMockup, LocalReachMockup,
-              QualifiedLeadAnimation, VerificationReportMockup) sind fuer
-              /funktionen frei geworden. */}
-          <div className="mt-14 border-t border-edge2/70 pt-10">
-            <h3 className="font-display text-xl font-semibold tracking-[-0.015em] text-ink">
-              {t.sourcesExtra.title}
-            </h3>
-            <div className="mt-6 grid items-stretch gap-5 md:grid-cols-2">
-              {t.sourcesExtra.items.map((it, i) => (
-                <Reveal key={it.id} delay={i * 70} className="h-full">
-                  <div className="flex h-full flex-col rounded-2xl border border-edge/60 bg-panel p-5">
-                    <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-faint">{it.label}</p>
-                    <h4 className="font-display mt-2 text-lg font-semibold leading-snug tracking-[-0.015em] text-ink">
-                      {it.title}
-                    </h4>
-                    <p className="mt-2 text-sm leading-relaxed text-soft">{it.body}</p>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-            <a
-              href="/funktionen"
-              className="group mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-soft transition-colors hover:text-ink"
-            >
-              {t.sourcesExtra.linkLabel}
-              <span aria-hidden className="transition-transform group-hover:translate-x-0.5">&rarr;</span>
-            </a>
-          </div>
-
-        </div>
-      </section>
       {/* Kostenbeweis und Sparpotenzial-Rechner standen bis zum 2026-08-06
           hier -- der Kostenbeweis sogar als zweiter Abschnitt der ganzen
           Seite. Beides gibt es auf /preise bereits, Wort fuer Wort und mit
@@ -852,72 +719,17 @@ export default function Home() {
           bestehende Links nicht ins Leere laufen. */}
 
 
-      {/* Integrations */}
-      {/* BYOK und die Integrationsliste, seit dem 2026-08-06 als schmaler
-          Streifen statt als voller Abschnitt (POSITIONIERUNG.md Abschnitt 7).
-
-          Der Abschnitt stand an Position 20 und war ueber sechzig Zeilen lang:
-          zehn Quellen mit Beschreibung, acht Ziele mit Icons, eine
-          hervorgehobene Instantly-Karte. BYOK ist ein gutes Argument, aber es
-          ist ein NEBENSATZ -- die Vergleichstabelle sagt inzwischen "deine
-          Schluessel, dein Konto, kein Aufschlag", und das reicht auf der
-          Startseite. Wer die Liste im Einzelnen sucht, findet sie auf
-          /funktionen und in der FAQ.
-
-          Bewusst zwei Zeilen Namen ohne Icons und ohne Beschreibung: es geht
-          hier nur um Wiedererkennung ("meine Werkzeuge sind dabei"), nicht um
-          Erklaerung. Instantly bleibt hervorgehoben, weil die native Anbindung
-          der einzige Eintrag ist, der etwas anderes bedeutet als die uebrigen. */}
-      <section id="integrationen" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
-        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-12">
-            <div className="lg:w-[34%]">
-              <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-faint">
-                {t.integrations.eyebrow}
-              </p>
-              <h2 className="font-display mt-2 text-xl font-semibold leading-snug tracking-[-0.015em] text-ink">
-                {t.integrations.title}
-              </h2>
-            </div>
-
-            <div className="lg:flex-1">
-              <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-faint">
-                {t.integrations.sourcesLabel}
-              </p>
-              <ul className="mt-2 flex flex-wrap gap-x-5 gap-y-1.5">
-                {t.integrations.sources.map((s) => (
-                  <li key={s.name} className="text-sm font-medium text-soft">
-                    {s.name}
-                  </li>
-                ))}
-              </ul>
-
-              <p className="mt-6 text-[11px] font-medium uppercase tracking-[0.12em] text-faint">
-                {t.integrations.targetsLabel}
-              </p>
-              <ul className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-1.5">
-                {t.integrations.items.map((i, n) => (
-                  <li
-                    key={i.name}
-                    className={
-                      n === 0
-                        ? "rounded-full border border-sky-300/70 bg-sky-50/60 px-3 py-1 text-sm font-semibold text-sky-900"
-                        : "text-sm font-medium text-soft"
-                    }
-                  >
-                    {i.name}
-                    {n === 0 && (
-                      <span className="ml-1.5 text-[10px] font-bold uppercase tracking-wide text-sky-700">
-                        {lang === "de" ? "nativ" : "native"}
-                      </span>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Der Streifen #integrationen stand bis zum 2026-08-14 hier: zwei
+          Zeilen Anbieternamen, Quellen und Ziele. Er ist gefallen
+          (VEREINFACHUNG.md 1.2). Sein eigentliches Argument -- eure
+          Zugaenge, eure Konditionen, kein Aufschlag -- steht als
+          `ledgerKeep` in der Vergleichstabelle darueber, und zwar als
+          Rechnung statt als Behauptung. Die Namensliste selbst war
+          Wiedererkennung ohne Aussage; wer sie sucht, findet sie auf
+          /funktionen und in der FAQ. Der Menuepunkt in nav.produktItems ist
+          mitgefallen. Ein leerer Marker bleibt, weil der Anker in fremden
+          Links stehen kann. */}
+      <span id="integrationen" className="block scroll-mt-20" aria-hidden />
 
       {/* Hier stand bis zum 2026-08-06 der eigene Telefon-Abschnitt. Sein
           Inhalt steckt jetzt in der dritten Spalte von #kanaele, samt der
@@ -930,63 +742,59 @@ export default function Home() {
       {/* Die zwei Gruende, aus denen ein Interessent NICHT kauft: "zu
           kompliziert fuer mich" und "rechtlich zu heikel". Beide sind in der
           App laengst beantwortet, standen hier aber nur als Nebensatz. */}
-      <section id="startklar" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <SectionHeading eyebrow={t.safeStart.eyebrow} title={t.safeStart.title} />
-        <div className="grid items-stretch gap-8 lg:grid-cols-2">
-          {t.safeStart.cards.map((card, i) => (
-            <Reveal key={card.id} delay={i * 80} className="h-full">
-              <div className="flex h-full flex-col rounded-2xl border border-edge/60 bg-panel p-6">
-                <span className="inline-flex self-start rounded-full bg-ink px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-surface">
-                  {card.label}
-                </span>
-                <h3 className="font-display mt-3 text-xl font-semibold tracking-[-0.015em] text-ink">{card.title}</h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-soft">{card.body}</p>
-                <ul className="mt-5 space-y-2 border-t border-edge/70 pt-5">
-                  {card.points.map((p) => (
-                    <li key={p} className="flex items-start gap-2.5 text-sm text-soft">
-                      <CheckIcon />
-                      {p}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-
-      {/* Trust / DSGVO */}
-      <section className="border-y border-edge/60 bg-panel2">
+      {/* Eigene Flaeche seit dem 14.08.2026. Vorher lief die Seite hier ueber
+          DREI helle Abschnitte am Stueck (#ergaenzt, dieser, "Warum es
+          Frostbreaker gibt") -- die zwei grauen dazwischen waren beim Kuerzen
+          gefallen, und ohne sie las sich alles als ein Block. Gemessen: drei
+          Abschnitte, gleiche Hintergrundfarbe, kein Rand dazwischen.
+          Dieser hier bekommt den Wechsel und nicht einer der Nachbarn, weil er
+          mit 682 Pixeln der kuerzeste der drei ist: ein grauer Streifen
+          zwischen zwei hellen Flaechen trennt, ein grauer Block von 1500
+          Pixeln waere selbst wieder eine Flaeche. */}
+      <section id="startklar" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-          <SectionHeading title={t.trust.title} />
-          <div className="grid gap-5 sm:grid-cols-2">
-            {t.trustBadges.map((b) => (
-              <div key={b.id} className="rounded-2xl border border-edge/60 bg-panel p-6 hover-lift">
-                <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-panel2 text-ink">
-                  {trustIcons[b.id]}
+          <SectionHeading eyebrow={t.safeStart.eyebrow} title={t.safeStart.title} />
+          <div className="grid items-stretch gap-8 lg:grid-cols-2">
+            {t.safeStart.cards.map((card, i) => (
+              <Reveal key={card.id} delay={i * 80} className="h-full">
+                <div className="flex h-full flex-col rounded-2xl border border-edge/60 bg-panel p-6">
+                  <span className="inline-flex self-start rounded-full bg-ink px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-surface">
+                    {card.label}
+                  </span>
+                  <h3 className="font-display mt-3 text-xl font-semibold tracking-[-0.015em] text-ink">{card.title}</h3>
+                  <p className="mt-2.5 text-sm leading-relaxed text-soft">{card.body}</p>
+                  <ul className="mt-5 space-y-2 border-t border-edge/70 pt-5">
+                    {card.points.map((p) => (
+                      <li key={p} className="flex items-start gap-2.5 text-sm text-soft">
+                        <CheckIcon />
+                        {p}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <h3 className="mt-4 text-sm font-semibold text-ink">{b.title}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-soft">{b.body}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
-          <div className="tap-row mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-faint">
-            <a href="/datenschutz" className="hover:text-ink">{t.trust.links.datenschutz}</a>
-            <span>·</span>
-            <a href="/agb" className="hover:text-ink">{t.trust.links.agb}</a>
-            <span>·</span>
-            <a href="/avv" className="hover:text-ink">{t.trust.links.avv}</a>
-          </div>
         </div>
       </section>
 
-      {/* Why Frostbreaker exists + founder */}
+
+      {/* Der Vertrauens-Abschnitt ("Datenschutz ist keine Checkbox") stand bis
+          zum 2026-08-14 hier: zwei Kacheln und drei Rechtslinks. Beide Kacheln
+          waren BYOK-Wiederholung -- verschluesselte Schluessel und
+          Kostenkontrolle stehen als `ledgerKeep` in der Vergleichstabelle und
+          als Antwort in der FAQ. Von den drei Links fehlte dem Fuss nur der
+          AVV; der steht dort jetzt (dict `footer.avv`). */}
+
+      {/* Warum es Frostbreaker gibt. Bis zum 2026-08-14 drei Karten und ein
+          Fliesstext darueber; `why.body` und die Karte `poweredBy` sagten
+          beide "ein Werkzeug statt vier" und sind gefallen. Geblieben sind
+          die zwei Karten, die es sonst nirgends auf der Seite gibt: der frueh
+          begleitete Zugang und der Gruender. */}
       <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <SectionHeading title={t.why.title} />
-        <p className="max-w-3xl text-sm leading-relaxed text-soft sm:text-base">{t.why.body}</p>
 
-        <div className="mt-8 grid gap-5 lg:grid-cols-3">
+        <div className="grid gap-5 lg:grid-cols-2">
           <div className="rounded-2xl border border-edge/60 bg-panel p-6 hover-lift">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-sky-500/10 text-sky-600">
               <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
@@ -1015,23 +823,6 @@ export default function Home() {
               </div>
             </div>
           </a>
-
-          <div className="rounded-2xl border border-edge/60 bg-panel p-6 hover-lift">
-            <h3 className="text-sm font-semibold text-ink">{t.why.poweredBy.title}</h3>
-            <p className="mt-1.5 text-sm leading-relaxed text-soft">{t.why.poweredBy.body}</p>
-            {/* Vorher standen hier die Namen der Dienste im Hintergrund. Das
-                las sich wie eine Zutatenliste und legte die Frage nahe, warum
-                man nicht gleich dorthin geht. Wer es wissen will, findet die
-                Antwort im FAQ -- inklusive der Begruendung, warum die Summe
-                mehr ist als ihre Teile. */}
-            <div className="mt-4 flex flex-wrap gap-2">
-              {t.why.poweredBy.chips.map((name) => (
-                <span key={name} className="rounded-full border border-edge2 bg-panel2 px-3 py-1 text-xs font-medium text-soft">
-                  {name}
-                </span>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
 
@@ -1079,6 +870,9 @@ export default function Home() {
             <a href="/impressum" className="hover:text-ink">{t.footer.impressum}</a>
             <a href="/datenschutz" className="hover:text-ink">{t.footer.datenschutz}</a>
             <a href="/agb" className="hover:text-ink">{t.footer.agb}</a>
+            {/* Neu am 2026-08-14, aus dem gestrichenen Vertrauens-Abschnitt.
+                Er war dessen einziger Link, den der Fuss noch nicht hatte. */}
+            <a href="/avv" className="hover:text-ink">{t.footer.avv}</a>
             <a href="/kontakt" className="hover:text-ink">{t.footer.kontakt}</a>
           </div>
         </div>

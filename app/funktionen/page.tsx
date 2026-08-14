@@ -2,6 +2,7 @@
 import { Logo, CTAButton, CTAGroup, NavDropdown, SectionHeading } from "../_ui";
 import { DashboardMockup, UnifiedSearchMockup, LeadsTableMockup, LeadDetailMockup, MailboxesMockup, AiAgentMockup, VerificationReportMockup, CopyCheckMockup, PipelineMockup, TechFilterMockup } from "../_app-mockups";
 import { SuppressionMockup, LocalReachMockup, QualifiedLeadAnimation, CampaignMockup, DeliverabilityMockup } from "../_mockups";
+import { LinkedInMockup } from "../_guard-mockups";
 import { Reveal } from "../reveal";
 import { CheckIcon } from "../_icons";
 import { useT, LanguageToggle } from "../language-provider";
@@ -53,6 +54,12 @@ export default function FunktionenPage() {
       <div className="space-y-5">
         <CampaignMockup />
         <MailboxesMockup />
+        {/* Am 2026-08-14 von Rundgang Schritt 4 hierher gezogen: dort traegt
+            jetzt ChainMockup das Bild, seit der Abschnitt #kette gefallen ist
+            (VEREINFACHUNG.md 1.2). Die fertig eingesetzte LinkedIn-Nachricht
+            gehoert zur Kampagne -- sie traegt denselben Aufhaenger wie die
+            Mail und entsteht mit ihr. */}
+        <LinkedInMockup />
         {/* Zustellbarkeit steht bewusst NACH den Postfaechern: erst sieht man,
             womit gesendet wird, dann, was daran kaputtgehen kann. */}
         <DeliverabilityMockup />
@@ -62,12 +69,13 @@ export default function FunktionenPage() {
     protect: <SuppressionMockup />,
   };
 
-  const navLinks = [
-    { href: "/#agenturen", label: t.nav.agenturen, secondary: false },
-    // Erst ab lg -- siehe die Messwerte im Kopf von app/page.tsx.
-    { href: "/fuer-saas", label: t.nav.saas, secondary: true },
-    { href: "/kontakt", label: t.nav.kontakt, secondary: false },
-  ];
+  // Die Kopfleiste steht seit dem 14.08.2026 ausgeschrieben statt als
+  // navLinks-Liste da (Messwerte im Kopf von app/page.tsx). Der Link auf den
+  // Startseiten-Anker "/#agenturen" ist dabei entfallen: er trug dieselbe
+  // Beschriftung wie der Menue-Eintrag "Fuer Agenturen", zeigte aber auf einen
+  // Abschnitt der Startseite statt auf die vollstaendige Seite. Zwei gleich
+  // beschriftete Ziele nebeneinander sind eine Falle; der Anker selbst bleibt
+  // fuer alte Links bestehen.
 
   return (
     <div className="min-h-screen pb-16 sm:pb-0">
@@ -77,15 +85,16 @@ export default function FunktionenPage() {
           <nav className="hidden items-center gap-6 md:flex">
             <NavDropdown label={t.nav.produkt} items={t.nav.produktItems} />
             <NavDropdown label={f.eyebrow} items={t.nav.funktionenItems} />
-            {navLinks.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                className={"text-sm text-soft hover:text-ink " + (l.secondary ? "hidden lg:inline" : "")}
-              >
-                {l.label}
-              </a>
-            ))}
+            {/* Reihenfolge wie auf allen sieben Seiten: Produkt, Funktionen,
+                Fuer wen, Kontakt -- vom Angebot zur Zielgruppe zum Gespraech. */}
+            <NavDropdown
+              label={t.nav.fuerWen}
+              items={t.nav.fuerWenItems}
+              className="hidden lg:block"
+            />
+            <a href="/kontakt" className="text-sm text-soft hover:text-ink">
+              {t.nav.kontakt}
+            </a>
             <a
               href="/eigene-software"
               className="hidden text-sm text-soft transition-colors hover:text-ink lg:inline"

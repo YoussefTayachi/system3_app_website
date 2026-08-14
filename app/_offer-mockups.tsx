@@ -19,11 +19,11 @@ import { useId } from "react";
  * sein Aufhaenger. Das ist das Geschaeftsgeheimnis der Kunden und gehoert
  * nicht ins Marketing.
  *
- * Die einzige Ausnahme, seit dem 2026-08-13: RETAIYN, unser erster Kunde, mit
+ * Die einzige Ausnahme, seit dem 2026-08-13: retaiyn, unser erster Kunde, mit
  * ausdruecklicher Zustimmung des Betreibers und ausschliesslich mit Saetzen,
  * die auf retaiyn.com oeffentlich stehen. Kein Preis, keine Referenz eines
  * Dritten. Es gibt auf dieser Website genau zwei Namen: Frostbreaker und
- * RETAIYN -- keine erfundene dritte Firma mehr (BEISPIELE.md).
+ * retaiyn -- keine erfundene dritte Firma mehr (BEISPIELE.md).
  *
  * Zweiter Grund: die echte Karte ist erst ab rund 1600 Pixeln Fensterbreite
  * vollstaendig zu sehen (sie misst ihre Knoten zur Laufzeit und zieht
@@ -99,9 +99,30 @@ const SEHNEN = [
   { a1: 314, r1: 18.4, a2: 32, r2: 19.2, o: 0.22 },
 ];
 
+/**
+ * Auf drei Nachkommastellen gerunden, BEVOR die Zahl ins Markup geht.
+ *
+ * Math.sin und Math.cos sind in der Spezifikation nicht bitgenau festgelegt;
+ * Node (Server-Rendering) und Chrome (Hydration) runden das letzte Bit
+ * unterschiedlich. Gemessen am 2026-08-14 auf / in der Konsole: derselbe
+ * Breitenkreis kam vom Server als cy=15.259530581872152 und im Browser als
+ * cy=15.259530581872149. React meldet das als Hydration-Mismatch und
+ * verwirft dann den GANZEN Serverbaum, um ihn im Browser neu aufzubauen --
+ * das ist kein Schoenheitsfehler, sondern der teuerste Rendervorgang, den
+ * die Seite haben kann.
+ *
+ * Drei Stellen reichen: die Zeichnung laeuft in viewBox 64, ein Tausendstel
+ * davon ist bei 108 Pixeln Darstellungsgroesse rund 1,7 Tausendstel Pixel.
+ * Nachgemessen: die Figur ist vorher und nachher pixelgleich.
+ *
+ * NICHT wegkuerzen, auch wenn es nach ueberfluessiger Kosmetik aussieht --
+ * ohne die Rundung ist der Hydration-Fehler sofort zurueck.
+ */
+const r3 = (n: number) => Math.round(n * 1000) / 1000;
+
 const punkt = (grad: number, r: number) => {
   const b = (grad * Math.PI) / 180;
-  return [32 + r * Math.cos(b), 32 + r * Math.sin(b)] as const;
+  return [r3(32 + r * Math.cos(b)), r3(32 + r * Math.sin(b))] as const;
 };
 
 /**
@@ -194,14 +215,16 @@ function ThawOrb({ size = 96 }: { size?: number }) {
             bei 0 ein Stapel Striche. */}
         {BREITEN.map((phi, i) => {
           const b = (phi * Math.PI) / 180;
-          const rx = 21 * Math.cos(b);
+          // r3: siehe oben. Genau diese drei Attribute standen im
+          // Hydration-Fehler.
+          const rx = r3(21 * Math.cos(b));
           return (
             <ellipse
               key={phi}
               cx="32"
-              cy={32 - 21 * Math.sin(b) * 0.94}
+              cy={r3(32 - 21 * Math.sin(b) * 0.94)}
               rx={rx}
-              ry={Math.max(rx * 0.34, 1.2)}
+              ry={r3(Math.max(rx * 0.34, 1.2))}
               fill="none"
               stroke="currentColor"
               strokeWidth="0.85"
@@ -648,9 +671,9 @@ export function CoachFindingMockup({
    hier stehen laesst, hat zwei Wahrheiten.
 
    Seit dem 2026-08-13 keine erfundene Firma und keine erfundene Zahl mehr
-   (BEISPIELE.md): das Angebotsprofil gehoert RETAIYN, unserem ersten Kunden,
+   (BEISPIELE.md): das Angebotsprofil gehoert retaiyn, unserem ersten Kunden,
    Feld fuer Feld aus deren eigenen Saetzen von retaiyn.com. Die Prozentwerte
-   sind RETAIYNs Aussagen ueber sich selbst und duerfen nur deshalb hier
+   sind retaiyns Aussagen ueber sich selbst und duerfen nur deshalb hier
    stehen, weil sie sichtbar in beschrifteten Formularfeldern eines
    Kundenangebots stehen und nicht in einer Auswertung.
 
@@ -712,7 +735,7 @@ export const DEMO_OFFER_MAP: OfferMapMockupProps = {
     button: "Angebot prüfen",
   },
   findingLabel: "Im Ergebnisfeld steht ein Versprechen, im Belegfeld ein Wahlspruch. Der Beleg für das Versprechen steht nirgends.",
-  note: "Zwölf Felder, vier Gruppen. Jede Linie dazwischen ist eine Regel, an der geprüft wird. Ausgefüllt mit den eigenen Sätzen unseres ersten Kunden RETAIYN, von dessen Website.",
+  note: "Zwölf Felder, vier Gruppen. Jede Linie dazwischen ist eine Regel, an der geprüft wird. Ausgefüllt mit den eigenen Sätzen unseres ersten Kunden retaiyn, von dessen Website.",
 };
 
 export const DEMO_COACH_FINDING: CoachFindingMockupProps = {

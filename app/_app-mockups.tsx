@@ -314,7 +314,16 @@ export function LeadsTableMockup() {
   return (
     <AppFrame>
       <div className="p-5 sm:p-6">
-        <p className="font-display text-lg font-semibold tracking-[-0.01em] text-ink">{m.title}</p>
+        {/* Dieselbe Kennzeichnung wie im Dashboard oben: das Bild zeigt
+            Nischen mit Mengen, und die Mengen duerfen nicht als Zusage
+            gelesen werden. Bis zum 14.08.2026 war dies das einzige grosse
+            Zahlenbild ohne diese Marke. */}
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <p className="font-display text-lg font-semibold tracking-[-0.01em] text-ink">{m.title}</p>
+          <span className="rounded-full border border-edge2 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wide text-faint">
+            {m.sampleBadge}
+          </span>
+        </div>
 
         <div className="mt-4 flex flex-wrap items-center gap-2">
           <span className="rounded-md border border-edge2 px-2.5 py-1.5 text-[11px] font-medium text-soft">

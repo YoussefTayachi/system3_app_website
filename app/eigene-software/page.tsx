@@ -23,15 +23,17 @@ export default function EigeneSoftwarePage() {
   const { t } = useT();
   const c = t.customPage;
 
-  const navLinks = [
-    { href: "/funktionen", label: t.featuresPage.eyebrow, secondary: false },
-    { href: "/fuer-agenturen", label: t.nav.agenturen, secondary: false },
-    // Erst ab lg -- siehe die Messwerte im Kopf von app/page.tsx. Diese
-    // Leiste ist die vollste der sechs (sie traegt zusaetzlich den Namen der
-    // eigenen Seite), sie lief mit dem Link ab md bei 900px als einzige ueber.
-    { href: "/fuer-saas", label: t.nav.saas, secondary: true },
-    { href: "/kontakt", label: t.nav.kontakt, secondary: false },
-  ];
+  // Die Kopfleiste steht seit dem 14.08.2026 ausgeschrieben statt als
+  // navLinks-Liste da: die drei Zielgruppenseiten stecken im Menue "Fuer wen"
+  // (Messwerte im Kopf von app/page.tsx). Diese Leiste bleibt die vollste von
+  // allen, weil sie zusaetzlich den Namen der eigenen Seite traegt.
+  //
+  // Deshalb steht hier -- und nur hier -- der Link "Funktionen" erst ab lg.
+  // Gemessen am 14.08.2026 in Chrome (natuerliche Breite der Leiste gegen
+  // ihren Kasten): bei 768px braucht sie mit dem Link 791px bei 705px Platz,
+  // bricht zweizeilig um und erzeugt 13px Querscrollen; ohne ihn sind es
+  // 681px. Verloren geht dabei nichts: der erste Eintrag des Produkt-Menues
+  // ("Alle Funktionen") fuehrt auf dieselbe Seite und ist ab md sichtbar.
 
   // Pro Sektion das passende Visual -- wie auf /funktionen bewusst hier
   // zugeordnet und nicht im Dictionary: das Dictionary haelt Text, keine
@@ -48,18 +50,22 @@ export default function EigeneSoftwarePage() {
           <Logo />
           <nav className="hidden items-center gap-6 md:flex">
             <NavDropdown label={t.nav.produkt} items={t.nav.produktItems} />
-            {navLinks.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                className={
-                  "text-sm text-soft transition-colors hover:text-ink " +
-                  (l.secondary ? "hidden lg:inline" : "")
-                }
-              >
-                {l.label}
-              </a>
-            ))}
+            <a
+              href="/funktionen"
+              className="hidden text-sm text-soft transition-colors hover:text-ink lg:inline"
+            >
+              {t.featuresPage.eyebrow}
+            </a>
+            {/* Reihenfolge wie auf allen sieben Seiten: Produkt, Funktionen,
+                Fuer wen, Kontakt -- vom Angebot zur Zielgruppe zum Gespraech. */}
+            <NavDropdown
+              label={t.nav.fuerWen}
+              items={t.nav.fuerWenItems}
+              className="hidden lg:block"
+            />
+            <a href="/kontakt" className="text-sm text-soft transition-colors hover:text-ink">
+              {t.nav.kontakt}
+            </a>
             <span className="text-sm font-medium text-ink">{t.nav.custom}</span>
           </nav>
           <div className="flex items-center gap-3">

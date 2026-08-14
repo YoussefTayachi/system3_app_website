@@ -23,22 +23,10 @@ export function CrossIcon() {
   );
 }
 
-export const trustIcons: Record<string, React.ReactNode> = {
-  encryption: (
-    <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
-      <rect x="5" y="10.5" width="14" height="9.5" rx="2" stroke="currentColor" strokeWidth="1.6" />
-      <path d="M8 10.5V7.5a4 4 0 0 1 8 0v3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-      <circle cx="12" cy="15" r="1.4" fill="currentColor" />
-    </svg>
-  ),
-  byok: (
-    <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6">
-      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.6" />
-      <path d="M9.5 9.2c0-1.1 1.1-2 2.5-2s2.5.9 2.5 2-1.1 2-2.5 2-2.5.9-2.5 2 1.1 2 2.5 2 2.5-.9 2.5-2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M12 6v1.4M12 16.6V18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-  ),
-};
+// `trustIcons` (Schloss und Muenze) ist am 2026-08-14 mit dem
+// Vertrauens-Abschnitt der Startseite gefallen -- er war die einzige
+// Fundstelle. Die uebrigen Icon-Saetze in dieser Datei haben ihre Abschnitte
+// frueher verloren und liegen unabhaengig davon hier.
 
 export const postSendIcons: Record<string, React.ReactNode> = {
   replies: (

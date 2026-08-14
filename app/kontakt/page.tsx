@@ -10,12 +10,14 @@ const PHONE_HREF = "+436769004865";
 export default function KontaktPage() {
   const { t } = useT();
   const c = t.contactPage;
-  const navLinks = [
-    { href: "/#agenturen", label: t.nav.agenturen, secondary: false },
-    // Erst ab lg -- siehe die Messwerte im Kopf von app/page.tsx.
-    { href: "/fuer-saas", label: t.nav.saas, secondary: true },
-    { href: "/#vergleich", label: t.nav.vergleich, secondary: false },
-  ];
+  // Die Kopfleiste steht seit dem 14.08.2026 ausgeschrieben statt als
+  // navLinks-Liste da (Messwerte im Kopf von app/page.tsx). Der Link auf den
+  // Startseiten-Anker "/#agenturen" ist dabei entfallen: er trug dieselbe
+  // Beschriftung wie der Menue-Eintrag "Fuer Agenturen", zeigte aber auf einen
+  // Abschnitt der Startseite statt auf die vollstaendige Seite. Zwei gleich
+  // beschriftete Ziele nebeneinander sind eine Falle; der Anker selbst bleibt
+  // fuer alte Links bestehen. "/#vergleich" bleibt dagegen stehen -- dafuer
+  // gibt es keine eigene Seite, der Anker ist das einzige Ziel.
   // Direkt durchgereicht, ohne Praefix: die Hrefs in produktItems sind bereits
   // absolut ("/funktionen", "/#rundgang"). Bis zum 13.08.2026 stand hier
   // '"/" + item.href' -- ein Rest aus der Zeit relativer Hrefs. Daraus wurde
@@ -31,15 +33,16 @@ export default function KontaktPage() {
           <nav className="hidden items-center gap-6 md:flex">
             <NavDropdown label={t.nav.produkt} items={produktItems} />
             <NavDropdown label={t.featuresPage.eyebrow} items={t.nav.funktionenItems} />
-            {navLinks.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                className={"text-sm text-soft hover:text-ink " + (l.secondary ? "hidden lg:inline" : "")}
-              >
-                {l.label}
-              </a>
-            ))}
+            {/* Reihenfolge wie auf allen sieben Seiten: Produkt, Funktionen,
+                Fuer wen, dann der Rest der Leiste. */}
+            <NavDropdown
+              label={t.nav.fuerWen}
+              items={t.nav.fuerWenItems}
+              className="hidden lg:block"
+            />
+            <a href="/#vergleich" className="text-sm text-soft hover:text-ink">
+              {t.nav.vergleich}
+            </a>
             <a
               href="/eigene-software"
               className="hidden text-sm text-soft transition-colors hover:text-ink lg:inline"

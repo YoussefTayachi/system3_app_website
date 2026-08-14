@@ -40,7 +40,7 @@ function ExternalIcon() {
  * Schmale Zeile fuer den Hero: Label, Wortzeichen, auf breiten Schirmen die
  * Einordnung dahinter. Bewusst kein Kasten und keine Logo-Wand -- ein
  * einzelnes Logo in einem breiten Band sieht aus wie eine Wand, bei der
- * die anderen fehlen. Als Satzanfang gelesen ("Im Einsatz bei RETAIYN")
+ * die anderen fehlen. Als Satzanfang gelesen ("Im Einsatz bei retaiyn")
  * fehlt nichts.
  */
 export function CustomerStrip({ className = "" }: { className?: string }) {

@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useT } from "./language-provider";
 
 // ══════════════════════════════════════════════════════════════════════
@@ -95,27 +96,68 @@ export function CTAGroup({ className = "" }: { className?: string }) {
  * allein durch seine Existenz mehr Tiefe/Reife als eine flache Ein-Klick-
  * Navigation -- die Eintraege verlinken auf echte, bestehende Anker auf der
  * Seite, keine Fake-Unterseiten.
+ *
+ * Seit dem 14.08.2026 haengen an einem dieser Menues ("Fuer wen") drei echte
+ * Seiten, die vorher als eigene Links in der Leiste standen. Daraus folgen
+ * zwei Ergaenzungen:
+ *
+ * 1. `group-focus-within` neben `group-hover`. Vorher liess sich das Menue
+ *    ausschliesslich mit der Maus oeffnen -- solange darin nur Anker derselben
+ *    Seite lagen, war das verschmerzbar. Mit den Zielgruppenseiten darin waeren
+ *    sie per Tastatur gar nicht mehr erreichbar gewesen: `invisible` nimmt die
+ *    Links auch aus der Tab-Reihenfolge. Jetzt oeffnet der Fokus auf dem Knopf
+ *    das Menue, und Tab laeuft weiter hinein.
+ * 2. Der Eintrag der aktuellen Seite wird markiert (`aria-current`). Im
+ *    geschlossenen Zustand zeigt die Leiste nur noch die Sammelbeschriftung --
+ *    beim Oeffnen soll man sehen, wo man steht. Verglichen wird nur der reine
+ *    Pfad; Anker-Eintraege wie "/#rundgang" treffen deshalb nie zu, was richtig
+ *    ist: ein Anker ist keine eigene Seite.
  */
-export function NavDropdown({ label, items }: { label: string; items: { label: string; href: string }[] }) {
+export function NavDropdown({
+  label,
+  items,
+  className = "",
+}: {
+  label: string;
+  items: { label: string; href: string }[];
+  className?: string;
+}) {
+  const pfad = usePathname();
   return (
-    <div className="group relative">
-      <button className="flex items-center gap-1 text-sm text-soft transition-colors hover:text-ink">
+    <div className={"group relative " + className}>
+      <button
+        type="button"
+        aria-haspopup="true"
+        className="flex items-center gap-1 text-sm text-soft transition-colors hover:text-ink"
+      >
         {label}
-        <svg viewBox="0 0 24 24" fill="none" className="h-3.5 w-3.5 transition-transform group-hover:rotate-180">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden
+          className="h-3.5 w-3.5 transition-transform group-hover:rotate-180 group-focus-within:rotate-180"
+        >
           <path d="m6 9 6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
-      <div className="invisible absolute left-0 top-full pt-3 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
+      <div className="invisible absolute left-0 top-full pt-3 opacity-0 transition-all group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
         <div className="w-52 rounded-2xl border border-edge/60 bg-panel p-2 shadow-lg shadow-ink/10">
-          {items.map((it) => (
-            <a
-              key={it.href}
-              href={it.href}
-              className="block rounded-lg px-3 py-2 text-sm text-soft transition-colors hover:bg-panel2 hover:text-ink"
-            >
-              {it.label}
-            </a>
-          ))}
+          {items.map((it) => {
+            const hier = it.href === pfad;
+            return (
+              <a
+                key={it.href}
+                href={it.href}
+                aria-current={hier ? "page" : undefined}
+                className={
+                  "block rounded-lg px-3 py-2 text-sm transition-colors hover:bg-panel2 hover:text-ink " +
+                  (hier ? "bg-panel2 font-medium text-ink" : "text-soft")
+                }
+              >
+                {it.label}
+              </a>
+            );
+          })}
         </div>
       </div>
     </div>

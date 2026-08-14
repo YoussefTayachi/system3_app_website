@@ -66,7 +66,26 @@ function StageArrow({ label }: { label: string }) {
   );
 }
 
-type Stage = { id: string; label: string; title: string; items: string[]; note: string };
+/**
+ * Eine Stufe traegt ENTWEDER `items` (mehrere gleichrangige Dinge)
+ * ODER `body` (ein Fliesstext). Beide Felder optional, weil
+ * `type Dictionary = typeof de` aus dem Stufen-Array eine Vereinigung der
+ * drei Objektformen ableitet -- eine Pflichtangabe hier wuerde `stages[0]`
+ * unzuweisbar machen, sobald sich die Formen unterscheiden.
+ *
+ * Erwartet wird `systemMap.stages[0].body` (de und en) vom `copywriter`.
+ * Solange der Schluessel fehlt, faellt Stufe 1 auf `items` zurueck und
+ * zeigt ihre vier Anbieternamen weiter -- dann aber schon in der neuen,
+ * kachellosen Form. Der Rueckfall darf verschwinden, sobald `body` steht.
+ */
+type Stage = {
+  id: string;
+  label: string;
+  title: string;
+  note: string;
+  items?: string[];
+  body?: string;
+};
 
 function StageCard({ stage, accent }: { stage: Stage; accent: boolean }) {
   return (
@@ -91,17 +110,62 @@ function StageCard({ stage, accent }: { stage: Stage; accent: boolean }) {
       <h3 className="font-display mt-2 text-lg font-semibold leading-snug tracking-[-0.015em] text-ink">
         {stage.title}
       </h3>
-      <ul className="mt-4 space-y-1.5">
-        {stage.items.map((item) => (
-          <li
-            key={item}
-            className="rounded-lg border border-edge2/70 bg-panel2 px-2.5 py-1.5 text-[13px] leading-snug text-soft"
-          >
-            {item}
-          </li>
-        ))}
-      </ul>
-      <p className="mt-auto pt-4 text-xs leading-relaxed text-mute">{stage.note}</p>
+      {/* ═══════════════════════════════════════════════════════════════
+          KEINE KACHELN MEHR, seit dem 2026-08-14.
+
+          Bis dahin stand jede Zeile in einem eigenen Kasten: Rahmen,
+          Eckenrundung und ein zweiter Flaechenton auf einer Karte, die
+          selbst schon Rahmen und Flaeche hat. Drei Ebenen Kasten
+          uebereinander -- das ist die staerkste Auszeichnung, die diese
+          Seite kennt, und sie lag ausgerechnet auf den vier Anbieternamen
+          in Stufe 1. Die Karte behauptete damit, die Quelle sei das
+          Merkmal des Systems; gemeint ist das Gegenteil.
+
+          Jetzt Trennlinien statt Kaesten -- eine Stufe leiser, dieselbe
+          Ordnung. Dasselbe Mittel wie in den Grenzen unter #angebot und in
+          der FAQ, also nichts Neues auf dieser Seite.
+
+          WARUM ALLE DREI STUFEN, obwohl nur Stufe 1 beanstandet war:
+          verschwindet der Kasten nur dort, sieht die Karte aus, als fehle
+          Stufe 1 etwas. Der Unterschied zwischen den Stufen soll im INHALT
+          liegen (Stufe 1 ein Satz, Stufe 2 und 3 je drei Dinge), nicht in
+          zwei verschiedenen Auszeichnungen nebeneinander.
+
+          WARUM STUFE 2 UND 3 IHRE LISTE BEHALTEN: dort stehen drei
+          tatsaechlich gleichrangige Dinge -- drei Kanaele, drei Arten von
+          CRM-Eintrag. Eine Liste ist dafuer die ehrliche Form. Nur Stufe 1
+          zaehlte austauschbare Anbieter auf, und genau das ist eine
+          Zutatenliste und keine Stufe eines Ablaufs.
+          ═══════════════════════════════════════════════════════════════ */}
+      {stage.body ? (
+        <p className="mt-4 text-[13px] leading-relaxed text-soft">{stage.body}</p>
+      ) : (
+        // Linien NUR ZWISCHEN den Punkten, nicht darum herum: eine Liste
+        // braucht keine Aussenkante, sie hat die Karte. Reiner Abstand
+        // reicht hier nicht -- mehrere Punkte laufen ueber zwei Zeilen, und
+        // dann ist der Abstand zwischen zwei Punkten kaum groesser als der
+        // zwischen zwei Zeilen desselben Punktes (gemessen bei 1440px in
+        // Deutsch, Stufe 2: 18px Zeilenabstand gegen 21px bei space-y-4).
+        // Genau deshalb standen dort urspruenglich Kaesten; die Trennlinie
+        // loest dasselbe eine Stufe leiser.
+        <ul className="mt-4 divide-y divide-edge/70">
+          {stage.items?.map((item) => (
+            <li key={item} className="py-2.5 text-[13px] leading-snug text-soft">
+              {item}
+            </li>
+          ))}
+        </ul>
+      )}
+      {/* Die Notiz sitzt am Kartenfuss (mt-auto), weil die drei Karten gleich
+          hoch sind und ihre Notizen sonst auf drei verschiedenen Hoehen
+          endeten. Der Rest der Hoehe sammelt sich damit UEBER der Notiz --
+          und ein leerer Streifen mitten in einer Karte liest sich als
+          Fehlstelle, solange nichts ihn erklaert. Die Linie erklaert ihn:
+          dieselbe Fusszeilen-Loesung wie in den drei Kanalkarten weiter
+          unten (mt-auto + border-t + pt-5), also kein neues Mittel. */}
+      <p className="mt-auto border-t border-edge/70 pt-5 text-xs leading-relaxed text-mute">
+        {stage.note}
+      </p>
     </div>
   );
 }

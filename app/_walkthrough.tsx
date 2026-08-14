@@ -3,7 +3,7 @@ import { useT } from "./language-provider";
 import { BOOKING_URL } from "./_ui";
 import { Reveal } from "./reveal";
 import { LeadsTableMockup, AiAgentMockup, CopyCheckMockup, PipelineMockup } from "./_app-mockups";
-import { CopyOutcomesMockup, LinkedInMockup } from "./_guard-mockups";
+import { CopyOutcomesMockup, ChainMockup } from "./_guard-mockups";
 
 /**
  * Der Rundgang in sechs Schritten -- das Herzstueck der Startseite
@@ -49,16 +49,22 @@ import { CopyOutcomesMockup, LinkedInMockup } from "./_guard-mockups";
  * ═══════════════════════════════════════════════════════════════════════
  *
  * Bewusst sechs Bildschirme, die auf der Startseite sonst NICHT vorkommen.
- * UnifiedSearchMockup waere fuer Schritt 1 naheliegend, steht aber schon im
- * Suchwege-Abschnitt -- zweimal dasselbe Bild laesst die Seite kuerzer
- * wirken, als sie ist. LeadsTableMockup zeigt statt der Suchmaske ihr
+ * UnifiedSearchMockup waere fuer Schritt 1 naheliegend, steht aber auf
+ * /funktionen#find -- LeadsTableMockup zeigt statt der Suchmaske ihr
  * ERGEBNIS, und das ist fuer "Entscheider raus" ohnehin der bessere Beleg.
+ *
+ * Schritt 4 trug bis zum 2026-08-14 LinkedInMockup. Seit der Abschnitt
+ * #kette gefallen ist (VEREINFACHUNG.md 1.2), steht ChainMockup hier: der
+ * Schritt beschreibt die ganze Kette (Mail schweigt, LinkedIn kommt, dann
+ * der Anruf), nicht nur die LinkedIn-Nachricht, und das Bild soll sagen,
+ * was der Text sagt. LinkedInMockup ist dafuer auf /funktionen#send
+ * gewandert, wo die Kampagne beschrieben wird.
  */
 const MOCKUPS = [
   LeadsTableMockup,
   AiAgentMockup,
   CopyCheckMockup,
-  LinkedInMockup,
+  ChainMockup,
   PipelineMockup,
   CopyOutcomesMockup,
 ];

@@ -26,7 +26,9 @@ const de = {
       { label: "Dein Angebot", href: "/#angebot" },
       { label: "Drei Kanäle", href: "/#kanaele" },
       { label: "Personalisierung", href: "/funktionen#personalize" },
-      { label: "Integrationen", href: "/#integrationen" },
+      // Der Punkt "Integrationen" ist am 2026-08-14 mit seinem Abschnitt
+      // gefallen (VEREINFACHUNG.md 1.2). Ein Menuepunkt, der ins Leere zeigt,
+      // ist schlimmer als keiner -- die Anbieterliste steht auf /funktionen.
     ],
     // "Funktionen" als eigenes Dropdown statt eines einzelnen Links: jeder
     // Eintrag zeigt direkt auf den passenden Anker auf /funktionen (siehe
@@ -56,19 +58,44 @@ const de = {
       { label: "Sperrliste", href: "/funktionen#protect" },
       { label: "Pipeline", href: "/funktionen#pipeline" },
     ],
-    agenturen: "Für Agenturen",
-    // Kurz gehalten wie die Nachbarn: die Leiste hat auf /fuer-saas einen
-    // Punkt mehr als anderswo (siehe Kopf von fuer-saas/page.tsx), und
-    // "Für SaaS-Anbieter" waere der laengste Eintrag der ganzen Zeile.
-    saas: "Für SaaS",
-    preise: "Preise",
     vergleich: "Vergleich",
-    faq: "FAQ",
     kontakt: "Kontakt",
     // Zweites, eigenstaendiges Angebot (Individualentwicklung) neben dem
     // Produkt. Bewusst ein kurzes Substantiv wie die uebrigen Nav-Punkte --
     // die einladende Frage steht als H1 auf der Zielseite, wo sie wirkt.
     custom: "Eigene Software",
+    // Hier standen bis zum 14.08.2026 `agenturen`, `saas` und `kunde` als
+    // einzelne Beschriftungen. Sie sind mit dem Fuer-wen-Menue unten in
+    // fuerWenItems aufgegangen; `preise` und `faq` waren schon laenger tot
+    // (Seiten dazu gibt es nicht mehr). Alle fuenf per grep ueber app/ als
+    // unbenutzt bestaetigt, bevor sie gefallen sind.
+    // ────────────────────────────────────────────────────────────────────
+    // Drei Zielgruppen-Links waren einer zu viel
+    // ────────────────────────────────────────────────────────────────────
+    //
+    // Am 14.08.2026 nachgemessen (Chrome, Deutsch, natuerliche Breite der
+    // Leiste gegen ihren Kasten): ab 1152px waechst der Platz nicht mehr mit,
+    // weil `max-w-6xl` deckelt -- verfuegbar bleiben 697px. Mit "Unser Kunde"
+    // brauchte die Leiste 696 bis 723px. Auf vier der sieben Seiten brachen
+    // die Beschriftungen zweizeilig um ("Fuer / Agenturen"), auf /kontakt und
+    // /case-study kamen bei 1024px zusaetzlich 4px Querscrollen dazu.
+    //
+    // Ein hoeherer Breakpoint half nicht: der Deckel gilt ab 1152px fuer jede
+    // Fensterbreite. Deshalb wandern die drei Zielgruppen-Seiten in EIN
+    // Aufklappmenue -- drei Links plus Abstaende sind 311px, das Menue rund
+    // 96px. Das spart etwa 215px und heilt nebenbei einen Umbruch, den
+    // /kontakt schon vorher hatte.
+    fuerWen: "Für wen",
+    // Der dritte Eintrag ist bewusst anders gebaut. "Für Agenturen" und "Für
+    // SaaS-Anbieter" beantworten die Frage der Ueberschrift, "Unser Kunde"
+    // nicht -- das ist kein Publikum, sondern ein Beleg. Als Verbform gelesen
+    // ("So nutzt es ...") steht er nicht mehr als dritte Zielgruppe da,
+    // sondern als die eine echte Antwort auf "und benutzt das jemand".
+    fuerWenItems: [
+      { label: "Für Agenturen", href: "/fuer-agenturen" },
+      { label: "Für SaaS-Anbieter", href: "/fuer-saas" },
+      { label: "So nutzt es retaiyn", href: "/kunden/retaiyn" },
+    ],
   },
   // ══════════════════════════════════════════════════════════════════════
   // DIE AGENTURSEITE. Am 2026-08-06 von drei auf sechs Abschnitte plus einen
@@ -198,11 +225,11 @@ const de = {
   // beiden `learning`-Abschnitte: die 30er-Schwelle steht auf beiden Seiten,
   // aber mit anderen Worten und aus anderer Richtung.
   //
-  // BEISPIELE: nur Frostbreaker selbst oder RETAIYN (erster Kunde, Agentur
+  // BEISPIELE: nur Frostbreaker selbst oder retaiyn (erster Kunde, Agentur
   // fuer Customer Experience im E-Commerce). Keine dritte Firma, keine
   // erfundene Branche -- Vorgabe des Betreibers vom 2026-08-13. Auf DIESER
   // Seite traegt Frostbreaker die Beispiele, wo es um SaaS geht (`multi`),
-  // und RETAIYN dort, wo ein Angebotsprofil gezeigt wird (`icp`): RETAIYN ist
+  // und retaiyn dort, wo ein Angebotsprofil gezeigt wird (`icp`): retaiyn ist
   // eine Agentur, kein SaaS-Anbieter, und darf hier nicht als "jemand wie du"
   // gelesen werden.
   // ══════════════════════════════════════════════════════════════════════
@@ -232,7 +259,7 @@ const de = {
         id: "icp",
         eyebrow: "Wen du meinst",
         title: "Dein Wunschkunde hängt an einer Technik, nicht an einer Branche",
-        body: "Für ein Softwareprodukt trifft die Branchenliste selten. Was trifft, ist die Technik daneben: das Shopsystem, das Mail-Tool, der Support-Kanal. Unser erster Kunde RETAIYN verkauft Customer Experience an E-Commerce-Marken, und eine Marke kommt für ihn genau dann infrage, wenn sie Klaviyo, WhatsApp oder eine Supportlösung im Einsatz hat. Dazu der Anlass: wer gerade eine Stelle dafür ausschreibt oder dessen Besucherzahlen steigen, hat das Problem nicht irgendwann, sondern jetzt.",
+        body: "Für ein Softwareprodukt trifft die Branchenliste selten. Was trifft, ist die Technik daneben: das Shopsystem, das Mail-Tool, der Support-Kanal. Unser erster Kunde retaiyn verkauft Customer Experience an E-Commerce-Marken, und eine Marke kommt für ihn genau dann infrage, wenn sie Klaviyo, WhatsApp oder eine Supportlösung im Einsatz hat. Dazu der Anlass: wer gerade eine Stelle dafür ausschreibt oder dessen Besucherzahlen steigen, hat das Problem nicht irgendwann, sondern jetzt.",
         bullets: [
           "Über 10.000 Technologien, vom Shopsystem bis zum Mail-Tool",
           "Stellenausschreibungen als Anlass: wer sucht, hat die Lücke zugegeben",
@@ -280,6 +307,106 @@ const de = {
     ctaTitle: "Bring dein Produkt mit, wir füllen das Angebot gemeinsam aus",
     ctaBody:
       "Dreißig Minuten an deinem echten Produkt: die zwölf Felder, die Technik, an der deine Käufer hängen, und die erste Suche. Danach steht ein ausgefülltes Angebot in deinem Konto. Kein Pitch, kein PDF hinterher.",
+  },
+  // ══════════════════════════════════════════════════════════════════════
+  // DIE KUNDENSEITE /kunden/retaiyn (VEREINFACHUNG.md Punkt 6). Kein
+  // "Case Study" -- die Seite ist ein Kundenportraet, keine belegte
+  // Fallstudie: es gibt keine einzige Zahl darueber, was retaiyn MIT
+  // Frostbreaker erreicht hat. Die 70 % und 30 % in Abschnitt `offer` sind
+  // retaiyns eigene Aussage ueber IHR Angebot gegenueber IHREN Kunden, nicht
+  // Frostbreakers Wirkung -- deshalb dort ausdruecklich zugeordnet, nie in
+  // einer Kennzahlenkachel.
+  //
+  // Die Seite zeigt deshalb den ABLAUF ("so arbeiten sie damit"), nicht ein
+  // ERGEBNIS ("das kam dabei heraus"). Die Leerstelle fuer die spaetere
+  // gemessene Zahl ist `customer.pending`, bereits vorhanden -- dort wird
+  // sie prominent platziert, nicht hier neu erfunden. Sobald der Betreiber
+  // liefert: Startdatum, angeschriebene Kontakte und Antworten (zwei
+  // absolute Zahlen, keine Quote unter 30), Termine absolut, und die
+  // schriftliche Freigabe von retaiyn fuer Name/Logo/Zitat in dieser Form.
+  //
+  // ANSPRACHE: retaiyn in dritter Person (wie `customer`), der Leser als
+  // "ihr" (wie `agencyPage`) -- diese Seite spiegelt eine Agentur.
+  //
+  // KEINE FORMULIERUNG VON `saasPage`, `agencyPage` ODER `offerSection`
+  // WOERTLICH WIEDERHOLEN. Fakten (zwoelf Felder, vier Wellen, die
+  // schrumpfenden Stufen) sind dieselben wie dort -- der Satzbau, in dem sie
+  // stehen, ist es bewusst nicht.
+  // ══════════════════════════════════════════════════════════════════════
+  customerPage: {
+    metaTitle: "retaiyn: wie eine Agentur ihr eigenes Angebot in eine Sequenz übersetzt",
+    metaDescription:
+      "Ein Kundenporträt, kein Erfolgsbericht: wie retaiyn, unser erster Kunde, aus dem eigenen Angebot acht Mails macht — von der Nische über das Angebot bis zur Sequenz, ohne eine Zahl, die wir nicht selbst nachrechnen können.",
+    eyebrow: "Unser erster Kunde",
+    title: "Ihr Geschäft ist Kundenbindung. Ihr Problem war Kundengewinnung.",
+    intro:
+      "retaiyn ist unser erster Kunde: eine Agentur für Customer Experience im E-Commerce. Diese Seite zeigt, wie deren Angebot durch Frostbreaker läuft — von der Nische über das Angebot bis zur fertigen Sequenz. Was das an Terminen gebracht hat, steht hier noch nicht: das tragen wir nach, sobald genug gemessen ist, nicht vorher.",
+    ctaLabel: "Gespräch buchen",
+    sections: [
+      {
+        id: "who",
+        eyebrow: "Wer sie sind",
+        title: "Die Nische stand fest — nur erreicht hat sie niemand",
+        body: "retaiyn beschreibt sich selbst als „mehr als eine klassische Agentur“: Customer Experience & AI Support, WhatsApp-Marketing und E-Mail-Marketing laufen dort als ein Ablauf, nicht als drei getrennte Leistungen. Verkauft wird das an E-Commerce-Shops und -Brands, die meisten davon schon mit Klaviyo, WhatsApp oder einer eigenen Supportlösung im Einsatz. Wer verkauft und an wen: Diese Frage stand bei retaiyn fest, bevor überhaupt eine Mail geschrieben wurde. Genau dort beginnt jedes Angebot in Frostbreaker.",
+        bullets: [
+          "Customer Experience & AI Support, WhatsApp-Marketing, E-Mail-Marketing — ein Ablauf statt drei getrennte Leistungen",
+          "Zielgruppe: E-Commerce-Shops und -Brands",
+          "Meist schon mit Klaviyo, WhatsApp oder einer eigenen Supportlösung im Einsatz",
+          "Das Problem, das retaiyn dort löst: E-Mail, WhatsApp und Support laufen unabhängig voneinander",
+        ],
+      },
+      {
+        id: "offer",
+        eyebrow: "Das Angebot",
+        title: "Was auf der eigenen Website steht, ist noch keine Kaltmail",
+        body: "Dasselbe Profil, das die Startseite als Beispiel zeigt, gehört retaiyn: zwölf Felder, gefüllt mit deren eigenen Sätzen von retaiyn.com — auch die zwei Zahlen darin, bis zu 70 % automatisierter Support, bis zu 30 % Mehrumsatz. Das ist retaiyns Versprechen an die eigenen Kunden, nicht Frostbreakers Ergebnis bei retaiyn. Am letzten Feld wird der Unterschied sichtbar: retaiyns heutiger Handlungsaufruf lautet „Kostenloses Erstgespräch vereinbaren“. Auf der Website ist das der richtige Satz. In einer ersten Mail an einen Fremden verlangt er zu viel auf einmal, und genau das markiert die Prüfung im Angebot, mit einem fertigen Ersatzsatz daneben.",
+        bullets: [
+          "Zwölf Felder, sieben aus retaiyn.com vorgeschlagen, fünf von retaiyn selbst beantwortet",
+          "Bis zu 70 % automatisierter Support, bis zu 30 % Mehrumsatz: retaiyns Aussage über das eigene Angebot, nicht über Frostbreaker",
+          "Handlungsaufruf auf der Website: „Kostenloses Erstgespräch vereinbaren“",
+          "In der Sequenz markiert die Prüfung genau diesen Satz als zu große Bitte",
+        ],
+      },
+      {
+        id: "sequence",
+        eyebrow: "Die Sequenz",
+        title: "Aus dem Profil werden acht Mails, die kleiner bitten statt größer",
+        body: "Die App verschickt in vier Wellen: heute, dann nach drei, fünf und sieben Tagen, mit demselben Betreff über die ganze Folge. Jede Welle ist kürzer als die davor. Aus der Terminbitte auf retaiyns Website wurde in der ersten Mail eine kleine Frage: Soll ich dir die drei Stellen schicken, an denen E-Mail, WhatsApp und Support bei euch heute auseinanderlaufen? Dieselbe Quelle liefert daneben auch die LinkedIn-Nachricht.",
+        bullets: [
+          "Vier Wellen, heute plus Tag drei, fünf und sieben, ein Betreff für alle",
+          "Jede Welle kürzer als die vorherige",
+          "Aus der Terminbitte wird eine kleine Frage, aus retaiyns eigener Problembeschreibung geformt",
+          "Die LinkedIn-Nachricht entsteht aus demselben Angebot",
+        ],
+      },
+      {
+        id: "role",
+        eyebrow: "Was nur retaiyn wusste",
+        title: "Fünf Felder, die keine Website hergibt",
+        body: "Was nach einem Ja verschickt wird, wie lange die Sichtung dauert, die eine Frage am Ende, warum Käufer zögern, und der Ton der Mails: Diese fünf Antworten kannte nur retaiyn, keine Recherche schlägt sie vor. Blieb ein Belegfeld leer, schreibt die App an der Stelle nichts hinzu, das sich nicht belegen lässt. Und bevor die acht Texte verschickt werden, liegen sie im Kampagnenformular: Dort liest jemand bei retaiyn sie zuerst und ändert, was nicht passt.",
+        bullets: [
+          "Was nach dem Ja kommt, die Dauer der Sichtung, die eine Frage, das Zögern der Käufer, der Ton: fünf Antworten nur von retaiyn selbst",
+          "Ohne Beleg keine Behauptung — nichts, was sich nicht nachprüfen lässt",
+          "Die acht Texte landen zuerst im Kampagnenformular, nicht direkt im Versand",
+          "Ein Mensch bei retaiyn liest sie, bevor sie rausgehen",
+        ],
+      },
+      {
+        id: "fit",
+        eyebrow: "Und bei euch?",
+        title: "Dieselbe Mechanik für jede Agentur mit einer festen Nische",
+        body: "retaiyn hatte kein Vertriebsteam, sondern eine klare Nische und keine Zeit, sie anzuschreiben. Genau für diese Ausgangslage ist Frostbreaker gebaut. Was hier über retaiyn steht, gilt für jede Agentur oder jeden Anbieter mit einer festen Zielgruppe: das Angebot einmal ausfüllen, den Rest aus derselben Quelle schreiben lassen. Wie das bei euch aussieht, ist eine Frage von dreißig Minuten, kein eigenes Projekt.",
+        bullets: [
+          "Passt, wenn eure Nische feststeht und niemand Zeit hat, sie anzuschreiben",
+          "Passt, wenn ihr für Kunden verkauft, nicht in einen anonymen Markt",
+          "Füllt bei euch jemand selbst aus, wie bei retaiyn — kein Vertriebsteam nötig",
+          "Der erste Schritt ist derselbe: euer Angebot, einmal beantwortet",
+        ],
+      },
+    ],
+    ctaTitle: "Redet mit uns über eure Nische, nicht über retaiyns Zahlen",
+    ctaBody:
+      "Dreißig Minuten: euer Angebot, eure Zielgruppe, die erste Suche. Kein Pitch mit fremden Prozentzahlen — die von retaiyn gehören retaiyn.",
   },
   // Eigene Funktionsseite: auf der Startseite standen die Detailfunktionen
   // verteilt ueber zwoelf Sektionen. Wer wissen will, was drinsteckt, findet
@@ -361,7 +488,7 @@ const de = {
       // davon 7 vorgeschlagen (SUGGESTED_FIELDS in lib/copy/offer-from-
       // website.ts). Keine Ergebniszahl, keine Stundenersparnis.
       //
-      // RETAIYN steht hier als Beispiel fuer eine Terminbitte, nicht als
+      // retaiyn steht hier als Beispiel fuer eine Terminbitte, nicht als
       // Fehler: "Kostenloses Erstgespraech vereinbaren" ist auf einer Website
       // richtig und am Ende einer Kaltmail die groesste denkbare Bitte. Genau
       // dieser Unterschied ist der Abschnitt.
@@ -369,7 +496,7 @@ const de = {
         id: "write",
         eyebrow: "Schreiben",
         title: "Acht Mails, geschrieben aus zwölf Feldern",
-        body: "Aus dem Angebot entstehen vier Stufen an Tag 0, 3, 5 und 7, je zwei Fassungen, ein Betreff über alle vier. Jede Stufe ist kürzer als die vorherige, 90, 70, 50, 35 Wörter, und jede endet bei derselben kleinen Frage. Nicht bei einem Termin: „Kostenloses Erstgespräch vereinbaren“ steht auf fast jeder Website, bei unserem ersten Kunden RETAIYN genauso, und am Ende einer Kaltmail ist das die größte Bitte, die es gibt. Danach wird nachgemessen statt gebeten: wurde eine Stufe länger als ihr Vorgänger, steht doch eine Terminbitte darin, oder ist ein Angebotsfeld wörtlich in die Mail gerutscht, benennt die App den Verstoß und lässt neu schreiben.",
+        body: "Aus dem Angebot entstehen vier Stufen an Tag 0, 3, 5 und 7, je zwei Fassungen, ein Betreff über alle vier. Jede Stufe ist kürzer als die vorherige, 90, 70, 50, 35 Wörter, und jede endet bei derselben kleinen Frage. Nicht bei einem Termin: „Kostenloses Erstgespräch vereinbaren“ steht auf fast jeder Website, bei unserem ersten Kunden retaiyn genauso, und am Ende einer Kaltmail ist das die größte Bitte, die es gibt. Danach wird nachgemessen statt gebeten: wurde eine Stufe länger als ihr Vorgänger, steht doch eine Terminbitte darin, oder ist ein Angebotsfeld wörtlich in die Mail gerutscht, benennt die App den Verstoß und lässt neu schreiben.",
         bullets: [
           "Zwölf Felder, sieben davon aus deiner Website vorgeschlagen und einzeln zu bestätigen",
           "Höchstens fünf Befunde vom Coach, jeder mit fertigem Ersatzsatz statt einer Kritik",
@@ -427,182 +554,6 @@ const de = {
     ],
     ctaTitle: "Am schnellsten versteht man es beim Ausprobieren",
     ctaBody: "Dreißig Minuten, gemeinsam eingerichtet, monatlich kündbar.",
-  },
-  // Die Seite argumentierte an prominenter Stelle gegen klassische
-  // Firmendatenbanken, obwohl die App genau das auch kann (Corporate-Modus
-  // ueber Hunter: Branche, Land, Mitarbeiterzahl). Wer B2B-Software an
-  // Mittelstaendler verkauft, las "nur fuer Handwerker" und ging wieder.
-  // Hiess bis zur Apollo-Integration "twoWays". Der Name ist mitgewandert,
-  // weil ein Schluessel, der "zwei" heisst und drei Eintraege haelt, beim
-  // naechsten Ausbau garantiert jemanden in die Irre fuehrt.
-  // Die vier Beschaffungs-Themen, die am 2026-08-06 ihre eigenen Abschnitte
-  // verloren haben (Technologie-Filter, lokale Betriebe, keine info@-Adressen,
-  // Adresspruefung). Sie standen als vier volle Abschnitte zwischen Hero und
-  // Produkt -- gemeinsam mit den Suchwegen waren das fuenf Abschnitte ueber
-  // Beschaffung, also vier zu viel. Als kurze Karten unter den Suchwegen
-  // bleiben sie belegbar, ohne die Gewichtung der Seite zu kippen.
-  // Die Tiefe dazu gehoert auf /funktionen.
-  sourcesExtra: {
-    title: "Was mit jeder Suche mitläuft",
-    linkLabel: "Alles im Einzelnen auf der Funktionsseite",
-    items: [
-      {
-        id: "tech",
-        label: "Technologie-Filter",
-        title: "Firmen an ihrer Technik finden, nicht an Stichwörtern",
-        body: "Ein Stichwort trifft, worüber eine Firma redet. Die eingesetzte Technik zeigt, was sie betreibt: ein Shopify-Shop hat Shopify im Quelltext, egal was auf der Über-uns-Seite steht.",
-      },
-      {
-        id: "local",
-        label: "Lokale Betriebe",
-        title: "Auch die, die in keiner B2B-Datenbank stehen",
-        body: "Klassische Datenbanken bauen auf LinkedIn-Profilen auf. Wer keins pflegt, existiert dort nicht. Über Google Places ist praktisch jeder Betrieb mit Adresse zu finden.",
-      },
-      {
-        id: "person",
-        label: "Keine info@-Adressen",
-        title: "Jeder Lead ist eine Person, die man erreichen kann",
-        body: "Adressen wie info@, office@ oder kontakt@ werden aussortiert. In die Lead-Liste kommt nur, was eindeutig einer Person zugeordnet ist.",
-      },
-      {
-        id: "verify",
-        label: "Adressprüfung",
-        title: "Geprüft, bevor eine Adresse der Domain schadet",
-        body: "Eine ungültige Adresse kostet nicht einen Lead, sie kostet Ruf. Die Prüfung läuft automatisch vor jedem Versand, ohne zweites Werkzeug.",
-      },
-    ],
-  },
-  searchModes: {
-    // Seit dem 2026-08-05 vier statt drei Wege: Prospeo ist in der App live
-    // (SEARCH_SOURCE_LABELS im App-Repo kennt maps, corporate, apollo,
-    // prospeo). "Drei Wege" stand hier noch, als der vierte schon lief.
-    eyebrow: "Woher die Leads kommen",
-    title: "Vier Wege, ein Ergebnis: Menschen mit Namen und geprüfter Adresse",
-    body: "Ihr entscheidet pro Suche, woher die Firmen kommen. Alle vier Wege münden in dieselbe Liste, dieselbe Anreicherung und denselben Versand.",
-    modes: [
-      {
-        // Benannt nach dem, WAS gesucht wird (Ort, Firma, Person), mit dem
-        // Anbieter dahinter. "Lokal/Corporate/Massen-Leads" beschrieb keinen
-        // Unterschied: "Corporate" sagt nichts, und "Massen-Leads" klang billig,
-        // obwohl es der hochwertigste Weg ist (Person samt gepruefter Adresse).
-        id: "local",
-        label: "Vor Ort",
-        title: "Über Google Maps",
-        body: "Der Suchbegriff ist ein freies Feld: Fahrschule, Yogastudio, Tierarztpraxis, Autohaus, Hotel. Wenn es auf der Karte einen Eintrag hat, findet Frostbreaker es, unabhängig davon, wie digital der Betrieb aufgestellt ist.",
-        points: [
-          "Freier Suchbegriff, keine feste Branchenliste",
-          "Umkreis in Metern rund um jeden Ort",
-          "Nur Betriebe ohne eigene Website",
-          "Nur Betriebe unter einer Bewertungsschwelle",
-          "Telefonnummer aus dem Karteneintrag",
-        ],
-      },
-      {
-        id: "corporate",
-        label: "Firmen",
-        title: "Über Hunters Firmendatenbank",
-        body: "487 Branchen, 9 Länder und 8 Größenklassen lassen sich frei kombinieren, dazu Stadt und eigene Stichwörter. Die Firmensuche selbst kostet nichts, die Adressen kommen anschließend geprüft von Hunter.",
-        points: [
-          "487 Branchen von Software bis Zahnmedizin",
-          "9 Länder in Europa und den USA",
-          "8 Größenklassen von 1 bis über 10.000 Mitarbeitende",
-          "Stadt, US-Bundesstaat und freie Stichwörter",
-          "Adressen von Hunter geprüft, statt aus Namensmustern geraten",
-        ],
-      },
-      {
-        id: "apollo",
-        label: "Entscheider",
-        title: "Über Apollos Entscheider-Datenbank",
-        body: "Firma und Entscheider samt bereits verifizierter E-Mail in einem Schritt. Die angefragte Zahl ist hier die Zahl der Leads, keine Schätzung: bei den anderen Wegen wird die Adresse nachträglich recherchiert.",
-        points: [
-          "Entscheider und verifizierte Adresse in einem Schritt",
-          "Filter nach eingesetzter Technik, etwa Shopify",
-          "11 Hierarchiestufen vom Inhaber bis zur Fachkraft",
-          "Freie Jobtitel, Länder und Firmengröße",
-          "Bis zu 1.000 Leads pro Suche",
-        ],
-      },
-      {
-        // Steht bewusst NACH Apollo, obwohl es derselbe Suchtyp ist: die
-        // Reihenfolge folgt dem Umfang der Filter, und der Anlass-Filter
-        // ("schreibt gerade Stellen aus") ist das staerkste Argument der
-        // ganzen Sektion -- er gehoert ans Ende, wo er haengen bleibt.
-        // Tarifhinweise stehen dabei, weil sie an Prospeos Tarifen haengen,
-        // nicht an unseren: Technik und Stellen ab Starter, Traffic ab Pro
-        // (siehe lib/prospeo-query.ts im App-Repo).
-        id: "prospeo",
-        label: "Anlass",
-        title: "Über Prospeos Entscheider-Datenbank",
-        body: "Wie Apollo: Firma, Entscheider und geprüfte Adresse in einem Lauf. Der Unterschied sind die Filter: wer gerade Stellen ausschreibt, wie viel Website-Traffic eine Firma hat und wie schnell er wächst.",
-        points: [
-          "Schreibt gerade Stellen aus für eine bestimmte Rolle",
-          "Website-Traffic: Besuche pro Monat, Wachstum, Herkunftsländer",
-          "Eingesetzte Technik, erkannt über Wappalyzer",
-          "Umsatzklasse und Mitarbeiterzahl",
-          "Trefferzahl vorab prüfbar, bevor Credits fließen",
-        ],
-      },
-    ],
-  },
-  // Steht bewusst DIREKT hinter den vier Suchwegen: sobald dort "Hunter" und
-  // "Apollo" stehen, denkt jeder Fachkundige sofort "dann nehme ich die doch
-  // gleich selbst". Diesen Einwand erst in der FAQ zu beantworten, hiesse ihn
-  // die halbe Seite lang unbeantwortet mitlaufen zu lassen.
-  // Der Einwand "ich habe Apollo und Instantly doch schon" laesst sich nicht
-  // mit Eigenschaften beantworten, sondern nur damit, wie ein Monat wirklich
-  // aussieht. Deshalb hier keine Feature-Liste, sondern zwei Ablaeufe
-  // nebeneinander: die Laenge der linken Spalte IST das Argument.
-  //
-  // Bewusst ohne Gesamtpreis im Text: die Tarife der Anbieter aendern sich,
-  // eine Zahl hier waere in drei Monaten falsch. Die Preise stehen an genau
-  // einer Stelle, im Preis-Abschnitt.
-  dailyDiff: {
-    eyebrow: "Der Unterschied im Alltag",
-    title: "Derselbe Monat, einmal mit und einmal ohne",
-    body: "Apollo findet Entscheider, Instantly verschickt zuverlässig. Beides bleibt. Die Frage ist, was zwischen den beiden passiert, und wie viel davon ihr von Hand macht.",
-    manualBadge: "Handarbeit",
-    before: {
-      label: "Heute: Apollo + Instantly",
-      countLabel: "Schritte",
-      count: "8",
-      manualLabel: "davon von Hand",
-      // Vier bis zum 2026-08-13. Der Aufbau der Sequenz stand als Nicht-
-      // Handarbeit da -- ausgerechnet der groesste Block, den die App abnimmt.
-      // Damit rechnete die Seite die eigene Ersparnis aus der eigenen
-      // Rechnung heraus.
-      manualCount: "5",
-      steps: [
-        { text: "In Apollo filtern und 250 Leads als CSV exportieren.", manual: false },
-        { text: "Abmeldungen und Bestandskunden aus der CSV entfernen. Apollo kennt beides nicht, Instantly meldet es nicht zurück.", manual: true },
-        { text: "Für jeden Lead eine persönliche Zeile schreiben, oder auf generische Platzhalter ausweichen, die schlechter abschneiden als gar keine Personalisierung.", manual: true },
-        { text: "CSV bei Instantly hochladen und die Spalten zuordnen.", manual: false },
-        { text: "Kampagne und Nachfass-Sequenz aufbauen: vier Stufen, für jede ein Betreff und ein Text, und das für jede Zielgruppe neu.", manual: true },
-        { text: "Antworten in Instantly lesen, Ergebnisse an anderer Stelle notieren.", manual: true },
-        { text: "Zahlen für den Kunden aus zwei Tools in einer Tabelle zusammensetzen.", manual: true },
-        { text: "Nächsten Monat von vorn. Apollo weiß nicht, wen ihr letzten Monat schon angeschrieben habt.", manual: false },
-      ],
-    },
-    after: {
-      label: "Mit Frostbreaker",
-      countLabel: "Schritte",
-      count: "5",
-      manualLabel: "davon von Hand",
-      // Eins, nicht null. Das Angebot tippt ein Mensch, und eine Null neben
-      // einem Abschnitt "Was wir dir nicht vormachen" waere teurer als die
-      // ehrliche Eins. Welcher der fuenf Schritte gemeint ist, steht im Text
-      // des Schritts selbst -- die Nachher-Spalte kennt keinen Handarbeits-
-      // Marker (siehe page.tsx, dort sind die Schritte reiner Text).
-      manualCount: "1",
-      steps: [
-        "Das Angebot einmal ausfüllen, von Hand: zwölf Fragen, sieben davon aus deiner Website vorgeschlagen. Einmal, nicht je Kampagne.",
-        "Eine Suche starten, mit denselben Filtern wie in Apollo, zusätzlich nach eingesetzter Technik.",
-        "Läuft von allein durch: Sperrliste geprüft, Adresse verifiziert, persönliche Zeile pro Firma geschrieben.",
-        "Kampagne direkt aus derselben Liste starten: die vier Stufen stehen bereits im Formular, aus dem Angebot geschrieben.",
-        "Antworten, Meetings und der Kundenreport stehen im selben Dashboard.",
-      ],
-    },
-    note: "Frostbreaker ersetzt weder Apollo noch Instantly. Es ersetzt die Handarbeit dazwischen, und das CRM-Abo, das sonst als drittes dazukäme.",
   },
   // ══════════════════════════════════════════════════════════════════════
   // DIE VERGLEICHSTABELLE, neu am 2026-08-06. Ersetzt an Ort und Stelle den
@@ -714,76 +665,6 @@ const de = {
     footnote:
       "Geprüft am 13. August 2026 an den öffentlichen Leistungsbeschreibungen und Hilfecentern der Anbieter. „Teilweise“ heißt: vorhanden, aber nicht in dem Umfang, den die Zeile beschreibt. Ein Strich heißt „gehört nicht zum Leistungsumfang“, nicht „funktioniert schlecht“. Apollo, Hunter und Instantly erzeugen Sequenztexte per KI. „Teilweise“ heißt in der Schreibzeile deshalb: eine Sequenz entsteht, aber nicht zwei eigenständige Fassungen je Stufe aus einem dauerhaft hinterlegten Angebot.",
   },
-  // Wird seit dem 2026-08-06 nicht mehr gerendert: der Abschnitt #ergaenzt ist
-  // der Vergleichstabelle gewichen. Der Inhalt bleibt bis Stufe 5 stehen, weil
-  // die FAQ-Antwort auf "ich habe Apollo doch schon" daraus entsteht
-  // (POSITIONIERUNG.md Abschnitt 7).
-  worksWith: {
-    eyebrow: "Ergänzt euren Stack",
-    title: "Ihr nutzt Apollo, Hunter oder Instantly bereits? Dann ist das hier kein Ersatz",
-    body: "Frostbreaker bringt keine eigene Datenbank und kein eigenes Postfach mit. Es läuft auf euren Zugängen, zum Selbstkostenpreis, und schließt die Lücken zwischen den Werkzeugen, die ihr ohnehin bezahlt.",
-    // Die ehrliche Fassung: erst sagen, was die Werkzeuge gut koennen, dann
-    // die Luecke benennen. Wer seine eigenen Tools schlechtgeredet bekommt,
-    // glaubt dem Rest der Seite nicht mehr.
-    rows: [
-      {
-        tool: "Apollo",
-        good: "Liefert Entscheider samt verifizierter Adresse und den Technologie-Filter.",
-        gap: "Schreibt keine individuelle Zeile pro Lead und weiß nichts von eurer Sperrliste oder davon, wer letzten Monat schon angeschrieben wurde.",
-      },
-      {
-        tool: "Hunter",
-        good: "Findet Adressen zu einer Domain und hat eine brauchbare Firmendatenbank.",
-        gap: "Kennt keine lokalen Betriebe ohne Datenbank-Eintrag: Handwerk, Gastronomie und Praxen fehlen dort schlicht.",
-      },
-      {
-        tool: "Instantly",
-        good: "Verschickt zuverlässig, wärmt Postfächer auf und rotiert sie sauber.",
-        gap: "Recherchiert nicht und personalisiert nicht. Was ihr hineingebt, entscheidet ihr woanders.",
-      },
-    ],
-    bridgeLabel: "Was Frostbreaker dazwischen erledigt",
-    bridge: [
-      "Eine Suche statt drei Oberflächen, mit demselben Ergebnis in einer Liste",
-      "Eine individuelle Eröffnungszeile pro Lead, aus der Recherche zur Firma",
-      "Sperrliste und Bestandskunden werden vor jeder Suche und jedem Versand geprüft",
-      "Antworten, Bounces und Meetings fließen in dasselbe Dashboard zurück",
-      "Pro Kunde ein eigener Workspace, ohne für jeden ein neues Abo zu buchen",
-    ],
-    note: "Alle Abfragen laufen über eure eigenen Zugänge. Frostbreaker schlägt nichts auf die Abfragekosten auf.",
-  },
-  // Der Technologie-Filter ist das staerkste Argument fuer eine konkrete
-  // Zielgruppe: er verwandelt "irgendwas mit E-Commerce" in eine belegbare
-  // Liste. Bewusst eine eigene Sektion statt eines Stichpunkts oben, weil er
-  // fuer Interessenten mit klarer Nische der Kaufgrund ist.
-  techFilter: {
-    eyebrow: "Technologie-Filter",
-    title: "Finde Firmen an der Technik, die sie wirklich einsetzen",
-    body: "Wer E-Commerce-Kunden sucht, tippt sonst „ecommerce\" als Stichwort ein und bekommt Agenturen, Blogs und Berater, die über E-Commerce schreiben. Der Technologie-Filter geht den umgekehrten Weg: Er erkennt am Shop selbst, welches System darunter läuft.",
-    points: [
-      {
-        title: "Stichwort rät, Technik belegt",
-        body: "Ein Stichwort trifft, worüber eine Firma spricht. Die eingesetzte Technik zeigt, was sie tatsächlich betreibt: ein Shopify-Shop hat Shopify im Quelltext, unabhängig davon, was auf der Über-uns-Seite steht.",
-      },
-      {
-        title: "Der Aufhänger für die erste Zeile",
-        body: "Wer weiß, dass ein Shop auf Shopware läuft und Klarna anbietet, schreibt eine erste Zeile, die nur zu dieser Firma passt. Genau daran erkennt ein Empfänger den Unterschied zwischen Serienmail und gemeinter Nachricht.",
-      },
-      {
-        title: "Passt zu dem, was ihr verkauft",
-        body: "Ihr baut Shopify-Apps, macht Shopware-Migrationen oder Klaviyo-Setups? Dann ist eure Zielgruppe keine Branche, sondern eine Technologie. Der Filter bildet genau das ab.",
-      },
-    ],
-    scaleLabel: "Katalog-Umfang",
-    scaleValue: "über 10.000 Technologien",
-    scaleNote: "Von den großen Shopsystemen bis zu einzelnen Zahlungs- und Bewertungs-Tools. Auf der Oberfläche steht eine kuratierte Auswahl, die für E-Commerce zählt.",
-    dachLabel: "Für den DACH-Markt",
-    dachValue: "Shopware, JTL, Oxid, PlentyMarkets",
-    dachNote: "Nicht nur die US-Systeme: die im deutschsprachigen Raum verbreiteten Shopsysteme sind genauso erfasst.",
-  },
-  // Der zweite Kanal. Stand bisher nirgends auf der Seite, obwohl er das
-  // Argument gegen reine Versand-Tools ist: wer schon eines hat, kauft kein
-  // zweites, aber er kauft den Kanal, den sein jetziges Werkzeug nicht kann.
   /**
    * Die drei Abschnitte, die Frostbreaker von einem Versandwerkzeug trennen.
    *
@@ -845,17 +726,23 @@ const de = {
           body: "Personalisierter Aufhänger, geprüfte Adresse, deine eigenen Postfächer.",
         },
         {
-          day: "Tag 3, 7 und 12",
+          // Tag 3, 5 und 7 -- nicht 3, 7 und 12. Die alten Abstaende stammen
+          // aus der Zeit vor dem Playbook. Massgeblich ist PLAYBOOK_DELAYS in
+          // apps/web/lib/copy/playbook.ts der App: [0, 3, 2, 2], also Tag 0,
+          // 3, 5, 7 -- schrumpfende Abstaende, weil ein Nachfassen nach zwoelf
+          // Tagen ein neuer Erstkontakt ist und nicht mehr dieselbe Mail.
+          // Bis zum 14.08.2026 widersprach dieses Bild dem Text daneben.
+          day: "Tag 3, 5 und 7",
           title: "Drei Follow-ups laufen nach",
           body: "Dieselbe Sequenz, dieselben Postfächer. Wer antwortet, fällt sofort raus.",
         },
         {
-          day: "Tag 15 · keine Antwort",
+          day: "Tag 10 · keine Antwort",
           title: "LinkedIn-Aufgabe erscheint",
           body: "Nur wo ein Profil hinterlegt ist. Landet in der LinkedIn-Liste, nicht in einer Tabelle.",
         },
         {
-          day: "Tag 20 · immer noch still",
+          day: "Tag 14 · immer noch still",
           title: "Der Anruf steht in der Anrufliste",
           body: "Nur wo eine Nummer da ist, und erst wenn die LinkedIn-Aufgabe erledigt ist.",
         },
@@ -906,9 +793,7 @@ const de = {
       campaign: "Kampagne mit zwei Textfassungen",
       campaignCount: "964 Kontakte",
       bestLabel: "Beste Fassung",
-      versionLabel: "Fassung",
       contactsWord: "Kontakte",
-      repliesWord: "Antworten",
       rows: [
         {
           step: "Schritt 1",
@@ -916,11 +801,7 @@ const de = {
           contacts: "482",
           percent: 6.0,
           replies: "29 · 6,0 %",
-          repliesNum: "29",
-          repliesPct: "6,0 %",
           meetings: "6 Termine",
-          meetingsNum: "6",
-          meetingsWord: "Termine",
           interested: "11 Interessiert",
           rejections: "8 Absagen",
           best: false,
@@ -931,11 +812,7 @@ const de = {
           contacts: "482",
           percent: 10.6,
           replies: "51 · 10,6 %",
-          repliesNum: "51",
-          repliesPct: "10,6 %",
           meetings: "17 Termine",
-          meetingsNum: "17",
-          meetingsWord: "Termine",
           interested: "24 Interessiert",
           rejections: "6 Absagen",
           best: true,
@@ -946,11 +823,7 @@ const de = {
           contacts: "831",
           percent: 2.6,
           replies: "22 · 2,6 %",
-          repliesNum: "22",
-          repliesPct: "2,6 %",
           meetings: "4 Termine",
-          meetingsNum: "4",
-          meetingsWord: "Termine",
           interested: "7 Interessiert",
           rejections: "5 Absagen",
           best: false,
@@ -961,11 +834,7 @@ const de = {
           contacts: "26",
           percent: null,
           replies: "26, zu wenig",
-          repliesNum: "",
-          repliesPct: "",
           meetings: "",
-          meetingsNum: "",
-          meetingsWord: "",
           interested: "0 Interessiert",
           rejections: "0 Absagen",
           best: false,
@@ -974,7 +843,6 @@ const de = {
       note: "Die Zuordnung kommt aus dem Versand selbst: eine Antwort trägt den Schritt der Mail, auf die sie antwortet. Unter 30 Kontakten steht keine Prozentzahl.",
       // Kurzfassung fuer den Hero: dort steht nur die Pointe (zwei Fassungen,
       // eine mit Terminen), und die braucht einen Satz, keine Methodik.
-      noteShort: "Zwei Fassungen desselben Schritts. B hat weniger Absagen und drei Termine. Das sieht man nur, wenn dasselbe Werkzeug den Text schreibt und die Antwort empfängt.",
     },
     // Die LinkedIn-Arbeitsliste. Der Aufhaenger ist bewusst derselbe Ton wie
     // die erzeugten Aufhaenger in der App: eine Beobachtung aus der Recherche,
@@ -988,41 +856,55 @@ const de = {
     // Marketingseite stand, die drei Abschnitte weiter mit Datensparsamkeit
     // wirbt.
     //
-    // Jetzt RETAIYN, unser erster Kunde, der genau so gewonnen wurde. Firma
+    // Jetzt retaiyn, unser erster Kunde, der genau so gewonnen wurde. Firma
     // und Rolle, KEIN Personenname: die Zustimmung des Betreibers betrifft
-    // RETAIYN als Firma; ob der dort genannte Ansprechpartner damit
+    // retaiyn als Firma; ob der dort genannte Ansprechpartner damit
     // einverstanden ist, in fremder Werbung als Empfaenger einer Kaltmail zu
     // stehen, ist eine zweite Frage und liegt nicht vor. Deshalb auch die
     // Anrede ohne Vornamen. Erst mit schriftlicher Antwort darf hier ein Name
     // stehen.
     linkedin: {
       frameTitle: "LinkedIn · Nachricht steht",
-      name: "RETAIYN",
+      name: "retaiyn",
       role: "Customer Experience für E-Commerce",
       template: "Vorlage: Standard ★",
       greeting: "Hallo,",
       hookLabel: "Aufhänger, je Kontakt erzeugt",
       hook: "Dass ihr E-Mail, WhatsApp und Support als ein Angebot führt und nicht als drei nebeneinander, ist der Grund für diese Nachricht.",
       pitch:
-        "Ich baue Software, die Agenturen wie RETAIYN die Arbeit abnimmt, die sonst zwischen fünf Werkzeugen liegen bleibt. Kein Pitch, ich wollte mich erst mal vernetzen.",
+        "Ich baue Software, die Agenturen wie retaiyn die Arbeit abnimmt, die sonst zwischen fünf Werkzeugen liegen bleibt. Kein Pitch, ich wollte mich erst mal vernetzen.",
       signoff: "Beste Grüße, Youssef",
       buttons: ["Kopieren", "Profil öffnen ↗", "Als gesendet vermerken"],
       note: "Derselbe Aufhänger wie in der Mail, schon erzeugt und bezahlt. Gesendet wird von dir: LinkedIn hat keine Schnittstelle für Nachrichten, und ein Werkzeug, das trotzdem automatisch sendet, riskiert dein Konto.",
     },
   },
+  // ══════════════════════════════════════════════════════════════════════
+  // EIN ABSCHNITT AUS ZWEIEN, seit dem 2026-08-14 (VEREINFACHUNG.md 1.2).
+  //
+  // `guard` ("die App sagt Nein, bevor du sendest") und `honesty` ("die App
+  // beschoenigt keine Zahl, nachdem du gesendet hast") sind zwei Haelften
+  // derselben Haltung und standen als zwei volle Abschnitte mit je drei
+  // Karten und je einem Bild direkt hintereinander -- beide auf bg-panel2,
+  // also auch optisch nicht auseinanderzuhalten. `guard` traegt jetzt
+  // Augenbraue, Ueberschrift und Einleitung des gemeinsamen Abschnitts,
+  // `honesty` die Zwischenueberschrift der zweiten Haelfte. `honesty.eyebrow`
+  // ist damit entfallen.
+  //
+  // Von sechs Karten sind vier geblieben. Gefallen ist "Du kannst trotzdem
+  // starten" -- der Einwand, den die Ueberschrift ausloest, gehoert in die
+  // Einleitung und nicht in eine eigene Karte, deshalb steht er jetzt im
+  // letzten Satz von `body`. Gefallen ist ausserdem "Abwesenheitsnotizen
+  // zaehlen nicht", die feinste der drei Ehrlichkeitsregeln.
+  // ══════════════════════════════════════════════════════════════════════
   guard: {
-    eyebrow: "Bevor du sendest",
+    eyebrow: "Bevor du sendest, und danach",
     title: "Das einzige Werkzeug für Kaltakquise, das dir Nein sagt",
     body:
-      "Elf Prüfungen laufen, bevor eine Kampagne starten kann. Vier davon können sie aufhalten: fehlendes SPF oder DKIM, eine Bounce-Quote über fünf Prozent, eine Liste ohne sendbare Adresse. Das kostet dich nicht eine Kampagne, das kostet dich die Domain.",
+      "Elf Prüfungen laufen, bevor eine Kampagne starten kann. Vier davon können sie aufhalten: fehlendes SPF oder DKIM, eine Bounce-Quote über fünf Prozent, eine Liste ohne sendbare Adresse. Das kostet dich nicht eine Kampagne, das kostet dich die Domain. Aufhalten heißt nicht sperren: du siehst vorher, was du in Kauf nimmst, und kannst mit einem bewussten zweiten Klick trotzdem starten.",
     points: [
       {
         title: "Blocker und Hinweise sind zweierlei",
         body: "Ein Blocker ist etwas, das mit Sicherheit schiefgeht und dessen Schaden bleibt. Ein Hinweis macht schlechter, aber weder sicher noch dauerhaft. Diese Linie halten wir streng: eine Warnung, die auch mal nur eine Meinung ist, klickt man beim dritten Mal weg, und die echte gleich mit.",
-      },
-      {
-        title: "Du kannst trotzdem starten",
-        body: "Mit einem bewussten zweiten Klick, und du siehst vorher, was du in Kauf nimmst. Ein Torwart, an dem man nicht vorbeikommt, führt nur dazu, dass die Kampagne woanders angelegt wird.",
       },
       {
         title: "Danach schaut jemand weiter hin",
@@ -1088,33 +970,7 @@ const de = {
     phoneNote:
       "Angerufen wird mit deinem eigenen Telefon: Frostbreaker ist keine Telefonanlage und rechnet keine Gesprächsminuten ab.",
   },
-  // Eyebrow und Titel geaendert am 2026-08-06: der Abschnitt #kanaele direkt
-  // darueber traegt jetzt "Drei Kanaele, ein Kontakt". Zwei benachbarte
-  // Abschnitte, die beide mit "Drei Kanaele" anfangen, liest man als
-  // Wiederholung und ueberspringt den zweiten. Dieser hier handelt nicht von
-  // den Kanaelen, sondern von der Reihenfolge zwischen ihnen.
-  chain: {
-    eyebrow: "Die Kette",
-    title: "Kein Lead bleibt liegen, und keiner bekommt zwei Aufgaben",
-    body:
-      "Instantly kennt dein Telefon nicht. Lemlist hat kein CRM. Pipedrive hat keine Kampagne. Hier ist es ein Vorgang, und er läuft, ohne dass du daran denken musst.",
-    points: [
-      {
-        title: "Immer genau ein nächster Schritt",
-        body: "Kein Lead bekommt gleichzeitig eine LinkedIn-Aufgabe und einen Anruf. Der Anruf entsteht erst, wenn die LinkedIn-Anfrage abgehakt ist.",
-      },
-      {
-        title: "Wer antwortet, fällt sofort raus",
-        body: "Die Kette gilt nur für Kontakte, die angeschrieben wurden und geschwiegen haben. Eine Antwort beendet sie im selben Moment.",
-      },
-      {
-        title: "Nur wo es etwas zu tun gibt",
-        body: "LinkedIn nur mit hinterlegtem Profil, Anruf nur mit Nummer. Eine Aufgabe ohne Adresse ist eine Recherche-Aufgabe, und die gehört nicht in eine Arbeitsliste.",
-      },
-    ],
-  },
   honesty: {
-    eyebrow: "Was wir dir nicht vormachen",
     title: "Eine Zahl, die nichts bedeutet, zeigen wir nicht",
     body:
       "Zwölf Mails und eine Antwort sind nicht „8,3 %“. Das sind zwölf Mails und eine Antwort. Unter dreißig angeschriebenen Kontakten schreiben wir „zu wenig“ statt einer Prozentzahl, und der Balken bleibt leer.",
@@ -1127,31 +983,7 @@ const de = {
         title: "Gemessen an Kontakten, nicht an Mails",
         body: "Eine Sequenz schickt drei bis vier Mails an dieselbe Person. Die eine Antwort darauf gehört nicht durch vier geteilt.",
       },
-      {
-        title: "Abwesenheitsnotizen zählen nicht",
-        body: "Ein Autoresponder ist kein Mensch, der reagiert hat. Ihn mitzuzählen würde die Quote nach oben verfälschen, also genau in die Richtung, in die man sich gern täuschen lässt.",
-      },
     ],
-  },
-  phone: {
-    eyebrow: "Zweiter Kanal",
-    title: "Wenn die Mail nicht reicht, steht die Nummer schon da",
-    body: "Kaltakquise endet nicht bei der E-Mail. Wer nach zwei Nachfassmails nicht antwortet, ist oft trotzdem erreichbar, nur eben am Telefon. Frostbreaker plant diese Anrufe an derselben Stelle, an der der Lead entstanden ist.",
-    points: [
-      {
-        title: "Vorbereitet statt kalt erwischt",
-        body: "Jede Zeile trägt die Nummer, die Rolle der Person und die Firmenzusammenfassung aus der Recherche. Ihr wisst vor dem Wählen, mit wem ihr sprecht und warum.",
-      },
-      {
-        title: "Nach Dringlichkeit sortiert",
-        body: "Überfällig, heute, später. Ein zugesagter Rückruf geht nicht mehr unter, weil er in einer Tabelle stand, die niemand geöffnet hat.",
-      },
-      {
-        title: "Das Ergebnis bleibt am Lead",
-        body: "Gesprächsnotiz und Ausgang werden am Kontakt gespeichert und setzen den Status. Der nächste Schritt steht damit im selben Verlauf wie die verschickten Mails.",
-      },
-    ],
-    note: "Gewählt wird mit dem eigenen Telefon: Frostbreaker ist keine Telefonanlage und rechnet keine Gesprächsminuten ab.",
   },
   // Die beiden Gruende, aus denen ein Interessent NICHT kauft: "zu kompliziert
   // fuer mich" und "rechtlich zu heikel". Beide sind in der App laengst
@@ -1190,8 +1022,8 @@ const de = {
   //
   // Seit dem 2026-08-13 (BEISPIELE.md) tragen diese Bildschirme KEINE
   // erfundenen Firmen mehr. Es gibt genau zwei Namen auf dieser Website:
-  // Frostbreaker und RETAIYN. Das gezeigte Konto ist Frostbreakers eigenes,
-  // der gezeigte Lead ist RETAIYN -- unser erster Kunde, ueber genau diesen
+  // Frostbreaker und retaiyn. Das gezeigte Konto ist Frostbreakers eigenes,
+  // der gezeigte Lead ist retaiyn -- unser erster Kunde, ueber genau diesen
   // Weg gewonnen. Alle uebrigen Zeilen tragen ihr Segment statt eines Namens.
   // Wer hier eine dritte Firma einsetzt, egal wie offensichtlich erfunden,
   // macht die Regel wieder kaputt.
@@ -1299,7 +1131,7 @@ const de = {
       tabs: ["Vor Ort (Maps)", "Firmen (Hunter)", "Entscheider (Apollo)", "Anlass (Prospeo)"],
       // Zielgruppe auf E-Commerce-Marken gestellt (vorher "Nahrungsergänzung",
       // BEISPIELE.md 5.5). Shopify und Klaviyo standen schon im Technikfeld --
-      // das IST die Zielgruppe von RETAIYN und damit auch die von Frostbreaker.
+      // das IST die Zielgruppe von retaiyn und damit auch die von Frostbreaker.
       // Nur das Zielgruppenfeld ist gewandert, der Rest stand schon richtig da.
       fields: [
         { label: "Zielgruppe", value: "E-Commerce-Marken" },
@@ -1322,9 +1154,9 @@ const de = {
     //   - Eine erfundene Nummer neben einem echten Firmennamen kann eine
     //     fremde, echte Nummer treffen. Deshalb steht dort eine erkennbare
     //     Maske und keine Ziffernfolge, die jemand waehlen kann.
-    //   - RETAIYN steht hier bewusst NICHT, obwohl BEISPIELE.md eine Zeile
+    //   - retaiyn steht hier bewusst NICHT, obwohl BEISPIELE.md eine Zeile
     //     dafuer vorsah: die Anrufliste behauptet einen Anruf mit Datum und
-    //     Gespraechsnotiz. Dass RETAIYN ueber E-Mail und LinkedIn gewonnen
+    //     Gespraechsnotiz. Dass retaiyn ueber E-Mail und LinkedIn gewonnen
     //     wurde, steht im Kundenabschnitt; ein Telefonat steht dort nicht, und
     //     eine Notiz daneben waere eine Tatsachenbehauptung ueber einen echten
     //     Kunden.
@@ -1423,31 +1255,46 @@ const de = {
     },
     leads: {
       title: "Alle Leads",
-      toolbar: { count: "97 Firmen · 259 Kontakte", verify: "E-Mails verifizieren", export: "In Kampagne übernehmen", csv: "Excel-CSV" },
-      // Das gezeigte Konto ist Frostbreakers eigenes, also ist die erste Zeile
-      // RETAIYN: unser erster Kunde, genau ueber diesen Weg gewonnen. Die
-      // uebrigen drei tragen ihr Segment statt eines Namens. Die Aussage der
-      // Tabelle ist die Spalte (Kontakte, davon mit E-Mail), nicht die Firma
-      // -- und fremde Leads haben nie zugestimmt, hier zu stehen.
+      // Kennzeichnung wie im Dashboard (`dashboard.sampleBadge`) und im
+      // Report (`report.badge`): dieses Bild trug als einziges der grossen
+      // Zahlenbilder gar keine. Ohne sie liest sich eine Menge in einer
+      // Beispielansicht wie eine Ergebniszahl.
+      sampleBadge: "Beispielansicht",
+      // Summe der vier Zeilen: 120 + 80 + 60 + 45. Wer eine Zeile aendert,
+      // muss diese Zahl mitrechnen -- eine Werkzeugleiste, die nicht zur
+      // Tabelle darunter passt, faellt jedem auf, der nachzaehlt.
+      toolbar: { count: "4 Nischen · 305 Leads", verify: "E-Mails verifizieren", export: "In Kampagne übernehmen", csv: "Excel-CSV" },
+      // Bis zum 2026-08-14 standen hier vier Firmen, zwei davon mit "Name
+      // weggelassen" als Domain. Die Regel dahinter kennt ein Website-Besucher
+      // nicht, und ohne sie ist die Zeile nur ein Raetsel. Jetzt eine Zeile je
+      // NISCHE mit einer Menge -- damit gibt es auch nichts mehr zu erfinden
+      // und niemanden mehr um Zustimmung zu bitten.
+      //
+      // Die zweite Zahl ist nie gleich der ersten: "120 Leads mit 120
+      // E-Mails" waere eine behauptete Trefferquote von 100 %, und die gibt
+      // es nicht. Die Luecke ist je Nische verschieden, und zwar in die
+      // richtige Richtung -- lokale Betriebe (Restaurants, Makler) haben eine
+      // schlechtere Adressabdeckung als Shopify-Marken und Agenturen. Damit
+      // sagt die Spalte nebenbei etwas Wahres, statt Platz zu fuellen.
       rows: [
-        { name: "RETAIYN", domain: "RETAIYN.com", contacts: "2 Kontakte", withMail: "2 mit E-Mail", color: "#0EA5E9" },
-        { name: "E-Commerce-Marke, Shopify", domain: "Name weggelassen", contacts: "3 Kontakte", withMail: "3 mit E-Mail", color: "#8B5CF6" },
-        { name: "Onlineshop, Shopware", domain: "Name weggelassen", contacts: "1 Kontakt", withMail: "1 mit E-Mail", color: "#F59E0B" },
-        { name: "Agentur, Wien", domain: "Name weggelassen", contacts: "2 Kontakte", withMail: "1 mit E-Mail", color: "#10B981" },
+        { name: "E-Commerce", domain: "Shopify-Shops, DACH", contacts: "120 Leads", withMail: "112 mit E-Mail", color: "#8B5CF6" },
+        { name: "Marketingagenturen", domain: "10 bis 50 Mitarbeiter", contacts: "80 Leads", withMail: "71 mit E-Mail", color: "#0EA5E9" },
+        { name: "Restaurants", domain: "Wien und Umgebung", contacts: "60 Leads", withMail: "38 mit E-Mail", color: "#F59E0B" },
+        { name: "Immobilienmakler", domain: "München, Hamburg, Berlin", contacts: "45 Leads", withMail: "34 mit E-Mail", color: "#10B981" },
       ],
     },
     // Firma und Rolle, kein Personenname und keine Klaradresse: die Zustimmung
-    // betrifft RETAIYN als Firma, nicht den dort genannten Ansprechpartner
+    // betrifft retaiyn als Firma, nicht den dort genannten Ansprechpartner
     // (BEISPIELE.md, Warnung in Abschnitt 5.3 und offene Frage 10.1). Die
     // Telefonnummer ist maskiert -- eine erfundene Nummer neben einem echten
     // Firmennamen kann eine fremde, echte Nummer treffen.
     leadDetail: {
       label: "Aufgeklappter Lead",
-      person: "RETAIYN",
+      person: "retaiyn",
       role: "Geschäftsführung",
       company: "Customer Experience für E-Commerce",
       emailLabel: "E-Mail",
-      email: "····@RETAIYN.com",
+      email: "····@retaiyn.com",
       emailBadge: "verifiziert",
       phoneLabel: "Telefon",
       phone: "+·· ··· ······",
@@ -1467,7 +1314,7 @@ const de = {
       badge: "Beispielansicht · für den Endkunden",
       // Ohne Firmennamen (BEISPIELE.md, offene Frage 10.2): dieser Bildschirm
       // zeigt die Ansicht, die eine Agentur ihrem Endkunden gibt. Frostbreaker
-      // hat diese Rolle nicht, und RETAIYNs Kunden sind Dritte, die niemand
+      // hat diese Rolle nicht, und retaiyns Kunden sind Dritte, die niemand
       // nennen darf. "Kunde 1" ist dieselbe Bezeichnung wie im agencyMockup,
       // damit die Seite eine Welt bleibt.
       client: "Kunde 1",
@@ -1505,7 +1352,7 @@ const de = {
     // findet (siehe lib/email-quality in der App), keine erfundenen Beispiele.
     //
     // Die gute Fassung ist seit dem 2026-08-13 Frostbreakers eigene Mail an
-    // RETAIYN, Absender Youssef -- dieselbe Sorte Mail, aus der der erste
+    // retaiyn, Absender Youssef -- dieselbe Sorte Mail, aus der der erste
     // Kunde entstanden ist. Der schlechte Entwurf daneben traegt keine Namen
     // und muss auch keine tragen. Anrede ohne Vornamen, aus demselben Grund
     // wie im LinkedIn-Bild.
@@ -1562,11 +1409,11 @@ const de = {
     // (STAGE_DOT_CLS) in der App ueberein. Karten zeigen nur, was das echte
     // Board auch zeigt -- keine erfundenen Deal-Werte pro Spalte.
     //
-    // RETAIYN steht in der Spalte "Kunde", und das stimmt buchstaeblich: das
-    // Board gehoert Frostbreaker, und RETAIYN ist dort angekommen. Die drei
+    // retaiyn steht in der Spalte "Kunde", und das stimmt buchstaeblich: das
+    // Board gehoert Frostbreaker, und retaiyn ist dort angekommen. Die drei
     // uebrigen Karten tragen ihr Segment statt eines Namens. Die aufgeklappte
     // Karte unten ist absichtlich die anonyme aus "Geantwortet" und nicht
-    // RETAIYN: dort stehen Verlauf und "noch kein Deal", und beides waere
+    // retaiyn: dort stehen Verlauf und "noch kein Deal", und beides waere
     // neben einem echten Kundennamen eine Behauptung ueber dessen Vorgang.
     pipeline: {
       title: "Pipeline",
@@ -1575,7 +1422,7 @@ const de = {
         { stage: "new", label: "Neu", cards: [{ initial: "E", name: "E-Commerce-Marke, Shopify", company: "Name weggelassen" }] },
         { stage: "contacted", label: "Kontaktiert", cards: [{ initial: "O", name: "Onlineshop, Shopware", company: "Name weggelassen" }] },
         { stage: "replied", label: "Geantwortet", cards: [{ initial: "A", name: "Agentur, Wien", company: "Name weggelassen" }] },
-        { stage: "customer", label: "Kunde", cards: [{ initial: "R", name: "RETAIYN", company: "Customer Experience für E-Commerce" }] },
+        { stage: "customer", label: "Kunde", cards: [{ initial: "R", name: "retaiyn", company: "Customer Experience für E-Commerce" }] },
       ],
       // Begriffe 1:1 aus der echten App uebernommen (lib/i18n/dict.ts:
       // dealsHeading, dealsEmpty, timelineHeading, notePlaceholder, noteSave),
@@ -1599,19 +1446,19 @@ const de = {
     inboxLabel: "Posteingang",
     exampleLabel: "Beispielansicht",
     featured: {
-      // Am 2026-08-13 auf RETAIYN gestellt (BEISPIELE.md, 5.1). Der Posteingang
+      // Am 2026-08-13 auf retaiyn gestellt (BEISPIELE.md, 5.1). Der Posteingang
       // gehoert Frostbreaker, der antwortende Lead ist unser erster Kunde --
       // damit ist der einzige Bildschirm der Startseite, auf dem ein Name
       // steht, in beide Richtungen wahr.
       //
       // Das Antwortzitat ist raus: es gibt keinen freigegebenen Satz von
-      // RETAIYN, und ein erfundenes Zitat neben einem echten Namen ist eine
+      // retaiyn, und ein erfundenes Zitat neben einem echten Namen ist eine
       // untergeschobene Aussage. Statt eines Zitats steht dort die Einstufung,
       // die die App tatsaechlich vergibt. `when` ist leer, weil wir den
       // Termin nicht kennen -- nicht, weil das Feld ueberfluessig waere. Erst
       // wieder fuellen, wenn ein Datum vorliegt, das jemand belegen kann.
       initials: "R",
-      name: "RETAIYN",
+      name: "retaiyn",
       company: "Customer Experience für E-Commerce",
       message: "Antwort eingestuft: interessiert. Aus dieser einen Antwort ist der erste Kunde von Frostbreaker geworden.",
       outcome: "Termin gebucht",
@@ -1635,17 +1482,6 @@ const de = {
     replyLabel: "Antwort",
     meetingLabel: "Termin",
     footer: "Alle Postfächer in einem Eingang, alle fünf Minuten abgeglichen. Jede Antwort wird eingestuft und dem Kontakt zugeordnet.",
-  },
-  calculator: {
-    eyebrow: "Interaktiv",
-    title: "Berechne dein Sparpotenzial",
-    subtitle: "Wie viele qualifizierte Leads willst du pro Monat erreichen? Wir rechnen live vor, was das für dich bedeutet.",
-    sliderLabel: "Qualifizierte Leads / Monat",
-    hoursUnit: "Std.",
-    hoursLabel: "manuelle Recherche gespart / Monat",
-    laborLabel: "Arbeitszeit-Gegenwert dafür",
-    planPrefix: "Dafür passt der",
-    apiCostPrefix: "ca.",
   },
   cta: {
     // Die Testphase ist am 2026-08-06 ersatzlos entfallen (Begruendung im Kopf
@@ -1702,9 +1538,10 @@ const de = {
     // E-Mail-Adresse -- Telefonnummern kommen aus oeffentlichen Eintraegen
     // und werden nicht verifiziert.
     body: "Ein Werkzeug von der Nische bis zum Auftrag: geprüfte Entscheider, ein eigener Aufhänger für jeden, die E-Mail-Sequenz, die LinkedIn-Nachricht und die Telefonnummer. Je Kunde ein eigener Workspace mit seinem Branding, alles im selben CRM.",
-    factBadge: "Agenturen bekommen im Schnitt 42 € zurück für jeden Euro, den sie in E-Mails stecken.",
-    factSource: "Quelle: Litmus, State of Email 2025",
-    screenshotAlt: "Frostbreaker Leads-Tabelle mit Firmen-Logos, Kontaktanzahl und E-Mail-Status",
+    // `factBadge` und `factSource` sind am 2026-08-14 gefallen: „42 € zurueck
+    // fuer jeden Euro" ist eine geliehene Litmus-Zahl ueber E-Mail-Marketing
+    // allgemein, auf einer Seite, deren Selbstverstaendnis ausdruecklich
+    // lautet, keine Zahl zu zeigen, die man nicht selbst nachrechnen kann.
     dashboardAlt:
       // Muss zu den Zahlen im Dashboard-Mockup passen (appMockups.dashboard).
       // Stand vorher auf einem aelteren Zahlensatz -- Screenreader und
@@ -1739,15 +1576,41 @@ const de = {
   // bevor irgendetwas im Einzelnen erklaert wird.
   systemMap: {
     eyebrow: "Das ganze Bild",
-    title: "Von der Nische bis zum Auftrag, ohne das Werkzeug zu wechseln",
-    body: "Drei Stufen und eine Rückkopplung. Alles darunter auf dieser Seite ist eine dieser vier Kästen im Einzelnen.",
+    // Zweimal geaendert am 2026-08-14. Zuerst hiess die Ueberschrift "Von der
+    // Nische bis zum Auftrag, ohne das Werkzeug zu wechseln" -- fast woertlich
+    // wie `hero.body` einen Abschnitt darueber. Dann "Drei Stufen und eine
+    // Rueckkopplung": nicht mehr doppelt, aber die reine Mechanik, und die
+    // steht als Bild ohnehin darunter.
+    //
+    // Was die Karte dem Leser wirklich verspricht, ist dieser Satz: die Daten
+    // aus Stufe 1 stehen in Stufe 2 schon drin, die Antwort aus Stufe 2 steht
+    // in Stufe 3 schon drin, und die Rueckkopplung legt der naechsten Kampagne
+    // die Textfassung hin, die beim letzten Mal Termine gebracht hat. Er gilt
+    // fuer alle vier Kaesten und wiederholt keinen anderen Satz der Seite.
+    title: "Kein Schritt fängt bei null an",
+    body: "Alles Weitere auf dieser Seite ist einer dieser vier Kästen im Einzelnen.",
     stages: [
       {
+        // Die vier Anbieternamen standen bis zum 2026-08-14 als Kacheln hier
+        // und machten aus einer Ablaufskizze eine Zutatenliste -- an der
+        // prominentesten Stelle der Karte, und damit direkt neben der Frage
+        // "warum gehe ich dann nicht gleich dorthin?". Jetzt stehen sie im
+        // Fliesstext der Notiz, wo sie Argument sind statt Auslage.
         id: "find",
         label: "Finden",
         title: "Entscheider statt info@-Adressen",
-        items: ["Google Maps", "Hunter", "Apollo", "Prospeo"],
-        note: "Name, Rolle, geprüfte E-Mail-Adresse, Telefonnummer und LinkedIn-Profil, soweit öffentlich vorhanden.",
+        items: [
+          "Nische, Ort, Größe, eingesetzte Technik oder offene Stellen",
+          "Name, Rolle, geprüfte E-Mail, Telefon und LinkedIn, soweit öffentlich",
+          "Oder deine eigene Liste als CSV",
+        ],
+        // Bewusst ein Leistungsversprechen, keine Zustandsbehauptung: heute
+        // angebunden sind Google Maps, Hunter, Apollo und Prospeo. Clay ist es
+        // NICHT -- der Name steht deshalb im zweiten Satz ("bring es mit"),
+        // nie im ersten ("angebunden sind"). Wer diese Grenze verschiebt,
+        // laesst die Seite behaupten, Clay sei integriert, und der erste
+        // Interessent, der danach fragt, hoert eine andere Antwort.
+        note: "Angebunden sind heute Google Maps, Hunter, Apollo und Prospeo. Arbeitest du mit etwas anderem, mit Clay etwa, bring es mit — wir binden es an. Und wenn du nicht weißt, welche Quelle zu deiner Nische passt, beraten wir dich.",
       },
       {
         id: "contact",
@@ -1903,25 +1766,34 @@ const de = {
       },
     ],
     closing: "Das ist die Arbeit, für die man sonst jemanden im Vertrieb einstellt und ein halbes Jahr einarbeitet: das Angebot verstehen, es in vier Mails übersetzen, jede Stufe zweimal schreiben und keine Behauptung aufstellen, die nicht trägt. Wie viele Stunden dich das spart, sagen wir nicht — wir haben es nicht gemessen. Was die App tut, steht hier, Regel für Regel.",
+    // Steht ÜBER der Angebotskarte, nicht darunter. Die Einordnung gab es
+    // vorher schon, aber in `offerMap.note` -- also unter zwoelf Feldern und
+    // hinter der Zahl "bis zu 70 %", die in Ecke 3 weit darueber steht. Wer
+    // von oben liest, hatte die 70 % laengst als Frostbreakers Zahl verbucht,
+    // bevor er erfuhr, wessen Angebot das ist. Deshalb zuerst der Absender,
+    // dann die Zahlen. `retaiyn` durchgehend klein, das ist deren eigene
+    // Schreibweise.
+    caseIntro:
+      "Das Angebot unten gehört retaiyn, unserem ersten Kunden: Customer Experience für E-Commerce-Marken, also AI-Support, WhatsApp- und E-Mail-Marketing als ein Ablauf statt als drei. Die Felder sind mit deren eigenen Sätzen gefüllt — auch die Prozentzahlen darin sind retaiyns Aussagen über sich selbst, nicht unsere.",
     // ────────────────────────────────────────────────────────────────────
     // Die Texte der beiden Bilder (_offer-mockups.tsx).
     //
-    // Seit dem 2026-08-13 steht hier das Angebotsprofil von RETAIYN, unserem
-    // ersten Kunden, Feld fuer Feld aus deren eigenen Saetzen von RETAIYN.com.
+    // Seit dem 2026-08-13 steht hier das Angebotsprofil von retaiyn, unserem
+    // ersten Kunden, Feld fuer Feld aus deren eigenen Saetzen von retaiyn.com.
     // Das ist die einzige Stelle der Website, an der die Rollen sich umdrehen:
-    // sonst ist das gezeigte Konto Frostbreakers und RETAIYN der Lead, hier
-    // ist RETAIYN der Kontoinhaber -- weil dieser Bildschirm ausdruecklich das
+    // sonst ist das gezeigte Konto Frostbreakers und retaiyn der Lead, hier
+    // ist retaiyn der Kontoinhaber -- weil dieser Bildschirm ausdruecklich das
     // Angebot eines NUTZERS zeigt.
     //
     // Nur deshalb duerfen die 70 %, die 30 %, die 200 Brands und die 2,5 Mio.
-    // hier stehen: sie sind RETAIYNs Aussagen ueber sich selbst, und sie
+    // hier stehen: sie sind retaiyns Aussagen ueber sich selbst, und sie
     // stehen sichtbar in beschrifteten Formularfeldern eines Kundenangebots.
     // In einer Kennzahlenkachel, einem Balken oder einer Auswertung waeren
     // dieselben Zeichen eine Behauptung ueber Frostbreakers Wirkung und damit
     // erfunden. Diese Grenze nicht verschieben.
     //
     // Der Glueckfall an diesem Material: der Fehler, den das Bild zeigen soll,
-    // entsteht von allein. Im Ergebnisfeld steht RETAIYNs Versprechen (richtig
+    // entsteht von allein. Im Ergebnisfeld steht retaiyns Versprechen (richtig
     // platziert), im Belegfeld steht deren Wahlspruch "mehr als eine
     // klassische Agentur" (ein Wahlspruch, kein Beleg), und der eigentliche
     // Beleg -- ueber 200 betreute Brands, 2,5 Mio. EUR ARR im Portfolio --
@@ -1930,7 +1802,7 @@ const de = {
     // Knoten 3 verdrahtet: die dritte Ecke muss in der Reihenfolge Ergebnis,
     // Mechanismus, Beleg stehen bleiben, sonst zeigt der Pfeil ins Leere.
     //
-    // Fuenf der zwoelf Felder stehen so nicht auf RETAIYN.com (Tonfall,
+    // Fuenf der zwoelf Felder stehen so nicht auf retaiyn.com (Tonfall,
     // Zoegern, Mechanismus, Beilage, Dauer). Sie sind aus deren eigenen
     // Saetzen umgestellt, nicht dazuerfunden -- keines davon behauptet etwas
     // Neues ueber die Firma. Wer sie anfasst, muss diese Linie halten.
@@ -1979,7 +1851,10 @@ const de = {
       // Muss genau die beiden Felder benennen, die der Pfeil verbindet:
       // Knoten 1 der dritten Ecke (Ergebnis) und Knoten 3 (Beleg).
       findingLabel: "Im Ergebnisfeld steht ein Versprechen, im Belegfeld ein Wahlspruch. Der Beleg für das Versprechen steht nirgends.",
-      note: "Zwölf Felder, vier Gruppen. Jede Linie dazwischen ist eine Regel, an der geprüft wird. Ausgefüllt mit den eigenen Sätzen unseres ersten Kunden RETAIYN, von dessen Website.",
+      // Der Herkunftssatz ist am 2026-08-14 nach oben in `caseIntro`
+      // gewandert. Unten bleibt nur die Mechanik -- zweimal dieselbe Auskunft
+      // ueber und unter demselben Bild ist einmal zu viel.
+      note: "Zwölf Felder, vier Gruppen. Jede Linie dazwischen ist eine Regel, an der geprüft wird.",
     },
     coachFinding: {
       frameTitle: "Angebot · Prüfung",
@@ -1988,11 +1863,11 @@ const de = {
       severity: "Blocker",
       beforeLabel: "Du hattest geschrieben",
       // Der Befund kommt aus dem Angebot darueber: "Kostenloses Erstgespräch
-      // vereinbaren" ist RETAIYNs heutiger Handlungsaufruf, woertlich von
+      // vereinbaren" ist retaiyns heutiger Handlungsaufruf, woertlich von
       // deren Seite. Das ist kein Fehler auf einer Website -- dort ist der
       // Satz richtig. Am Ende einer Kaltmail ist er die groesste denkbare
       // Bitte, und genau dieser Unterschied ist das ganze Bild. Der
-      // Gegenvorschlag ist aus RETAIYNs eigener Problembeschreibung geformt
+      // Gegenvorschlag ist aus retaiyns eigener Problembeschreibung geformt
       // und nichts dazuerfunden.
       before: "Kostenloses Erstgespräch vereinbaren.",
       verdictLabel: "Der Befund",
@@ -2011,7 +1886,7 @@ const de = {
     notListed: "nicht gelistet",
     // Gestrichen statt ersetzt (BEISPIELE.md, Abschnitt 7.1): die Aussage ist
     // "lokale Betriebe, die in keiner B2B-Datenbank stehen". Weder
-    // Frostbreaker noch RETAIYN ist so ein Betrieb, und die Kategorie traegt
+    // Frostbreaker noch retaiyn ist so ein Betrieb, und die Kategorie traegt
     // das Argument vollstaendig. Die Namensspalte hat es nie getragen.
     businesses: [
       { name: "Einzelsalon, 1 Standort", sub: "Google-Eintrag mit Website und Telefonnummer" },
@@ -2088,7 +1963,7 @@ const de = {
     workspacesLabel: "Workspaces",
     active: "aktiv",
     // Gestrichen statt ersetzt (BEISPIELE.md, Abschnitt 7.3): das ist die
-    // Kundenliste einer Agentur. Frostbreaker ist keine; RETAIYN ist eine,
+    // Kundenliste einer Agentur. Frostbreaker ist keine; retaiyn ist eine,
     // aber deren Kunden sind Dritte, die niemand nennen darf. Drei Farbpunkte
     // und "Kunde 1/2/3" sagen "drei getrennte Workspaces" genauso vollstaendig.
     workspaces: [
@@ -2119,7 +1994,10 @@ const de = {
       { id: "replies", title: "Ein Posteingang für alle Postfächer", body: "Alle verbundenen Postfächer laufen in einem Posteingang zusammen, alle fünf Minuten synchronisiert, mit Zähler für Ungelesenes. Jede Antwort kommt mit vollem Text an, die KI ordnet sie ein (interessiert, kein Interesse, Rückfrage), und geantwortet wird direkt aus der App. Instantly müsst ihr dafür nicht mehr öffnen." },
       { id: "dashboard", title: "Umsatz-Forecast statt nur Öffnungsrate", body: "Offene Pipeline, mit der Abschlusswahrscheinlichkeit gewichteter Forecast, gewonnen und verloren der letzten 30 Tage, dazu fällige und überfällige Aufgaben. Für die meisten Agenturen ersetzt das ein eigenes CRM-Abo." },
       { id: "status", title: "Lead-Status pro Kontakt, ohne separates CRM", body: "Kontaktiert, geantwortet, Meeting gebucht, Kunde geworden, alles direkt in der Leads-Tabelle nachvollziehbar." },
-      { id: "deliverability", title: "SPF, DKIM, DMARC: geprüft, bevor ihr sendet", body: "Frostbreaker prüft eure Sende-Domain live per DNS-Abfrage und zeigt in Klartext, was zu tun ist, kein separates Tool nötig. Dazu Tagesvolumen pro Postfach auf einen Blick, mit Warnung bei riskant hohem Sendevolumen." },
+      // Die vierte Karte ("SPF, DKIM, DMARC: geprueft, bevor ihr sendet") ist
+      // am 2026-08-14 gefallen. Ein Zustellbarkeits-Argument im Abschnitt
+      // "Nach dem Ja" steht hinter der Antwort statt davor -- es ist die
+      // Aussage von #torwart, an der falschen Stelle wiederholt.
     ],
   },
   postSendMockup: {
@@ -2152,50 +2030,15 @@ const de = {
     forbiddenLabel: "Verbotene Wörter",
     forbiddenWords: ["Respekt", "bewundern", "stolz", "Lob", "begeistert"],
   },
-  integrations: {
-    eyebrow: "Passt in euren Stack",
-    title: "Liest aus euren Quellen, schreibt in eure Werkzeuge",
-    // Die Sektion zeigte bisher nur Ziele. Apollo, Hunter und Google fehlten
-    // deshalb komplett -- dabei ist genau das die Aussage: Frostbreaker sitzt
-    // zwischen den Diensten, die ihr ohnehin habt, und ersetzt keinen davon.
-    sourcesLabel: "Quellen, auf euren Zugängen",
-    sources: [
-      { name: "Google Maps", note: "Lokale Betriebe samt Telefonnummer" },
-      { name: "Hunter", note: "Firmendatenbank und Adressen zur Domain" },
-      { name: "Apollo", note: "Entscheider, verifizierte Adresse, Technologie-Filter" },
-      { name: "OpenAI", note: "Entscheider-Recherche und Eröffnungszeile" },
-      { name: "NeverBounce", note: "Adressprüfung vor dem Versand, optional" },
-    ],
-    targetsLabel: "Ziele",
-    items: [
-      { id: "instantly", name: "Instantly", note: "Vollständig natives Kampagnen-Management, kein CSV-Export nötig" },
-      { id: "sending", name: "Smartlead", note: "CSV-Import" },
-      { id: "sending", name: "Lemlist", note: "CSV-Import" },
-      { id: "crm", name: "HubSpot", note: "CSV-Import" },
-      { id: "crm", name: "Pipedrive", note: "CSV-Import" },
-      { id: "crm", name: "Salesforce", note: "CSV-Import" },
-      { id: "sheet", name: "Excel / Sheets", note: "Excel-CSV" },
-      { id: "automation", name: "Zapier", note: "geplant" },
-    ],
-  },
-  features: {
-    eyebrow: "Mehr als nur Leads finden",
-    title: "Was sonst noch mit drin steckt",
-    items: [
-      { id: "suppression", title: "Bestandskunden und Opt-outs bleiben geschützt", body: "Einmal auf der Sperrliste, für immer ausgeschlossen: Frostbreaker prüft automatisch dagegen, bevor irgendjemand angeschrieben wird, egal ob neue Suche oder neue Kampagne." },
-      { id: "deliverability", title: "Zustellbarkeit prüfen, bevor es zum Problem wird", body: "SPF, DKIM und DMARC eurer Sende-Domain live per DNS geprüft, in Klartext erklärt, dazu eine Warnung bei riskant hohem Tagesvolumen pro Postfach." },
-      { id: "campaigns", title: "Kampagnen und Sequenzen direkt im Tool", body: "Sequenz, Zeitplan, Anzahl der Follow-ups und Aktivierung, alles nativ in Frostbreaker. Kein Tool-Wechsel, kein CSV-Export." },
-    ],
-  },
   suppressionMockup: {
     // Die Kennzeichnung haengt an der Kopfzeile, weil die 312 sonst als
     // gezaehlter Bestand eines echten Kontos gelesen werden (BEISPIELE.md,
     // Abschnitt 6). Die Zahl selbst ist harmlos, solange die Marke steht.
     label: "Automatisch geprüft, bevor versendet wird · Beispielansicht",
-    // Der genaueste Beleg, den es fuer diese Funktion gibt: RETAIYN darf
-    // keine Kaltmail mehr bekommen, weil RETAIYN Kunde ist. Kostet nichts und
+    // Der genaueste Beleg, den es fuer diese Funktion gibt: retaiyn darf
+    // keine Kaltmail mehr bekommen, weil retaiyn Kunde ist. Kostet nichts und
     // ist wahr. Firma statt Person, aus demselben Grund wie ueberall sonst.
-    blocked: { name: "RETAIYN", company: "Customer Experience für E-Commerce", note: "bereits Kunde" },
+    blocked: { name: "retaiyn", company: "Customer Experience für E-Commerce", note: "bereits Kunde" },
     blockedTag: "Automatisch übersprungen",
     countLabel: "Kontakte auf der Sperrliste",
     count: "312",
@@ -2220,30 +2063,6 @@ const de = {
     ],
     activeLabel: "Aktiv",
   },
-  trustBadges: [
-    { id: "encryption", title: "Verschlüsselte API-Keys", body: "Eure Zugangsdaten werden verschlüsselt gespeichert, nie im Klartext." },
-    { id: "byok", title: "BYOK-Kostenkontrolle", body: "Volle Transparenz über eure tatsächlichen API-Kosten, live im Dashboard." },
-  ],
-  comparison: {
-    title: "Im Vergleich",
-    headerFrostbreaker: "Frostbreaker",
-    headerOther: "Typischer Alternativ-Stack einer Agentur",
-    rows: [
-      ["Lokale Kleinunternehmen finden", "Ja, direkt über Google Places/Maps", "Meist nicht gelistet, da kein LinkedIn-Profil oder strukturierte Firmendaten"],
-      ["Alles in einem Workflow", "Ja", "Nein, separates Recherche-Tool + Sende-Tool + eigenes Reporting"],
-      ["Mehrere Kunden verwalten", "Eigener Workspace pro Kunde inklusive", "Meist ein separat bepreistes White-Label-Add-on"],
-      ["Reporting für den Endkunden", "Teilbarer Report-Link im Look des Kunden", "Von Hand aus mehreren Tools zusammengebaut"],
-      ["KI-Personalisierung pro Lead", "Ja, mit einstellbaren Regeln", "Teilweise, oft separates Tool nötig"],
-      ["E-Mail-Verifizierung eingebaut", "Ja", "Separates Tool nötig"],
-      ["Nur echte Ansprechpartner, kein info@", "Automatisch gefiltert", "Meist ungefiltert"],
-      ["Preistransparenz", "Feste Preise, im Gespräch eingerichtet", "Meist individuelles Angebot"],
-      ["Support", "Direkter Draht zum Gründerteam", "Ticket-System"],
-    ] as [string, string, string][],
-  },
-  trust: {
-    title: "Datenschutz ist keine Checkbox, sondern Teil der Architektur",
-    links: { datenschutz: "Datenschutzerklärung", agb: "AGB", avv: "AVV" },
-  },
   // ══════════════════════════════════════════════════════════════════════
   // DER ERSTE GENANNTE KUNDE, neu am 2026-08-09.
   //
@@ -2251,7 +2070,7 @@ const de = {
   // Zahlen. Genau das ist die Luecke, die KONVERSION.md benennt: niemand
   // ausser dem Gruender bestaetigt, dass es funktioniert.
   //
-  // RETAIYN ist dafuer der Idealfall, aber NICHT aus dem naheliegenden
+  // retaiyn ist dafuer der Idealfall, aber NICHT aus dem naheliegenden
   // Grund. Sie betreiben kein Outbound fuer ihre Kunden -- sie richten
   // WhatsApp-Marketing und CRMs ein, damit die BESTANDSKUNDEN von
   // E-Commerce-Marken wiederkommen. Ihr eigenes Problem war das Gegenteil
@@ -2268,7 +2087,7 @@ const de = {
   // Bewusst KEINE Ergebniszahl und KEIN Zitat. Die Zusammenarbeit ist neu,
   // gemessen ist noch nichts, und eine Zahl ohne Messung dahinter macht auf
   // dieser Seite alles andere unglaubwuerdig -- dieselbe Begruendung wie bei
-  // why.earlyAccess. Alles Uebrige laesst sich auf RETAIYN.com nachpruefen.
+  // why.earlyAccess. Alles Uebrige laesst sich auf retaiyn.com nachpruefen.
   // `pending` haelt den Platz fuer die echten Zahlen frei und macht aus der
   // Luecke ein Argument statt einer Verlegenheit.
   // ══════════════════════════════════════════════════════════════════════
@@ -2280,18 +2099,18 @@ const de = {
     // Gegensatz, und die zweite Haelfte im Praeteritum -- damit steht die
     // Loesung schon in der Ueberschrift, ohne sie zu behaupten.
     title: "Ihr Geschäft ist Kundenbindung. Ihr Problem war Kundengewinnung.",
-    name: "RETAIYN",
-    url: "https://www.RETAIYN.com",
-    urlLabel: "RETAIYN.com",
-    logoAlt: "Logo der Agentur RETAIYN",
+    name: "retaiyn",
+    url: "https://www.retaiyn.com",
+    urlLabel: "retaiyn.com",
+    logoAlt: "Logo der Agentur retaiyn",
     // Sachkorrektur am 2026-08-13 (BEISPIELE.md, Abschnitt 3): hier stand
-    // "CRMs". Auf RETAIYN.com steht an dieser Stelle Customer Experience, AI
+    // "CRMs". Auf retaiyn.com steht an dieser Stelle Customer Experience, AI
     // Support, WhatsApp und E-Mail -- von CRM-Aufbau steht dort nichts. Ein
     // Kundenabschnitt, dessen erste Tatsachenbehauptung der Kunde selbst nicht
     // unterschreiben wuerde, ist schlimmer als gar keiner.
     descriptor: "Customer Experience für E-Commerce-Marken",
     body: [
-      "RETAIYN verbindet E-Mail-Marketing, WhatsApp und Customer Support für E-Commerce-Marken, damit die Kunden dieser Marken wiederkommen. Das füllt den Arbeitstag vollständig. Die eigene Neukundengewinnung war das, was danach käme, und danach kam nie etwas.",
+      "retaiyn verbindet E-Mail-Marketing, WhatsApp und Customer Support für E-Commerce-Marken, damit die Kunden dieser Marken wiederkommen. Das füllt den Arbeitstag vollständig. Die eigene Neukundengewinnung war das, was danach käme, und danach kam nie etwas.",
       "Dabei war die Zielgruppe nie die Frage: Entscheider bei E-Commerce-Marken. Nur das Erreichen war Handarbeit. Recherchieren, schreiben, nachfassen, für jeden einzeln. Genau das läuft heute über Frostbreaker: die richtigen Entscheider finden, über E-Mail und LinkedIn ansprechen, automatisch nachfassen. Die Stunden bleiben da, wo sie den Umsatz sichern: bei den Kunden, die schon da sind.",
     ],
     facts: [
@@ -2301,7 +2120,7 @@ const de = {
       { label: "Als Nächstes", value: "Dieselbe Mechanik für die Kunden der Agentur" },
     ],
     // Der Spiegel. Bewusst in der zweiten Person und ohne den Kundennamen:
-    // ab hier geht es nicht mehr um RETAIYN, sondern um den Leser.
+    // ab hier geht es nicht mehr um retaiyn, sondern um den Leser.
     mirror: {
       title: "Und in eurer Agentur?",
       body: [
@@ -2311,11 +2130,16 @@ const de = {
       cta: "Dreißig Minuten über eure Zielgruppe",
     },
     pending:
-      "Was das bei RETAIYN gebracht hat, steht hier, sobald genug gemessen ist. Wir schreiben keine Zahl hin, die wir nicht selbst nachrechnen können.",
+      "Was das bei retaiyn gebracht hat, steht hier, sobald genug gemessen ist. Wir schreiben keine Zahl hin, die wir nicht selbst nachrechnen können.",
   },
+  // `body` und die Karte `poweredBy` sind am 2026-08-14 gefallen
+  // (VEREINFACHUNG.md 1.2). Beide sagten „ein Werkzeug statt vier" -- eine
+  // Aussage, die auf dieser Seite bis dahin sechsmal stand, unter anderem im
+  // Hero, in der Systemkarte und in der Schlusszeile der Vergleichstabelle.
+  // Was hier bleibt, sind die zwei Karten, die es sonst nirgends gibt: der
+  // fruehe Zugang und der Gruender.
   why: {
     title: "Warum es Frostbreaker gibt",
-    body: "Outbound-Teams kombinieren heute meist vier bis fünf einzelne Tools, um vom ersten Suchbegriff bis zur personalisierten, verifizierten E-Mail zu kommen. Frostbreaker reduziert diesen Workflow auf ein einziges Tool, mit voller Kostentransparenz statt Pauschal-Abos und ohne CSV-Hin-und-Her zwischen Anbietern.",
     // Stand vorher auf "Frueher Zugang STATT grosser Kundenliste" -- das las
     // sich wie eine Entschuldigung dafuer, keine Kunden zu haben, und genau so
     // kommt es bei einem Fachkaeufer an. Dieselbe Tatsache, als Angebot
@@ -2326,26 +2150,33 @@ const de = {
     founderQuote: "„Ich wollte schon immer etwas Eigenes aufbauen. Das größte Hindernis war nie die Idee, sondern Kunden zu finden: Kaltakquise per Hand, endlose Anrufe und E-Mails, ohne je zu wissen, ob es sich lohnt. Also habe ich mir selbst das Werkzeug gebaut, das mir gefehlt hat, seitdem geht mir der nächste Ansprechpartner nie mehr aus.“",
     founderName: "Youssef Tayachi",
     founderRole: "Gründer & CEO, Frostbreaker",
-    poweredBy: {
-      title: "Ein Werkzeug statt vier",
-      body: "Suche, Recherche, Verifizierung, Personalisierung und Versand greifen ineinander, statt über CSV-Dateien verbunden zu werden.",
-      chips: ["Suchen", "Recherchieren", "Verifizieren", "Personalisieren", "Versenden"],
-    },
   },
+  // ══════════════════════════════════════════════════════════════════════
+  // Am 2026-08-14 von 17 auf 8 Eintraege gekuerzt (VEREINFACHUNG.md 1.4).
+  // Der Fliesstext der FAQ war laenger als der jedes anderen Abschnitts, und
+  // acht der siebzehn Antworten standen wortnah schon weiter oben auf der
+  // Seite. Gefallen sind: die Agentur-Frage (steht im Agentur-Band zwanzig
+  // Zeilen darueber), die zweite Apollo/Hunter-Frage (dieselbe Frage wie die
+  // erste, nur mit vertauschten Anbieternamen), info@-Filter und
+  // Adresspruefung (Rundgang Schritt 1 und 3), Sperrliste (#startklar),
+  // SPF/DKIM (#torwart) und "Kampagnen in einem zweiten Tool" (Zeile `send`
+  // in der Vergleichstabelle). Drei Kostenfragen sind zu einer geworden.
+  //
+  // Der neunte Platz bleibt bewusst frei: er gehoert der Frage, die im
+  // Verkaufsgespraech tatsaechlich am haeufigsten kommt.
+  // ══════════════════════════════════════════════════════════════════════
   faq: {
     title: "Häufige Fragen",
     items: [
-      { q: "Kann ich das als Agentur für mehrere Kunden gleichzeitig nutzen?", a: "Ja, dafür gibt es eigene Workspaces pro Kunde, inklusive eigenem Namen, Logo und Akzentfarbe. Für jeden Workspace lässt sich ein Report-Link teilen, der eurem Endkunden aggregierte Kennzahlen im eigenen Look zeigt, ganz ohne dass der einen eigenen Account braucht." },
-      // Drei Fragen am 2026-08-06 dazugekommen. Sie beantworten die Einwaende,
-      // die vorher eigene Abschnitte hatten: der Kostenbeweis (1,5 Cent), der
-      // BYOK-Abschnitt und "dann nehme ich Apollo doch gleich selbst". Als
-      // Abschnitte standen sie vor dem Produkt und haben die Gewichtung
-      // gekippt; als FAQ-Antwort sind sie da, wo jemand tatsaechlich danach
-      // sucht. Die Apollo-Antwort ist bewusst umgedreht formuliert -- nicht
-      // "wir sind nur eine Ergaenzung", sondern was wir zusaetzlich tun.
+      // Die Apollo-Antwort ist bewusst umgedreht formuliert -- nicht "wir sind
+      // nur eine Ergaenzung", sondern was wir zusaetzlich tun.
       { q: "Warum nicht gleich direkt zu Apollo oder Hunter?", a: "Weil die Adresse der Anfang ist, nicht das Ergebnis. Apollo liefert Entscheider samt gepruefter Adresse. Danach faengt die Arbeit an: ein eigener Aufhaenger je Kontakt, die Pruefung des Textes, der Abgleich mit Sperrliste und Bestandskunden, der Versand, die LinkedIn-Nachricht und der Anruf, wenn es still bleibt, und am Ende die Frage, welche Textfassung Termine gebracht hat. Genau das liegt zwischen Apollo und Instantly, und genau das macht Frostbreaker." },
-      { q: "Was kosten die Abfragen?", a: "Genau das, was Google, Hunter, Apollo, Prospeo, OpenAI und NeverBounce euch berechnen, nicht mehr. Die Abfragen laufen über eure eigenen Zugänge, wir schlagen keinen Cent auf. Nach jeder Suche steht im Dashboard auf den Cent genau, was sie gekostet hat, und die Summe je Monat steht daneben. Was ihr tatsächlich zahlt, hängt an Nische, Trefferquote und Volumen. Das rechnen wir im Gespräch an euren Zahlen durch." },
-      { q: "Muss ich eigene API-Schluessel mitbringen?", a: "Ja, und das ist Absicht. Die Abfragen laufen auf euren eigenen Zugaengen, ihr zahlt sie zum Selbstkostenpreis, wir schlagen nichts auf. Wer schon mit Apollo oder Instantly arbeitet, behaelt Konto und Konditionen und aendert nur, was dazwischen passiert. Die Schluessel werden verschluesselt gespeichert, und wir richten sie im ersten Gespraech gemeinsam ein. Das ist der Teil, an dem sonst die meisten haengenbleiben." },
+      // Zieht die drei frueheren Eintraege "Was kosten die Abfragen",
+      // "Muss ich eigene API-Schluessel mitbringen" und "Welche Dienste laufen
+      // im Hintergrund" zusammen. Alle drei beantworteten dieselbe Frage aus
+      // drei Richtungen und wiederholten je zweimal, dass wir nichts
+      // aufschlagen.
+      { q: "Was brauche ich, und was kostet es?", a: "Eigene Zugänge bei den Diensten, die im Hintergrund laufen: Google für die Kartensuche, OpenAI für die Recherche, Hunter und Apollo für Adressen und Entscheider, Prospeo als weitere Quelle, NeverBounce für die Verifizierung und Instantly für den Versand. Die Schlüssel hinterlegt ihr einmal in den Einstellungen, verschlüsselt gespeichert. Danach laufen alle Abfragen auf euren eigenen Konten, zum Selbstkostenpreis, wir schlagen keinen Cent auf. Nach jeder Suche steht im Dashboard auf den Cent genau, was sie gekostet hat, und die Summe je Monat steht daneben. Was das im Monat ergibt, hängt an Nische, Trefferquote und Volumen — das rechnen wir im Gespräch an euren Zahlen durch, und das Einrichten machen wir dort gemeinsam. Es ist der Teil, an dem sonst die meisten hängenbleiben." },
       { q: "Was kostet das?", a: "Ein fester Monatsbetrag, den wir im Gespräch gemeinsam festlegen. Er hängt daran, wie viele Kunden ihr betreut, nicht daran, wie viele Leads ihr zieht, und nicht daran, wie viele Workspaces ihr anlegt. Wir nennen ihn im ersten Gespräch, nicht nach drei Runden. Dazu kommen eure eigenen Abfragekosten zum Selbstkostenpreis, live im Dashboard einsehbar. Monatlich kündbar, keine Einrichtungsgebühr." },
       { q: "Kann ich jederzeit kündigen?", a: "Ja, monatlich, keine Mindestlaufzeit, keine Kündigungsfrist über den laufenden Monat hinaus." },
       // Die beiden Einwaende, die der Angebot-Abschnitt auf der Startseite
@@ -2353,13 +2184,6 @@ const de = {
       // erst im Gespraech beantwortet bekommt, stellt sie gar nicht erst.
       { q: "Klingen dann nicht alle Mails gleich?", a: "Gleich ist das Gerüst, verschieden ist die Zeile, die zählt. Die Eröffnung entsteht je Empfänger aus dem, was über diese Firma recherchiert wurde, und nicht aus einem Platzhalter. Dazu gibt es je Stufe zwei Fassungen, und die müssen sich im Ansatz unterscheiden: anderer Blickwinkel, andere Frage, anderer erster Satz. Zwei Fassungen, die sich in zwei Wörtern unterscheiden, meldet die App als ein und denselben Text. Und was aus deinem Angebot wörtlich in die Mail rutscht, fällt beim Nachmessen auf, denn dann liest der Empfänger die Stichpunkte eines Fremden." },
       { q: "Kann ich den Text noch ändern?", a: "Ja. Nichts geht raus, bevor du es gesehen hast: die acht Texte stehen im Kampagnenformular und warten dort. Du kannst jede Stufe überschreiben oder sie mit einer Anweisung nachschärfen, also kürzer, direkter, oder mach daraus eine Abschiedsmail, und zwar Stufe für Stufe statt für die ganze Sequenz auf einmal. Was du nicht anfasst, bleibt so stehen, wie es ist. Bevor ein Text an tausend Adressen geht, hat ihn ein Mensch gelesen." },
-      { q: "Woher weiß ich, dass eine gefundene E-Mail wirklich zu einer Person gehört?", a: "Frostbreaker filtert generische Adressen wie info@ oder office@ automatisch heraus. Nur E-Mails, die eindeutig einer Person zugeordnet sind, landen in eurer Leads-Liste." },
-      { q: "Was passiert, wenn ich aus Versehen an eine ungültige Adresse schreibe?", a: "Jede Adresse wird vor dem Versand geprüft, ungültige werden automatisch aussortiert. Das ist kein Nice-to-have: eine hohe Bounce-Rate beschädigt eure Sender-Reputation über alle Postfächer und alle Kunden hinweg, nicht nur die eine Kampagne. Die Prüfung läuft automatisch mit, ihr müsst nichts manuell anstoßen." },
-      { q: "Welche Dienste laufen im Hintergrund, und brauche ich dort eigene Zugänge?", a: "Frostbreaker greift für die Kartensuche auf Google, für die Recherche auf OpenAI und für den Domain-Abgleich auf Hunter zu, für die Entscheider-Suche samt Technologie-Filter auf Apollo, optional NeverBounce für die Verifizierung und Instantly für den Versand. Ihr legt dort eigene Zugänge an und hinterlegt die Schlüssel einmal in den Einstellungen, verschlüsselt gespeichert. Genau deshalb zahlt ihr die Abfragen zum Selbstkostenpreis statt eines Aufschlags. Das Einrichten machen wir im ersten Gespräch gemeinsam." },
-      { q: "Warum nicht gleich direkt zu Hunter oder Apollo?", a: "Weil keiner dieser Dienste den ganzen Weg abdeckt, und weil Frostbreaker sie gar nicht ersetzen will: Hunter und Apollo laufen als Datenquellen darin, mit euren eigenen Zugängen und zum Selbstkostenpreis. Der Unterschied liegt in dem, was davor und danach passiert. Hunter findet Adressen zu einer Domain, aber keine lokalen Betriebe ohne Firmendatenbank-Eintrag. Apollo liefert Entscheider samt verifizierter Adresse, schreibt aber keine individuelle Zeile pro Lead. Versand-Tools versenden, recherchieren aber nicht. Wer das selbst zusammensteckt, zahlt drei bis vier Abos, exportiert CSV-Dateien hin und her und baut das Reporting von Hand. Frostbreaker ist die Verbindung dazwischen: eine Suche, eine Liste, ein Versand, ein Dashboard, inklusive Antworten und gebuchten Meetings." },
-      { q: "Was passiert, wenn ich aus Versehen einen Bestandskunden oder jemanden anschreibe, der sich abgemeldet hat?", a: "Genau dafür gibt es die eingebaute Sperrliste: einmal eingetragen, schließt Frostbreaker diese Kontakte und Domains automatisch aus jeder zukünftigen Suche und jedem Versand aus, ganz ohne dass ihr das bei jeder Kampagne manuell prüfen müsst. Bestandskunden und Opt-outs bleiben zuverlässig geschützt." },
-      { q: "Kann ich prüfen, ob meine Versand-Domain überhaupt zustellfähig ist?", a: "Ja, direkt in der App: Frostbreaker prüft SPF, DKIM und DMARC eurer Sende-Domain per Live-DNS-Abfrage und zeigt in Klartext, was noch fehlt, dazu eine Warnung, wenn das Tagesvolumen pro Postfach riskant hoch wird. Kein separates Zustellbarkeits-Tool nötig." },
-      { q: "Muss ich meine E-Mail-Kampagnen und Sequenzen in einem separaten Tool bauen?", a: "Nein. Kampagnen, Sequenzen inklusive Zeitplan und Anzahl der Follow-ups, und die Aktivierung laufen direkt in Frostbreaker. Ihr wechselt für den Versand nicht in ein zweites Tool und müsst nichts per CSV hin- und herschieben." },
       { q: "Wie schnell bin ich startklar?", a: "Die erste Suche läuft am selben Tag. Bis die erste Kampagne rausgeht, vergehen zwei bis vier Wochen. So lange brauchen frische Postfächer Warmup, und daran führt kein Werkzeug vorbei. Genau deshalb gibt es keine 14-Tage-Testphase: sie wäre kürzer als die Einrichtung. Wir richten stattdessen im Gespräch gemeinsam ein und begleiten die erste Kampagne." },
       { q: "Was passiert mit meinen Daten, wenn ich kündige?", a: "Eure Daten werden nach Vertragsende gelöscht oder auf Wunsch zurückgegeben, geregelt im AVV. Es gibt keine automatische Weiternutzung nach Kündigung." },
     ],
@@ -2373,6 +2197,12 @@ const de = {
     impressum: "Impressum",
     datenschutz: "Datenschutzerklärung",
     agb: "AGB",
+    // Am 2026-08-14 aus dem Vertrauens-Abschnitt hierher gezogen. Der
+    // Abschnitt ist gefallen (VEREINFACHUNG.md 1.2), und der AVV war der
+    // einzige seiner drei Rechtslinks, den der Fuss noch nicht hatte. Eine
+    // Seite, die an DSGVO-empfindliche Kaeufer verkauft, darf ihn nicht mit
+    // dem Abschnitt verlieren.
+    avv: "AVV",
     kontakt: "Kontakt",
   },
   contactPage: {
@@ -2389,7 +2219,7 @@ const de = {
     backLabel: "Zurück zur Startseite",
   },
   caseStudyPage: {
-    eyebrow: "Case Study",
+    eyebrow: "Referenz · Eigene Software",
     title: "Wie Frostbreaker in drei Wochen von der Idee zum laufenden System wurde",
     intro: "Ich wollte selbst B2B-Kaltakquise betreiben, ohne dafür vier verschiedene Tools zu abonnieren und zu verkabeln. Also habe ich das System selbst gebaut. Das ist die Geschichte dahinter, mit echten Zahlen aus dem laufenden Betrieb.",
     problemHeading: "Die Ausgangslage",
@@ -2614,7 +2444,6 @@ const en: typeof de = {
       { label: "Your offer", href: "/#angebot" },
       { label: "Three channels", href: "/#kanaele" },
       { label: "Personalization", href: "/funktionen#personalize" },
-      { label: "Integrations", href: "/#integrationen" },
     ],
     funktionenItems: [
       { label: "All features", href: "/funktionen" },
@@ -2628,13 +2457,15 @@ const en: typeof de = {
       { label: "Suppression list", href: "/funktionen#protect" },
       { label: "Pipeline", href: "/funktionen#pipeline" },
     ],
-    agenturen: "For Agencies",
-    saas: "For SaaS",
-    preise: "Pricing",
     vergleich: "Comparison",
-    faq: "FAQ",
     kontakt: "Contact",
     custom: "Custom Software",
+    fuerWen: "Who it's for",
+    fuerWenItems: [
+      { label: "For agencies", href: "/fuer-agenturen" },
+      { label: "For SaaS companies", href: "/fuer-saas" },
+      { label: "How retaiyn uses it", href: "/kunden/retaiyn" },
+    ],
   },
   agencyPage: {
     metaTitle: "For agencies: cold outreach for several clients in one tool",
@@ -2752,7 +2583,7 @@ const en: typeof de = {
         id: "icp",
         eyebrow: "Who you mean",
         title: "Your best-fit buyer runs a technology, not an industry code",
-        body: "For a software product the industry list rarely lands. What lands is the software sitting next to yours: the shop system, the email tool, the support channel. RETAIYN, our first customer, sells customer experience to e-commerce brands, and a brand becomes relevant to them the moment it runs Klaviyo, WhatsApp or a support desk. Then the trigger on top: a company hiring for that role, or one whose visitor numbers are climbing, has the problem now rather than someday.",
+        body: "For a software product the industry list rarely lands. What lands is the software sitting next to yours: the shop system, the email tool, the support channel. retaiyn, our first customer, sells customer experience to e-commerce brands, and a brand becomes relevant to them the moment it runs Klaviyo, WhatsApp or a support desk. Then the trigger on top: a company hiring for that role, or one whose visitor numbers are climbing, has the problem now rather than someday.",
         bullets: [
           "Over 10,000 technologies, from shop system to email tool",
           "Job ads as a trigger: hiring for it is admitting the gap",
@@ -2800,6 +2631,81 @@ const en: typeof de = {
     ctaTitle: "Bring the product, we fill in the offer together",
     ctaBody:
       "Thirty minutes on the real thing: the twelve fields, the technology your buyers run, and the first search. You leave with an offer filled in inside your account. No pitch, no PDF afterwards.",
+  },
+  customerPage: {
+    metaTitle: "retaiyn: how one agency turns its own offer into a sequence",
+    metaDescription:
+      "A client portrait, not a success story: how retaiyn, our first customer, turns its own offer into eight emails — from niche to offer to sequence, without a figure we couldn't recalculate ourselves.",
+    eyebrow: "Our first client",
+    title: "Their business is retention. Their problem was acquisition.",
+    intro:
+      "retaiyn is our first customer: an agency for customer experience in e-commerce. This page shows how their offer runs through Frostbreaker — from niche to offer to finished sequence. What that produced in meetings is not here yet: we add that once there is enough to measure, not before.",
+    ctaLabel: "Book a call",
+    sections: [
+      {
+        id: "who",
+        eyebrow: "Who they are",
+        title: "The niche was never the question — reaching it was",
+        body: "retaiyn describes itself as \"more than a classic agency\": customer experience & AI support, WhatsApp marketing and email marketing run there as one process, not three separate services. That gets sold to e-commerce shops and brands, most of them already running Klaviyo, WhatsApp or a support desk of their own. Who sells and to whom was never open at retaiyn. It was settled before a single email got written, and that is exactly where every offer in Frostbreaker starts.",
+        bullets: [
+          "Customer experience & AI support, WhatsApp marketing, email marketing — one process, not three separate services",
+          "Audience: e-commerce shops and brands",
+          "Mostly already running Klaviyo, WhatsApp or a support desk of their own",
+          "The problem retaiyn solves there: email, WhatsApp and support running independently of each other",
+        ],
+      },
+      {
+        id: "offer",
+        eyebrow: "The offer",
+        title: "What is on the website is not a cold email yet",
+        body: "The same profile the homepage shows as an example belongs to retaiyn: twelve fields, filled with their own sentences from retaiyn.com, including the two figures inside — up to 70% of support automated, up to 30% more revenue. That is retaiyn's promise to its own customers, not Frostbreaker's result at retaiyn. The last field is where the difference shows: retaiyn's current call to action reads \"Book a free intro call.\" On the website, that is the right sentence. In a first email to a stranger, it asks for too much at once, and that is exactly what the review inside the offer flags, with a finished replacement sentence next to it.",
+        bullets: [
+          "Twelve fields, seven suggested from retaiyn.com, five answered by retaiyn itself",
+          "Up to 70% of support automated, up to 30% more revenue: retaiyn's claim about its own offer, not about Frostbreaker",
+          "Call to action on the website: \"Book a free intro call\"",
+          "In the sequence, the review flags that exact sentence as too big an ask",
+        ],
+      },
+      {
+        id: "sequence",
+        eyebrow: "The sequence",
+        title: "Twelve fields turn into eight emails that ask for less each time",
+        body: "The app sends in four waves: today, then after three, five and seven days, one subject line running through the whole set. Each wave is shorter than the one before. The meeting request from retaiyn's website became a small question in the first email instead: should I send you the three places where email, WhatsApp and support still run apart for you? The same profile also produces the LinkedIn message next to it.",
+        bullets: [
+          "Four waves, today plus day three, five and seven, one subject line for all of them",
+          "Each wave shorter than the last",
+          "The meeting request becomes a small question, shaped from retaiyn's own description of the problem",
+          "The LinkedIn message comes from the same offer",
+        ],
+      },
+      {
+        id: "role",
+        eyebrow: "What only retaiyn knew",
+        title: "Five fields no website hands over",
+        body: "What gets sent after a yes, how long review takes, the one question at the end, why buyers hesitate, and the tone of the emails: those five answers were retaiyn's alone, no research suggests them. Where a proof field stayed empty, the app adds nothing that cannot be backed up. And before the eight emails go out, they sit in the campaign form: someone at retaiyn reads them first and changes what does not fit.",
+        bullets: [
+          "What follows a yes, how long review takes, the one closing question, buyer hesitation, tone: five answers only retaiyn could give",
+          "No proof, no claim — nothing goes in that cannot be backed up",
+          "The eight emails land in the campaign form first, not straight into sending",
+          "Someone at retaiyn reads them before they go out",
+        ],
+      },
+      {
+        id: "fit",
+        eyebrow: "And in your agency?",
+        title: "The same mechanism for any agency with a fixed niche",
+        body: "retaiyn had no sales team, just a clear niche and no time to reach it. That is exactly the situation Frostbreaker is built for. What holds true for retaiyn here holds for any agency or vendor with a fixed audience: fill in the offer once, let the rest get written from the same source. What that looks like for you is a thirty-minute question, not a project of its own.",
+        bullets: [
+          "Fits if your niche is fixed and nobody has time to reach it",
+          "Fits if you sell to clients, not into an anonymous market",
+          "Someone on your side fills in the offer, same as at retaiyn — no sales team required",
+          "The first step is the same: your offer, answered once",
+        ],
+      },
+    ],
+    ctaTitle: "Talk to us about your niche, not retaiyn's numbers",
+    ctaBody:
+      "Thirty minutes: your offer, your audience, the first search. No pitch built on someone else's percentages — the ones from retaiyn belong to retaiyn.",
   },
   featuresPage: {
     metaTitle: "Features: from search to answered email",
@@ -2862,7 +2768,7 @@ const en: typeof de = {
         id: "write",
         eyebrow: "Write",
         title: "Eight emails, written out of twelve fields",
-        body: "The offer turns into four steps on day 0, 3, 5 and 7, two versions each, one subject line across all four. Every step is shorter than the one before it, 90, 70, 50, 35 words, and every one of them ends on the same small question. Not on a meeting: “book a free intro call” is what almost every website says, our first customer RETAIYN included, and at the end of a cold email that is the biggest thing you can ask for. Then it gets measured instead of requested: if a step grew longer than the one before, if a meeting request slipped in, or if a field from the offer went into the email word for word, the app names the breach and has it written again.",
+        body: "The offer turns into four steps on day 0, 3, 5 and 7, two versions each, one subject line across all four. Every step is shorter than the one before it, 90, 70, 50, 35 words, and every one of them ends on the same small question. Not on a meeting: “book a free intro call” is what almost every website says, our first customer retaiyn included, and at the end of a cold email that is the biggest thing you can ask for. Then it gets measured instead of requested: if a step grew longer than the one before, if a meeting request slipped in, or if a field from the offer went into the email word for word, the app names the breach and has it written again.",
         bullets: [
           "Twelve fields, seven of them suggested off your website and confirmed one at a time",
           "Five findings at most from the coach, each with a finished replacement sentence",
@@ -2921,133 +2827,6 @@ const en: typeof de = {
     ctaTitle: "The fastest way to understand it is to try it",
     ctaBody: "Thirty minutes, set up together, cancel monthly.",
   },
-  sourcesExtra: {
-    title: "What runs along with every search",
-    linkLabel: "All of it in detail on the features page",
-    items: [
-      {
-        id: "tech",
-        label: "Technology filter",
-        title: "Find companies by what they run, not by keywords",
-        body: "A keyword matches what a company talks about. The technology it runs shows what it actually operates: a Shopify shop has Shopify in its source code, whatever the about page says.",
-      },
-      {
-        id: "local",
-        label: "Local businesses",
-        title: "Including the ones no B2B database lists",
-        body: "Classic databases are built on LinkedIn profiles. A business that keeps none does not exist to them. Via Google Places, practically every business with an address is findable.",
-      },
-      {
-        id: "person",
-        label: "No info@ addresses",
-        title: "Every lead is a person you can actually reach",
-        body: "Addresses like info@, office@ or contact@ are filtered out. Only what is clearly assigned to a real person makes it into the leads list.",
-      },
-      {
-        id: "verify",
-        label: "Address check",
-        title: "Verified before an address hurts your domain",
-        body: "An invalid address does not cost you one lead, it costs reputation. The check runs automatically before every send, with no second tool.",
-      },
-    ],
-  },
-  searchModes: {
-    eyebrow: "Where the leads come from",
-    title: "Four routes, one result: people with a name and a verified address",
-    body: "You decide per search where the companies come from. All four routes end up in the same list, the same enrichment and the same sending.",
-    modes: [
-      {
-        id: "local",
-        label: "On location",
-        title: "Via Google Maps",
-        body: "The search term is a free text field: driving school, yoga studio, veterinary practice, car dealership, hotel. If it has a listing on the map, Frostbreaker finds it, no matter how digital the business is.",
-        points: [
-          "Free search term, no fixed industry list",
-          "Radius in metres around any location",
-          "Only businesses without their own website",
-          "Only businesses below a rating threshold",
-          "Phone number from the map listing",
-        ],
-      },
-      {
-        id: "corporate",
-        label: "Companies",
-        title: "Via Hunter's company database",
-        body: "487 industries, 9 countries and 8 size bands combine freely, plus city and your own keywords. The company search itself is free; the addresses then come verified from Hunter.",
-        points: [
-          "487 industries from software to dentistry",
-          "9 countries across Europe and the US",
-          "8 size bands from 1 to over 10,000 employees",
-          "City, US state and free-text keywords",
-          "Addresses verified by Hunter, not guessed from name patterns",
-        ],
-      },
-      {
-        id: "apollo",
-        label: "Decision-makers",
-        title: "Via Apollo's decision-maker database",
-        body: "Company and decision maker with an already verified email in one step. Here the number you ask for is the number of leads, not an estimate: on the other routes the address is researched afterwards.",
-        points: [
-          "Decision maker and verified address in one step",
-          "Filter by the technology they run, such as Shopify",
-          "11 seniority levels from owner to individual contributor",
-          "Free-text job titles, countries and company size",
-          "Up to 1,000 leads per search",
-        ],
-      },
-      {
-        id: "prospeo",
-        label: "Trigger",
-        title: "Via Prospeo's decision-maker database",
-        body: "Like Apollo: company, decision maker and verified address in one run. The difference is the filters: who is hiring right now, how much website traffic a company gets, and how fast it is growing.",
-        points: [
-          "Currently hiring for a specific role",
-          "Website traffic: visits per month, growth, countries of origin",
-          "Technology in use, detected via Wappalyzer",
-          "Revenue band and headcount",
-          "Match count checkable up front, before credits are spent",
-        ],
-      },
-    ],
-  },
-  dailyDiff: {
-    eyebrow: "The difference in practice",
-    title: "The same month, once with and once without",
-    body: "Apollo finds decision makers, Instantly sends reliably. Both stay. The question is what happens between the two, and how much of it you do by hand.",
-    manualBadge: "By hand",
-    before: {
-      label: "Today: Apollo + Instantly",
-      countLabel: "Steps",
-      count: "8",
-      manualLabel: "of those by hand",
-      manualCount: "5",
-      steps: [
-        { text: "Filter in Apollo and export 250 leads as a CSV.", manual: false },
-        { text: "Remove opt-outs and existing customers from the CSV. Apollo knows about neither, and Instantly never reports them back.", manual: true },
-        { text: "Write a personal line for every lead, or fall back to generic placeholders that perform worse than no personalisation at all.", manual: true },
-        { text: "Upload the CSV to Instantly and map the columns.", manual: false },
-        { text: "Build the campaign and the follow-up sequence: four steps, a subject line and a body for each, and all of it again for the next audience.", manual: true },
-        { text: "Read replies in Instantly, record outcomes somewhere else.", manual: true },
-        { text: "Assemble the client's numbers from two tools into one spreadsheet.", manual: true },
-        { text: "Next month, start over. Apollo does not know who you contacted last month.", manual: false },
-      ],
-    },
-    after: {
-      label: "With Frostbreaker",
-      countLabel: "Steps",
-      count: "5",
-      manualLabel: "of those by hand",
-      manualCount: "1",
-      steps: [
-        "Fill in your offer once, by hand: twelve questions, seven of them suggested from your own website. Once, not per campaign.",
-        "Start one search, with the same filters as in Apollo, plus the technology they run.",
-        "It runs on its own: blocklist checked, address verified, a personal line written per company.",
-        "Start the campaign straight from that same list: the four steps are already in the form, written from your offer.",
-        "Replies, meetings and the client report sit in the same dashboard.",
-      ],
-    },
-    note: "Frostbreaker replaces neither Apollo nor Instantly. It replaces the manual work between them, and the CRM subscription that would otherwise be the third one.",
-  },
   compare: {
     eyebrow: "What stays, what goes",
     title: "Keep Apollo. Keep Instantly. Cancel your CRM.",
@@ -3082,62 +2861,6 @@ const en: typeof de = {
     ledgerDrop: "Goes: the per-seat CRM subscription and the manual work in between. On a team of six, that is the bigger line item, not ours.",
     footnote:
       "Checked on 13 August 2026 against the providers' public product descriptions and help centres. “Partly” means: present, but not to the extent the row describes. A dash means “not part of the product”, not “works badly”. Apollo, Hunter and Instantly all generate sequence copy with AI. In the writing row, “partly” therefore means: a sequence comes out, but not two independent versions per step from an offer you keep on file.",
-  },
-  worksWith: {
-    eyebrow: "Complements your stack",
-    title: "Already using Apollo, Hunter or Instantly? Then this is not a replacement",
-    body: "Frostbreaker brings no database and no mailbox of its own. It runs on your accounts, at cost, and closes the gaps between the tools you already pay for.",
-    rows: [
-      {
-        tool: "Apollo",
-        good: "Delivers decision makers with a verified address, plus the technology filter.",
-        gap: "Doesn't write an individual line per lead, and knows nothing about your blocklist or who you already contacted last month.",
-      },
-      {
-        tool: "Hunter",
-        good: "Finds addresses for a domain and has a usable company database.",
-        gap: "Doesn't know local businesses without a database entry: trades, hospitality and practices are simply missing there.",
-      },
-      {
-        tool: "Instantly",
-        good: "Sends reliably, warms mailboxes up and rotates them cleanly.",
-        gap: "Doesn't research and doesn't personalise. What you feed it is decided somewhere else.",
-      },
-    ],
-    bridgeLabel: "What Frostbreaker does in between",
-    bridge: [
-      "One search instead of three interfaces, with the result in a single list",
-      "An individual opening line per lead, from the research on that company",
-      "Blocklist and existing customers are checked before every search and every send",
-      "Replies, bounces and meetings flow back into the same dashboard",
-      "One workspace per client, without booking a new subscription for each",
-    ],
-    note: "Every lookup runs on your own accounts. Frostbreaker adds no markup to lookup costs.",
-  },
-  techFilter: {
-    eyebrow: "Technology filter",
-    title: "Find companies by the technology they actually run",
-    body: "Looking for e-commerce clients, you would normally type \"ecommerce\" as a keyword and get agencies, blogs and consultants who write about e-commerce. The technology filter works the other way round: it recognises from the shop itself which system is running underneath.",
-    points: [
-      {
-        title: "A keyword guesses, technology proves",
-        body: "A keyword matches what a company talks about. The technology it runs shows what it actually operates: a Shopify shop has Shopify in its source code, whatever the about page says.",
-      },
-      {
-        title: "The hook for your opening line",
-        body: "Knowing a shop runs on Shopware and offers Klarna lets you write a first line that fits only that company. That is exactly how a recipient tells a mass mail from a message meant for them.",
-      },
-      {
-        title: "Matches what you actually sell",
-        body: "Building Shopify apps, doing Shopware migrations or Klaviyo setups? Then your audience is not an industry, it is a technology. This filter maps precisely that.",
-      },
-    ],
-    scaleLabel: "Catalogue size",
-    scaleValue: "over 10,000 technologies",
-    scaleNote: "From the major shop systems down to individual payment and review tools. The interface shows a curated selection of what matters for e-commerce.",
-    dachLabel: "For the DACH market",
-    dachValue: "Shopware, JTL, Oxid, PlentyMarkets",
-    dachNote: "Not just the US systems: the shop platforms common in German-speaking markets are covered too.",
   },
   guardMockups: {
     gate: {
@@ -3178,17 +2901,17 @@ const en: typeof de = {
           body: "Personalised icebreaker, verified address, your own mailboxes.",
         },
         {
-          day: "Days 3, 7 and 12",
+          day: "Days 3, 5 and 7",
           title: "Three follow-ups run after it",
           body: "The same sequence, the same mailboxes. Anyone who replies drops out immediately.",
         },
         {
-          day: "Day 15 · no reply",
+          day: "Day 10 · no reply",
           title: "LinkedIn task appears",
           body: "Only where a profile is on file. Lands in the LinkedIn list, not in a spreadsheet.",
         },
         {
-          day: "Day 20 · still quiet",
+          day: "Day 14 · still quiet",
           title: "The call goes into the call list",
           body: "Only where a number exists, and only once the LinkedIn task is done.",
         },
@@ -3217,9 +2940,7 @@ const en: typeof de = {
       campaign: "One campaign, two versions of the copy",
       campaignCount: "964 contacts",
       bestLabel: "Best version",
-      versionLabel: "Version",
       contactsWord: "contacts",
-      repliesWord: "replies",
       rows: [
         {
           step: "Step 1",
@@ -3227,11 +2948,7 @@ const en: typeof de = {
           contacts: "482",
           percent: 6.0,
           replies: "29 \u00b7 6.0%",
-          repliesNum: "29",
-          repliesPct: "6.0%",
           meetings: "6 meetings",
-          meetingsNum: "6",
-          meetingsWord: "meetings",
           interested: "11 interested",
           rejections: "8 rejections",
           best: false,
@@ -3242,11 +2959,7 @@ const en: typeof de = {
           contacts: "482",
           percent: 10.6,
           replies: "51 \u00b7 10.6%",
-          repliesNum: "51",
-          repliesPct: "10.6%",
           meetings: "17 meetings",
-          meetingsNum: "17",
-          meetingsWord: "meetings",
           interested: "24 interested",
           rejections: "6 rejections",
           best: true,
@@ -3257,11 +2970,7 @@ const en: typeof de = {
           contacts: "831",
           percent: 2.6,
           replies: "22 \u00b7 2.6%",
-          repliesNum: "22",
-          repliesPct: "2.6%",
           meetings: "4 meetings",
-          meetingsNum: "4",
-          meetingsWord: "meetings",
           interested: "7 interested",
           rejections: "5 rejections",
           best: false,
@@ -3272,47 +2981,38 @@ const en: typeof de = {
           contacts: "26",
           percent: null,
           replies: "26, too few",
-          repliesNum: "",
-          repliesPct: "",
           meetings: "",
-          meetingsNum: "",
-          meetingsWord: "",
           interested: "0 interested",
           rejections: "0 rejections",
           best: false,
         },
       ],
       note: "The attribution comes from the sending itself: a reply carries the step of the mail it answers. Below 30 contacts no percentage is shown.",
-      noteShort: "Two versions of the same step. B has fewer rejections and three meetings. You only see that when the same tool writes the copy and receives the reply.",
     },
     linkedin: {
       frameTitle: "LinkedIn \u00b7 message ready",
-      name: "RETAIYN",
+      name: "retaiyn",
       role: "Customer experience for e-commerce",
       template: "Template: Default \u2605",
       greeting: "Hi,",
       hookLabel: "Opener, generated per contact",
       hook: "You run email, WhatsApp and support as one offer rather than three side by side, which is why I am writing.",
       pitch:
-        "I build software that takes off agencies like RETAIYN the work that otherwise gets stuck between five separate tools. No pitch, I just wanted to connect first.",
+        "I build software that takes off agencies like retaiyn the work that otherwise gets stuck between five separate tools. No pitch, I just wanted to connect first.",
       signoff: "Best, Youssef",
       buttons: ["Copy", "Open profile \u2197", "Mark as sent"],
       note: "The same opener as in the email, already generated and paid for. You send it: LinkedIn has no messaging API, and a tool that sends anyway puts your account at risk.",
     },
   },
   guard: {
-    eyebrow: "Before you send",
+    eyebrow: "Before you send, and after",
     title: "The only cold outreach tool that tells you no",
     body:
-      "Eleven checks run before a campaign can start. Four of them can stop it: missing SPF or DKIM, a bounce rate above five percent, a list with nothing sendable in it. Those do not cost you a campaign, they cost you the domain.",
+      "Eleven checks run before a campaign can start. Four of them can stop it: missing SPF or DKIM, a bounce rate above five percent, a list with nothing sendable in it. Those do not cost you a campaign, they cost you the domain. Stopping is not blocking: you see what you are taking on, and a deliberate second click starts it anyway.",
     points: [
       {
         title: "Blockers and notes are not the same thing",
         body: "A blocker is something that will certainly go wrong and whose damage stays. A note makes things worse, but neither certainly nor permanently. We keep that line strict: a warning that is sometimes just an opinion gets clicked away by the third time, and the real one goes with it.",
-      },
-      {
-        title: "You can still start",
-        body: "With a deliberate second click, and you see what you are taking on first. A gate you cannot pass only means the campaign gets built somewhere else.",
       },
       {
         title: "Someone keeps looking afterwards",
@@ -3368,28 +3068,7 @@ const en: typeof de = {
     phoneNote:
       "You dial with your own phone: Frostbreaker is not a phone system and does not bill call minutes.",
   },
-  chain: {
-    eyebrow: "The chain",
-    title: "No lead is left behind, and none gets two tasks at once",
-    body:
-      "Instantly does not know your phone. Lemlist has no CRM. Pipedrive has no campaign. Here it is one process, and it runs without you remembering it.",
-    points: [
-      {
-        title: "Always exactly one next step",
-        body: "No lead gets a LinkedIn task and a call queued at the same time. The call only appears once the LinkedIn task is done.",
-      },
-      {
-        title: "Anyone who replies drops out immediately",
-        body: "The chain only applies to contacts who were mailed and stayed quiet. A reply ends it the same moment.",
-      },
-      {
-        title: "Only where there is something to do",
-        body: "LinkedIn only with a profile on file, a call only with a number. A task without an address is a research task, and that does not belong in a work list.",
-      },
-    ],
-  },
   honesty: {
-    eyebrow: "What we will not fake",
     title: "A number that means nothing does not get shown",
     body:
       "Twelve mails and one reply is not \u201c8.3%\u201d. It is twelve mails and one reply. Below thirty contacted people we print \u201ctoo few\u201d instead of a percentage, and the bar stays empty.",
@@ -3402,31 +3081,7 @@ const en: typeof de = {
         title: "Measured per contact, not per mail",
         body: "A sequence sends three or four mails to the same person. The one reply should not be divided by four.",
       },
-      {
-        title: "Out-of-office replies do not count",
-        body: "An autoresponder is not a person who reacted. Counting it would push the rate up, which is exactly the direction people like to be fooled in.",
-      },
     ],
-  },
-  phone: {
-    eyebrow: "Second channel",
-    title: "When email isn't enough, the number is already there",
-    body: "Cold outreach doesn't end at email. Someone who ignores two follow-ups is often still reachable, just by phone. Frostbreaker plans those calls in the same place the lead came from.",
-    points: [
-      {
-        title: "Prepared, not caught cold",
-        body: "Every row carries the number, the person's role and the company summary from the research. You know who you are talking to, and why, before you dial.",
-      },
-      {
-        title: "Sorted by urgency",
-        body: "Overdue, today, later. A promised callback no longer slips because it sat in a spreadsheet nobody opened.",
-      },
-      {
-        title: "The outcome stays with the lead",
-        body: "Call note and result are saved on the contact and set its status. The next step then sits in the same history as the emails you sent.",
-      },
-    ],
-    note: "You dial with your own phone: Frostbreaker is not a phone system and does not bill call minutes.",
   },
   safeStart: {
     eyebrow: "Start without prior knowledge",
@@ -3625,21 +3280,23 @@ const en: typeof de = {
     },
     leads: {
       title: "All leads",
-      toolbar: { count: "97 companies · 259 contacts", verify: "Verify emails", export: "Add to campaign", csv: "Excel CSV" },
+      sampleBadge: "Example view",
+      // Dieselben Zahlen wie in der deutschen Haelfte, nicht umgerechnet.
+      toolbar: { count: "4 niches · 305 leads", verify: "Verify emails", export: "Add to campaign", csv: "Excel CSV" },
       rows: [
-        { name: "RETAIYN", domain: "RETAIYN.com", contacts: "2 contacts", withMail: "2 with email", color: "#0EA5E9" },
-        { name: "E-commerce brand, Shopify", domain: "name left out", contacts: "3 contacts", withMail: "3 with email", color: "#8B5CF6" },
-        { name: "Online shop, Shopware", domain: "name left out", contacts: "1 contact", withMail: "1 with email", color: "#F59E0B" },
-        { name: "Agency, Vienna", domain: "name left out", contacts: "2 contacts", withMail: "1 with email", color: "#10B981" },
+        { name: "E-commerce", domain: "Shopify stores, DACH", contacts: "120 leads", withMail: "112 with email", color: "#8B5CF6" },
+        { name: "Marketing agencies", domain: "10 to 50 employees", contacts: "80 leads", withMail: "71 with email", color: "#0EA5E9" },
+        { name: "Restaurants", domain: "Vienna and around", contacts: "60 leads", withMail: "38 with email", color: "#F59E0B" },
+        { name: "Real estate agents", domain: "Munich, Hamburg, Berlin", contacts: "45 leads", withMail: "34 with email", color: "#10B981" },
       ],
     },
     leadDetail: {
       label: "Expanded lead",
-      person: "RETAIYN",
+      person: "retaiyn",
       role: "Managing director",
       company: "Customer experience for e-commerce",
       emailLabel: "Email",
-      email: "····@RETAIYN.com",
+      email: "····@retaiyn.com",
       emailBadge: "verified",
       phoneLabel: "Phone",
       phone: "+·· ··· ······",
@@ -3730,7 +3387,7 @@ const en: typeof de = {
         { stage: "new", label: "New", cards: [{ initial: "E", name: "E-commerce brand, Shopify", company: "name left out" }] },
         { stage: "contacted", label: "Contacted", cards: [{ initial: "O", name: "Online shop, Shopware", company: "name left out" }] },
         { stage: "replied", label: "Replied", cards: [{ initial: "A", name: "Agency, Vienna", company: "name left out" }] },
-        { stage: "customer", label: "Customer", cards: [{ initial: "R", name: "RETAIYN", company: "Customer experience for e-commerce" }] },
+        { stage: "customer", label: "Customer", cards: [{ initial: "R", name: "retaiyn", company: "Customer experience for e-commerce" }] },
       ],
       detailLabel: "Agency, Vienna",
       detailSub: "name left out",
@@ -3748,7 +3405,7 @@ const en: typeof de = {
     exampleLabel: "Example view",
     featured: {
       initials: "R",
-      name: "RETAIYN",
+      name: "retaiyn",
       company: "Customer experience for e-commerce",
       message: "Reply classified: interested. That single reply turned into Frostbreaker's first customer.",
       outcome: "Meeting booked",
@@ -3763,17 +3420,6 @@ const en: typeof de = {
     meetingLabel: "Meeting",
     footer: "Every mailbox in one inbox, synced every five minutes. Every reply is classified and attached to the contact.",
   },
-  calculator: {
-    eyebrow: "Interactive",
-    title: "Calculate your savings potential",
-    subtitle: "How many qualified leads do you want to reach per month? We'll calculate live what that means for you.",
-    sliderLabel: "Qualified leads / month",
-    hoursUnit: "hrs",
-    hoursLabel: "manual research saved / month",
-    laborLabel: "labor cost equivalent for that",
-    planPrefix: "That fits the",
-    apiCostPrefix: "approx.",
-  },
   cta: {
     primary: "Book a call",
     secondary: "Or ask a question first",
@@ -3785,9 +3431,6 @@ const en: typeof de = {
     h1Accent: "every channel",
     h1Post: ". Turn them into clients.",
     body: "One tool from a niche to a signed deal: verified decision-makers, a personal opener for each one, the email sequence, the LinkedIn message and the phone number. One workspace per client in their branding, all in the same CRM.",
-    factBadge: "Agencies get an average of $42 back for every dollar they spend on email.",
-    factSource: "Source: Litmus, State of Email 2025",
-    screenshotAlt: "Frostbreaker leads table with company logos, contact count and email status",
     dashboardAlt:
       "Frostbreaker dashboard: 800 companies found, 2,000 contacts, 1,327 with an email address, around 267 hours of research saved at 30.40 US dollars in lookup cost",
   },
@@ -3807,15 +3450,22 @@ const en: typeof de = {
   ],
   systemMap: {
     eyebrow: "The whole picture",
-    title: "From a niche to a signed deal, without switching tools",
-    body: "Three stages and one feedback loop. Everything further down this page is one of those four boxes in detail.",
+    title: "No step starts from scratch",
+    body: "Everything further down this page is one of those four boxes in detail.",
     stages: [
       {
         id: "find",
         label: "Find",
         title: "Decision-makers, not info@ addresses",
-        items: ["Google Maps", "Hunter", "Apollo", "Prospeo"],
-        note: "Name, role, verified email address, phone number and LinkedIn profile, as far as they are publicly available.",
+        items: [
+          "Niche, location, size, the technology they run or the roles they are hiring for",
+          "Name, role, verified email, phone and LinkedIn, as far as they are public",
+          "Or your own list as a CSV",
+        ],
+        // Siehe den Kommentar in der deutschen Haelfte: erster Satz = was
+        // heute laeuft, zweiter Satz = was wir zusagen. Clay gehoert in den
+        // zweiten.
+        note: "Google Maps, Hunter, Apollo and Prospeo are connected today. Work with something else, Clay for instance, and you bring it along — we connect it. And if you are not sure which source fits your niche, we help you pick one.",
       },
       {
         id: "contact",
@@ -3933,6 +3583,10 @@ const en: typeof de = {
       },
     ],
     closing: "This is the work you would otherwise hire someone in sales for and spend half a year training them on: understand the offer, turn it into four emails, write every step twice, and claim nothing that does not hold. How many hours it saves you, we will not say — we have not measured it. What the app does is right here, rule by rule.",
+    // Siehe die deutsche Haelfte: steht UEBER der Karte, damit der Absender
+    // vor der ersten Prozentzahl gelesen wird.
+    caseIntro:
+      "The offer below belongs to retaiyn, our first client: customer experience for e-commerce brands, meaning AI support, WhatsApp and email marketing as one flow instead of three. The fields are filled with their own sentences — the percentages in there are retaiyn's claims about themselves, not ours.",
     offerMap: {
       frameTitle: "Offer · Example",
       corners: [
@@ -3975,7 +3629,7 @@ const en: typeof de = {
         button: "Check the offer",
       },
       findingLabel: "The outcome field holds a promise, the proof field holds a slogan. The proof for the promise is nowhere in the offer.",
-      note: "Twelve fields, four groups. Every line between them is a rule the offer is checked against. Filled in with the words of our first client RETAIYN, taken from their own website.",
+      note: "Twelve fields, four groups. Every line between them is a rule the offer is checked against.",
     },
     coachFinding: {
       frameTitle: "Offer · Check",
@@ -4067,7 +3721,6 @@ const en: typeof de = {
       { id: "replies", title: "One inbox for every mailbox", body: "All connected mailboxes come together in one inbox, synced every five minutes, with an unread counter. Every reply arrives with full text, AI classifies it (interested, not interested, question), and you reply straight from the app. You no longer need to open Instantly for this." },
       { id: "dashboard", title: "Revenue forecast, not just open rate", body: "Open pipeline, a forecast weighted by close probability, won and lost over the last 30 days, plus due and overdue tasks. For most agencies that replaces a separate CRM subscription." },
       { id: "status", title: "Lead status per contact, no separate CRM needed", body: "Contacted, replied, meeting booked, became a customer, all trackable directly in the leads table." },
-      { id: "deliverability", title: "SPF, DKIM, DMARC: checked before you send", body: "Frostbreaker checks your sending domain live via DNS lookup and shows in plain language what to fix, no separate tool needed. Plus daily volume per mailbox at a glance, with a warning at risky send volumes." },
     ],
   },
   postSendMockup: {
@@ -4100,41 +3753,9 @@ const en: typeof de = {
     forbiddenLabel: "Forbidden words",
     forbiddenWords: ["respect", "admire", "proud", "praise", "thrilled"],
   },
-  integrations: {
-    eyebrow: "Fits into your stack",
-    title: "Reads from your sources, writes into your tools",
-    sourcesLabel: "Sources, on your own accounts",
-    sources: [
-      { name: "Google Maps", note: "Local businesses including phone number" },
-      { name: "Hunter", note: "Company database and addresses per domain" },
-      { name: "Apollo", note: "Decision makers, verified address, technology filter" },
-      { name: "OpenAI", note: "Decision-maker research and opening line" },
-      { name: "NeverBounce", note: "Address check before sending, optional" },
-    ],
-    targetsLabel: "Destinations",
-    items: [
-      { id: "instantly", name: "Instantly", note: "Fully native campaign management, no CSV export needed" },
-      { id: "sending", name: "Smartlead", note: "CSV import" },
-      { id: "sending", name: "Lemlist", note: "CSV import" },
-      { id: "crm", name: "HubSpot", note: "CSV import" },
-      { id: "crm", name: "Pipedrive", note: "CSV import" },
-      { id: "crm", name: "Salesforce", note: "CSV import" },
-      { id: "sheet", name: "Excel / Sheets", note: "Excel/CSV" },
-      { id: "automation", name: "Zapier", note: "planned" },
-    ],
-  },
-  features: {
-    eyebrow: "More than just finding leads",
-    title: "What else is built in",
-    items: [
-      { id: "suppression", title: "Existing customers and opt-outs stay protected", body: "Add someone to the suppression list once, and they're excluded for good: Frostbreaker automatically checks against it before anyone gets contacted, whether from a new search or a new campaign." },
-      { id: "deliverability", title: "Check deliverability before it becomes a problem", body: "SPF, DKIM and DMARC for your sending domain, checked live via DNS and explained in plain language, plus a warning if your daily volume per mailbox gets risky." },
-      { id: "campaigns", title: "Campaigns and sequences right in the tool", body: "Sequence, schedule, number of follow-ups and activation, all natively in Frostbreaker. No switching tools, no CSV export." },
-    ],
-  },
   suppressionMockup: {
     label: "Automatically checked before sending · example view",
-    blocked: { name: "RETAIYN", company: "Customer experience for e-commerce", note: "already a customer" },
+    blocked: { name: "retaiyn", company: "Customer experience for e-commerce", note: "already a customer" },
     blockedTag: "Automatically skipped",
     countLabel: "contacts on the suppression list",
     count: "312",
@@ -4159,41 +3780,17 @@ const en: typeof de = {
     ],
     activeLabel: "Active",
   },
-  trustBadges: [
-    { id: "encryption", title: "Encrypted API keys", body: "Your credentials are stored encrypted, never in plain text." },
-    { id: "byok", title: "BYOK cost control", body: "Full transparency over your actual API costs, live in the dashboard." },
-  ],
-  comparison: {
-    title: "Comparison",
-    headerFrostbreaker: "Frostbreaker",
-    headerOther: "Typical alternative stack for an agency",
-    rows: [
-      ["Finding local small businesses", "Yes, directly via Google Places/Maps", "Usually not listed, no LinkedIn profile or structured company data"],
-      ["Everything in one workflow", "Yes", "No, separate research tool + sending tool + own reporting"],
-      ["Managing multiple clients", "Own workspace per client included", "Usually a separately priced white-label add-on"],
-      ["Client-facing reporting", "Shareable report link in the client's look", "Manually assembled from multiple tools"],
-      ["AI personalization per lead", "Yes, with configurable rules", "Partial, often a separate tool needed"],
-      ["Built-in email verification", "Yes", "Separate tool needed"],
-      ["Only real decision-makers, no info@", "Automatically filtered", "Usually unfiltered"],
-      ["Price transparency", "Fixed prices, set up on a call", "Usually a custom quote"],
-      ["Support", "Direct line to the founder", "Ticket system"],
-    ] as [string, string, string][],
-  },
-  trust: {
-    title: "Privacy isn't a checkbox, it's part of the architecture",
-    links: { datenschutz: "Privacy Policy", agb: "Terms", avv: "DPA" },
-  },
   customer: {
     stripLabel: "Working with",
     eyebrow: "Client",
     title: "Their business is retention. Their problem was acquisition.",
-    name: "RETAIYN",
-    url: "https://www.RETAIYN.com",
-    urlLabel: "RETAIYN.com",
-    logoAlt: "Logo of the agency RETAIYN",
+    name: "retaiyn",
+    url: "https://www.retaiyn.com",
+    urlLabel: "retaiyn.com",
+    logoAlt: "Logo of the agency retaiyn",
     descriptor: "Customer experience for e-commerce brands",
     body: [
-      "RETAIYN connects email marketing, WhatsApp and customer support for e-commerce brands, so the customers those brands already have keep coming back. That fills the working day completely. Winning their own new clients was the thing that would happen afterwards, and afterwards never came.",
+      "retaiyn connects email marketing, WhatsApp and customer support for e-commerce brands, so the customers those brands already have keep coming back. That fills the working day completely. Winning their own new clients was the thing that would happen afterwards, and afterwards never came.",
       "The target group was never in question: decision-makers at e-commerce brands. Reaching them was the manual part: research, write, follow up, one at a time. That is exactly what now runs on Frostbreaker: find the right decision-makers, reach them over email and LinkedIn, follow up automatically. The hours stay where they protect revenue, with the clients already on the books.",
     ],
     facts: [
@@ -4211,40 +3808,25 @@ const en: typeof de = {
       cta: "Thirty minutes about your target group",
     },
     pending:
-      "What this produced for RETAIYN goes here as soon as there is enough to measure. We don't put up a figure we can't recalculate ourselves.",
+      "What this produced for retaiyn goes here as soon as there is enough to measure. We don't put up a figure we can't recalculate ourselves.",
   },
   why: {
     title: "Why Frostbreaker exists",
-    body: "Outbound teams today usually combine four to five separate tools to get from the first search term to a personalized, verified email. Frostbreaker reduces this workflow to a single tool, with full cost transparency instead of flat-rate subscriptions and no CSV back-and-forth between providers.",
     earlyAccess: { title: "You talk to the person building it", body: "We work with a small number of agencies right now, each one closely supported. For you that means: we do the setup together, you get a direct line instead of a ticket system, and what you are missing goes into the next sprint rather than onto a roadmap. That closeness only exists while the group is small." },
     founderLabel: "From the founder",
     founderQuote: "\"I always wanted to build something of my own. The hardest part was never the idea, it was finding clients: cold calls and emails by hand, hours of research, never knowing if any of it would land. So I built the tool I wish I'd had, and I've never run out of real decision-makers to reach since.\"",
     founderName: "Youssef Tayachi",
     founderRole: "Founder & CEO, Frostbreaker",
-    poweredBy: {
-      title: "One tool instead of four",
-      body: "Search, research, verification, personalization and sending interlock instead of being wired together through CSV files.",
-      chips: ["Search", "Research", "Verify", "Personalize", "Send"],
-    },
   },
   faq: {
     title: "Frequently asked questions",
     items: [
-      { q: "Can I use this as an agency for multiple clients at once?", a: "Yes, there are separate workspaces per client, including their own name, logo and accent color. Each workspace can share a report link that shows your client aggregated metrics in their own look, without them needing their own account." },
       { q: "Why not go straight to Apollo or Hunter myself?", a: "Because the address is the start, not the result. Apollo delivers decision makers with a verified address. The work begins after that: an opener per contact, a check on the copy, a match against your suppression list and existing customers, the sending, the LinkedIn message and the call when it stays quiet, and finally the question of which copy version booked meetings. All of that sits between Apollo and Instantly, and that is what Frostbreaker does." },
-      { q: "What do the lookups cost?", a: "Exactly what Google, Hunter, Apollo, Prospeo, OpenAI and NeverBounce charge you, nothing more. The lookups run on your own accounts and we add not a cent. After every search the dashboard shows to the cent what it cost, with the monthly total next to it. What you actually pay depends on niche, hit rate and volume. We work that through on your numbers on the call." },
-      { q: "Do I have to bring my own API keys?", a: "Yes, and that is deliberate. The lookups run on your own accounts, you pay them at cost, we add no markup. If you already work with Apollo or Instantly, you keep the account and the terms and only change what happens in between. Keys are stored encrypted, and we set them up together on the first call. That is the step most people get stuck on." },
+      { q: "What do I need, and what does it cost?", a: "Your own accounts with the services running in the background: Google for the map search, OpenAI for the research, Hunter and Apollo for addresses and decision-makers, Prospeo as a further source, NeverBounce for verification and Instantly for sending. You enter the keys once in settings, stored encrypted. After that every lookup runs on your own accounts, at cost, and we add not a cent. After every search the dashboard shows to the cent what it cost, with the monthly total next to it. What that adds up to per month depends on niche, hit rate and volume — we work that through on your numbers on the call, and we do the setup together there. It is the part most people otherwise get stuck on." },
       { q: "What does it cost?", a: "One fixed monthly amount that we set together on the call. It depends on how many clients you run, not on how many leads you pull, and not on how many workspaces you create. We name it on the first call, not after three rounds. On top come your own lookup costs at cost price, visible live in the dashboard. Cancel monthly, no setup fee." },
       { q: "Can I cancel anytime?", a: "Yes, monthly, no minimum term, no notice period beyond the current month." },
       { q: "Won't every email sound the same then?", a: "The frame is the same, the line that matters is not. The opener is written per recipient out of what was researched about that particular company, not dropped in from a placeholder. On top of that, every step comes in two versions, and they have to differ in approach: different angle, different question, different opening sentence. Two versions that differ by two words get flagged as one and the same. And anything lifted word for word out of your offer is caught when the copy is measured, because at that point the recipient is reading a stranger's bullet points." },
       { q: "Can I still change the copy?", a: "Yes. Nothing goes out before you have seen it: the eight pieces of copy sit in the campaign form and wait there. You can overwrite any step or refine it with a plain instruction, so shorter, more direct, or turn this into a break-up email, one step at a time rather than the whole sequence at once. Whatever you leave alone stays exactly as it is. Before any copy goes to a thousand addresses, a person has read it." },
-      { q: "How do I know a found email really belongs to a person?", a: "Frostbreaker automatically filters out generic addresses like info@ or office@. Only emails clearly assigned to a person make it into your leads list." },
-      { q: "What happens if I accidentally send to an invalid address?", a: "Every address is checked before sending, invalid ones are filtered out automatically. This isn't a nice-to-have: a high bounce rate damages your sender reputation across every mailbox and every client, not just the one campaign. The check runs automatically, nothing to trigger manually." },
-      { q: "Which services run in the background, and do I need my own accounts there?", a: "Frostbreaker uses Google for the map search, OpenAI for the research and Hunter for the domain match, Apollo for bulk leads including the technology filter, optionally NeverBounce for verification and Instantly for sending. You create your own accounts there and enter the keys once in settings, stored encrypted. That is exactly why you pay for lookups at cost instead of a markup. During the trial the app walks you through setup step by step." },
-      { q: "Why not go straight to Hunter or Apollo?", a: "Because none of them covers the whole path, and because Frostbreaker does not try to replace them: Hunter and Apollo run inside it as data sources, on your own accounts and at cost. The difference is what happens before and after. Hunter finds addresses for a domain, but not local businesses that aren't in a company database. Apollo returns decision makers with a verified address but doesn't write an individual line per lead. Sending tools send but don't research. Stitching that together yourself means three or four subscriptions, CSV files going back and forth, and reporting built by hand. Frostbreaker is the connection in between: one search, one list, one send, one dashboard, including replies and booked meetings." },
-      { q: "What happens if I accidentally email an existing customer or someone who's opted out?", a: "That's exactly what the built-in suppression list is for: once added, Frostbreaker automatically excludes those contacts and domains from every future search and send, no manual checking required for every campaign. Existing customers and opt-outs stay reliably protected." },
-      { q: "Can I check whether my sending domain is actually deliverable?", a: "Yes, directly in the app: Frostbreaker checks SPF, DKIM and DMARC for your sending domain via a live DNS lookup and shows in plain language what's still missing, plus a warning if your daily volume per mailbox gets risky. No separate deliverability tool needed." },
-      { q: "Do I need to build my email campaigns and sequences in a separate tool?", a: "No. Campaigns, sequences including schedule and number of follow-ups, and activation all happen directly in Frostbreaker. You don't switch to a second tool to send, and there's no CSV shuffling." },
       { q: "How fast can I get started?", a: "The first search runs the same day. Two to four weeks pass before the first campaign goes out. That is how long fresh mailboxes need to warm up, and no tool gets around it. That is exactly why there is no 14-day trial: it would be shorter than the setup. We set things up together on the call and stay with you through the first campaign." },
       { q: "What happens to my data if I cancel?", a: "Your data is deleted after the contract ends, or returned on request, as governed by the DPA. There's no automatic continued use after cancellation." },
     ],
@@ -4258,6 +3840,7 @@ const en: typeof de = {
     impressum: "Legal notice",
     datenschutz: "Privacy policy",
     agb: "Terms",
+    avv: "DPA",
     kontakt: "Contact",
   },
   contactPage: {
@@ -4274,7 +3857,7 @@ const en: typeof de = {
     backLabel: "Back to homepage",
   },
   caseStudyPage: {
-    eyebrow: "Case Study",
+    eyebrow: "Referenz · Eigene Software",
     title: "How Frostbreaker went from idea to a working system in three weeks",
     intro: "I wanted to run my own B2B cold outreach without subscribing to and wiring together four different tools. So I built the system myself. Here's the story behind it, with real numbers from the live system.",
     problemHeading: "The starting point",
