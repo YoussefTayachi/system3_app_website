@@ -394,40 +394,38 @@ export default function Home() {
               formulierte Zeile in de und en. */}
         </div>
 
-        {/* ─────────────────────────────────────────────────────────────
-            DIE GRENZEN. Ausdruecklich nicht das Kleingedruckte.
+        {/* HIER STAND "WAS SIE DIR NICHT ABNIMMT", gefallen am 2026-08-15
+            (KORREKTUR.md Punkt 5). Drei Absaetze mit je fuenf bis sechs
+            Zeilen, rund 620 Pixel, tief im Angebot-Abschnitt.
 
-            Anders gesetzt als die drei Aussagen (weisse Flaeche statt
-            Seitengrund, Ueberschrift eine Stufe unter der Abschnitts-
-            ueberschrift, Zeilen mit fester Beschriftungsspalte), aber an
-            keiner Stelle leiser: der Fliesstext hat dieselbe Groesse wie
-            oben (text-base -- die uebrigen Kartenraster dieser Seite stehen
-            auf text-sm), und der Block ist die groesste zusammenhaengende
-            Flaeche des Abschnitts.
+            Der Betreiber: "wuerde ich ganz weglassen -- das ist soviel Text
+            und bringt keinem was." Er hat recht: zwei der drei Punkte
+            beschreiben, was die App NICHT tut (fuenf nicht vorgeschlagene
+            Felder, leeres Belegfeld), und das interessiert erst jemanden,
+            der sie schon benutzt.
 
-            Weiss statt bg-panel2: ein grauer Kasten am Fuss eines Abschnitts
-            liest sich als Anhang. Weiss auf dem Seitengrund hebt ihn an.
-            ───────────────────────────────────────────────────────────── */}
-        <div className="mt-20 rounded-3xl border border-edge2/70 bg-panel px-5 py-8 sm:px-10 sm:py-10">
-          <h3 className={"max-w-[26ch] " + h3Cls}>{t.offerSection.limitsTitle}</h3>
-          {/* Zwei Spalten erst ab lg. Darunter blieben von den 17rem
-              Beschriftungsspalte fuer den Fliesstext rund 30 Zeichen je
-              Zeile uebrig -- gestapelt liest er sich in voller Breite. */}
-          <div className="mt-7 divide-y divide-edge/80 border-t border-edge/80">
-            {t.offerSection.limits.map((l) => (
-              <div
-                key={l.title}
-                className="grid gap-x-10 gap-y-2 py-7 lg:grid-cols-[minmax(0,17rem)_minmax(0,1fr)]"
-              >
-                {/* Kartentitel-Stufe, nicht Fraunces: eine h4 UNTER einer h3
-                    darf nicht dieselben 24px tragen, und unter 24px hat die
-                    Display-Serife nichts zu suchen. */}
-                <h4 className={cardTitleCls}>{l.title}</h4>
-                <p className="max-w-[70ch] text-base leading-relaxed text-soft">{l.body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+            DER DRITTE PUNKT DURFTE NICHT VERSCHWINDEN. "Ein Mensch liest die
+            acht Texte, bevor sie an tausend Adressen gehen" ist die Antwort
+            auf die haeufigste Sorge bei KI-Texten und stand von Anfang an auf
+            der Liste dessen, was nicht verloren gehen darf.
+
+            Er steht zwar wortgleich in der FAQ-Antwort "Kann ich den Text
+            noch aendern?" -- aber die FAQ besteht aus details-Elementen, also
+            liegt er dort hinter einem Klick. Nachgemessen: im DOM vorhanden,
+            ohne Aufklappen nicht sichtbar. Fuer die groesste Sorge bei
+            KI-Texten ist das zu tief, und zwar ausgerechnet an der Stelle,
+            an der sie entsteht.
+
+            Deshalb steht er hier als EINE Zeile. Das ist nicht der
+            zurueckgeholte Block -- der war drei Absaetze und rund 620 Pixel;
+            das hier sind vierzig. Der Satz ist woertlich aus der FAQ kopiert,
+            nicht neu erfunden.
+
+            offerSection.limitsTitle und offerSection.limits bleiben vorerst
+            im Woerterbuch stehen. */}
+        <p className="mt-12 max-w-[62ch] border-l-2 border-edge2 pl-4 text-base leading-relaxed text-ink">
+          {t.offerSection.humanCheck}
+        </p>
 
         {/* HIER STAND DER SCHLUSSSATZ, gefallen am 2026-08-15 (KLARTEXT.md,
             Stufe 2): "Das ist die Arbeit, fuer die man sonst jemanden im
@@ -551,18 +549,14 @@ export default function Home() {
       <section id="kosten" className={"scroll-mt-20 mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
         <SectionHeading eyebrow={t.costs.eyebrow} title={t.costs.title} lead={t.costs.body} />
 
-        <div className="grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
-          {t.costs.points.map((pt) => (
-            <div key={pt.title} className="border-t border-edge/70 pt-4">
-              <h3 className={cardTitleCls}>{pt.title}</h3>
-              <p className="mt-2 text-[15px] leading-relaxed text-soft">{pt.body}</p>
-            </div>
-          ))}
-        </div>
+        {/* Die vier Karten sind am 2026-08-15 gefallen (KORREKTUR.md Punkt
+            6). Was sie sagten, steht jetzt in den drei Saetzen der
+            Einleitung darueber. Ein Abschnitt, der eine einzige Auskunft
+            gibt, braucht kein Raster aus vier Spalten.
 
-        {/* Der Satz, der das Preisargument traegt. Er steht in Ink und ohne
-            Kasten: er ist eine Zusage, keine Fussnote. */}
-        <p className="mt-10 max-w-[62ch] border-l-2 border-coral pl-4 text-base leading-relaxed text-ink">
+            Der Satz darunter bleibt: in Ink und ohne Kasten, weil er eine
+            Zusage ist und keine Fussnote. */}
+        <p className="mt-2 max-w-[62ch] border-l-2 border-coral pl-4 text-base leading-relaxed text-ink">
           {t.costs.note}
         </p>
       </section>

@@ -1830,6 +1830,7 @@ const de = {
     // bevor er erfuhr, wessen Angebot das ist. Deshalb zuerst der Absender,
     // dann die Zahlen. `retaiyn` durchgehend klein, das ist deren eigene
     // Schreibweise.
+    humanCheck: "Bevor ein Text an tausend Adressen geht, hat ihn ein Mensch gelesen.",
     caseIntro:
       "Das Angebot unten gehört retaiyn, unserem ersten Kunden: Customer Experience für E-Commerce-Marken, also AI-Support, WhatsApp- und E-Mail-Marketing als ein Ablauf statt als drei. Die Felder sind mit deren eigenen Sätzen gefüllt — auch die Prozentzahlen darin sind retaiyns Aussagen über sich selbst, nicht unsere.",
     // ────────────────────────────────────────────────────────────────────
@@ -2283,18 +2284,23 @@ const de = {
   // sich zu wiederholen.
   // ══════════════════════════════════════════════════════════════════════
   costs: {
-    // Umformuliert 2026-08-15 (KLARTEXT.md, Auftrag 2): "Kalkulierbar" war
-    // ein Werturteil, keine Einordnung. "Kosten" benennt das Thema.
+    // Am 2026-08-15 von Ueberschrift, Einleitung, VIER Karten und Schlusssatz
+    // auf drei Saetze eingedampft (KORREKTUR.md Punkt 6). Der Betreiber:
+    // "wuerde ich es sogar kuerzer machen [...] nicht soviel drum reden."
+    //
+    // Rund 740 Pixel fuer eine Auskunft, die in drei Saetze passt. Was die
+    // vier Karten sagten, steht jetzt in zweien davon; die dritte haelt die
+    // beiden Einwaende fest, die sonst im Gespraech kommen.
+    //
+    // NICHT uebernommen wurde der Vorschlag "massgeschneiderte Loesung fuer
+    // deine Beduerfnisse". Den Satz schreibt jede Agentur der Welt, er
+    // besteht die Wettbewerberprobe nicht, und er sagt weniger als "haengt an
+    // eurer Kundenzahl". Die Absicht -- kuerzer, kein Drumherum -- ist
+    // umgesetzt, nur ohne den Leersatz.
     eyebrow: "Kosten",
-    title: "Ein fester Betrag, genannt im ersten Gespräch",
-    body: "Eine Zahl steht hier nicht. Wonach sie sich richtet und wann ihr sie erfahrt, findet ihr hier.",
-    points: [
-      { title: "Ein fester Betrag pro Monat", body: "Ein monatlicher Betrag, der an eurer Kundenzahl hängt — nicht an euren Leads, nicht an der Zahl eurer Workspaces." },
-      { title: "Genannt im ersten Gespräch", body: "Wir nennen ihn im ersten Gespräch, nicht erst nach der dritten Gesprächsrunde." },
-      { title: "Abfragekosten separat und sichtbar", body: "Sie laufen über eure eigenen Zugänge zum Selbstkostenpreis und stehen im Dashboard auf den Cent genau." },
-      { title: "Jederzeit kündbar", body: "Monatlich kündbar, ohne Einrichtungsgebühr und ohne Mindestlaufzeit." },
-    ],
-    note: "Eure eigenen Zugänge, zum Selbstkostenpreis, wir schlagen nichts auf.",
+    title: "Den Preis legen wir gemeinsam fest",
+    body: "Er hängt daran, wie viele Kunden ihr betreut, nicht an euren Leads und nicht an euren Workspaces. Wir nennen ihn im ersten Gespräch. Monatlich kündbar, ohne Einrichtungsgebühr.",
+    note: "Die Abfragen laufen über eure eigenen Zugänge, zum Selbstkostenpreis. Wir schlagen nichts auf.",
   },
   // ══════════════════════════════════════════════════════════════════════
   // Am 2026-08-14 von 17 auf 8 Eintraege gekuerzt (VEREINFACHUNG.md 1.4).
@@ -3720,6 +3726,7 @@ const en: typeof de = {
     closing: "This is the work you would otherwise hire someone in sales for and spend half a year training them on: understand the offer, turn it into four emails, write every step twice, and claim nothing that does not hold. How many hours it saves you, we will not say — we have not measured it. What the app does is right here, rule by rule.",
     // Siehe die deutsche Haelfte: steht UEBER der Karte, damit der Absender
     // vor der ersten Prozentzahl gelesen wird.
+    humanCheck: "Before any copy goes to a thousand addresses, a person has read it.",
     caseIntro:
       "The offer below belongs to retaiyn, our first client: customer experience for e-commerce brands, meaning AI support, WhatsApp and email marketing as one flow instead of three. The fields are filled with their own sentences — the percentages in there are retaiyn's claims about themselves, not ours.",
     offerMap: {
@@ -3972,15 +3979,9 @@ const en: typeof de = {
   },
   costs: {
     eyebrow: "Pricing",
-    title: "A fixed amount, named on the first call",
-    body: "There's no number on this page. What it depends on, and when you'll hear it, is below.",
-    points: [
-      { title: "A fixed monthly amount", body: "A monthly amount tied to how many clients you run, not your leads and not your workspaces." },
-      { title: "Named on the first call", body: "We name it on the first call, not after the third round." },
-      { title: "Lookup costs, separate and visible", body: "They run through your own accounts at cost price and show up in the dashboard to the cent." },
-      { title: "Cancel anytime", body: "Cancel monthly, no setup fee, no minimum term." },
-    ],
-    note: "Your own accounts, at cost price — we add not a cent.",
+    title: "We set the price together",
+    body: "It depends on how many clients you run, not on your leads and not on your workspaces. We name it on the first call. Cancel monthly, no setup fee.",
+    note: "Lookups run through your own accounts, at cost price. We add not a cent.",
   },
   why: {
     title: "Why Frostbreaker exists",
