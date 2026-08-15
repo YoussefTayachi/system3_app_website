@@ -3,49 +3,43 @@
   <!--
     FROSTBREAKER, Bildmarke.
 
-    Eine Scheibe Eis, die gebrochen ist. Der Name sagt es woertlich, das
-    Produkt heisst Kaltakquise, und das Kernstueck der App heisst Icebreaker.
-    Die Marke muss nichts uebersetzen.
+    Ein f im abgerundeten Quadrat. Das ist das Zeichen, das vorher schon da
+    war; der Betreiber hat es der abstrakten Fassung vorgezogen. Neu ist nur
+    die Ausfuehrung: das alte setzte den Buchstaben als Arial-TEXT, war also
+    von einer Systemschrift abhaengig und sah auf jedem Geraet ein wenig
+    anders aus. Hier ist er als Pfad gezeichnet und ueberall gleich.
 
-    WARUM BLAU UND NICHT DUNKEL
-    Beide Fassungen gegeneinander gerendert, bei 150, 88, 48 und 32px, auf
-    weissem, grauem und schwarzem Grund. Die blaue Scheibe haelt auf allen
-    drei Gruenden. Die dunkle Fassung ist auf Hell die schoenere, loest sich
-    auf Dunkel aber auf: uebrig bleibt ein schwebender Blitz ohne Scheibe.
-    YouTube hat einen hellen und einen dunklen Modus, also gewinnt die
-    Fassung, die beides aushaelt. Die dunkle liegt als Zweitfassung daneben.
+    WAS SICH GEGENUEBER DEM ALTEN ZEICHEN AENDERT
+    - Buchstabe als Pfad statt als Arial-Text.
+    - Markenblau #0284C7 statt sky-500 #0EA5E9. Das alte Blau stammt von vor
+      dem Redesign vom 15.08. und passte nicht mehr zur Wortmarke.
+    - Groesserer Eckenradius. Beim alten Zeichen schnitt die Kreisbeschneidung
+      von YouTube, LinkedIn und X die Ecken so an, dass ein Achteck uebrig
+      blieb; nachgesehen bei 88px. Mit rx 118 liegt die Rundung ausserhalb des
+      einbeschriebenen Kreises und faellt sauber weg.
+    - Sichtbarer Querbalken, mittige Stellung. Der alte Buchstabe sass unten
+      rechts und hatte kaum Querbalken.
 
-    WARUM KEIN f ALS MONOGRAMM
-    Blauer Kreis plus weisser Kleinbuchstabe f ist Facebook. Geprueft und
-    verworfen.
+    DER EINWAND, DER BLEIBT
+    Blaues Quadrat mit weissem Kleinbuchstaben f ist nahe an Facebooks
+    Symbol. Der Betreiber kennt den Einwand und hat sich bewusst dafuer
+    entschieden. Querbalken und mittige Stellung sind der Abstand, den die
+    Form hergibt.
 
-    FARBEN
-    #0284C7  Das Blau der Website. Bewusst dasselbe und kein helleres: zwei
-             Blautoene in einer Marke sind zwei Blautoene zu viel.
-    #12212B  Eis bei Nacht, der Bruch. Kuehler als der Textton der Website
-             (#1c1b19), der ins Warme geht und hier braunschwarz wirken wuerde.
+    Die abstrakte Alternative liegt als frostbreaker-marke-scheibe.svg
+    daneben: eine gebrochene Eisscheibe, ohne Verwechslungsgefahr.
 
-    DER SPALT LAEUFT ZU: 36px oben, 28px unten. Ein Bruch oeffnet sich dort,
-    wo er beginnt. Bei 32px sieht das niemand, bei 800px schon.
-
-    Die Scheibe fuellt das Quadrat randlos. YouTube, LinkedIn und X
-    beschneiden quadratisch hochgeladene Bilder selbst zum Kreis.
+    Verworfen wurde eine dritte Fassung, die den Buchstaben selbst brechen
+    liess (Querbalken versetzt). Bei 48px war er nicht mehr als f zu lesen,
+    sondern als Blitz.
 
     ACHTUNG BEIM BEARBEITEN: in diesem Kommentar darf keine doppelte
     Bindestrichfolge stehen. XML verbietet sie innerhalb eines Kommentars,
-    und ein als img eingebundenes SVG wird streng geparst. Die Datei war aus
-    genau diesem Grund einmal ein kaputtes Bildsymbol, waehrend sie
-    eingebettet in HTML einwandfrei aussah.
+    und ein als img eingebundenes SVG wird streng geparst.
   -->
-  <defs>
-    <clipPath id="fb-scheibe"><circle cx="256" cy="256" r="256"/></clipPath>
-  </defs>
-
-  <!-- Was im Bruch sichtbar wird -->
-  <rect width="512" height="512" fill="#12212B" clip-path="url(#fb-scheibe)"/>
-
-  <g clip-path="url(#fb-scheibe)">
-    <path d="M -20 -20 L 278 -20 L 220 150 L 284 300 L 212 532 L -20 532 Z" fill="#0284C7"/>
-    <path d="M 314 -20 L 532 -20 L 532 532 L 240 532 L 314 300 L 254 150 Z" fill="#0284C7"/>
+  <rect width="512" height="512" rx="118" fill="#0284C7"/>
+  <g fill="none" stroke="#FFFFFF" stroke-width="62" stroke-linecap="butt">
+    <path d="M 262 400 V 228 A 74 74 0 0 1 336 154"/>
+    <path d="M 182 252 H 342"/>
   </g>
 </svg>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Frostbreaker">
+  <title>Frostbreaker</title>
+  <!--
+    FROSTBREAKER, Bildmarke.
+
+    Eine Scheibe Eis, die gebrochen ist. Der Name sagt es woertlich, das
+    Produkt heisst Kaltakquise, und das Kernstueck der App heisst Icebreaker.
+    Die Marke muss nichts uebersetzen.
+
+    WARUM BLAU UND NICHT DUNKEL
+    Beide Fassungen gegeneinander gerendert, bei 150, 88, 48 und 32px, auf
+    weissem, grauem und schwarzem Grund. Die blaue Scheibe haelt auf allen
+    drei Gruenden. Die dunkle Fassung ist auf Hell die schoenere, loest sich
+    auf Dunkel aber auf: uebrig bleibt ein schwebender Blitz ohne Scheibe.
+    YouTube hat einen hellen und einen dunklen Modus, also gewinnt die
+    Fassung, die beides aushaelt. Die dunkle liegt als Zweitfassung daneben.
+
+    WARUM KEIN f ALS MONOGRAMM
+    Blauer Kreis plus weisser Kleinbuchstabe f ist Facebook. Geprueft und
+    verworfen.
+
+    FARBEN
+    #0284C7  Das Blau der Website. Bewusst dasselbe und kein helleres: zwei
+             Blautoene in einer Marke sind zwei Blautoene zu viel.
+    #12212B  Eis bei Nacht, der Bruch. Kuehler als der Textton der Website
+             (#1c1b19), der ins Warme geht und hier braunschwarz wirken wuerde.
+
+    DER SPALT LAEUFT ZU: 36px oben, 28px unten. Ein Bruch oeffnet sich dort,
+    wo er beginnt. Bei 32px sieht das niemand, bei 800px schon.
+
+    Die Scheibe fuellt das Quadrat randlos. YouTube, LinkedIn und X
+    beschneiden quadratisch hochgeladene Bilder selbst zum Kreis.
+
+    ACHTUNG BEIM BEARBEITEN: in diesem Kommentar darf keine doppelte
+    Bindestrichfolge stehen. XML verbietet sie innerhalb eines Kommentars,
+    und ein als img eingebundenes SVG wird streng geparst. Die Datei war aus
+    genau diesem Grund einmal ein kaputtes Bildsymbol, waehrend sie
+    eingebettet in HTML einwandfrei aussah.
+  -->
+  <defs>
+    <clipPath id="fb-scheibe"><circle cx="256" cy="256" r="256"/></clipPath>
+  </defs>
+
+  <!-- Was im Bruch sichtbar wird -->
+  <rect width="512" height="512" fill="#12212B" clip-path="url(#fb-scheibe)"/>
+
+  <g clip-path="url(#fb-scheibe)">
+    <path d="M -20 -20 L 278 -20 L 220 150 L 284 300 L 212 532 L -20 532 Z" fill="#0284C7"/>
+    <path d="M 314 -20 L 532 -20 L 532 532 L 240 532 L 314 300 L 254 150 Z" fill="#0284C7"/>
+  </g>
+</svg>

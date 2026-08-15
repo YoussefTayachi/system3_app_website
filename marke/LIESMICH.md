@@ -1,8 +1,7 @@
 # Frostbreaker — Bildmarke
 
-Eine Scheibe Eis, die gebrochen ist. Der Name sagt es wörtlich, das Produkt
-heißt Kaltakquise, und das Kernstück der App heißt Icebreaker — die Marke muss
-nichts übersetzen.
+Ein **f** im abgerundeten Quadrat. Das Zeichen, das vorher schon da war —
+neu ist nur die Ausführung.
 
 ## Welche Datei wofür
 
@@ -15,61 +14,69 @@ nichts übersetzen.
 | `frostbreaker-youtube-banner.png` | **YouTube-Kanalbanner**, 2048 × 1152 |
 | `frostbreaker-wortmarke-hell.png` | Marke plus Schriftzug, für **dunkle** Flächen. Transparenter Grund. |
 | `frostbreaker-wortmarke-dunkel.png` | Dasselbe für **helle** Flächen |
-| `frostbreaker-marke.svg` | Die Quelle. Beliebig skalierbar, für Druck und neue Größen. |
-| `frostbreaker-marke-dunkel.svg` | Zweitfassung: dunkle Scheibe, heller Bruch |
+| `frostbreaker-marke.svg` | Die Quelle. Beliebig skalierbar, für Druck und neue Größen. Liegt zusätzlich als `app/icon.svg` (Favicon der Website). |
+| `frostbreaker-marke-scheibe.svg` | **Alternative:** eine gebrochene Eisscheibe, abstrakt |
+| `frostbreaker-marke-dunkel.svg` | Die Scheibe in dunkel |
 
-Das Profilbild ist **randlos** — kein Rand, kein Abstand. YouTube, LinkedIn und
-X schneiden den Kreis selbst heraus; ein eingebauter Rand würde doppelt. Die
-Ecken außerhalb des Kreises sind **transparent**: bei der Kreisbeschneidung
+Die Ecken außerhalb des Kreises sind **transparent**: bei der Kreisbeschneidung
 macht das keinen Unterschied, aber wer die Datei eckig verwendet, bekommt kein
 weißes Kästchen auf dunklem Grund.
 
-`bauen.js` erzeugt alle PNGs aus der SVG. Es braucht ein lokal laufendes Chrome
-mit `--remote-debugging-port=9222` und `puppeteer-core`.
+## Was sich gegenüber dem alten Zeichen geändert hat
 
-## Warum blau und nicht dunkel
+Das alte war ein Platzhalter. Es funktionierte, aber vier Dinge waren offen:
 
-Beide Fassungen wurden gegeneinander gerendert, bei 150, 88, 48 und 32 Pixeln,
-auf weißem, grauem und schwarzem Grund. Die blaue Scheibe hält auf allen drei
-Gründen. Die dunkle ist auf Hell die schönere, löst sich auf Dunkel aber auf —
-übrig bleibt ein schwebender Blitz ohne Scheibe. YouTube hat einen hellen und
-einen dunklen Modus, also gewinnt die Fassung, die beides aushält.
+| | alt | jetzt |
+|---|---|---|
+| Buchstabe | **Arial-Text** — von der Systemschrift abhängig, auf jedem Gerät ein wenig anders | als Pfad gezeichnet, überall gleich |
+| Blau | `#0EA5E9` (sky-500), von vor dem Redesign | `#0284C7`, dasselbe wie die Wortmarke |
+| Ecken | kleiner Radius. Die Kreisbeschneidung schnitt sie so an, dass ein **Achteck** übrig blieb — nachgesehen bei 88 px | großer Radius, die Rundung fällt sauber weg |
+| Stellung | Buchstabe unten rechts, kaum Querbalken | mittig, sichtbarer Querbalken |
 
-Die dunkle liegt als Zweitfassung daneben. Nimm sie, wenn der Grund garantiert
-hell ist: Druck, Präsentationen, helle Briefköpfe.
+Gerendert und geprüft bei 120, 88, 48, 32 und 16 Pixeln, auf hellem und
+dunklem Grund, eckig und rund.
 
-## Was geprüft und verworfen wurde
+## Der Einwand, der bleibt
 
-- **Ein „f" als Monogramm.** Blauer Kreis plus weißer Kleinbuchstabe f ist
-  Facebook. Dazu las sich die Bruchlinie quer durch den Buchstaben als
-  Durchstreichung.
-- **Ein Eiskristall als Sechseck.** Ergab die beste Silhouette, sagte aber
-  „isometrische Kiste" statt „Eis" — und sah aus wie hundert andere
-  Technik-Logos.
+**Blaues Quadrat mit weißem Kleinbuchstaben f ist nahe an Facebooks Symbol.**
+Das war der Grund, warum diese Richtung zunächst verworfen wurde. Der Betreiber
+kennt den Einwand und hat sich bewusst dafür entschieden. Der Querbalken und
+die mittige Stellung sind der Abstand, den die Form hergibt — Facebooks f sitzt
+unten rechts und hat keinen sichtbaren Querbalken.
+
+Wer es sich anders überlegt: `frostbreaker-marke-scheibe.svg` liegt daneben.
+Eine gebrochene Eisscheibe — der Name sagt es wörtlich, das Produkt heißt
+Kaltakquise, das Kernstück der App heißt Icebreaker. Ohne
+Verwechslungsgefahr, dafür ohne Buchstaben.
+
+## Auch geprüft und verworfen
+
+- **Ein gebrochenes f**, bei dem der Querbalken versetzt ist. Bei 48 Pixeln
+  nicht mehr als „f" zu lesen, sondern als Blitz.
+- **Ein Eiskristall als Sechseck.** Beste Silhouette von allen, sagte aber
+  „isometrische Kiste" statt „Eis".
 - **Eine abgebrochene Scholle**, die zur Seite gerutscht ist. Bei 32 Pixeln als
   Tortendiagramm gelesen.
-- **Ein dünner Riss mit korallener Füllung.** Bei 32 Pixeln verlor er seine
-  Aussage und wurde zur Schnörkellinie. Koralle auf Blau ist außerdem heiß und
-  unruhig; auf dieser Marke ist Koralle nicht zu Hause.
 
 ## Farben
 
 | | |
 |---|---|
-| `#0284C7` | Die Scheibe. Dasselbe Blau wie die Wortmarke auf der Website — bewusst kein helleres, zwei Blautöne in einer Marke sind einer zu viel. |
-| `#12212B` | Der Bruch. Eis bei Nacht, kühler als der Textton der Website (`#1c1b19`), der ins Warme geht und als Fläche braunschwarz wirken würde. |
+| `#0284C7` | Das Blau der Website. Bewusst kein helleres — zwei Blautöne in einer Marke sind einer zu viel. |
+| `#FFFFFF` | Der Buchstabe |
 
-Der Spalt läuft zu: 36 Pixel oben, 28 unten. Ein Bruch öffnet sich dort, wo er
-beginnt. Bei 32 Pixeln sieht das niemand, bei 800 schon.
+## Neue Größen erzeugen
+
+`bauen.js` erzeugt alle PNGs aus `frostbreaker-marke.svg`. Es braucht ein lokal
+laufendes Chrome mit `--remote-debugging-port=9222` und `puppeteer-core`.
 
 ## Zwei Fallen, die beim Bauen zugeschnappt sind
 
 **Beim Bearbeiten von `bauen.js`:** das Skript streicht `width="512"` aus dem
 öffnenden `<svg>`-Tag, damit das Elternelement die Größe bestimmt. Wird dabei
-global gestrichen statt nur im Tag, trifft es auch das `<rect>`, das den Bruch
-färbt — ein Rechteck ohne Breite ist null Pixel groß und verschwindet. Der
-Bruch zeigte dann den weißen Seitengrund statt seiner eigenen Farbe. Am Bild
-kaum zu sehen, an den Pixelwerten sofort.
+global gestrichen statt nur im Tag, trifft es auch Kinder-Elemente mit
+denselben Maßen — die sind dann null Pixel groß und verschwinden. Am Bild kaum
+zu sehen, an den Pixelwerten sofort.
 
 **Beim Bearbeiten der SVG:** in den Kommentaren darf keine doppelte
 Bindestrichfolge stehen. XML verbietet sie innerhalb eines Kommentars, und ein
