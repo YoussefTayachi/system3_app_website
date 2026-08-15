@@ -210,12 +210,39 @@ Bleibt bei zwei Farben aus den vorhandenen Tokens — kein drittes Farbsystem.
 
 Keiner wird gelöscht — jeder hat schon eine Heimat.
 
-| Abschnitt | heute | zieht um nach | Ersparnis |
-|---|---|---|---|
-| `#rundgang` | 4.335 px | `/funktionen` (steht dort bereits vollständig) | **−3.100 px** |
-| `#ergaenzt` (Vergleich) | 1.607 px | `/funktionen`, unterster Abschnitt | **−1.607 px** |
-| `#crm` | 1.564 px | `/funktionen#pipeline` (steht dort bereits) | **−1.564 px** |
-| `#kanaele` | 1.208 px | `/funktionen#send` (steht dort bereits) | **−1.208 px** |
+| Abschnitt | heute | zieht um nach | Ersparnis | Stand |
+|---|---|---|---|---|
+| `#ergaenzt` (Vergleich) | 1.607 px | `/funktionen#vergleich` | **−1.607 px** | **erledigt 15.08.** |
+| `#rundgang` | 4.335 px | `/funktionen` | **−3.100 px** | blockiert, siehe unten |
+| `#crm` | 1.564 px | `/funktionen` | **−1.564 px** | blockiert, siehe unten |
+| `#kanaele` | 1.208 px | `/funktionen` | **−1.208 px** | blockiert, siehe unten |
+
+> ### Korrektur vom 2026-08-15: die Funktionsseite ist nicht vollständig
+>
+> Die Spalte „steht dort bereits" war für drei der vier Zeilen **falsch**.
+> Nachgesehen, bevor etwas gelöscht wurde:
+>
+> - **`#kanaele`** — `/funktionen` kennt den Kanal **Telefon** überhaupt
+>   nicht. Es gibt nur „Telefonnummer aus dem öffentlichen Google-Eintrag"
+>   als Aufzählungspunkt beim Anreichern. Die dritte Kanalkarte
+>   („Vorbereitet statt kalt erwischt") stünde nirgends mehr. Zusätzlich
+>   zeigt das Produkt-Menü auf `/#kanaele`.
+> - **`#crm`** — `/funktionen#pipeline` hat das Kanban-Board, aber **nicht**
+>   den gemeinsamen Posteingang über alle Postfächer und **nicht** den
+>   Umsatz-Forecast.
+> - **`#rundgang`** — fünf der sechs Schritte sind abgedeckt. Der sechste
+>   („Und jetzt weißt du, was funktioniert hat") steht auf `/funktionen`
+>   nicht.
+>
+> **Daraus folgt eine neue Stufe 0, vor allem anderen:** `/funktionen`
+> bekommt drei Gruppen dazu — Telefon als Kanal, der gemeinsame Posteingang
+> samt Forecast, und die Wirkungsmessung. Der Text dafür existiert bereits
+> in `channels`, `postSend` und `walkthrough`; er wird verschoben, nicht neu
+> erfunden. Erst danach kann die Startseite diese Abschnitte abgeben.
+>
+> Der Grundsatz „nichts wird gelöscht, alles zieht um" hält nur, wenn das
+> Ziel den Inhalt wirklich trägt. Sonst ist Umziehen ein schöneres Wort für
+> Verlieren.
 
 Von `#rundgang` bleibt ein Rest: **drei Schritte statt sechs**, je eine Zeile,
 eine gemeinsame Nachbildung, ein Verweis „Alle neun Funktionen ansehen →".
@@ -322,12 +349,24 @@ beim Kürzen nicht mitgehen — notfalls in einem Satz statt in einem Abschnitt:
 Streichen zuerst, Umziehen danach, Neubauen zuletzt. Jede Stufe ein eigener
 Commit. Wer die Reihenfolge dreht, baut Abschnitte um, die danach fallen.
 
-1. **Stufe 2** — die vier Umzüge. Größter Effekt, kleinstes Risiko: die Ziele
-   existieren bereits, es sind Streichungen plus Verweise. (−7.500 px)
+0. **Stufe 0** — `/funktionen` vervollständigen: Telefon als Kanal, der
+   gemeinsame Posteingang samt Forecast, die Wirkungsmessung. Ergibt sich aus
+   der Korrektur oben und muss vor allem anderen stehen. *(offen)*
+1. **Stufe 2** — die vier Umzüge. *(1 von 4 erledigt: der Vergleich, −1.607 px.
+   Die anderen drei warten auf Stufe 0.)*
 2. **Stufe 3** — die drei Zusammenziehungen. (−4.600 px)
 3. **Stufe 1** — der Held. Braucht die Textarbeit an der Augenbraue.
-4. **Stufe 4** — die zwei neuen Abschnitte. Braucht die Preisentscheidung.
+4. **Stufe 4** — die zwei neuen Abschnitte. Braucht keine Preisentscheidung
+   mehr, die ist gefallen.
 5. **Stufe 5** — die Knöpfe ausdünnen.
+
+### Stand
+
+| | Startseite |
+|---|---|
+| Ausgangspunkt 15.08. | 20.016 px · 4.582 Wörter |
+| nach dem Vergleichs-Umzug | **18.410 px · 3.970 Wörter** |
+| Ziel | ~6.700 px · ~1.300 Wörter |
 
 ## Prüfen
 
