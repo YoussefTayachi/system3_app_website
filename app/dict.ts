@@ -134,7 +134,7 @@ const de = {
           "Anrufliste mit Nummer, Rolle und Gesprächsnotiz aus der Recherche",
           "LinkedIn-Nachricht fertig eingesetzt: kopieren, öffnen, senden",
           "Überfällig, heute, später statt einer Liste von allem",
-          "Wer antwortet, fällt im selben Moment aus der Kette",
+          "Wer antwortet, bekommt im selben Moment keine weiteren Nachrichten mehr",
         ],
       },
       {
@@ -499,7 +499,7 @@ const de = {
         body: "Aus dem Angebot entstehen vier Stufen an Tag 0, 3, 5 und 7, je zwei Fassungen, ein Betreff über alle vier. Jede Stufe ist kürzer als die vorherige, 90, 70, 50, 35 Wörter, und jede endet bei derselben kleinen Frage. Nicht bei einem Termin: „Kostenloses Erstgespräch vereinbaren“ steht auf fast jeder Website, bei unserem ersten Kunden retaiyn genauso, und am Ende einer Kaltmail ist das die größte Bitte, die es gibt. Danach wird nachgemessen statt gebeten: wurde eine Stufe länger als ihr Vorgänger, steht doch eine Terminbitte darin, oder ist ein Angebotsfeld wörtlich in die Mail gerutscht, benennt die App den Verstoß und lässt neu schreiben.",
         bullets: [
           "Zwölf Felder, sieben davon aus deiner Website vorgeschlagen und einzeln zu bestätigen",
-          "Höchstens fünf Befunde vom Coach, jeder mit fertigem Ersatzsatz statt einer Kritik",
+          "Höchstens fünf Befunde, und jeder bringt einen fertigen Ersatzsatz mit",
           "Die zwei Fassungen einer Stufe müssen sich im Ansatz unterscheiden, nicht in zwei Wörtern",
           "Jede Stufe einzeln nachschärfen; die LinkedIn-Vorlage kommt aus demselben Angebot",
         ],
@@ -718,7 +718,7 @@ const de = {
     },
     chain: {
       frameTitle: "Ein Lead, drei Kanäle",
-      note: "Es entsteht immer nur ein nächster Schritt. Wer antwortet, fällt sofort aus der Kette.",
+      note: "Es entsteht immer nur ein nächster Schritt. Wer antwortet, bekommt sofort keine weiteren Nachrichten mehr.",
       steps: [
         {
           day: "Tag 0",
@@ -734,7 +734,7 @@ const de = {
           // Bis zum 14.08.2026 widersprach dieses Bild dem Text daneben.
           day: "Tag 3, 5 und 7",
           title: "Drei Follow-ups laufen nach",
-          body: "Dieselbe Sequenz, dieselben Postfächer. Wer antwortet, fällt sofort raus.",
+          body: "Dieselbe Sequenz, dieselben Postfächer. Wer antwortet, bekommt sofort keine weiteren Nachrichten.",
         },
         {
           day: "Tag 10 · keine Antwort",
@@ -872,7 +872,7 @@ const de = {
       hookLabel: "Aufhänger, je Kontakt erzeugt",
       hook: "Dass ihr E-Mail, WhatsApp und Support als ein Angebot führt und nicht als drei nebeneinander, ist der Grund für diese Nachricht.",
       pitch:
-        "Ich baue Software, die Agenturen wie retaiyn die Arbeit abnimmt, die sonst zwischen fünf Werkzeugen liegen bleibt. Kein Pitch, ich wollte mich erst mal vernetzen.",
+        "Ich baue Software, die Agenturen wie retaiyn die Arbeit abnimmt, die sonst zwischen fünf Werkzeugen unerledigt bleibt. Kein Pitch, ich wollte mich erst mal vernetzen.",
       signoff: "Beste Grüße, Youssef",
       buttons: ["Kopieren", "Profil öffnen ↗", "Als gesendet vermerken"],
       note: "Derselbe Aufhänger wie in der Mail, schon erzeugt und bezahlt. Gesendet wird von dir: LinkedIn hat keine Schnittstelle für Nachrichten, und ein Werkzeug, das trotzdem automatisch sendet, riskiert dein Konto.",
@@ -897,7 +897,10 @@ const de = {
   // zaehlen nicht", die feinste der drei Ehrlichkeitsregeln.
   // ══════════════════════════════════════════════════════════════════════
   guard: {
-    eyebrow: "Bevor du sendest, und danach",
+    // Umformuliert 2026-08-15 (KLARTEXT.md, Auftrag 2): "Bevor du sendest,
+    // und danach" nannte einen Zeitpunkt, keine Sache. "Prüfungen" ordnet
+    // den Abschnitt ein, wie im Titel darunter.
+    eyebrow: "Prüfungen",
     // Umformuliert 2026-08-15 (KLARTEXT.md): "das einzige Werkzeug, das dir
     // Nein sagt" bestand weder Deckprobe noch Wettbewerberprobe -- jedes Tool
     // kann das behaupten. Die Substanz (elf Pruefungen, vier davon Blocker)
@@ -929,13 +932,19 @@ const de = {
   // LinkedIn und Telefon eine Automatik zu behaupten, die es nicht gibt und
   // aus gutem Grund nicht geben wird.
   channels: {
-    eyebrow: "Drei Kanäle, ein Kontakt",
-    // Umformuliert 2026-08-15 (KLARTEXT.md): "Nicht X, sondern Y" ist genau
-    // das Gegensatzpaar-Muster, das die Startseite ueberladen hat. Die neue
-    // Zeile nennt die drei Kanaele direkt.
-    title: "E-Mail, LinkedIn und Telefon aus einem Kontakt",
+    eyebrow: "Kanäle",
+    // Umformuliert 2026-08-15 (KLARTEXT.md, Teil 0): Titel und Body
+    // beantworteten bisher "wie viel Arbeit ist das" (Automatisierungsgrad).
+    // Der Leser fragt an dieser Stelle aber "wie oft komme ich an diesen
+    // Menschen heran" -- der Automatisierungs-Punkt bleibt trotzdem stehen,
+    // naemlich in der Zeile "Was du tust" auf jeder Karte unten.
+    title: "Sechs Berührungen, ein eingekaufter Lead",
+    // Nachtrag vom Betreiber, waehrend der Umsetzung: "wenn er da nicht
+    // antwortet" wörtlich benennen, keine Metapher wie "still bleiben"
+    // oder "ins Leere laufen". Deshalb "wenn der Lead auf die vorige nicht
+    // geantwortet hat" statt einer Umschreibung.
     body:
-      "Der Unterschied zwischen den Kanälen ist nicht, wie gut sie sind, sondern wie viel davon von allein läuft. Bei zweien bereitet die App alles vor und du drückst den letzten Knopf. Das ist Absicht, nicht Lücke.",
+      "Wer einmal mailt und keine Antwort bekommt, hat einen Versuch gemacht. Vier Mails, eine LinkedIn-Nachricht und ein Anruf sind sechs — an derselben Person, jede nur dann, wenn der Lead auf die vorige nicht geantwortet hat. Das erhöht die Chance auf eine Antwort erheblich, und es kostet keinen zweiten Lead: eingekauft wird einmal, das Profil und die Nummer liegen danach ohnehin vor.",
     appLabel: "Was die App tut",
     youLabel: "Was du tust",
     cards: [
@@ -977,7 +986,7 @@ const de = {
     ],
     protectionLabel: "Warum LinkedIn und Telefon nicht von allein senden",
     protectionBody:
-      "LinkedIn bietet für Nachrichten keine Schnittstelle. Jedes Werkzeug, das trotzdem automatisch sendet, steuert einen Browser fern, verstößt gegen die Nutzungsbedingungen und riskiert die Sperrung, bei einem verkauften Produkt also die Konten der Kunden. Wir bereiten alles vor, den Absendeknopf drückst du. Dieselbe Haltung wie beim Torwart: lieber ein Schritt von Hand als ein verbranntes Konto.",
+      "LinkedIn bietet für Nachrichten keine Schnittstelle. Jedes Werkzeug, das trotzdem automatisch sendet, steuert einen Browser fern, verstößt gegen die Nutzungsbedingungen und riskiert die Sperrung, bei einem verkauften Produkt also die Konten der Kunden. Wir bereiten alles vor, den Absendeknopf drückst du. Dieselbe Haltung wie bei der Startprüfung: lieber ein Schritt von Hand als ein verbranntes Konto.",
     phoneNote:
       "Angerufen wird mit deinem eigenen Telefon: Frostbreaker ist keine Telefonanlage und rechnet keine Gesprächsminuten ab.",
   },
@@ -1599,8 +1608,8 @@ const de = {
       body: "Finden, anschreiben, nachfassen, abschließen, je Kundenkonto getrennt. Ohne das Werkzeug zu wechseln und ohne eine CSV dazwischen.",
     },
     {
-      title: "Kein Lead bleibt liegen",
-      body: "Schweigt die Mail, kommt LinkedIn. Schweigt LinkedIn, kommt der Anruf. Wer antwortet, fällt sofort raus.",
+      title: "Kein Lead bleibt ohne nächsten Schritt",
+      body: "Antwortet der Lead nicht auf die Mail, kommt LinkedIn. Antwortet er auf LinkedIn nicht, kommt der Anruf. Wer antwortet, bekommt sofort keine weiteren Nachrichten.",
     },
     {
       title: "Du weißt, was Termine bringt",
@@ -1611,7 +1620,10 @@ const de = {
   // nach dem Hero: sie beantwortet "wie gross ist das hier?" auf einen Blick,
   // bevor irgendetwas im Einzelnen erklaert wird.
   systemMap: {
-    eyebrow: "Das ganze Bild",
+    // Umformuliert 2026-08-15 (KLARTEXT.md, Auftrag 2): "Das ganze Bild"
+    // sagte nicht, wovon. "Der Ablauf" ordnet die vier Stufen als das ein,
+    // was sie sind.
+    eyebrow: "Der Ablauf",
     // Zweimal geaendert am 2026-08-14. Zuerst hiess die Ueberschrift "Von der
     // Nische bis zum Auftrag, ohne das Werkzeug zu wechseln" -- fast woertlich
     // wie `hero.body` einen Abschnitt darueber. Dann "Drei Stufen und eine
@@ -1661,7 +1673,7 @@ const de = {
           "LinkedIn-Nachricht, fertig eingesetzt",
           "Anrufliste mit Nummer und Vorbereitung",
         ],
-        note: "Wer nicht antwortet, rutscht zum nächsten Kanal. Wer antwortet, fällt sofort raus.",
+        note: "Wer nicht antwortet, bekommt die nächste Nachricht über den nächsten Kanal. Wer antwortet, bekommt sofort keine weiteren Nachrichten.",
       },
       {
         id: "win",
@@ -1719,15 +1731,15 @@ const de = {
         cta: "Den Agenten ansehen",
       },
       {
-        title: "Zwei lesen gegen, bevor etwas rausgeht",
-        body: "Der Copy-Check prüft Länge, Spam-Wörter, KI-Klang und ob wirklich nur eine Handlungsaufforderung drinsteht. Der Torwart prüft danach die Technik: SPF, DKIM, Bounce-Quote, sendbare Adressen.",
+        title: "Zwei Prüfungen, bevor etwas rausgeht",
+        body: "Der Copy-Check prüft Länge, Spam-Wörter, KI-Klang und ob wirklich nur eine Handlungsaufforderung drinsteht. Die Startprüfung prüft danach die Technik: SPF, DKIM, Bounce-Quote, sendbare Adressen.",
         detail: "Vier der elf Prüfungen können den Start aufhalten. Das kostet dich nicht eine Kampagne, das kostet dich sonst die Domain.",
         cta: "Die Prüfungen ansehen",
       },
       {
-        title: "Wenn die Mails schweigen, steht die Nachricht schon",
-        body: "Nach Erstmail und drei Follow-ups erscheint eine LinkedIn-Aufgabe, aber nur dort, wo ein Profil hinterlegt ist. Die Nachricht ist bereits eingesetzt, mit demselben Aufhänger wie die Mail. Bleibt es weiter still, kommt der Anruf, mit Nummer und Vorbereitung.",
-        detail: "Immer genau ein nächster Schritt, nie zwei gleichzeitig. Wer antwortet, fällt im selben Moment aus der Kette.",
+        title: "Wenn der Lead auf die Mail nicht antwortet, steht die Nachricht schon",
+        body: "Nach Erstmail und drei Follow-ups erscheint eine LinkedIn-Aufgabe, aber nur dort, wo ein Profil hinterlegt ist. Die Nachricht ist bereits eingesetzt, mit demselben Aufhänger wie die Mail. Antwortet der Lead auch auf die LinkedIn-Nachricht nicht, kommt der Anruf, mit Nummer und Vorbereitung.",
+        detail: "Immer genau ein nächster Schritt, nie zwei gleichzeitig. Wer antwortet, bekommt im selben Moment keine weiteren Nachrichten mehr.",
         cta: "Die Kette ansehen",
       },
       {
@@ -1785,12 +1797,12 @@ const de = {
         body: "Was du verkaufst, an wen, woran dein Käufer hängen bleibt, was er davon hat, worum du bittest. Sieben der zwölf Antworten liest die App aus deiner eigenen Website und schlägt sie dir vor — du bestätigst sie einzeln, statt sie abzutippen. Fünf bleiben leer, und zwar mit Absicht.",
       },
       {
-        title: "Der Coach liest gegen und schreibt einen besseren Satz daneben",
+        title: "Die App prüft dein Angebot und schreibt einen besseren Satz daneben",
         body: "Höchstens fünf Befunde, und keiner ohne Gegenvorschlag. Nicht „das ist zu vage“, sondern der fertige Ersatztext mit einem Knopf, der ihn einsetzt. Sind zwei Felder vertauscht — dein Beleg steht im Ergebnisfeld —, zieht die Karte einen Pfeil zwischen beide. Ein Formular hat für so einen Befund keinen Ort.",
       },
       {
         title: "Daraus entstehen acht Texte",
-        body: "Vier Stufen an Tag 0, 3, 5 und 7, je zwei eigenständige Fassungen, ein Betreff über alle vier. Jede Stufe ist kürzer als die vorherige: 90, 70, 50, 35 Wörter. Wer bei Schweigen mehr schreibt, läuft hinterher. Die LinkedIn-Nachricht kommt aus derselben Quelle.",
+        body: "Vier Stufen an Tag 0, 3, 5 und 7, je zwei eigenständige Fassungen, ein Betreff über alle vier. Jede Stufe ist kürzer als die vorherige: 90, 70, 50, 35 Wörter. Wer nach einer ausbleibenden Antwort mehr schreibt, läuft hinterher. Die LinkedIn-Nachricht kommt aus derselben Quelle.",
       },
     ],
     limitsTitle: "Was sie dir nicht abnimmt",
@@ -1807,7 +1819,7 @@ const de = {
       },
       {
         title: "Der Entwurf wartet im Kampagnenformular",
-        body: "Die acht Texte stehen danach im Kampagnenformular. Dort liest ein Mensch sie, bevor sie an tausend Adressen gehen, und ändert, was ihm nicht passt. Der Torwart prüft danach die Technik wie bisher.",
+        body: "Die acht Texte stehen danach im Kampagnenformular. Dort liest ein Mensch sie, bevor sie an tausend Adressen gehen, und ändert, was ihm nicht passt. Die Startprüfung prüft danach die Technik wie bisher.",
       },
     ],
     closing: "Das ist die Arbeit, für die man sonst jemanden im Vertrieb einstellt und ein halbes Jahr einarbeitet: das Angebot verstehen, es in vier Mails übersetzen, jede Stufe zweimal schreiben und keine Behauptung aufstellen, die nicht trägt. Wie viele Stunden dich das spart, sagen wir nicht — wir haben es nicht gemessen. Was die App tut, steht hier, Regel für Regel.",
@@ -2074,7 +2086,12 @@ const de = {
   // anderer beginnt, verkauft den Mangel, nicht das Produkt. Er traegt jetzt
   // die vierte Saeule: was aus einer Antwort wird.
   postSend: {
-    eyebrow: "Nach dem Ja",
+    // Umformuliert 2026-08-15 (KLARTEXT.md, Auftrag 2): "Nach dem Ja" war
+    // poetisch, der Abschnitt handelt aber von jeder Antwort, nicht nur von
+    // Zusagen. "CRM" benennt, was Posteingang, Deals und Aufgaben zusammen
+    // sind -- derselbe Begriff, den `dashboard.body` zwei Zeilen weiter
+    // unten selbst dafuer verwendet ("ersetzt das ein eigenes CRM-Abo").
+    eyebrow: "CRM",
     // Umformuliert 2026-08-15 (KLARTEXT.md): ", nicht" gestrichen, Titel
     // benennt jetzt Posteingang und Pipeline direkt statt sich gegen ein
     // simples Postfach abzugrenzen.
@@ -2249,7 +2266,7 @@ const de = {
     // kommt es bei einem Fachkaeufer an. Dieselbe Tatsache, als Angebot
     // formuliert: was er davon HAT, dass wir noch klein sind. Ohne erfundene
     // Zahl, weil eine erfundene Zahl auf dieser Seite alles kaputtmacht.
-    earlyAccess: { title: "Ihr redet mit dem, der es baut", body: "Wir arbeiten gerade mit einer kleinen Zahl von Agenturen, jede eng begleitet. Das heißt für euch: die Einrichtung machen wir gemeinsam, ihr habt eine direkte Leitung statt eines Ticketsystems, und was euch fehlt, steht im nächsten Sprint statt auf einer Roadmap. Diese Nähe gibt es nur, solange die Gruppe klein ist." },
+    earlyAccess: { title: "Ihr redet mit dem, der es baut", body: "Wir arbeiten gerade mit einer kleinen Zahl von Agenturen, jede eng begleitet. Das heißt für euch: die Einrichtung machen wir gemeinsam, ihr schreibt mir direkt, ohne Ticketsystem, und was euch fehlt, steht im nächsten Sprint statt auf einer Roadmap. Diese Nähe gibt es nur, solange die Gruppe klein ist." },
     founderLabel: "Vom Gründer",
     founderQuote: "„Ich wollte schon immer etwas Eigenes aufbauen. Das größte Hindernis war nie die Idee, sondern Kunden zu finden: Kaltakquise per Hand, endlose Anrufe und E-Mails, ohne je zu wissen, ob es sich lohnt. Also habe ich mir selbst das Werkzeug gebaut, das mir gefehlt hat, seitdem geht mir der nächste Ansprechpartner nie mehr aus.“",
     founderName: "Youssef Tayachi",
@@ -2266,7 +2283,9 @@ const de = {
   // sich zu wiederholen.
   // ══════════════════════════════════════════════════════════════════════
   costs: {
-    eyebrow: "Kalkulierbar",
+    // Umformuliert 2026-08-15 (KLARTEXT.md, Auftrag 2): "Kalkulierbar" war
+    // ein Werturteil, keine Einordnung. "Kosten" benennt das Thema.
+    eyebrow: "Kosten",
     title: "Ein fester Betrag, genannt im ersten Gespräch",
     body: "Eine Zahl steht hier nicht. Wonach sie sich richtet und wann ihr sie erfahrt, findet ihr hier.",
     points: [
@@ -2305,7 +2324,7 @@ const de = {
     items: [
       // Die Apollo-Antwort ist bewusst umgedreht formuliert -- nicht "wir sind
       // nur eine Ergaenzung", sondern was wir zusaetzlich tun.
-      { q: "Warum nicht gleich direkt zu Apollo oder Hunter?", a: "Weil die Adresse der Anfang ist, nicht das Ergebnis. Apollo liefert Entscheider samt gepruefter Adresse. Danach faengt die Arbeit an: ein eigener Aufhaenger je Kontakt, die Pruefung des Textes, der Abgleich mit Sperrliste und Bestandskunden, der Versand, die LinkedIn-Nachricht und der Anruf, wenn es still bleibt, und am Ende die Frage, welche Textfassung Termine gebracht hat. Genau das liegt zwischen Apollo und Instantly, und genau das macht Frostbreaker." },
+      { q: "Warum nicht gleich direkt zu Apollo oder Hunter?", a: "Weil die Adresse der Anfang ist, nicht das Ergebnis. Apollo liefert Entscheider samt gepruefter Adresse. Danach faengt die Arbeit an: ein eigener Aufhaenger je Kontakt, die Pruefung des Textes, der Abgleich mit Sperrliste und Bestandskunden, der Versand, die LinkedIn-Nachricht und der Anruf, wenn der Lead nicht antwortet, und am Ende die Frage, welche Textfassung Termine gebracht hat. Genau das liegt zwischen Apollo und Instantly, und genau das macht Frostbreaker." },
       { q: "Was brauche ich, um loszulegen?", a: "Eigene Zugänge bei den Diensten, die im Hintergrund laufen: Google für die Kartensuche, OpenAI für die Recherche, Hunter und Apollo für Adressen und Entscheider, Prospeo als weitere Quelle, NeverBounce für die Verifizierung und Instantly für den Versand. Die Schlüssel hinterlegt ihr einmal in den Einstellungen, verschlüsselt gespeichert. Danach laufen alle Abfragen auf euren eigenen Konten, zum Selbstkostenpreis, wir schlagen keinen Cent auf. Nach jeder Suche steht im Dashboard auf den Cent genau, was sie gekostet hat. Was der monatliche Betrag kostet, steht weiter oben auf dieser Seite." },
       { q: "Kann ich jederzeit kündigen?", a: "Ja, monatlich, keine Mindestlaufzeit, keine Kündigungsfrist über den laufenden Monat hinaus." },
       // Die beiden Einwaende, die der Angebot-Abschnitt auf der Startseite
@@ -2617,7 +2636,7 @@ const en: typeof de = {
           "Call list with number, role and a prep note from the research",
           "LinkedIn message already filled in: copy, open, send",
           "Overdue, today, later instead of a list of everything",
-          "Anyone who replies drops out of the chain the same moment",
+          "Anyone who replies stops receiving further messages the same moment",
         ],
       },
       {
@@ -2893,7 +2912,7 @@ const en: typeof de = {
         body: "The offer turns into four steps on day 0, 3, 5 and 7, two versions each, one subject line across all four. Every step is shorter than the one before it, 90, 70, 50, 35 words, and every one of them ends on the same small question. Not on a meeting: “book a free intro call” is what almost every website says, our first customer retaiyn included, and at the end of a cold email that is the biggest thing you can ask for. Then it gets measured instead of requested: if a step grew longer than the one before, if a meeting request slipped in, or if a field from the offer went into the email word for word, the app names the breach and has it written again.",
         bullets: [
           "Twelve fields, seven of them suggested off your website and confirmed one at a time",
-          "Five findings at most from the coach, each with a finished replacement sentence",
+          "Five findings at most, and each one comes with a finished replacement sentence",
           "The two versions of a step have to differ in approach, not in two words",
           "Refine any single step; the LinkedIn template comes out of the same offer",
         ],
@@ -3015,7 +3034,7 @@ const en: typeof de = {
     },
     chain: {
       frameTitle: "One lead, three channels",
-      note: "There is always exactly one next step. Anyone who replies drops out of the chain immediately.",
+      note: "There is always exactly one next step. Anyone who replies stops receiving further messages immediately.",
       steps: [
         {
           day: "Day 0",
@@ -3025,7 +3044,7 @@ const en: typeof de = {
         {
           day: "Days 3, 5 and 7",
           title: "Three follow-ups run after it",
-          body: "The same sequence, the same mailboxes. Anyone who replies drops out immediately.",
+          body: "The same sequence, the same mailboxes. Anyone who replies stops receiving messages immediately.",
         },
         {
           day: "Day 10 · no reply",
@@ -3120,14 +3139,14 @@ const en: typeof de = {
       hookLabel: "Opener, generated per contact",
       hook: "You run email, WhatsApp and support as one offer rather than three side by side, which is why I am writing.",
       pitch:
-        "I build software that takes off agencies like retaiyn the work that otherwise gets stuck between five separate tools. No pitch, I just wanted to connect first.",
+        "I build software that takes off agencies like retaiyn the work that otherwise does not get done because it is split across five separate tools. No pitch, I just wanted to connect first.",
       signoff: "Best, Youssef",
       buttons: ["Copy", "Open profile \u2197", "Mark as sent"],
       note: "The same opener as in the email, already generated and paid for. You send it: LinkedIn has no messaging API, and a tool that sends anyway puts your account at risk.",
     },
   },
   guard: {
-    eyebrow: "Before you send, and after",
+    eyebrow: "Checks",
     title: "Eleven checks before a campaign can start",
     body:
       "Four of them can stop it: missing SPF or DKIM, a bounce rate above five percent, a list with nothing sendable in it. Those do not cost you a campaign, they cost you the domain. Stopping is not blocking: you see what you are taking on, and a deliberate second click starts it anyway.",
@@ -3143,10 +3162,10 @@ const en: typeof de = {
     ],
   },
   channels: {
-    eyebrow: "Three channels, one contact",
-    title: "Email, LinkedIn and phone from one contact",
+    eyebrow: "Channels",
+    title: "Six touches, one lead you already paid for",
     body:
-      "The difference between the channels is not how good they are, but how much of each runs on its own. On two of them the app prepares everything and you press the last button. That is deliberate, not a gap.",
+      "Send one email and get no reply, and that's one attempt. Four emails, one LinkedIn message and one call add up to six — all to the same person, each one sent only when the lead hasn't replied to the previous one. That raises your odds of a reply substantially, and it doesn't cost a second lead: you buy the lead once, and the profile and phone number are already available afterward.",
     appLabel: "What the app does",
     youLabel: "What you do",
     cards: [
@@ -3186,7 +3205,7 @@ const en: typeof de = {
     ],
     protectionLabel: "Why LinkedIn and phone do not send on their own",
     protectionBody:
-      "LinkedIn offers no API for messages. Any tool that sends anyway drives a browser remotely, breaks the terms of service and risks suspension. In a product you sell, that means your customers' accounts. We prepare everything, you press send. The same stance as the gate: better one step by hand than a burnt account.",
+      "LinkedIn offers no API for messages. Any tool that sends anyway drives a browser remotely, breaks the terms of service and risks suspension. In a product you sell, that means your customers' accounts. We prepare everything, you press send. The same stance as the start check: better one step by hand than a burnt account.",
     phoneNote:
       "You dial with your own phone: Frostbreaker is not a phone system and does not bill call minutes.",
   },
@@ -3556,8 +3575,8 @@ const en: typeof de = {
       body: "Find, write, follow up, close, separately per client account. Without switching tools and without a CSV in between.",
     },
     {
-      title: "No lead is left behind",
-      body: "Email goes quiet, LinkedIn follows. LinkedIn goes quiet, the call does. Anyone who replies drops out at once.",
+      title: "No lead is without a next step",
+      body: "If the lead doesn't reply by email, LinkedIn follows. If the lead doesn't reply on LinkedIn, the call follows. Anyone who replies stops receiving further messages at once.",
     },
     {
       title: "You know what books meetings",
@@ -3565,7 +3584,7 @@ const en: typeof de = {
     },
   ],
   systemMap: {
-    eyebrow: "The whole picture",
+    eyebrow: "The process",
     title: "Four stages, one shared dataset",
     body: "Everything further down this page is one of those four boxes in detail.",
     stages: [
@@ -3592,7 +3611,7 @@ const en: typeof de = {
           "LinkedIn message, already written out",
           "Call list with number and prep",
         ],
-        note: "Anyone who stays quiet moves to the next channel. Anyone who replies drops out immediately.",
+        note: "Anyone who doesn't reply gets the next message through the next channel. Anyone who replies stops receiving further messages immediately.",
       },
       {
         id: "win",
@@ -3640,15 +3659,15 @@ const en: typeof de = {
         cta: "See the agent",
       },
       {
-        title: "Two of them read it before anything goes out",
-        body: "The copy check looks at length, spam words, AI tone and whether there really is only one call to action. The gate then checks the technical side: SPF, DKIM, bounce rate, sendable addresses.",
+        title: "Two checks happen before anything goes out",
+        body: "The copy check looks at length, spam words, AI tone and whether there really is only one call to action. The start check then checks the technical side: SPF, DKIM, bounce rate, sendable addresses.",
         detail: "Four of the eleven checks can hold the start back. That does not cost you a campaign, it otherwise costs you the domain.",
         cta: "See the checks",
       },
       {
-        title: "When the emails stay quiet, the message is already written",
-        body: "After the first mail and three follow-ups a LinkedIn task appears, but only where a profile is on file. The message is already filled in, with the same opener as the email. If it stays quiet after that, the call comes up, with number and prep.",
-        detail: "Always exactly one next step, never two at once. Anyone who replies drops out of the chain the same moment.",
+        title: "When the lead doesn't reply to the email, the message is already written",
+        body: "After the first mail and three follow-ups a LinkedIn task appears, but only where a profile is on file. The message is already filled in, with the same opener as the email. If the lead doesn't reply to that either, the call comes up, with number and prep.",
+        detail: "Always exactly one next step, never two at once. Anyone who replies stops receiving further messages the same moment.",
         cta: "See the chain",
       },
       {
@@ -3675,12 +3694,12 @@ const en: typeof de = {
         body: "What you sell, to whom, where your buyer gets stuck, what they get out of it, what you are asking for. Seven of the twelve answers are read off your own website and offered to you — you confirm them one by one instead of typing them. Five stay empty, and that is deliberate.",
       },
       {
-        title: "The coach argues back, and writes a better sentence next to it",
+        title: "The app checks your offer and writes a better sentence next to it",
         body: "Five findings at most, and none without a replacement. Not “that is too vague”, but the finished sentence with a button that puts it in. When two fields have swapped places — your proof sitting in the outcome field — the map draws an arrow between them. A form has nowhere to put a finding like that.",
       },
       {
         title: "Eight pieces of copy come out of it",
-        body: "Four steps on day 0, 3, 5 and 7, two independent versions each, one subject line across all four. Every step is shorter than the one before it: 90, 70, 50, 35 words. Write more when nobody answers and you are chasing. The LinkedIn message comes from the same source.",
+        body: "Four steps on day 0, 3, 5 and 7, two independent versions each, one subject line across all four. Every step is shorter than the one before it: 90, 70, 50, 35 words. Writing more after no reply reads as chasing. The LinkedIn message comes from the same source.",
       },
     ],
     limitsTitle: "What it does not do for you",
@@ -3695,7 +3714,7 @@ const en: typeof de = {
       },
       {
         title: "The draft waits in the campaign form",
-        body: "The eight pieces of copy go into the campaign form. A person reads them there before they go to a thousand addresses, and changes whatever does not fit. The gate then checks the technical side, as it always did.",
+        body: "The eight pieces of copy go into the campaign form. A person reads them there before they go to a thousand addresses, and changes whatever does not fit. The start check then checks the technical side, as it always did.",
       },
     ],
     closing: "This is the work you would otherwise hire someone in sales for and spend half a year training them on: understand the offer, turn it into four emails, write every step twice, and claim nothing that does not hold. How many hours it saves you, we will not say — we have not measured it. What the app does is right here, rule by rule.",
@@ -3854,7 +3873,7 @@ const en: typeof de = {
     copyLabel: "Copy",
   },
   postSend: {
-    eyebrow: "After the yes",
+    eyebrow: "CRM",
     title: "Inbox, deals and tasks in one view",
     body: "Every reply is classified and attached to the contact. It becomes a deal with a value and a probability, a task with a due date, a note after the call. Yesterday's call and the email from three weeks ago sit in the same history.",
     features: [
@@ -3952,7 +3971,7 @@ const en: typeof de = {
       "What this produced for retaiyn goes here as soon as there is enough to measure. We don't put up a figure we can't recalculate ourselves.",
   },
   costs: {
-    eyebrow: "Predictable",
+    eyebrow: "Pricing",
     title: "A fixed amount, named on the first call",
     body: "There's no number on this page. What it depends on, and when you'll hear it, is below.",
     points: [
@@ -3965,7 +3984,7 @@ const en: typeof de = {
   },
   why: {
     title: "Why Frostbreaker exists",
-    earlyAccess: { title: "You talk to the person building it", body: "We work with a small number of agencies right now, each one closely supported. For you that means: we do the setup together, you get a direct line instead of a ticket system, and what you are missing goes into the next sprint rather than onto a roadmap. That closeness only exists while the group is small." },
+    earlyAccess: { title: "You talk to the person building it", body: "We work with a small number of agencies right now, each one closely supported. For you that means: we do the setup together, you message me directly, with no ticket system, and what you are missing goes into the next sprint rather than onto a roadmap. That closeness only exists while the group is small." },
     founderLabel: "From the founder",
     founderQuote: "\"I always wanted to build something of my own. The hardest part was never the idea, it was finding clients: cold calls and emails by hand, hours of research, never knowing if any of it would land. So I built the tool I wish I'd had, and I've never run out of real decision-makers to reach since.\"",
     founderName: "Youssef Tayachi",
@@ -3974,7 +3993,7 @@ const en: typeof de = {
   faq: {
     title: "Frequently asked questions",
     items: [
-      { q: "Why not go straight to Apollo or Hunter myself?", a: "Because the address is the start, not the result. Apollo delivers decision makers with a verified address. The work begins after that: an opener per contact, a check on the copy, a match against your suppression list and existing customers, the sending, the LinkedIn message and the call when it stays quiet, and finally the question of which copy version booked meetings. All of that sits between Apollo and Instantly, and that is what Frostbreaker does." },
+      { q: "Why not go straight to Apollo or Hunter myself?", a: "Because the address is the start, not the result. Apollo delivers decision makers with a verified address. The work begins after that: an opener per contact, a check on the copy, a match against your suppression list and existing customers, the sending, the LinkedIn message and the call when the lead doesn't reply, and finally the question of which copy version booked meetings. All of that sits between Apollo and Instantly, and that is what Frostbreaker does." },
       { q: "What do I need to get started?", a: "Your own accounts with the services running in the background: Google for the map search, OpenAI for the research, Hunter and Apollo for addresses and decision-makers, Prospeo as a further source, NeverBounce for verification and Instantly for sending. You enter the keys once in settings, stored encrypted. After that every lookup runs on your own accounts, at cost, and we add not a cent. After every search the dashboard shows to the cent what it cost. What the monthly amount itself costs sits further up this page." },
       { q: "Can I cancel anytime?", a: "Yes, monthly, no minimum term, no notice period beyond the current month." },
       { q: "Won't every email sound the same then?", a: "The frame is the same, the line that matters is not. The opener is written per recipient out of what was researched about that particular company, not dropped in from a placeholder. On top of that, every step comes in two versions, and they have to differ in approach: different angle, different question, different opening sentence. Two versions that differ by two words get flagged as one and the same. And anything lifted word for word out of your offer is caught when the copy is measured, because at that point the recipient is reading a stranger's bullet points." },
