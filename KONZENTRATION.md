@@ -1,0 +1,329 @@
+# Die Startseite auf das Nötige zusammenziehen
+
+## Der Auftrag
+
+Rückmeldung des Coaches, wörtlich:
+
+> Overall you go into way too much detail details which will make your visitors
+> even more confused than before. So on the main page, keep it to the point with
+> [less] text and visuals. […] the objective would be to make the website more
+> concise on the main landing page. And you will have to keep in mind the
+> questions that your ideal customer profile would have. I.e What's the price?
+> Who is it for? What does it do? How would it go? And more…
+>
+> Also, in the hero section, remove the UI element because that's not your only
+> service; instead settle a background image, which could be a gradient image.
+
+**Ziel:** die Startseite beantwortet die Fragen eines Interessenten in der
+Reihenfolge, in der er sie stellt, und hört danach auf. Alles Weitere steht auf
+den Unterseiten, die es längst gibt.
+
+---
+
+## Was gemessen ist
+
+Chrome, 1440 × 900, Stand 2026-08-15.
+
+| | Wert |
+|---|---|
+| Höhe der Startseite | **20.016 px** |
+| Wörter | **4.152** (de) · 4.582 (en) |
+| Lesezeit | **21 bis 23 Minuten** |
+| Abschnitte | 13 |
+| H3-Zwischentitel | **25** |
+| Knöpfe zum Kalender | **14** |
+
+Die vier größten Abschnitte:
+
+| Abschnitt | Höhe | Anteil | Wörter |
+|---|---|---|---|
+| `#rundgang` | 4.335 px | 22 % | 1.071 |
+| `#angebot` | 3.020 px | 15 % | 816 |
+| `#torwart` | 1.772 px | 9 % | 418 |
+| `#ergaenzt` | 1.607 px | 8 % | 612 |
+
+`#rundgang` und `#angebot` allein sind **37 % der Seite und 41 % aller Wörter.**
+
+---
+
+## Die Fragen des Kunden, und wo sie heute beantwortet werden
+
+Der Coach nennt vier. Hier steht, was die Seite heute daraus macht.
+
+### 1 · „Was kostet es?"
+
+**Heute: bei 93 % Scrolltiefe, zugeklappt, und die Frage steht zweimal da.**
+
+Die FAQ beginnt bei 18.534 px von 20.016. Sie besteht aus `<details>`, ist also
+zusätzlich hinter einem Klick. Darin stehen **zwei** Preisfragen nebeneinander:
+
+- „Was brauche ich, und was kostet es?" — beantwortet die *Abfragekosten*
+  (eigene Zugänge, Selbstkostenpreis)
+- „Was kostet das?" — beantwortet den *Monatsbetrag*
+
+Beide beginnen mit derselben Aussage („wir schlagen nichts auf"). Zwei Fragen,
+die sich überlappen, sind für den Leser ein Signal, dass es kompliziert ist.
+
+Eine **Zahl** steht nirgends. Die Antwort lautet: fester Monatsbetrag, hängt an
+der Kundenzahl, wird im ersten Gespräch genannt, monatlich kündbar, keine
+Einrichtungsgebühr, Abfragekosten daneben zum Selbstkostenpreis.
+
+Das ist eine haltbare Position — aber sie steht an der schlechtestmöglichen
+Stelle. **Siehe die offene Entscheidung ganz unten.**
+
+### 2 · „Für wen ist es?"
+
+**Heute: die Startseite widerspricht der eigenen Navigation.**
+
+Die Augenbraue im Helden sagt: „FÜR AGENTUREN, DIE OUTBOUND FÜR IHRE KUNDEN
+MACHEN". Im Menü „Für wen" stehen aber **drei** Türen: Agenturen, SaaS-Anbieter
+und Eigene Software. Ein SaaS-Gründer, der über eine Anzeige auf der Startseite
+landet, liest in der ersten Zeile, dass er nicht gemeint ist.
+
+**Entschieden am 2026-08-15: die Startseite schränkt nicht mehr ein.** Sie
+spricht jedes Unternehmen an, das B2B-Kunden gewinnen will. Es gibt keinen
+Grund, in Zeile eins Zielgruppen auszuschließen, die das Produkt bedient.
+
+> **Was dabei aufzupassen ist.** „Für alle" beantwortet die Frage „für wen"
+> streng genommen nicht — je breiter die Zeile, desto weniger erkennt sich
+> jemand darin wieder. Deshalb wird die Breite **oben** getragen und die
+> Konkretheit **direkt darunter**: die Augenbraue nennt die *Situation* (wer
+> B2B-Kunden über Kaltakquise gewinnt), und der neue Abschnitt „Für wen" zeigt
+> drei konkrete Türen mit Namen. Breites Versprechen, konkrete Wege — nicht
+> breites Versprechen und dann nichts.
+>
+> Zu vermeiden ist eine Zeile wie „Für jedes Unternehmen, das B2B-Marketing
+> betreibt": sie beschreibt eine Branche, keine Lage. Besser ist eine Zeile,
+> die den Zustand des Lesers trifft, etwa im Sinne von *„Für alle, die
+> B2B-Kunden über Kaltakquise gewinnen"*. Die endgültige Formulierung macht der
+> `copywriter`, in beiden Sprachen.
+
+### 3 · „Was macht es?"
+
+**Heute: gut beantwortet — und danach noch achtmal.**
+
+`#system` beantwortet es in drei Karten auf 1.246 px. Das ist die stärkste
+Stelle der Seite. Danach erklären `#rundgang`, `#angebot`, `#kanaele`, `#crm`,
+`#torwart` und `#ergaenzt` dieselbe Sache noch einmal in aller Ausführlichkeit.
+
+### 4 · „Wie läuft das ab?"
+
+**Heute: beantwortet, aber in 1.071 Wörtern.**
+
+`#rundgang` ist der Ablauf in sechs Schritten mit je einer Nachbildung. Als
+Antwort auf „wie läuft das ab" ist das zwanzigmal so lang wie nötig. Als
+Funktionsseite ist es richtig — und genau dafür gibt es `/funktionen`.
+
+### 5 · Die fünfte Frage, die der Coach mit „and more" meint
+
+**„Woher weiß ich, dass es funktioniert?"** Beantwortet in `#kunde` (retaiyn)
+auf 1.021 px. Diese Stelle bleibt, sie ist die billigste Vertrauensquelle der
+Seite.
+
+---
+
+## Der Plan
+
+### Grundsatz: nichts wird gelöscht, alles zieht um
+
+Die Unterseiten existieren bereits und sind fertig: `/funktionen` (neun
+Funktionsgruppen mit Bildern), `/fuer-agenturen`, `/fuer-saas`,
+`/kunden/retaiyn`, `/case-study`, `/eigene-software`. Die Startseite trägt
+heute deren Inhalt ein zweites Mal.
+
+**Die Startseite verkauft. Die Unterseiten erklären.**
+
+### Zielgerüst: acht Abschnitte, jeder eine Kundenfrage
+
+| # | Abschnitt | Beantwortet | Ziel-Höhe |
+|---|---|---|---|
+| 1 | Held | Für wen · Was macht es | ~800 px |
+| 2 | Was es tut (`#system`, drei Karten) | Was macht es | 1.200 px |
+| 3 | Für wen (drei Türen) | Für wen | 600 px |
+| 4 | Der Ablauf (drei Schritte) | Wie läuft das ab | 1.200 px |
+| 5 | Der Beleg (retaiyn) | Funktioniert es | 900 px |
+| 6 | **Was es kostet** — neu | Was kostet es | 700 px |
+| 7 | FAQ (sechs Fragen) | der Rest | 800 px |
+| 8 | Schluss-CTA | die Handlung | 500 px |
+
+**Zielwerte: rund 6.700 px statt 20.016, rund 1.300 Wörter statt 4.152,
+sechs bis sieben Minuten statt 21.** Ein Drittel der heutigen Länge.
+
+---
+
+### Stufe 1 · Der Held
+
+Der Coach ist hier ausdrücklich: **die Nachbildung raus, ein Verlauf als
+Hintergrund rein.** Seine Begründung ist die richtige — der Posteingang zeigt
+genau ein Produkt, und es gibt zwei Angebote.
+
+**Was verschwindet**
+- `HeroIllustration` (die Posteingang-Nachbildung, rechte Spalte)
+- Das zweispaltige Raster
+- Die Hinweiszeile unter den Knöpfen (der Inhalt steht in Abschnitt 6)
+
+**Was bleibt und wächst**
+- Augenbraue, **neu formuliert**: sie schränkt nicht mehr auf Agenturen ein,
+  sondern nennt die Lage statt der Branche (siehe Frage 2 oben)
+- Überschrift, mittig, `max-w-[20ch]`
+- **Ein** Satz darunter, höchstens 25 Wörter (heute: 42)
+- Beide Knöpfe
+- Der Kundenstreifen „Im Einsatz bei retaiyn" — die billigste Vertrauensquelle,
+  die es gibt, und sie kostet 40 px
+
+**Der Verlauf.** `hero-wash` in `globals.css` gibt es bereits, mit 9 % und 5,5 %
+Deckkraft. Nachgemessen ist er im Screenshot **nicht auffindbar**. Wenn er der
+einzige visuelle Träger des Helden wird, muss er tatsächlich zu sehen sein:
+Deckkraft auf 0,16 und 0,10, Radius des ersten Verlaufs enger (`90% 70%` statt
+`120% 90%`), damit er eine Lichtquelle hat statt einer gleichmäßigen Tönung.
+Bleibt bei zwei Farben aus den vorhandenen Tokens — kein drittes Farbsystem.
+
+> **Der Einwand, den ich trotzdem notiere.** Die Nachbildung ist heute das
+> einzige auf der Startseite, das zeigt, dass es die Software wirklich gibt.
+> Fällt sie weg, ist der erste Produktbeweis erst in Abschnitt 2. Deshalb: in
+> Abschnitt 2 gehört **ein** Bildschirm, sonst verliert die Seite ihren Beleg.
+> Der Coach hat recht, dass der Held nicht ein Produkt festnageln soll; er hat
+> nicht gesagt, dass die Seite gar nichts mehr zeigen soll.
+
+### Stufe 2 · Vier Abschnitte ziehen um
+
+Keiner wird gelöscht — jeder hat schon eine Heimat.
+
+| Abschnitt | heute | zieht um nach | Ersparnis |
+|---|---|---|---|
+| `#rundgang` | 4.335 px | `/funktionen` (steht dort bereits vollständig) | **−3.100 px** |
+| `#ergaenzt` (Vergleich) | 1.607 px | `/funktionen`, unterster Abschnitt | **−1.607 px** |
+| `#crm` | 1.564 px | `/funktionen#pipeline` (steht dort bereits) | **−1.564 px** |
+| `#kanaele` | 1.208 px | `/funktionen#send` (steht dort bereits) | **−1.208 px** |
+
+Von `#rundgang` bleibt ein Rest: **drei Schritte statt sechs**, je eine Zeile,
+eine gemeinsame Nachbildung, ein Verweis „Alle neun Funktionen ansehen →".
+Das ist Abschnitt 4 des neuen Gerüsts.
+
+### Stufe 3 · Drei Abschnitte werden zusammengezogen
+
+| Abschnitt | heute | wird |
+|---|---|---|
+| `#angebot` | 3.020 px | **900 px.** Eine Überschrift, drei Zeilen, **ein** Bild (die Angebotskarte). Der Coach-Befund und der Rest ziehen nach `/funktionen#write` und `/kunden/retaiyn`, wo beide schon stehen. |
+| `#torwart` | 1.772 px | **entfällt auf der Startseite.** Der Torwart ist ein starkes Argument, aber es ist ein Argument für Leute, die schon verstanden haben, worum es geht. Er steht auf `/funktionen#protect`. In der FAQ bleibt eine Zeile. |
+| „Warum es Frostbreaker gibt" | 740 px | **entfällt.** Die Gründungsgeschichte beantwortet keine der fünf Fragen. Sie gehört auf `/kontakt`, wo das Gründerfoto schon steht. |
+
+### Stufe 4 · Zwei Abschnitte werden neu gebaut
+
+**„Für wen" (neu, ~600 px).** Drei Karten, je vier Zeilen, je ein Verweis auf
+die vorhandene Zielgruppenseite. Das ist die konkrete Hälfte der Antwort aus
+Frage 2: oben das breite Versprechen, hier die drei Türen mit Namen. Ersetzt
+`#agenturen` (805 px), das heute nur eine der drei Türen zeigt.
+
+**„Was es kostet" (neu, ~700 px).** Der eigentliche Kern dieser Rückmeldung.
+Die Antwort existiert bereits vollständig — sie steht nur zugeklappt bei 93 %.
+Sie kommt nach vorn, als eigener Abschnitt mit Überschrift, und sie wird
+**einmal** beantwortet statt zweimal:
+
+- Ein fester Monatsbetrag, abhängig von der Kundenzahl — nicht von Leads, nicht
+  von Workspaces
+- Wird im **ersten** Gespräch genannt, nicht nach drei Runden
+- Abfragekosten laufen über eigene Zugänge, zum Selbstkostenpreis, im Dashboard
+  auf den Cent sichtbar
+- Monatlich kündbar, keine Einrichtungsgebühr, keine Mindestlaufzeit
+
+**Entschieden am 2026-08-15: ohne Zahl.** Kein Betrag, keine Spanne, kein
+Ab-Preis. Was sich ändert, ist ausschließlich die *Stelle* und die *Klarheit* —
+das Verfahren steht sichtbar und früh statt zugeklappt am Seitenende. Am
+Geschäftsmodell ändert sich nichts.
+
+Damit das trägt, muss der Abschnitt zwei Dinge leisten, die die heutige
+FAQ-Antwort nicht leistet:
+
+1. **Sagen, wovon der Betrag abhängt.** „Preis auf Anfrage" ist eine
+   Verweigerung; „hängt an eurer Kundenzahl, nicht an euren Leads" ist eine
+   Auskunft. Der Leser kann sich danach selbst einordnen.
+2. **Sagen, wann die Zahl fällt.** „Im ersten Gespräch, nicht nach drei Runden"
+   nimmt genau die Befürchtung weg, die hinter der Frage steht.
+
+Die beiden FAQ-Einträge „Was brauche ich, und was kostet es?" und „Was kostet
+das?" werden zu **einem** zusammengezogen, der auf diesen Abschnitt verweist.
+
+### Stufe 5 · Die 14 Kalenderknöpfe
+
+Vierzehn Knöpfe zum selben Kalender auf einer Seite sind kein Nachdruck,
+sondern Rauschen. **Ziel: fünf.** Held, Ende von Abschnitt 4, Beleg,
+Kostenabschnitt, Schluss-CTA. Dazwischen genügen Textlinks auf die
+Unterseiten.
+
+---
+
+## Was nicht verloren gehen darf
+
+Diese Aussagen sind der Grund, warum die Seite überhaupt überzeugt. Sie dürfen
+beim Kürzen nicht mitgehen — notfalls in einem Satz statt in einem Abschnitt:
+
+- **retaiyn als namentlicher Kunde.** Der einzige fremde Name auf der Seite.
+- **„Eure eigenen Zugänge, zum Selbstkostenpreis, wir schlagen nichts auf."**
+  Das ist das Preisargument, nicht ein Nebensatz.
+- **„Bevor ein Text an tausend Adressen geht, hat ihn ein Mensch gelesen."**
+- **Die ehrlichen Grenzen** („Was wir dir nicht vormachen"). Eine Seite, die
+  ihre Grenzen nennt, wird für den Rest geglaubt. Darf schrumpfen, nicht
+  verschwinden.
+- **Zwei bis vier Wochen Warmup bis zur ersten Kampagne.** Wer das erst im
+  Gespräch erfährt, fühlt sich verkauft.
+
+---
+
+## Reihenfolge
+
+Streichen zuerst, Umziehen danach, Neubauen zuletzt. Jede Stufe ein eigener
+Commit. Wer die Reihenfolge dreht, baut Abschnitte um, die danach fallen.
+
+1. **Stufe 2** — die vier Umzüge. Größter Effekt, kleinstes Risiko: die Ziele
+   existieren bereits, es sind Streichungen plus Verweise. (−7.500 px)
+2. **Stufe 3** — die drei Zusammenziehungen. (−4.600 px)
+3. **Stufe 1** — der Held. Braucht die Textarbeit an der Augenbraue.
+4. **Stufe 4** — die zwei neuen Abschnitte. Braucht die Preisentscheidung.
+5. **Stufe 5** — die Knöpfe ausdünnen.
+
+## Prüfen
+
+- `npx tsc --noEmit`, `npm test`, `npm run build`
+- Seitenhöhe unter **8.000 px**, Wörter unter **1.500**, gemessen in beiden
+  Sprachen
+- Jede der fünf Kundenfragen ist über die Suchfunktion des Browsers auf der
+  Startseite auffindbar, **ohne** ein `<details>` zu öffnen
+- Scrolltiefe bis zur Preisantwort: unter **60 %** (heute 93 %)
+- Kopfleiste 8 Seiten × 4 Breiten × 2 Sprachen, 0 von 64 kaputt
+- Querscrollen 10 Seiten × 375/1440 × 2 Sprachen, 0 von 40
+- Kein Verweis läuft ins Leere: jeder Abschnitt, der umzieht, hinterlässt einen
+  Link auf sein neues Zuhause
+
+---
+
+## Die zwei Entscheidungen des Betreibers, 2026-08-15
+
+**Preis: ohne Zahl, aber ganz vorn.** Kein Betrag auf der Seite. Der
+Kostenabschnitt erklärt das Verfahren früh und sichtbar statt zugeklappt bei
+93 %. Verworfen wurden ein Ab-Preis (verankert nach unten) und eine Spanne.
+
+*Bekanntes Risiko, bewusst getragen:* wer für eine Zahl keinen Termin machen
+will, springt ab. Das ist messbar, sobald die Seite live ist — wenn die
+Terminquote hinter den Erwartungen bleibt, ist dieser Punkt der erste, den man
+noch einmal aufmacht.
+
+**Zielgruppe: nicht mehr einschränken.** Die Startseite spricht jedes
+Unternehmen an, das B2B-Kunden gewinnen will, statt nur Agenturen. Begründung
+des Betreibers: es gibt keinen Grund, sich einzuschränken.
+
+*Was daraus folgt:* die Breite gehört in die Augenbraue, die Konkretheit in den
+Abschnitt „Für wen" direkt darunter. Eine breite Zeile ohne konkrete Türen
+darunter wäre eine Verschlechterung, keine Öffnung — siehe die Anmerkung bei
+Frage 2.
+
+---
+
+## Was dieser Plan bewusst nicht anfasst
+
+- **Die Unterseiten.** Sie sind das Ziel der Umzüge und bleiben, wie sie sind.
+  Der Coach spricht ausdrücklich von der *main landing page*.
+- **Die Gestaltung.** Typoskala, Flächen, Schatten und Bewegung sind vom
+  14. und 15. August und bleiben unverändert. Hier wird gekürzt, nicht neu
+  gestaltet — mit der einen Ausnahme des Helden, die der Coach benennt.
+- **Die Marke.** Bildmarke und Farben bleiben.
