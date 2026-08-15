@@ -80,23 +80,44 @@ MACHEN". Im Menü „Für wen" stehen aber **drei** Türen: Agenturen, SaaS-Anbi
 und Eigene Software. Ein SaaS-Gründer, der über eine Anzeige auf der Startseite
 landet, liest in der ersten Zeile, dass er nicht gemeint ist.
 
-**Entschieden am 2026-08-15: die Startseite schränkt nicht mehr ein.** Sie
-spricht jedes Unternehmen an, das B2B-Kunden gewinnen will. Es gibt keinen
-Grund, in Zeile eins Zielgruppen auszuschließen, die das Produkt bedient.
+**Entschieden am 2026-08-15: die Startseite schränkt nicht mehr ein.**
 
-> **Was dabei aufzupassen ist.** „Für alle" beantwortet die Frage „für wen"
-> streng genommen nicht — je breiter die Zeile, desto weniger erkennt sich
-> jemand darin wieder. Deshalb wird die Breite **oben** getragen und die
-> Konkretheit **direkt darunter**: die Augenbraue nennt die *Situation* (wer
-> B2B-Kunden über Kaltakquise gewinnt), und der neue Abschnitt „Für wen" zeigt
-> drei konkrete Türen mit Namen. Breites Versprechen, konkrete Wege — nicht
-> breites Versprechen und dann nichts.
->
-> Zu vermeiden ist eine Zeile wie „Für jedes Unternehmen, das B2B-Marketing
-> betreibt": sie beschreibt eine Branche, keine Lage. Besser ist eine Zeile,
-> die den Zustand des Lesers trifft, etwa im Sinne von *„Für alle, die
-> B2B-Kunden über Kaltakquise gewinnen"*. Die endgültige Formulierung macht der
-> `copywriter`, in beiden Sprachen.
+Der Betreiber hat die Zielgruppe selbst benannt. Wörtlich, drei Gruppen:
+
+1. Unternehmen, die **E-Mail-Marketing schon nutzen** und es verbessern und
+   automatisieren wollen
+2. Unternehmen, die **für sich selbst** Kunden per E-Mail gewinnen — oder
+   **für ihre Kunden** deren Kunden — und die Prozesse dahinter automatisieren
+   wollen
+3. Leute, die **E-Mail als neuen Kanal** aufmachen wollen
+
+Das sind **Lagen, keine Branchen** — und genau deshalb trägt es. Wer sich in
+einer Lage wiedererkennt, liest weiter; wer in einer Branchenliste seine
+Branche nicht findet, geht.
+
+Zwei Achsen stecken darin: **für wen** (für euch selbst oder für eure Kunden)
+und **wie weit** (schon dabei oder noch nicht). Drei Karten können nicht beide
+Achsen tragen. Die Aufteilung unten nimmt deshalb „für wen" als Hauptachse —
+weil dort die echten Produktunterschiede liegen, nämlich getrennte Workspaces
+je Kunde — und hängt die Einsteiger als dritte Karte daneben.
+
+### Die Augenbraue
+
+Sie muss alle drei Gruppen tragen und trotzdem kurz sein. Entwurf:
+
+> **FÜR ALLE, DIE KUNDEN PER E-MAIL GEWINNEN WOLLEN**
+
+Das „wollen" ist die ganze Arbeit dieser Zeile: es schließt Gruppe 3 ein, ohne
+sie zu nennen. Ohne „wollen" liest sich die Zeile als „für alle, die es schon
+tun", und die Einsteiger fallen wieder heraus.
+
+**Bewusst „per E-Mail" und nicht „auf jedem Kanal", obwohl die Überschrift
+direkt darunter von jedem Kanal spricht.** Das ist kein Widerspruch, sondern
+die Reihenfolge: der Leser kommt wegen E-Mail und erfährt in der nächsten
+Zeile, dass es mehr gibt. Andersherum wäre es ein Versprechen, das er noch
+nicht einordnen kann.
+
+Endgültige Formulierung in beiden Sprachen macht der `copywriter`.
 
 ### 3 · „Was macht es?"
 
@@ -210,10 +231,36 @@ Das ist Abschnitt 4 des neuen Gerüsts.
 
 ### Stufe 4 · Zwei Abschnitte werden neu gebaut
 
-**„Für wen" (neu, ~600 px).** Drei Karten, je vier Zeilen, je ein Verweis auf
-die vorhandene Zielgruppenseite. Das ist die konkrete Hälfte der Antwort aus
-Frage 2: oben das breite Versprechen, hier die drei Türen mit Namen. Ersetzt
-`#agenturen` (805 px), das heute nur eine der drei Türen zeigt.
+**„Für wen" (neu, ~600 px).** Die konkrete Hälfte der Antwort aus Frage 2: oben
+das breite Versprechen, hier drei Türen mit Namen. Ersetzt `#agenturen`
+(805 px), das heute nur eine davon zeigt.
+
+Drei Karten, je ein Titel, zwei Zeilen und ein Verweis. Entwurf:
+
+| Karte | Titel | Zwei Zeilen | Verweis |
+|---|---|---|---|
+| 1 | **Ihr gewinnt Kunden für euch selbst** | Ihr wisst, wen ihr braucht, und schreibt ihn selbst an. Hier läuft der ganze Weg dahin in einem Werkzeug statt in vieren. | `/fuer-saas` |
+| 2 | **Ihr gewinnt Kunden für andere** | Akquise im Auftrag, je Kunde ein eigener Workspace in seinem Branding, Sperrlisten getrennt. | `/fuer-agenturen` |
+| 3 | **E-Mail ist bei euch neu** | Ihr wollt den Kanal aufmachen und wisst noch nicht, wo ihr anfangt. Die erste Suche läuft am selben Tag, die erste Kampagne nach zwei bis vier Wochen Warmup. | `/funktionen` |
+
+Karte 1 und 2 tragen dabei auch Gruppe 1 des Betreibers (schon dabei, will
+automatisieren) — „in einem Werkzeug statt in vieren" ist genau das
+Verbesserungs- und Automatisierungsversprechen. Karte 3 trägt Gruppe 3.
+
+> **Zwei Dinge, die dabei auffallen und die dieser Plan nicht mehr abräumt.**
+>
+> Erstens: das Menü „Für wen" enthält heute **zwei Zielgruppen und eine
+> Fallstudie** („Für Agenturen", „Für SaaS-Anbieter", „So nutzt es retaiyn").
+> Eine Fallstudie ist keine Zielgruppe. Sobald die Startseite drei Türen zeigt,
+> sollte das Menü dieselben drei zeigen.
+>
+> Zweitens: `/fuer-saas` heißt „Für SaaS-Anbieter" und ist damit **enger als
+> Karte 1**. Wer für sich selbst akquiriert, ist nicht zwangsläufig ein
+> SaaS-Anbieter — das ist genau die Branchen-Einschränkung, von der die
+> Startseite gerade wegzieht. Die Seite selbst bleibt in diesem Plan
+> unangetastet (der Coach spricht von der Startseite), aber ihr Titel gehört
+> in einem eigenen Schritt geweitet, sonst führt Karte 1 in ein engeres
+> Versprechen, als sie gibt.
 
 **„Was es kostet" (neu, ~700 px).** Der eigentliche Kern dieser Rückmeldung.
 Die Antwort existiert bereits vollständig — sie steht nur zugeklappt bei 93 %.
@@ -308,14 +355,20 @@ will, springt ab. Das ist messbar, sobald die Seite live ist — wenn die
 Terminquote hinter den Erwartungen bleibt, ist dieser Punkt der erste, den man
 noch einmal aufmacht.
 
-**Zielgruppe: nicht mehr einschränken.** Die Startseite spricht jedes
-Unternehmen an, das B2B-Kunden gewinnen will, statt nur Agenturen. Begründung
-des Betreibers: es gibt keinen Grund, sich einzuschränken.
+**Zielgruppe: nicht mehr einschränken.** Die Startseite spricht jeden an, der
+Kunden per E-Mail gewinnen will — ob er es schon tut, für andere tut oder
+gerade erst anfängt. Begründung des Betreibers: es gibt keinen Grund, sich
+einzuschränken. Die drei Lagen stehen ausformuliert bei Frage 2 und in
+Stufe 4.
 
-*Was daraus folgt:* die Breite gehört in die Augenbraue, die Konkretheit in den
-Abschnitt „Für wen" direkt darunter. Eine breite Zeile ohne konkrete Türen
-darunter wäre eine Verschlechterung, keine Öffnung — siehe die Anmerkung bei
-Frage 2.
+*Was daraus folgt:* die Breite gehört in die Augenbraue, die Konkretheit in
+die drei Karten direkt darunter. Eine breite Zeile ohne konkrete Türen wäre
+eine Verschlechterung, keine Öffnung.
+
+*Und was noch daraus folgt:* zwei Stellen widersprechen der neuen Breite und
+gehören in einem eigenen Schritt nachgezogen — das Menü „Für wen" (zwei
+Zielgruppen plus eine Fallstudie) und der Titel von `/fuer-saas`, der enger
+ist als das, was die Startseite dann verspricht.
 
 ---
 
