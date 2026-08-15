@@ -1536,11 +1536,21 @@ const de = {
   // wir besetzen wollen.
   // ══════════════════════════════════════════════════════════════════════
   hero: {
-    // Nennt seit dem 2026-08-06 die Zielgruppe statt der Taetigkeit. Das Wort
-    // "Agentur" tauchte vorher zum ersten Mal in der Navigation auf und dann
-    // erst wieder an Abschnitt 12 -- wer aus einer Kaltmail kommt, entscheidet
-    // aber in den ersten Sekunden, ob die Seite ihn meint.
-    eyebrow: "Für Agenturen, die Outbound für ihre Kunden machen",
+    // Stand bis zum 2026-08-15 auf "Fuer Agenturen, die Outbound fuer ihre
+    // Kunden machen" -- das widersprach der eigenen Navigation (dort stehen
+    // drei Tueren: fuer euch selbst, fuer eure Kunden, neu im Kanal) und
+    // schloss in Zeile eins alle aus, die keine Agentur sind. Der Betreiber
+    // hat entschieden, die Startseite nicht mehr einzuschraenken
+    // (KONZENTRATION.md): drei Lagen statt einer Branche. "wollen" traegt die
+    // ganze Arbeit der Zeile -- es schliesst auch die ein, die E-Mail als
+    // Kanal gerade erst aufmachen, ohne sie eigens zu nennen. Bewusst "per
+    // E-Mail" und nicht "auf jedem Kanal", obwohl die Ueberschrift direkt
+    // darunter von jedem Kanal spricht: der Leser kommt wegen E-Mail und
+    // erfaehrt eine Zeile spaeter, dass es mehr gibt. Die drei Lagen stehen
+    // konkret im Abschnitt `whoFor` weiter unten. Grossbuchstaben kommen aus
+    // der CSS-Klasse (uppercase tracking-[0.14em]), der String bleibt deshalb
+    // in normaler Schreibung -- unter 50 Zeichen, sonst bricht die Zeile um.
+    eyebrow: "Für alle, die Kunden per E-Mail gewinnen wollen",
     h1Pre: "Entscheider finden. Auf ",
     h1Accent: "jedem Kanal",
     h1Post: " erreichen. Zu Kunden machen.",
@@ -1955,6 +1965,45 @@ const de = {
     DKIM: "DKIM: eine digitale Signatur auf jeder E-Mail, an der der Empfänger erkennt, dass sie unterwegs nicht verändert wurde.",
     DMARC: "DMARC: die Regel, was ein Empfänger mit E-Mails tun soll, die SPF oder DKIM nicht bestehen.",
   },
+  // ══════════════════════════════════════════════════════════════════════
+  // "FUER WEN", neu am 2026-08-15 (KONZENTRATION.md, Auftrag 2). Die
+  // konkrete Haelfte der Antwort auf "fuer wen ist das": oben im Hero das
+  // breite Versprechen, hier drei Tueren mit Namen. Ersetzt auf der
+  // Startseite den Abschnitt `agency` weiter unten, der nur Agenturen zeigt.
+  //
+  // Drei Lagen, keine Branchen -- wortgleich mit dem Hero: fuer euch selbst,
+  // fuer eure Kunden, oder E-Mail als neuer Kanal. Karte "self" und "clients"
+  // tragen dabei auch das Automatisierungsversprechen (Gruppe 1 des
+  // Betreibers: schon dabei, will es automatisieren) -- deshalb bei beiden
+  // ausdruecklich "statt in vieren" / "automatisiert statt von Hand".
+  // ══════════════════════════════════════════════════════════════════════
+  whoFor: {
+    eyebrow: "Für wen",
+    title: "Eure Lage entscheidet, nicht eure Branche",
+    cards: [
+      {
+        id: "self",
+        title: "Ihr gewinnt Kunden für euch selbst",
+        body: "Ihr wisst, wen ihr braucht, und schreibt selbst an. Der ganze Weg dahin läuft in einem Werkzeug statt in vieren.",
+        linkLabel: "Wie das für euch aussieht",
+      },
+      {
+        id: "clients",
+        // Der Link zeigt bewusst auf /fuer-agenturen und traegt dieselbe
+        // Formulierung wie `agency.pageLink` -- derselbe Ort, dieselbe
+        // Zusage, keine zweite Wortwahl fuer dasselbe Versprechen.
+        title: "Ihr gewinnt Kunden für andere",
+        body: "Ihr übernehmt die Akquise für eure Kunden, automatisiert statt von Hand. Je Kunde ein eigener Workspace in seinem Branding, mit getrennten Sperrlisten.",
+        linkLabel: "Wie das im Agenturalltag aussieht",
+      },
+      {
+        id: "new",
+        title: "E-Mail ist bei euch neu",
+        body: "Ihr wollt den Kanal aufmachen und wisst noch nicht, wo ihr anfangt. Die erste Suche läuft am selben Tag, die erste Kampagne nach zwei bis vier Wochen Warmup.",
+        linkLabel: "Alle Funktionen ansehen",
+      },
+    ],
+  },
   agency: {
     pageLink: "Wie das im Agenturalltag aussieht",
     eyebrow: "Für Agenturen",
@@ -2169,6 +2218,28 @@ const de = {
     founderRole: "Gründer & CEO, Frostbreaker",
   },
   // ══════════════════════════════════════════════════════════════════════
+  // "WAS ES KOSTET", neu am 2026-08-15 (KONZENTRATION.md, Auftrag 3). Die
+  // Antwort stand vorher bei 93% Scrolltiefe, zugeklappt in der FAQ, und
+  // zweimal. Sie zieht als eigener Abschnitt nach vorn -- entschieden OHNE
+  // Zahl: kein Betrag, keine Spanne, kein Ab-Preis. Was sich aendert, ist die
+  // Stelle und die Klarheit, nicht das Geschaeftsmodell. Die beiden
+  // FAQ-Eintraege "Was brauche ich, und was kostet es?" und "Was kostet das?"
+  // sind deshalb unten zu einem geworden, der hierher zurueckverweist statt
+  // sich zu wiederholen.
+  // ══════════════════════════════════════════════════════════════════════
+  costs: {
+    eyebrow: "Kalkulierbar",
+    title: "Ein fester Betrag, genannt im ersten Gespräch",
+    body: "Eine Zahl steht hier nicht. Wonach sie sich richtet und wann ihr sie erfahrt, findet ihr hier.",
+    points: [
+      { title: "Ein fester Betrag pro Monat", body: "Ein monatlicher Betrag, der an eurer Kundenzahl hängt — nicht an euren Leads, nicht an der Zahl eurer Workspaces." },
+      { title: "Genannt im ersten Gespräch", body: "Wir nennen ihn im ersten Gespräch, nicht erst nach der dritten Gesprächsrunde." },
+      { title: "Abfragekosten separat und sichtbar", body: "Sie laufen über eure eigenen Zugänge zum Selbstkostenpreis und stehen im Dashboard auf den Cent genau." },
+      { title: "Jederzeit kündbar", body: "Monatlich kündbar, ohne Einrichtungsgebühr und ohne Mindestlaufzeit." },
+    ],
+    note: "Eure eigenen Zugänge, zum Selbstkostenpreis, wir schlagen nichts auf.",
+  },
+  // ══════════════════════════════════════════════════════════════════════
   // Am 2026-08-14 von 17 auf 8 Eintraege gekuerzt (VEREINFACHUNG.md 1.4).
   // Der Fliesstext der FAQ war laenger als der jedes anderen Abschnitts, und
   // acht der siebzehn Antworten standen wortnah schon weiter oben auf der
@@ -2183,6 +2254,13 @@ const de = {
   //
   // Der neunte Platz bleibt bewusst frei: er gehoert der Frage, die im
   // Verkaufsgespraech tatsaechlich am haeufigsten kommt.
+  //
+  // NACHTRAG 2026-08-15 (KONZENTRATION.md, Auftrag 4): von 8 auf 7 Eintraege.
+  // "Was brauche ich, und was kostet es?" und "Was kostet das?" waren zwei
+  // Fragen, die sich ueberlappten -- fuer den Leser das Signal, dass es
+  // kompliziert ist. Sie sind jetzt eine: die Dienste-Liste bleibt (steht
+  // sonst nirgends vollstaendig), der Monatsbetrag zieht in den neuen
+  // Abschnitt `costs` um, hier bleibt nur der Verweis dorthin.
   // ══════════════════════════════════════════════════════════════════════
   faq: {
     title: "Häufige Fragen",
@@ -2190,13 +2268,7 @@ const de = {
       // Die Apollo-Antwort ist bewusst umgedreht formuliert -- nicht "wir sind
       // nur eine Ergaenzung", sondern was wir zusaetzlich tun.
       { q: "Warum nicht gleich direkt zu Apollo oder Hunter?", a: "Weil die Adresse der Anfang ist, nicht das Ergebnis. Apollo liefert Entscheider samt gepruefter Adresse. Danach faengt die Arbeit an: ein eigener Aufhaenger je Kontakt, die Pruefung des Textes, der Abgleich mit Sperrliste und Bestandskunden, der Versand, die LinkedIn-Nachricht und der Anruf, wenn es still bleibt, und am Ende die Frage, welche Textfassung Termine gebracht hat. Genau das liegt zwischen Apollo und Instantly, und genau das macht Frostbreaker." },
-      // Zieht die drei frueheren Eintraege "Was kosten die Abfragen",
-      // "Muss ich eigene API-Schluessel mitbringen" und "Welche Dienste laufen
-      // im Hintergrund" zusammen. Alle drei beantworteten dieselbe Frage aus
-      // drei Richtungen und wiederholten je zweimal, dass wir nichts
-      // aufschlagen.
-      { q: "Was brauche ich, und was kostet es?", a: "Eigene Zugänge bei den Diensten, die im Hintergrund laufen: Google für die Kartensuche, OpenAI für die Recherche, Hunter und Apollo für Adressen und Entscheider, Prospeo als weitere Quelle, NeverBounce für die Verifizierung und Instantly für den Versand. Die Schlüssel hinterlegt ihr einmal in den Einstellungen, verschlüsselt gespeichert. Danach laufen alle Abfragen auf euren eigenen Konten, zum Selbstkostenpreis, wir schlagen keinen Cent auf. Nach jeder Suche steht im Dashboard auf den Cent genau, was sie gekostet hat, und die Summe je Monat steht daneben. Was das im Monat ergibt, hängt an Nische, Trefferquote und Volumen — das rechnen wir im Gespräch an euren Zahlen durch, und das Einrichten machen wir dort gemeinsam. Es ist der Teil, an dem sonst die meisten hängenbleiben." },
-      { q: "Was kostet das?", a: "Ein fester Monatsbetrag, den wir im Gespräch gemeinsam festlegen. Er hängt daran, wie viele Kunden ihr betreut, nicht daran, wie viele Leads ihr zieht, und nicht daran, wie viele Workspaces ihr anlegt. Wir nennen ihn im ersten Gespräch, nicht nach drei Runden. Dazu kommen eure eigenen Abfragekosten zum Selbstkostenpreis, live im Dashboard einsehbar. Monatlich kündbar, keine Einrichtungsgebühr." },
+      { q: "Was brauche ich, um loszulegen?", a: "Eigene Zugänge bei den Diensten, die im Hintergrund laufen: Google für die Kartensuche, OpenAI für die Recherche, Hunter und Apollo für Adressen und Entscheider, Prospeo als weitere Quelle, NeverBounce für die Verifizierung und Instantly für den Versand. Die Schlüssel hinterlegt ihr einmal in den Einstellungen, verschlüsselt gespeichert. Danach laufen alle Abfragen auf euren eigenen Konten, zum Selbstkostenpreis, wir schlagen keinen Cent auf. Nach jeder Suche steht im Dashboard auf den Cent genau, was sie gekostet hat. Was der monatliche Betrag kostet, steht weiter oben auf dieser Seite." },
       { q: "Kann ich jederzeit kündigen?", a: "Ja, monatlich, keine Mindestlaufzeit, keine Kündigungsfrist über den laufenden Monat hinaus." },
       // Die beiden Einwaende, die der Angebot-Abschnitt auf der Startseite
       // ausloest. Beide werden beantwortet und nicht ausgesessen: wer sie
@@ -3429,7 +3501,8 @@ const en: typeof de = {
     trialNote: "30 minutes, not a sales pitch. We look at your client setup together and set up the first workspace.",
   },
   hero: {
-    eyebrow: "FOR AGENCIES RUNNING OUTBOUND FOR THEIR CLIENTS",
+    // Geschrieben, nicht uebersetzt -- siehe die Begruendung im de-Block.
+    eyebrow: "For anyone who wants to win customers over email",
     h1Pre: "Find decision-makers. Reach them on ",
     h1Accent: "every channel",
     h1Post: ". Turn them into clients.",
@@ -3690,6 +3763,30 @@ const en: typeof de = {
     DKIM: "DKIM: a digital signature on every email that lets the recipient verify it wasn't altered in transit.",
     DMARC: "DMARC: the rule telling recipients what to do with email that fails SPF or DKIM.",
   },
+  whoFor: {
+    eyebrow: "Who it's for",
+    title: "Your situation decides, not your industry",
+    cards: [
+      {
+        id: "self",
+        title: "You're winning customers for yourselves",
+        body: "You know who you need and reach out yourselves. The whole path from there runs in one tool instead of four.",
+        linkLabel: "See how it looks for you",
+      },
+      {
+        id: "clients",
+        title: "You're winning customers for others",
+        body: "You run acquisition for your clients, automated instead of by hand. One workspace per client in their branding, with separate suppression lists.",
+        linkLabel: "What that looks like day to day",
+      },
+      {
+        id: "new",
+        title: "Email is new to you",
+        body: "You want to open the channel and don't know where to start yet. The first search runs the same day, the first campaign after two to four weeks of warmup.",
+        linkLabel: "See all features",
+      },
+    ],
+  },
   agency: {
     pageLink: "What that looks like day to day",
     eyebrow: "For agencies",
@@ -3814,6 +3911,18 @@ const en: typeof de = {
     pending:
       "What this produced for retaiyn goes here as soon as there is enough to measure. We don't put up a figure we can't recalculate ourselves.",
   },
+  costs: {
+    eyebrow: "Predictable",
+    title: "A fixed amount, named on the first call",
+    body: "There's no number on this page. What it depends on, and when you'll hear it, is below.",
+    points: [
+      { title: "A fixed monthly amount", body: "A monthly amount tied to how many clients you run, not your leads and not your workspaces." },
+      { title: "Named on the first call", body: "We name it on the first call, not after the third round." },
+      { title: "Lookup costs, separate and visible", body: "They run through your own accounts at cost price and show up in the dashboard to the cent." },
+      { title: "Cancel anytime", body: "Cancel monthly, no setup fee, no minimum term." },
+    ],
+    note: "Your own accounts, at cost price — we add not a cent.",
+  },
   why: {
     title: "Why Frostbreaker exists",
     earlyAccess: { title: "You talk to the person building it", body: "We work with a small number of agencies right now, each one closely supported. For you that means: we do the setup together, you get a direct line instead of a ticket system, and what you are missing goes into the next sprint rather than onto a roadmap. That closeness only exists while the group is small." },
@@ -3826,8 +3935,7 @@ const en: typeof de = {
     title: "Frequently asked questions",
     items: [
       { q: "Why not go straight to Apollo or Hunter myself?", a: "Because the address is the start, not the result. Apollo delivers decision makers with a verified address. The work begins after that: an opener per contact, a check on the copy, a match against your suppression list and existing customers, the sending, the LinkedIn message and the call when it stays quiet, and finally the question of which copy version booked meetings. All of that sits between Apollo and Instantly, and that is what Frostbreaker does." },
-      { q: "What do I need, and what does it cost?", a: "Your own accounts with the services running in the background: Google for the map search, OpenAI for the research, Hunter and Apollo for addresses and decision-makers, Prospeo as a further source, NeverBounce for verification and Instantly for sending. You enter the keys once in settings, stored encrypted. After that every lookup runs on your own accounts, at cost, and we add not a cent. After every search the dashboard shows to the cent what it cost, with the monthly total next to it. What that adds up to per month depends on niche, hit rate and volume — we work that through on your numbers on the call, and we do the setup together there. It is the part most people otherwise get stuck on." },
-      { q: "What does it cost?", a: "One fixed monthly amount that we set together on the call. It depends on how many clients you run, not on how many leads you pull, and not on how many workspaces you create. We name it on the first call, not after three rounds. On top come your own lookup costs at cost price, visible live in the dashboard. Cancel monthly, no setup fee." },
+      { q: "What do I need to get started?", a: "Your own accounts with the services running in the background: Google for the map search, OpenAI for the research, Hunter and Apollo for addresses and decision-makers, Prospeo as a further source, NeverBounce for verification and Instantly for sending. You enter the keys once in settings, stored encrypted. After that every lookup runs on your own accounts, at cost, and we add not a cent. After every search the dashboard shows to the cent what it cost. What the monthly amount itself costs sits further up this page." },
       { q: "Can I cancel anytime?", a: "Yes, monthly, no minimum term, no notice period beyond the current month." },
       { q: "Won't every email sound the same then?", a: "The frame is the same, the line that matters is not. The opener is written per recipient out of what was researched about that particular company, not dropped in from a placeholder. On top of that, every step comes in two versions, and they have to differ in approach: different angle, different question, different opening sentence. Two versions that differ by two words get flagged as one and the same. And anything lifted word for word out of your offer is caught when the copy is measured, because at that point the recipient is reading a stranger's bullet points." },
       { q: "Can I still change the copy?", a: "Yes. Nothing goes out before you have seen it: the eight pieces of copy sit in the campaign form and wait there. You can overwrite any step or refine it with a plain instruction, so shorter, more direct, or turn this into a break-up email, one step at a time rather than the whole sequence at once. Whatever you leave alone stays exactly as it is. Before any copy goes to a thousand addresses, a person has read it." },

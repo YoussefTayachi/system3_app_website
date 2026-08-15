@@ -418,8 +418,23 @@ Menüpunkte sind in deutschem SaaS üblich, englischer Fließtext nicht.
 | Ausgangspunkt 15.08. | 20.016 px · 4.582 Wörter |
 | Vergleich umgezogen | 18.410 px · 3.970 Wörter |
 | Rundgang gekürzt | 14.937 px · 2.996 Wörter |
-| Angebot, Kanäle, CRM gekürzt | **13.825 px · 2.660 Wörter** |
+| Angebot, Kanäle, CRM gekürzt | 13.825 px · 2.660 Wörter |
+| Held ohne Nachbildung | 13.788 px |
+| **„Für wen" und „Was es kostet" dazu** | **14.341 px · 2.710 Wörter** |
 | Ziel | ~6.700 px · ~1.300 Wörter |
+
+Die letzte Zeile geht wieder nach oben, und das ist beabsichtigt: zwei
+Abschnitte sind **dazugekommen**, weil zwei Kundenfragen unbeantwortet waren.
+Kürzer ist nicht das Ziel — **beantwortet** ist das Ziel.
+
+### Die vier Fragen des Coaches, Stand jetzt
+
+| Frage | vorher | jetzt |
+|---|---|---|
+| Was macht es? | beantwortet, dann achtmal wiederholt | `#system` bei 8 %, danach nicht mehr wiederholt |
+| Wie läuft das ab? | 1.071 Wörter | sechs Zeilen bei 17 % |
+| Für wen? | „für Agenturen", im Widerspruch zur Navigation | drei Türen bei **39 %** |
+| Was kostet es? | bei **93 %**, zugeklappt, doppelt gestellt | eigener Abschnitt bei **51 %**, einmal |
 
 **Bisher −31 % Höhe und −42 % Text, ohne dass ein einziges Argument
 verschwunden ist.** Je Abschnitt:

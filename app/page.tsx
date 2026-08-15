@@ -11,8 +11,7 @@ import {
   h1Cls,
   h2Cls,
   h3Cls,
-  cardTitleCls,
-  eyebrowCls,
+  cardTitleCls,
   leadCls,
   sectionPad,
   subSectionPad,
@@ -21,7 +20,9 @@ import {
 // SuppressionMockup, DeliverabilityMockup und CampaignMockup lagen im
 // Abschnitt "Mehr als nur Leads finden", der am 2026-08-06 von der
 // Startseite verschwunden ist. Die Komponenten bleiben fuer /funktionen.
-import { AgencyMockup, PostSendMockup } from "./_mockups";
+// AgencyMockup ist am 2026-08-15 mit dem Agentur-Band von der Startseite
+// verschwunden; es steht weiter auf /fuer-agenturen und /start.
+import { PostSendMockup } from "./_mockups";
 // DashboardMockup ist seit dem 2026-08-06 nicht mehr auf der Startseite: das
 // erste Bild ist jetzt die Ansicht "Nach Text". Die Komponente bleibt in
 // _app-mockups.tsx, /funktionen ist der naheliegende neue Ort dafuer.
@@ -51,6 +52,16 @@ import { useT } from "./language-provider";
 // Kurzfassung des Angebot-Abschnitts am 2026-08-15 sind die drei Fliesstexte
 // entfallen, und was uebrig blieb -- Scheibe plus Titel -- ist eine Zeile
 // Markup in der Liste dort. Ein Bauteil fuer eine Zeile lohnt nicht.
+
+// Wohin die drei Tueren aus dem Abschnitt "Fuer wen" fuehren. Bewusst hier und
+// nicht im Woerterbuch: das Woerterbuch haelt Text, keine Wege. Und bewusst
+// nach id statt nach Reihenfolge -- wer die drei Karten umsortiert, soll nicht
+// aus Versehen die Ziele mitdrehen.
+const WOHIN: Record<string, string> = {
+  self: "/fuer-saas",
+  clients: "/fuer-agenturen",
+  new: "/funktionen",
+};
 
 export default function Home() {
   const { t } = useT();
@@ -450,47 +461,54 @@ export default function Home() {
           Kunde, Monatsende, was ihr ueber alle Kunden lernt) steht auf
           /fuer-agenturen, und dorthin fuehrt hier ein deutlicher Weg statt
           eines Textlinks am Rand. ═══════════════════════════════════════ */}
-      <section id="agenturen" className="scroll-mt-20 border-y border-edge/60 bg-band">
+      {/* ═══════════════════════════════════════════════════════════════
+          FUER WEN, neu am 2026-08-15 (KONZENTRATION.md Stufe 4).
+
+          Hier stand #agenturen: ein Band, das ausschliesslich Agenturen
+          ansprach, mit AgencyMockup daneben. Es beantwortete die Frage
+          "fuer wen ist das" mit EINER von drei Tueren und widersprach damit
+          der eigenen Navigation, in der drei stehen.
+
+          Der Betreiber hat die Zielgruppe geoeffnet: jedes Unternehmen, das
+          Kunden per E-Mail gewinnen will. Das breite Versprechen steht in
+          der Augenbraue des Helden, die konkreten Wege stehen hier. Eine
+          breite Zeile ohne konkrete Tueren darunter waere eine
+          Verschlechterung gewesen, keine Oeffnung.
+
+          Drei LAGEN, keine Branchen. Wer sich in einer Lage wiedererkennt,
+          liest weiter; wer in einer Branchenliste seine Branche nicht
+          findet, geht.
+
+          AgencyMockup ist damit von der Startseite verschwunden, steht aber
+          weiter auf /fuer-agenturen und /start.
+
+          OFFEN: die Karte "self" fuehrt auf /fuer-saas, und diese Seite
+          heisst "Fuer SaaS-Anbieter" -- enger als die Karte verspricht. Ihr
+          linkLabel behauptet SaaS deshalb bewusst nicht. Der Titel der
+          Zielseite gehoert in einem eigenen Schritt geweitet.
+          ═══════════════════════════════════════════════════════════════ */}
+      <section id="fuer-wen" className="scroll-mt-20 border-y border-edge/60 bg-band">
+        {/* Der alte Anker bleibt: auf /#agenturen zeigen vorhandene Verweise. */}
+        <span id="agenturen" className="block scroll-mt-20" aria-hidden />
         <div className={"mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
-          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
-            <div className="min-w-0">
-              {/* Eigene Augenbraue statt SectionHeading, weil hier kein
-                  Strich davorsteht -- das Band traegt ohnehin schon eine
-                  eigene Flaeche. Groesse und Laufweite kommen trotzdem aus
-                  eyebrowCls, damit die 12px an einer Stelle stehen. */}
-              <p className={eyebrowCls}>{t.agency.eyebrow}</p>
-              <h2 className={"mt-3 " + h2Cls}>{t.agency.title}</h2>
-              <p className={"mt-5 " + leadCls}>{t.agency.body}</p>
+          <SectionHeading eyebrow={t.whoFor.eyebrow} title={t.whoFor.title} />
 
-              {/* Nur die Ueberschriften der drei Punkte, ohne Fliesstext und
-                  ohne Icons: das Band soll belegen, nicht erklaeren. */}
-              <ul className="mt-6 space-y-2.5">
-                {t.agency.features.map((f) => (
-                  <li key={f.id} className="flex items-start gap-2.5 text-[15px] leading-relaxed text-soft">
-                    <CheckIcon />
-                    {f.title}
-                  </li>
-                ))}
-              </ul>
-
-              {/* Ein Knopf statt eines Textlinks: fuer die Hauptzielgruppe ist
-                  das der zweitwichtigste Weg der Seite, gleich nach dem
-                  Gespraech. */}
-              <a
-                href="/fuer-agenturen"
-                // Druckreaktion wie an CTAButton (Begruendung dort): dieser
-                // Knopf sieht aus wie einer und war der einzige der drei,
-                // der sich beim Tippen nicht ruehrte.
-                className="group mt-7 inline-flex items-center gap-2 rounded-full border border-edge2 bg-panel px-5 py-2.5 text-sm font-medium text-ink transition-[color,border-color,scale] duration-[140ms] ease-out hover:border-ink active:scale-[0.98]"
-              >
-                {t.agency.pageLink}
-                <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
-              </a>
-            </div>
-
-            <Reveal className="min-w-0">
-              <AgencyMockup />
-            </Reveal>
+          <div className="grid items-stretch gap-6 md:grid-cols-3">
+            {t.whoFor.cards.map((c, i) => (
+              <Reveal key={c.id} delay={i * 80} className="h-full">
+                <div className="flex h-full flex-col rounded-2xl border border-edge/60 bg-panel p-6">
+                  <h3 className={cardTitleCls}>{c.title}</h3>
+                  <p className="mt-2.5 text-[15px] leading-relaxed text-soft">{c.body}</p>
+                  <Link
+                    href={WOHIN[c.id]}
+                    className="group mt-auto inline-flex items-center gap-1.5 pt-6 text-sm font-medium text-soft transition-colors hover:text-ink"
+                  >
+                    {c.linkLabel}
+                    <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
+                  </Link>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
@@ -505,6 +523,53 @@ export default function Home() {
           Karte heraus, statt sie im dritten grauen Block hintereinander
           verschwinden zu lassen. */}
       <CustomerSection className="border-b border-edge/60" />
+
+      {/* ═══════════════════════════════════════════════════════════════
+          WAS ES KOSTET, neu am 2026-08-15 (KONZENTRATION.md Stufe 4).
+
+          Der eigentliche Kern der Rueckmeldung des Coaches. Die Frage "was
+          kostet es" wurde vorher bei 93 PROZENT Scrolltiefe beantwortet,
+          zugeklappt in einem details-Element -- und sie stand ZWEIMAL in der
+          FAQ ("Was brauche ich, und was kostet es?" neben "Was kostet
+          das?"), beide beginnend mit derselben Aussage. Dass eine Frage
+          zweimal dasteht, ist fuer den Leser ein Signal, dass es kompliziert
+          ist.
+
+          Der Betreiber hat entschieden: OHNE ZAHL. Kein Betrag, keine
+          Spanne, kein Ab-Preis. Was sich aendert, ist die STELLE und die
+          KLARHEIT.
+
+          Damit das traegt, leistet der Abschnitt zwei Dinge, die die alte
+          FAQ-Antwort nicht leistete: er sagt, WOVON der Betrag abhaengt
+          (Kundenzahl, nicht Leads, nicht Workspaces -- danach kann der Leser
+          sich selbst einordnen), und er sagt, WANN die Zahl faellt (im
+          ersten Gespraech). "Preis auf Anfrage" ist eine Verweigerung;
+          beides zusammen ist eine Auskunft.
+
+          Die Stelle: unmittelbar VOR der FAQ und nach dem Beleg. Wer bis
+          hierher gelesen hat, hat verstanden, was es tut und dass es
+          funktioniert -- die Preisfrage ist dann die naechste, die er
+          stellt. In der FAQ steht jetzt nur noch, WAS man mitbringen muss
+          (eigene Zugaenge bei den sieben Diensten); der Betrag steht hier.
+          ═══════════════════════════════════════════════════════════════ */}
+      <section id="kosten" className={"scroll-mt-20 mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
+        <SectionHeading eyebrow={t.costs.eyebrow} title={t.costs.title} lead={t.costs.body} />
+
+        <div className="grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
+          {t.costs.points.map((pt) => (
+            <div key={pt.title} className="border-t border-edge/70 pt-4">
+              <h3 className={cardTitleCls}>{pt.title}</h3>
+              <p className="mt-2 text-[15px] leading-relaxed text-soft">{pt.body}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Der Satz, der das Preisargument traegt. Er steht in Ink und ohne
+            Kasten: er ist eine Zusage, keine Fussnote. */}
+        <p className="mt-10 max-w-[62ch] border-l-2 border-coral pl-4 text-base leading-relaxed text-ink">
+          {t.costs.note}
+        </p>
+      </section>
 
       {/* Die drei Kanaele, neu am 2026-08-06 (POSITIONIERUNG.md Abschnitt 5).
           Zieht den frueheren Abschnitt #telefon hier herein -- der stand als
@@ -906,6 +971,7 @@ export default function Home() {
       </section>
 
       {/* FAQ */}
+
       <section id="faq" className="scroll-mt-20 border-t border-edge/60 bg-band">
         <div className={"mx-auto max-w-3xl px-4 sm:px-6 " + sectionPad}>
           <SectionHeading title={t.faq.title} />
