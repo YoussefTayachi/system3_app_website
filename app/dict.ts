@@ -1668,7 +1668,7 @@ const de = {
   walkthrough: {
     eyebrow: "In sechs Schritten",
     title: "Was zwischen deiner Nische und dem ersten Termin passiert",
-    body: "Für jemanden, der die App nie gesehen hat. Jeder Schritt mit dem Bildschirm, auf dem er stattfindet.",
+    body: "Für jemanden, der die App nie gesehen hat.",
     stepLabel: "Schritt",
     steps: [
       {
@@ -3511,7 +3511,7 @@ const en: typeof de = {
   walkthrough: {
     eyebrow: "In six steps",
     title: "What happens between your niche and the first meeting",
-    body: "For someone who has never seen the app. Every step with the screen it happens on.",
+    body: "For someone who has never seen the app.",
     stepLabel: "Step",
     steps: [
       {

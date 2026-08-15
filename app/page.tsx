@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import {
   CTAButton,
   CTAGroup,
@@ -36,7 +37,10 @@ import { GateMockup, EffectMockup } from "./_guard-mockups";
 import { OfferMapMockup, type OfferMapMockupProps } from "./_offer-mockups";
 import { LeadCardStack } from "./_illustration";
 import { SystemMap } from "./_system-map";
-import { StepWalkthrough } from "./_walkthrough";
+// StepWalkthrough ist am 2026-08-15 aus dem Rundgang gefallen (Begruendung an
+// der Fundstelle). _walkthrough.tsx wird seither von niemandem mehr
+// importiert und bleibt fuer den Tag liegen, an dem es eine Seite gibt, auf
+// die ein ausfuehrlicher Rundgang gehoert.
 import { CustomerStrip, CustomerSection } from "./_customers";
 import { Reveal } from "./reveal";
 import { postSendIcons, CheckIcon } from "./_icons";
@@ -210,10 +214,62 @@ export default function Home() {
           title={t.walkthrough.title}
           lead={t.walkthrough.body}
         />
-        <StepWalkthrough />
-        {/* Der Haupt-CTA steht erst NACH Schritt 6, nicht dazwischen: die
-            Mini-CTAs an den Schritten sind die kleinen Ausstiege, dieser
-            hier ist der eigentliche. */}
+        {/* ═══════════════════════════════════════════════════════════════
+            KURZFASSUNG SEIT DEM 2026-08-15 (KONZENTRATION.md, Stufe 2).
+
+            Hier stand StepWalkthrough: sechs Schritte mit je einem Absatz,
+            einer Detailzeile, einem eigenen Knopf und einer Nachbildung.
+            4.335 Pixel und 1.071 Woerter -- 22 Prozent der Seite und 41
+            Prozent aller Woerter, zusammen mit dem Angebot-Abschnitt.
+
+            Die Rueckmeldung des Coaches war, dass genau solche Tiefe den
+            Besucher verwirrt statt ihn zu ueberzeugen. Der Abschnitt
+            beantwortet die Frage "wie laeuft das ab" -- und die sechs
+            TITEL beantworten sie vollstaendig. Sie sind der einzige Teil,
+            der als Liste gelesen einen Ablauf ergibt; die Absaetze darunter
+            sind die Antwort auf eine Frage, die hier noch niemand stellt.
+
+            Kein Wort ist dafuer neu geschrieben worden. Die sechs Titel
+            stehen unveraendert im Woerterbuch, in beiden Sprachen, und
+            werden dort auch weiter von /funktionen gebraucht.
+
+            Was wegfaellt, faellt nicht aus der Website: fuenf der sechs
+            Schritte stehen ausfuehrlich auf /funktionen. Der sechste
+            ("Und jetzt weisst du, was funktioniert hat") steht dort nicht
+            -- sein Titel bleibt hier, und das Argument dahinter steht in
+            der Vergleichstabelle auf /funktionen#vergleich.
+
+            StepWalkthrough bleibt in _walkthrough.tsx liegen. Die Datei
+            wird von niemandem mehr importiert; sie steht dort fuer den Tag,
+            an dem es eine Seite gibt, auf die ein ausfuehrlicher Rundgang
+            gehoert.
+            ═══════════════════════════════════════════════════════════ */}
+        <ol className="mt-2 grid gap-x-10 gap-y-5 sm:grid-cols-2">
+          {t.walkthrough.steps.map((s, i) => (
+            <li key={s.title} className="flex items-baseline gap-4 border-t border-edge/70 pt-4">
+              {/* Die Ziffer traegt die Reihenfolge, nicht die Aussage --
+                  deshalb tabellarische Ziffern und zurueckgenommene Farbe.
+                  Ohne tabular-nums stehen die zweistelligen nicht auf der
+                  Kante der einstelligen. */}
+              <span className="shrink-0 text-sm font-semibold tabular-nums text-faint">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span className="text-[15px] font-medium leading-snug text-ink sm:text-base">{s.title}</span>
+            </li>
+          ))}
+        </ol>
+
+        <Link
+          href="/funktionen"
+          className="mt-8 inline-flex items-center gap-1.5 text-sm text-soft underline decoration-edge3 underline-offset-4 transition-colors hover:text-ink"
+        >
+          {t.nav.funktionenItems[0].label}
+          <span aria-hidden>→</span>
+        </Link>
+
+        {/* Der Haupt-CTA steht erst NACH den sechs Schritten. Die Mini-CTAs
+            an den einzelnen Schritten sind mit dem ausfuehrlichen Rundgang
+            entfallen; dieser hier ist jetzt der einzige. */}
         <div className="mt-16 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-edge2/70 pt-10">
           <CTAButton />
           <p className="max-w-[52ch] text-sm text-mute">{t.cta.trialNote}</p>
