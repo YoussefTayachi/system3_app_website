@@ -1713,13 +1713,13 @@ const de = {
     stepLabel: "Schritt",
     steps: [
       {
-        title: "Nische rein, Entscheider raus",
+        title: "Aus einer Nische wird eine Liste mit Namen",
         body: "Branche, Ort, Größe, eingesetzte Technik, oder wer gerade Stellen ausschreibt. Was zurückkommt, ist keine Firmenliste, sondern eine Liste von Menschen: Name, Rolle, geprüfte Adresse, Telefonnummer.",
         detail: "Rollen-Adressen wie info@ oder office@ fallen automatisch raus. An eine Adresse, für die niemand zuständig ist, schreibt man nicht kalt an.",
         cta: "So sieht es in echt aus",
       },
       {
-        title: "Jeder bekommt seinen eigenen ersten Satz",
+        title: "Jede Nachricht ist personalisiert",
         body: "Aus der Recherche zur Firma entsteht ein Aufhänger je Kontakt. Du bestimmst die Quelle, den Ton und die Wörter, die nicht vorkommen dürfen, und testest an einer echten Firma, bevor etwas gespeichert wird.",
         // Bis zum 2026-08-13 stand hier der Satz gegen Platzhalter-
         // Personalisierung. Der stimmt weiter, liess den Schritt aber wie die
@@ -1731,13 +1731,13 @@ const de = {
         cta: "Den Agenten ansehen",
       },
       {
-        title: "Zwei Prüfungen, bevor etwas rausgeht",
+        title: "Text und Technik werden geprüft, bevor etwas rausgeht",
         body: "Der Copy-Check prüft Länge, Spam-Wörter, KI-Klang und ob wirklich nur eine Handlungsaufforderung drinsteht. Die Startprüfung prüft danach die Technik: SPF, DKIM, Bounce-Quote, sendbare Adressen.",
         detail: "Vier der elf Prüfungen können den Start aufhalten. Das kostet dich nicht eine Kampagne, das kostet dich sonst die Domain.",
         cta: "Die Prüfungen ansehen",
       },
       {
-        title: "Wenn der Lead auf die Mail nicht antwortet, steht die Nachricht schon",
+        title: "Antwortet der Lead nicht, ist die LinkedIn-Nachricht schon fertig",
         body: "Nach Erstmail und drei Follow-ups erscheint eine LinkedIn-Aufgabe, aber nur dort, wo ein Profil hinterlegt ist. Die Nachricht ist bereits eingesetzt, mit demselben Aufhänger wie die Mail. Antwortet der Lead auch auf die LinkedIn-Nachricht nicht, kommt der Anruf, mit Nummer und Vorbereitung.",
         detail: "Immer genau ein nächster Schritt, nie zwei gleichzeitig. Wer antwortet, bekommt im selben Moment keine weiteren Nachrichten mehr.",
         cta: "Die Kette ansehen",
@@ -3647,25 +3647,25 @@ const en: typeof de = {
     stepLabel: "Step",
     steps: [
       {
-        title: "Niche in, decision-makers out",
+        title: "A niche becomes a list of names",
         body: "Industry, location, size, the technology they run, or who is hiring right now. What comes back is not a list of companies but a list of people: name, role, verified address, phone number.",
         detail: "Role addresses like info@ or office@ are filtered out automatically. You do not cold-email an address nobody is responsible for.",
         cta: "See it for real",
       },
       {
-        title: "Everyone gets their own first sentence",
+        title: "Every message is personalised",
         body: "An opener per contact, written from the research on that company. You set the source, the tone and the words that must not appear, and test it on a real company before anything is saved.",
         detail: "It is the one line that differs per company, not a mail merge with the company name in the right slot. What follows it — the problem, the payoff, the one question — comes from your offer, in the section right below.",
         cta: "See the agent",
       },
       {
-        title: "Two checks happen before anything goes out",
+        title: "Copy and technical setup are checked before anything goes out",
         body: "The copy check looks at length, spam words, AI tone and whether there really is only one call to action. The start check then checks the technical side: SPF, DKIM, bounce rate, sendable addresses.",
         detail: "Four of the eleven checks can hold the start back. That does not cost you a campaign, it otherwise costs you the domain.",
         cta: "See the checks",
       },
       {
-        title: "When the lead doesn't reply to the email, the message is already written",
+        title: "If the lead doesn't reply, the LinkedIn message is already written",
         body: "After the first mail and three follow-ups a LinkedIn task appears, but only where a profile is on file. The message is already filled in, with the same opener as the email. If the lead doesn't reply to that either, the call comes up, with number and prep.",
         detail: "Always exactly one next step, never two at once. Anyone who replies stops receiving further messages the same moment.",
         cta: "See the chain",
