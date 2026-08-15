@@ -1,5 +1,107 @@
 # Überschriften, die etwas benennen
 
+---
+
+# Teil 0 · Woran die Seite gemessen wird
+
+*Nachgetragen am 2026-08-15, auf Ansage des Betreibers. Dieser Teil steht
+vorn, weil er der Maßstab für alles Übrige ist.*
+
+> Der wichtigste faktor ob eine cold outreach app gut ist oder nicht ist ob
+> leads antworten und man termine bucht — und meine app ist so konzipiert und
+> alle features sind daraus ausgelegt dass es die wahrscheinlichkeit erhöht
+> dass ein lead tatsächlich antwortet.
+
+Das ist keine Ergänzung, sondern die Klammer. Eine Funktionsliste beantwortet
+„was kann es". Der Käufer fragt „**antworten die Leute**". Jede Funktion dieser
+App existiert, weil sie an einer Stelle dieser Wahrscheinlichkeit dreht — und
+genau das steht auf der Seite bisher nirgends.
+
+## Die Hebel, Funktion für Funktion
+
+Jede Zeile ist eine Funktion, die es schon gibt. Die rechte Spalte ist der
+Grund, warum sie existiert.
+
+| Funktion | Was sie an der Antwortwahrscheinlichkeit dreht |
+|---|---|
+| Entscheider statt `info@` | Eine Rollenadresse antwortet nie. Da ist niemand zuständig. |
+| Verifizierte Adresse | Eine Mail, die nicht ankommt, kann nicht beantwortet werden. |
+| Elf Prüfungen: SPF, DKIM, Bounce-Quote | Landet die Mail im Postfach oder im Spam. |
+| Copy-Check: Spam-Wörter, KI-Klang | Dasselbe, eine Ebene tiefer. |
+| Icebreaker je Kontakt | Die erste Zeile entscheidet, ob die zweite gelesen wird. |
+| Angebotsprofil → acht Mails | Eine Mail mit einem Punkt statt vier leerer Textfelder. |
+| Schrumpfende Bitte: 90/70/50/35 Wörter, eine Frage | Eine kleine Frage wird eher beantwortet als eine Terminbitte. |
+| **Drei Kanäle am selben Kontakt** | **Drei Versuche statt einem.** Siehe unten. |
+| A/B mit ehrlichem Gewinner | Du erfährst, welche Fassung tatsächlich Antworten bringt. |
+| Posteingang und Pipeline | Eine Antwort, die untergeht, ist keine Antwort. |
+
+**Das ist die Geschichte der Seite.** Sie ist heute in zehn Abschnitte zerlegt,
+die je für sich eine Fähigkeit vorführen — und in keinem steht, worauf sie
+zusammen hinauslaufen.
+
+## Der Punkt, der ganz fehlt: drei Versuche für einen Einkauf
+
+Der Betreiber, wörtlich:
+
+> dass man das meiste aus einem lead rausholt und zwar mit emails, wenn er da
+> nicht antwortet linkedin wenn er dann nicht antwortet ruft man ihn an und hat
+> somit das meiste vom credit mit dem man den lead holt genutzt
+
+Die Rechnung dahinter steht bisher nirgends auf der Seite:
+
+1. Ein Lead wird **einmal** eingekauft. Das kostet Credits bei Apollo, Hunter
+   oder Prospeo — der einzige Posten, der je Lead wirklich anfällt.
+2. Was danach passiert, kostet **keine weiteren Abfrage-Credits**: die
+   LinkedIn-Nachricht nutzt das Profil, das schon da ist; der Anruf nutzt die
+   Nummer aus dem öffentlichen Eintrag, die beim Anreichern mitkam.
+3. Wer nur mailt, lässt zwei Drittel des Eingekauften liegen.
+
+**Wo das hingehört: in `#kanaele`, und zwar als Ersatz.** Der Abschnitt
+erklärt heute den *Automatisierungsgrad* („Der Unterschied zwischen den Kanälen
+ist nicht, wie gut sie sind, sondern wie viel davon von allein läuft"). Das
+beantwortet „wie viel Arbeit ist das" — eine Frage, die der Leser an dieser
+Stelle nicht stellt. Er fragt: **wie oft komme ich an diesen Menschen heran.**
+
+Der Automatisierungs-Punkt geht nicht verloren; er steckt bereits in der Zeile
+„Was du tust" auf jeder der drei Karten, und dort ist er am richtigen Platz.
+
+### Was dort stehen muss
+
+| Ebene | Aufgabe |
+|---|---|
+| Überschrift | Die Verkettung benennen. Entwurf: **„Drei Versuche, ein eingekaufter Lead"** |
+| Erster Satz | Der Painpoint: eine Mail, keine Antwort, Lead abgehakt — das Übrige liegen gelassen. |
+| Zweiter Satz | Der Nutzen: LinkedIn nur, wenn die Mail still bleibt. Anruf nur, wenn LinkedIn still bleibt. Ohne weitere Abfragekosten. |
+
+**Nicht behaupten:** eine Antwortquote, einen Prozentsatz oder „die höchste
+Wahrscheinlichkeit". Der Mechanismus ist das Argument — drei Berührungen am
+selben Menschen statt einer —, und den kann der Leser selbst bewerten. Eine
+erfundene Zahl würde auf einer Seite mit dem Abschnitt „Was sie dir nicht
+abnimmt" alles andere entwerten.
+
+Was belegbar ist und dastehen darf: **die Kette läuft nur weiter, solange es
+still bleibt.** Wer antwortet, fällt im selben Moment heraus — das steht
+bereits so im Rundgang und ist eine Aussage über das Produkt, keine über den
+Markt.
+
+## Was daraus für den Rest des Plans folgt
+
+Die sechzehn Überschriften sind umgestellt (siehe Teil 1). Der Bauplan
+„Feature → Painpoint → Nutzen" bekommt jetzt eine **vierte Prüfung**:
+
+> **Antwortprobe.** Lässt sich in einem Satz sagen, was dieser Abschnitt an der
+> Wahrscheinlichkeit dreht, dass ein Lead antwortet? Wenn nein: entweder gehört
+> der Abschnitt nicht auf die Startseite, oder er ist falsch erklärt.
+
+Angewandt auf den heutigen Stand fällt genau ein Abschnitt durch — `#kanaele`,
+aus dem oben genannten Grund. Alle anderen bestehen sie, sagen ihren Hebel aber
+nicht: er steckt im Fließtext, nicht in der Überschrift.
+
+**Das ist die Arbeit für Teil 3**, nach den Streichungen: nicht neue Abschnitte,
+sondern die vorhandenen so schreiben, dass ihr Hebel im ersten Satz steht.
+
+---
+
 ## Der Auftrag
 
 Der Betreiber, wörtlich:
@@ -157,9 +259,12 @@ zu werden.
 ## Reihenfolge
 
 1. **Die sechzehn Zeilen** — reine Wörterbuch-Arbeit, `copywriter`, beide
-   Sprachen. Kein Markup ändert sich.
+   Sprachen. Kein Markup ändert sich. ✔ **erledigt 15.08., 16 → 1**
 2. **Die vier Streichungen** — Markup, klein.
-3. **Nachmessen und gegenlesen** (unten).
+3. **Der Hebel in den ersten Satz** (Teil 0): `#kanaele` von
+   Automatisierungsgrad auf die Kette umstellen, und in den übrigen
+   Abschnitten den Hebel aus dem Fließtext nach vorn ziehen.
+4. **Nachmessen und gegenlesen** (unten).
 
 Jede Stufe ein eigener Commit.
 
@@ -175,6 +280,12 @@ Jede Stufe ein eigener Commit.
 - Kopfleiste 8 × 4 × 2 = 0 von 64, Querscrollen 8 × 2 × 2 = 0 von 32
 - **Beide Sprachen.** Die englische Fassung hat dieselben Konstruktionen, weil
   sie aus der deutschen übersetzt ist.
+- **Antwortprobe über alle Abschnitte der Startseite:** zu jedem lässt sich in
+  einem Satz sagen, was er an der Antwortwahrscheinlichkeit dreht. Ziel:
+  **0 Durchfaller** (heute 1 — `#kanaele`).
+- **Keine erfundene Quote.** Nach „%", „Prozent", „mal mehr", „doppelt so"
+  suchen: außerhalb der Kundenzahlen von retaiyn und der belegten Werte im
+  Torwart-Abschnitt **0 neue Treffer**.
 
 ## Die Gegenprobe
 
