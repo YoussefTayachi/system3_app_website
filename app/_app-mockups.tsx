@@ -19,10 +19,17 @@ import { useT } from "./language-provider";
  */
 
 /** Gemeinsamer Rahmen: dezente Fensterleiste, damit die Nachbildung als
- *  Programmoberflaeche lesbar ist, ohne ein Browserfenster zu imitieren. */
+ *  Programmoberflaeche lesbar ist, ohne ein Browserfenster zu imitieren.
+ *
+ *  KEIN `border` mehr, seit dem 2026-08-15. `shadow-screen` (globals.css)
+ *  faengt mit `0 0 0 1px` an -- das IST die Haarlinie. Ein zusaetzlicher
+ *  border legte zwei Linien uebereinander und machte die Kante doppelt so
+ *  dunkel wie gemeint. Vorher stand hier `shadow-xl shadow-ink/[0.07]`,
+ *  dessen erste Schicht 20px UNTER dem Kasten beginnt: ein Dunst darunter
+ *  statt eines Bildschirms, der vor der Seite steht. */
 function AppFrame({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className={"overflow-hidden rounded-2xl border border-edge2/70 bg-panel shadow-xl shadow-ink/[0.07] " + className}>
+    <div className={"overflow-hidden rounded-2xl bg-panel shadow-screen " + className}>
       <div className="flex items-center gap-1.5 border-b border-edge/70 bg-panel2/60 px-4 py-2.5">
         <span className="h-2 w-2 rounded-full bg-edge3/50" />
         <span className="h-2 w-2 rounded-full bg-edge3/35" />
@@ -43,7 +50,7 @@ export function DashboardMockup() {
       <div className="p-5 sm:p-6">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <p className="font-display text-lg font-semibold tracking-[-0.01em] text-ink">{m.title}</p>
+            <p className="text-lg font-semibold tracking-[-0.01em] text-ink">{m.title}</p>
             <p className="mt-0.5 text-xs text-mute">{m.subtitle}</p>
           </div>
           {/* Als Beispiel gekennzeichnet: die Zahlen zeigen, wie eine gut
@@ -73,7 +80,7 @@ export function DashboardMockup() {
               </p>
               <p
                 className={
-                  "font-display mt-1 text-xl font-semibold tracking-[-0.02em] " +
+                  "mt-1 text-xl font-semibold tracking-[-0.02em] " +
                   (s.accent ? "text-sky-700" : "text-ink")
                 }
               >
@@ -93,7 +100,7 @@ export function DashboardMockup() {
             <span className="block text-[10px] font-medium uppercase tracking-[0.1em] text-sky-900/50">
               {m.costLabel}
             </span>
-            <span className="font-display block text-base font-semibold tracking-[-0.02em] text-ink">
+            <span className="block text-base font-semibold tracking-[-0.02em] text-ink">
               {m.costValue}
             </span>
           </span>
@@ -157,30 +164,145 @@ function FieldBox({ label, value, chevron = false }: { label: string; value: str
 }
 
 /**
- * Beide Suchwege in einer bedienbaren Maske statt zwei nebeneinanderstehender
- * Standbilder. Der Reiter laesst sich wirklich umschalten -- genau wie in der
- * App -- was die Kernaussage der Sektion ("derselbe Bildschirm, zwei Quellen")
- * belegt, statt sie nur zu behaupten. Die Werte bleiben Beispieldaten.
+ * Alle vier Suchwege in einer bedienbaren Maske statt vier nebeneinander
+ * stehender Standbilder. Der Reiter laesst sich wirklich umschalten -- genau
+ * wie in der App -- was die Kernaussage der Sektion ("derselbe Bildschirm,
+ * verschiedene Quellen") belegt, statt sie nur zu behaupten. Die Werte
+ * bleiben Beispieldaten.
+ *
+ * Die Reihenfolge folgt der App (get_businesses.py): maps, corporate, apollo,
+ * prospeo. Wer hier einen Reiter ergaenzt, muss BEIDES anfassen -- `MODES` und
+ * den Woerterbuch-Eintrag. Dass die Reiterbeschriftungen aus `local.tabs`
+ * kommen und die Modi aus `MODES`, hat genau einmal dazu gefuehrt, dass ein
+ * Reiter den Bildschirm eines anderen zeigte (2026-08-15).
  */
-type SearchMode = "local" | "corporate" | "apollo";
+type SearchMode = "local" | "corporate" | "apollo" | "prospeo";
+
+/**
+ * Die Tafel fuer Apollo und Prospeo. Beide Woerterbuch-Eintraege haben
+ * dieselben Feldnamen, weil beide denselben Bildschirm der App zeigen -- eine
+ * Personensuche, die Firma und Entscheider in einem Lauf zurueckgibt. Deshalb
+ * ein Bauteil mit Akzentfarbe statt zweimal fuenfundvierzig Zeilen.
+ *
+ * Die Farbe unterscheidet die QUELLE, nicht die Wichtigkeit: Sky fuer Maps,
+ * Smaragd fuer Hunter, Violett fuer Apollo, Petrol fuer Prospeo. Vier Quellen,
+ * vier Toene. Bernstein und Rot sind belegt (Coach-Befund und "geht schief",
+ * siehe _guard-mockups.tsx) und kommen hier nicht vor.
+ *
+ * Die Klassen stehen ausgeschrieben und nicht zusammengesetzt: Tailwind liest
+ * den Quelltext statisch, und ein zur Laufzeit gebautes `border-${ton}-300`
+ * landet nie im erzeugten CSS.
+ */
+const SUCH_AKZENT = {
+  violet: {
+    chip: "border-violet-300/70 bg-violet-50/70 text-violet-800",
+    techChip: "border-violet-500/60 bg-violet-500/10 text-violet-800",
+    notizKasten: "border-violet-200/70 bg-violet-50/50",
+    notizLabel: "text-violet-700/70",
+    notizWert: "text-violet-900",
+  },
+  teal: {
+    chip: "border-teal-300/70 bg-teal-50/70 text-teal-800",
+    techChip: "border-teal-500/60 bg-teal-500/10 text-teal-800",
+    notizKasten: "border-teal-200/70 bg-teal-50/50",
+    notizLabel: "text-teal-700/70",
+    notizWert: "text-teal-900",
+  },
+} as const;
+
+type PersonenSuche = {
+  fields: readonly { label: string; value: string }[];
+  titlesLabel: string;
+  titlesValue: string;
+  chipsLabel: string;
+  chips: readonly string[];
+  techLabel: string;
+  techChips: readonly string[];
+  noteLabel: string;
+  noteValue: string;
+  cta: string;
+};
+
+function PersonenSuchTafel({ d, akzent }: { d: PersonenSuche; akzent: keyof typeof SUCH_AKZENT }) {
+  const a = SUCH_AKZENT[akzent];
+  return (
+    <>
+      <div className="mt-4 grid gap-3 sm:grid-cols-3">
+        {d.fields.map((f) => (
+          <FieldBox key={f.label} label={f.label} value={f.value} />
+        ))}
+      </div>
+      <div className="mt-4">
+        <FieldBox label={d.titlesLabel} value={d.titlesValue} />
+      </div>
+
+      <p className="mt-4 text-[10px] font-medium uppercase tracking-[0.1em] text-faint">{d.chipsLabel}</p>
+      <div className="mt-1.5 flex flex-wrap gap-1.5">
+        {d.chips.map((c) => (
+          <span
+            key={c}
+            className={"inline-flex items-center rounded-full border px-2.5 py-1 text-[11px] font-medium " + a.chip}
+          >
+            {c}
+          </span>
+        ))}
+      </div>
+
+      {/* Der Technologie-Filter taucht hier schon auf, damit der Uebergang
+          zur naechsten Sektion nicht aus dem Nichts kommt. */}
+      <p className="mt-4 text-[10px] font-medium uppercase tracking-[0.1em] text-faint">{d.techLabel}</p>
+      <div className="mt-1.5 flex flex-wrap gap-1.5">
+        {d.techChips.map((c) => (
+          <span
+            key={c}
+            className={
+              "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-medium " + a.techChip
+            }
+          >
+            <span aria-hidden>✓</span>
+            {c}
+          </span>
+        ))}
+      </div>
+
+      <div className={"mt-4 flex flex-wrap items-end justify-between gap-3 rounded-xl border px-4 py-3 " + a.notizKasten}>
+        <div>
+          <p className={"text-[10px] font-medium uppercase tracking-[0.1em] " + a.notizLabel}>{d.noteLabel}</p>
+          <p className={"mt-1 text-sm font-semibold " + a.notizWert}>{d.noteValue}</p>
+        </div>
+        <span className="rounded-full bg-ink px-4 py-2 text-xs font-medium text-surface">{d.cta}</span>
+      </div>
+    </>
+  );
+}
 
 export function UnifiedSearchMockup() {
   const { t } = useT();
   const local = t.appMockups.search;
   const corporate = t.appMockups.corporateSearch;
   const apollo = t.appMockups.apolloSearch;
+  const prospeo = t.appMockups.prospeoSearch;
   const [mode, setMode] = useState<SearchMode>("local");
-  const m = mode === "local" ? local : mode === "corporate" ? corporate : apollo;
-  const MODES: SearchMode[] = ["local", "corporate", "apollo"];
+  const m =
+    mode === "local" ? local : mode === "corporate" ? corporate : mode === "apollo" ? apollo : prospeo;
+  // VIER Eintraege, nicht drei. Bis zum 2026-08-15 standen hier drei, waehrend
+  // `local.tabs` vier Reiter rendert -- fuer i = 3 war `MODES[3]` undefined,
+  // `mode` wurde undefined, und der Ausdruck darueber fiel auf den letzten
+  // Zweig durch: wer auf "Anlass (Prospeo)" klickte, bekam den APOLLO-
+  // Bildschirm unter Prospeo-Beschriftung zu sehen. Zusaetzlich stand
+  // `aria-selected` dann auf allen vier Reitern falsch, weil
+  // `undefined === undefined` wahr ist.
+  const MODES: SearchMode[] = ["local", "corporate", "apollo", "prospeo"];
 
   return (
     <AppFrame>
       <div className="p-5 sm:p-6">
-        <p className="font-display text-lg font-semibold tracking-[-0.01em] text-ink">{m.title}</p>
+        <p className="text-lg font-semibold tracking-[-0.01em] text-ink">{m.title}</p>
         <p className="mt-0.5 text-xs text-mute">{m.subtitle}</p>
 
-        {/* flex-wrap statt inline-flex: mit dem dritten Reiter passt die Leiste
-            auf schmalen Displays nicht mehr in eine Zeile. */}
+        {/* flex-wrap statt inline-flex: schon mit dem dritten Reiter passt die
+            Leiste auf schmalen Displays nicht mehr in eine Zeile, mit dem
+            vierten erst recht. */}
         <div className="mt-5 flex flex-wrap gap-1 rounded-lg bg-panel2 p-1 sm:inline-flex" role="tablist">
           {local.tabs.map((tab, i) => {
             const value = MODES[i];
@@ -254,52 +376,10 @@ export function UnifiedSearchMockup() {
               <span className="rounded-full bg-ink px-4 py-2 text-xs font-medium text-surface">{corporate.cta}</span>
             </div>
           </>
+        ) : mode === "apollo" ? (
+          <PersonenSuchTafel d={apollo} akzent="violet" />
         ) : (
-          <>
-            <div className="mt-4 grid gap-3 sm:grid-cols-3">
-              {apollo.fields.map((f) => (
-                <FieldBox key={f.label} label={f.label} value={f.value} />
-              ))}
-            </div>
-            <div className="mt-4">
-              <FieldBox label={apollo.titlesLabel} value={apollo.titlesValue} />
-            </div>
-
-            <p className="mt-4 text-[10px] font-medium uppercase tracking-[0.1em] text-faint">{apollo.chipsLabel}</p>
-            <div className="mt-1.5 flex flex-wrap gap-1.5">
-              {apollo.chips.map((c) => (
-                <span
-                  key={c}
-                  className="inline-flex items-center rounded-full border border-violet-300/70 bg-violet-50/70 px-2.5 py-1 text-[11px] font-medium text-violet-800"
-                >
-                  {c}
-                </span>
-              ))}
-            </div>
-
-            {/* Der Technologie-Filter taucht hier schon auf, damit der Uebergang
-                zur naechsten Sektion nicht aus dem Nichts kommt. */}
-            <p className="mt-4 text-[10px] font-medium uppercase tracking-[0.1em] text-faint">{apollo.techLabel}</p>
-            <div className="mt-1.5 flex flex-wrap gap-1.5">
-              {apollo.techChips.map((c) => (
-                <span
-                  key={c}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-violet-500/60 bg-violet-500/10 px-2.5 py-1 text-[11px] font-medium text-violet-800"
-                >
-                  <span aria-hidden>✓</span>
-                  {c}
-                </span>
-              ))}
-            </div>
-
-            <div className="mt-4 flex flex-wrap items-end justify-between gap-3 rounded-xl border border-violet-200/70 bg-violet-50/50 px-4 py-3">
-              <div>
-                <p className="text-[10px] font-medium uppercase tracking-[0.1em] text-violet-700/70">{apollo.noteLabel}</p>
-                <p className="mt-1 text-sm font-semibold text-violet-900">{apollo.noteValue}</p>
-              </div>
-              <span className="rounded-full bg-ink px-4 py-2 text-xs font-medium text-surface">{apollo.cta}</span>
-            </div>
-          </>
+          <PersonenSuchTafel d={prospeo} akzent="teal" />
         )}
       </div>
     </AppFrame>
@@ -319,7 +399,7 @@ export function LeadsTableMockup() {
             gelesen werden. Bis zum 14.08.2026 war dies das einzige grosse
             Zahlenbild ohne diese Marke. */}
         <div className="flex flex-wrap items-start justify-between gap-3">
-          <p className="font-display text-lg font-semibold tracking-[-0.01em] text-ink">{m.title}</p>
+          <p className="text-lg font-semibold tracking-[-0.01em] text-ink">{m.title}</p>
           <span className="rounded-full border border-edge2 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wide text-faint">
             {m.sampleBadge}
           </span>
@@ -428,7 +508,7 @@ export function AiAgentMockup() {
   return (
     <AppFrame>
       <div className="p-5 sm:p-6">
-        <p className="font-display text-lg font-semibold tracking-[-0.01em] text-ink">AI Agent</p>
+        <p className="text-lg font-semibold tracking-[-0.01em] text-ink">AI Agent</p>
 
         <p className="mt-4 text-[10px] font-medium uppercase tracking-[0.1em] text-faint">{p.dataSourceLabel}</p>
         <div className="mt-1.5 flex flex-wrap gap-1.5">
@@ -503,7 +583,7 @@ export function ReportMockup() {
           {m.stats.map((s) => (
             <div key={s.label} className="border-r border-edge/70 px-3.5 py-3 last:border-r-0">
               <p className="text-[10px] font-medium uppercase tracking-[0.1em] text-faint">{s.label}</p>
-              <p className="font-display mt-1 text-xl font-semibold tracking-[-0.02em] text-ink">{s.value}</p>
+              <p className="mt-1 text-xl font-semibold tracking-[-0.02em] text-ink">{s.value}</p>
             </div>
           ))}
         </div>
@@ -542,7 +622,7 @@ export function MailboxesMockup() {
   return (
     <AppFrame>
       <div className="p-5 sm:p-6">
-        <p className="font-display text-lg font-semibold tracking-[-0.01em] text-ink">{m.title}</p>
+        <p className="text-lg font-semibold tracking-[-0.01em] text-ink">{m.title}</p>
         <p className="mt-0.5 text-xs text-mute">{m.subtitle}</p>
 
         <div className="mt-4 divide-y divide-edge/70 overflow-hidden rounded-xl border border-edge/70">
@@ -652,7 +732,7 @@ export function CopyCheckMockup() {
   return (
     <AppFrame>
       <div className="p-5 sm:p-6">
-        <p className="font-display text-lg font-semibold tracking-[-0.01em] text-ink">{m.title}</p>
+        <p className="text-lg font-semibold tracking-[-0.01em] text-ink">{m.title}</p>
         <p className="mt-0.5 text-xs text-mute">{m.subtitle}</p>
 
         <div className="mt-4 space-y-5">
@@ -705,7 +785,7 @@ export function PipelineMockup() {
   return (
     <AppFrame>
       <div className="p-5 sm:p-6">
-        <p className="font-display text-lg font-semibold tracking-[-0.01em] text-ink">{m.title}</p>
+        <p className="text-lg font-semibold tracking-[-0.01em] text-ink">{m.title}</p>
         <p className="mt-0.5 text-xs text-mute">{m.subtitle}</p>
 
         <div className="-mx-1 mt-4 flex gap-2 overflow-x-auto px-1 pb-1">
@@ -798,7 +878,7 @@ export function CallListMockup() {
   return (
     <AppFrame>
       <div className="p-5 sm:p-6">
-        <p className="font-display text-lg font-semibold tracking-[-0.01em] text-ink">{m.title}</p>
+        <p className="text-lg font-semibold tracking-[-0.01em] text-ink">{m.title}</p>
         <p className="mt-0.5 text-xs text-mute">{m.subtitle}</p>
 
         <div className="mt-5 space-y-4">
@@ -882,7 +962,7 @@ export function TechFilterMockup() {
       <div className="p-5 sm:p-6">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <p className="font-display text-lg font-semibold tracking-[-0.01em] text-ink">{m.title}</p>
+            <p className="text-lg font-semibold tracking-[-0.01em] text-ink">{m.title}</p>
             <p className="mt-0.5 text-xs text-mute">{m.subtitle}</p>
           </div>
           <span className="rounded-full border border-edge2 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wide text-faint">

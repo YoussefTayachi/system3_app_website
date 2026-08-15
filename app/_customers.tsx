@@ -100,7 +100,11 @@ export function CustomerSection({ className = "" }: { className?: string }) {
     <section id="kunde" className={"scroll-mt-20 " + className}>
       <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <Reveal>
-          <div className="rounded-2xl border border-edge/60 bg-panel p-6 sm:p-8 lg:p-10">
+          {/* `shadow-card` statt `border`: die Haarlinie ist die erste Schicht
+              des Schattens (globals.css). Der Kundenbeleg ist die einzige
+              Karte dieses Abschnitts und darf auf der Seite LIEGEN -- als
+              blosser Rahmen war er eine Umrandung ohne Koerper. */}
+          <div className="rounded-2xl bg-panel p-6 shadow-card sm:p-8 lg:p-10">
             <div className="grid gap-8 lg:grid-cols-5 lg:gap-12">
               <div className="lg:col-span-2">
                 <a
@@ -160,7 +164,12 @@ export function CustomerSection({ className = "" }: { className?: string }) {
             </div>
 
             <div className="mt-8 rounded-xl border border-edge/70 bg-panel2/70 p-6 sm:mt-10 sm:p-8">
-              <h3 className="font-display text-xl font-semibold tracking-[-0.015em] text-ink sm:text-2xl">
+              {/* Ohne `font-display`: die Serife traegt erst ab 24px, und
+                  diese Zeile steht auf schmalen Fenstern in 20px. Ein
+                  Familienwechsel je Breakpoint waere ein zweiter Bruch -- die
+                  Groessen bleiben deshalb unveraendert, nur die Familie
+                  wechselt. */}
+              <h3 className="text-xl font-semibold tracking-[-0.015em] text-ink sm:text-2xl">
                 {c.mirror.title}
               </h3>
               <div className="mt-4 grid gap-4 sm:grid-cols-2 sm:gap-8">

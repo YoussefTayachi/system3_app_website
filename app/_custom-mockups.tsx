@@ -14,9 +14,11 @@ import { useT } from "./language-provider";
  * Programm, ein Fensterrahmen wuerde etwas vortaeuschen, das es nicht gibt.
  */
 
-/** Gemeinsamer Rahmen, identisch zu den Konzept-Mockups in _mockups.tsx. */
+/** Gemeinsamer Rahmen, identisch zu den Konzept-Mockups in _mockups.tsx.
+ *  `shadow-card` (globals.css) traegt die Haarlinie als erste Schicht selbst,
+ *  deshalb steht daneben kein `border` mehr. */
 function Panel({ children }: { children: React.ReactNode }) {
-  return <div className="rounded-2xl border border-edge/60 bg-panel p-6 shadow-sm">{children}</div>;
+  return <div className="rounded-2xl bg-panel p-6 shadow-card">{children}</div>;
 }
 
 function Chevron() {

@@ -44,20 +44,30 @@ import { useT } from "./language-provider";
 
 /** Pfeil zwischen zwei Stufen. Ab lg waagerecht, darunter senkrecht --
  *  deshalb zwei Varianten statt einer gedrehten: eine Rotation wuerde die
- *  Strichstaerke mitdrehen und auf schmalen Geraeten ausfransen. */
+ *  Strichstaerke mitdrehen und auf schmalen Geraeten ausfransen.
+ *
+ *  FARBE: `text-faint`, nicht `text-edge3`. Die beiden Pfeile tragen die
+ *  eigentliche Aussage dieser Karte -- dass die drei Stufen eine KETTE sind
+ *  und nicht drei Angebote nebeneinander. In edge3 (#a9a8a2) waren sie die
+ *  schwaechsten Elemente im ganzen Bild und verschwanden neben ihrer eigenen
+ *  Beschriftung.
+ *
+ *  `lg:self-center`: die Karten sind seit dem 2026-08-15 ungleich hoch
+ *  (items-start, siehe unten). Ohne self-center saesse der Pfeil ab lg oben
+ *  am Rand der Zeile statt zwischen den Karten. */
 function StageArrow({ label }: { label: string }) {
   return (
     <div
-      className="flex shrink-0 flex-col items-center justify-center gap-1.5 py-3 lg:px-3 lg:py-0"
+      className="flex shrink-0 flex-col items-center justify-center gap-1.5 py-3 lg:self-center lg:px-3 lg:py-0"
       aria-hidden
     >
       {/* senkrecht, unter lg */}
-      <svg viewBox="0 0 16 34" className="h-8 w-4 text-edge3 lg:hidden" fill="none">
+      <svg viewBox="0 0 16 34" className="h-8 w-4 text-faint lg:hidden" fill="none">
         <path d="M8 0v26" stroke="currentColor" strokeWidth="1.5" />
         <path d="M2.5 21 8 28l5.5-7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
       {/* waagerecht, ab lg */}
-      <svg viewBox="0 0 34 16" className="hidden h-4 w-8 text-edge3 lg:block" fill="none">
+      <svg viewBox="0 0 34 16" className="hidden h-4 w-8 text-faint lg:block" fill="none">
         <path d="M0 8h26" stroke="currentColor" strokeWidth="1.5" />
         <path d="M21 2.5 28 8l-7 5.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
@@ -90,13 +100,19 @@ type Stage = {
 function StageCard({ stage, accent }: { stage: Stage; accent: boolean }) {
   return (
     <div
-      // Bewusst OHNE h-full: die Karte ist Flex-Kind einer Zeile mit
-      // items-stretch, und "height: 100%" gegen ein Elternteil mit
-      // automatischer Hoehe faellt auf auto zurueck -- die drei Karten waren
-      // damit unterschiedlich hoch, obwohl stretch gesetzt war.
+      // Bewusst OHNE h-full: die Karte ist Flex-Kind einer Zeile, und
+      // "height: 100%" gegen ein Elternteil mit automatischer Hoehe faellt
+      // auf auto zurueck. Seit dem 2026-08-15 sollen die Karten ohnehin
+      // ungleich hoch sein (siehe SystemMap unten).
+      //
+      // Die neutrale Karte traegt `shadow-card` und KEINEN border: die erste
+      // Schicht des Schattens ist die Haarlinie (globals.css). Die
+      // Akzentfassung behaelt ihren coral-Rahmen -- er ist eine Aussage ueber
+      // die Farbe, keine Kante, und daneben waere die graue Ringschicht des
+      // Schattens ein zweiter, widersprechender Strich.
       className={
-        "flex flex-1 flex-col rounded-2xl border p-5 " +
-        (accent ? "border-coral/40 bg-coral-soft" : "border-edge/60 bg-panel")
+        "flex flex-1 flex-col rounded-2xl p-5 " +
+        (accent ? "border border-coral/40 bg-coral-soft" : "bg-panel shadow-card")
       }
     >
       <p
@@ -107,7 +123,10 @@ function StageCard({ stage, accent }: { stage: Stage; accent: boolean }) {
       >
         {stage.label}
       </p>
-      <h3 className="font-display mt-2 text-lg font-semibold leading-snug tracking-[-0.015em] text-ink">
+      {/* Kartentitel in Space Grotesk, nicht in Fraunces: die Display-Serife
+          traegt erst ab 24px. Darunter liest sie sich als Fachtext -- genau
+          das war hier bei 18px der Fall. */}
+      <h3 className="mt-2 text-[1.0625rem] font-semibold leading-snug tracking-[-0.015em] text-ink">
         {stage.title}
       </h3>
       {/* ═══════════════════════════════════════════════════════════════
@@ -137,8 +156,13 @@ function StageCard({ stage, accent }: { stage: Stage; accent: boolean }) {
           zaehlte austauschbare Anbieter auf, und genau das ist eine
           Zutatenliste und keine Stufe eines Ablaufs.
           ═══════════════════════════════════════════════════════════════ */}
+      {/* 15px, nicht 13px. Das hier ist SEITENTEXT und keine Nachbildung: in
+          den Mockups bildet 10-13px einen Bildschirm im Massstab ab, hier
+          stand Fliesstext einer Verkaufsseite in Fussnotengroesse. Gemessen
+          bei 1440px: die Zeile lief vorher auf 13px/1.625, jetzt 15px/1.625 --
+          derselbe Rhythmus, lesbare Groesse. */}
       {stage.body ? (
-        <p className="mt-4 text-[13px] leading-relaxed text-soft">{stage.body}</p>
+        <p className="mt-4 text-[15px] leading-relaxed text-soft">{stage.body}</p>
       ) : (
         // Linien NUR ZWISCHEN den Punkten, nicht darum herum: eine Liste
         // braucht keine Aussenkante, sie hat die Karte. Reiner Abstand
@@ -150,20 +174,22 @@ function StageCard({ stage, accent }: { stage: Stage; accent: boolean }) {
         // loest dasselbe eine Stufe leiser.
         <ul className="mt-4 divide-y divide-edge/70">
           {stage.items?.map((item) => (
-            <li key={item} className="py-2.5 text-[13px] leading-snug text-soft">
+            <li key={item} className="py-2.5 text-[15px] leading-relaxed text-soft">
               {item}
             </li>
           ))}
         </ul>
       )}
-      {/* Die Notiz sitzt am Kartenfuss (mt-auto), weil die drei Karten gleich
-          hoch sind und ihre Notizen sonst auf drei verschiedenen Hoehen
-          endeten. Der Rest der Hoehe sammelt sich damit UEBER der Notiz --
-          und ein leerer Streifen mitten in einer Karte liest sich als
-          Fehlstelle, solange nichts ihn erklaert. Die Linie erklaert ihn:
-          dieselbe Fusszeilen-Loesung wie in den drei Kanalkarten weiter
-          unten (mt-auto + border-t + pt-5), also kein neues Mittel. */}
-      <p className="mt-auto border-t border-edge/70 pt-5 text-xs leading-relaxed text-mute">
+      {/* mt-6 statt mt-auto, seit dem 2026-08-15.
+          Die Notiz sass am Kartenfuss, damit die drei Notizen auf einer Hoehe
+          enden. Der Preis dafuer stand ueber ihr: gemessen bei 1440px in
+          Deutsch klaffte zwischen der letzten Listenzeile und der Trennlinie
+          in Karte 2 rund 90px und in Karte 3 rund 100px leere Flaeche. Ein
+          leerer Streifen mitten in einer Karte liest sich als Fehlstelle, und
+          die Trennlinie erklaert ihn nicht, sie markiert ihn nur.
+          Ungleich hohe Karten sind ehrlicher als gleich hohe Karten mit
+          Loechern -- die Zeile darueber setzt dafuer items-start. */}
+      <p className="mt-6 border-t border-edge/70 pt-5 text-xs leading-relaxed text-mute">
         {stage.note}
       </p>
     </div>
@@ -175,10 +201,18 @@ export function SystemMap() {
 
   return (
     <div>
-      {/* Die drei Stufen. items-stretch, damit die drei Karten gleich hoch
-          bleiben -- unterschiedlich hohe Karten mit Pfeilen dazwischen lesen
-          sich als Rangfolge statt als Ablauf. */}
-      <div className="flex flex-col items-stretch lg:flex-row lg:items-stretch">
+      {/* Die drei Stufen. Ab lg `items-start`: die Karten duerfen ungleich
+          hoch sein. Vorher zog `items-stretch` alle drei auf die Hoehe der
+          laengsten, und der Ueberschuss sammelte sich als leerer Streifen
+          ueber der Fussnote (dort nachgemessen).
+          Die Sorge dahinter -- ungleich hohe Karten lesen sich als Rangfolge
+          statt als Ablauf -- traegt die Pfeile als Loesung, nicht die Hoehe:
+          sie sitzen ab lg mittig (self-center) und sagen die Richtung
+          ausdruecklich.
+          UNTER lg bleibt items-stretch stehen. In einer Spalte ist die
+          Querachse die BREITE -- items-start liesse die drei Karten dort auf
+          ihre Inhaltsbreite zusammenschnurren. */}
+      <div className="flex flex-col items-stretch lg:flex-row lg:items-start">
         <StageCard stage={m.stages[0]} accent={false} />
         <StageArrow label={m.arrows[0]} />
         <StageCard stage={m.stages[1]} accent={false} />
@@ -199,7 +233,7 @@ export function SystemMap() {
           <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-ink">
             {m.loop.label}
           </p>
-          <h3 className="font-display mt-2 max-w-[46ch] text-lg font-semibold leading-snug tracking-[-0.015em] text-ink sm:text-xl">
+          <h3 className="mt-2 max-w-[46ch] text-[1.0625rem] font-semibold leading-snug tracking-[-0.015em] text-ink sm:text-xl">
             {m.loop.title}
           </h3>
           <p className="mt-2.5 max-w-[70ch] text-sm leading-relaxed text-soft">{m.loop.body}</p>

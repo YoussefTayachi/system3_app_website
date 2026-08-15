@@ -51,10 +51,16 @@ import { useId } from "react";
 
 /** Bewusst eine dritte Kopie neben `_app-mockups.tsx` und
  *  `_guard-mockups.tsx` statt eines gemeinsamen Bauteils: drei Zeilen Markup
- *  zu teilen lohnt keine vierte Datei, an die sich alle drei binden. */
+ *  zu teilen lohnt keine vierte Datei, an die sich alle drei binden.
+ *
+ *  Der Preis dieser Entscheidung: `shadow-screen` und der weggefallene
+ *  `border` mussten am 2026-08-15 in allen drei Kopien von Hand nachgezogen
+ *  werden. Wer hier etwas am Rahmen aendert, aendert es auch in den beiden
+ *  anderen Dateien -- sonst stehen zwei Nachbildungen nebeneinander, von
+ *  denen eine auf der Seite liegt und die andere davor steht. */
 function AppFrame({ children, title }: { children: React.ReactNode; title?: string }) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-edge2/70 bg-panel shadow-xl shadow-ink/[0.07]">
+    <div className="overflow-hidden rounded-2xl bg-panel shadow-screen">
       <div className="flex items-center gap-1.5 border-b border-edge/70 bg-panel2/60 px-4 py-2.5">
         <span className="h-2 w-2 rounded-full bg-edge3/50" />
         <span className="h-2 w-2 rounded-full bg-edge3/35" />
@@ -571,8 +577,13 @@ export type CoachFindingMockupProps = {
  * ═══════════════════════════════════════════════════════════════════════
  *
  * Drei Stufen, absichtlich ungleich gewichtet:
- *  1. DER ERSATZTEXT ist das groesste Element (Display-Schrift, 17-19px) und
- *     das einzige mit Flaeche. Er ist der Grund, warum es diesen Kasten gibt.
+ *  1. DER ERSATZTEXT ist das groesste Element (17-19px) und das einzige mit
+ *     Flaeche. Er ist der Grund, warum es diesen Kasten gibt.
+ *     Bis zum 2026-08-15 stand er in der Display-Serife. Seit der Regel
+ *     "Fraunces erst ab 24px" traegt er Space Grotesk: eine Serife in 17px
+ *     liest sich als Fachtext, und dieser Satz soll wie eine geschriebene
+ *     Mail aussehen. Die Groesse und die Flaeche tragen die Hierarchie
+ *     weiterhin allein -- er bleibt das groesste Element des Kastens.
  *  2. DAS URTEIL steht in Lesegroesse darueber, in Ink.
  *  3. DER ALTE SATZ steht klein, grau und durchgestrichen. Er ist der
  *     Ausgangspunkt, nicht die Nachricht -- deshalb liest man ihn zuletzt,
@@ -609,7 +620,7 @@ export function CoachFindingMockup({
         <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
           <div className="min-w-0">
             <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-faint">{group}</p>
-            <p className="font-display mt-1 text-[15px] font-semibold leading-snug tracking-[-0.01em] text-ink sm:text-base">
+            <p className="mt-1 text-[15px] font-semibold leading-snug tracking-[-0.01em] text-ink sm:text-base">
               {fieldLabel}
             </p>
           </div>
@@ -642,7 +653,7 @@ export function CoachFindingMockup({
         {/* Der Ersatztext -- das eigentliche Bild. */}
         <div className="mt-5 rounded-2xl border border-amber-500/40 bg-amber-500/[0.06] p-4 sm:p-5">
           <p className="text-[10px] font-medium uppercase tracking-[0.1em] text-amber-700">{proposalLabel}</p>
-          <p className="font-display mt-2 max-w-[48ch] text-[17px] font-medium leading-snug tracking-[-0.01em] text-ink sm:text-[19px]">
+          <p className="mt-2 max-w-[48ch] text-[17px] font-semibold leading-snug tracking-[-0.01em] text-ink sm:text-[19px]">
             {proposal}
           </p>
           <div className="mt-4 flex flex-wrap gap-2">

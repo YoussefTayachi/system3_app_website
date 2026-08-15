@@ -12,7 +12,7 @@ export function AgencyMockup() {
   const { t } = useT();
   const m = t.agencyMockup;
   return (
-    <div className="rounded-2xl border border-edge/60 bg-panel p-6 shadow-sm">
+    <div className="rounded-2xl bg-panel p-6 shadow-card">
       <p className="text-xs font-medium uppercase tracking-wide text-faint">{m.workspacesLabel}</p>
       <div className="mt-2 space-y-1.5">
         {m.workspaces.map((w) => (
@@ -75,7 +75,7 @@ export function PostSendMockup() {
   const { t } = useT();
   const m = t.postSendMockup;
   return (
-    <div className="rounded-2xl border border-edge/60 bg-panel p-6 shadow-sm">
+    <div className="rounded-2xl bg-panel p-6 shadow-card">
       <p className="text-xs font-medium uppercase tracking-wide text-faint">{m.incomingLabel}</p>
       <div className="mt-2 rounded-lg bg-panel2 p-4">
         <p className="text-sm leading-relaxed text-ink">{m.exampleReply}</p>
@@ -110,7 +110,7 @@ export function LocalReachMockup() {
   const { t } = useT();
   const m = t.localReachMockup;
   return (
-    <div className="rounded-2xl border border-edge/60 bg-panel p-6 shadow-sm">
+    <div className="rounded-2xl bg-panel p-6 shadow-card">
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <p className="text-xs font-medium uppercase tracking-wide text-faint">{m.typicalLabel}</p>
@@ -193,7 +193,7 @@ export function QualifiedLeadAnimation() {
   const revealed = step > m.rows.length;
 
   return (
-    <div ref={ref} className="rounded-2xl border border-edge/60 bg-panel p-6 shadow-sm sm:p-8">
+    <div ref={ref} className="rounded-2xl bg-panel p-6 shadow-card sm:p-8">
       <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-faint">{m.typicalLabel}</p>
       <ul className="mt-3 space-y-2">
         {m.rows.map((r, i) => {
@@ -234,7 +234,11 @@ export function QualifiedLeadAnimation() {
         <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.12em] text-emerald-700">{m.frostbreakerLabel}</p>
         <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/5 p-4">
           <div className="flex items-center gap-3">
-            <div className="font-display flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 text-sm font-semibold text-white">
+            {/* Initialen in Space Grotesk, nicht in der Display-Serife: 14px
+                Fraunces in einem 40px-Kreis las sich als Monogramm auf
+                Briefpapier, nicht als Avatar einer Anwendung. Regel seit dem
+                2026-08-15: Fraunces erst ab 24px. */}
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 text-sm font-semibold text-white">
               {lead.name.split(" ").map((p) => p[0]).join("")}
             </div>
             <div className="min-w-0">
@@ -262,7 +266,7 @@ export function SuppressionMockup() {
   const { t } = useT();
   const m = t.suppressionMockup;
   return (
-    <div className="rounded-2xl border border-edge/60 bg-panel p-6 shadow-sm">
+    <div className="rounded-2xl bg-panel p-6 shadow-card">
       <p className="text-xs font-medium uppercase tracking-wide text-faint">{m.label}</p>
       <div className="mt-3 flex items-center gap-3 rounded-lg border border-edge2 bg-panel2 px-4 py-3 opacity-80">
         <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-panel text-mute">
@@ -296,7 +300,7 @@ export function DeliverabilityMockup() {
     { label: m.dmarc, ok: false },
   ];
   return (
-    <div className="rounded-2xl border border-edge/60 bg-panel p-6 shadow-sm">
+    <div className="rounded-2xl bg-panel p-6 shadow-card">
       <p className="text-xs font-medium uppercase tracking-wide text-faint">{m.domainLabel}</p>
       <p className="mt-1 text-sm font-medium text-ink">{m.domain}</p>
       <div className="mt-3 space-y-2">
@@ -327,7 +331,7 @@ export function CampaignMockup() {
   const { t } = useT();
   const m = t.campaignMockup;
   return (
-    <div className="rounded-2xl border border-edge/60 bg-panel p-6 shadow-sm">
+    <div className="rounded-2xl bg-panel p-6 shadow-card">
       <div className="flex items-center justify-between">
         <p className="text-xs font-medium uppercase tracking-wide text-faint">{m.label}</p>
         <span className="flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-1 text-[10px] font-medium text-emerald-600">

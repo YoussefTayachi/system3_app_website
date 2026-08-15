@@ -17,9 +17,12 @@ import { useT } from "./language-provider";
  * Seite, die mit Datensparsamkeit wirbt.
  */
 
+/** Dritte Kopie desselben Rahmens (siehe `_offer-mockups.tsx`): `shadow-screen`
+ *  bringt die Haarlinie als erste Schatten-Schicht selbst mit, deshalb steht
+ *  hier kein `border` mehr daneben. */
 function AppFrame({ children, title }: { children: React.ReactNode; title?: string }) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-edge2/70 bg-panel shadow-xl shadow-ink/[0.07]">
+    <div className="overflow-hidden rounded-2xl bg-panel shadow-screen">
       <div className="flex items-center gap-1.5 border-b border-edge/70 bg-panel2/60 px-4 py-2.5">
         <span className="h-2 w-2 rounded-full bg-edge3/50" />
         <span className="h-2 w-2 rounded-full bg-edge3/35" />

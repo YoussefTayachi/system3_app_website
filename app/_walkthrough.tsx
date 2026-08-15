@@ -110,7 +110,12 @@ export function StepWalkthrough() {
                   Mockup selbst. */}
               <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
                 <div className={"min-w-0 " + (imageRight ? "" : "lg:order-2")}>
-                  <p className="font-display mb-2 text-sm font-semibold text-edge3 lg:hidden">
+                  {/* Ohne `font-display` (14px, die Serife traegt erst ab
+                      24px) und in `text-mute` statt `text-edge3`: edge3 ist
+                      eine Rahmenfarbe. Auf --c-band gerechnet kam sie als
+                      Schrift auf rund 2,3:1 -- verlangt sind 4,5:1, und
+                      "Schritt 3 / 6" ist Inhalt, keine Zierlinie. */}
+                  <p className="mb-2 text-sm font-semibold text-mute lg:hidden">
                     {w.stepLabel} {i + 1} / {w.steps.length}
                   </p>
                   <h3 className="font-display text-2xl font-semibold leading-tight tracking-[-0.02em] text-ink sm:text-[1.75rem]">

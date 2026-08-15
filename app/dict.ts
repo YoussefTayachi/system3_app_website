@@ -1127,6 +1127,38 @@ const de = {
       noteValue: "Firma, Entscheider und verifizierte E-Mail in einem Schritt",
       cta: "Suche starten",
     },
+    // Vierter Suchweg, seit dem 2026-08-05 (siehe Kommentar bei der
+    // Tab-Liste). Steht neben Apollo, weil Apollos API am Tarif haengt:
+    // im kostenlosen und im Basic-Tarif kein Zugang, der Schluessel ist an
+    // die Organization-Stufe gebunden. Prospeo laesst den Schluessel schon
+    // im kostenlosen Tarif anlegen und rechnet je Konto statt je Sitz ab.
+    // Die Felder unten bilden nicht Groesse oder Branche ab, sondern die
+    // vier Filter, die es sonst nirgends gibt: offene Stellen,
+    // Website-Traffic samt Wachstum, Kaufabsicht je Thema, erkannte
+    // Technik. Genau das traegt die Reiterbeschriftung "Anlass".
+    // Quelle: apps/worker/worker/pipelines/prospeo.py,
+    // get_businesses.py::run_prospeo.
+    prospeoSearch: {
+      title: "Neue Suche",
+      subtitle: "Anlass, Kaufabsicht und Technik in einem Schritt.",
+      // Vierter Reiter seit dem 2026-08-06: die Karten darueber nennen vier
+      // Suchwege, das Bild zeigte weiter drei.
+      tabs: ["Vor Ort (Maps)", "Firmen (Hunter)", "Entscheider (Apollo)", "Anlass (Prospeo)"],
+      fields: [
+        { label: "Zielgruppe", value: "E-Commerce-Marken" },
+        { label: "Firmengröße", value: "11 bis 50" },
+        { label: "Website-Traffic", value: "wächst" },
+      ],
+      titlesLabel: "Offene Stellen",
+      titlesValue: "E-Commerce Manager, Performance Marketing",
+      chipsLabel: "Kaufabsicht",
+      chips: ["Marketing Automation", "E-Commerce-Plattform", "Kundenservice-Software"],
+      techLabel: "Eingesetzte Technik",
+      techChips: ["Shopify", "Klaviyo"],
+      noteLabel: "Was zurückkommt",
+      noteValue: "Firma und Entscheider in einem Lauf, samt Firmenbeschreibung — läuft weiter, sobald das Tageskontingent sich erneuert",
+      cta: "Suche starten",
+    },
     // Gruppierung und Bezeichnungen aus apps/web/app/calls/ der App.
     //
     // Ohne Firmennamen und ohne Telefonnummern, seit dem 2026-08-13:
@@ -3142,6 +3174,25 @@ const en: typeof de = {
       techChips: ["Shopify", "Klaviyo"],
       noteLabel: "What comes back",
       noteValue: "Company, decision maker and verified email in one step",
+      cta: "Start search",
+    },
+    prospeoSearch: {
+      title: "New search",
+      subtitle: "Trigger, buying intent and technology in one step.",
+      tabs: ["On location (Maps)", "Companies (Hunter)", "Decision-makers (Apollo)", "Triggers (Prospeo)"],
+      fields: [
+        { label: "Audience", value: "E-commerce brands" },
+        { label: "Company size", value: "11 to 50" },
+        { label: "Website traffic", value: "growing" },
+      ],
+      titlesLabel: "Open roles",
+      titlesValue: "E-Commerce Manager, Performance Marketing",
+      chipsLabel: "Buying intent",
+      chips: ["Marketing automation", "E-commerce platform", "Customer service software"],
+      techLabel: "Technology used",
+      techChips: ["Shopify", "Klaviyo"],
+      noteLabel: "What comes back",
+      noteValue: "Company and decision maker in one run, description included — resumes automatically once the daily quota refreshes",
       cta: "Start search",
     },
     calls: {

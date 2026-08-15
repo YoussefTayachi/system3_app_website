@@ -158,7 +158,7 @@ export function AllInOneCompare() {
             .map((state, j) => (state ? c.tools[j] + (state === "partial" ? ` (${c.partial})` : "") : null))
             .filter(Boolean) as string[];
           return (
-            <li key={row.id} className="rounded-xl border border-edge/60 bg-panel p-4">
+            <li key={row.id} className="rounded-xl bg-panel p-4 shadow-card">
               <p className="text-[14px] font-medium leading-snug text-ink">{row.label}</p>
               <p className="mt-2 text-[13px] leading-snug text-soft">
                 {others.length === 0 ? (
