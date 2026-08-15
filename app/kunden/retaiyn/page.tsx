@@ -96,7 +96,7 @@ export default function CustomerRetaiynPage() {
           <section
             key={sec.id}
             id={sec.id}
-            className={"scroll-mt-20 border-b border-edge/60 " + (flipped ? "bg-panel2" : "")}
+            className={"scroll-mt-20 border-b border-edge/60 " + (flipped ? "bg-band" : "")}
           >
             <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
               <div className={visual ? "grid gap-10 lg:grid-cols-5 lg:items-center lg:gap-14" : ""}>

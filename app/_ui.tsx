@@ -23,9 +23,15 @@ import { useT, LanguageToggle } from "./language-provider";
 // ══════════════════════════════════════════════════════════════════════
 export const BOOKING_URL = "https://calendly.com/youssef-tayachi-frostbreaker/30min";
 
+// #0EA5E9 (sky-500) auf dem Seitengrund misst 2,63:1. Als Wortmarke ist das
+// formal von WCAG ausgenommen, sichtbar war es trotzdem: das Logo war das
+// blasseste Element der Kopfleiste, blasser als jeder Navigationslink daneben.
+// sky-600 misst 4,03:1 und besteht die 3:1 fuer grosse Schrift deutlich.
+// tracking-tighter (-0.05em) war bei zwoelf Zeichen zu eng -- eine Wortmarke
+// soll gesetzt aussehen, nicht gequetscht.
 export function Logo() {
   return (
-    <Link href="/" className="text-3xl font-extrabold tracking-tighter text-[#0EA5E9]">
+    <Link href="/" className="text-3xl font-bold tracking-[-0.02em] text-[#0284C7]">
       frostbreaker
     </Link>
   );

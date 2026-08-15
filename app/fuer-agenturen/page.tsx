@@ -62,7 +62,7 @@ export default function AgenturenPage() {
           <section
             key={s.id}
             id={s.id}
-            className={"scroll-mt-20 border-b border-edge/60 " + (flipped ? "bg-panel2" : "")}
+            className={"scroll-mt-20 border-b border-edge/60 " + (flipped ? "bg-band" : "")}
           >
             <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
               {/* min-w-0 an beiden Rasterkindern, gleiche Ursache wie in
@@ -106,7 +106,7 @@ export default function AgenturenPage() {
       {/* Nach den sechs Abschnitten ueber den Agentur-Alltag und vor der
           Kostenfrage: an dieser Stelle ist alles behauptet, und der Leser
           fragt sich, ob es das auch ausserhalb dieser Seite gibt. */}
-      <CustomerSection className="border-b border-edge/60 bg-panel2" />
+      <CustomerSection className="border-b border-edge/60 bg-band" />
 
       {/* Ohne Anbieternamen und ohne erfundene Preise: die Aussage laesst sich
           belegen, eine konkrete Zahl fuer fremde Tools nicht. */}

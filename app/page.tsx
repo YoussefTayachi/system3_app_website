@@ -155,7 +155,7 @@ export default function Home() {
           den Umfang nicht in den ersten Sekunden erfasst, kommt dort nie an.
           Ersetzt an dieser Stelle den Kostenbeweis (#kosten), der bis heute
           der zweite Abschnitt der Seite war. */}
-      <section id="system" className="scroll-mt-20 border-b border-edge/60 bg-panel2">
+      <section id="system" className="scroll-mt-20 border-b border-edge/60 bg-band">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <SectionHeading eyebrow={t.systemMap.eyebrow} title={t.systemMap.title} />
           <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.systemMap.body}</p>
@@ -346,7 +346,7 @@ export default function Home() {
           Kunde, Monatsende, was ihr ueber alle Kunden lernt) steht auf
           /fuer-agenturen, und dorthin fuehrt hier ein deutlicher Weg statt
           eines Textlinks am Rand. ═══════════════════════════════════════ */}
-      <section id="agenturen" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
+      <section id="agenturen" className="scroll-mt-20 border-y border-edge/60 bg-band">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
             <div>
@@ -406,7 +406,7 @@ export default function Home() {
           man Entscheider ueber drei Kanaele erreicht, muessen die drei
           nebeneinander und gleich breit stehen.
           Der Anker telefon bleibt erhalten, damit alte Links funktionieren. */}
-      <section id="kanaele" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
+      <section id="kanaele" className="scroll-mt-20 border-y border-edge/60 bg-band">
         <span id="telefon" className="block scroll-mt-20" aria-hidden />
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <SectionHeading eyebrow={t.channels.eyebrow} title={t.channels.title} />
@@ -542,7 +542,7 @@ export default function Home() {
           Der Anker #ehrlich steht in keinem Menuepunkt, bleibt aber als
           leerer Marker an der Stelle stehen, an der sein Abschnitt begann.
           ═══════════════════════════════════════════════════════════════ */}
-      <section id="torwart" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
+      <section id="torwart" className="scroll-mt-20 border-y border-edge/60 bg-band">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <SectionHeading eyebrow={t.guard.eyebrow} title={t.guard.title} />
           <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.guard.body}</p>
@@ -762,7 +762,7 @@ export default function Home() {
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="scroll-mt-20 border-t border-edge/60 bg-panel2">
+      <section id="faq" className="scroll-mt-20 border-t border-edge/60 bg-band">
         <div className="mx-auto max-w-3xl px-4 py-20 sm:px-6">
           <SectionHeading title={t.faq.title} />
           <div className="divide-y divide-edge/60 rounded-2xl border border-edge/60 bg-panel">

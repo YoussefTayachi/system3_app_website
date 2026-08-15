@@ -119,7 +119,7 @@ export default function FunktionenPage() {
             key={g.id}
             id={g.id}
             className={
-              "scroll-mt-20 border-b border-edge/60 " + (flipped ? "bg-panel2" : "")
+              "scroll-mt-20 border-b border-edge/60 " + (flipped ? "bg-band" : "")
             }
           >
             <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">

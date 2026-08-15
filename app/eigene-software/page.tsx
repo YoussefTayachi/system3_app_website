@@ -59,7 +59,7 @@ export default function EigeneSoftwarePage() {
           <section
             key={s.id}
             id={s.id}
-            className={"scroll-mt-20 border-b border-edge/60 " + (flipped ? "bg-panel2" : "")}
+            className={"scroll-mt-20 border-b border-edge/60 " + (flipped ? "bg-band" : "")}
           >
             <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
               {/* min-w-0 an beiden Rasterkindern. Diese Seite war die letzte

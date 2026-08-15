@@ -1,7 +1,19 @@
 import type { Metadata } from "next";
 import "@fontsource-variable/space-grotesk";
-import "@fontsource-variable/fraunces";
-import "@fontsource-variable/fraunces/wght-italic.css";
+// opsz statt der Standarddatei. `@fontsource-variable/fraunces` allein laedt
+// index.css, und das ist die reine wght-Datei -- OHNE die opsz-Achse. Fraunces
+// hat laut metadata.json ital, opsz (9-144), wght, SOFT und WONK; die opsz-Achse
+// steht auf ihrem Vorgabewert 14, also dem LESETEXT-Schnitt, und war damit auch
+// in der 48px-Ueberschrift aktiv. `font-optical-sizing: auto` in globals.css lief
+// deshalb seit dem ersten Tag ins Leere: es gab keine Achse zum Drehen.
+// Gegeneinander gerendert am 2026-08-15 (gleiche Zeile, gleiche 56px): mit
+// opsz 144 verdoppelt sich der Strichkontrast, die Zeile wird schmaler und passt
+// auf eine statt zwei Zeilen, und die Kursive wird von "schraeggestellt" zu einer
+// echten Kanzleikursiven.
+// Kosten: +67 kB latin. Bewusst NICHT full.css -- das braechte SOFT und WONK fuer
+// +189 kB, beides Effektachsen ohne Nutzen auf einer Seite, die ruhig bleiben soll.
+import "@fontsource-variable/fraunces/opsz.css";
+import "@fontsource-variable/fraunces/opsz-italic.css";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { getLangServer } from "./lang";

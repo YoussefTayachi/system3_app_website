@@ -50,7 +50,7 @@ export default function StartPage() {
         </div>
       </section>
 
-      <section className="border-y border-edge/60 bg-panel2">
+      <section className="border-y border-edge/60 bg-band">
         <div className="mx-auto max-w-3xl px-4 py-14 sm:px-6">
           <h2 className="text-center text-lg font-semibold tracking-tight text-ink">{s.workspaceHeading}</h2>
           <div className="mt-6">

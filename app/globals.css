@@ -4,24 +4,39 @@
    plus ein warmer Zweitton (Coral) fuer CTA-Highlights/Rechner, damit nicht
    alles auf einem einzigen Blauton (Sky) sitzt. ===== */
 :root {
-  --c-surface: #f9f9f8;
+  /* Drei Flaechenstufen statt zwei. Bis zum 2026-08-15 wechselten die
+     Abschnitte zwischen --c-surface (#f9f9f8) und --c-panel2 (#f5f5f4), und
+     das sind 4 von 255 je Kanal -- nachgerechnet ein Kontrast von 1,036:1.
+     Die Seite wechselt siebenmal die Flaeche, sichtbar war kein einziger
+     Wechsel; die ganze Gliederungsarbeit hing an der Haarlinie daneben.
+     --c-band ist die neue Bandflaeche fuer Abschnittswechsel: 1,10:1 gegen
+     surface, also das Dreifache des alten Schritts und immer noch ein
+     Fluestern. --c-panel2 bleibt, was es immer war -- der Ton fuer Chips und
+     Felder INNERHALB einer Karte, wo er neben Weiss steht und dort auch
+     wirkt. */
+  --c-surface: #fbfbfa;
   --c-panel: #ffffff;
   --c-panel2: #f5f5f4;
+  --c-band: #f1f0ed;
   --c-field: #ffffff;
   --c-chip: #f1f0ee;
   --c-wash: #f5f5f4;
   --c-edge: #e9e8e6;
   --c-edge2: #d8d7d4;
   --c-edge3: #a9a8a2;
-  /* Textstufen sind gegen den hellsten *und* dunkelsten Flaechenton
-     (--c-panel #ffffff bis --c-panel2 #f5f5f4) auf WCAG-AA gerechnet.
-     Kontrast auf #f5f5f4, dem ungünstigsten Fall:
-     mute 4.54 · faint 6.22 · soft 6.99 · ink 16.3 -- die Abstufung bleibt
-     erhalten, jede Stufe besteht 4.5:1 auch bei 11-12px. */
+  /* Textstufen sind gegen den hellsten *und* dunkelsten Flaechenton auf
+     WCAG-AA gerechnet. Der unguenstigste Fall ist seit dem 2026-08-15 nicht
+     mehr --c-panel2 (#f5f5f4), sondern die neue Bandflaeche --c-band
+     (#f1f0ed). Neu gerechnet auf #f1f0ed:
+     mute 4.82 · faint 5.95 · soft 6.69 · ink 15.10 -- die Abstufung bleibt
+     erhalten, jede Stufe besteht 4.5:1 auch bei 11-12px.
+     --c-mute musste dafuer von #72706a um drei Stufen nachziehen: auf dem
+     dunkleren Band kam es sonst auf 4.35 und waere durchgefallen. Wer die
+     Bandflaeche weiter abdunkelt, muss diese Zeile erneut nachrechnen. */
   --c-ink: #1c1b19;
   --c-soft: #57534e;
   --c-faint: #5d5b56;
-  --c-mute: #72706a;
+  --c-mute: #6b6963;
   --c-coral: #ea5a3e;
   --c-coral-soft: #fdece7;
   color-scheme: light;
@@ -31,6 +46,7 @@
   --color-surface: var(--c-surface);
   --color-panel: var(--c-panel);
   --color-panel2: var(--c-panel2);
+  --color-band: var(--c-band);
   --color-field: var(--c-field);
   --color-chip: var(--c-chip);
   --color-wash: var(--c-wash);
@@ -45,6 +61,24 @@
   --color-coral-soft: var(--c-coral-soft);
   --font-sans: "Space Grotesk Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-display: "Fraunces Variable", ui-serif, Georgia, serif;
+
+  /* Zwei Schatten, benannt nach ihrer Aufgabe statt nach ihrer Groesse.
+     Vorher gab es auf der ganzen Seite drei Werte, und der Schatten der
+     App-Nachbildungen (shadow-xl bei 7%) begann erst 20px unter dem Kasten:
+     das ergibt einen Dunst UNTER dem Bild, nicht ein Bild, das auf etwas
+     liegt. Deshalb sahen die Nachbildungen aus wie Fotos von Bildschirmen.
+     Die erste Schicht ist jeweils eine 1px-Kontaktkante -- sie ersetzt den
+     border, der bisher separat danebenstand, und macht den Unterschied
+     zwischen "schwebt" und "liegt". Deckkraft bleibt ueberall unter 12%. */
+  --shadow-card:
+    0 0 0 1px rgb(28 27 25 / 0.05),
+    0 1px 2px rgb(28 27 25 / 0.06),
+    0 8px 16px -8px rgb(28 27 25 / 0.10);
+  --shadow-screen:
+    0 0 0 1px rgb(28 27 25 / 0.06),
+    0 2px 4px rgb(28 27 25 / 0.05),
+    0 12px 24px -8px rgb(28 27 25 / 0.09),
+    0 32px 64px -24px rgb(28 27 25 / 0.12);
 }
 
 body {
@@ -55,6 +89,13 @@ body {
   font-feature-settings: "cv11", "ss01";
 }
 
+/* font-optical-sizing wirkt erst, seit layout.tsx die opsz-Datei laedt (siehe
+   die Begruendung dort). `auto` setzt opsz auf die Schriftgroesse in px,
+   begrenzt auf den Bereich der Schrift (9-144): eine 72px-Ueberschrift bekommt
+   den Display-Schnitt mit hohem Strichkontrast, ein 24px-Zwischentitel einen
+   dazwischenliegenden. Bewusst `auto` und kein fester Wert: opsz 144 sieht in
+   der Ueberschrift grossartig aus und laesst 24px-Titel haarduenn werden --
+   genau dafuer gibt es die Achse. */
 .font-display {
   font-family: var(--font-display);
   font-optical-sizing: auto;
