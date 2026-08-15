@@ -141,27 +141,18 @@ export default function Home() {
             <CustomerStrip className="mt-7 justify-center" />
           </div>
 
-          {/* Die drei Versprechen. Hier standen bis zum 2026-08-06 drei
-              Kennzahlen: "4 Suchwege / 3 Kanaele / 1 Login". Alles
-              nachzaehlbar, alles Mechanik -- und niemand kauft vier Suchwege.
-              Auf der wichtigsten Flaeche der wichtigsten Seite muss stehen,
-              was man davon hat.
+          {/* HIER STANDEN DIE DREI VERSPRECHEN, gefallen am 2026-08-15
+              (KLARTEXT.md, Stufe 2).
 
-              Kein grosses Zahlenelement mehr (StatTile), sondern Ueberschrift
-              plus Satz: ein Versprechen braucht einen Nebensatz, eine Zahl
-              nicht. Jedes der drei ist weiter unten mit einem Bild belegt --
-              Rundgang, Kette, "Nach Text". */}
-          <div className="fade-up mt-14 grid gap-x-10 gap-y-8 border-t border-edge2/70 pt-8 sm:grid-cols-3">
-            {/* Kartentitel, nicht Fraunces: 18px Display-Serife las sich hier
-                wie eine Zwischenueberschrift im Fachbuch. Die Serife bleibt
-                den Kapiteln. */}
-            {t.heroPromises.map((p) => (
-              <div key={p.title}>
-                <p className={cardTitleCls}>{p.title}</p>
-                <p className="mt-1.5 text-[15px] leading-relaxed text-soft">{p.body}</p>
-              </div>
-            ))}
-          </div>
+              Drei Ueberschriften mit je einem Satz, direkt unter dem Helden
+              und direkt ueber der Systemkarte. Sie sagten dasselbe wie deren
+              vier Karten, nur allgemeiner -- zwei Zusammenfassungen
+              hintereinander, bevor der Leser ueberhaupt etwas gesehen hat,
+              von dem sie eine Zusammenfassung sein koennten.
+
+              Die Systemkarte bleibt: sie ist die konkretere von beiden und
+              hat Bilder. `heroPromises` bleibt vorerst im Woerterbuch
+              stehen, wird aber von niemandem mehr gelesen. */}
         </div>
 
         {/* Der Hero trug bis zum 2026-08-14 zwei Elemente mehr: ein
@@ -438,13 +429,18 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Der Schlusssatz: eine Stufe groesser als Fliesstext und in Ink,
-            aber ohne Kasten und ohne Knopf. Er ordnet ein, er verkauft
-            nicht -- ein CTA an dieser Stelle waere der dritte auf einer
-            Bildschirmhoehe (Rundgang darueber, Agentur-Band darunter). */}
-        <p className="mt-14 max-w-[68ch] text-base leading-relaxed text-ink sm:text-[17px] sm:leading-[1.7]">
-          {t.offerSection.closing}
-        </p>
+        {/* HIER STAND DER SCHLUSSSATZ, gefallen am 2026-08-15 (KLARTEXT.md,
+            Stufe 2): "Das ist die Arbeit, fuer die man sonst jemanden im
+            Vertrieb einstellt und ein halbes Jahr einarbeitet."
+
+            Der alte Kommentar an dieser Stelle behauptete, der Satz ordne
+            ein und verkaufe nicht. Er tut das Gegenteil: er rechnet dem
+            Leser vor, was ihm das wert sein sollte -- das ist ein
+            Verkaufsargument ueber den WERT, kein Feature, kein Painpoint und
+            kein Nutzen. Genau die Sorte Satz, die der Betreiber mit "weniger
+            sales maessig" meint.
+
+            `offerSection.closing` bleibt vorerst im Woerterbuch stehen. */}
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════

@@ -124,6 +124,59 @@ Belegbar und schon vorhanden: **die Kette läuft nur weiter, solange es still
 bleibt.** Wer antwortet, fällt im selben Moment heraus. Das ist eine Aussage
 über das Produkt und steht bereits so im Rundgang.
 
+---
+
+## Teil 0b · Keine Metaphern
+
+*Nachgetragen am 2026-08-15, ebenfalls auf Ansage des Betreibers.*
+
+> und ich würd nicht schreiben „when emails stay quiet" sondern schreib „when
+> the lead doesnt reply per email" — mach alles glasklar und red nicht in
+> metaphern
+
+Die Seite personifiziert an mehreren Stellen Software und beschreibt Zustände
+im Bild statt beim Namen. **Gemessen: 17 Fundstellen im deutschen Zweig**, über
+418 geprüfte Textzeilen.
+
+| Bild | Vorkommen | Wörtlich |
+|---|---|---|
+| „Schweigt die Mail…", „wenn die Mails schweigen", „still bleiben" | 3 | **„Antwortet der Lead nicht auf die Mail…"** |
+| „fällt aus der Kette", „fällt sofort raus" | 7 | **„bekommt keine weiteren Nachrichten"** |
+| „Der Torwart prüft" | 2 | **„Die Startprüfung prüft"** — der Abschnitt heißt inzwischen ohnehin „Elf Prüfungen, bevor eine Kampagne startet" |
+| „Der Coach liest gegen" | 2 | **„Die App prüft dein Angebot und schlägt bessere Sätze vor"** |
+| „Kette" als Bild für die Abfolge | 3 | Grenzfall, siehe unten |
+
+### Die Regel
+
+**Benenne den Vorgang wörtlich.** Kein Bild für einen Zustand, keine
+Personifizierung von Software. Wenn eine Zeile nur funktioniert, weil der Leser
+die Metapher auflöst, kostet sie ihn einen Denkschritt — und auf einer Seite,
+die ohnehin zu viel verlangt, ist das der teuerste.
+
+**Ausnahmen, weil es keine Metaphern sind, sondern Namen:**
+
+- **Icebreaker** — heißt in der App so, und der Kanal-Anker der Marke hängt
+  daran.
+- **Warmup** — Fachbegriff der Zustellbarkeit, hat keine deutsche Entsprechung,
+  die kürzer wäre.
+- **Aufhänger** — etabliert genug, um nicht als Bild gelesen zu werden.
+
+**Grenzfall „Kette".** Als Substantiv für die Abfolge (E-Mail → LinkedIn →
+Telefon) ist es verständlich und kurz. Als Verb wird es schief: „fällt aus der
+Kette" verlangt, dass der Leser sich erst eine Kette vorstellt, um zu verstehen,
+dass jemand keine weiteren Nachrichten bekommt. **Der Begriff bleibt, die
+Redewendung geht.**
+
+### Prüfung
+
+Suche nach: `schweig`, `still bleib`, `faellt.*(aus|raus)`, `Torwart`,
+`liest gegen`, `ins Leere`, `Leitung`. Außerhalb der drei genannten Ausnahmen
+**0 Treffer** — in beiden Sprachen. Die englische Fassung hat dieselben Bilder,
+weil sie aus der deutschen übersetzt ist („stay quiet", „drops out of the
+chain").
+
+---
+
 ## Was daraus für den Rest des Plans folgt
 
 Die sechzehn Überschriften sind umgestellt (siehe Teil 1). Der Bauplan
@@ -300,11 +353,17 @@ zu werden.
 
 1. **Die sechzehn Zeilen** — reine Wörterbuch-Arbeit, `copywriter`, beide
    Sprachen. Kein Markup ändert sich. ✔ **erledigt 15.08., 16 → 1**
-2. **Die vier Streichungen** — Markup, klein.
+2. **Die vier Streichungen** — Markup, klein. ✔ **zwei erledigt 15.08.**
+   (die drei Versprechen unter dem Helden, der Verkaufs-Schlusssatz im
+   Angebot-Abschnitt); die beiden Wiederholungs-Einleitungen und die
+   Augenbrauen laufen mit Stufe 3.
 3. **Der Hebel in den ersten Satz** (Teil 0): `#kanaele` von
-   Automatisierungsgrad auf die Kette umstellen, und in den übrigen
+   Automatisierungsgrad auf die Verkettung umstellen, und in den übrigen
    Abschnitten den Hebel aus dem Fließtext nach vorn ziehen.
-4. **Nachmessen und gegenlesen** (unten).
+4. **Die Metaphern** (Teil 0b) — 17 Fundstellen, beide Sprachen. Eigener
+   Durchgang, weil er quer durch alle Abschnitte läuft und nichts mit der
+   Gliederung zu tun hat.
+5. **Nachmessen und gegenlesen** (unten).
 
 Jede Stufe ein eigener Commit.
 
