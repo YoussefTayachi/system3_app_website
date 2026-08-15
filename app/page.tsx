@@ -959,7 +959,16 @@ export default function Home() {
           Abwaegung wie bei #angebot: erst Abstand, dann Trennlinie, dann
           Flaeche; der Abstand steht mit py-20 auf beiden Seiten schon. */}
       <section className={"mx-auto max-w-6xl border-t border-edge/60 px-4 sm:px-6 " + sectionPad}>
-        <SectionHeading title={t.why.title} />
+        {/* Die Ueberschrift war bis zum 2026-08-15 "Warum es Frostbreaker
+            gibt" (KLARTEXT.md). Sie bestand die Deckprobe nicht: deckt man
+            sie ab, fehlt dem Abschnitt nichts, und sie liesse sich auf jede
+            Seite jedes Anbieters setzen. Der Satz aus der linken Karte -- "Ihr
+            redet mit dem, der es baut" -- war die ganze Zeit die bessere
+            Ueberschrift: er benennt, was der Leser davon HAT, dass wir noch
+            klein sind. Er steht jetzt oben, und die Karte darunter traegt nur
+            noch die Erklaerung. Der Woerterbuch-Eintrag `why.title` bleibt
+            vorerst stehen; er wird von hier nicht mehr gelesen. */}
+        <SectionHeading title={t.why.earlyAccess.title} />
 
         <div className="grid gap-5 lg:grid-cols-2">
           <div className="rounded-2xl border border-edge/60 bg-panel p-6 hover-lift">
@@ -969,8 +978,10 @@ export default function Home() {
                 <circle cx="12" cy="12" r="3.2" stroke="currentColor" strokeWidth="1.6" />
               </svg>
             </div>
-            <h3 className={"mt-4 " + cardTitleCls}>{t.why.earlyAccess.title}</h3>
-            <p className="mt-1.5 text-[15px] leading-relaxed text-soft">{t.why.earlyAccess.body}</p>
+            {/* Kein h3 mehr: der Titel steht seit dem 2026-08-15 als
+                Abschnittsueberschrift oben. Zweimal derselbe Satz auf einer
+                Bildschirmhoehe waere eine Wiederholung, kein Aufbau. */}
+            <p className="mt-4 text-[15px] leading-relaxed text-soft">{t.why.earlyAccess.body}</p>
           </div>
 
           <a href="/kontakt" className="hover-lift block rounded-2xl border border-edge/60 bg-panel p-6 transition-colors hover:border-edge2">

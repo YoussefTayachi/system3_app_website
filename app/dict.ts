@@ -338,7 +338,7 @@ const de = {
     metaDescription:
       "Ein Kundenporträt, kein Erfolgsbericht: wie retaiyn, unser erster Kunde, aus dem eigenen Angebot acht Mails macht — von der Nische über das Angebot bis zur Sequenz, ohne eine Zahl, die wir nicht selbst nachrechnen können.",
     eyebrow: "Unser erster Kunde",
-    title: "Ihr Geschäft ist Kundenbindung. Ihr Problem war Kundengewinnung.",
+    title: "retaiyn: Kundengewinnung über E-Mail und LinkedIn",
     intro:
       "retaiyn ist unser erster Kunde: eine Agentur für Customer Experience im E-Commerce. Diese Seite zeigt, wie deren Angebot durch Frostbreaker läuft — von der Nische über das Angebot bis zur fertigen Sequenz. Was das an Terminen gebracht hat, steht hier noch nicht: das tragen wir nach, sobald genug gemessen ist, nicht vorher.",
     ctaLabel: "Gespräch buchen",
@@ -898,16 +898,22 @@ const de = {
   // ══════════════════════════════════════════════════════════════════════
   guard: {
     eyebrow: "Bevor du sendest, und danach",
-    title: "Das einzige Werkzeug für Kaltakquise, das dir Nein sagt",
+    // Umformuliert 2026-08-15 (KLARTEXT.md): "das einzige Werkzeug, das dir
+    // Nein sagt" bestand weder Deckprobe noch Wettbewerberprobe -- jedes Tool
+    // kann das behaupten. Die Substanz (elf Pruefungen, vier davon Blocker)
+    // steht unveraendert in body/points, nur die Verpackung faellt.
+    title: "Elf Prüfungen, bevor eine Kampagne startet",
     body:
-      "Elf Prüfungen laufen, bevor eine Kampagne starten kann. Vier davon können sie aufhalten: fehlendes SPF oder DKIM, eine Bounce-Quote über fünf Prozent, eine Liste ohne sendbare Adresse. Das kostet dich nicht eine Kampagne, das kostet dich die Domain. Aufhalten heißt nicht sperren: du siehst vorher, was du in Kauf nimmst, und kannst mit einem bewussten zweiten Klick trotzdem starten.",
+      "Vier davon können sie aufhalten: fehlendes SPF oder DKIM, eine Bounce-Quote über fünf Prozent, eine Liste ohne sendbare Adresse. Das kostet dich nicht eine Kampagne, das kostet dich die Domain. Aufhalten heißt nicht sperren: du siehst vorher, was du in Kauf nimmst, und kannst mit einem bewussten zweiten Klick trotzdem starten.",
     points: [
       {
-        title: "Blocker und Hinweise sind zweierlei",
+        // Umformuliert 2026-08-15 (KLARTEXT.md): benennt jetzt, wie viele der
+        // elf Pruefungen halten koennen, statt nur die Kategorie zu erklaeren.
+        title: "Vier der elf halten den Start auf",
         body: "Ein Blocker ist etwas, das mit Sicherheit schiefgeht und dessen Schaden bleibt. Ein Hinweis macht schlechter, aber weder sicher noch dauerhaft. Diese Linie halten wir streng: eine Warnung, die auch mal nur eine Meinung ist, klickt man beim dritten Mal weg, und die echte gleich mit.",
       },
       {
-        title: "Danach schaut jemand weiter hin",
+        title: "Tägliche DNS-Prüfung im laufenden Betrieb",
         body: "Täglich prüfen wir die DNS-Einträge jeder Absender-Domain. Klettert die Bounce-Quote im Betrieb über fünf Prozent, hält die App die Kampagne an und schreibt dir warum.",
       },
     ],
@@ -924,7 +930,10 @@ const de = {
   // aus gutem Grund nicht geben wird.
   channels: {
     eyebrow: "Drei Kanäle, ein Kontakt",
-    title: "Nicht drei Werkzeuge nebeneinander, sondern ein Vorgang",
+    // Umformuliert 2026-08-15 (KLARTEXT.md): "Nicht X, sondern Y" ist genau
+    // das Gegensatzpaar-Muster, das die Startseite ueberladen hat. Die neue
+    // Zeile nennt die drei Kanaele direkt.
+    title: "E-Mail, LinkedIn und Telefon aus einem Kontakt",
     body:
       "Der Unterschied zwischen den Kanälen ist nicht, wie gut sie sind, sondern wie viel davon von allein läuft. Bei zweien bereitet die App alles vor und du drückst den letzten Knopf. Das ist Absicht, nicht Lücke.",
     appLabel: "Was die App tut",
@@ -955,7 +964,9 @@ const de = {
       {
         id: "phone",
         label: "Telefon",
-        title: "Vorbereitet statt kalt erwischt",
+        // Umformuliert 2026-08-15 (KLARTEXT.md): "statt" ersetzt, Titel
+        // benennt jetzt, was auf dem Screen zu sehen ist.
+        title: "Gesprächsnotiz und Nummer vor dem Anruf",
         app: [
           "Nummer aus dem öffentlichen Eintrag, kein Nachschlagen",
           "Rolle, Firmenzusammenfassung und Gesprächsnotiz daneben",
@@ -971,7 +982,10 @@ const de = {
       "Angerufen wird mit deinem eigenen Telefon: Frostbreaker ist keine Telefonanlage und rechnet keine Gesprächsminuten ab.",
   },
   honesty: {
-    title: "Eine Zahl, die nichts bedeutet, zeigen wir nicht",
+    // Vom Betreiber selbst gewaehlt (KLARTEXT.md), nachdem mein erster
+    // Entwurf ("Kein Gewinner unter 50 Sendungen je Fassung") mit einer
+    // Verneinung anfing -- genau das Muster, das diese Umstellung verbietet.
+    title: "Der A/B-Gewinner steht erst, wenn die Menge reicht",
     body:
       "Zwölf Mails und eine Antwort sind nicht „8,3 %“. Das sind zwölf Mails und eine Antwort. Unter dreißig angeschriebenen Kontakten schreiben wir „zu wenig“ statt einer Prozentzahl, und der Balken bleibt leer.",
     points: [
@@ -980,7 +994,8 @@ const de = {
         body: "Kein Gewinner, solange nicht jede Fassung 50 Sendungen hinter sich hat und der Abstand einem Zufallstest standhält. Jedes andere Dashboard erklärt dir bei neun Antworten begeistert, Variante B habe deine Quote verdreifacht.",
       },
       {
-        title: "Gemessen an Kontakten, nicht an Mails",
+        // Umformuliert 2026-08-15 (KLARTEXT.md): ", nicht" gestrichen.
+        title: "Antwortquote je Kontakt",
         body: "Eine Sequenz schickt drei bis vier Mails an dieselbe Person. Die eine Antwort darauf gehört nicht durch vier geteilt.",
       },
     ],
@@ -1608,7 +1623,11 @@ const de = {
     // in Stufe 3 schon drin, und die Rueckkopplung legt der naechsten Kampagne
     // die Textfassung hin, die beim letzten Mal Termine gebracht hat. Er gilt
     // fuer alle vier Kaesten und wiederholt keinen anderen Satz der Seite.
-    title: "Kein Schritt fängt bei null an",
+    // Umformuliert 2026-08-15 (KLARTEXT.md): "Kein Schritt faengt bei null
+    // an" bestand die Wettbewerberprobe nicht -- jedes Tool kann behaupten,
+    // effizient zu sein. Die neue Zeile benennt konkret, was die Karte zeigt:
+    // vier Stufen, die dieselbe Datenbasis weiterreichen.
+    title: "Vier Stufen, eine Datenbasis",
     body: "Alles Weitere auf dieser Seite ist einer dieser vier Kästen im Einzelnen.",
     stages: [
       {
@@ -1755,7 +1774,10 @@ const de = {
   // ══════════════════════════════════════════════════════════════════════
   offerSection: {
     eyebrow: "Dein Angebot",
-    title: "Die App wusste alles über den Empfänger und nichts über dich",
+    // Vom Betreiber selbst gewaehlt (KLARTEXT.md), nachdem meine ersten
+    // Entwuerfe verworfen wurden: benennt das Angebotsprofil als das, was es
+    // ist -- eine Vorlage, aus der die Mails entstehen.
+    title: "Dein Angebot als Vorlage für jede Mail",
     body: "Firma, Rolle, eingesetzte Technik, recherchierte Beschreibung: über den Empfänger stand alles in der Datenbank. Was du verkaufst, stand nirgends. Also fing jede Kampagne mit vier leeren Textfeldern an, und für die meisten endet Akquise genau dort. Seit es das Angebot gibt, beantwortest du das einmal, und die Mails entstehen daraus.",
     points: [
       {
@@ -1778,11 +1800,13 @@ const de = {
         body: "Was du nach einem Ja schickst, wie lange das Ansehen dauert, deine eine Frage, warum Käufer zögern, und der Ton: diese fünf schlägt die App absichtlich nicht vor. Auf fast jeder Website steht an dieser Stelle „Termin buchen“ — und genau das ist die kleine Frage nicht, um die es geht. Ein Vorschlag wäre geraten, und geraten hieße: es steht etwas in deinem Angebot, das niemand entschieden hat.",
       },
       {
-        title: "Ohne Beleg behauptet sie keinen",
+        // Umformuliert 2026-08-15 (KLARTEXT.md): "Ohne..." als Verneinung am
+        // Satzanfang gestrichen.
+        title: "Leeres Belegfeld heißt: keine Zahl in der Mail",
         body: "Lässt du das Belegfeld leer, wird daraus eine ausdrückliche Anweisung, in der Mail nichts zu behaupten: kein Kunde, keine Zahl, kein Jahr. Ein Junior improvisiert an dieser Stelle. Eine erfundene Referenz fällt nicht dir auf, sondern dem Empfänger, und dann ist der Kontakt verbrannt.",
       },
       {
-        title: "Der Entwurf landet im Formular, nicht in der Leitung",
+        title: "Der Entwurf wartet im Kampagnenformular",
         body: "Die acht Texte stehen danach im Kampagnenformular. Dort liest ein Mensch sie, bevor sie an tausend Adressen gehen, und ändert, was ihm nicht passt. Der Torwart prüft danach die Technik wie bisher.",
       },
     ],
@@ -1979,7 +2003,10 @@ const de = {
   // ══════════════════════════════════════════════════════════════════════
   whoFor: {
     eyebrow: "Für wen",
-    title: "Eure Lage entscheidet, nicht eure Branche",
+    // Umformuliert 2026-08-15 (KLARTEXT.md): ", nicht" gestrichen, Titel
+    // benennt jetzt die drei Karten darunter statt sich gegen "Branche"
+    // abzugrenzen.
+    title: "Drei Wege hinein",
     cards: [
       {
         id: "self",
@@ -2048,11 +2075,15 @@ const de = {
   // die vierte Saeule: was aus einer Antwort wird.
   postSend: {
     eyebrow: "Nach dem Ja",
-    title: "Aus einer Antwort wird ein Vorgang, nicht eine Mail im Postfach",
+    // Umformuliert 2026-08-15 (KLARTEXT.md): ", nicht" gestrichen, Titel
+    // benennt jetzt Posteingang und Pipeline direkt statt sich gegen ein
+    // simples Postfach abzugrenzen.
+    title: "Posteingang, Deals und Aufgaben in einer Ansicht",
     body: "Jede Antwort wird eingeordnet und dem Kontakt zugeordnet. Daraus entsteht ein Deal mit Wert und Wahrscheinlichkeit, eine Aufgabe mit Fälligkeit, eine Notiz nach dem Anruf. Der Anruf von gestern und die Mail von vor drei Wochen stehen in derselben Historie.",
     features: [
       { id: "replies", title: "Ein Posteingang für alle Postfächer", body: "Alle verbundenen Postfächer laufen in einem Posteingang zusammen, alle fünf Minuten synchronisiert, mit Zähler für Ungelesenes. Jede Antwort kommt mit vollem Text an, die KI ordnet sie ein (interessiert, kein Interesse, Rückfrage), und geantwortet wird direkt aus der App. Instantly müsst ihr dafür nicht mehr öffnen." },
-      { id: "dashboard", title: "Umsatz-Forecast statt nur Öffnungsrate", body: "Offene Pipeline, mit der Abschlusswahrscheinlichkeit gewichteter Forecast, gewonnen und verloren der letzten 30 Tage, dazu fällige und überfällige Aufgaben. Für die meisten Agenturen ersetzt das ein eigenes CRM-Abo." },
+      // Titel umformuliert 2026-08-15 (KLARTEXT.md): "statt" ersetzt.
+      { id: "dashboard", title: "Umsatz-Forecast nach Abschlusswahrscheinlichkeit", body: "Offene Pipeline, mit der Abschlusswahrscheinlichkeit gewichteter Forecast, gewonnen und verloren der letzten 30 Tage, dazu fällige und überfällige Aufgaben. Für die meisten Agenturen ersetzt das ein eigenes CRM-Abo." },
       { id: "status", title: "Lead-Status pro Kontakt, ohne separates CRM", body: "Kontaktiert, geantwortet, Meeting gebucht, Kunde geworden, alles direkt in der Leads-Tabelle nachvollziehbar." },
       // Die vierte Karte ("SPF, DKIM, DMARC: geprueft, bevor ihr sendet") ist
       // am 2026-08-14 gefallen. Ein Zustellbarkeits-Argument im Abschnitt
@@ -2161,10 +2192,11 @@ const de = {
     // Kurzform fuer den Hero: klein, aber ueber der Falz.
     stripLabel: "Im Einsatz bei",
     eyebrow: "Kunde",
-    // Der Satz, um den der ganze Abschnitt gebaut ist. Zwei Haelften, ein
-    // Gegensatz, und die zweite Haelfte im Praeteritum -- damit steht die
-    // Loesung schon in der Ueberschrift, ohne sie zu behaupten.
-    title: "Ihr Geschäft ist Kundenbindung. Ihr Problem war Kundengewinnung.",
+    // Umformuliert 2026-08-15 (KLARTEXT.md): der Gegensatz "Kundenbindung
+    // .../ Kundengewinnung war" bestand die Deckprobe nicht -- er beschreibt
+    // ein Problem, nennt aber nicht, wofuer Frostbreaker bei retaiyn sorgt.
+    // Die neue Zeile benennt Kunde und Kanaele direkt.
+    title: "retaiyn: Kundengewinnung über E-Mail und LinkedIn",
     name: "retaiyn",
     url: "https://www.retaiyn.com",
     urlLabel: "retaiyn.com",
@@ -2205,6 +2237,12 @@ const de = {
   // Was hier bleibt, sind die zwei Karten, die es sonst nirgends gibt: der
   // fruehe Zugang und der Gruender.
   why: {
+    // OFFEN (KLARTEXT.md): "Warum es Frostbreaker gibt" ist die letzte der
+    // sechzehn schwachen Ueberschriften, aber die dort getroffene Entscheidung
+    // ist Streichung, nicht Umformulierung -- der H3 `earlyAccess.title`
+    // darunter ist bereits die bessere Ueberschrift. Das ist eine
+    // Markup-Aenderung (Element entfernen), keine Wortlaut-Aenderung. Bleibt
+    // hier unveraendert stehen; Entfernen ist Sache von Markup/`ui-designer`.
     title: "Warum es Frostbreaker gibt",
     // Stand vorher auf "Frueher Zugang STATT grosser Kundenliste" -- das las
     // sich wie eine Entschuldigung dafuer, keine Kunden zu haben, und genau so
@@ -2280,8 +2318,10 @@ const de = {
     ],
   },
   finalCta: {
-    title: "Lasst uns eure Kaltakquise automatisieren.",
-    body: "Dreißig Minuten, in denen wir gemeinsam auf eure Kundenstruktur schauen, den ersten Workspace einrichten und die API-Zugänge verbinden. Danach läuft die erste Suche noch am selben Tag. Kein Verkaufsgespräch, keine Kreditkarte.",
+    // Umformuliert 2026-08-15 (KLARTEXT.md): benennt jetzt, was im Gespraech
+    // passiert, statt eine allgemeine Aufforderung zu sein.
+    title: "Dreißig Minuten, danach läuft die erste Suche",
+    body: "Wir schauen gemeinsam auf eure Kundenstruktur, richten den ersten Workspace ein und verbinden die API-Zugänge. Danach läuft die erste Suche noch am selben Tag. Kein Verkaufsgespräch, keine Kreditkarte.",
   },
   footer: {
     location: "Wien, Österreich",
@@ -2719,7 +2759,7 @@ const en: typeof de = {
     metaDescription:
       "A client portrait, not a success story: how retaiyn, our first customer, turns its own offer into eight emails — from niche to offer to sequence, without a figure we couldn't recalculate ourselves.",
     eyebrow: "Our first client",
-    title: "Their business is retention. Their problem was acquisition.",
+    title: "retaiyn: winning customers over email and LinkedIn",
     intro:
       "retaiyn is our first customer: an agency for customer experience in e-commerce. This page shows how their offer runs through Frostbreaker — from niche to offer to finished sequence. What that produced in meetings is not here yet: we add that once there is enough to measure, not before.",
     ctaLabel: "Book a call",
@@ -3088,23 +3128,23 @@ const en: typeof de = {
   },
   guard: {
     eyebrow: "Before you send, and after",
-    title: "The only cold outreach tool that tells you no",
+    title: "Eleven checks before a campaign can start",
     body:
-      "Eleven checks run before a campaign can start. Four of them can stop it: missing SPF or DKIM, a bounce rate above five percent, a list with nothing sendable in it. Those do not cost you a campaign, they cost you the domain. Stopping is not blocking: you see what you are taking on, and a deliberate second click starts it anyway.",
+      "Four of them can stop it: missing SPF or DKIM, a bounce rate above five percent, a list with nothing sendable in it. Those do not cost you a campaign, they cost you the domain. Stopping is not blocking: you see what you are taking on, and a deliberate second click starts it anyway.",
     points: [
       {
-        title: "Blockers and notes are not the same thing",
+        title: "Four of the eleven can stop the start",
         body: "A blocker is something that will certainly go wrong and whose damage stays. A note makes things worse, but neither certainly nor permanently. We keep that line strict: a warning that is sometimes just an opinion gets clicked away by the third time, and the real one goes with it.",
       },
       {
-        title: "Someone keeps looking afterwards",
+        title: "Daily DNS checks while the campaign runs",
         body: "Every sending domain's DNS records are checked daily. If the bounce rate climbs past five percent in flight, the app pauses the campaign and tells you why.",
       },
     ],
   },
   channels: {
     eyebrow: "Three channels, one contact",
-    title: "Not three tools side by side, but one process",
+    title: "Email, LinkedIn and phone from one contact",
     body:
       "The difference between the channels is not how good they are, but how much of each runs on its own. On two of them the app prepares everything and you press the last button. That is deliberate, not a gap.",
     appLabel: "What the app does",
@@ -3135,7 +3175,7 @@ const en: typeof de = {
       {
         id: "phone",
         label: "Phone",
-        title: "Prepared instead of caught cold",
+        title: "Call note and number before you dial",
         app: [
           "Number from the public listing, no looking it up",
           "Role, company summary and call note next to it",
@@ -3151,7 +3191,7 @@ const en: typeof de = {
       "You dial with your own phone: Frostbreaker is not a phone system and does not bill call minutes.",
   },
   honesty: {
-    title: "A number that means nothing does not get shown",
+    title: "The A/B winner isn't declared until the volume is there",
     body:
       "Twelve mails and one reply is not \u201c8.3%\u201d. It is twelve mails and one reply. Below thirty contacted people we print \u201ctoo few\u201d instead of a percentage, and the bar stays empty.",
     points: [
@@ -3160,7 +3200,7 @@ const en: typeof de = {
         body: "No winner until every version has 50 sends and the gap survives a chance test. Every other dashboard will happily tell you variant B tripled your reply rate off nine replies.",
       },
       {
-        title: "Measured per contact, not per mail",
+        title: "Reply rate per contact",
         body: "A sequence sends three or four mails to the same person. The one reply should not be divided by four.",
       },
     ],
@@ -3526,7 +3566,7 @@ const en: typeof de = {
   ],
   systemMap: {
     eyebrow: "The whole picture",
-    title: "No step starts from scratch",
+    title: "Four stages, one shared dataset",
     body: "Everything further down this page is one of those four boxes in detail.",
     stages: [
       {
@@ -3627,7 +3667,7 @@ const en: typeof de = {
   },
   offerSection: {
     eyebrow: "Your offer",
-    title: "The app knew everything about the recipient and nothing about you",
+    title: "Your offer, the template for every email",
     body: "Company, role, the technology they run, a researched description: everything about the recipient was in the database. What you sell was nowhere. So every campaign started with four empty text fields, and for most people that is where outreach ends. Now you answer that once, and the emails are written from it.",
     points: [
       {
@@ -3650,11 +3690,11 @@ const en: typeof de = {
         body: "What you send once they say yes, how long it takes them to look, your one question, why buyers hesitate, and the tone: those five are deliberately never suggested. Almost every website says “book a call” in that spot — and a call is exactly what the small question is not. A suggestion there would be a guess, and a guess means something sits in your offer that nobody decided.",
       },
       {
-        title: "No proof on file, no claim made",
+        title: "Empty proof field means no number in the email",
         body: "Leave the proof field empty and it turns into an explicit instruction to claim nothing in the email: no client, no figure, no number of years. A junior would improvise here. An invented reference is not spotted by you, it is spotted by the recipient, and then that contact is gone.",
       },
       {
-        title: "The draft lands in the form, not on the wire",
+        title: "The draft waits in the campaign form",
         body: "The eight pieces of copy go into the campaign form. A person reads them there before they go to a thousand addresses, and changes whatever does not fit. The gate then checks the technical side, as it always did.",
       },
     ],
@@ -3765,7 +3805,7 @@ const en: typeof de = {
   },
   whoFor: {
     eyebrow: "Who it's for",
-    title: "Your situation decides, not your industry",
+    title: "Three ways in",
     cards: [
       {
         id: "self",
@@ -3815,11 +3855,11 @@ const en: typeof de = {
   },
   postSend: {
     eyebrow: "After the yes",
-    title: "A reply becomes a case, not an email in an inbox",
+    title: "Inbox, deals and tasks in one view",
     body: "Every reply is classified and attached to the contact. It becomes a deal with a value and a probability, a task with a due date, a note after the call. Yesterday's call and the email from three weeks ago sit in the same history.",
     features: [
       { id: "replies", title: "One inbox for every mailbox", body: "All connected mailboxes come together in one inbox, synced every five minutes, with an unread counter. Every reply arrives with full text, AI classifies it (interested, not interested, question), and you reply straight from the app. You no longer need to open Instantly for this." },
-      { id: "dashboard", title: "Revenue forecast, not just open rate", body: "Open pipeline, a forecast weighted by close probability, won and lost over the last 30 days, plus due and overdue tasks. For most agencies that replaces a separate CRM subscription." },
+      { id: "dashboard", title: "Revenue forecast weighted by close probability", body: "Open pipeline, a forecast weighted by close probability, won and lost over the last 30 days, plus due and overdue tasks. For most agencies that replaces a separate CRM subscription." },
       { id: "status", title: "Lead status per contact, no separate CRM needed", body: "Contacted, replied, meeting booked, became a customer, all trackable directly in the leads table." },
     ],
   },
@@ -3884,7 +3924,7 @@ const en: typeof de = {
   customer: {
     stripLabel: "Working with",
     eyebrow: "Client",
-    title: "Their business is retention. Their problem was acquisition.",
+    title: "retaiyn: winning customers over email and LinkedIn",
     name: "retaiyn",
     url: "https://www.retaiyn.com",
     urlLabel: "retaiyn.com",
@@ -3944,8 +3984,8 @@ const en: typeof de = {
     ],
   },
   finalCta: {
-    title: "Let's automate your cold outreach.",
-    body: "Thirty minutes in which we look at your client setup together, set up the first workspace and connect the API accounts. After that the first search runs the same day. Not a sales pitch, no credit card.",
+    title: "Thirty minutes, then the first search runs",
+    body: "We look at your client setup together, set up the first workspace and connect the API accounts. After that the first search runs the same day. Not a sales pitch, no credit card.",
   },
   footer: {
     location: "Vienna, Austria",
