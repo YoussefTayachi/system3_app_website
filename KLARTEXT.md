@@ -76,12 +76,33 @@ deren Sinn sich erst aus dem Abschnitt darunter erschließt.
 Entwürfe. Die endgültige Formulierung macht der `copywriter` in beiden
 Sprachen — hier steht, **was** die Zeile benennen muss.
 
+> **Zwei Zeilen sind bereits entschieden** (mit ✔ markiert). Meine ersten
+> Entwürfe dafür waren „Zwölf Felder, aus denen acht Mails entstehen" und
+> „Kein Gewinner unter 50 Sendungen je Fassung". Der Betreiber hat beide
+> verworfen: *„zu komisch formuliert bzw man überfliegt das einfach."*
+>
+> Er hat recht, und beide Male aus einem benennbaren Grund:
+>
+> - Der erste warf mit **zwölf** und **acht** um sich, bevor der Leser weiß,
+>   was ein Feld ist. Zahlen sind nur dann ein Anker, wenn man die Einheit
+>   schon kennt — sonst sind sie eine Spezifikation, über die man
+>   hinwegliest.
+> - Der zweite fing mit einer **Verneinung** an („Kein Gewinner…") — genau
+>   das Muster, das dieses Dokument zwei Absätze weiter oben verbietet. Eine
+>   Regel, die man beim ersten eigenen Entwurf bricht, ist eine schlechte
+>   Regel oder ein unaufmerksamer Entwurf. Hier war es Letzteres.
+>
+> **Daraus eine dritte Prüfung, die für alle sechzehn gilt:** eine Zahl darf
+> in einer Überschrift nur stehen, wenn ihre Einheit dem Leser an dieser
+> Stelle bereits geläufig ist. „50 Sendungen" geht im Auswertungs-Abschnitt,
+> „zwölf Felder" geht nicht als erste Berührung mit dem Angebotsprofil.
+
 ### Kapitelüberschriften
 
 | Wo | Heute | Muss benennen | Entwurf |
 |---|---|---|---|
 | `#system` | „Kein Schritt fängt bei null an" | dass jede Stufe die Daten der vorigen weiterreicht | **„Vier Stufen, eine Datenbasis"** |
-| `#angebot` | „Die App wusste alles über den Empfänger und nichts über dich" | das Angebotsprofil | **„Zwölf Felder, aus denen acht Mails entstehen"** |
+| `#angebot` | „Die App wusste alles über den Empfänger und nichts über dich" | das Angebotsprofil | **„Dein Angebot als Vorlage für jede Mail"** ✔ gesetzt |
 | `#kanaele` | „Nicht drei Werkzeuge nebeneinander, sondern ein Vorgang" | die drei Kanäle | **„E-Mail, LinkedIn und Telefon aus einem Kontakt"** |
 | `#crm` | „Aus einer Antwort wird ein Vorgang, nicht eine Mail im Postfach" | Posteingang und Pipeline | **„Posteingang, Deals und Aufgaben in einer Ansicht"** |
 | `#torwart` | „Das einzige Werkzeug für Kaltakquise, das dir Nein sagt" | die Startprüfung | **„Elf Prüfungen, bevor eine Kampagne startet"** |
@@ -96,7 +117,7 @@ Sprachen — hier steht, **was** die Zeile benennen muss.
 |---|---|---|
 | `#torwart` | „Blocker und Hinweise sind zweierlei" | **„Vier der elf halten den Start auf"** |
 | `#torwart` | „Danach schaut jemand weiter hin" | **„Tägliche DNS-Prüfung im laufenden Betrieb"** |
-| `#torwart` | „Eine Zahl, die nichts bedeutet, zeigen wir nicht" | **„Kein Gewinner unter 50 Sendungen je Fassung"** |
+| `#torwart` | „Eine Zahl, die nichts bedeutet, zeigen wir nicht" | **„Der A/B-Gewinner steht erst, wenn die Menge reicht"** ✔ gesetzt |
 | `#torwart` | „Gemessen an Kontakten, nicht an Mails" | **„Antwortquote je Kontakt"** |
 | `#kanaele` | „Vorbereitet statt kalt erwischt" | **„Gesprächsnotiz und Nummer vor dem Anruf"** |
 | `#crm` | „Umsatz-Forecast statt nur Öffnungsrate" | **„Umsatz-Forecast nach Abschlusswahrscheinlichkeit"** |
