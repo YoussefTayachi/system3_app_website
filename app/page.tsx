@@ -36,7 +36,6 @@ import { GateMockup, EffectMockup } from "./_guard-mockups";
 import { OfferMapMockup, type OfferMapMockupProps } from "./_offer-mockups";
 import { LeadCardStack } from "./_illustration";
 import { SystemMap } from "./_system-map";
-import { AllInOneCompare } from "./_compare";
 import { StepWalkthrough } from "./_walkthrough";
 import { CustomerStrip, CustomerSection } from "./_customers";
 import { Reveal } from "./reveal";
@@ -678,12 +677,17 @@ export default function Home() {
           Der Einwand ist real und bleibt beantwortet, aber in der
           Gegenrichtung. Der Anker #ergaenzt bleibt bestehen, damit vorhandene
           Links weiter funktionieren. Begruendung im Kopf von _compare.tsx. */}
-      <section id="ergaenzt" className={"scroll-mt-20 mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
-        <SectionHeading eyebrow={t.compare.eyebrow} title={t.compare.title} lead={t.compare.body} />
-        <Reveal>
-          <AllInOneCompare />
-        </Reveal>
-      </section>
+      {/* Die Vergleichstabelle ist am 2026-08-15 nach /funktionen#vergleich
+          gezogen (KONZENTRATION.md, Stufe 2). Sie war 1.607 von 20.016 Pixeln
+          und beantwortete eine Frage, die sich erst stellt, wenn jemand schon
+          verstanden hat, was das Werkzeug tut -- also nicht die Frage eines
+          Besuchers der Startseite, sondern die des Lesers der Funktionsseite.
+
+          Der Anker bleibt als leerer Marker: auf ihn zeigen vorhandene
+          Verweise, und ein Sprung ins Leere ist schlechter als ein Sprung an
+          die Stelle, an der der Inhalt jetzt steht. Wer /#ergaenzt aufruft,
+          landet hier und findet den Verweis direkt darunter. */}
+      <span id="ergaenzt" className="block scroll-mt-20" aria-hidden />
 
       {/* Der Abschnitt "Woher die Leads kommen" samt "Was mit jeder Suche
           mitlaeuft" stand bis zum 2026-08-14 hier: acht Karten, zwanzig

@@ -17,6 +17,7 @@ import { UnifiedSearchMockup, LeadsTableMockup, LeadDetailMockup, MailboxesMocku
 import { SuppressionMockup, LocalReachMockup, QualifiedLeadAnimation, CampaignMockup, DeliverabilityMockup } from "../_mockups";
 import { LinkedInMockup } from "../_guard-mockups";
 import { CoachFindingMockup } from "../_offer-mockups";
+import { AllInOneCompare } from "../_compare";
 import { Reveal } from "../reveal";
 import { CheckIcon } from "../_icons";
 import { useT } from "../language-provider";
@@ -207,6 +208,31 @@ export default function FunktionenPage() {
           Schluss-CTA ebenfalls. Diese Naht war vorher schon da -- der
           Dashboard-Abschnitt war selbst hell -- ist jetzt aber nur noch eine
           statt zwei. Gemeldet an den ui-designer. */}
+
+      {/* Die Vergleichstabelle, am 2026-08-15 von der Startseite hierher
+          gezogen (KONZENTRATION.md, Stufe 2). Sie stand dort als #ergaenzt und
+          war 1.607 Pixel von 20.016 -- ein ganzer Abschnitt, der eine Frage
+          beantwortet, die sich erst stellt, wenn jemand schon verstanden hat,
+          was das Werkzeug tut. Genau das ist der Leser DIESER Seite: er hat
+          neun Funktionsgruppen hinter sich und fragt sich als naechstes, was
+          davon seine vorhandenen Werkzeuge nicht koennen.
+
+          Der Anker #ergaenzt bleibt auf der Startseite als leerer Marker
+          stehen, damit vorhandene Verweise nicht ins Leere laufen -- er zeigt
+          von dort hierher.
+
+          Flaechenton: bg-band, damit die Tabelle sich von der letzten
+          Funktionsgruppe absetzt und der helle Schluss-CTA danach wieder
+          wechselt. Damit ist die Naht aus dem Kommentar darueber nebenbei
+          erledigt. */}
+      <section id="vergleich" className={"scroll-mt-20 border-y border-edge/60 bg-band"}>
+        <div className={"mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
+          <SectionHeading eyebrow={t.compare.eyebrow} title={t.compare.title} lead={t.compare.body} />
+          <Reveal>
+            <AllInOneCompare />
+          </Reveal>
+        </div>
+      </section>
 
       <section className={"mx-auto max-w-3xl px-4 text-center sm:px-6 " + sectionPad}>
         <h2 className={"mx-auto " + h2Cls}>{f.ctaTitle}</h2>
