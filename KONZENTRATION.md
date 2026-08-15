@@ -210,12 +210,12 @@ Bleibt bei zwei Farben aus den vorhandenen Tokens — kein drittes Farbsystem.
 
 Keiner wird gelöscht — jeder hat schon eine Heimat.
 
-| Abschnitt | heute | zieht um nach | Ersparnis | Stand |
+| Abschnitt | heute | wird | Ersparnis | Stand |
 |---|---|---|---|---|
-| `#ergaenzt` (Vergleich) | 1.607 px | `/funktionen#vergleich` | **−1.607 px** | **erledigt 15.08.** |
-| `#rundgang` | 4.335 px | `/funktionen` | **−3.100 px** | blockiert, siehe unten |
-| `#crm` | 1.564 px | `/funktionen` | **−1.564 px** | blockiert, siehe unten |
-| `#kanaele` | 1.208 px | `/funktionen` | **−1.208 px** | blockiert, siehe unten |
+| `#ergaenzt` (Vergleich) | 1.607 px | zieht um nach `/funktionen#vergleich` | **−1.607 px** | **erledigt 15.08.** |
+| `#rundgang` | 4.335 px | schrumpft auf drei Zeilen plus Verweis | **−3.500 px** | offen |
+| `#crm` | 1.564 px | schrumpft: Aussage und ein Bild, ohne die vier Karten | **−950 px** | offen |
+| `#kanaele` | 1.208 px | schrumpft: drei Kanäle, je eine Zeile | **−700 px** | offen |
 
 > ### Korrektur vom 2026-08-15: die Funktionsseite ist nicht vollständig
 >
@@ -234,15 +234,35 @@ Keiner wird gelöscht — jeder hat schon eine Heimat.
 >   („Und jetzt weißt du, was funktioniert hat") steht auf `/funktionen`
 >   nicht.
 >
-> **Daraus folgt eine neue Stufe 0, vor allem anderen:** `/funktionen`
-> bekommt drei Gruppen dazu — Telefon als Kanal, der gemeinsame Posteingang
-> samt Forecast, und die Wirkungsmessung. Der Text dafür existiert bereits
-> in `channels`, `postSend` und `walkthrough`; er wird verschoben, nicht neu
-> erfunden. Erst danach kann die Startseite diese Abschnitte abgeben.
->
 > Der Grundsatz „nichts wird gelöscht, alles zieht um" hält nur, wenn das
 > Ziel den Inhalt wirklich trägt. Sonst ist Umziehen ein schöneres Wort für
 > Verlieren.
+>
+> ### Zweite Korrektur, noch am selben Tag: sie ziehen gar nicht um
+>
+> Der erste Reflex war, `/funktionen` um drei Gruppen zu erweitern. Der
+> Betreiber hat das gestoppt, und zu Recht:
+>
+> > „fokussier dich nicht darauf viele features zu schreiben sondern die
+> > fragen des ICP in der website zu beantworten und den kunden nicht zu
+> > überfordern."
+>
+> Drei Gruppen an `/funktionen` anzuhängen hätte die Funktionsseite von
+> 12.549 auf rund 15.000 px gebracht — mehr Stoff zum Durchlesen, um die
+> Startseite zu entlasten. Das ist dieselbe Krankheit an einem anderen Ort.
+>
+> **`#kanaele` und `#crm` bleiben deshalb auf der Startseite und werden
+> gekürzt statt verschoben.** Beide beantworten eine Frage des Kunden, und
+> zwar genau die, die der Coach nennt:
+>
+> - `#kanaele` beantwortet **„Was macht es?"** in drei Wörtern: E-Mail,
+>   LinkedIn, Telefon. Das ist eine der stärksten kurzen Antworten der
+>   ganzen Seite — sie ist nur zu lang ausgeführt.
+> - `#crm` beantwortet **„Wie läuft das ab?"** für den Teil nach der
+>   Antwort. Auch das gehört auf die Startseite, nur kürzer.
+>
+> Umgezogen wird nur, was auf der Startseite die falsche Frage beantwortet.
+> Das war der Vergleich, und der ist umgezogen.
 
 Von `#rundgang` bleibt ein Rest: **drei Schritte statt sechs**, je eine Zeile,
 eine gemeinsame Nachbildung, ein Verweis „Alle neun Funktionen ansehen →".
@@ -349,16 +369,47 @@ beim Kürzen nicht mitgehen — notfalls in einem Satz statt in einem Abschnitt:
 Streichen zuerst, Umziehen danach, Neubauen zuletzt. Jede Stufe ein eigener
 Commit. Wer die Reihenfolge dreht, baut Abschnitte um, die danach fallen.
 
-0. **Stufe 0** — `/funktionen` vervollständigen: Telefon als Kanal, der
-   gemeinsame Posteingang samt Forecast, die Wirkungsmessung. Ergibt sich aus
-   der Korrektur oben und muss vor allem anderen stehen. *(offen)*
-1. **Stufe 2** — die vier Umzüge. *(1 von 4 erledigt: der Vergleich, −1.607 px.
-   Die anderen drei warten auf Stufe 0.)*
+1. **Stufe 2** — Umziehen und Kürzen. *(1 von 4 erledigt: der Vergleich,
+   −1.607 px. Die drei Kürzungen sind Textarbeit und gehen an den
+   `copywriter`.)*
 2. **Stufe 3** — die drei Zusammenziehungen. (−4.600 px)
 3. **Stufe 1** — der Held. Braucht die Textarbeit an der Augenbraue.
 4. **Stufe 4** — die zwei neuen Abschnitte. Braucht keine Preisentscheidung
    mehr, die ist gefallen.
 5. **Stufe 5** — die Knöpfe ausdünnen.
+
+### Die Regel, an der jede Kürzung gemessen wird
+
+Nicht „was ist entbehrlich", sondern **„welche Frage beantwortet das, und ist
+das die Frage, die der Leser an dieser Stelle hat?"**
+
+- Beantwortet ein Abschnitt eine der fünf Fragen → er bleibt, so kurz wie
+  möglich.
+- Beantwortet er eine Frage, die erst später kommt → er zieht auf die Seite
+  um, auf der sie gestellt wird.
+- Beantwortet er keine → er fällt.
+
+Was **nicht** passieren darf: Inhalt von der Startseite auf eine Unterseite
+schieben, nur damit die Startseite kürzer wird. Dann liest sich die Unterseite
+wie ein Handbuch, und die Verwirrung ist bloß umgezogen.
+
+---
+
+## Die Navigation, erledigt am 2026-08-15
+
+Auf Wunsch des Betreibers stehen die Menüpunkte jetzt **in beiden Sprachen auf
+Englisch** — Product, All features, Who it's for, Contact, Custom Software.
+Übernommen wurden wortgleich die Beschriftungen, die im englischen Zweig des
+Wörterbuchs bereits standen; nichts ist neu erfunden. Die deutsche Leiste trug
+ohnehin schon „Lead Finder" und „Decision Maker Finder".
+
+Nachgemessen: 8 Seiten × 4 Breiten × 2 Sprachen, 0 von 64 Kombinationen kaputt.
+
+**Nicht mitgeändert:** die Route bleibt `/funktionen`, und die Meta-Titel
+bleiben deutsch. Eine Route umzubenennen bricht vorhandene Verweise und
+verlangt eine Weiterleitung; das ist ein eigener Schritt, wenn er gewünscht
+ist. Fließtext auf Deutsch zu lassen ist ebenfalls Absicht — englische
+Menüpunkte sind in deutschem SaaS üblich, englischer Fließtext nicht.
 
 ### Stand
 

@@ -8,7 +8,7 @@ import type { Lang } from "./lang";
 
 const de = {
   nav: {
-    produkt: "Produkt",
+    produkt: "Product",
     // Absolute Pfade mit Anker, damit die Eintraege auch von Unterseiten aus
     // funktionieren -- ein reines "#produkt" wuerde auf /funktionen ins Leere
     // zeigen.
@@ -17,15 +17,15 @@ const de = {
     // beides steckt jetzt im Rundgang bzw. auf /funktionen. Ein Nav-Eintrag,
     // der ins Leere zeigt, ist schlimmer als keiner.
     produktItems: [
-      { label: "Alle Funktionen", href: "/funktionen" },
-      { label: "Rundgang", href: "/#rundgang" },
+      { label: "All features", href: "/funktionen" },
+      { label: "Walkthrough", href: "/#rundgang" },
       // Gehoert zu den Startseiten-Ankern, nicht zu den /funktionen-Ankern
       // darunter: der Abschnitt steht direkt hinter dem Rundgang. Bewusst ohne
       // "THAW" -- die Figur darf auf der Seite auftauchen, aber kein
       // Menuepunkt und keine Ueberschrift traegt ihren Namen.
-      { label: "Dein Angebot", href: "/#angebot" },
-      { label: "Drei Kanäle", href: "/#kanaele" },
-      { label: "Personalisierung", href: "/funktionen#personalize" },
+      { label: "Your offer", href: "/#angebot" },
+      { label: "Three channels", href: "/#kanaele" },
+      { label: "Personalization", href: "/funktionen#personalize" },
       // Der Punkt "Integrationen" ist am 2026-08-14 mit seinem Abschnitt
       // gefallen (VEREINFACHUNG.md 1.2). Ein Menuepunkt, der ins Leere zeigt,
       // ist schlimmer als keiner -- die Anbieterliste steht auf /funktionen.
@@ -40,30 +40,30 @@ const de = {
     // nutzer zu technisch klingen. "Personalisierung"/"Personalization"
     // bleibt bewusst uebersetzt (kein Produktname wie die anderen).
     funktionenItems: [
-      { label: "Alle Funktionen", href: "/funktionen" },
+      { label: "All features", href: "/funktionen" },
       { label: "Lead Finder", href: "/funktionen#find" },
-      { label: "Technologie-Filter", href: "/funktionen#tech" },
+      { label: "Technology filter", href: "/funktionen#tech" },
       { label: "Decision Maker Finder", href: "/funktionen#enrich" },
-      { label: "Personalisierung", href: "/funktionen#personalize" },
+      { label: "Personalization", href: "/funktionen#personalize" },
       // Neu am 2026-08-13, zur Gruppe `write`. Wieder eine Beschreibung statt
       // eines Produktnamens, aus demselben Grund wie beim Punkt darunter.
-      { label: "Texte aus dem Angebot", href: "/funktionen#write" },
+      { label: "Copy from your offer", href: "/funktionen#write" },
       // Hiess bis zum 2026-08-13 "Email Copy Coach" und wurde damit fuer die
       // Schreibfunktion gehalten, die seither im Angebot steckt. Dieser Punkt
       // ist etwas anderes: die Pruefung im Browser waehrend des Tippens.
       // Deshalb hier eine Beschreibung statt eines Produktnamens -- dieselbe
       // Ausnahme wie bei "Personalisierung".
-      { label: "Textcheck beim Tippen", href: "/funktionen#check" },
-      { label: "Kampagnen", href: "/funktionen#send" },
-      { label: "Sperrliste", href: "/funktionen#protect" },
+      { label: "Copy check as you type", href: "/funktionen#check" },
+      { label: "Campaigns", href: "/funktionen#send" },
+      { label: "Suppression list", href: "/funktionen#protect" },
       { label: "Pipeline", href: "/funktionen#pipeline" },
     ],
-    vergleich: "Vergleich",
-    kontakt: "Kontakt",
+    vergleich: "Comparison",
+    kontakt: "Contact",
     // Zweites, eigenstaendiges Angebot (Individualentwicklung) neben dem
     // Produkt. Bewusst ein kurzes Substantiv wie die uebrigen Nav-Punkte --
     // die einladende Frage steht als H1 auf der Zielseite, wo sie wirkt.
-    custom: "Eigene Software",
+    custom: "Custom Software",
     // Hier standen bis zum 14.08.2026 `agenturen`, `saas` und `kunde` als
     // einzelne Beschriftungen. Sie sind mit dem Fuer-wen-Menue unten in
     // fuerWenItems aufgegangen; `preise` und `faq` waren schon laenger tot
@@ -85,16 +85,16 @@ const de = {
     // Aufklappmenue -- drei Links plus Abstaende sind 311px, das Menue rund
     // 96px. Das spart etwa 215px und heilt nebenbei einen Umbruch, den
     // /kontakt schon vorher hatte.
-    fuerWen: "Für wen",
+    fuerWen: "Who it's for",
     // Der dritte Eintrag ist bewusst anders gebaut. "Für Agenturen" und "Für
     // SaaS-Anbieter" beantworten die Frage der Ueberschrift, "Unser Kunde"
     // nicht -- das ist kein Publikum, sondern ein Beleg. Als Verbform gelesen
     // ("So nutzt es ...") steht er nicht mehr als dritte Zielgruppe da,
     // sondern als die eine echte Antwort auf "und benutzt das jemand".
     fuerWenItems: [
-      { label: "Für Agenturen", href: "/fuer-agenturen" },
-      { label: "Für SaaS-Anbieter", href: "/fuer-saas" },
-      { label: "So nutzt es retaiyn", href: "/kunden/retaiyn" },
+      { label: "For agencies", href: "/fuer-agenturen" },
+      { label: "For SaaS companies", href: "/fuer-saas" },
+      { label: "How retaiyn uses it", href: "/kunden/retaiyn" },
     ],
   },
   // ══════════════════════════════════════════════════════════════════════
@@ -415,7 +415,7 @@ const de = {
     metaTitle: "Funktionen: von der Suche bis zur beantworteten Mail",
     metaDescription:
       "Alle Funktionen von Frostbreaker im Überblick: Lead-Suche über Google Maps, Firmendatenbank und Entscheider-Datenbank mit Technologie-Filter, Entscheider-Recherche, E-Mail-Verifizierung, KI-Personalisierung, Kampagnen, Zustellbarkeit und Sperrliste.",
-    eyebrow: "Funktionen",
+    eyebrow: "Features",
     title: "Von der Suche bis zur beantworteten Mail",
     intro:
       "Was in anderen Setups vier Abos und drei CSV-Exporte braucht, läuft hier in einem Durchgang. Diese Seite zeigt jeden Schritt einzeln.",
