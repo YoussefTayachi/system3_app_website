@@ -1,5 +1,15 @@
 "use client";
-import { CTAButton, CTAGroup, SectionHeading, SiteHeader, SiteFooter } from "../_ui";
+import {
+  CTAButton,
+  CTAGroup,
+  SectionHeading,
+  SiteHeader,
+  SiteFooter,
+  h1Cls,
+  h2Cls,
+  eyebrowCls,
+  sectionPad,
+} from "../_ui";
 // DashboardMockup ist am 2026-08-14 mit dem textlosen Schlussabschnitt
 // gefallen (Begruendung unten an der Fundstelle). Die Komponente bleibt in
 // _app-mockups.tsx.
@@ -92,13 +102,34 @@ export default function FunktionenPage() {
     <div className="min-h-screen pb-16 sm:pb-0">
       <SiteHeader />
 
+      {/* ═══════════════════════════════════════════════════════════════
+          MITTIGER HERO, seit dem 2026-08-15.
+
+          Vorher lag alles in den linken rund 620px eines 1152px-Rahmens und
+          die rechten 530px standen leer -- auf fuenf Unterseiten dieselbe
+          Fehlstelle. Leer ist in Ordnung, aber es muss VERSEHENTLICH von
+          ABSICHTLICH unterscheidbar sein: mittig gesetzt ist das rechte
+          Drittel Rand, linksbuendig ist es eine Luecke.
+
+          Der Startseiten-Hero bleibt als einziger zweispaltig. Der
+          Unterschied bedeutet dann etwas: dort faengt die Seite an, hier ein
+          Kapitel davon.
+          ═══════════════════════════════════════════════════════════════ */}
       <section className="hero-wash border-b border-edge/60">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-20">
-          <p className="mb-4 text-xs font-medium uppercase tracking-[0.14em] text-sky-700">{f.eyebrow}</p>
-          <h1 className="font-display max-w-[18ch] text-4xl font-semibold leading-[1.08] tracking-tight text-ink sm:text-5xl">
-            {f.title}
-          </h1>
-          <p className="mt-5 max-w-[58ch] text-base leading-relaxed text-soft sm:text-lg">{f.intro}</p>
+        <div className="mx-auto max-w-6xl px-4 py-24 text-center sm:px-6 lg:py-32">
+          {/* Nicht eyebrowCls: die Hero-Augenbraue traegt sky-700 statt
+              --c-faint (12px Grossbuchstaben brauchen 4,5:1, sky-600 kommt
+              nur auf 3,9). Zwei Textfarben in einem className entscheidet die
+              Reihenfolge im erzeugten CSS, nicht die im Attribut -- deshalb
+              hier ausgeschrieben. Groesse und Laufweite sind dieselben. */}
+          <p className="mb-5 text-xs font-medium uppercase tracking-[0.14em] text-sky-700">
+            {f.eyebrow}
+          </p>
+          <h1 className={"mx-auto max-w-[24ch] " + h1Cls}>{f.title}</h1>
+          <p className="mx-auto mt-6 max-w-[58ch] text-base leading-relaxed text-soft sm:text-lg">
+            {f.intro}
+          </p>
+          <CTAGroup className="mt-9" />
         </div>
       </section>
 
@@ -122,7 +153,7 @@ export default function FunktionenPage() {
               "scroll-mt-20 border-b border-edge/60 " + (flipped ? "bg-band" : "")
             }
           >
-            <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+            <div className={"mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
               {/* min-w-0 an beiden Rasterkindern -- dieselbe Ursache wie in
                   _walkthrough.tsx und fuer-agenturen/page.tsx: eine
                   Rasterspalte ist von Haus aus minmax(auto, 1fr), und `auto`
@@ -140,11 +171,10 @@ export default function FunktionenPage() {
                     visual ? "min-w-0 lg:col-span-2 " + (flipped ? "lg:order-2" : "") : "max-w-3xl"
                   }
                 >
-                  <SectionHeading eyebrow={g.eyebrow} title={g.title} />
-                  <p className="-mt-4 text-sm leading-relaxed text-soft sm:text-base">{g.body}</p>
-                  <ul className="mt-6 space-y-2.5">
+                  <SectionHeading eyebrow={g.eyebrow} title={g.title} lead={g.body} />
+                  <ul className="space-y-2.5">
                     {g.bullets.map((b) => (
-                      <li key={b} className="flex items-start gap-2.5 text-sm text-soft">
+                      <li key={b} className="flex items-start gap-2.5 text-[15px] leading-relaxed text-soft">
                         <CheckIcon />
                         {b}
                       </li>
@@ -178,11 +208,9 @@ export default function FunktionenPage() {
           Dashboard-Abschnitt war selbst hell -- ist jetzt aber nur noch eine
           statt zwei. Gemeldet an den ui-designer. */}
 
-      <section className="mx-auto max-w-3xl px-4 py-24 text-center sm:px-6">
-        <h2 className="font-display text-2xl font-semibold tracking-[-0.02em] text-ink text-balance sm:text-3xl">
-          {f.ctaTitle}
-        </h2>
-        <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-soft sm:text-base">{f.ctaBody}</p>
+      <section className={"mx-auto max-w-3xl px-4 text-center sm:px-6 " + sectionPad}>
+        <h2 className={"mx-auto " + h2Cls}>{f.ctaTitle}</h2>
+        <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-soft">{f.ctaBody}</p>
         <CTAGroup className="mt-9" />
       </section>
 

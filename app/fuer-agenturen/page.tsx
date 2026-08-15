@@ -1,5 +1,14 @@
 "use client";
-import { CTAButton, SectionHeading, SiteHeader, SiteFooter, BOOKING_URL } from "../_ui";
+import {
+  CTAButton,
+  SectionHeading,
+  SiteHeader,
+  SiteFooter,
+  BOOKING_URL,
+  h1Cls,
+  h2Cls,
+  sectionPad,
+} from "../_ui";
 import { AgencyMockup } from "../_mockups";
 import { ReportMockup, CallListMockup } from "../_app-mockups";
 import { CopyOutcomesMockup } from "../_guard-mockups";
@@ -39,19 +48,22 @@ export default function AgenturenPage() {
       <SiteHeader />
 
       <section className="hero-wash border-b border-edge/60">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-20">
-          <p className="mb-4 text-xs font-medium uppercase tracking-[0.14em] text-sky-700">{a.eyebrow}</p>
-          <h1 className="font-display max-w-[20ch] text-4xl font-semibold leading-[1.08] tracking-tight text-ink sm:text-5xl">
-            {a.title}
-          </h1>
-          <p className="mt-5 max-w-[60ch] text-base leading-relaxed text-soft sm:text-lg">{a.intro}</p>
-          <div className="mt-8">
+        {/* Mittiger Hero, Begruendung ausgeschrieben in funktionen/page.tsx:
+            die linksbuendige Fassung liess die rechten 530px des Rahmens leer
+            stehen, und zwar auf allen fuenf Unterseiten gleich. */}
+        <div className="mx-auto max-w-6xl px-4 py-24 text-center sm:px-6 lg:py-32">
+          <p className="mb-5 text-xs font-medium uppercase tracking-[0.14em] text-sky-700">{a.eyebrow}</p>
+          <h1 className={"mx-auto max-w-[24ch] " + h1Cls}>{a.title}</h1>
+          <p className="mx-auto mt-6 max-w-[58ch] text-base leading-relaxed text-soft sm:text-lg">{a.intro}</p>
+          <div className="mt-9">
             <CTAButton href={BOOKING_URL} label={a.ctaLabel} />
           </div>
           {/* Auf dieser Seite wiegt der Name schwerer als auf der Startseite:
               wer hier landet, ist selbst eine Agentur und liest den Beleg
               als "jemand wie ich", nicht als "irgendein Kunde". */}
-          <CustomerStrip className="mt-7" />
+          {/* CustomerStrip ist inline-flex -- im mittigen Hero zentriert es
+              das text-center des Elternteils, kein justify-center noetig. */}
+          <CustomerStrip className="mt-8" />
         </div>
       </section>
 
@@ -64,7 +76,7 @@ export default function AgenturenPage() {
             id={s.id}
             className={"scroll-mt-20 border-b border-edge/60 " + (flipped ? "bg-band" : "")}
           >
-            <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+            <div className={"mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
               {/* min-w-0 an beiden Rasterkindern, gleiche Ursache wie in
                   _walkthrough.tsx: eine Rasterspalte ist minmax(auto, 1fr),
                   und `auto` meint die MINDESTBREITE des breitesten Kindes.
@@ -80,11 +92,10 @@ export default function AgenturenPage() {
                     visual ? "min-w-0 lg:col-span-2 " + (flipped ? "lg:order-2" : "") : "max-w-3xl"
                   }
                 >
-                  <SectionHeading eyebrow={s.eyebrow} title={s.title} />
-                  <p className="-mt-4 text-sm leading-relaxed text-soft sm:text-base">{s.body}</p>
-                  <ul className="mt-6 space-y-2.5">
+                  <SectionHeading eyebrow={s.eyebrow} title={s.title} lead={s.body} />
+                  <ul className="space-y-2.5">
                     {s.bullets.map((b) => (
-                      <li key={b} className="flex items-start gap-2.5 text-sm text-soft">
+                      <li key={b} className="flex items-start gap-2.5 text-[15px] leading-relaxed text-soft">
                         <CheckIcon />
                         {b}
                       </li>
@@ -111,17 +122,18 @@ export default function AgenturenPage() {
       {/* Ohne Anbieternamen und ohne erfundene Preise: die Aussage laesst sich
           belegen, eine konkrete Zahl fuer fremde Tools nicht. */}
       <section className="border-b border-edge/60">
-        <div className="mx-auto max-w-3xl px-4 py-20 sm:px-6">
-          <SectionHeading title={a.contrastTitle} />
-          <p className="-mt-4 text-sm leading-relaxed text-soft sm:text-base">{a.contrastBody}</p>
+        {/* max-w-6xl statt max-w-3xl: der Abschnitt stand als einziger dieser
+            Seite 192px weiter innen als der Kopf darueber und las sich
+            dadurch wie ein eingeklebter Kasten. Die Textbreite regelt jetzt
+            der Fliesstext selbst (SectionHeading: 62ch), nicht der Rahmen. */}
+        <div className={"mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
+          <SectionHeading title={a.contrastTitle} lead={a.contrastBody} flush />
         </div>
       </section>
 
-      <section className="mx-auto max-w-3xl px-4 py-24 text-center sm:px-6">
-        <h2 className="font-display text-2xl font-semibold tracking-[-0.02em] text-ink text-balance sm:text-3xl">
-          {a.ctaTitle}
-        </h2>
-        <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-soft sm:text-base">{a.ctaBody}</p>
+      <section className={"mx-auto max-w-3xl px-4 text-center sm:px-6 " + sectionPad}>
+        <h2 className={"mx-auto " + h2Cls}>{a.ctaTitle}</h2>
+        <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-soft">{a.ctaBody}</p>
         <CTAButton className="mt-9" href={BOOKING_URL} label={a.ctaLabel} />
       </section>
 

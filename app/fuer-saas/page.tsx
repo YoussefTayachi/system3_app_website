@@ -1,5 +1,14 @@
 "use client";
-import { CTAButton, SectionHeading, SiteHeader, SiteFooter, BOOKING_URL } from "../_ui";
+import {
+  CTAButton,
+  SectionHeading,
+  SiteHeader,
+  SiteFooter,
+  BOOKING_URL,
+  h1Cls,
+  h2Cls,
+  sectionPad,
+} from "../_ui";
 import { TechFilterMockup } from "../_app-mockups";
 import { CopyOutcomesMockup } from "../_guard-mockups";
 import { Reveal } from "../reveal";
@@ -85,13 +94,12 @@ export default function SaasPage() {
       <SiteHeader />
 
       <section className="hero-wash border-b border-edge/60">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-20">
-          <p className="mb-4 text-xs font-medium uppercase tracking-[0.14em] text-sky-700">{s.eyebrow}</p>
-          <h1 className="font-display max-w-[20ch] text-4xl font-semibold leading-[1.08] tracking-tight text-ink sm:text-5xl">
-            {s.title}
-          </h1>
-          <p className="mt-5 max-w-[60ch] text-base leading-relaxed text-soft sm:text-lg">{s.intro}</p>
-          <div className="mt-8">
+        {/* Mittiger Hero, Begruendung ausgeschrieben in funktionen/page.tsx. */}
+        <div className="mx-auto max-w-6xl px-4 py-24 text-center sm:px-6 lg:py-32">
+          <p className="mb-5 text-xs font-medium uppercase tracking-[0.14em] text-sky-700">{s.eyebrow}</p>
+          <h1 className={"mx-auto max-w-[24ch] " + h1Cls}>{s.title}</h1>
+          <p className="mx-auto mt-6 max-w-[58ch] text-base leading-relaxed text-soft sm:text-lg">{s.intro}</p>
+          <div className="mt-9">
             <CTAButton href={BOOKING_URL} label={s.ctaLabel} />
           </div>
         </div>
@@ -106,14 +114,13 @@ export default function SaasPage() {
             id={sec.id}
             className={"scroll-mt-20 border-b border-edge/60 " + (flipped ? "bg-band" : "")}
           >
-            <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+            <div className={"mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
               <div className={visual ? "grid gap-10 lg:grid-cols-5 lg:items-center lg:gap-14" : ""}>
                 <div className={visual ? "lg:col-span-2 " + (flipped ? "lg:order-2" : "") : "max-w-3xl"}>
-                  <SectionHeading eyebrow={sec.eyebrow} title={sec.title} />
-                  <p className="-mt-4 text-sm leading-relaxed text-soft sm:text-base">{sec.body}</p>
-                  <ul className="mt-6 space-y-2.5">
+                  <SectionHeading eyebrow={sec.eyebrow} title={sec.title} lead={sec.body} />
+                  <ul className="space-y-2.5">
                     {sec.bullets.map((b) => (
-                      <li key={b} className="flex items-start gap-2.5 text-sm text-soft">
+                      <li key={b} className="flex items-start gap-2.5 text-[15px] leading-relaxed text-soft">
                         <CheckIcon />
                         {b}
                       </li>
@@ -131,11 +138,9 @@ export default function SaasPage() {
         );
       })}
 
-      <section className="mx-auto max-w-3xl px-4 py-24 text-center sm:px-6">
-        <h2 className="font-display text-2xl font-semibold tracking-[-0.02em] text-ink text-balance sm:text-3xl">
-          {s.ctaTitle}
-        </h2>
-        <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-soft sm:text-base">{s.ctaBody}</p>
+      <section className={"mx-auto max-w-3xl px-4 text-center sm:px-6 " + sectionPad}>
+        <h2 className={"mx-auto " + h2Cls}>{s.ctaTitle}</h2>
+        <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-soft">{s.ctaBody}</p>
         <CTAButton className="mt-9" href={BOOKING_URL} label={s.ctaLabel} />
       </section>
 

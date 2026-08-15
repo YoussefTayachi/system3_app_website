@@ -1,6 +1,22 @@
 "use client";
 import Image from "next/image";
-import { CTAButton, CTAGroup, SectionHeading, SiteHeader, SiteFooter, BOOKING_URL } from "./_ui";
+import {
+  CTAButton,
+  CTAGroup,
+  SectionHeading,
+  SiteHeader,
+  SiteFooter,
+  BOOKING_URL,
+  h1SplitCls,
+  h2Cls,
+  h3Cls,
+  cardTitleCls,
+  eyebrowCls,
+  leadCls,
+  sectionPad,
+  subSectionPad,
+  heroPad,
+} from "./_ui";
 // SuppressionMockup, DeliverabilityMockup und CampaignMockup lagen im
 // Abschnitt "Mehr als nur Leads finden", der am 2026-08-06 von der
 // Startseite verschwunden ist. Die Komponenten bleiben fuer /funktionen.
@@ -41,12 +57,13 @@ function OfferPoint({ n, title, body }: { n: number; title: string; body: string
   return (
     <div className="max-w-[64ch]">
       <div className="flex items-baseline gap-3">
-        <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-sky-500/12 text-[11px] font-bold text-sky-700">
+        {/* Die Scheibe bleibt bei 24px, obwohl die Ziffer von 11 auf 12px
+            waechst: sie traegt dieselbe Form wie die vier Eckennummern in
+            _offer-mockups.tsx, und diese Paarung ist der ganze Zweck. */}
+        <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-sky-500/12 text-xs font-bold text-sky-700">
           {n}
         </span>
-        <h3 className="font-display text-xl font-semibold leading-snug tracking-[-0.015em] text-ink sm:text-[1.375rem]">
-          {title}
-        </h3>
+        <h3 className={h3Cls}>{title}</h3>
       </div>
       {/* Eingerueckt auf die Textkante der Ueberschrift (24px Scheibe + 12px
           Abstand = 36px): der Fliesstext haengt dadurch an der Ueberschrift
@@ -65,15 +82,29 @@ export default function Home() {
 
       {/* Hero */}
       <section className="hero-wash border-b border-edge/60">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-20">
+        <div className={"mx-auto max-w-6xl px-4 sm:px-6 " + heroPad}>
+          {/* min-w-0 an beiden Rasterkindern, dieselbe Ursache wie in
+              _walkthrough.tsx und auf vier weiteren Seiten: eine Rasterspur
+              ist minmax(auto, 1fr), und `auto` meint die MINDESTBREITE des
+              breitesten Kindes. Unter lg liegen Text und Bild in derselben
+              Spur -- LeadCardStack zog sie am 2026-08-15 bei 320px Fenster
+              auf 332px auf und die Seite scrollte 43px seitlich, in beiden
+              Sprachen. Der Hero war die letzte Stelle ohne diese Sicherung. */}
           <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
-            <div className="fade-up">
+            <div className="fade-up min-w-0">
               {/* sky-700 statt sky-600: bei 12px Grossbuchstaben reicht
                   sky-600 (3.9:1) nicht fuer WCAG AA. */}
               <p className="mb-4 text-xs font-medium uppercase tracking-[0.14em] text-sky-700">
                 {t.hero.eyebrow}
               </p>
-              <h1 className="font-display text-4xl font-semibold leading-[1.08] tracking-tight text-ink sm:text-5xl">
+              {/* DER EINZIGE ZWEISPALTIGE HERO DER SEITE, und deshalb der
+                  einzige, dessen H1 nicht die volle Rahmenbreite hat: die
+                  Spalte misst bei 1440px 544px. h1Cls bringt max-w-[20ch]
+                  mit, hier deckelt ohnehin die Spalte davor. Die fuenf
+                  Unterseiten-Heros stehen seit dem 2026-08-15 mittig und
+                  einspaltig -- der Unterschied soll heissen: hier faengt die
+                  Seite an, dort ein Kapitel. */}
+              <h1 className={"max-w-[20ch] " + h1SplitCls}>
                 {t.hero.h1Pre}
                 <span className="italic text-sky-600">{t.hero.h1Accent}</span>
                 {t.hero.h1Post}
@@ -101,7 +132,7 @@ export default function Home() {
                   <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
                 </a>
               </div>
-              <p className="mt-3.5 text-xs text-mute">{t.cta.trialNote}</p>
+              <p className="mt-3.5 max-w-[52ch] text-sm text-mute">{t.cta.trialNote}</p>
 
               {/* Der einzige fremde Name ueber der Falz. Er steht bewusst
                   NACH dem Knopf: wer schon klickt, soll nicht aufgehalten
@@ -110,7 +141,7 @@ export default function Home() {
               <CustomerStrip className="mt-7" />
             </div>
 
-            <div className="fade-up">
+            <div className="fade-up min-w-0">
               <LeadCardStack />
             </div>
           </div>
@@ -126,12 +157,13 @@ export default function Home() {
               nicht. Jedes der drei ist weiter unten mit einem Bild belegt --
               Rundgang, Kette, "Nach Text". */}
           <div className="fade-up mt-14 grid gap-x-10 gap-y-8 border-t border-edge2/70 pt-8 sm:grid-cols-3">
+            {/* Kartentitel, nicht Fraunces: 18px Display-Serife las sich hier
+                wie eine Zwischenueberschrift im Fachbuch. Die Serife bleibt
+                den Kapiteln. */}
             {t.heroPromises.map((p) => (
               <div key={p.title}>
-                <p className="font-display text-lg font-semibold leading-snug tracking-[-0.015em] text-ink">
-                  {p.title}
-                </p>
-                <p className="mt-1.5 text-sm leading-relaxed text-soft">{p.body}</p>
+                <p className={cardTitleCls}>{p.title}</p>
+                <p className="mt-1.5 text-[15px] leading-relaxed text-soft">{p.body}</p>
               </div>
             ))}
           </div>
@@ -156,9 +188,12 @@ export default function Home() {
           Ersetzt an dieser Stelle den Kostenbeweis (#kosten), der bis heute
           der zweite Abschnitt der Seite war. */}
       <section id="system" className="scroll-mt-20 border-b border-edge/60 bg-band">
-        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-          <SectionHeading eyebrow={t.systemMap.eyebrow} title={t.systemMap.title} />
-          <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.systemMap.body}</p>
+        <div className={"mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
+          <SectionHeading
+            eyebrow={t.systemMap.eyebrow}
+            title={t.systemMap.title}
+            lead={t.systemMap.body}
+          />
           <Reveal>
             <SystemMap />
           </Reveal>
@@ -170,16 +205,19 @@ export default function Home() {
           passiert. Sechs Schritte, sechs Bildschirme, die auf dieser Seite
           sonst nicht vorkommen. Gestaltungsregeln im Kopf von
           _walkthrough.tsx. */}
-      <section id="rundgang" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <SectionHeading eyebrow={t.walkthrough.eyebrow} title={t.walkthrough.title} />
-        <p className="-mt-6 mb-14 max-w-[62ch] text-base leading-relaxed text-soft">{t.walkthrough.body}</p>
+      <section id="rundgang" className={"scroll-mt-20 mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
+        <SectionHeading
+          eyebrow={t.walkthrough.eyebrow}
+          title={t.walkthrough.title}
+          lead={t.walkthrough.body}
+        />
         <StepWalkthrough />
         {/* Der Haupt-CTA steht erst NACH Schritt 6, nicht dazwischen: die
             Mini-CTAs an den Schritten sind die kleinen Ausstiege, dieser
             hier ist der eigentliche. */}
         <div className="mt-16 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-edge2/70 pt-10">
           <CTAButton />
-          <p className="text-xs text-mute">{t.cta.trialNote}</p>
+          <p className="max-w-[52ch] text-sm text-mute">{t.cta.trialNote}</p>
         </div>
       </section>
 
@@ -228,10 +266,13 @@ export default function Home() {
           getragen hat er bei dieser Laenge nicht. */}
       <section
         id="angebot"
-        className="scroll-mt-20 mx-auto max-w-6xl border-t border-edge/60 px-4 py-20 sm:px-6"
+        className={"scroll-mt-20 mx-auto max-w-6xl border-t border-edge/60 px-4 sm:px-6 " + sectionPad}
       >
-        <SectionHeading eyebrow={t.offerSection.eyebrow} title={t.offerSection.title} />
-        <p className="-mt-6 max-w-[62ch] text-base leading-relaxed text-soft">{t.offerSection.body}</p>
+        <SectionHeading
+          eyebrow={t.offerSection.eyebrow}
+          title={t.offerSection.title}
+          lead={t.offerSection.body}
+        />
 
         {/* Jede Aussage steht UEBER ihrem Beleg, nicht daneben. Zwei Gruende:
             die Angebotskarte legt sich erst ab 52rem Kartenbreite ueber Kreuz
@@ -302,9 +343,7 @@ export default function Home() {
             liest sich als Anhang. Weiss auf dem Seitengrund hebt ihn an.
             ───────────────────────────────────────────────────────────── */}
         <div className="mt-20 rounded-3xl border border-edge2/70 bg-panel px-5 py-8 sm:px-10 sm:py-10">
-          <h3 className="font-display max-w-[26ch] text-2xl font-semibold leading-[1.15] tracking-[-0.02em] text-ink sm:text-[1.75rem]">
-            {t.offerSection.limitsTitle}
-          </h3>
+          <h3 className={"max-w-[26ch] " + h3Cls}>{t.offerSection.limitsTitle}</h3>
           {/* Zwei Spalten erst ab lg. Darunter blieben von den 17rem
               Beschriftungsspalte fuer den Fliesstext rund 30 Zeichen je
               Zeile uebrig -- gestapelt liest er sich in voller Breite. */}
@@ -314,9 +353,10 @@ export default function Home() {
                 key={l.title}
                 className="grid gap-x-10 gap-y-2 py-7 lg:grid-cols-[minmax(0,17rem)_minmax(0,1fr)]"
               >
-                <h4 className="font-display text-xl font-semibold leading-snug tracking-[-0.015em] text-ink">
-                  {l.title}
-                </h4>
+                {/* Kartentitel-Stufe, nicht Fraunces: eine h4 UNTER einer h3
+                    darf nicht dieselben 24px tragen, und unter 24px hat die
+                    Display-Serife nichts zu suchen. */}
+                <h4 className={cardTitleCls}>{l.title}</h4>
                 <p className="max-w-[70ch] text-base leading-relaxed text-soft">{l.body}</p>
               </div>
             ))}
@@ -347,22 +387,22 @@ export default function Home() {
           /fuer-agenturen, und dorthin fuehrt hier ein deutlicher Weg statt
           eines Textlinks am Rand. ═══════════════════════════════════════ */}
       <section id="agenturen" className="scroll-mt-20 border-y border-edge/60 bg-band">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+        <div className={"mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
           <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
-            <div>
-              <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-faint">
-                {t.agency.eyebrow}
-              </p>
-              <h2 className="font-display mt-2 max-w-[20ch] text-2xl font-semibold leading-[1.15] tracking-[-0.02em] text-ink sm:text-[1.75rem]">
-                {t.agency.title}
-              </h2>
-              <p className="mt-4 max-w-[52ch] text-base leading-relaxed text-soft">{t.agency.body}</p>
+            <div className="min-w-0">
+              {/* Eigene Augenbraue statt SectionHeading, weil hier kein
+                  Strich davorsteht -- das Band traegt ohnehin schon eine
+                  eigene Flaeche. Groesse und Laufweite kommen trotzdem aus
+                  eyebrowCls, damit die 12px an einer Stelle stehen. */}
+              <p className={eyebrowCls}>{t.agency.eyebrow}</p>
+              <h2 className={"mt-3 " + h2Cls}>{t.agency.title}</h2>
+              <p className={"mt-5 " + leadCls}>{t.agency.body}</p>
 
               {/* Nur die Ueberschriften der drei Punkte, ohne Fliesstext und
                   ohne Icons: das Band soll belegen, nicht erklaeren. */}
               <ul className="mt-6 space-y-2.5">
                 {t.agency.features.map((f) => (
-                  <li key={f.id} className="flex items-start gap-2.5 text-sm leading-relaxed text-soft">
+                  <li key={f.id} className="flex items-start gap-2.5 text-[15px] leading-relaxed text-soft">
                     <CheckIcon />
                     {f.title}
                   </li>
@@ -381,7 +421,7 @@ export default function Home() {
               </a>
             </div>
 
-            <Reveal>
+            <Reveal className="min-w-0">
               <AgencyMockup />
             </Reveal>
           </div>
@@ -408,9 +448,12 @@ export default function Home() {
           Der Anker telefon bleibt erhalten, damit alte Links funktionieren. */}
       <section id="kanaele" className="scroll-mt-20 border-y border-edge/60 bg-band">
         <span id="telefon" className="block scroll-mt-20" aria-hidden />
-        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-          <SectionHeading eyebrow={t.channels.eyebrow} title={t.channels.title} />
-          <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.channels.body}</p>
+        <div className={"mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
+          <SectionHeading
+            eyebrow={t.channels.eyebrow}
+            title={t.channels.title}
+            lead={t.channels.body}
+          />
 
           {/* Drei gleich breite Spalten, items-stretch: unterschiedlich hohe
               Karten wuerden als Rangfolge gelesen, und der ganze Punkt ist,
@@ -419,19 +462,17 @@ export default function Home() {
             {t.channels.cards.map((c, i) => (
               <Reveal key={c.id} delay={i * 80} className="h-full">
                 <div className="flex h-full flex-col rounded-2xl border border-edge/60 bg-panel p-6">
-                  <span className="inline-flex self-start rounded-full bg-ink px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-surface">
+                  <span className="inline-flex self-start rounded-full bg-ink px-2.5 py-1 text-xs font-bold uppercase tracking-wide text-surface">
                     {c.label}
                   </span>
-                  <h3 className="font-display mt-3 text-xl font-semibold leading-snug tracking-[-0.015em] text-ink">
-                    {c.title}
-                  </h3>
+                  <h3 className={"mt-3 " + cardTitleCls}>{c.title}</h3>
 
-                  <p className="mt-5 text-[11px] font-medium uppercase tracking-[0.12em] text-faint">
+                  <p className="mt-5 text-xs font-medium uppercase tracking-[0.14em] text-faint">
                     {t.channels.appLabel}
                   </p>
                   <ul className="mt-2.5 space-y-2">
                     {c.app.map((a) => (
-                      <li key={a} className="flex items-start gap-2.5 text-sm leading-relaxed text-soft">
+                      <li key={a} className="flex items-start gap-2.5 text-[15px] leading-relaxed text-soft">
                         <CheckIcon />
                         {a}
                       </li>
@@ -444,10 +485,10 @@ export default function Home() {
                       die Aussage -- er waere weg, wenn man die Zeile bei den
                       automatischen Kanaelen einfach weglaesst. */}
                   <div className="mt-auto border-t border-edge/70 pt-5">
-                    <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-faint">
+                    <p className="text-xs font-medium uppercase tracking-[0.14em] text-faint">
                       {t.channels.youLabel}
                     </p>
-                    <p className="mt-2 border-l-2 border-coral pl-3 text-sm leading-relaxed text-ink">{c.you}</p>
+                    <p className="mt-2 border-l-2 border-coral pl-3 text-[15px] leading-relaxed text-ink">{c.you}</p>
                   </div>
                 </div>
               </Reveal>
@@ -460,11 +501,11 @@ export default function Home() {
               ihn niemand lesen. */}
           <Reveal className="mt-8">
             <div className="rounded-2xl border border-edge2/70 bg-panel p-6">
-              <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-ink">
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-ink">
                 {t.channels.protectionLabel}
               </p>
-              <p className="mt-2.5 max-w-[80ch] text-sm leading-relaxed text-soft">{t.channels.protectionBody}</p>
-              <p className="mt-3 text-xs leading-relaxed text-mute">{t.channels.phoneNote}</p>
+              <p className="mt-2.5 max-w-[80ch] text-[15px] leading-relaxed text-soft">{t.channels.protectionBody}</p>
+              <p className="mt-3 max-w-[80ch] text-sm leading-relaxed text-mute">{t.channels.phoneNote}</p>
             </div>
           </Reveal>
         </div>
@@ -496,14 +537,20 @@ export default function Home() {
           steht, was daraus zu tun ist. Ein Bild allein zeigt nur die Haelfte
           des Vorgangs. Die Anrufliste ist hier frei geworden, seit der
           Telefon-Abschnitt in #kanaele aufgegangen ist. */}
-      <section id="crm" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <SectionHeading eyebrow={t.postSend.eyebrow} title={t.postSend.title} />
-        <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.postSend.body}</p>
+      <section id="crm" className={"scroll-mt-20 mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
+        <SectionHeading
+          eyebrow={t.postSend.eyebrow}
+          title={t.postSend.title}
+          lead={t.postSend.body}
+        />
+        {/* min-w-0, gleiche Ursache wie im Hero: die beiden Nachbildungen
+            haben eine grosse Mindestbreite und zogen die Spur unter lg mit
+            auf. */}
         <div className="grid items-start gap-8 lg:grid-cols-2">
-          <Reveal>
+          <Reveal className="min-w-0">
             <PostSendMockup />
           </Reveal>
-          <Reveal delay={80}>
+          <Reveal className="min-w-0" delay={80}>
             <CallListMockup />
           </Reveal>
         </div>
@@ -513,8 +560,8 @@ export default function Home() {
               <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-panel2 text-ink">
                 {postSendIcons[f.id]}
               </div>
-              <h3 className="mt-4 text-sm font-semibold text-ink">{f.title}</h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-soft">{f.body}</p>
+              <h3 className={"mt-4 " + cardTitleCls}>{f.title}</h3>
+              <p className="mt-1.5 text-[15px] leading-relaxed text-soft">{f.body}</p>
             </div>
           ))}
         </div>
@@ -543,9 +590,8 @@ export default function Home() {
           leerer Marker an der Stelle stehen, an der sein Abschnitt begann.
           ═══════════════════════════════════════════════════════════════ */}
       <section id="torwart" className="scroll-mt-20 border-y border-edge/60 bg-band">
-        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-          <SectionHeading eyebrow={t.guard.eyebrow} title={t.guard.title} />
-          <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.guard.body}</p>
+        <div className={"mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
+          <SectionHeading eyebrow={t.guard.eyebrow} title={t.guard.title} lead={t.guard.body} />
           {/* SPALTENVERHAELTNIS UND SENKRECHTE AUSRICHTUNG, 2026-08-14.
               Beide Haelften hatten zwei gleich breite Spalten und
               items-start. Seit der Verschmelzung tragen sie je zwei Karten
@@ -570,15 +616,15 @@ export default function Home() {
               damit die beiden Haelften nicht unterschiedlich gebaut wirken.
               Unter lg ist beides wirkungslos: dort ist das Raster einspaltig. */}
           <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)]">
-            <Reveal>
+            <Reveal className="min-w-0">
               <GateMockup />
             </Reveal>
-            <div className="space-y-4">
+            <div className="min-w-0 space-y-4">
               {t.guard.points.map((p, i) => (
                 <Reveal key={p.title} delay={i * 80}>
                   <div className="rounded-2xl border border-edge/60 bg-panel p-5">
-                    <h3 className="font-display text-lg font-semibold tracking-[-0.015em] text-ink">{p.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-soft">{p.body}</p>
+                    <h3 className={cardTitleCls}>{p.title}</h3>
+                    <p className="mt-2 text-[15px] leading-relaxed text-soft">{p.body}</p>
                   </div>
                 </Reveal>
               ))}
@@ -589,25 +635,30 @@ export default function Home() {
               Abstand statt eines zweiten Flaechentons -- der Abschnitt liegt
               ohnehin schon auf bg-panel2. */}
           <span id="ehrlich" className="block scroll-mt-20" aria-hidden />
-          <div className="mt-16 border-t border-edge2/70 pt-14">
-            <h3 className="font-display max-w-[26ch] text-2xl font-semibold leading-[1.15] tracking-[-0.02em] text-ink sm:text-[1.75rem]">
-              {t.honesty.title}
-            </h3>
-            <p className="mt-4 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.honesty.body}</p>
+          {/* Unterabschnitt innerhalb des Kapitels, und h3 statt h2 -- genau
+              der Fall, fuer den es die dritte Stufe gibt. Die Zahlen stehen
+              hier ausgeschrieben und nicht als subSectionPad: der Abstand
+              wirkt nur nach OBEN (die Trennlinie), unten schliesst der
+              Abschnitt selbst ab. Tailwind v4 liest Klassennamen als Text
+              aus der Quelle -- ein zusammengerechneter Name existierte im
+              fertigen CSS nicht. */}
+          <div className="mt-16 border-t border-edge2/70 pt-14 sm:pt-16">
+            <h3 className={"max-w-[26ch] " + h3Cls}>{t.honesty.title}</h3>
+            <p className={"mt-5 mb-10 " + leadCls}>{t.honesty.body}</p>
             {/* Gespiegelt zur ersten Haelfte: das Bild steht rechts und
                 bekommt dieselben 1,25 Anteile. */}
             <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)]">
-              <div className="space-y-4 lg:order-1">
+              <div className="min-w-0 space-y-4 lg:order-1">
                 {t.honesty.points.map((p, i) => (
                   <Reveal key={p.title} delay={i * 80}>
                     <div className="rounded-2xl border border-edge/60 bg-panel p-5">
-                      <h4 className="font-display text-lg font-semibold tracking-[-0.015em] text-ink">{p.title}</h4>
-                      <p className="mt-2 text-sm leading-relaxed text-soft">{p.body}</p>
+                      <h4 className={cardTitleCls}>{p.title}</h4>
+                      <p className="mt-2 text-[15px] leading-relaxed text-soft">{p.body}</p>
                     </div>
                   </Reveal>
                 ))}
               </div>
-              <Reveal className="lg:order-2">
+              <Reveal className="min-w-0 lg:order-2">
                 <EffectMockup />
               </Reveal>
             </div>
@@ -624,9 +675,8 @@ export default function Home() {
           Der Einwand ist real und bleibt beantwortet, aber in der
           Gegenrichtung. Der Anker #ergaenzt bleibt bestehen, damit vorhandene
           Links weiter funktionieren. Begruendung im Kopf von _compare.tsx. */}
-      <section id="ergaenzt" className="scroll-mt-20 mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <SectionHeading eyebrow={t.compare.eyebrow} title={t.compare.title} />
-        <p className="-mt-6 mb-10 max-w-[62ch] text-base leading-relaxed text-soft">{t.compare.body}</p>
+      <section id="ergaenzt" className={"scroll-mt-20 mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
+        <SectionHeading eyebrow={t.compare.eyebrow} title={t.compare.title} lead={t.compare.body} />
         <Reveal>
           <AllInOneCompare />
         </Reveal>
@@ -726,7 +776,7 @@ export default function Home() {
           hintereinander waeren dieselbe Wand in anderer Farbe. Dieselbe
           Abwaegung wie bei #angebot: erst Abstand, dann Trennlinie, dann
           Flaeche; der Abstand steht mit py-20 auf beiden Seiten schon. */}
-      <section className="mx-auto max-w-6xl border-t border-edge/60 px-4 py-20 sm:px-6">
+      <section className={"mx-auto max-w-6xl border-t border-edge/60 px-4 sm:px-6 " + sectionPad}>
         <SectionHeading title={t.why.title} />
 
         <div className="grid gap-5 lg:grid-cols-2">
@@ -737,13 +787,21 @@ export default function Home() {
                 <circle cx="12" cy="12" r="3.2" stroke="currentColor" strokeWidth="1.6" />
               </svg>
             </div>
-            <h3 className="mt-4 text-sm font-semibold text-ink">{t.why.earlyAccess.title}</h3>
-            <p className="mt-1.5 text-sm leading-relaxed text-soft">{t.why.earlyAccess.body}</p>
+            <h3 className={"mt-4 " + cardTitleCls}>{t.why.earlyAccess.title}</h3>
+            <p className="mt-1.5 text-[15px] leading-relaxed text-soft">{t.why.earlyAccess.body}</p>
           </div>
 
           <a href="/kontakt" className="hover-lift block rounded-2xl border border-edge/60 bg-panel p-6 transition-colors hover:border-edge2">
-            <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-faint">{t.why.founderLabel}</p>
-            <p className="font-display mt-3 text-base italic leading-[1.5] text-ink">{t.why.founderQuote}</p>
+            <p className="text-xs font-medium uppercase tracking-[0.14em] text-faint">{t.why.founderLabel}</p>
+            {/* Fraunces, aber kein Kapitel: das Zitat stand auf 16px und war
+                damit der klarste Fall der alten Regelverletzung -- eine
+                Display-Serife in Lesegroesse liest sich als Fussnote in einem
+                Fachbuch. Auf 24px erfuellt es die Grenze und wird zu dem, was
+                es ist: die einzige Stelle der Seite, an der ein Mensch
+                spricht. Kursiv bleibt, weil es woertliche Rede ist. */}
+            <p className="font-display mt-3 text-2xl italic leading-[1.35] tracking-[-0.01em] text-ink">
+              {t.why.founderQuote}
+            </p>
             <div className="mt-4 flex items-center gap-2.5">
               <Image
                 src="/team/youssef-tayachi.png"
@@ -753,8 +811,8 @@ export default function Home() {
                 className="h-10 w-10 rounded-full object-cover"
               />
               <div>
-                <p className="text-xs font-medium text-ink">{t.why.founderName}</p>
-                <p className="text-xs text-mute">{t.why.founderRole}</p>
+                <p className="text-sm font-medium text-ink">{t.why.founderName}</p>
+                <p className="text-sm text-mute">{t.why.founderRole}</p>
               </div>
             </div>
           </a>
@@ -763,14 +821,14 @@ export default function Home() {
 
       {/* FAQ */}
       <section id="faq" className="scroll-mt-20 border-t border-edge/60 bg-band">
-        <div className="mx-auto max-w-3xl px-4 py-20 sm:px-6">
+        <div className={"mx-auto max-w-3xl px-4 sm:px-6 " + sectionPad}>
           <SectionHeading title={t.faq.title} />
           <div className="divide-y divide-edge/60 rounded-2xl border border-edge/60 bg-panel">
             {t.faq.items.map((f) => (
-              <details key={f.q} className="group px-6 py-4">
+              <details key={f.q} className="group px-6 py-5">
                 {/* Ohne Chevron war den 12 Fragen nicht anzusehen, dass sie
                     aufklappbar sind -- 943px Seite ohne einen Hinweis darauf. */}
-                <summary className="flex min-h-6 cursor-pointer list-none items-center justify-between gap-4 text-sm font-medium text-ink marker:content-none">
+                <summary className="flex min-h-6 cursor-pointer list-none items-center justify-between gap-4 text-base font-medium text-ink marker:content-none">
                   {f.q}
                   <svg
                     viewBox="0 0 24 24"
@@ -781,20 +839,59 @@ export default function Home() {
                     <path d="m6 9 6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </summary>
-                <p className="mt-2 max-w-[68ch] text-sm leading-relaxed text-soft">{f.a}</p>
+                <p className="mt-2.5 max-w-[68ch] text-[15px] leading-relaxed text-soft">{f.a}</p>
               </details>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="mx-auto max-w-3xl px-4 py-24 text-center sm:px-6">
-        <h2 className="font-display text-[2rem] font-semibold leading-[1.12] tracking-[-0.025em] text-ink text-balance sm:text-[2.75rem]">
-          {t.finalCta.title}
-        </h2>
-        <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-soft">{t.finalCta.body}</p>
-        <CTAGroup className="mt-9" />
+      {/* ═══════════════════════════════════════════════════════════════
+          DIE EINE DUNKLE FLAECHE.
+
+          Die Startseite ist 18.292 Pixel hoch und trug vom ersten bis zum
+          letzten davon Tinte auf Papier: sieben Flaechenwechsel, alle
+          zwischen #fbfbfa und #f1f0ed, dazu Weiss in den Karten. Das ist die
+          richtige Entscheidung fuer 18.000 Pixel Erklaerung -- und die
+          falsche fuer die letzten 400, an denen genau eine Handlung gefragt
+          ist.
+
+          GENAU EINE, UND ZWAR DIESE. Zwei dunkle Flaechen waeren eine Optik;
+          eine ist eine Aussage. Deshalb steht das Markup hier ausgeschrieben
+          und nicht als Bauteil in _ui.tsx -- ein Bauteil laedt dazu ein, es
+          ein zweites Mal zu benutzen, und beim zweiten Mal ist das Argument
+          weg. Wer einen zweiten dunklen Abschnitt will, muss diesen Kommentar
+          zuerst widerlegen.
+
+          Der primaere Knopf ist invertiert (bg-surface auf bg-ink). CTAGroup
+          setzt seine Farben selbst, deshalb steht der Knopf hier einzeln --
+          der zweite Weg (Fragen stellen) haengt als Textlink daneben, wie
+          ueberall sonst auf der Seite, nur in text-surface/75 statt in
+          text-soft. text-surface/75 auf #1c1b19 misst 9,9:1 (nachgemessen
+          2026-08-15 im Browser, gemischte Farbe #c3c3c2).
+          ═══════════════════════════════════════════════════════════════ */}
+      <section className="bg-ink">
+        <div className="mx-auto max-w-3xl px-4 py-24 text-center text-surface sm:px-6 lg:py-32">
+          <h2 className={"mx-auto " + h2Cls}>{t.finalCta.title}</h2>
+          <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-surface/75">
+            {t.finalCta.body}
+          </p>
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+            <a
+              href={BOOKING_URL}
+              className="inline-flex items-center justify-center whitespace-nowrap rounded-full bg-surface px-4 py-2.5 text-sm font-medium text-ink shadow-sm transition-all hover:opacity-85 hover:scale-[1.02] active:scale-[0.98] sm:px-6 sm:py-3"
+            >
+              {t.cta.primary}
+            </a>
+            <a
+              href={BOOKING_URL}
+              className="group inline-flex items-center gap-1.5 text-sm font-medium text-surface/75 transition-colors hover:text-surface"
+            >
+              {t.cta.secondary}
+              <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
+            </a>
+          </div>
+        </div>
       </section>
 
       <SiteFooter />

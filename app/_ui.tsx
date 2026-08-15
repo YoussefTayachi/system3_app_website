@@ -23,15 +23,124 @@ import { useT, LanguageToggle } from "./language-provider";
 // ══════════════════════════════════════════════════════════════════════
 export const BOOKING_URL = "https://calendly.com/youssef-tayachi-frostbreaker/30min";
 
+// ══════════════════════════════════════════════════════════════════════
+// DIE TYPOSKALA. Vier Stufen, dazwischen nichts.
+//
+// Gemessen am 2026-08-15 auf dem Stand davor: H1 48px, ALLE H2 36px, H3 in
+// SECHS Groessen (14/18/20/22/24/28px), jede davon font-semibold. H1:H2 stand
+// damit auf 1,33 -- ein Sprung, den man nicht sieht. Die Hierarchie hing fast
+// vollstaendig an der Textfarbe, nicht an der Groesse.
+//
+//   h1Cls         Seitentitel, genau einer je Seite
+//   h2Cls         Kapitel: eigener Abschnitt mit eigenem Flaechenton
+//   h3Cls         Abschnitt innerhalb eines Kapitels -- EINE Groesse (24px),
+//                 sie ersetzt alle sechs alten
+//   cardTitleCls  Kartentitel, Space Grotesk statt Fraunces
+//
+// DIE REGEL, AUF DIE ES ANKOMMT: Fraunces erst ab 24px, darunter Space
+// Grotesk. Fraunces stand vorher bei 18px in Karten, und eine Display-Serife
+// in 18px liest sich als Fachtext, nicht als Produkt. Die Serife markiert
+// Kapitel, sonst nichts. Seit layout.tsx die opsz-Achse laedt, gewinnt grosse
+// Fraunces zusaetzlich, weil sie erst dort den Display-Schnitt bekommt --
+// derselbe Grund, aus dem sie klein verliert.
+//
+// GEWICHT: 500 (font-medium) fuer h1/h2, 600 (font-semibold) ab h3 abwaerts.
+// Bei aktiver opsz-Achse traegt 500 die grossen Groessen bereits; 600 wirkt
+// dort gedrungen. Unter 24px ist es umgekehrt, dort traegt erst 600.
+// ══════════════════════════════════════════════════════════════════════
+// KEINE FARBE IN DER SKALA. Eine Groessenstufe, die ihre eigene Textfarbe
+// mitbringt, laesst sich nicht umdrehen: `h2Cls + " text-surface"` gewinnt
+// nicht zuverlaessig gegen das mitgelieferte `text-ink`, weil beide Regeln
+// dieselbe Spezifitaet haben und dann die Reihenfolge im erzeugten CSS
+// entscheidet, nicht die im className. Gebraucht wird das genau einmal, im
+// dunklen Schluss-CTA der Startseite. Ohne Farbe erbt jede Ueberschrift
+// --c-ink vom body (globals.css) und die im dunklen Abschnitt --c-surface
+// von ihrem Container -- richtig herum, ohne Ausnahme und ohne Zweitkonstante.
+// h1Cls bringt bewusst KEINE Zeilenbreite mit, h2Cls schon: die Seite kennt
+// zwei Hero-Bauformen, und sie unterscheiden sich genau darin. Der
+// Startseiten-Hero ist zweispaltig, dort deckelt die Rasterspalte; die fuenf
+// Unterseiten-Heros stehen mittig und setzen max-w-[24ch] selbst.
+export const h1Cls =
+  "font-display text-4xl font-medium leading-[0.98] tracking-[-0.03em] text-balance sm:text-[3.75rem] lg:text-[4.5rem]";
+
+// Der zweispaltige Startseiten-Hero. Er teilt sich die Breite mit dem Bild,
+// und die Skala muss dem folgen -- gemessen am 2026-08-15 in Chrome:
+//
+//   bis 1023px   einspaltig, volle Rahmenbreite   -> 60px, 3 Zeilen
+//   1024-1279px  Raster teilt, Spalte 464px       -> 60px waeren zu viele
+//   ab 1280px    Spalte 544px                     -> 60px sind 4 (de) / 5 (en)
+//
+// Die Stufe faellt bei lg ABSICHTLICH auf 52px zurueck und steigt bei xl
+// wieder. Das sieht in der Klassenliste falsch aus und ist es nicht: nicht die
+// Schrift springt, sondern der Kasten, in dem sie steht.
+//
+// WARUM NICHT 72px WIE h1Cls. Kurz so gebaut und wieder zurueckgenommen. Bei
+// 72px steht die Ueberschrift in BEIDEN Sprachen auf fuenf Zeilen (353px), der
+// Hero waechst von 947 auf 1199px, und die Unterkante des Hauptknopfes liegt
+// bei 832px. Auf einem 1440x900-Laptop hat das Fenster nach Browserleiste rund
+// 800px -- der einzige Knopf, um den es auf dieser Seite geht, faellt damit
+// unter die Falz. Gemessen bei 1280, 1440 und 1920, de und en: sechs von sechs
+// Mal darunter.
+//
+// Bei 60px: de vier Zeilen und Knopfunterkante 714, en fuenf Zeilen und 773 --
+// beide sichtbar. 64px waere fuer Deutsch schoener, laesst Englisch aber auf
+// 793 und damit sieben Pixel Luft; das ist keine Reserve, das ist Zufall.
+// Der ZENTRIERTE Hero der Unterseiten (h1Cls) bleibt bei 72px: dort steht
+// keine Nachbildung daneben, die Ueberschriften sind kuerzer, und unter ihnen
+// haengt kein Kundenstreifen.
+export const h1SplitCls =
+  "font-display text-4xl font-medium leading-[0.98] tracking-[-0.03em] text-balance sm:text-[3.75rem] lg:text-[3.25rem] xl:text-[3.75rem]";
+export const h2Cls =
+  "font-display max-w-[24ch] text-[2.5rem] font-medium leading-[1.05] tracking-[-0.025em] text-balance lg:text-5xl";
+export const h3Cls = "font-display text-2xl font-semibold leading-[1.25] tracking-[-0.02em]";
+export const cardTitleCls = "text-[1.0625rem] font-semibold leading-snug";
+
+// Augenbraue und Fliesstext unter einer Ueberschrift. Beide standen bisher an
+// jeder Aufrufstelle ausgeschrieben, in drei Groessen (11px, 13px, 14px) und
+// zwei Laufweiten. 11px ist ausserhalb der Nachbildungen zu klein: 12px ist
+// die Untergrenze fuer Grossbuchstaben, 14px die fuer Fliesstext.
+export const eyebrowCls =
+  "flex items-center gap-2.5 text-xs font-medium uppercase tracking-[0.14em] text-faint";
+export const leadCls = "max-w-[62ch] text-base leading-relaxed text-soft";
+
+// ══════════════════════════════════════════════════════════════════════
+// DER ABSCHNITTSRHYTHMUS. Zwei Stufen, nicht drei.
+//
+// Gemessen am 2026-08-15: py-20 19x, py-16 11x, py-24 6x -- ohne erkennbares
+// System. #rundgang (4214px Inhalt) und #agenturen (527px Inhalt) hatten
+// beide 80px. Und py-20 ohne Breakpoint heisst 80px auf dem Telefon wie auf
+// 1440, wo dieselbe Zahl viermal weniger Anteil am Bildschirm hat.
+//
+//   sectionPad     Kapitel: eigene H2, eigener Flaechenton
+//   subSectionPad  Unterabschnitt: haengt innerhalb eines Kapitels
+// ══════════════════════════════════════════════════════════════════════
+export const sectionPad = "py-20 sm:py-28 lg:py-36";
+export const subSectionPad = "py-14 sm:py-16";
+
+// Der Hero ist keins von beidem: er sitzt unter der Kopfleiste und hat oben
+// keinen Abschnitt, von dem er sich absetzen muesste. lg:py-32 statt lg:py-36
+// haelt ihn eine Spur straffer als ein Kapitel. Unter sm bewusst 64px und
+// nicht 96px: 96px sind auf einem 667px hohen Telefon 14 % des ersten
+// Bildschirms, und die gehoeren der Ueberschrift.
+export const heroPad = "py-16 sm:py-24 lg:py-32";
+
 // #0EA5E9 (sky-500) auf dem Seitengrund misst 2,63:1. Als Wortmarke ist das
 // formal von WCAG ausgenommen, sichtbar war es trotzdem: das Logo war das
 // blasseste Element der Kopfleiste, blasser als jeder Navigationslink daneben.
 // sky-600 misst 4,03:1 und besteht die 3:1 fuer grosse Schrift deutlich.
 // tracking-tighter (-0.05em) war bei zwoelf Zeichen zu eng -- eine Wortmarke
 // soll gesetzt aussehen, nicht gequetscht.
+//
+// GROESSE AB 2026-08-15: 24px unter sm, 30px darueber. Bei 30px misst die
+// Wortmarke 176px, und unter sm stehen ihr insgesamt 343px zur Verfuegung
+// (375px minus px-4 beidseitig). Zusammen mit Sprachschalter und CTA-Knopf
+// waren das 370px -- die Startseite scrollte auf Deutsch bei 375px bereits
+// 10px seitlich, bevor der Knopf ueberhaupt von 12 auf 14px gewachsen ist
+// (gemessen 2026-08-15, Chrome ueber CDP). "frostbreaker" ist ein Wort ohne
+// Trennstelle: es kann nicht umbrechen, es kann nur ueberstehen.
 export function Logo() {
   return (
-    <Link href="/" className="text-3xl font-bold tracking-[-0.02em] text-[#0284C7]">
+    <Link href="/" className="text-2xl font-bold tracking-[-0.02em] text-[#0284C7] sm:text-3xl">
       frostbreaker
     </Link>
   );
@@ -65,9 +174,14 @@ export function CTAButton({
     <a
       href={href ?? BOOKING_URL}
       className={
+        // 14px auch unter sm. Der Knopf stand dort auf 12px und war damit der
+        // KLEINSTE Text auf dem Telefon -- kleiner als jede Fussnote daneben,
+        // und das ausgerechnet an der einen Stelle, an der die Seite etwas
+        // will. Die Breite, die das kostet, holt die Wortmarke daneben herein
+        // (siehe Logo).
         (isPrimary
-          ? "inline-flex items-center justify-center whitespace-nowrap rounded-full bg-ink px-4 py-2.5 text-xs font-medium text-surface shadow-sm transition-all hover:opacity-85 hover:scale-[1.02] active:scale-[0.98] sm:px-6 sm:py-3 sm:text-sm "
-          : "inline-flex items-center justify-center whitespace-nowrap rounded-full border border-edge2 px-4 py-2.5 text-xs font-medium text-soft transition-colors hover:border-ink hover:text-ink sm:px-6 sm:py-3 sm:text-sm ") +
+          ? "inline-flex items-center justify-center whitespace-nowrap rounded-full bg-ink px-4 py-2.5 text-sm font-medium text-surface shadow-sm transition-all hover:opacity-85 hover:scale-[1.02] active:scale-[0.98] sm:px-6 sm:py-3 "
+          : "inline-flex items-center justify-center whitespace-nowrap rounded-full border border-edge2 px-4 py-2.5 text-sm font-medium text-soft transition-colors hover:border-ink hover:text-ink sm:px-6 sm:py-3 ") +
         className
       }
     >
@@ -298,9 +412,35 @@ export function SiteHeader() {
             className={istEigeneSoftware ? "" : "hidden lg:inline"}
           />
         </nav>
+        {/* ──────────────────────────────────────────────────────────────
+            DER KNOPF IN DER LEISTE FAENGT ERST BEI sm AN.
+
+            Zwei Gruende, beide am 2026-08-15 gemessen:
+
+            1. ER WAR AUF DEM TELEFON DOPPELT. Sechs der acht Seiten tragen
+               unten eine feste Leiste mit demselben Knopf und derselben
+               Beschriftung ("Gespraech buchen"). Auf einem 375px-Bildschirm
+               standen beide gleichzeitig im Bild -- zweimal dieselbe
+               Handlung, einmal weit oben und einmal in Daumenreichweite.
+               /kontakt und /case-study haben diese Leiste seit heute
+               ebenfalls; damit ist der Weg auf allen acht Seiten unten.
+            2. ER PASSTE NICHT. Bei 375px Fensterbreite mit klassischem
+               Scrollbalken bleiben 328px Inhalt. Auf Deutsch brauchten
+               Wortmarke (140), Sprachschalter (32) und Knopf (151) samt
+               Abstaenden 351px -- die Seite scrollte 7px seitlich, und zwar
+               schon vor der Schriftvergroesserung (damals 10px). Ohne den
+               Knopf sind es 188px.
+
+            Als Umhuellung und nicht als "hidden sm:inline-flex" am Knopf
+            selbst: `hidden` und das mitgelieferte `inline-flex` sind beides
+            display-Klassen, und welche gewinnt, entscheidet dann die
+            Reihenfolge im erzeugten CSS statt die im Attribut.
+            ────────────────────────────────────────────────────────────── */}
         <div className="flex items-center gap-3">
           <LanguageToggle />
-          <CTAButton />
+          <div className="hidden sm:block">
+            <CTAButton />
+          </div>
         </div>
       </div>
     </header>
@@ -336,7 +476,11 @@ export function SiteFooter() {
   const { t } = useT();
   return (
     <footer className="border-t border-edge/60">
-      <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 text-xs text-mute sm:flex-row sm:items-center sm:justify-between sm:px-6">
+      {/* 14px statt 12px: der Fuss traegt Rechtslinks, und ein Rechtslink,
+          den man schlechter liest als den Fliesstext darueber, ist genau der
+          falsche. --c-mute misst auf dem Seitengrund 5,35:1 und traegt beide
+          Groessen. */}
+      <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 text-sm text-mute sm:flex-row sm:items-center sm:justify-between sm:px-6">
         <span>© {new Date().getFullYear()} Frostbreaker · {t.footer.location}</span>
         {/* tap-row hebt die Trefferflaeche der Links auf 24px -- vier Zeichen
             hohe Textlinks nebeneinander sind auf dem Telefon sonst nicht
@@ -374,18 +518,54 @@ export function Screenshot({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-export function SectionHeading({ eyebrow, title }: { eyebrow?: string; title: string }) {
+/**
+ * Augenbraue, Ueberschrift und -- neu seit dem 2026-08-15 -- der Fliesstext
+ * darunter.
+ *
+ * WARUM `lead` INS BAUTEIL GEHOERT
+ * Das Bauteil brachte `mb-10` mit, und an ZWOELF Aufrufstellen stand direkt
+ * danach `<p className="-mt-6 …">` bzw. `-mt-4`, das genau diesen Abstand
+ * wieder zurueckzog. Ein negativer Abstand an zwoelf Stellen ist keine
+ * Gestaltung, sondern eine Reparatur: beim naechsten Umbau bleibt einer
+ * stehen, und dann steht ein Absatz 24px zu hoch, ohne dass jemand sieht,
+ * warum. Der Fliesstext gehoert zur Ueberschrift, also gehoert er ins
+ * Bauteil -- danach ist `mb-10` wieder der Abstand, der er zu sein behauptet.
+ *
+ * WARUM `as`
+ * Das Bauteil rendert seit jeher ein <h2>. /case-study benutzt es als
+ * Seitentitel und begann dadurch auf Ebene 2, ganz ohne h1 -- ein Struktur-
+ * und SEO-Fehler, kein Geschmacksfehler. `as="h1"` schaltet Element UND
+ * Groesse um; beides zusammen, damit es nicht wieder auseinanderlaeuft.
+ */
+export function SectionHeading({
+  eyebrow,
+  title,
+  lead,
+  as = "h2",
+  flush = false,
+}: {
+  eyebrow?: string;
+  title: string;
+  lead?: string;
+  as?: "h1" | "h2";
+  /** Nichts folgt mehr im Abschnitt -- dann faellt der Abstand nach unten
+   *  weg, statt sich auf das Polster des Abschnitts zu addieren. Als
+   *  Schalter und nicht als "mb-0" von aussen: zwei Klassen derselben
+   *  Gruppe im selben className entscheidet die Reihenfolge im erzeugten
+   *  CSS, nicht die im Attribut. */
+  flush?: boolean;
+}) {
+  const Heading = as;
   return (
-    <div className="mb-10 max-w-2xl">
+    <div className={flush ? "" : "mb-10"}>
       {eyebrow && (
-        <p className="mb-3 flex items-center gap-2.5 text-[11px] font-medium uppercase tracking-[0.14em] text-faint">
+        <p className={"mb-3 " + eyebrowCls}>
           <span aria-hidden className="h-px w-6 bg-edge2" />
           {eyebrow}
         </p>
       )}
-      <h2 className="font-display text-[1.75rem] font-semibold leading-[1.15] tracking-[-0.02em] text-ink text-balance sm:text-4xl">
-        {title}
-      </h2>
+      <Heading className={as === "h1" ? h1Cls : h2Cls}>{title}</Heading>
+      {lead && <p className={"mt-5 " + leadCls}>{lead}</p>}
     </div>
   );
 }
@@ -425,13 +605,21 @@ export function FactBox({ fact, sub, source }: { fact: string; sub?: string; sou
   return (
     <div className="mt-4 rounded-xl border border-sky-200/70 bg-sky-50/70 p-4">
       <div className="flex items-start gap-2.5">
-        <span className="mt-0.5 shrink-0 rounded bg-sky-600 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
+        {/* sky-700 statt sky-600: Weiss auf sky-600 misst 4,02:1 und faellt
+            damit durch -- bei 10px war das genauso falsch wie bei 12px, nur
+            unauffaelliger. sky-700 misst 5,93:1 (nachgemessen 2026-08-15 im
+            Browser ueber alle Seiten). */}
+        <span className="mt-0.5 shrink-0 rounded bg-sky-700 px-1.5 py-0.5 text-xs font-bold uppercase tracking-wide text-white">
           {lang === "de" ? "Fakt" : "Fact"}
         </span>
-        <p className="text-sm font-semibold leading-snug text-sky-950">{fact}</p>
+        <p className="text-base font-semibold leading-snug text-sky-950">{fact}</p>
       </div>
-      {sub && <p className="mt-2 text-sm leading-relaxed text-sky-900/80">{sub}</p>}
-      <p className="mt-2 text-xs text-sky-900/55">{lang === "de" ? "Quelle" : "Source"}: {source}</p>
+      {sub && <p className="mt-2 text-[15px] leading-relaxed text-sky-900/80">{sub}</p>}
+      {/* /55 auf sky-50/70 misst 2,89:1 und faellt damit durch -- das war
+          schon bei 12px falsch und waere bei 14px nur groesser falsch. /80
+          misst 5,28:1 (nachgerechnet 2026-08-15 gegen den gemischten Grund
+          #f3fafd, nicht gegen reines sky-50). */}
+      <p className="mt-2 text-sm text-sky-900/80">{lang === "de" ? "Quelle" : "Source"}: {source}</p>
     </div>
   );
 }

@@ -1,6 +1,16 @@
 "use client";
 import Link from "next/link";
-import { CTAButton, SectionHeading, StatTile, SiteHeader, SiteFooter, BOOKING_URL } from "../_ui";
+import {
+  CTAButton,
+  SectionHeading,
+  StatTile,
+  SiteHeader,
+  SiteFooter,
+  BOOKING_URL,
+  h1Cls,
+  h2Cls,
+  sectionPad,
+} from "../_ui";
 import { WorkaroundMockup, ProcessMockup, StackMockup } from "../_custom-mockups";
 import { Reveal } from "../reveal";
 import { CheckIcon } from "../_icons";
@@ -36,13 +46,12 @@ export default function EigeneSoftwarePage() {
       <SiteHeader />
 
       <section className="hero-wash border-b border-edge/60">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-20">
-          <p className="mb-4 text-xs font-medium uppercase tracking-[0.14em] text-sky-700">{c.eyebrow}</p>
-          <h1 className="font-display max-w-[20ch] text-4xl font-semibold leading-[1.08] tracking-tight text-ink sm:text-5xl">
-            {c.title}
-          </h1>
-          <p className="mt-5 max-w-[60ch] text-base leading-relaxed text-soft sm:text-lg">{c.intro}</p>
-          <div className="mt-8">
+        {/* Mittiger Hero, Begruendung ausgeschrieben in funktionen/page.tsx. */}
+        <div className="mx-auto max-w-6xl px-4 py-24 text-center sm:px-6 lg:py-32">
+          <p className="mb-5 text-xs font-medium uppercase tracking-[0.14em] text-sky-700">{c.eyebrow}</p>
+          <h1 className={"mx-auto max-w-[24ch] " + h1Cls}>{c.title}</h1>
+          <p className="mx-auto mt-6 max-w-[58ch] text-base leading-relaxed text-soft sm:text-lg">{c.intro}</p>
+          <div className="mt-9">
             <CTAButton href={BOOKING_URL} label={c.ctaLabel} />
           </div>
         </div>
@@ -61,7 +70,7 @@ export default function EigeneSoftwarePage() {
             id={s.id}
             className={"scroll-mt-20 border-b border-edge/60 " + (flipped ? "bg-band" : "")}
           >
-            <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+            <div className={"mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
               {/* min-w-0 an beiden Rasterkindern. Diese Seite war die letzte
                   ohne: eine Rasterspalte ist minmax(auto, 1fr), und `auto`
                   meint die MINDESTBREITE des breitesten Kindes -- unter lg
@@ -76,11 +85,10 @@ export default function EigeneSoftwarePage() {
                     visual ? "min-w-0 lg:col-span-2 " + (flipped ? "lg:order-2" : "") : "max-w-3xl"
                   }
                 >
-                  <SectionHeading eyebrow={s.eyebrow} title={s.title} />
-                  <p className="-mt-4 text-sm leading-relaxed text-soft sm:text-base">{s.body}</p>
-                  <ul className="mt-6 space-y-2.5">
+                  <SectionHeading eyebrow={s.eyebrow} title={s.title} lead={s.body} />
+                  <ul className="space-y-2.5">
                     {s.bullets.map((b) => (
-                      <li key={b} className="flex items-start gap-2.5 text-sm text-soft">
+                      <li key={b} className="flex items-start gap-2.5 text-[15px] leading-relaxed text-soft">
                         <CheckIcon />
                         {b}
                       </li>
@@ -103,14 +111,13 @@ export default function EigeneSoftwarePage() {
           funktioniert hat. Zahlen stammen aus dem laufenden Betrieb der
           eigenen App, die ganze Herleitung steht auf /case-study. */}
       <section className="border-b border-edge/60">
-        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        <div className={"mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
           <div className="grid gap-10 lg:grid-cols-5 lg:items-center lg:gap-14">
             <div className="lg:col-span-2">
-              <SectionHeading eyebrow={c.proofEyebrow} title={c.proofTitle} />
-              <p className="-mt-4 text-sm leading-relaxed text-soft sm:text-base">{c.proofBody}</p>
+              <SectionHeading eyebrow={c.proofEyebrow} title={c.proofTitle} lead={c.proofBody} />
               <Link
                 href="/case-study"
-                className="mt-6 inline-flex items-center gap-1.5 text-sm text-soft underline decoration-edge3 underline-offset-4 transition-colors hover:text-ink"
+                className="inline-flex items-center gap-1.5 text-[15px] text-soft underline decoration-edge3 underline-offset-4 transition-colors hover:text-ink"
               >
                 {c.proofLinkLabel}
                 <span aria-hidden>→</span>
@@ -130,11 +137,9 @@ export default function EigeneSoftwarePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-3xl px-4 py-24 text-center sm:px-6">
-        <h2 className="font-display text-2xl font-semibold tracking-[-0.02em] text-ink text-balance sm:text-3xl">
-          {c.ctaTitle}
-        </h2>
-        <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-soft sm:text-base">{c.ctaBody}</p>
+      <section className={"mx-auto max-w-3xl px-4 text-center sm:px-6 " + sectionPad}>
+        <h2 className={"mx-auto " + h2Cls}>{c.ctaTitle}</h2>
+        <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-soft">{c.ctaBody}</p>
         <CTAButton className="mt-9" href={BOOKING_URL} label={c.ctaLabel} />
       </section>
 

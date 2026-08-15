@@ -13,7 +13,21 @@
      surface, also das Dreifache des alten Schritts und immer noch ein
      Fluestern. --c-panel2 bleibt, was es immer war -- der Ton fuer Chips und
      Felder INNERHALB einer Karte, wo er neben Weiss steht und dort auch
-     wirkt. */
+     wirkt.
+
+     DIE HAARLINIE AN BANDKANTEN BLEIBT. Nachgesehen am 2026-08-15 im
+     Browser (1440px, deviceScaleFactor 3, Ausschnitte um #agenturen,
+     #kanaele und #torwart): --c-edge liegt bei 60 % Deckkraft ueber der
+     Kante und mischt sich zu rund #ecebe9. Gegen --c-band sind das 1,03:1
+     -- die Linie ist an einer Bandkante nicht mehr zu sehen, die Flaeche
+     macht die ganze Arbeit. Entfernt wird sie trotzdem nicht: sie ist an
+     diesen Kanten unsichtbar, also kostet sie auch nichts, und sie ist an
+     den Kanten OHNE Flaechenwechsel (#angebot, "Warum es Frostbreaker
+     gibt", der Schnitt zwischen letztem Abschnitt und Schluss-CTA auf den
+     Unterseiten) der einzige Marker. Sie vom Ton des Nachbarabschnitts
+     abhaengig zu machen hiesse, dieselbe Regel in fuenf Dateien zu
+     wiederholen -- und ihr Fehlerfall (zwei gleiche Flaechen ohne Kante)
+     ist sichtbar, waehrend der Fehlerfall des Bleibens es nicht ist. */
   --c-surface: #fbfbfa;
   --c-panel: #ffffff;
   --c-panel2: #f5f5f4;
@@ -105,9 +119,19 @@ body {
 
 /* ===== Motion ===== */
 
+/* translateY statt `top`. `top` ist eine Layout-Eigenschaft: der Browser
+   rechnet in jedem Bild neu, statt die fertige Ebene nur zu verschieben.
+   In der App gibt es einen dokumentierten Grund, warum dort NICHT auf
+   transform umgestellt wurde -- ein stehen gebliebenes transform erzeugt
+   einen containing block und reisst `position: fixed`-Nachkommen los. Auf
+   dieser Website gilt der Grund nicht: `.fade-up` steht nur auf der
+   Startseite an drei Stellen, und keine davon enthaelt ein fixed- oder
+   sticky-Element (nachgesehen auf allen sieben Seiten am 2026-08-15).
+   `position: relative` bleibt trotzdem stehen -- es haelt die
+   Stapelreihenfolge, die vorher am selben Selektor hing. */
 @keyframes fadeUp {
-  from { opacity: 0; top: 6px; }
-  to { opacity: 1; top: 0; }
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 .fade-up { position: relative; animation: fadeUp 0.5s cubic-bezier(0.2, 0.7, 0.3, 1) both; }
 
@@ -202,7 +226,14 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .fade-up, .animate-float, .animate-float-slow { animation: none; }
+  /* .animate-ping ist die Tailwind-Klasse am gruenen Punkt neben
+     "Posteingang" im Hero (_illustration.tsx). Sie stand bis zum 2026-08-15
+     nicht in dieser Liste und war damit die EINZIGE Dauerbewegung der Seite,
+     die eine ausdrueckliche Systemeinstellung ignorierte -- nachgemessen mit
+     erzwungenem `reduce` lief sie weiter, 1s, unendlich. Ausgerechnet eine
+     Dauerbewegung: genau die Sorte, wegen der Menschen die Einstellung
+     ueberhaupt setzen. */
+  .fade-up, .animate-float, .animate-float-slow, .animate-ping { animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
   .hover-lift:hover { transform: none; }
 }
