@@ -900,19 +900,19 @@ const de = {
     // Umformuliert 2026-08-15 (KLARTEXT.md, Auftrag 2): "Bevor du sendest,
     // und danach" nannte einen Zeitpunkt, keine Sache. "Prüfungen" ordnet
     // den Abschnitt ein, wie im Titel darunter.
-    eyebrow: "Prüfungen",
+    eyebrow: "Zustellbarkeit",
     // Umformuliert 2026-08-15 (KLARTEXT.md): "das einzige Werkzeug, das dir
     // Nein sagt" bestand weder Deckprobe noch Wettbewerberprobe -- jedes Tool
     // kann das behaupten. Die Substanz (elf Pruefungen, vier davon Blocker)
     // steht unveraendert in body/points, nur die Verpackung faellt.
-    title: "Elf Prüfungen, bevor eine Kampagne startet",
+    title: "Deine Absender-Domain überlebt die Kampagne",
     body:
-      "Vier davon können sie aufhalten: fehlendes SPF oder DKIM, eine Bounce-Quote über fünf Prozent, eine Liste ohne sendbare Adresse. Das kostet dich nicht eine Kampagne, das kostet dich die Domain. Aufhalten heißt nicht sperren: du siehst vorher, was du in Kauf nimmst, und kannst mit einem bewussten zweiten Klick trotzdem starten.",
+      "Fehlendes SPF, eine Bounce-Quote über fünf Prozent, eine Liste voller ungeprüfter Adressen: danach landet auch die Mail an den richtigen Kontakt im Spam, und zwar dauerhaft. Eine verbrannte Domain kostet nicht eine Kampagne, sie kostet jede künftige. Elf Prüfungen laufen deshalb vor dem Start, vier davon halten ihn auf, und danach wird täglich weitergeprüft.",
     points: [
       {
         // Umformuliert 2026-08-15 (KLARTEXT.md): benennt jetzt, wie viele der
         // elf Pruefungen halten koennen, statt nur die Kategorie zu erklaeren.
-        title: "Vier der elf halten den Start auf",
+        title: "Aufhalten heißt nicht sperren",
         body: "Ein Blocker ist etwas, das mit Sicherheit schiefgeht und dessen Schaden bleibt. Ein Hinweis macht schlechter, aber weder sicher noch dauerhaft. Diese Linie halten wir streng: eine Warnung, die auch mal nur eine Meinung ist, klickt man beim dritten Mal weg, und die echte gleich mit.",
       },
       {
@@ -994,9 +994,9 @@ const de = {
     // Vom Betreiber selbst gewaehlt (KLARTEXT.md), nachdem mein erster
     // Entwurf ("Kein Gewinner unter 50 Sendungen je Fassung") mit einer
     // Verneinung anfing -- genau das Muster, das diese Umstellung verbietet.
-    title: "Der A/B-Gewinner steht erst, wenn die Menge reicht",
+    title: "Du siehst, welche Fassung Termine bringt",
     body:
-      "Zwölf Mails und eine Antwort sind nicht „8,3 %“. Das sind zwölf Mails und eine Antwort. Unter dreißig angeschriebenen Kontakten schreiben wir „zu wenig“ statt einer Prozentzahl, und der Balken bleibt leer.",
+      "Zwei Fassungen laufen, eine funktioniert besser. Ohne Auswertung merkst du das nach Wochen, wenn überhaupt. Die App misst je Fassung mit und sagt dir, welche vorn liegt: du setzt auf die, die Termine bringt, statt weiter zu raten. Und sie sagt es erst, wenn genug Antworten da sind — zwölf Mails und eine Antwort sind nicht „8,3 %“, das sind zwölf Mails und eine Antwort.",
     points: [
       {
         title: "Dieselbe Regel beim A/B-Test",
@@ -3152,13 +3152,13 @@ const en: typeof de = {
     },
   },
   guard: {
-    eyebrow: "Checks",
-    title: "Eleven checks before a campaign can start",
+    eyebrow: "Deliverability",
+    title: "Your sending domain survives the campaign",
     body:
-      "Four of them can stop it: missing SPF or DKIM, a bounce rate above five percent, a list with nothing sendable in it. Those do not cost you a campaign, they cost you the domain. Stopping is not blocking: you see what you are taking on, and a deliberate second click starts it anyway.",
+      "Missing SPF, a bounce rate above five percent, a list full of unverified addresses: after that even the mail to the right contact lands in spam, permanently. A burnt domain does not cost you one campaign, it costs you every future one. That is why eleven checks run before the start, four of them can stop it, and the checking continues daily.",
     points: [
       {
-        title: "Four of the eleven can stop the start",
+        title: "Stopping is not blocking",
         body: "A blocker is something that will certainly go wrong and whose damage stays. A note makes things worse, but neither certainly nor permanently. We keep that line strict: a warning that is sometimes just an opinion gets clicked away by the third time, and the real one goes with it.",
       },
       {
@@ -3216,9 +3216,9 @@ const en: typeof de = {
       "You dial with your own phone: Frostbreaker is not a phone system and does not bill call minutes.",
   },
   honesty: {
-    title: "The A/B winner isn't declared until the volume is there",
+    title: "You see which version books meetings",
     body:
-      "Twelve mails and one reply is not \u201c8.3%\u201d. It is twelve mails and one reply. Below thirty contacted people we print \u201ctoo few\u201d instead of a percentage, and the bar stays empty.",
+      "Two versions run, one works better. Without measurement you notice that after weeks, if at all. The app measures each version and tells you which one is ahead: you back the one that books meetings instead of guessing. And it only says so once enough replies are in — twelve mails and one reply is not “8.3%”, it is twelve mails and one reply.",
     points: [
       {
         title: "Same rule for A/B tests",
