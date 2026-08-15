@@ -8,7 +8,7 @@ import {
   SiteHeader,
   SiteFooter,
   BOOKING_URL,
-  h1SplitCls,
+  h1Cls,
   h2Cls,
   h3Cls,
   cardTitleCls,
@@ -35,7 +35,8 @@ import { GateMockup, EffectMockup } from "./_guard-mockups";
 // noch auf /kunden/retaiyn -- dort, wo der Fall erzaehlt wird. Begruendung
 // unten an der Fundstelle.
 import { OfferMapMockup, type OfferMapMockupProps } from "./_offer-mockups";
-import { LeadCardStack } from "./_illustration";
+// LeadCardStack ist am 2026-08-15 aus dem Helden gefallen (Begruendung an der
+// Fundstelle). _illustration.tsx wird seither von niemandem mehr importiert.
 import { SystemMap } from "./_system-map";
 // StepWalkthrough ist am 2026-08-15 aus dem Rundgang gefallen (Begruendung an
 // der Fundstelle). _walkthrough.tsx wird seither von niemandem mehr
@@ -61,33 +62,43 @@ export default function Home() {
       {/* Hero */}
       <section className="hero-wash border-b border-edge/60">
         <div className={"mx-auto max-w-6xl px-4 sm:px-6 " + heroPad}>
-          {/* min-w-0 an beiden Rasterkindern, dieselbe Ursache wie in
-              _walkthrough.tsx und auf vier weiteren Seiten: eine Rasterspur
-              ist minmax(auto, 1fr), und `auto` meint die MINDESTBREITE des
-              breitesten Kindes. Unter lg liegen Text und Bild in derselben
-              Spur -- LeadCardStack zog sie am 2026-08-15 bei 320px Fenster
-              auf 332px auf und die Seite scrollte 43px seitlich, in beiden
-              Sprachen. Der Hero war die letzte Stelle ohne diese Sicherung. */}
-          <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
-            <div className="fade-up min-w-0">
-              {/* sky-700 statt sky-600: bei 12px Grossbuchstaben reicht
-                  sky-600 (3.9:1) nicht fuer WCAG AA. */}
-              <p className="mb-4 text-xs font-medium uppercase tracking-[0.14em] text-sky-700">
-                {t.hero.eyebrow}
-              </p>
-              {/* DER EINZIGE ZWEISPALTIGE HERO DER SEITE, und deshalb der
-                  einzige, dessen H1 nicht die volle Rahmenbreite hat: die
-                  Spalte misst bei 1440px 544px. h1Cls bringt max-w-[20ch]
-                  mit, hier deckelt ohnehin die Spalte davor. Die fuenf
-                  Unterseiten-Heros stehen seit dem 2026-08-15 mittig und
-                  einspaltig -- der Unterschied soll heissen: hier faengt die
-                  Seite an, dort ein Kapitel. */}
-              <h1 className={"max-w-[20ch] " + h1SplitCls}>
-                {t.hero.h1Pre}
-                <span className="italic text-sky-600">{t.hero.h1Accent}</span>
-                {t.hero.h1Post}
-              </h1>
-              <p className="mt-5 max-w-[46ch] text-base leading-relaxed text-soft sm:text-lg">{t.hero.body}</p>
+          {/* ═══════════════════════════════════════════════════════════════
+              EINSPALTIG UND MITTIG SEIT DEM 2026-08-15 (KONZENTRATION.md).
+
+              Hier stand rechts LeadCardStack, die Posteingang-Nachbildung.
+              Der Coach des Betreibers hat sie herausgenommen, mit dem
+              richtigen Grund: sie zeigt genau EIN Produkt, und es gibt zwei
+              Angebote (das Werkzeug und die Auftragsentwicklung). Ein Held,
+              der eines davon abbildet, legt die Seite auf die Haelfte fest.
+              An seine Stelle tritt der Verlauf aus .hero-wash, der dafuer
+              sichtbar gemacht werden musste -- siehe globals.css.
+
+              WAS DAMIT VERLOREN GEHT, und wohin es kommt: die Nachbildung
+              war das einzige auf der Startseite, das ZEIGTE, dass es die
+              Software gibt. Der erste Produktbeweis liegt jetzt in der
+              Systemkarte direkt darunter. Faellt die je weg, hat die
+              Startseite kein Bild mehr, das etwas belegt.
+
+              Alle sechs Heros der Website stehen damit mittig. Der
+              Unterschied "hier faengt die Seite an, dort ein Kapitel" wird
+              jetzt von der Groesse getragen, nicht mehr von der Bauform:
+              h1Cls geht bis 72px, die Unterseiten bleiben bei ihren
+              zweizeiligen Titeln.
+              ═══════════════════════════════════════════════════════════ */}
+          <div className="fade-up mx-auto max-w-3xl text-center">
+            {/* sky-700 statt sky-600: bei 12px Grossbuchstaben reicht
+                sky-600 (3.9:1) nicht fuer WCAG AA. */}
+            <p className="mb-4 text-xs font-medium uppercase tracking-[0.14em] text-sky-700">
+              {t.hero.eyebrow}
+            </p>
+            <h1 className={"mx-auto max-w-[19ch] " + h1Cls}>
+              {t.hero.h1Pre}
+              <span className="italic text-sky-600">{t.hero.h1Accent}</span>
+              {t.hero.h1Post}
+            </h1>
+            <p className="mx-auto mt-6 max-w-[54ch] text-base leading-relaxed text-soft sm:text-lg">
+              {t.hero.body}
+            </p>
               {/* Der Sekundaer-CTA war optisch fast so stark wie der primaere;
                   als reiner Textlink mit Pfeil bleibt er verfuegbar, ohne den
                   Hauptweg zu verwaessern.
@@ -100,28 +111,23 @@ export default function Home() {
                   handelt. Seit der Rechner mit dem Kosten-Abschnitt nach
                   unten gerueckt ist, waere der Anker ohnehin der falsche
                   Einstieg. Jetzt die Testphase. */}
-              <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
-                <CTAButton />
-                <a
-                  href={BOOKING_URL}
-                  className="group inline-flex items-center gap-1.5 text-sm font-medium text-soft transition-colors hover:text-ink"
-                >
-                  {t.cta.secondary}
-                  <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
-                </a>
-              </div>
-              <p className="mt-3.5 max-w-[52ch] text-sm text-mute">{t.cta.trialNote}</p>
-
-              {/* Der einzige fremde Name ueber der Falz. Er steht bewusst
-                  NACH dem Knopf: wer schon klickt, soll nicht aufgehalten
-                  werden, wer zoegert, findet hier den ersten Beleg, der
-                  nicht von uns selbst kommt. */}
-              <CustomerStrip className="mt-7" />
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+              <CTAButton />
+              <a
+                href={BOOKING_URL}
+                className="group inline-flex items-center gap-1.5 text-sm font-medium text-soft transition-colors hover:text-ink"
+              >
+                {t.cta.secondary}
+                <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
+              </a>
             </div>
+            <p className="mx-auto mt-3.5 max-w-[52ch] text-sm text-mute">{t.cta.trialNote}</p>
 
-            <div className="fade-up min-w-0">
-              <LeadCardStack />
-            </div>
+            {/* Der einzige fremde Name ueber der Falz. Er steht bewusst NACH
+                dem Knopf: wer schon klickt, soll nicht aufgehalten werden,
+                wer zoegert, findet hier den ersten Beleg, der nicht von uns
+                selbst kommt. */}
+            <CustomerStrip className="mt-7 justify-center" />
           </div>
 
           {/* Die drei Versprechen. Hier standen bis zum 2026-08-06 drei

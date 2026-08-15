@@ -374,10 +374,34 @@ body {
    Raster war ein generisches Deko-Muster ohne Bezug zum Produkt; der Verlauf
    gibt dem Hero eine Lichtquelle oben links und laesst die Headline-Seite
    heller wirken als die Illustrationsseite. */
+/* SEIT DEM 2026-08-15 TRAEGT DIESER VERLAUF DEN HELDEN ALLEIN.
+   Der Coach des Betreibers: die Nachbildung raus, ein Verlauf als Grund.
+   Seine Begruendung ist richtig -- der Posteingang zeigt genau EIN Produkt,
+   und es gibt zwei Angebote.
+
+   Vorher standen hier 0.09 und 0.055 Deckkraft. Bei einem Hero, neben dem
+   eine Nachbildung stand, war das die richtige Dosis; als einziger Traeger
+   ist es nichts: im Screenshot bei 1440px war der Verlauf nicht auffindbar.
+   Jetzt 0.20 und 0.11.
+
+   Auch die RADIEN sind enger (85% 65% statt 120% 90%). Ein Verlauf, der
+   ueber 120 % der Flaeche laeuft, ist keine Lichtquelle mehr, sondern eine
+   gleichmaessige Toenung -- und eine gleichmaessige Toenung sieht aus wie
+   ein falsch gesetzter Hintergrund, nicht wie Absicht. Eng genug gesetzt,
+   bekommt der Held oben links ein Licht und oben rechts eine warme
+   Gegenstimme.
+
+   Die dritte Schicht faengt die Unterkante ab: ohne sie steht der Verlauf
+   auf halber Hoehe hart auf dem Seitengrund, weil der Abschnitt jetzt
+   kuerzer ist als vorher.
+
+   Zwei Farben, beide aus den vorhandenen Tokens (sky-500 und Coral). Kein
+   drittes Farbsystem, keine erfundene Farbe. */
 .hero-wash {
   background-image:
-    radial-gradient(120% 90% at 8% -10%, rgba(14, 165, 233, 0.09), transparent 58%),
-    radial-gradient(80% 70% at 92% 8%, rgba(234, 90, 62, 0.055), transparent 62%);
+    radial-gradient(85% 65% at 6% -12%, rgba(14, 165, 233, 0.20), transparent 60%),
+    radial-gradient(70% 60% at 96% 2%, rgba(234, 90, 62, 0.11), transparent 62%),
+    linear-gradient(to bottom, transparent 55%, var(--c-surface) 100%);
 }
 
 @media (prefers-reduced-motion: reduce) {
