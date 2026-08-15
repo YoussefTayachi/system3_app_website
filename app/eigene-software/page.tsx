@@ -52,6 +52,9 @@ export default function EigeneSoftwarePage() {
           zweimal dasselbe Muster gelesen werden. */}
       {c.sections.map((s, i) => {
         const flipped = i % 2 === 1;
+        // Wie auf /funktionen seit dem 2026-08-15: fehlt der Schluessel, wird
+        // der Abschnitt einspaltig statt loechrig.
+        const visual = visuals[s.id];
         return (
           <section
             key={s.id}
@@ -59,8 +62,20 @@ export default function EigeneSoftwarePage() {
             className={"scroll-mt-20 border-b border-edge/60 " + (flipped ? "bg-panel2" : "")}
           >
             <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-              <div className="grid gap-10 lg:grid-cols-5 lg:items-center lg:gap-14">
-                <div className={"lg:col-span-2 " + (flipped ? "lg:order-2" : "")}>
+              {/* min-w-0 an beiden Rasterkindern. Diese Seite war die letzte
+                  ohne: eine Rasterspalte ist minmax(auto, 1fr), und `auto`
+                  meint die MINDESTBREITE des breitesten Kindes -- unter lg
+                  zieht ein breites Bild die Spur samt Text auf. Hier ist es
+                  bisher nur deshalb nicht aufgeschlagen, weil die beiden
+                  Bilder schmal genug sind; das ist kein Schutz, sondern
+                  Glueck. Vier andere Seiten wurden am 13. und 14.08.2026 aus
+                  genau diesem Grund nachgebessert. */}
+              <div className={visual ? "grid gap-10 lg:grid-cols-5 lg:items-center lg:gap-14" : ""}>
+                <div
+                  className={
+                    visual ? "min-w-0 lg:col-span-2 " + (flipped ? "lg:order-2" : "") : "max-w-3xl"
+                  }
+                >
                   <SectionHeading eyebrow={s.eyebrow} title={s.title} />
                   <p className="-mt-4 text-sm leading-relaxed text-soft sm:text-base">{s.body}</p>
                   <ul className="mt-6 space-y-2.5">
@@ -72,9 +87,11 @@ export default function EigeneSoftwarePage() {
                     ))}
                   </ul>
                 </div>
-                <div className={"lg:col-span-3 " + (flipped ? "lg:order-1" : "")}>
-                  <Reveal>{visuals[s.id]}</Reveal>
-                </div>
+                {visual && (
+                  <div className={"min-w-0 lg:col-span-3 " + (flipped ? "lg:order-1" : "")}>
+                    <Reveal>{visual}</Reveal>
+                  </div>
+                )}
               </div>
             </div>
           </section>

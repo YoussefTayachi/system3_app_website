@@ -106,6 +106,14 @@ export default function FunktionenPage() {
           Gruppen nicht als fuenfmal dasselbe Muster gelesen werden. */}
       {f.groups.map((g, i) => {
         const flipped = i % 2 === 1;
+        // Fehlt der Schluessel, wird der Abschnitt einspaltig statt loechrig.
+        // Genau dieser Fall ist am 2026-08-15 aufgetreten: `write` stand im
+        // Woerterbuch, aber nicht in `visuals`, und die Bildspalte blieb ueber
+        // die volle Abschnittshoehe leer. Ein Record<string, ReactNode> kann
+        // das nicht verhindern -- TypeScript kennt keinen Pflichtschluessel,
+        // und React rendert undefined klaglos als nichts. /fuer-agenturen,
+        // /fuer-saas und /kunden/retaiyn fangen das seit jeher so ab.
+        const visual = visuals[g.id];
         return (
           <section
             key={g.id}
@@ -126,8 +134,12 @@ export default function FunktionenPage() {
                   Startseite und die Agenturseite hatten denselben Fehler und
                   wurden am 13.08. so behoben -- diese Seite ist damals
                   uebersehen worden. */}
-              <div className="grid gap-10 lg:grid-cols-5 lg:items-center lg:gap-14">
-                <div className={"min-w-0 lg:col-span-2 " + (flipped ? "lg:order-2" : "")}>
+              <div className={visual ? "grid gap-10 lg:grid-cols-5 lg:items-center lg:gap-14" : ""}>
+                <div
+                  className={
+                    visual ? "min-w-0 lg:col-span-2 " + (flipped ? "lg:order-2" : "") : "max-w-3xl"
+                  }
+                >
                   <SectionHeading eyebrow={g.eyebrow} title={g.title} />
                   <p className="-mt-4 text-sm leading-relaxed text-soft sm:text-base">{g.body}</p>
                   <ul className="mt-6 space-y-2.5">
@@ -139,9 +151,11 @@ export default function FunktionenPage() {
                     ))}
                   </ul>
                 </div>
-                <div className={"min-w-0 lg:col-span-3 " + (flipped ? "lg:order-1" : "")}>
-                  <Reveal>{visuals[g.id]}</Reveal>
-                </div>
+                {visual && (
+                  <div className={"min-w-0 lg:col-span-3 " + (flipped ? "lg:order-1" : "")}>
+                    <Reveal>{visual}</Reveal>
+                  </div>
+                )}
               </div>
             </div>
           </section>
