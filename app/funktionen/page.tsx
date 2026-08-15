@@ -6,6 +6,7 @@ import { CTAButton, CTAGroup, SectionHeading, SiteHeader, SiteFooter } from "../
 import { UnifiedSearchMockup, LeadsTableMockup, LeadDetailMockup, MailboxesMockup, AiAgentMockup, VerificationReportMockup, CopyCheckMockup, PipelineMockup, TechFilterMockup } from "../_app-mockups";
 import { SuppressionMockup, LocalReachMockup, QualifiedLeadAnimation, CampaignMockup, DeliverabilityMockup } from "../_mockups";
 import { LinkedInMockup } from "../_guard-mockups";
+import { CoachFindingMockup } from "../_offer-mockups";
 import { Reveal } from "../reveal";
 import { CheckIcon } from "../_icons";
 import { useT } from "../language-provider";
@@ -52,10 +53,25 @@ export default function FunktionenPage() {
       </div>
     ),
     personalize: <AiAgentMockup />,
+    // Die Gruppe "write" ist am 2026-08-13 mit dem Angebot dazugekommen, diese
+    // Zuordnung aber nicht: `visuals["write"]` war undefined, und die
+    // Bildspalte stand ueber die volle Abschnittshoehe leer da (gemeldet
+    // 2026-08-15 mit Screenshot).
+    // CampaignMockup zeigt genau die vier Stufen an Tag 0, 3, 5 und 7, von
+    // denen der Absatz spricht; es lag bis dahin unter "send" und bebilderte
+    // dort die Kampagne statt das Schreiben. CoachFindingMockup ist die zweite
+    // Haelfte desselben Absatzes -- der benannte Verstoss samt fertigem
+    // Ersatzsatz. Es steht sonst nur auf /kunden/retaiyn, also entsteht keine
+    // zweite Fundstelle auf derselben Seite.
+    write: (
+      <div className="space-y-5">
+        <CampaignMockup />
+        <CoachFindingMockup {...t.offerSection.coachFinding} />
+      </div>
+    ),
     check: <CopyCheckMockup />,
     send: (
       <div className="space-y-5">
-        <CampaignMockup />
         <MailboxesMockup />
         {/* Am 2026-08-14 von Rundgang Schritt 4 hierher gezogen: dort traegt
             jetzt ChainMockup das Bild, seit der Abschnitt #kette gefallen ist

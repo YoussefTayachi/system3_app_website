@@ -2033,12 +2033,18 @@ const de = {
     volumeLabel: "Tagesvolumen pro Postfach",
     volumeNote: "42 von 50, im sicheren Bereich",
   },
+  // Vier Stufen, nicht drei. Bis zum 2026-08-15 standen hier drei, waehrend
+  // der Text danebenstand: "vier Stufen an Tag 0, 3, 5 und 7". Das Bild ist
+  // aelter als der Sequenzgenerator. Tage und Aufgaben sind aus
+  // `apps/web/lib/copy/sequence-prompt.ts` uebernommen (DEFAULT_DELAYS und die
+  // vier STEP-Zeilen des Prompts) -- wer sie dort aendert, aendert sie hier.
   campaignMockup: {
     label: "Sequenz",
     steps: [
-      { day: "Tag 0", title: "Icebreaker-Mail" },
-      { day: "Tag 3", title: "Follow-up 1" },
-      { day: "Tag 7", title: "Follow-up 2, Break-up" },
+      { day: "Tag 0", title: "Die Beobachtung" },
+      { day: "Tag 3", title: "Enger, nichts Neues" },
+      { day: "Tag 5", title: "Die Zusammenfassung" },
+      { day: "Tag 7", title: "Die letzte" },
     ],
     activeLabel: "Aktiv",
   },
@@ -3720,9 +3726,10 @@ const en: typeof de = {
   campaignMockup: {
     label: "Sequence",
     steps: [
-      { day: "Day 0", title: "Icebreaker email" },
-      { day: "Day 3", title: "Follow-up 1" },
-      { day: "Day 7", title: "Follow-up 2, break-up" },
+      { day: "Day 0", title: "The observation" },
+      { day: "Day 3", title: "Tighter, nothing new" },
+      { day: "Day 5", title: "The summary" },
+      { day: "Day 7", title: "The last one" },
     ],
     activeLabel: "Active",
   },
