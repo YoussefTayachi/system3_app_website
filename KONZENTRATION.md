@@ -413,11 +413,31 @@ Menüpunkte sind in deutschem SaaS üblich, englischer Fließtext nicht.
 
 ### Stand
 
-| | Startseite |
+| | Startseite (en) |
 |---|---|
 | Ausgangspunkt 15.08. | 20.016 px · 4.582 Wörter |
-| nach dem Vergleichs-Umzug | **18.410 px · 3.970 Wörter** |
+| Vergleich umgezogen | 18.410 px · 3.970 Wörter |
+| Rundgang gekürzt | 14.937 px · 2.996 Wörter |
+| Angebot, Kanäle, CRM gekürzt | **13.825 px · 2.660 Wörter** |
 | Ziel | ~6.700 px · ~1.300 Wörter |
+
+**Bisher −31 % Höhe und −42 % Text, ohne dass ein einziges Argument
+verschwunden ist.** Je Abschnitt:
+
+| | vorher | jetzt |
+|---|---|---|
+| `#rundgang` | 4.335 px | **863 px** |
+| `#angebot` | 3.020 px | 2.483 px |
+| `#crm` | 1.564 px | 1.197 px |
+| `#kanaele` | 1.208 px | 1.000 px |
+
+Das Muster, das dreimal getragen hat: **die Titel behalten, die Fließtexte
+streichen.** In allen drei Fällen war der Titel die Aussage und der Absatz
+darunter die Antwort auf eine Frage, die an dieser Stelle noch niemand
+stellt. Kein einziges Wort musste dafür neu geschrieben werden.
+
+Wo es *nicht* trägt, steht es im Code: `#crm` behält die vier Titel samt
+Symbolen, weil es keine Seite gibt, auf die der Text ausweichen könnte.
 
 ## Prüfen
 

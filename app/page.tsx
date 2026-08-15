@@ -46,35 +46,10 @@ import { Reveal } from "./reveal";
 import { postSendIcons, CheckIcon } from "./_icons";
 import { useT } from "./language-provider";
 
-/**
- * Eine der drei Aussagen im Angebot-Abschnitt: Nummer, Ueberschrift,
- * Fliesstext.
- *
- * Die Nummernscheibe traegt dieselbe Form und dieselbe Farbe wie die vier
- * Eckennummern in der Angebotskarte darunter (_offer-mockups.tsx). Damit
- * liest man Text und Bild als ein Gefuege statt als zwei getrennte Listen.
- * Nur drei Vorkommen, deshalb ein Bauteil hier oben statt dreimal dasselbe
- * Markup im Abschnitt.
- */
-function OfferPoint({ n, title, body }: { n: number; title: string; body: string }) {
-  return (
-    <div className="max-w-[64ch]">
-      <div className="flex items-baseline gap-3">
-        {/* Die Scheibe bleibt bei 24px, obwohl die Ziffer von 11 auf 12px
-            waechst: sie traegt dieselbe Form wie die vier Eckennummern in
-            _offer-mockups.tsx, und diese Paarung ist der ganze Zweck. */}
-        <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-sky-500/12 text-xs font-bold text-sky-700">
-          {n}
-        </span>
-        <h3 className={h3Cls}>{title}</h3>
-      </div>
-      {/* Eingerueckt auf die Textkante der Ueberschrift (24px Scheibe + 12px
-          Abstand = 36px): der Fliesstext haengt dadurch an der Ueberschrift
-          und nicht an der Nummer. */}
-      <p className="mt-3 pl-9 text-base leading-relaxed text-soft">{body}</p>
-    </div>
-  );
-}
+// OfferPoint stand hier: Nummernscheibe, Ueberschrift, Fliesstext. Mit der
+// Kurzfassung des Angebot-Abschnitts am 2026-08-15 sind die drei Fliesstexte
+// entfallen, und was uebrig blieb -- Scheibe plus Titel -- ist eine Zeile
+// Markup in der Liste dort. Ein Bauteil fuer eine Zeile lohnt nicht.
 
 export default function Home() {
   const { t } = useT();
@@ -335,8 +310,43 @@ export default function Home() {
             staerkste Einzelbeleg der Seite -- in einer halben Spalte waere er
             ein drittes Kaertchen. Die dritte Aussage hat bewusst kein Bild;
             sie leitet zu den Grenzen ueber. */}
+        {/* ═══════════════════════════════════════════════════════════════
+            KURZFASSUNG SEIT DEM 2026-08-15 (KONZENTRATION.md, Stufe 3).
+
+            Hier standen die drei Aussagen mit je einem Absatz darunter, in
+            Summe 1.539 Pixel und 494 Woerter. Wie beim Rundgang tragen die
+            drei TITEL die Aussage vollstaendig:
+
+              1  Zwoelf Fragen, einmal beantwortet
+              2  Der Coach liest gegen und schreibt einen besseren Satz daneben
+              3  Daraus entstehen acht Texte
+
+            Das ist der ganze Vorgang. Die Absaetze darunter nannten Tage,
+            Wortzahlen und Feldnamen -- Angaben, die derselbe Leser erst
+            braucht, wenn er wissen will, WIE es geht, und die auf
+            /funktionen#write ("Acht Mails, geschrieben aus zwoelf Feldern")
+            Wort fuer Wort stehen.
+
+            Kein Wort ist neu geschrieben. Die drei Titel stehen unveraendert
+            im Woerterbuch, in beiden Sprachen.
+
+            Die Nummernscheiben bleiben: sie tragen dieselbe Form und Farbe
+            wie die vier Eckennummern in der Angebotskarte darunter, und diese
+            Paarung ist der Grund, warum man Text und Bild als ein Gefuege
+            liest statt als zwei Listen.
+            ═══════════════════════════════════════════════════════════ */}
         <div className="mt-16">
-          <OfferPoint n={1} title={t.offerSection.points[0].title} body={t.offerSection.points[0].body} />
+          <ol className="grid gap-x-10 gap-y-5 sm:grid-cols-3">
+            {t.offerSection.points.map((pt, i) => (
+              <li key={pt.title} className="flex items-baseline gap-3 border-t border-edge/70 pt-4">
+                <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-sky-500/12 text-xs font-bold text-sky-700">
+                  {i + 1}
+                </span>
+                <span className="text-[15px] font-medium leading-snug text-ink sm:text-base">{pt.title}</span>
+              </li>
+            ))}
+          </ol>
+
           {/* Die Einordnung steht UEBER dem Bild, nicht darunter. Sie stand
               bis zum 14.08.2026 in offerMap.note, also unter der Karte -- und
               damit hinter den Prozentzahlen im Ergebnisfeld. Wer von oben
@@ -374,13 +384,6 @@ export default function Home() {
               OFFEN: der Textlink auf /kunden/retaiyn, der laut Plan (D1/D2)
               an diese Stelle gehoert, fehlt noch -- er braucht eine
               formulierte Zeile in de und en. */}
-          <div className="mt-16">
-            <OfferPoint n={2} title={t.offerSection.points[1].title} body={t.offerSection.points[1].body} />
-          </div>
-
-          <div className="mt-16">
-            <OfferPoint n={3} title={t.offerSection.points[2].title} body={t.offerSection.points[2].body} />
-          </div>
         </div>
 
         {/* ─────────────────────────────────────────────────────────────
@@ -525,17 +528,18 @@ export default function Home() {
                   </span>
                   <h3 className={"mt-3 " + cardTitleCls}>{c.title}</h3>
 
-                  <p className="mt-5 text-xs font-medium uppercase tracking-[0.14em] text-faint">
-                    {t.channels.appLabel}
-                  </p>
-                  <ul className="mt-2.5 space-y-2">
-                    {c.app.map((a) => (
-                      <li key={a} className="flex items-start gap-2.5 text-[15px] leading-relaxed text-soft">
-                        <CheckIcon />
-                        {a}
-                      </li>
-                    ))}
-                  </ul>
+                  {/* Die Liste "Was die App tut" stand hier: drei bis vier
+                      Aufzaehlungspunkte je Karte (KONZENTRATION.md Stufe 3,
+                      2026-08-15). Sie ist gefallen, weil dieser Abschnitt EINE
+                      Frage beantwortet -- "auf welchen Kanaelen?" -- und die
+                      Antwort in den drei Beschriftungen und drei Titeln
+                      vollstaendig steht. Wie die Kanaele im Einzelnen
+                      funktionieren, ist die naechste Frage, und die stellt
+                      sich auf /funktionen.
+
+                      Der Woerterbuch-Eintrag `app` bleibt bestehen: er wird
+                      hier nur nicht mehr gerendert. Wer den Abschnitt spaeter
+                      wieder ausbaut, findet den Text unveraendert vor. */}
 
                   {/* "Was du tust" steht bewusst am Fuss jeder Karte und in der
                       Akzentfarbe. Bei E-Mail ist die Zeile leer ("nichts"),
@@ -612,14 +616,27 @@ export default function Home() {
             <CallListMockup />
           </Reveal>
         </div>
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Die vier Karten trugen bis zum 2026-08-15 je einen Absatz unter
+            dem Titel (KONZENTRATION.md Stufe 3). Die Absaetze sind gefallen,
+            die TITEL nicht: sie sind die vier Aussagen, und jede steht fuer
+            sich.
+
+            Anders als bei #rundgang und #angebot gibt es hier KEINE Seite,
+            auf die der Text ausweichen koennte -- /funktionen#pipeline zeigt
+            das Kanban-Board, aber weder den gemeinsamen Posteingang noch den
+            Umsatz-Forecast (nachgesehen am 2026-08-15). Deshalb bleiben die
+            Titel und das Symbol stehen, statt dass der ganze Block zieht:
+            vier Aussagen in vier Zeilen sind das Mindeste, das die Website
+            von diesen Funktionen behalten muss. Der Fliesstext steht
+            unveraendert im Woerterbuch, falls die Funktionsseite spaeter eine
+            Gruppe dafuer bekommt. */}
+        <div className="mt-10 grid gap-x-6 gap-y-4 sm:grid-cols-2 lg:grid-cols-4">
           {t.postSend.features.map((f) => (
-            <div key={f.id} className="rounded-2xl border border-edge/60 bg-panel p-6 hover-lift">
-              <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-panel2 text-ink">
+            <div key={f.id} className="flex items-center gap-3 border-t border-edge/70 pt-4">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-panel2 text-ink [&_svg]:h-4 [&_svg]:w-4">
                 {postSendIcons[f.id]}
-              </div>
-              <h3 className={"mt-4 " + cardTitleCls}>{f.title}</h3>
-              <p className="mt-1.5 text-[15px] leading-relaxed text-soft">{f.body}</p>
+              </span>
+              <h3 className={cardTitleCls}>{f.title}</h3>
             </div>
           ))}
         </div>
