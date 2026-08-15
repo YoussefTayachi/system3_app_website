@@ -414,7 +414,10 @@ export default function Home() {
                   Gespraech. */}
               <a
                 href="/fuer-agenturen"
-                className="group mt-7 inline-flex items-center gap-2 rounded-full border border-edge2 bg-panel px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:border-ink"
+                // Druckreaktion wie an CTAButton (Begruendung dort): dieser
+                // Knopf sieht aus wie einer und war der einzige der drei,
+                // der sich beim Tippen nicht ruehrte.
+                className="group mt-7 inline-flex items-center gap-2 rounded-full border border-edge2 bg-panel px-5 py-2.5 text-sm font-medium text-ink transition-[color,border-color,scale] duration-[140ms] ease-out hover:border-ink active:scale-[0.98]"
               >
                 {t.agency.pageLink}
                 <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
@@ -839,7 +842,12 @@ export default function Home() {
                     <path d="m6 9 6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </summary>
-                <p className="mt-2.5 max-w-[68ch] text-[15px] leading-relaxed text-soft">{f.a}</p>
+                {/* `fb-faq-answer`: die Antwort blendet ein statt aufzu-
+                    springen -- nur Deckkraft und 4px, ausdruecklich KEINE
+                    Hoehenanimation (zwoelf Zeilen untereinander, und eine
+                    wachsende Hoehe schiebt beim Aufklappen alles darunter
+                    weg). Begruendung und Browser-Vorbehalt in globals.css. */}
+                <p className="fb-faq-answer mt-2.5 max-w-[68ch] text-[15px] leading-relaxed text-soft">{f.a}</p>
               </details>
             ))}
           </div>
@@ -879,7 +887,11 @@ export default function Home() {
           <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
             <a
               href={BOOKING_URL}
-              className="inline-flex items-center justify-center whitespace-nowrap rounded-full bg-surface px-4 py-2.5 text-sm font-medium text-ink shadow-sm transition-all hover:opacity-85 hover:scale-[1.02] active:scale-[0.98] sm:px-6 sm:py-3"
+              // Umgedrehte Fassung des Primaerknopfes (heller Knopf auf der
+              // dunklen Flaeche) und deshalb Zeichen fuer Zeichen dieselben
+              // Bewegungsklassen wie in CTAButton -- die Begruendung steht
+              // dort.
+              className="inline-flex items-center justify-center whitespace-nowrap rounded-full bg-surface px-4 py-2.5 text-sm font-medium text-ink shadow-sm transition-[opacity,scale] duration-[140ms] ease-out hover:opacity-85 hoverfine:scale-[1.02] active:scale-[0.98] sm:px-6 sm:py-3"
             >
               {t.cta.primary}
             </a>

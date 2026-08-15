@@ -48,18 +48,45 @@ const SEVERITY: Record<Severity, { dot: string; box: string }> = {
  * Zeigt bewusst BEIDE Stufen: zwei rote Blocker und zwei gelbe Hinweise. Nur
  * rot zu zeigen wuerde die Sache als Schikane lesbar machen; der ganze Punkt
  * ist, dass die App zwischen "geht schief" und "waere besser" unterscheidet.
+ *
+ * ─────────────────────────────────────────────────────────────────────
+ * WARUM HIER BEWEGUNG STEHT UND NEBENAN NICHT
+ * ─────────────────────────────────────────────────────────────────────
+ * Der Abschnitt heisst "Was nicht rausgehen darf, geht nicht raus". Das ist
+ * kein Zustand, sondern eine REIHENFOLGE: erst laufen die Pruefungen durch,
+ * dann faellt der Riegel. Als Standbild muss man diese Reihenfolge aus dem
+ * Text daneben erschliessen; gestaffelt sieht man sie.
+ *
+ * Die Zahlen: 260ms je Zeile (kurz genug, dass fuenf Zeilen kein Vorspann
+ * werden), 60ms Versatz (unter 30ms wirkt es wie ein Ruck, ueber 80ms wie
+ * eine Aufzaehlung). Fuenf Zeilen sind damit nach 500ms durch. Der Riegel
+ * kommt 180ms spaeter -- lang genug, dass er als FOLGE gelesen wird und
+ * nicht als sechste Zeile; kurz genug, dass niemand darauf wartet. Der
+ * abgeschaltete Knopf schliesst 60ms danach im selben Takt an: Riegel und
+ * toter Knopf sind eine Aussage.
+ * Gesamt 700ms, ausgeloest vom `Reveal` um die Karte (globals.css,
+ * `.fb-anim`). Kein Layoutsprung -- es bewegen sich nur Deckkraft und 6px,
+ * die Zeilen behalten ihren Platz von Anfang an.
  */
+const GATE_ZEILEN_VERSATZ = 60;
+const GATE_RIEGEL_PAUSE = 180;
+
 export function GateMockup() {
   const { t } = useT();
   const m = t.guardMockups.gate;
+  const riegelVerzoegerung = m.checks.length * GATE_ZEILEN_VERSATZ + GATE_RIEGEL_PAUSE;
 
   return (
     <AppFrame title={m.frameTitle}>
       <div className="space-y-2 p-4 sm:p-5">
-        {m.checks.map((c) => {
+        {m.checks.map((c, i) => {
           const style = SEVERITY[c.severity as Severity];
           return (
-            <div key={c.title} className={"flex gap-2.5 rounded-xl border px-3.5 py-3 " + style.box}>
+            <div
+              key={c.title}
+              className={"fb-anim fb-rise-6 flex gap-2.5 rounded-xl border px-3.5 py-3 " + style.box}
+              style={{ animationDelay: i * GATE_ZEILEN_VERSATZ + "ms" }}
+            >
               <span className={"mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full " + style.dot} />
               <div className="min-w-0">
                 <p className="text-[13px] font-medium leading-snug text-ink">{c.title}</p>
@@ -76,13 +103,19 @@ export function GateMockup() {
             bekam dadurch helle Schrift auf der weiterhin weissen Flaeche:
             text-red-400 auf dem Panel gemessen 2,6:1, text-sky-400 sogar 2,0:1
             (13.08.2026). Verlangt sind 4,5:1. */}
-        <div className="rounded-xl border border-red-500/40 bg-red-500/[0.08] px-3.5 py-2.5 text-[12px] font-semibold text-red-600">
+        <div
+          className="fb-anim fb-rise-6 rounded-xl border border-red-500/40 bg-red-500/[0.08] px-3.5 py-2.5 text-[12px] font-semibold text-red-600"
+          style={{ animationDelay: riegelVerzoegerung + "ms" }}
+        >
           {m.blocked}
         </div>
 
         {/* Abgeschalteter Knopf statt eines fehlenden: der Besucher soll
             sehen, dass der Start existiert und gerade nicht geht. */}
-        <div className="pt-1">
+        <div
+          className="fb-anim fb-rise-6 pt-1"
+          style={{ animationDelay: riegelVerzoegerung + GATE_ZEILEN_VERSATZ + "ms" }}
+        >
           <span className="inline-block cursor-not-allowed rounded-lg bg-edge2/70 px-4 py-2 text-[12px] font-semibold text-mute">
             {m.button}
           </span>
@@ -133,7 +166,18 @@ export function ChainMockup() {
  * Der Kern sind die zwei unteren Zeilen: Balken leer, statt "zu wenig" eine
  * Zahl zu erfinden. Wer das Bild ueberfliegt, sieht zuerst die Luecke, und
  * genau die ist das Verkaufsargument.
+ *
+ * DESHALB LAUFEN DIE BALKEN EIN. Nicht als Zierde: die Zeilen mit
+ * `percent === null` rendern gar keinen Balken und BLEIBEN LEER, waehrend
+ * die anderen von links nach rechts wachsen. Die Ueberschrift daneben
+ * behauptet genau das ("Eine Zahl, die nichts bedeutet, wird nicht
+ * gezeigt") -- im Standbild muss man es lesen, im Ablauf sieht man es.
+ * 420ms je Balken und 70ms Versatz: der Versatz ist der eigentliche Punkt,
+ * weil erst er den leeren Platz sichtbar macht, an dem nichts passiert.
+ * Ausgeloest vom `Reveal` um die Karte (globals.css, `.fb-anim`).
  */
+const BALKEN_VERSATZ = 70;
+
 export function EffectMockup() {
   const { t } = useT();
   const m = t.guardMockups.effect;
@@ -153,14 +197,17 @@ export function EffectMockup() {
         </div>
 
         <div className="space-y-2">
-          {m.rows.map((r) => (
+          {m.rows.map((r, i) => (
             <div key={r.label} className="flex items-center gap-3">
               <span className="w-[104px] shrink-0 truncate text-[12px] text-ink sm:w-[132px]">{r.label}</span>
               <span className="h-2 flex-1 overflow-hidden rounded-full bg-chip">
                 {r.percent !== null && (
                   <span
-                    className="block h-full rounded-full bg-sky-500"
-                    style={{ width: Math.min(100, r.percent * 5) + "%" }}
+                    className="fb-anim fb-bar block h-full rounded-full bg-sky-500"
+                    style={{
+                      width: Math.min(100, r.percent * 5) + "%",
+                      animationDelay: i * BALKEN_VERSATZ + "ms",
+                    }}
                   />
                 )}
               </span>
@@ -241,7 +288,7 @@ export function CopyOutcomesMockup() {
         </div>
 
         <div className="divide-y divide-edge/60">
-          {rows.map((r) => (
+          {rows.map((r, i) => (
             <div key={r.step + r.variant} className="py-3">
               {/* Die Spaltenbreiten sind zweistufig. Gemessen am 13.08.2026
                   (Chrome 151, Deutsch, der laengere Fall): "Schritt 2" braucht
@@ -275,11 +322,17 @@ export function CopyOutcomesMockup() {
                     einem 320px-Fenster blieben ihm 4px. Die Zahl daneben sagt
                     ohnehin dasselbe genauer -- verloren geht nur der Vergleich
                     auf einen Blick, und der ist bei 4px auch verloren. */}
+                {/* Einlaufend wie im EffectMockup, aus demselben Grund: die
+                    Zeile ohne Zahl (Schritt 3) bleibt leer, waehrend die
+                    anderen wachsen. Siehe die Begruendung dort. */}
                 <span className="hidden h-2 min-w-0 flex-1 overflow-hidden rounded-full bg-chip @min-[17rem]:block @min-[26rem]:min-w-[70px]">
                   {r.percent !== null && (
                     <span
-                      className="block h-full rounded-full bg-sky-500"
-                      style={{ width: Math.min(100, r.percent * 5) + "%" }}
+                      className="fb-anim fb-bar block h-full rounded-full bg-sky-500"
+                      style={{
+                        width: Math.min(100, r.percent * 5) + "%",
+                        animationDelay: i * BALKEN_VERSATZ + "ms",
+                      }}
                     />
                   )}
                 </span>

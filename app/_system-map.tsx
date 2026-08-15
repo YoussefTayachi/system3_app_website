@@ -55,10 +55,11 @@ import { useT } from "./language-provider";
  *  `lg:self-center`: die Karten sind seit dem 2026-08-15 ungleich hoch
  *  (items-start, siehe unten). Ohne self-center saesse der Pfeil ab lg oben
  *  am Rand der Zeile statt zwischen den Karten. */
-function StageArrow({ label }: { label: string }) {
+function StageArrow({ label, delay }: { label: string; delay: number }) {
   return (
     <div
-      className="flex shrink-0 flex-col items-center justify-center gap-1.5 py-3 lg:self-center lg:px-3 lg:py-0"
+      className="fb-anim fb-arrow flex shrink-0 flex-col items-center justify-center gap-1.5 py-3 lg:self-center lg:px-3 lg:py-0"
+      style={{ animationDelay: delay + "ms" }}
       aria-hidden
     >
       {/* senkrecht, unter lg */}
@@ -97,9 +98,10 @@ type Stage = {
   body?: string;
 };
 
-function StageCard({ stage, accent }: { stage: Stage; accent: boolean }) {
+function StageCard({ stage, accent, delay }: { stage: Stage; accent: boolean; delay: number }) {
   return (
     <div
+      style={{ animationDelay: delay + "ms" }}
       // Bewusst OHNE h-full: die Karte ist Flex-Kind einer Zeile, und
       // "height: 100%" gegen ein Elternteil mit automatischer Hoehe faellt
       // auf auto zurueck. Seit dem 2026-08-15 sollen die Karten ohnehin
@@ -111,7 +113,7 @@ function StageCard({ stage, accent }: { stage: Stage; accent: boolean }) {
       // die Farbe, keine Kante, und daneben waere die graue Ringschicht des
       // Schattens ein zweiter, widersprechender Strich.
       className={
-        "flex flex-1 flex-col rounded-2xl p-5 " +
+        "fb-anim fb-rise-8 flex flex-1 flex-col rounded-2xl p-5 " +
         (accent ? "border border-coral/40 bg-coral-soft" : "bg-panel shadow-card")
       }
     >
@@ -196,8 +198,34 @@ function StageCard({ stage, accent }: { stage: Stage; accent: boolean }) {
   );
 }
 
+/**
+ * DIE LESEREIHENFOLGE ALS ABLAUF.
+ *
+ * Bis zum 2026-08-15 kam die ganze Karte als EIN Block herein: ein `Reveal`,
+ * und drei Stufen, zwei Pfeile und die Rueckkopplung standen gleichzeitig
+ * da. Das Bild behauptet eine Kette und zeigte einen Zustand.
+ *
+ * Jetzt faehrt es seine eigene Leserichtung nach: Stufe 1, Pfeil 1,
+ * Stufe 2, Pfeil 2, Stufe 3. 90ms Versatz -- gross genug, dass die Kette als
+ * Folge lesbar ist, klein genug, dass die drei Stufen nicht zu drei
+ * Ereignissen werden. Nach der letzten Stufe 260ms PAUSE, und erst dann
+ * kommt die Rueckkopplung. Die Pause ist die Aussage dieses Bildes: der
+ * Kreis schliesst sich, NACHDEM der Ablauf steht. Kaeme der Kasten im selben
+ * Takt, waere er die vierte Stufe -- und genau das ist er nicht.
+ *
+ * Gesamt rund 1,2s. Laenger als jede Bedien-Animation dieser Seite und hier
+ * richtig: das ist keine Rueckmeldung auf eine Handlung, sondern eine
+ * Erklaerung, und sie laeuft genau einmal.
+ */
+const STUFEN_VERSATZ = 90;
+const SCHLEIFEN_PAUSE = 260;
+
 export function SystemMap() {
   const m = useT().t.systemMap;
+  // Fuenf Glieder (Stufe, Pfeil, Stufe, Pfeil, Stufe), danach die Pause.
+  // Ausgerechnet und nicht ausgeschrieben, damit die Zahlen nicht
+  // auseinanderlaufen, wenn jemand am Versatz dreht.
+  const schleifeVerzoegerung = 4 * STUFEN_VERSATZ + 300 + SCHLEIFEN_PAUSE;
 
   return (
     <div>
@@ -213,18 +241,23 @@ export function SystemMap() {
           Querachse die BREITE -- items-start liesse die drei Karten dort auf
           ihre Inhaltsbreite zusammenschnurren. */}
       <div className="flex flex-col items-stretch lg:flex-row lg:items-start">
-        <StageCard stage={m.stages[0]} accent={false} />
-        <StageArrow label={m.arrows[0]} />
-        <StageCard stage={m.stages[1]} accent={false} />
-        <StageArrow label={m.arrows[1]} />
-        <StageCard stage={m.stages[2]} accent={false} />
+        <StageCard stage={m.stages[0]} accent={false} delay={0} />
+        <StageArrow label={m.arrows[0]} delay={STUFEN_VERSATZ} />
+        <StageCard stage={m.stages[1]} accent={false} delay={2 * STUFEN_VERSATZ} />
+        <StageArrow label={m.arrows[1]} delay={3 * STUFEN_VERSATZ} />
+        <StageCard stage={m.stages[2]} accent={false} delay={4 * STUFEN_VERSATZ} />
       </div>
 
       {/* Die Rueckkopplung. Bewusst als eigene, volle Breite unter den drei
           Stufen und in der Akzentfarbe: sie ist nicht die vierte Stufe eines
           Ablaufs, sondern das, was aus dem Ablauf zurueck in ihn hineinlaeuft.
           Der Pfeil zeigt deshalb nach OBEN, gegen die Leserichtung. */}
-      <div className="mt-3 flex flex-col items-center">
+      {/* Pfeil und Kasten als EIN bewegtes Stueck: sie sind ein Gedanke, und
+          ein Pfeil, der vor seinem Ziel eintrifft, zeigt kurz ins Leere. */}
+      <div
+        className="fb-anim fb-rise-8 mt-3 flex flex-col items-center"
+        style={{ animationDelay: schleifeVerzoegerung + "ms" }}
+      >
         <svg viewBox="0 0 16 30" className="h-7 w-4 text-coral" fill="none" aria-hidden>
           <path d="M8 30V6" stroke="currentColor" strokeWidth="1.5" strokeDasharray="3 3" />
           <path d="M2.5 9 8 2l5.5 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

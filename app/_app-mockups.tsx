@@ -283,8 +283,6 @@ export function UnifiedSearchMockup() {
   const apollo = t.appMockups.apolloSearch;
   const prospeo = t.appMockups.prospeoSearch;
   const [mode, setMode] = useState<SearchMode>("local");
-  const m =
-    mode === "local" ? local : mode === "corporate" ? corporate : mode === "apollo" ? apollo : prospeo;
   // VIER Eintraege, nicht drei. Bis zum 2026-08-15 standen hier drei, waehrend
   // `local.tabs` vier Reiter rendert -- fuer i = 3 war `MODES[3]` undefined,
   // `mode` wurde undefined, und der Ausdruck darueber fiel auf den letzten
@@ -293,12 +291,30 @@ export function UnifiedSearchMockup() {
   // `aria-selected` dann auf allen vier Reitern falsch, weil
   // `undefined === undefined` wahr ist.
   const MODES: SearchMode[] = ["local", "corporate", "apollo", "prospeo"];
+  const KOEPFE: Record<SearchMode, { title: string; subtitle: string }> = {
+    local,
+    corporate,
+    apollo,
+    prospeo,
+  };
 
   return (
     <AppFrame>
       <div className="p-5 sm:p-6">
-        <p className="text-lg font-semibold tracking-[-0.01em] text-ink">{m.title}</p>
-        <p className="mt-0.5 text-xs text-mute">{m.subtitle}</p>
+        {/* Auch der Kopf steht im Stapel, nicht nur die Tafel darunter.
+            Gemessen am 2026-08-15 bei 375px: die Unterzeile laeuft je nach
+            Quelle ueber eine oder zwei Zeilen, und die Karte sprang dadurch
+            weiterhin um 16px -- ausgerechnet oben, wo der Blick beim
+            Reiterwechsel steht. Ab 768px waren es 0px, der Fehler war also
+            nur auf dem Telefon zu sehen. */}
+        <div className="fb-stack">
+          {MODES.map((v) => (
+            <div key={v} inert={mode !== v}>
+              <p className="text-lg font-semibold tracking-[-0.01em] text-ink">{KOEPFE[v].title}</p>
+              <p className="mt-0.5 text-xs text-mute">{KOEPFE[v].subtitle}</p>
+            </div>
+          ))}
+        </div>
 
         {/* flex-wrap statt inline-flex: schon mit dem dritten Reiter passt die
             Leiste auf schmalen Displays nicht mehr in eine Zeile, mit dem
@@ -315,7 +331,12 @@ export function UnifiedSearchMockup() {
                 aria-selected={active}
                 onClick={() => setMode(value)}
                 className={
-                  "rounded-md px-3 py-1.5 text-xs font-medium transition-colors " +
+                  // Druckreaktion wie an den echten Knoepfen der Seite: der
+                  // Reiter ist das einzige, was an dieser Nachbildung
+                  // tatsaechlich bedienbar ist, und er soll sich auch so
+                  // anfuehlen. 140ms, unteres Ende des Bereichs fuer
+                  // Druck-Rueckmeldung -- alles darueber haengt am Finger.
+                  "rounded-md px-3 py-1.5 text-xs font-medium transition-[color,background-color,scale] duration-[140ms] ease-out active:scale-[0.98] " +
                   (active ? "bg-sky-500/15 text-sky-700" : "text-faint hover:text-soft")
                 }
               >
@@ -325,8 +346,27 @@ export function UnifiedSearchMockup() {
           })}
         </div>
 
-        {mode === "local" ? (
-          <>
+        {/* ═══════════════════════════════════════════════════════════════
+            ALLE VIER TAFELN LIEGEN UEBEREINANDER IM SELBEN RASTERFELD.
+            ═══════════════════════════════════════════════════════════════
+            Gemessen am 2026-08-15 (Chrome, 1440px, Englisch) auf dem Stand
+            davor: die Karte war je nach Reiter 492 / 481 / 537 / 601 Pixel
+            hoch. Wer durchklickte, sah die Karte um bis zu 120px springen --
+            und die Aussage des Abschnitts ist DERSELBE BILDSCHIRM, ANDERE
+            QUELLE. Springt der Rahmen, sind es optisch vier Screenshots.
+
+            KEINE FESTE HOECHSTHOEHE. Sie waere in genau einer Breite und
+            einer Sprache richtig: auf 375px umbrechen die Feldraster, auf
+            Deutsch sind die Beschriftungen laenger. Der Stapel laesst
+            stattdessen den Browser messen -- die Rasterzeile ist so hoch wie
+            die hoechste Tafel, in jeder Breite und in beiden Sprachen. Dafuer
+            muessen die verborgenen Tafeln im Layout bleiben, weshalb sie mit
+            `visibility` verschwinden und nicht mit `display` (globals.css).
+
+            `inert` haelt sie aus Tastatur- und Vorlesereihenfolge heraus --
+            sonst laege derselbe Bildschirm viermal im Baum. */}
+        <div className="fb-stack">
+          <div inert={mode !== "local"}>
             <div className="mt-4">
               <FieldBox label={local.playbookLabel} value={local.playbookValue} chevron />
             </div>
@@ -357,9 +397,9 @@ export function UnifiedSearchMockup() {
               </div>
               <span className="rounded-full bg-ink px-4 py-2 text-xs font-medium text-surface">{local.cta}</span>
             </div>
-          </>
-        ) : mode === "corporate" ? (
-          <>
+          </div>
+
+          <div inert={mode !== "corporate"}>
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
               {corporate.fields.map((f) => (
                 <FieldBox key={f.label} label={f.label} value={f.value} chevron />
@@ -375,12 +415,16 @@ export function UnifiedSearchMockup() {
               </div>
               <span className="rounded-full bg-ink px-4 py-2 text-xs font-medium text-surface">{corporate.cta}</span>
             </div>
-          </>
-        ) : mode === "apollo" ? (
-          <PersonenSuchTafel d={apollo} akzent="violet" />
-        ) : (
-          <PersonenSuchTafel d={prospeo} akzent="teal" />
-        )}
+          </div>
+
+          <div inert={mode !== "apollo"}>
+            <PersonenSuchTafel d={apollo} akzent="violet" />
+          </div>
+
+          <div inert={mode !== "prospeo"}>
+            <PersonenSuchTafel d={prospeo} akzent="teal" />
+          </div>
+        </div>
       </div>
     </AppFrame>
   );

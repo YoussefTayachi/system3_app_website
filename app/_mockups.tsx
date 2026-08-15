@@ -156,6 +156,33 @@ export function LocalReachMockup() {
  * Ersetzt zwei gestapelte Standbilder: der Vorgang selbst ist die Aussage,
  * dafuer braucht es keine zweite Karte und keine zusaetzliche Seitenhoehe.
  * Laeuft erst los, wenn die Sektion im Viewport steht.
+ *
+ * ═══════════════════════════════════════════════════════════════════════
+ * DREI MESSWERTE, DIE DIESE FASSUNG ERKLAEREN (2026-08-15, Chrome, 1440px)
+ * ═══════════════════════════════════════════════════════════════════════
+ *
+ * 1. DIE KARTE SPRANG VON 267 AUF 410 PIXEL. Der gruene Teil klappte ueber
+ *    `max-h-0 -> max-h-72` auf. `max-height` ist eine Layout-Eigenschaft:
+ *    der Browser rechnet in jedem Bild die Seite neu, und alles unter der
+ *    Karte rutscht 143px nach unten -- mitten im Lesen. Jetzt steht der
+ *    gruene Teil von Anfang an im Layout und ist nur unsichtbar
+ *    (`.fb-card-enter`, Deckkraft + 8px). Nachgemessen: 410px vor und nach
+ *    dem Ablauf, 0px Sprung.
+ *    Der Preis dafuer ist ein Stueck leere Flaeche unter der Notiz, solange
+ *    der Ablauf laeuft. Das ist der richtige Preis: eine reservierte Luecke
+ *    steht still, ein Layoutsprung schiebt den Text weg, den jemand gerade
+ *    liest.
+ *
+ * 2. BIS ZUR POINTE VERGINGEN 2,6 SEKUNDEN (4 Schritte x 650ms). Wer in
+ *    normalem Tempo scrollt, ist vorbei, bevor die gruene Karte kommt --
+ *    dann hat die Nachbildung drei durchgestrichene Adressen gezeigt und
+ *    ihre eigentliche Aussage nicht. 420ms je Schritt macht 1,68s daraus.
+ *    Untergrenze ist der Strich selbst: er laeuft 220ms, und der naechste
+ *    Schritt darf nicht anfangen, bevor der vorige angekommen ist.
+ *
+ * 3. `clearInterval` FEHLTE IM AUFRAEUMPFAD. Der Beobachter wurde getrennt,
+ *    der Zaehler lief weiter -- nach einem Seitenwechsel setzte er alle
+ *    420ms den Zustand einer Komponente, die es nicht mehr gibt.
  */
 export function QualifiedLeadAnimation() {
   const { t } = useT();
@@ -173,21 +200,29 @@ export function QualifiedLeadAnimation() {
       setStep(m.rows.length + 1);
       return;
     }
+    // Ausserhalb des Rueckrufs, damit der Aufraeumpfad ihn auch dann kennt,
+    // wenn die Komponente WAEHREND des Ablaufs verschwindet -- vorher lag
+    // die Kennung nur im Rueckruf, und der Zaehler lief nach dem Aushaengen
+    // weiter.
+    let timer: ReturnType<typeof setInterval> | undefined;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) return;
         observer.disconnect();
         let i = 0;
-        const timer = setInterval(() => {
+        timer = setInterval(() => {
           i += 1;
           setStep(i);
           if (i > m.rows.length) clearInterval(timer);
-        }, 650);
+        }, 420);
       },
       { threshold: 0.3 }
     );
     observer.observe(el);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      clearInterval(timer);
+    };
   }, [m.rows.length]);
 
   const revealed = step > m.rows.length;
@@ -199,16 +234,21 @@ export function QualifiedLeadAnimation() {
         {m.rows.map((r, i) => {
           const struck = step > i;
           return (
+            // `transition-all duration-500` stand an Zeile, Marke und Text.
+            // Es aendert sich je genau EINE Eigenschaft; `all` laesst den
+            // Browser bei jedem Bild alle vergleichen, und die 500ms passten
+            // ohnehin nicht mehr zum 420ms-Takt. Jetzt die tatsaechlich
+            // wechselnden Eigenschaften, 220ms wie der Strich daneben.
             <li
               key={r.generic}
               className={
-                "flex items-center gap-2.5 rounded-lg border border-edge2 bg-panel2 px-3 py-2 transition-all duration-500 " +
+                "flex items-center gap-2.5 rounded-lg border border-edge2 bg-panel2 px-3 py-2 transition-opacity duration-[220ms] ease-out " +
                 (struck ? "opacity-45" : "opacity-100")
               }
             >
               <span
                 className={
-                  "flex h-5 w-5 shrink-0 items-center justify-center rounded transition-colors duration-500 " +
+                  "flex h-5 w-5 shrink-0 items-center justify-center rounded transition-colors duration-[220ms] ease-out " +
                   (struck ? "bg-coral-soft text-coral" : "bg-panel text-mute")
                 }
               >
@@ -216,7 +256,15 @@ export function QualifiedLeadAnimation() {
                   <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                 </svg>
               </span>
-              <p className={"truncate text-xs transition-all duration-500 " + (struck ? "text-faint line-through" : "text-soft")}>
+              {/* `fb-strike` statt `line-through` -- siehe globals.css: eine
+                  Linie, die durch das Wort laeuft, statt eines Strichs, der
+                  von einem Bild aufs andere da ist. */}
+              <p
+                className={
+                  "fb-strike truncate text-xs transition-colors duration-[220ms] ease-out " +
+                  (struck ? "fb-strike-on text-faint" : "text-soft")
+                }
+              >
                 {r.generic}
               </p>
             </li>
@@ -225,12 +273,12 @@ export function QualifiedLeadAnimation() {
       </ul>
       <p className="mt-2 text-[11px] text-mute">{m.genericNote}</p>
 
-      <div
-        className={
-          "mt-5 overflow-hidden transition-all duration-700 ease-out " +
-          (revealed ? "max-h-72 opacity-100" : "max-h-0 opacity-0")
-        }
-      >
+      {/* Kein `overflow-hidden` und kein `max-h-*` mehr: der Platz gehoert
+          diesem Teil von der ersten Sekunde an, sichtbar wird nur sein
+          Inhalt. `aria-hidden` waere hier falsch -- der Text steht die ganze
+          Zeit im Layout und ist auch die ganze Zeit vorlesbar, er ist nur
+          noch nicht eingeblendet. */}
+      <div className={"mt-5 fb-card-enter " + (revealed ? "fb-card-enter-on" : "")}>
         <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.12em] text-emerald-700">{m.frostbreakerLabel}</p>
         <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/5 p-4">
           <div className="flex items-center gap-3">

@@ -181,7 +181,10 @@ export function CustomerSection({ className = "" }: { className?: string }) {
               </div>
               <a
                 href={BOOKING_URL}
-                className="group mt-6 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-surface transition-all hover:opacity-85 active:scale-[0.98]"
+                // `transition-all` ersetzt durch die zwei Eigenschaften, die
+                // tatsaechlich wechseln -- gleiche Begruendung wie an
+                // CTAButton in _ui.tsx.
+                className="group mt-6 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-surface transition-[opacity,scale] duration-[140ms] ease-out hover:opacity-85 active:scale-[0.98]"
               >
                 {c.mirror.cta}
                 <span aria-hidden className="transition-transform group-hover:translate-x-0.5">

@@ -179,9 +179,30 @@ export function CTAButton({
         // und das ausgerechnet an der einen Stelle, an der die Seite etwas
         // will. Die Breite, die das kostet, holt die Wortmarke daneben herein
         // (siehe Logo).
+        // ────────────────────────────────────────────────────────────
+        // DRUCKREAKTION, 2026-08-15.
+        //
+        // `transition-all` stand am Primaerknopf und liess den Browser bei
+        // jedem Bild jede Eigenschaft vergleichen; gewechselt haben immer
+        // nur zwei. Jetzt stehen die zwei da. 140ms, weil Druck-Rueckmeldung
+        // zwischen 100 und 160ms liegt -- darueber haengt der Knopf am
+        // Finger, darunter sieht man sie nicht.
+        //
+        // `hoverfine:` statt `hover:` fuer die VERGROESSERUNG (globals.css):
+        // Tailwind v4 verpackt `hover:` zwar schon in `(hover: hover)`,
+        // aber ein Zeigegeraet mit grober Aufloesung faellt da noch
+        // hindurch. Der Deckkraft-/Farbwechsel bleibt am gewoehnlichen
+        // `hover:` -- er stoert beim Tippen nicht, ein springender Knopf
+        // schon.
+        //
+        // Die Sekundaervariante hatte GAR KEINE Druckreaktion. Sie ist
+        // derselbe Knopf in leiser, und "leiser" heisst nicht "reagiert
+        // nicht": auf dem Telefon war das der Unterschied zwischen einem
+        // Knopf und einem Stueck Text mit Rahmen.
+        // ────────────────────────────────────────────────────────────
         (isPrimary
-          ? "inline-flex items-center justify-center whitespace-nowrap rounded-full bg-ink px-4 py-2.5 text-sm font-medium text-surface shadow-sm transition-all hover:opacity-85 hover:scale-[1.02] active:scale-[0.98] sm:px-6 sm:py-3 "
-          : "inline-flex items-center justify-center whitespace-nowrap rounded-full border border-edge2 px-4 py-2.5 text-sm font-medium text-soft transition-colors hover:border-ink hover:text-ink sm:px-6 sm:py-3 ") +
+          ? "inline-flex items-center justify-center whitespace-nowrap rounded-full bg-ink px-4 py-2.5 text-sm font-medium text-surface shadow-sm transition-[opacity,scale] duration-[140ms] ease-out hover:opacity-85 hoverfine:scale-[1.02] active:scale-[0.98] sm:px-6 sm:py-3 "
+          : "inline-flex items-center justify-center whitespace-nowrap rounded-full border border-edge2 px-4 py-2.5 text-sm font-medium text-soft transition-[color,border-color,scale] duration-[140ms] ease-out hover:border-ink hover:text-ink active:scale-[0.98] sm:px-6 sm:py-3 ") +
         className
       }
     >

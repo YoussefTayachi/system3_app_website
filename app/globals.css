@@ -53,8 +53,27 @@
   --c-mute: #6b6963;
   --c-coral: #ea5a3e;
   --c-coral-soft: #fdece7;
+
+  /* EINE Kurve fuer die ganze Seite. Sie stand bis zum 2026-08-15 zweimal
+     ausgeschrieben da (.fade-up und .reveal) und waere mit jeder neuen
+     Bewegung ein drittes und viertes Mal abgeschrieben worden -- genau so
+     entstehen zwei Kurvensysteme, die keiner mehr zusammenfuehrt.
+     Der Wert selbst bleibt unveraendert: ein kraeftiges ease-out, das sofort
+     losgeht und weich ankommt. Kein ease-in irgendwo auf dieser Seite --
+     ease-in verzoegert die ersten Millisekunden, also genau die, in denen
+     jemand hinsieht. */
+  --fb-ease-out: cubic-bezier(0.2, 0.7, 0.3, 1);
   color-scheme: light;
 }
+
+/* Tailwind v4 verpackt `hover:` von sich aus in `@media (hover: hover)`
+   (nachgesehen 2026-08-15 im erzeugten layout.css). Das reicht fuer reine
+   Touch-Geraete, nicht fuer Zeigegeraete mit grober Aufloesung. `hoverfine`
+   ergaenzt `(pointer: fine)` und ist NUR fuer Hover-BEWEGUNG gedacht --
+   Farb- und Deckkraftwechsel duerfen weiter am gewoehnlichen `hover:`
+   haengen, ein kurz aufblitzender Farbwechsel beim Tippen stoert niemanden,
+   ein springender Knopf schon. */
+@custom-variant hoverfine (@media (hover: hover) and (pointer: fine));
 
 @theme inline {
   --color-surface: var(--c-surface);
@@ -133,14 +152,124 @@ body {
   from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
 }
-.fade-up { position: relative; animation: fadeUp 0.5s cubic-bezier(0.2, 0.7, 0.3, 1) both; }
+.fade-up { position: relative; animation: fadeUp 0.5s var(--fb-ease-out) both; }
 
 /* Scroll-Reveal: Ausgangszustand + eingeblendeter Zustand, umgeschaltet von
    der Reveal-Client-Komponente (IntersectionObserver) statt reinem CSS --
    funktioniert dadurch zuverlaessig unabhaengig von Browser-Support fuer
    scroll-driven animations. */
-.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s cubic-bezier(0.2, 0.7, 0.3, 1), transform 0.6s cubic-bezier(0.2, 0.7, 0.3, 1); }
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s var(--fb-ease-out), transform 0.6s var(--fb-ease-out); }
 .reveal-visible { opacity: 1; transform: translateY(0); }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ABLAEUFE INNERHALB EINER NACHBILDUNG
+   ═══════════════════════════════════════════════════════════════════════
+   `.reveal` blendet einen ganzen Block ein. Die Klassen hier drunter zeigen
+   etwas anderes: einen ABLAUF innerhalb dieses Blocks -- erst wird geprueft,
+   dann wird gesperrt; erst waechst der eine Balken, dann der naechste, und
+   eine Zeile ohne Zahl waechst nie. Das ist der einzige Grund, aus dem hier
+   ueberhaupt etwas laeuft: ein Standbild kann diese Reihenfolge nur
+   behaupten, Bewegung zeigt sie. Wo Bewegung nur huebsch waere, steht keine.
+
+   DER SCHALTER. Jedes bewegte Element traegt `.fb-anim`; die Reihenfolge
+   kommt aus `animation-delay` an der Aufrufstelle (dort steht auch, warum
+   die Zahl so ist). Solange der umgebende `.reveal` noch nicht sichtbar ist,
+   steht die Animation still -- sonst waere sie abgelaufen, bevor der Block
+   im Bild ist, und man saehe das Ergebnis statt des Vorgangs.
+
+   `animation-play-state: paused` und nicht ein zweiter Klassenwechsel per
+   JS: die Pause haelt auch die VERZOEGERUNG an (die Delay-Phase gehoert zur
+   Zeitleiste der Animation). Und ohne einen `.reveal` darueber -- falls das
+   Bauteil einmal ohne benutzt wird -- laeuft die Animation einfach beim
+   Einhaengen los, statt auf ein Signal zu warten, das nie kommt. */
+.fb-anim {
+  animation-duration: 300ms;
+  animation-timing-function: var(--fb-ease-out);
+  animation-fill-mode: both;
+}
+.reveal:not(.reveal-visible) .fb-anim { animation-play-state: paused; }
+
+@keyframes fbRise6 { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@keyframes fbRise8 { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+/* Der Pfeil laeuft in SEINE eigene Richtung ein, nicht nach oben wie die
+   Karten: ab lg zeigt er nach rechts, darunter nach unten (_system-map.tsx
+   haelt dafuer zwei SVG-Fassungen vor, statt eine zu drehen). Ein Pfeil, der
+   quer zu seiner Spitze einschwebt, sagt eine andere Richtung als er zeigt.
+   4px statt 8px: er ist ein Zeichen von 32px Kantenlaenge, bei 8px waere der
+   Weg ein Viertel seiner eigenen Groesse. */
+@keyframes fbArrowDown { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+@keyframes fbArrowRight { from { opacity: 0; transform: translateX(-4px); } to { opacity: 1; transform: none; } }
+/* Balken: clip-path, NICHT scaleX. Die Balken sind 8px hoch und voll
+   gerundet (`rounded-full`); scaleX(0.1) macht aus den beiden Halbkreisen an
+   den Enden zwei senkrechte Striche, und der Balken sieht auf halbem Weg
+   kaputt aus statt kurz. clip-path schneidet stattdessen ab -- die rechte
+   Kappe kommt in ihrer richtigen Form heraus. */
+@keyframes fbBarGrow { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes fbFadeOnly { from { opacity: 0; } to { opacity: 1; } }
+
+.fb-rise-6 { animation-name: fbRise6; animation-duration: 260ms; }
+.fb-rise-8 { animation-name: fbRise8; animation-duration: 300ms; }
+.fb-arrow { animation-name: fbArrowDown; animation-duration: 300ms; }
+@media (min-width: 64rem) { .fb-arrow { animation-name: fbArrowRight; } }
+.fb-bar { animation-name: fbBarGrow; animation-duration: 420ms; }
+
+/* Der aufklappende Teil der Filter-Nachbildung (_mockups.tsx). Als
+   TRANSITION und nicht als Animation: der Zustand haengt an einem
+   JS-Zaehler, und eine Transition laesst sich mitten im Lauf umlenken,
+   waehrend Keyframes von vorn anfangen. 320ms, weil hier eine ganze Karte
+   kommt und keine Zeile -- unter 300ms wirkt eine Flaeche dieser Groesse
+   geschnitten statt eingeblendet.
+   KEIN max-height. Die Endhoehe reserviert das Layout dauerhaft (siehe die
+   Messnotiz in _mockups.tsx); hier bewegen sich nur Deckkraft und 8px. */
+.fb-card-enter {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 320ms var(--fb-ease-out), transform 320ms var(--fb-ease-out);
+}
+.fb-card-enter-on { opacity: 1; transform: none; }
+
+/* Durchstreichen als Handlung statt als Zustand. `text-decoration:
+   line-through` ist nicht animierbar -- der Strich ist im einen Bild nicht da
+   und im naechsten ganz. Eine 1px-Linie als ::after mit
+   `transform: scaleX(0) -> 1` von links laeuft dagegen durch das Wort, und
+   genau das ist die Aussage: die Adresse WIRD aussortiert.
+   220ms: kuerzer als das Einblenden der Zeile, weil der Strich ihr folgt und
+   nicht mit ihr konkurriert. */
+.fb-strike { position: relative; }
+.fb-strike::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 220ms var(--fb-ease-out);
+}
+.fb-strike-on::after { transform: scaleX(1); }
+
+/* Vier Tafeln im selben Rasterfeld (_app-mockups.tsx). Der Stapel ist so
+   hoch wie seine hoechste Tafel -- vom Browser gemessen, in jeder Breite und
+   in beiden Sprachen, statt einer festen Zahl, die bei 375px und auf Englisch
+   sofort falsch waere. `visibility: hidden` und nicht `display: none`: nur so
+   traegt eine verborgene Tafel weiter zur Hoehe der Rasterzeile bei. */
+.fb-stack { display: grid; }
+.fb-stack > * {
+  grid-area: 1 / 1;
+  transition: opacity 200ms var(--fb-ease-out), transform 200ms var(--fb-ease-out);
+}
+/* `inert` nimmt die verborgenen Tafeln aus Tastaturreihenfolge und
+   Vorlesereihenfolge -- sonst laege derselbe Bildschirm viermal im Baum.
+   `transition: none` an dieser Stelle: die abtretende Tafel soll SOFORT weg
+   sein, sonst liegen zwei Bildschirme sichtbar uebereinander. */
+.fb-stack > [inert] {
+  opacity: 0;
+  transform: translateY(4px);
+  visibility: hidden;
+  transition: none;
+}
 
 @keyframes float {
   0%, 100% { transform: translateY(0px) rotate(-1deg); }
@@ -152,6 +281,32 @@ body {
 }
 .animate-float { animation: float 6s ease-in-out infinite; }
 .animate-float-slow { animation: floatSlow 5s ease-in-out infinite; }
+
+/* Die Antwort einer FAQ-Zeile. NUR Deckkraft und 4px -- ausdruecklich KEINE
+   Hoehenanimation: die zwoelf Zeilen stehen untereinander, und eine
+   wachsende Hoehe schiebt beim Aufklappen alles darunter weg, waehrend
+   jemand liest. Der Kasten bekommt seine Endhoehe also weiterhin sofort, nur
+   der Text darin blendet ein.
+   180ms, das untere Ende des Bereichs fuer kleine Aufklapper: die Antwort
+   ist der Grund fuer den Klick und darf nicht auf sich warten lassen.
+   -4px, also von OBEN: der Absatz kommt unter der Frage hervor, und das ist
+   die Richtung, aus der er kommt.
+   Ohne JS. `@starting-style` gilt fuer den ersten Stilaufbau eines Elements,
+   und die Kinder eines geschlossenen <details> haben ueberhaupt keine Box --
+   beim Aufklappen entsteht sie neu, und genau dann greift der Startstil.
+   `transition-behavior: allow-discrete` steht bewusst NICHT dabei: es wirkt
+   auf diskrete Eigenschaften DIESES Elements (etwa `display`), und hier ist
+   keine im Spiel -- verborgen wird der Absatz vom Browser eine Ebene
+   darueber. Wo `@starting-style` fehlt (Firefox < 129), erscheint die
+   Antwort wie bisher schlagartig: kein Rueckschritt, nur kein Zugewinn. */
+.fb-faq-answer {
+  opacity: 1;
+  transform: none;
+  transition: opacity 180ms var(--fb-ease-out), transform 180ms var(--fb-ease-out);
+}
+@starting-style {
+  .fb-faq-answer { opacity: 0; transform: translateY(-4px); }
+}
 
 /* Dezenter Hover-Lift fuer Karten -- statt eines einheitlich flachen
    Zustands ueberall, macht interaktive Flaechen spuerbar "gebaut". */
@@ -236,4 +391,25 @@ body {
   .fade-up, .animate-float, .animate-float-slow, .animate-ping { animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
   .hover-lift:hover { transform: none; }
+
+  /* Die Ablaeufe in den Nachbildungen bleiben, werden aber zu reinem
+     Aufblenden: kein Versatz, kein Wischen, 160ms statt 260-420ms. Sie
+     tragen eine Aussage (die Reihenfolge, die leere Zeile), und die geht mit
+     `animation: none` verloren -- gemeint ist "weniger und sanfter", nicht
+     "gar nichts".
+     `animation-delay: 0s !important` ist die eine Stelle mit !important auf
+     dieser Seite, und sie hat einen Grund: die Staffelung steht als
+     Inline-Stil an der Aufrufstelle (dort gehoert sie hin, sie ist je
+     Element verschieden), und Inline schlaegt jede Regel aus dieser Datei.
+     Eine Staffelung ist aber genau das, was unter `reduce` stoert -- Dinge,
+     die nacheinander in Bewegung geraten. Also alle zugleich, einmal kurz. */
+  .fb-anim {
+    animation-name: fbFadeOnly;
+    animation-duration: 160ms;
+    animation-delay: 0s !important;
+  }
+  /* Der aufklappende Teil, das Durchstreichen und der Tafelwechsel springen
+     in ihren Endzustand. Bei allen dreien fuehrt JS bzw. ein Klick den
+     Zustand -- ohne Transition heisst das: sofort da, nichts unsichtbar. */
+  .fb-card-enter, .fb-strike::after, .fb-stack > *, .fb-faq-answer { transition: none; }
 }
