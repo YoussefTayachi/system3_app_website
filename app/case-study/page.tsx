@@ -1,55 +1,18 @@
 "use client";
 import Link from "next/link";
-import { Logo, CTAButton, NavDropdown, SectionHeading, StatTile, FactBox } from "../_ui";
-import { useT, LanguageToggle } from "../language-provider";
+import { CTAButton, SectionHeading, StatTile, FactBox, SiteHeader, SiteFooter } from "../_ui";
+import { useT } from "../language-provider";
 
 export default function CaseStudyPage() {
   const { t } = useT();
   const c = t.caseStudyPage;
-  // Die Kopfleiste steht seit dem 14.08.2026 ausgeschrieben statt als
-  // navLinks-Liste da (Messwerte im Kopf von app/page.tsx). Der Link auf den
-  // Startseiten-Anker "/#agenturen" ist dabei entfallen: er trug dieselbe
-  // Beschriftung wie der Menue-Eintrag "Fuer Agenturen", zeigte aber auf einen
-  // Abschnitt der Startseite statt auf die vollstaendige Seite. Zwei gleich
-  // beschriftete Ziele nebeneinander sind eine Falle; der Anker selbst bleibt
-  // fuer alte Links bestehen. "/#vergleich" bleibt dagegen stehen -- dafuer
-  // gibt es keine eigene Seite, der Anker ist das einzige Ziel.
-  // Ohne Praefix, siehe die ausfuehrliche Begruendung in kontakt/page.tsx:
-  // '"/" + item.href' erzeugte "//funktionen", eine protokollrelative URL, die
-  // der Browser als Host aufloest. Am 13.08.2026 auf beiden Seiten behoben.
-  const produktItems = t.nav.produktItems;
-
   return (
     <div className="min-h-screen">
-      <header className="sticky top-0 z-10 border-b border-edge/60 bg-surface/90 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
-          <Logo />
-          <nav className="hidden items-center gap-6 md:flex">
-            <NavDropdown label={t.nav.produkt} items={produktItems} />
-            <NavDropdown label={t.featuresPage.eyebrow} items={t.nav.funktionenItems} />
-            {/* Reihenfolge wie auf allen sieben Seiten: Produkt, Funktionen,
-                Fuer wen, dann der Rest der Leiste. */}
-            <NavDropdown
-              label={t.nav.fuerWen}
-              items={t.nav.fuerWenItems}
-              className="hidden lg:block"
-            />
-            <a href="/#vergleich" className="text-sm text-soft hover:text-ink">
-              {t.nav.vergleich}
-            </a>
-            <a
-              href="/eigene-software"
-              className="hidden text-sm text-soft transition-colors hover:text-ink lg:inline"
-            >
-              {t.nav.custom}
-            </a>
-          </nav>
-          <div className="flex items-center gap-3">
-            <LanguageToggle />
-            <CTAButton />
-          </div>
-        </div>
-      </header>
+      {/* Kopf und Fuss aus _ui.tsx. Diese Seite trug bis zum 14.08.2026 eine
+          eigene Zusammenstellung mit "/#vergleich" statt "Kontakt" -- eine
+          von mehreren Abweichungen, die entstanden sind, weil dasselbe
+          Markup achtmal kopiert dastand. */}
+      <SiteHeader />
 
       <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20">
         <SectionHeading eyebrow={c.eyebrow} title={c.title} />
@@ -99,11 +62,7 @@ export default function CaseStudyPage() {
         </p>
       </section>
 
-      <footer className="border-t border-edge/60">
-        <div className="mx-auto max-w-3xl px-4 py-6 text-center text-xs text-mute sm:px-6">
-          © {new Date().getFullYear()} Frostbreaker · {t.footer.location}
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

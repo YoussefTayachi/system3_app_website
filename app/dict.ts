@@ -279,18 +279,18 @@ const de = {
           "Abwesenheitsnotizen stehen getrennt und gehen nicht als Antwort durch",
         ],
       },
-      {
-        id: "multi",
-        eyebrow: "Zwei Zielgruppen",
-        title: "Zwei Angebote, ein Konto",
-        body: "Frostbreaker hat selbst zwei Zielgruppen: Agenturen und SaaS-Anbieter. Diese Seite meint die eine, die Seite für Agenturen die andere, und beide brauchen andere Sätze. Genau dafür liegen mehrere Angebote nebeneinander im selben Workspace, eines davon als Standard. Ein zweiter Account wäre dafür der falsche Weg, und ein zweiter Plan erst recht.",
-        bullets: [
-          "Bis zu zehn Angebote je Workspace, eines als Standard",
-          "Je Angebot eine eigene Sequenz, eine eigene LinkedIn-Vorlage, eine eigene Unterschrift",
-          "Beim Start der Kampagne wählst du, welches Angebot schreibt",
-          "Kein zweites Konto, kein zweiter Plan, kein zweiter Preis",
-        ],
-      },
+      // Der Abschnitt `multi` ("Zwei Zielgruppen" / "Zwei Angebote, ein
+      // Konto") stand bis zum 2026-08-14 hier. Gefallen (EINHEITLICH.md S3):
+      // er widersprach der Ueberschrift seiner eigenen Seite -- saasPage.title
+      // sagt "Ein Produkt, eine Zielgruppe, kein Vertriebsteam". Wer diese
+      // Seite betritt, HAT eine Zielgruppe; ihm auf halber Strecke zu
+      // erklaeren, dass man auch zwei fuehren kann, ist eine Mechanik-Auskunft
+      // fuer einen Bestandskunden, keine Kaufentscheidung.
+      //
+      // OFFEN: die Aussage steht damit nirgends mehr auf der Website. Der
+      // Plan schlaegt einen FAQ-Eintrag oder einen Bullet in
+      // featuresPage.groups.write vor -- beides braucht formulierten Text in
+      // de und en und ist Sache des copywriter.
       {
         id: "limits",
         eyebrow: "Wo es aufhört",
@@ -985,37 +985,16 @@ const de = {
       },
     ],
   },
-  // Die beiden Gruende, aus denen ein Interessent NICHT kauft: "zu kompliziert
-  // fuer mich" und "rechtlich zu heikel". Beide sind in der App laengst
-  // beantwortet, standen auf der Website aber nur als Nebensatz.
-  safeStart: {
-    eyebrow: "Ohne Vorwissen starten",
-    title: "Genau die zwei Dinge, an denen Kaltakquise sonst scheitert, sind eingebaut",
-    cards: [
-      {
-        id: "guide",
-        label: "Anleitung",
-        title: "Die Anleitung sitzt im Werkzeug, nicht in einem PDF",
-        body: "Zehn Kapitel erklären den ganzen Ablauf: warum Postfächer zwei bis vier Wochen aufgewärmt werden müssen, was SPF, DKIM und DMARC im Klartext bedeuten, welcher Suchweg zu welcher Zielgruppe passt. Dazu eine Checkliste, die zeigt, was noch fehlt.",
-        points: [
-          "Warnung vor dem teuersten Anfängerfehler: sofort loslegen ohne Warmup",
-          "Kaltakquise gehört nie auf die Hauptdomain, mit Begründung",
-          "Jede Seite verlinkt in das passende Kapitel",
-        ],
-      },
-      {
-        id: "optout",
-        label: "Rechtssicherheit",
-        title: "Der Abmeldelink ist Teil der Kampagne, kein Nachgedanke",
-        body: "Jede Kampagnenmail enthält einen Abmeldelink. Ein Klick trägt die Adresse dauerhaft in eure Sperrliste ein, und die wird vor jeder weiteren Suche und jeder weiteren Kampagne abgeglichen. Ihr müsst dafür nichts pflegen und nichts nachtragen.",
-        points: [
-          "Abgemeldete Empfänger tauchen in keiner neuen Suche mehr auf",
-          "Bestandskunden lassen sich per CSV auf einmal ausschließen",
-          "Der Abgleich läuft vor dem Versand, nicht danach",
-        ],
-      },
-    ],
-  },
+  // `safeStart` stand bis zum 2026-08-14 hier: die zwei Karten des
+  // Abschnitts #startklar ("die Anleitung sitzt im Werkzeug", "der
+  // Abmeldelink ist Teil der Kampagne"). Mit dem Abschnitt gefallen
+  // (EINHEITLICH.md S1) -- beide Aussagen stehen anderswo: die erste in
+  // why.earlyAccess, die zweite in featuresPage.groups.protect.
+  //
+  // OFFEN: der Plan will die zwei Saetze als EINEN FAQ-Eintrag retten; der
+  // neunte Platz in faq.items ist dafuer bewusst frei. Das braucht
+  // formulierten Text in de und en und ist Sache des copywriter.
+
   // Nachbildungen echter App-Screens. Bewusst keine Screenshots aus dem
   // laufenden Betrieb: dort stehen Namen realer Personen mit Rolle und
   // Arbeitgeber, die ohne Einwilligung nicht ins Marketing gehoeren.
@@ -2158,7 +2137,9 @@ const de = {
   // Seite. Gefallen sind: die Agentur-Frage (steht im Agentur-Band zwanzig
   // Zeilen darueber), die zweite Apollo/Hunter-Frage (dieselbe Frage wie die
   // erste, nur mit vertauschten Anbieternamen), info@-Filter und
-  // Adresspruefung (Rundgang Schritt 1 und 3), Sperrliste (#startklar),
+  // Adresspruefung (Rundgang Schritt 1 und 3), Sperrliste (stand damals in
+  // #startklar, seit dessen Streichung am 14.08.2026 in
+  // featuresPage.groups.protect),
   // SPF/DKIM (#torwart) und "Kampagnen in einem zweiten Tool" (Zeile `send`
   // in der Vergleichstabelle). Drei Kostenfragen sind zu einer geworden.
   //
@@ -2603,18 +2584,9 @@ const en: typeof de = {
           "Out-of-office replies are listed separately and never pass as answers",
         ],
       },
-      {
-        id: "multi",
-        eyebrow: "Two audiences",
-        title: "Two offers, one account",
-        body: "Frostbreaker has two audiences of its own: agencies and SaaS companies. This page speaks to one of them, the agency page to the other, and the two need different sentences. That is what several offers side by side in one workspace are for, one of them the default. A second account would be the wrong way to solve it, and a second plan even more so.",
-        bullets: [
-          "Up to ten offers per workspace, one of them the default",
-          "Each offer with its own sequence, its own LinkedIn template, its own sign-off",
-          "You pick which offer writes when you start the campaign",
-          "No second account, no second plan, no second price",
-        ],
-      },
+      // Der Abschnitt `multi` ist am 2026-08-14 gefallen -- Begruendung in der
+      // deutschen Haelfte an derselben Stelle. `type Dictionary = typeof de`
+      // verlangt, dass beide Haelften gleichzeitig fallen.
       {
         id: "limits",
         eyebrow: "Where it stops",
@@ -3083,34 +3055,8 @@ const en: typeof de = {
       },
     ],
   },
-  safeStart: {
-    eyebrow: "Start without prior knowledge",
-    title: "The two things cold outreach usually fails on are built in",
-    cards: [
-      {
-        id: "guide",
-        label: "Guide",
-        title: "The guide lives in the tool, not in a PDF",
-        body: "Ten chapters cover the whole flow: why mailboxes need two to four weeks of warmup, what SPF, DKIM and DMARC mean in plain language, which search route fits which audience. Plus a checklist showing what is still missing.",
-        points: [
-          "A warning about the most expensive beginner mistake: sending before warmup",
-          "Cold outreach never belongs on your main domain, with the reasoning",
-          "Every page links into the matching chapter",
-        ],
-      },
-      {
-        id: "optout",
-        label: "Legal safety",
-        title: "The opt-out link is part of the campaign, not an afterthought",
-        body: "Every campaign email contains an opt-out link. One click adds the address to your blocklist permanently, and that list is checked before every further search and every further campaign. Nothing to maintain, nothing to add by hand.",
-        points: [
-          "Opted-out recipients no longer appear in any new search",
-          "Existing customers can be excluded in bulk via CSV",
-          "The check runs before sending, not after",
-        ],
-      },
-    ],
-  },
+  // `safeStart` ist am 2026-08-14 mit dem Abschnitt #startklar gefallen --
+  // Begruendung in der deutschen Haelfte an derselben Stelle.
   appMockups: {
     dashboard: {
       title: "Dashboard",

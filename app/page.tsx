@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { Logo, CTAButton, CTAGroup, NavDropdown, SectionHeading, BOOKING_URL } from "./_ui";
+import { CTAButton, CTAGroup, SectionHeading, SiteHeader, SiteFooter, BOOKING_URL } from "./_ui";
 // SuppressionMockup, DeliverabilityMockup und CampaignMockup lagen im
 // Abschnitt "Mehr als nur Leads finden", der am 2026-08-06 von der
 // Startseite verschwunden ist. Die Komponenten bleiben fuer /funktionen.
@@ -14,7 +14,10 @@ import { AgencyMockup, PostSendMockup } from "./_mockups";
 // gar nicht mehr gerendert, nur noch importiert.
 import { CallListMockup } from "./_app-mockups";
 import { GateMockup, EffectMockup } from "./_guard-mockups";
-import { OfferMapMockup, CoachFindingMockup, type OfferMapMockupProps } from "./_offer-mockups";
+// CoachFindingMockup ist am 2026-08-14 aus #angebot gefallen und steht nur
+// noch auf /kunden/retaiyn -- dort, wo der Fall erzaehlt wird. Begruendung
+// unten an der Fundstelle.
+import { OfferMapMockup, type OfferMapMockupProps } from "./_offer-mockups";
 import { LeadCardStack } from "./_illustration";
 import { SystemMap } from "./_system-map";
 import { AllInOneCompare } from "./_compare";
@@ -22,7 +25,7 @@ import { StepWalkthrough } from "./_walkthrough";
 import { CustomerStrip, CustomerSection } from "./_customers";
 import { Reveal } from "./reveal";
 import { postSendIcons, CheckIcon } from "./_icons";
-import { useT, LanguageToggle } from "./language-provider";
+import { useT } from "./language-provider";
 
 /**
  * Eine der drei Aussagen im Angebot-Abschnitt: Nummer, Ueberschrift,
@@ -54,74 +57,11 @@ function OfferPoint({ n, title, body }: { n: number; title: string; body: string
 }
 
 export default function Home() {
-  const { t, lang } = useT();
-  // ────────────────────────────────────────────────────────────────────
-  // DIE KOPFLEISTE. Hier stehen die Messwerte, auf die die uebrigen sechs
-  // Seiten verweisen.
-  // ────────────────────────────────────────────────────────────────────
-  //
-  // Zwischen 768px und 1024px passen Logo, volle Navigation und CTA nicht
-  // nebeneinander (die Leiste lief ueber und erzeugte horizontales Scrollen).
-  // Deshalb erscheint alles Sekundaere erst ab lg.
-  //
-  // Am 14.08.2026 kam als dritter Zielgruppen-Link "Unser Kunde" dazu, und
-  // damit lief die Leiste auch OBERHALB von lg ueber: `max-w-6xl` deckelt den
-  // Platz ab 1152px bei 1104px (Leiste komplett, inkl. Logo und CTA) -- der
-  // Platz waechst also nicht mehr mit dem Fenster. Nachgemessen in Chrome auf
-  // Deutsch, natuerliche Breite der Leiste gegen ihren Kasten:
-  //
-  //   1280/1440px  /, /funktionen 1121 · /kontakt, /case-study 1130 · Rest 1103
-  //   1024px       verfuegbar 961, benoetigt 1103 bis 1130
-  //
-  // Auf vier von sieben Seiten brachen die Beschriftungen dadurch zweizeilig
-  // um ("Fuer / Agenturen") und die Leiste wurde doppelt so hoch; bei 1024px
-  // kamen auf /kontakt und /case-study 4px Querscrollen dazu. Ein hoeherer
-  // Breakpoint half nicht -- der Deckel gilt fuer jede Fensterbreite ab 1152px.
-  //
-  // Loesung: die drei Zielgruppenseiten stecken in EINEM Menue ("Fuer wen",
-  // siehe nav.fuerWenItems). Drei Links plus Abstaende waren 311px, das Menue
-  // ist rund 96px breit -- gespart sind ~215px, und die Leiste bleibt auf
-  // allen sieben Seiten einzeilig.
-  //
-  // Das Menue selbst bleibt bei lg, so wie die drei Links, die es ersetzt:
-  // ab md sichtbar braeuchte es bei 768px etwa 110px, die dort nirgends frei
-  // sind (verfuegbar 705px, benoetigt danach 660 bis 794).
+  const { t } = useT();
 
   return (
     <div className="min-h-screen pb-16 sm:pb-0">
-      {/* Nav */}
-      <header className="sticky top-0 z-10 border-b border-edge/60 bg-surface/90 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
-          <Logo />
-          <nav className="hidden items-center gap-5 md:flex lg:gap-6">
-            <NavDropdown label={t.nav.produkt} items={t.nav.produktItems} />
-            <NavDropdown label={t.featuresPage.eyebrow} items={t.nav.funktionenItems} />
-            {/* Die drei Zielgruppenseiten, seit dem 14.08.2026 als ein Menue
-                statt als drei Links -- Begruendung und Messwerte oben. */}
-            <NavDropdown
-              label={t.nav.fuerWen}
-              items={t.nav.fuerWenItems}
-              className="hidden lg:block"
-            />
-            <a href="/kontakt" className="text-sm text-soft transition-colors hover:text-ink">
-              {t.nav.kontakt}
-            </a>
-            {/* Zweites Angebot (Individualentwicklung). Wie die uebrigen
-                sekundaeren Links erst ab lg sichtbar, damit die Leiste
-                zwischen 768 und 1024px nicht wieder ueberlaeuft. */}
-            <a
-              href="/eigene-software"
-              className="hidden text-sm text-soft transition-colors hover:text-ink lg:inline"
-            >
-              {t.nav.custom}
-            </a>
-          </nav>
-          <div className="flex items-center gap-3">
-            <LanguageToggle />
-            <CTAButton />
-          </div>
-        </div>
-      </header>
+      <SiteHeader />
 
       {/* Hero */}
       <section className="hero-wash border-b border-edge/60">
@@ -324,14 +264,23 @@ export default function Home() {
             <OfferMapMockup {...(t.offerSection.offerMap as OfferMapMockupProps)} />
           </Reveal>
 
+          {/* Aussage 2 ("Der Coach liest gegen") steht hier ohne Bild.
+              CoachFindingMockup hing bis zum 2026-08-14 darunter -- mit
+              denselben Props (t.offerSection.coachFinding) wie auf
+              /kunden/retaiyn, Feld fuer Feld dasselbe Bild auf zwei Seiten.
+              VEREINFACHUNG.md hatte geplant, dass es WANDERT; gebaut wurde
+              die Kundenseite, ohne dass die Startseite etwas abgegeben hat.
+              Nachgeholt (EINHEITLICH.md S4/D1): der Beleg steht dort, wo der
+              Fall erzaehlt wird. OfferMapMockup bleibt auf beiden Seiten --
+              hier ist sie der Beleg fuer die Kernaussage des Abschnitts,
+              dort retaiyns Profil.
+
+              OFFEN: der Textlink auf /kunden/retaiyn, der laut Plan (D1/D2)
+              an diese Stelle gehoert, fehlt noch -- er braucht eine
+              formulierte Zeile in de und en. */}
           <div className="mt-16">
             <OfferPoint n={2} title={t.offerSection.points[1].title} body={t.offerSection.points[1].body} />
           </div>
-          {/* coachFinding besteht nur aus Zeichenketten -- hier braucht es
-              keine Zusicherung. */}
-          <Reveal className="mt-8">
-            <CoachFindingMockup {...t.offerSection.coachFinding} />
-          </Reveal>
 
           <div className="mt-16">
             <OfferPoint n={3} title={t.offerSection.points[2].title} body={t.offerSection.points[2].body} />
@@ -739,45 +688,23 @@ export default function Home() {
           Die CallListMockup ist damit auf der Startseite frei und uebernimmt
           im CRM-Abschnitt die Aufgaben-Ansicht. */}
 
-      {/* Die zwei Gruende, aus denen ein Interessent NICHT kauft: "zu
-          kompliziert fuer mich" und "rechtlich zu heikel". Beide sind in der
-          App laengst beantwortet, standen hier aber nur als Nebensatz. */}
-      {/* Eigene Flaeche seit dem 14.08.2026. Vorher lief die Seite hier ueber
-          DREI helle Abschnitte am Stueck (#ergaenzt, dieser, "Warum es
-          Frostbreaker gibt") -- die zwei grauen dazwischen waren beim Kuerzen
-          gefallen, und ohne sie las sich alles als ein Block. Gemessen: drei
-          Abschnitte, gleiche Hintergrundfarbe, kein Rand dazwischen.
-          Dieser hier bekommt den Wechsel und nicht einer der Nachbarn, weil er
-          mit 682 Pixeln der kuerzeste der drei ist: ein grauer Streifen
-          zwischen zwei hellen Flaechen trennt, ein grauer Block von 1500
-          Pixeln waere selbst wieder eine Flaeche. */}
-      <section id="startklar" className="scroll-mt-20 border-y border-edge/60 bg-panel2">
-        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-          <SectionHeading eyebrow={t.safeStart.eyebrow} title={t.safeStart.title} />
-          <div className="grid items-stretch gap-8 lg:grid-cols-2">
-            {t.safeStart.cards.map((card, i) => (
-              <Reveal key={card.id} delay={i * 80} className="h-full">
-                <div className="flex h-full flex-col rounded-2xl border border-edge/60 bg-panel p-6">
-                  <span className="inline-flex self-start rounded-full bg-ink px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-surface">
-                    {card.label}
-                  </span>
-                  <h3 className="font-display mt-3 text-xl font-semibold tracking-[-0.015em] text-ink">{card.title}</h3>
-                  <p className="mt-2.5 text-sm leading-relaxed text-soft">{card.body}</p>
-                  <ul className="mt-5 space-y-2 border-t border-edge/70 pt-5">
-                    {card.points.map((p) => (
-                      <li key={p} className="flex items-start gap-2.5 text-sm text-soft">
-                        <CheckIcon />
-                        {p}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Der Abschnitt #startklar ("Ohne Vorwissen starten") stand bis zum
+          2026-08-14 hier: zwei Karten, zehn Haken, 682 Pixel hoch. Er ist
+          gefallen (EINHEITLICH.md S1), weil beide Haelften anderswo stehen --
+          "die Anleitung sitzt im Werkzeug" sagt why.earlyAccess eine
+          Bildschirmhoehe weiter unten ("die Einrichtung machen wir
+          gemeinsam"), und der Abmeldelink steht als
+          featuresPage.groups.protect. Dazu beantwortete er eine Frage, die
+          NACH dem Termin kommt ("schaffe ich das?"), nicht davor. Der
+          Schluessel safeStart ist aus beiden Woerterbuchhaelften mit
+          entfernt. Kein leerer Marker: #startklar steht in keinem Menuepunkt
+          und in keinem Fliesstext.
 
+          ACHTUNG FLAECHENFOLGE: dieser Abschnitt war der graue Streifen
+          zwischen #ergaenzt und "Warum es Frostbreaker gibt". Ohne ihn laeuft
+          die Seite hier wieder ueber ZWEI helle Abschnitte am Stueck -- genau
+          der Zustand, den der Wechsel am 14.08.2026 behoben hat. Gemeldet an
+          den ui-designer; die Flaechenfolge wird nicht nebenbei umgefaerbt. */}
 
       {/* Der Vertrauens-Abschnitt ("Datenschutz ist keine Checkbox") stand bis
           zum 2026-08-14 hier: zwei Kacheln und drei Rechtslinks. Beide Kacheln
@@ -790,8 +717,16 @@ export default function Home() {
           Fliesstext darueber; `why.body` und die Karte `poweredBy` sagten
           beide "ein Werkzeug statt vier" und sind gefallen. Geblieben sind
           die zwei Karten, die es sonst nirgends auf der Seite gibt: der frueh
-          begleitete Zugang und der Gruender. */}
-      <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+          begleitete Zugang und der Gruender.
+
+          Haarlinie oben, seit #startklar dazwischen weggefallen ist: sonst
+          laeuft die Seite hier ueber zwei helle Abschnitte am Stueck
+          (#ergaenzt 1457px, dieser 496px). Eine graue Flaeche scheidet aus --
+          die FAQ direkt darunter ist bereits grau, zwei graue Bloecke
+          hintereinander waeren dieselbe Wand in anderer Farbe. Dieselbe
+          Abwaegung wie bei #angebot: erst Abstand, dann Trennlinie, dann
+          Flaeche; der Abstand steht mit py-20 auf beiden Seiten schon. */}
+      <section className="mx-auto max-w-6xl border-t border-edge/60 px-4 py-20 sm:px-6">
         <SectionHeading title={t.why.title} />
 
         <div className="grid gap-5 lg:grid-cols-2">
@@ -862,21 +797,7 @@ export default function Home() {
         <CTAGroup className="mt-9" />
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-edge/60">
-        <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 text-xs text-mute sm:flex-row sm:items-center sm:justify-between sm:px-6">
-          <span>© {new Date().getFullYear()} Frostbreaker · {t.footer.location}</span>
-          <div className="tap-row flex flex-wrap items-center gap-x-4 gap-y-2">
-            <a href="/impressum" className="hover:text-ink">{t.footer.impressum}</a>
-            <a href="/datenschutz" className="hover:text-ink">{t.footer.datenschutz}</a>
-            <a href="/agb" className="hover:text-ink">{t.footer.agb}</a>
-            {/* Neu am 2026-08-14, aus dem gestrichenen Vertrauens-Abschnitt.
-                Er war dessen einziger Link, den der Fuss noch nicht hatte. */}
-            <a href="/avv" className="hover:text-ink">{t.footer.avv}</a>
-            <a href="/kontakt" className="hover:text-ink">{t.footer.kontakt}</a>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
 
       {/* Sticky mobile CTA */}
       <div className="fixed inset-x-0 bottom-0 z-20 border-t border-edge/60 bg-surface/95 p-3 backdrop-blur sm:hidden">

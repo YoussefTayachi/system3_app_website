@@ -1,12 +1,12 @@
 "use client";
-import { Logo, CTAButton, NavDropdown, SectionHeading, BOOKING_URL } from "../_ui";
+import { CTAButton, SectionHeading, SiteHeader, SiteFooter, BOOKING_URL } from "../_ui";
 import { AgencyMockup } from "../_mockups";
 import { ReportMockup, CallListMockup } from "../_app-mockups";
 import { CopyOutcomesMockup } from "../_guard-mockups";
 import { CustomerStrip, CustomerSection } from "../_customers";
 import { Reveal } from "../reveal";
 import { CheckIcon } from "../_icons";
-import { useT, LanguageToggle } from "../language-provider";
+import { useT } from "../language-provider";
 
 /**
  * Eigene Agenturseite. Agenturen sind die wertvollere Zielgruppe -- hoeherer
@@ -34,44 +34,9 @@ export default function AgenturenPage() {
     learning: <CopyOutcomesMockup />,
   };
 
-  // Die Kopfleiste steht seit dem 14.08.2026 ausgeschrieben statt als
-  // navLinks-Liste da: uebrig sind zwei Links, dazwischen gehoert das Menue
-  // "Fuer wen". Diese Seite steckt selbst darin und ist dort als aktueller
-  // Eintrag markiert. Messwerte im Kopf von app/page.tsx.
-
   return (
     <div className="min-h-screen pb-16 sm:pb-0">
-      <header className="sticky top-0 z-10 border-b border-edge/60 bg-surface/90 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
-          <Logo />
-          <nav className="hidden items-center gap-6 md:flex">
-            <NavDropdown label={t.nav.produkt} items={t.nav.produktItems} />
-            <a href="/funktionen" className="text-sm text-soft hover:text-ink">
-              {t.featuresPage.eyebrow}
-            </a>
-            {/* Reihenfolge wie auf allen sieben Seiten: Produkt, Funktionen,
-                Fuer wen, Kontakt -- vom Angebot zur Zielgruppe zum Gespraech. */}
-            <NavDropdown
-              label={t.nav.fuerWen}
-              items={t.nav.fuerWenItems}
-              className="hidden lg:block"
-            />
-            <a href="/kontakt" className="text-sm text-soft hover:text-ink">
-              {t.nav.kontakt}
-            </a>
-            <a
-              href="/eigene-software"
-              className="hidden text-sm text-soft transition-colors hover:text-ink lg:inline"
-            >
-              {t.nav.custom}
-            </a>
-          </nav>
-          <div className="flex items-center gap-3">
-            <LanguageToggle />
-            <CTAButton />
-          </div>
-        </div>
-      </header>
+      <SiteHeader />
 
       <section className="hero-wash border-b border-edge/60">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-20">
@@ -160,17 +125,7 @@ export default function AgenturenPage() {
         <CTAButton className="mt-9" href={BOOKING_URL} label={a.ctaLabel} />
       </section>
 
-      <footer className="border-t border-edge/60">
-        <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 text-xs text-mute sm:flex-row sm:items-center sm:justify-between sm:px-6">
-          <span>© {new Date().getFullYear()} Frostbreaker · {t.footer.location}</span>
-          <div className="flex flex-wrap gap-x-4 gap-y-2">
-            <a href="/impressum" className="hover:text-ink">{t.footer.impressum}</a>
-            <a href="/datenschutz" className="hover:text-ink">{t.footer.datenschutz}</a>
-            <a href="/agb" className="hover:text-ink">{t.footer.agb}</a>
-            <a href="/kontakt" className="hover:text-ink">{t.footer.kontakt}</a>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
 
       <div className="fixed inset-x-0 bottom-0 z-20 border-t border-edge/60 bg-surface/95 p-3 backdrop-blur sm:hidden">
         <CTAButton className="w-full" href={BOOKING_URL} label={a.ctaLabel} />

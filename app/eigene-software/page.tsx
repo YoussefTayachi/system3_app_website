@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
-import { Logo, CTAButton, NavDropdown, SectionHeading, StatTile, BOOKING_URL } from "../_ui";
+import { CTAButton, SectionHeading, StatTile, SiteHeader, SiteFooter, BOOKING_URL } from "../_ui";
 import { WorkaroundMockup, ProcessMockup, StackMockup } from "../_custom-mockups";
 import { Reveal } from "../reveal";
 import { CheckIcon } from "../_icons";
-import { useT, LanguageToggle } from "../language-provider";
+import { useT } from "../language-provider";
 
 /**
  * Zweites Angebot neben dem Produkt: Individualentwicklung im Auftrag.
@@ -23,18 +23,6 @@ export default function EigeneSoftwarePage() {
   const { t } = useT();
   const c = t.customPage;
 
-  // Die Kopfleiste steht seit dem 14.08.2026 ausgeschrieben statt als
-  // navLinks-Liste da: die drei Zielgruppenseiten stecken im Menue "Fuer wen"
-  // (Messwerte im Kopf von app/page.tsx). Diese Leiste bleibt die vollste von
-  // allen, weil sie zusaetzlich den Namen der eigenen Seite traegt.
-  //
-  // Deshalb steht hier -- und nur hier -- der Link "Funktionen" erst ab lg.
-  // Gemessen am 14.08.2026 in Chrome (natuerliche Breite der Leiste gegen
-  // ihren Kasten): bei 768px braucht sie mit dem Link 791px bei 705px Platz,
-  // bricht zweizeilig um und erzeugt 13px Querscrollen; ohne ihn sind es
-  // 681px. Verloren geht dabei nichts: der erste Eintrag des Produkt-Menues
-  // ("Alle Funktionen") fuehrt auf dieselbe Seite und ist ab md sichtbar.
-
   // Pro Sektion das passende Visual -- wie auf /funktionen bewusst hier
   // zugeordnet und nicht im Dictionary: das Dictionary haelt Text, keine
   // Komponenten.
@@ -45,35 +33,7 @@ export default function EigeneSoftwarePage() {
 
   return (
     <div className="min-h-screen pb-16 sm:pb-0">
-      <header className="sticky top-0 z-10 border-b border-edge/60 bg-surface/90 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
-          <Logo />
-          <nav className="hidden items-center gap-6 md:flex">
-            <NavDropdown label={t.nav.produkt} items={t.nav.produktItems} />
-            <a
-              href="/funktionen"
-              className="hidden text-sm text-soft transition-colors hover:text-ink lg:inline"
-            >
-              {t.featuresPage.eyebrow}
-            </a>
-            {/* Reihenfolge wie auf allen sieben Seiten: Produkt, Funktionen,
-                Fuer wen, Kontakt -- vom Angebot zur Zielgruppe zum Gespraech. */}
-            <NavDropdown
-              label={t.nav.fuerWen}
-              items={t.nav.fuerWenItems}
-              className="hidden lg:block"
-            />
-            <a href="/kontakt" className="text-sm text-soft transition-colors hover:text-ink">
-              {t.nav.kontakt}
-            </a>
-            <span className="text-sm font-medium text-ink">{t.nav.custom}</span>
-          </nav>
-          <div className="flex items-center gap-3">
-            <LanguageToggle />
-            <CTAButton />
-          </div>
-        </div>
-      </header>
+      <SiteHeader />
 
       <section className="hero-wash border-b border-edge/60">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-20">
@@ -161,17 +121,7 @@ export default function EigeneSoftwarePage() {
         <CTAButton className="mt-9" href={BOOKING_URL} label={c.ctaLabel} />
       </section>
 
-      <footer className="border-t border-edge/60">
-        <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 text-xs text-mute sm:flex-row sm:items-center sm:justify-between sm:px-6">
-          <span>© {new Date().getFullYear()} Frostbreaker · {t.footer.location}</span>
-          <div className="flex flex-wrap gap-x-4 gap-y-2">
-            <a href="/impressum" className="hover:text-ink">{t.footer.impressum}</a>
-            <a href="/datenschutz" className="hover:text-ink">{t.footer.datenschutz}</a>
-            <a href="/agb" className="hover:text-ink">{t.footer.agb}</a>
-            <a href="/kontakt" className="hover:text-ink">{t.footer.kontakt}</a>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
 
       <div className="fixed inset-x-0 bottom-0 z-20 border-t border-edge/60 bg-surface/95 p-3 backdrop-blur sm:hidden">
         <CTAButton className="w-full" href={BOOKING_URL} label={c.ctaLabel} />

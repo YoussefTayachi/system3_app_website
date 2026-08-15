@@ -1,10 +1,10 @@
 "use client";
-import { Logo, CTAButton, NavDropdown, SectionHeading, BOOKING_URL } from "../_ui";
+import { CTAButton, SectionHeading, SiteHeader, SiteFooter, BOOKING_URL } from "../_ui";
 import { TechFilterMockup } from "../_app-mockups";
 import { CopyOutcomesMockup } from "../_guard-mockups";
 import { Reveal } from "../reveal";
 import { CheckIcon } from "../_icons";
-import { useT, LanguageToggle } from "../language-provider";
+import { useT } from "../language-provider";
 
 /**
  * Die zweite Segmentseite, nach dem Muster von /fuer-agenturen.
@@ -48,7 +48,7 @@ export default function SaasPage() {
   const s = t.saasPage;
 
   /**
-   * Zwei der fuenf Abschnitte haben ein Bild, beide liegen fertig im Repo:
+   * Zwei der vier Abschnitte haben ein Bild, beide liegen fertig im Repo:
    * `TechFilterMockup` lag bis jetzt ungenutzt in _app-mockups.tsx,
    * `CopyOutcomesMockup` traegt auf /fuer-agenturen denselben Gedanken.
    * Beide holen ihre Texte selbst aus dem Dictionary und brauchen hier
@@ -64,55 +64,25 @@ export default function SaasPage() {
    * `offerMap`-Block bekommt, gehoert er hier hinein -- kein Fehler, sondern
    * eine offene Textluecke.
    *
-   * `multi` und `limits` bleiben dauerhaft ohne Bild: beides sind
-   * Abgrenzungen, und ein Mockup dazu waere Dekoration.
+   * `limits` bleibt dauerhaft ohne Bild: eine Abgrenzung, und ein Mockup
+   * dazu waere Dekoration. Dasselbe galt fuer `multi`, den vierten
+   * Abschnitt -- der ist am 2026-08-14 ganz gefallen (EINHEITLICH.md S3,
+   * Begruendung in dict.ts an der Stelle, an der er stand).
+   *
+   * FLAECHENFOLGE, nach der Streichung nachgesehen: der Ton haengt unten an
+   * `i % 2 === 1`, also an der POSITION in der Schleife -- eine Streichung
+   * kippt alles dahinter. Hier zum Guten: `limits` liegt jetzt auf panel2
+   * statt auf hell und stoesst damit nicht mehr an den hellen Schluss-CTA.
+   * Die Naht, die vorher am Seitenende sass, ist weg.
    */
   const visuals: Record<string, React.ReactNode> = {
     icp: <TechFilterMockup />,
     learning: <CopyOutcomesMockup />,
   };
 
-  // Die Kopfleiste steht seit dem 14.08.2026 ausgeschrieben statt als
-  // navLinks-Liste da: die Schwesterseite, diese Seite und die Kundenseite
-  // sind ins Menue "Fuer wen" gewandert, uebrig blieben zwei Links.
-  // Messwerte im Kopf von app/page.tsx.
-
   return (
     <div className="min-h-screen pb-16 sm:pb-0">
-      <header className="sticky top-0 z-10 border-b border-edge/60 bg-surface/90 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
-          <Logo />
-          <nav className="hidden items-center gap-6 md:flex">
-            <NavDropdown label={t.nav.produkt} items={t.nav.produktItems} />
-            <a href="/funktionen" className="text-sm text-soft hover:text-ink">
-              {t.featuresPage.eyebrow}
-            </a>
-            {/* Reihenfolge wie auf allen sieben Seiten: Produkt, Funktionen,
-                Fuer wen, Kontakt -- vom Angebot zur Zielgruppe zum Gespraech. */}
-            <NavDropdown
-              label={t.nav.fuerWen}
-              items={t.nav.fuerWenItems}
-              className="hidden lg:block"
-            />
-            <a href="/kontakt" className="text-sm text-soft hover:text-ink">
-              {t.nav.kontakt}
-            </a>
-            {/* Erst ab lg, wie auf den uebrigen Seiten: zwischen 768 und
-                1024px laeuft die Leiste sonst ueber (Begruendung im Kopf
-                von page.tsx). */}
-            <a
-              href="/eigene-software"
-              className="hidden text-sm text-soft transition-colors hover:text-ink lg:inline"
-            >
-              {t.nav.custom}
-            </a>
-          </nav>
-          <div className="flex items-center gap-3">
-            <LanguageToggle />
-            <CTAButton />
-          </div>
-        </div>
-      </header>
+      <SiteHeader />
 
       <section className="hero-wash border-b border-edge/60">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-20">
@@ -169,17 +139,7 @@ export default function SaasPage() {
         <CTAButton className="mt-9" href={BOOKING_URL} label={s.ctaLabel} />
       </section>
 
-      <footer className="border-t border-edge/60">
-        <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 text-xs text-mute sm:flex-row sm:items-center sm:justify-between sm:px-6">
-          <span>© {new Date().getFullYear()} Frostbreaker · {t.footer.location}</span>
-          <div className="flex flex-wrap gap-x-4 gap-y-2">
-            <a href="/impressum" className="hover:text-ink">{t.footer.impressum}</a>
-            <a href="/datenschutz" className="hover:text-ink">{t.footer.datenschutz}</a>
-            <a href="/agb" className="hover:text-ink">{t.footer.agb}</a>
-            <a href="/kontakt" className="hover:text-ink">{t.footer.kontakt}</a>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
 
       <div className="fixed inset-x-0 bottom-0 z-20 border-t border-edge/60 bg-surface/95 p-3 backdrop-blur sm:hidden">
         <CTAButton className="w-full" href={BOOKING_URL} label={s.ctaLabel} />

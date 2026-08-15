@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useT } from "./language-provider";
+import { useT, LanguageToggle } from "./language-provider";
 
 // ══════════════════════════════════════════════════════════════════════
 // EIN WEG: DAS GESPRAECH. Die 14-Tage-Testphase ist am 2026-08-06
@@ -161,6 +161,189 @@ export function NavDropdown({
         </div>
       </div>
     </div>
+  );
+}
+
+/**
+ * Ein einzelner Link in der Kopfleiste. Traegt die Markierung der aktuellen
+ * Seite, aus demselben Grund wie NavDropdown: wer irgendwo steht, soll das
+ * sehen. Bleibt dabei ein Link und wird kein <span> -- ein Element, das
+ * aussieht wie ein Nachbar, aber nicht fokussierbar ist, faellt beim Tabben
+ * aus der Reihe.
+ */
+function NavLink({ href, label, className = "" }: { href: string; label: string; className?: string }) {
+  const pfad = usePathname();
+  const hier = href === pfad;
+  return (
+    <a
+      href={href}
+      aria-current={hier ? "page" : undefined}
+      className={
+        (hier ? "text-sm font-medium text-ink " : "text-sm text-soft transition-colors hover:text-ink ") + className
+      }
+    >
+      {label}
+    </a>
+  );
+}
+
+/**
+ * ══════════════════════════════════════════════════════════════════════
+ * DIE KOPFLEISTE. Ein Bauteil fuer alle acht Seiten.
+ * ══════════════════════════════════════════════════════════════════════
+ *
+ * Bis zum 2026-08-14 stand dasselbe Markup ACHTMAL kopiert im Repo, und es
+ * war achtmal verschieden: auf drei Seiten ein Aufklappmenue "Funktionen",
+ * auf vieren ein einzelner Link darauf, auf /kontakt und /case-study
+ * stattdessen ein Link "Vergleich". Die neun Funktionsnamen aus
+ * nav.funktionenItems -- das Inhaltsverzeichnis des Produkts -- waren damit
+ * von der Haelfte der Seiten aus unerreichbar. Wer ueber eine Anzeige auf
+ * /fuer-agenturen landet, sah nie, was das Produkt kann.
+ *
+ * WAS DABEI GEFALLEN IST: der Link "Vergleich" auf /kontakt und
+ * /case-study. Er zeigte auf "/#vergleich", und diesen Anker gibt es auf der
+ * Startseite nicht -- die Vergleichstabelle sitzt unter id="ergaenzt"
+ * (nachgesehen am 2026-08-14, ein Suchlauf ueber app/ findet "vergleich" nur
+ * in diesen beiden Leisten und als Beschriftung in dict.ts). Der Klick
+ * sprang also an den Seitenanfang. An seine Stelle tritt "Kontakt" wie auf
+ * den uebrigen sechs Seiten.
+ *
+ * ──────────────────────────────────────────────────────────────────────
+ * DIE BREITE DER LEISTE. Hier stehen die Messwerte, die vorher im Kopf von
+ * app/page.tsx standen.
+ * ──────────────────────────────────────────────────────────────────────
+ *
+ * Zwischen 768px und 1024px passen Logo, volle Navigation und CTA nicht
+ * nebeneinander (die Leiste lief ueber und erzeugte horizontales Scrollen).
+ * Deshalb erscheint alles Sekundaere erst ab lg.
+ *
+ * Am 14.08.2026 kam als dritter Zielgruppen-Link "Unser Kunde" dazu, und
+ * damit lief die Leiste auch OBERHALB von lg ueber: `max-w-6xl` deckelt den
+ * Platz ab 1152px bei 1104px (Leiste komplett, inkl. Logo und CTA) -- der
+ * Platz waechst also nicht mehr mit dem Fenster. Nachgemessen in Chrome auf
+ * Deutsch, natuerliche Breite der Leiste gegen ihren Kasten:
+ *
+ *   1280/1440px  /, /funktionen 1121 · /kontakt, /case-study 1130 · Rest 1103
+ *   1024px       verfuegbar 961, benoetigt 1103 bis 1130
+ *
+ * Auf vier von sieben Seiten brachen die Beschriftungen dadurch zweizeilig
+ * um ("Fuer / Agenturen") und die Leiste wurde doppelt so hoch; bei 1024px
+ * kamen auf /kontakt und /case-study 4px Querscrollen dazu. Ein hoeherer
+ * Breakpoint half nicht -- der Deckel gilt fuer jede Fensterbreite ab 1152px.
+ *
+ * Loesung: die drei Zielgruppenseiten stecken in EINEM Menue ("Fuer wen",
+ * siehe nav.fuerWenItems). Drei Links plus Abstaende waren 311px, das Menue
+ * ist rund 96px breit -- gespart sind ~215px.
+ *
+ * Das Menue selbst bleibt bei lg, so wie die drei Links, die es ersetzt:
+ * ab md sichtbar braeuchte es bei 768px etwa 110px, die dort nirgends frei
+ * sind (verfuegbar 705px, benoetigt danach 660 bis 794).
+ *
+ * Nach der Zusammenlegung am 2026-08-14 erneut gemessen (leiste.js, acht
+ * Seiten x 768/1024/1280/1440px x de/en = 64 Kombinationen): 0 kaputt.
+ * Wer hier einen Eintrag hinzufuegt, misst nach.
+ *
+ * ──────────────────────────────────────────────────────────────────────
+ * ZWEI AUSNAHMEN, BEIDE AM PFAD ERKANNT STATT AN EINEM PROP
+ * ──────────────────────────────────────────────────────────────────────
+ *
+ * NavDropdown vergleicht ohnehin schon usePathname(), um den aktuellen
+ * Eintrag zu markieren. Dieselbe Quelle hier zu benutzen heisst: die Leiste
+ * hat keinen einzigen Schalter, den eine kopierte Seite falsch setzen kann.
+ *
+ * 1. Auf /eigene-software erscheint das Funktionen-Menue erst ab lg. Diese
+ *    Leiste ist die vollste von allen, weil sie zusaetzlich den Namen der
+ *    eigenen Seite traegt. Gemessen am 14.08.2026 in Chrome: bei 768px
+ *    braucht sie mit dem Eintrag 791px bei 705px Platz, bricht zweizeilig um
+ *    und erzeugt 13px Querscrollen; ohne ihn sind es 681px. Verloren geht
+ *    nichts -- der erste Eintrag des Produkt-Menues ("Alle Funktionen")
+ *    fuehrt auf dieselbe Seite und ist ab md sichtbar.
+ * 2. Der Link auf die aktuelle Seite ist nie versteckt. "Eigene Software"
+ *    steht sonst erst ab lg; auf /eigene-software ist es der Name der Seite,
+ *    auf der man steht, und der gehoert ab md sichtbar. Dieselbe Regel
+ *    greift auf /kontakt fuer "Kontakt" -- dort war der Eintrag ohnehin nie
+ *    versteckt, die Bedingung aendert dort also nur die Markierung.
+ */
+export function SiteHeader() {
+  const { t } = useT();
+  const pfad = usePathname();
+  const istEigeneSoftware = pfad === "/eigene-software";
+  return (
+    <header className="sticky top-0 z-10 border-b border-edge/60 bg-surface/90 backdrop-blur">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
+        <Logo />
+        {/* gap-5 zwischen md und lg, erst darueber gap-6: genau der Bereich,
+            in dem die Leiste ueberlaeuft, bekommt den kleineren Abstand. */}
+        <nav className="hidden items-center gap-5 md:flex lg:gap-6">
+          {/* Reihenfolge auf allen acht Seiten gleich: Produkt, Funktionen,
+              Fuer wen, Kontakt, Eigene Software -- vom Angebot ueber die
+              Zielgruppe zum Gespraech. */}
+          <NavDropdown label={t.nav.produkt} items={t.nav.produktItems} />
+          <NavDropdown
+            label={t.featuresPage.eyebrow}
+            items={t.nav.funktionenItems}
+            className={istEigeneSoftware ? "hidden lg:block" : ""}
+          />
+          <NavDropdown label={t.nav.fuerWen} items={t.nav.fuerWenItems} className="hidden lg:block" />
+          <NavLink href="/kontakt" label={t.nav.kontakt} />
+          <NavLink
+            href="/eigene-software"
+            label={t.nav.custom}
+            className={istEigeneSoftware ? "" : "hidden lg:inline"}
+          />
+        </nav>
+        <div className="flex items-center gap-3">
+          <LanguageToggle />
+          <CTAButton />
+        </div>
+      </div>
+    </header>
+  );
+}
+
+/**
+ * Die Fusszeile, ebenfalls ein Bauteil fuer alle acht Seiten.
+ *
+ * Bis zum 2026-08-14 stand auch dieses Markup achtmal kopiert da, in zwei
+ * Fassungen: fuenf Seiten mit Linksatz, /kontakt und /case-study nur mit der
+ * Zeile darueber. Und der Linksatz war nicht derselbe -- der AVV kam am
+ * 14.08. aus dem gestrichenen Vertrauens-Abschnitt in den Fuss der
+ * Startseite und NUR dorthin. Rechtlich ist er auf jeder Seite gleich
+ * relevant; genau das ist der Fehler, den fuenffach kopiertes Markup
+ * produziert.
+ *
+ * BREITE: max-w-6xl auf allen Seiten, auch auf /kontakt und /case-study, wo
+ * der Inhalt in max-w-3xl steht und der Fuss ihm bisher folgte. Kopf und
+ * Fuss sind zusammen der Rahmen der Seite; die Kopfleiste steht auf ALLEN
+ * acht Seiten in max-w-6xl. Ein Fuss, der schmaler ist als der Kopf
+ * darueber, liest sich als zweiter Rahmen. Dazu kommt, dass der Fuss jetzt
+ * ueberall fuenf Links traegt statt nur einer Zeile -- die brauchen die
+ * Breite, sonst umbrechen sie auf schmalen Seiten frueher als auf breiten.
+ *
+ * `/start` und die Rechtsseiten (_legal/LegalShell.tsx) benutzen dieses
+ * Bauteil bewusst NICHT: /start ist eine navigationsfreie Landingpage fuer
+ * Klicks aus der eigenen Kaltakquise (Begruendung im Kopf der Datei), und
+ * LegalShell traegt statt des Linksatzes einen eigenen Rechtssatz
+ * (legal.footerLine).
+ */
+export function SiteFooter() {
+  const { t } = useT();
+  return (
+    <footer className="border-t border-edge/60">
+      <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 text-xs text-mute sm:flex-row sm:items-center sm:justify-between sm:px-6">
+        <span>© {new Date().getFullYear()} Frostbreaker · {t.footer.location}</span>
+        {/* tap-row hebt die Trefferflaeche der Links auf 24px -- vier Zeichen
+            hohe Textlinks nebeneinander sind auf dem Telefon sonst nicht
+            sicher zu treffen. */}
+        <div className="tap-row flex flex-wrap items-center gap-x-4 gap-y-2">
+          <a href="/impressum" className="hover:text-ink">{t.footer.impressum}</a>
+          <a href="/datenschutz" className="hover:text-ink">{t.footer.datenschutz}</a>
+          <a href="/agb" className="hover:text-ink">{t.footer.agb}</a>
+          <a href="/avv" className="hover:text-ink">{t.footer.avv}</a>
+          <a href="/kontakt" className="hover:text-ink">{t.footer.kontakt}</a>
+        </div>
+      </div>
+    </footer>
   );
 }
 

@@ -1,11 +1,14 @@
 "use client";
-import { Logo, CTAButton, CTAGroup, NavDropdown, SectionHeading } from "../_ui";
-import { DashboardMockup, UnifiedSearchMockup, LeadsTableMockup, LeadDetailMockup, MailboxesMockup, AiAgentMockup, VerificationReportMockup, CopyCheckMockup, PipelineMockup, TechFilterMockup } from "../_app-mockups";
+import { CTAButton, CTAGroup, SectionHeading, SiteHeader, SiteFooter } from "../_ui";
+// DashboardMockup ist am 2026-08-14 mit dem textlosen Schlussabschnitt
+// gefallen (Begruendung unten an der Fundstelle). Die Komponente bleibt in
+// _app-mockups.tsx.
+import { UnifiedSearchMockup, LeadsTableMockup, LeadDetailMockup, MailboxesMockup, AiAgentMockup, VerificationReportMockup, CopyCheckMockup, PipelineMockup, TechFilterMockup } from "../_app-mockups";
 import { SuppressionMockup, LocalReachMockup, QualifiedLeadAnimation, CampaignMockup, DeliverabilityMockup } from "../_mockups";
 import { LinkedInMockup } from "../_guard-mockups";
 import { Reveal } from "../reveal";
 import { CheckIcon } from "../_icons";
-import { useT, LanguageToggle } from "../language-provider";
+import { useT } from "../language-provider";
 
 /**
  * Eigene Funktionsseite. Auf der Startseite lagen die Detailfunktionen ueber
@@ -69,45 +72,9 @@ export default function FunktionenPage() {
     protect: <SuppressionMockup />,
   };
 
-  // Die Kopfleiste steht seit dem 14.08.2026 ausgeschrieben statt als
-  // navLinks-Liste da (Messwerte im Kopf von app/page.tsx). Der Link auf den
-  // Startseiten-Anker "/#agenturen" ist dabei entfallen: er trug dieselbe
-  // Beschriftung wie der Menue-Eintrag "Fuer Agenturen", zeigte aber auf einen
-  // Abschnitt der Startseite statt auf die vollstaendige Seite. Zwei gleich
-  // beschriftete Ziele nebeneinander sind eine Falle; der Anker selbst bleibt
-  // fuer alte Links bestehen.
-
   return (
     <div className="min-h-screen pb-16 sm:pb-0">
-      <header className="sticky top-0 z-10 border-b border-edge/60 bg-surface/90 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
-          <Logo />
-          <nav className="hidden items-center gap-6 md:flex">
-            <NavDropdown label={t.nav.produkt} items={t.nav.produktItems} />
-            <NavDropdown label={f.eyebrow} items={t.nav.funktionenItems} />
-            {/* Reihenfolge wie auf allen sieben Seiten: Produkt, Funktionen,
-                Fuer wen, Kontakt -- vom Angebot zur Zielgruppe zum Gespraech. */}
-            <NavDropdown
-              label={t.nav.fuerWen}
-              items={t.nav.fuerWenItems}
-              className="hidden lg:block"
-            />
-            <a href="/kontakt" className="text-sm text-soft hover:text-ink">
-              {t.nav.kontakt}
-            </a>
-            <a
-              href="/eigene-software"
-              className="hidden text-sm text-soft transition-colors hover:text-ink lg:inline"
-            >
-              {t.nav.custom}
-            </a>
-          </nav>
-          <div className="flex items-center gap-3">
-            <LanguageToggle />
-            <CTAButton />
-          </div>
-        </div>
-      </header>
+      <SiteHeader />
 
       <section className="hero-wash border-b border-edge/60">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:py-20">
@@ -132,8 +99,19 @@ export default function FunktionenPage() {
             }
           >
             <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+              {/* min-w-0 an beiden Rasterkindern -- dieselbe Ursache wie in
+                  _walkthrough.tsx und fuer-agenturen/page.tsx: eine
+                  Rasterspalte ist von Haus aus minmax(auto, 1fr), und `auto`
+                  meint die MINDESTBREITE des breitesten Kindes. Unter lg
+                  liegen Text und Bild in derselben Spur, und ein Bild mit
+                  grosser Mindestbreite zieht die Spur samt Text auf.
+                  Gemessen am 14.08.2026 (Chrome 151, 375px Fenster): die
+                  Seite scrollte bis 594px seitlich, in beiden Sprachen. Die
+                  Startseite und die Agenturseite hatten denselben Fehler und
+                  wurden am 13.08. so behoben -- diese Seite ist damals
+                  uebersehen worden. */}
               <div className="grid gap-10 lg:grid-cols-5 lg:items-center lg:gap-14">
-                <div className={"lg:col-span-2 " + (flipped ? "lg:order-2" : "")}>
+                <div className={"min-w-0 lg:col-span-2 " + (flipped ? "lg:order-2" : "")}>
                   <SectionHeading eyebrow={g.eyebrow} title={g.title} />
                   <p className="-mt-4 text-sm leading-relaxed text-soft sm:text-base">{g.body}</p>
                   <ul className="mt-6 space-y-2.5">
@@ -145,7 +123,7 @@ export default function FunktionenPage() {
                     ))}
                   </ul>
                 </div>
-                <div className={"lg:col-span-3 " + (flipped ? "lg:order-1" : "")}>
+                <div className={"min-w-0 lg:col-span-3 " + (flipped ? "lg:order-1" : "")}>
                   <Reveal>{visuals[g.id]}</Reveal>
                 </div>
               </div>
@@ -154,15 +132,21 @@ export default function FunktionenPage() {
         );
       })}
 
-      {/* Das Dashboard steht am Ende, weil es das Ergebnis aller Schritte
-          zusammenfasst -- und weil dort die Kosten sichtbar werden. */}
-      <section className="border-b border-edge/60">
-        <div className="mx-auto max-w-5xl px-4 py-20 sm:px-6">
-          <Reveal>
-            <DashboardMockup />
-          </Reveal>
-        </div>
-      </section>
+      {/* Hier stand bis zum 2026-08-14 ein Abschnitt mit nichts als
+          DashboardMockup darin -- keine Augenbraue, keine Ueberschrift, kein
+          Satz. Der Kommentar behauptete, das Bild fasse alle Schritte
+          zusammen und mache die Kosten sichtbar; auf der Seite stand das
+          nirgends. Gefallen (EINHEITLICH.md S2): ein Bild ohne Text kann
+          nichts zusammenfassen, und nach neun benannten Gruppen liest es sich
+          als zehnte Funktion ohne Namen. Das Kostenargument gehoert ohnehin
+          nicht hierher -- auf dieser Website steht kein Preis.
+          DashboardMockup bleibt in _app-mockups.tsx fuer den Tag, an dem es
+          einen Abschnitt gibt, in den sie gehoert.
+
+          ACHTUNG FLAECHENFOLGE: die letzte Gruppe (i = 8) liegt auf hell, der
+          Schluss-CTA ebenfalls. Diese Naht war vorher schon da -- der
+          Dashboard-Abschnitt war selbst hell -- ist jetzt aber nur noch eine
+          statt zwei. Gemeldet an den ui-designer. */}
 
       <section className="mx-auto max-w-3xl px-4 py-24 text-center sm:px-6">
         <h2 className="font-display text-2xl font-semibold tracking-[-0.02em] text-ink text-balance sm:text-3xl">
@@ -172,17 +156,7 @@ export default function FunktionenPage() {
         <CTAGroup className="mt-9" />
       </section>
 
-      <footer className="border-t border-edge/60">
-        <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 text-xs text-mute sm:flex-row sm:items-center sm:justify-between sm:px-6">
-          <span>© {new Date().getFullYear()} Frostbreaker · {t.footer.location}</span>
-          <div className="flex flex-wrap gap-x-4 gap-y-2">
-            <a href="/impressum" className="hover:text-ink">{t.footer.impressum}</a>
-            <a href="/datenschutz" className="hover:text-ink">{t.footer.datenschutz}</a>
-            <a href="/agb" className="hover:text-ink">{t.footer.agb}</a>
-            <a href="/kontakt" className="hover:text-ink">{t.footer.kontakt}</a>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
 
       <div className="fixed inset-x-0 bottom-0 z-20 border-t border-edge/60 bg-surface/95 p-3 backdrop-blur sm:hidden">
         <CTAButton className="w-full" />
