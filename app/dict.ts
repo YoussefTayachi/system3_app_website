@@ -24,6 +24,7 @@ const de = {
       // "THAW" -- die Figur darf auf der Seite auftauchen, aber kein
       // Menuepunkt und keine Ueberschrift traegt ihren Namen.
       { label: "Your offer", href: "/#angebot" },
+      { label: "How retaiyn uses it", href: "/kunden/retaiyn" },
       { label: "Three channels", href: "/#kanaele" },
       { label: "Personalization", href: "/funktionen#personalize" },
       // Der Punkt "Integrationen" ist am 2026-08-14 mit seinem Abschnitt
@@ -92,9 +93,8 @@ const de = {
     // ("So nutzt es ...") steht er nicht mehr als dritte Zielgruppe da,
     // sondern als die eine echte Antwort auf "und benutzt das jemand".
     fuerWenItems: [
-      { label: "For agencies", href: "/fuer-agenturen" },
-      { label: "For SaaS companies", href: "/fuer-saas" },
-      { label: "How retaiyn uses it", href: "/kunden/retaiyn" },
+      { label: "Winning customers for others", href: "/fuer-agenturen" },
+      { label: "Winning customers for yourselves", href: "/fuer-saas" },
     ],
   },
   // ══════════════════════════════════════════════════════════════════════
@@ -234,10 +234,10 @@ const de = {
   // gelesen werden.
   // ══════════════════════════════════════════════════════════════════════
   saasPage: {
-    metaTitle: "Für SaaS-Anbieter: Kaltakquise aus einem Angebot, das du einmal hinterlegst",
+    metaTitle: "Kaltakquise fürs eigene Produkt, aus einem Angebot, das du einmal hinterlegst",
     metaDescription:
       "Für SaaS-Anbieter ohne eigenes Vertriebsteam: zwölf Fragen zum Angebot, sieben davon aus der eigenen Website vorgeschlagen. Wunschkunden über die eingesetzte Technik finden, mehrere Angebote in einem Konto, und je Stufe und Fassung sehen, was zurückkam.",
-    eyebrow: "Für SaaS-Anbieter",
+    eyebrow: "Kunden für euch selbst",
     title: "Ein Produkt, eine Zielgruppe, kein Vertriebsteam.",
     intro:
       "Dein Produkt kennst du besser als jeder, den du dafür einstellen könntest. Was dir fehlt, ist nicht das Wissen, sondern der Apparat, der es jede Woche ausschreibt: neue Empfänger, vier Mails pro Empfänger, und jede so, als hätte vorher jemand nachgesehen. Diese Seite zeigt, wie das aussieht, wenn niemand im Haus Vertrieb gelernt hat.",
@@ -2598,6 +2598,7 @@ const en: typeof de = {
       { label: "All features", href: "/funktionen" },
       { label: "Walkthrough", href: "/#rundgang" },
       { label: "Your offer", href: "/#angebot" },
+      { label: "How retaiyn uses it", href: "/kunden/retaiyn" },
       { label: "Three channels", href: "/#kanaele" },
       { label: "Personalization", href: "/funktionen#personalize" },
     ],
@@ -2618,9 +2619,8 @@ const en: typeof de = {
     custom: "Custom Software",
     fuerWen: "Who it's for",
     fuerWenItems: [
-      { label: "For agencies", href: "/fuer-agenturen" },
-      { label: "For SaaS companies", href: "/fuer-saas" },
-      { label: "How retaiyn uses it", href: "/kunden/retaiyn" },
+      { label: "Winning customers for others", href: "/fuer-agenturen" },
+      { label: "Winning customers for yourselves", href: "/fuer-saas" },
     ],
   },
   agencyPage: {
@@ -2714,10 +2714,10 @@ const en: typeof de = {
       "Thirty minutes: how many clients, which audiences, how your team works today. We set up the first workspace together. Not a sales pitch, no slide deck.",
   },
   saasPage: {
-    metaTitle: "For SaaS companies: outbound written from an offer you fill in once",
+    metaTitle: "Outbound for your own product, written from an offer you fill in once",
     metaDescription:
       "For SaaS companies without a sales team: twelve questions about your offer, seven of them suggested from your own website. Find buyers by the technology they run, keep several offers in one account, and see what came back per step and per version.",
-    eyebrow: "For SaaS companies",
+    eyebrow: "Customers for yourselves",
     title: "One product, one audience, no sales team.",
     intro:
       "You know your product better than anyone you could hire to sell it. What you are missing is not the knowledge, it is the machinery that puts it in writing every week: new recipients, four emails each, every one of them written as if somebody had looked the company up first. This page is about what that looks like when nobody in the building has ever done sales.",

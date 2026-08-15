@@ -203,11 +203,30 @@ Antwortprobe:
 
 ## Reihenfolge
 
-1. **Die vier Einzelzeilen** (1–4) — Wörterbuch, klein.
-2. **Die zwei Streichungen** (5–6) — Markup und Wörterbuch. Größter
-   Pixelgewinn: rund 1.100.
+1. **Die vier Einzelzeilen** (1–4) — Wörterbuch, klein. ✔ **erledigt**
+2. **Die zwei Streichungen** (5–6) — Markup und Wörterbuch. ✔ **erledigt**
 3. **Die zwei Umformulierungen** (7–8) — Überschrift, Einleitung und je ein
-   Nebentitel. Inhaltlich der wichtigste Schritt.
+   Nebentitel. ✔ **erledigt**
+4. **Die zwei Altlasten** aus `KONZENTRATION.md`. ✔ **erledigt**
+
+### Die zwei Altlasten, nachgetragen
+
+**`/fuer-saas` hieß enger als sein eigener Inhalt.** Die Augenbraue sagte „Für
+SaaS-Anbieter", während die Seite selbst nirgends SaaS voraussetzt: „Dein
+Produkt kennst du besser als jeder, den du dafür einstellen könntest", „ein
+Produkt, eine Zielgruppe, kein Vertriebsteam". Das gilt für jedes Unternehmen,
+das eine Sache an eine definierte Zielgruppe verkauft. Nachgelesen, bevor
+umbenannt wurde — die Öffnung war schon im Text, nur nicht im Titel.
+
+Augenbraue jetzt **„Kunden für euch selbst"**, passend zur gleichnamigen Tür
+auf der Startseite. Der Seitentitel „Ein Produkt, eine Zielgruppe, kein
+Vertriebsteam" blieb unverändert; er war nie SaaS-spezifisch.
+
+**Das Menü „Für wen" enthielt eine Fallstudie.** „So nutzt es retaiyn" ist kein
+Publikum, sondern ein Beleg. Es steht jetzt im Produkt-Menü hinter „Dein
+Angebot", wo es als Beispiel richtig sitzt. Übrig bleiben zwei Einträge, und
+die heißen wie die Türen auf der Startseite: **Kunden für andere gewinnen**
+und **Kunden für euch selbst gewinnen**.
 
 ## Prüfen
 
