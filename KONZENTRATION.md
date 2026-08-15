@@ -270,11 +270,39 @@ Das ist Abschnitt 4 des neuen Gerüsts.
 
 ### Stufe 3 · Drei Abschnitte werden zusammengezogen
 
-| Abschnitt | heute | wird |
-|---|---|---|
-| `#angebot` | 3.020 px | **900 px.** Eine Überschrift, drei Zeilen, **ein** Bild (die Angebotskarte). Der Coach-Befund und der Rest ziehen nach `/funktionen#write` und `/kunden/retaiyn`, wo beide schon stehen. |
-| `#torwart` | 1.772 px | **entfällt auf der Startseite.** Der Torwart ist ein starkes Argument, aber es ist ein Argument für Leute, die schon verstanden haben, worum es geht. Er steht auf `/funktionen#protect`. In der FAQ bleibt eine Zeile. |
-| „Warum es Frostbreaker gibt" | 740 px | **entfällt.** Die Gründungsgeschichte beantwortet keine der fünf Fragen. Sie gehört auf `/kontakt`, wo das Gründerfoto schon steht. |
+| Abschnitt | heute | wird | Stand |
+|---|---|---|---|
+| `#angebot` | 3.020 px | Drei Titel statt drei Absätzen, **ein** Bild (die Angebotskarte). Der Rest steht auf `/funktionen#write`. | **erledigt, 2.483 px** |
+| `#torwart` | 1.772 px | ~~entfällt auf der Startseite~~ | **bleibt, siehe unten** |
+| „Warum es Frostbreaker gibt" | 740 px | ~~entfällt~~ | **bleibt, siehe unten** |
+
+> ### Zwei Streichungen, die nach dem Nachmessen nicht stattfinden
+>
+> **`#torwart` bleibt, und die Kürzung wurde zurückgenommen.** Das Muster,
+> das viermal getragen hat — Titel behalten, Fließtexte streichen — brachte
+> hier **24 Pixel**. Grund: die Höhe des Abschnitts hängt an den beiden
+> Nachbildungen, nicht am Text. Die Textspalte steht in einem Raster mit
+> `items-center` *neben* dem Bild; wird sie kürzer, bleibt die Zeilenhöhe
+> stehen. Übrig blieben zwei Titel, die in einer halbleeren Spalte
+> schwebten. Inhalt entfernt, nichts gewonnen.
+>
+> Umziehen kann er auch nicht: seine beiden Aussagen („das einzige Werkzeug,
+> das dir Nein sagt" und „eine Zahl, die nichts bedeutet, zeigen wir nicht")
+> stehen auf keiner anderen Seite, und sie sind die eigenständigsten Sätze
+> der Website.
+>
+> **„Warum es Frostbreaker gibt" bleibt ebenfalls.** Der Plan nannte es
+> Gründungsgeschichte — beim Nachlesen sind es zwei Dinge, und nur eines
+> davon ist Geschichte. „Ihr redet mit dem, der es baut" ist ein
+> Verkaufsargument, das nur *jetzt* gilt, solange die Gruppe klein ist: die
+> Einrichtung gemeinsam, eine direkte Leitung statt eines Ticketsystems, der
+> nächste Sprint statt einer Roadmap. Das beantwortet „warum bei euch und
+> warum jetzt" und steht nirgends sonst.
+>
+> **Die Lehre für den Rest des Plans:** eine Zeile im Plan ist eine
+> Vermutung, bis sie gemessen ist. Beide Streichungen standen dort, bevor
+> jemand nachgesehen hat, was in den Abschnitten steht und woran ihre Höhe
+> hängt.
 
 ### Stufe 4 · Zwei Abschnitte werden neu gebaut
 

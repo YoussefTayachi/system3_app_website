@@ -11,7 +11,7 @@ import {
   h1Cls,
   h2Cls,
   h3Cls,
-  cardTitleCls,
+  cardTitleCls,
   leadCls,
   sectionPad,
   subSectionPad,
@@ -765,6 +765,37 @@ export default function Home() {
             <Reveal className="min-w-0">
               <GateMockup />
             </Reveal>
+            {/* ═══════════════════════════════════════════════════════════
+                HIER WURDE GEKUERZT UND ZURUECKGENOMMEN, 2026-08-15.
+
+                Vier andere Abschnitte der Startseite sind an diesem Tag nach
+                demselben Muster geschrumpft: Titel behalten, Fliesstexte
+                streichen. Bei #rundgang, #angebot, #kanaele und #crm hat das
+                getragen. Hier NICHT, und der Grund zeigte sich erst am
+                gemessenen Ergebnis:
+
+                Die Hoehe dieses Abschnitts haengt an den beiden
+                Nachbildungen, nicht am Text. Die Textspalte steht in einem
+                Raster mit items-center NEBEN GateMockup bzw. EffectMockup;
+                wird sie kuerzer, bleibt die Zeilenhoehe stehen. Gemessen:
+                1.772 -> 1.748 Pixel. Vierundzwanzig Pixel fuer sechs
+                gestrichene Absaetze, und dafuer zwei Titel, die mitten in
+                einer halbleeren Spalte schwebten.
+
+                Inhalt entfernt, nichts gewonnen. Zurueckgenommen.
+
+                Wer diesen Abschnitt wirklich kuerzen will, muss an die
+                Nachbildungen -- und die sind hier der Beleg: "elf
+                Pruefungen, vier davon koennen den Start aufhalten" ist eine
+                Behauptung, das Bild daneben ist der Beweis.
+
+                Der Abschnitt bleibt ausserdem auf der Startseite und zieht
+                nicht um: seine beiden Aussagen ("das einzige Werkzeug, das
+                dir Nein sagt" und "eine Zahl, die nichts bedeutet, zeigen
+                wir nicht") stehen auf keiner anderen Seite. /funktionen
+                kennt weder die elf Pruefungen noch die Sperre bei zu
+                duenner Datenlage, nachgesehen am 2026-08-15.
+                ═══════════════════════════════════════════════════════ */}
             <div className="min-w-0 space-y-4">
               {t.guard.points.map((p, i) => (
                 <Reveal key={p.title} delay={i * 80}>
