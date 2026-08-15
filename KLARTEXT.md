@@ -69,20 +69,60 @@ Der Automatisierungs-Punkt geht nicht verloren; er steckt bereits in der Zeile
 
 | Ebene | Aufgabe |
 |---|---|
-| Überschrift | Die Verkettung benennen. Entwurf: **„Drei Versuche, ein eingekaufter Lead"** |
+| Überschrift | Die Verkettung benennen. Entwurf: **„Sechs Berührungen, ein eingekaufter Lead"** |
 | Erster Satz | Der Painpoint: eine Mail, keine Antwort, Lead abgehakt — das Übrige liegen gelassen. |
 | Zweiter Satz | Der Nutzen: LinkedIn nur, wenn die Mail still bleibt. Anruf nur, wenn LinkedIn still bleibt. Ohne weitere Abfragekosten. |
 
-**Nicht behaupten:** eine Antwortquote, einen Prozentsatz oder „die höchste
-Wahrscheinlichkeit". Der Mechanismus ist das Argument — drei Berührungen am
-selben Menschen statt einer —, und den kann der Leser selbst bewerten. Eine
-erfundene Zahl würde auf einer Seite mit dem Abschnitt „Was sie dir nicht
-abnimmt" alles andere entwerten.
+Entwurf für den Absatz, als Maß für Ton und Länge:
 
-Was belegbar ist und dastehen darf: **die Kette läuft nur weiter, solange es
-still bleibt.** Wer antwortet, fällt im selben Moment heraus — das steht
-bereits so im Rundgang und ist eine Aussage über das Produkt, keine über den
-Markt.
+> Wer einmal mailt und nichts hört, hat einen Versuch gemacht. Vier Mails, eine
+> LinkedIn-Nachricht und ein Anruf sind sechs — an derselben Person, jede nur
+> dann, wenn die vorige still geblieben ist. Das erhöht die Chance auf eine
+> Antwort erheblich, und es kostet keinen zweiten Lead: eingekauft wird einmal,
+> das Profil und die Nummer liegen danach ohnehin vor.
+
+Keine Zahl, die niemand gemessen hat. Vier Zahlen, die stimmen: vier, eine,
+eine, sechs.
+
+### Die Grenze verläuft anders, als ich sie zuerst gezogen habe
+
+In der ersten Fassung stand hier, die Seite dürfe nicht behaupten, dass das die
+Wahrscheinlichkeit erhöht. Das war falsch, und der Betreiber hat es korrigiert:
+
+> das ist keine lüge sondern reine logik und wir müssen an unser produkt
+> glauben […] du kannst gerne einen besseren weg nennen automatisiert kunden
+> kalt zu aquirieren aber dir wird keiner einfallen weil das bereits der beste
+> weg ist
+
+Er hat recht. Ich hatte zwei verschiedene Dinge in einen Topf geworfen:
+
+| | |
+|---|---|
+| **Ein Messwert** — „3× mehr Antworten", „um 40 % höher" | **Verboten.** Niemand hat das gemessen. Eine Zahl ohne Messung entwertet auf einer Seite mit dem Abschnitt „Was sie dir nicht abnimmt" alles andere. |
+| **Ein Mechanismus** — mehr Berührungen an derselben Person, über mehrere Kanäle, personalisiert, erhöhen die Chance auf eine Antwort erheblich | **Erlaubt, und zwar mit Überzeugung.** Das ist keine Statistik, sondern Arithmetik: sechs Versuche sind mehr als einer. |
+
+Dieselbe Grenze gilt auf der ganzen Seite schon: „eine verifizierte Adresse
+kommt eher an" steht dort ohne Quote und ist trotzdem wahr.
+
+**Was also dastehen darf, ohne Zahl und ohne Konjunktiv:**
+
+- Vier Mails, eine LinkedIn-Nachricht und ein Anruf sind **sechs Berührungen an
+  derselben Person** — jede nur dann, wenn die vorige still geblieben ist.
+- Dass das die Chance auf eine Antwort erheblich erhöht, ist **keine
+  Behauptung, sondern die Rechnung**.
+- Und es kostet **keinen zweiten Lead**.
+
+**Zur Einordnung als Bestleistung.** „Der beste Weg" stimmt — aber nur mit dem
+Zusatz, der ihn erst überprüfbar macht: der beste Weg **für automatisierte
+Kaltakquise**. Empfehlungen, Inbound und Events konvertieren besser; sie sind
+nur nicht kalt und lassen sich nicht auf Zuruf hochfahren. Genau so gehört es
+auf die Seite — mit dem Geltungsbereich, nicht ohne. Ein Superlativ mit Grenze
+ist ein Argument; einer ohne Grenze ist Werbung, und der Leser hat beide
+tausendmal gesehen.
+
+Belegbar und schon vorhanden: **die Kette läuft nur weiter, solange es still
+bleibt.** Wer antwortet, fällt im selben Moment heraus. Das ist eine Aussage
+über das Produkt und steht bereits so im Rundgang.
 
 ## Was daraus für den Rest des Plans folgt
 
@@ -285,7 +325,11 @@ Jede Stufe ein eigener Commit.
   **0 Durchfaller** (heute 1 — `#kanaele`).
 - **Keine erfundene Quote.** Nach „%", „Prozent", „mal mehr", „doppelt so"
   suchen: außerhalb der Kundenzahlen von retaiyn und der belegten Werte im
-  Torwart-Abschnitt **0 neue Treffer**.
+  Torwart-Abschnitt **0 neue Treffer**. Der Mechanismus darf behauptet werden,
+  die Messung nicht — die Grenze steht in Teil 0.
+- **Jeder Superlativ hat einen Geltungsbereich.** „Der beste Weg" nur mit
+  „für automatisierte Kaltakquise" dahinter. Suche nach „beste", „einzige",
+  „wirksamste": jeder Treffer muss die Grenze im selben Satz tragen.
 
 ## Die Gegenprobe
 
