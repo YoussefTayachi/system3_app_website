@@ -120,9 +120,9 @@ const de = {
     metaDescription:
       "Für Agenturen, die täglich E-Mail, LinkedIn und Telefon für ihre Kunden bespielen: ein Workspace je Kunde, getrennte Sperrlisten, Reports ohne Login und die Auswertung, welche Textfassung Termine gebracht hat.",
     eyebrow: "Für Agenturen",
-    title: "Acht Kunden. Drei Kanäle. Jeden Tag.",
+    title: "Acht Kunden. Drei Kanäle. Ein Werkzeug.",
     intro:
-      "Ihr macht Kaltakquise für andere. Das heißt jeden Morgen: mehrere Postfächer, mehrere Sperrlisten, mehrere Zielgruppen, und am Monatsende eine Tabelle, die jemand von Hand baut. Diese Seite handelt von diesem Alltag, nicht von Funktionen.",
+      "Ein Workspace je Kunde: eigene Leads, eigene Sperrliste, eigenes Branding, eigener Report. Ihr wechselt mit einem Klick zwischen ihnen, und nichts von Kunde A landet je bei Kunde B.",
     ctaLabel: "Gespräch buchen",
     sections: [
       {
@@ -2670,9 +2670,9 @@ const en: typeof de = {
     metaDescription:
       "For agencies running email, LinkedIn and phone for their clients every day: one workspace per client, separate suppression lists, reports without a login, and the analysis of which copy version booked meetings.",
     eyebrow: "For agencies",
-    title: "Eight clients. Three channels. Every day.",
+    title: "Eight clients. Three channels. One tool.",
     intro:
-      "You run cold outreach for other people. That means every morning: several mailboxes, several suppression lists, several audiences, and at month's end a spreadsheet somebody builds by hand. This page is about that daily reality, not about features.",
+      "One workspace per client: their own leads, their own suppression list, their own branding, their own report. You switch between them in one click, and nothing from client A ever ends up with client B.",
     ctaLabel: "Book a call",
     sections: [
       {

@@ -206,6 +206,31 @@ verkauft ein Produkt, keine Dienstleistung.
   Handelnden. Wer das später wieder einsetzt, holt sich das Problem aus
   Befund 1 zurück.
 
+## Nachtrag: derselbe Fehler auf `/fuer-agenturen`
+
+> beim punkt mit winning customers for others würde ich als landing page nicht
+> einen painpoint nehmen sonst denkt der user bei der app ist das so.
+
+Zutreffend, und es betraf **nur den Hero**. Die sechs Abschnitte darunter sind
+alle lösungsförmig; der Vorspann war der einzige Text der Seite, der den
+Zustand *ohne* die App beschrieb — „mehrere Postfächer, mehrere Sperrlisten,
+mehrere Zielgruppen, und am Monatsende eine Tabelle, die jemand von Hand
+baut". Ohne ein Wort, das die Zeitform markiert, liest sich eine solche
+Aufzählung als Beschreibung dessen, was man **bekommt**.
+
+| | vorher | jetzt |
+|---|---|---|
+| Titel | Acht Kunden. Drei Kanäle. **Jeden Tag.** | Acht Kunden. Drei Kanäle. **Ein Werkzeug.** |
+| Vorspann | der Alltag ohne uns | ein Workspace je Kunde, mit einem Klick gewechselt |
+
+Der Dreiklang und die Zahl bleiben, nur das dritte Glied wechselt von der Lage
+zur Antwort.
+
+**Der Schmerz ist nicht gelöscht, er steht an der richtigen Stelle.** Die
+Tabelle von Hand steht weiter in `report` („Ersetzt die Tabelle, die sonst am
+Monatsende entsteht"), die Haftung in `workspaces`. Ein Schmerz direkt neben
+seiner Antwort wirkt; derselbe Schmerz allein im Hero beschreibt das Produkt.
+
 ## Nachtrag: was beim Bauen dazukam
 
 - **„Stellenbeschreibung" hat die Überschrift gesprengt.** Bei 320 px war das
