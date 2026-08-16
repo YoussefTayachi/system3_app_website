@@ -496,7 +496,7 @@ const de = {
         id: "write",
         eyebrow: "Schreiben",
         title: "Acht Mails, geschrieben aus zwölf Feldern",
-        body: "Aus dem Angebot entstehen vier Stufen an Tag 0, 3, 5 und 7, je zwei Fassungen, ein Betreff über alle vier. Jede Stufe ist kürzer als die vorherige, 90, 70, 50, 35 Wörter, und jede endet bei derselben kleinen Frage. Nicht bei einem Termin: „Kostenloses Erstgespräch vereinbaren“ steht auf fast jeder Website, bei unserem ersten Kunden retaiyn genauso, und am Ende einer Kaltmail ist das die größte Bitte, die es gibt. Danach wird nachgemessen statt gebeten: wurde eine Stufe länger als ihr Vorgänger, steht doch eine Terminbitte darin, oder ist ein Angebotsfeld wörtlich in die Mail gerutscht, benennt die App den Verstoß und lässt neu schreiben.",
+        body: "Die KI schreibt die Sequenz aus deinem Angebot, nach dem, was bei Kaltakquise funktioniert. Auch wenn du noch nie kalt geschrieben hast, steht danach ein Entwurf da, den du abschicken kannst. Der Aufbau ist unser Vorschlag, keine Vorschrift: Stufen kannst du ergänzen, Abstände ändern, jeden Text überschreiben. Am Schluss steht bewusst eine kleine Frage statt einer Terminbitte — „Kostenloses Erstgespräch vereinbaren“ steht auf fast jeder Website, bei unserem ersten Kunden retaiyn genauso, und am Ende einer Kaltmail ist das die größte Bitte, die es gibt.",
         bullets: [
           "Zwölf Felder, sieben davon aus deiner Website vorgeschlagen und einzeln zu bestätigen",
           "Höchstens fünf Befunde, und jeder bringt einen fertigen Ersatzsatz mit",
@@ -1801,9 +1801,13 @@ const de = {
         body: "Höchstens fünf Befunde, und keiner ohne Gegenvorschlag. Nicht „das ist zu vage“, sondern der fertige Ersatztext mit einem Knopf, der ihn einsetzt. Sind zwei Felder vertauscht — dein Beleg steht im Ergebnisfeld —, zieht die Karte einen Pfeil zwischen beide. Ein Formular hat für so einen Befund keinen Ort.",
       },
       {
-        title: "Daraus entstehen acht Texte",
-        body: "Vier Stufen an Tag 0, 3, 5 und 7, je zwei eigenständige Fassungen, ein Betreff über alle vier. Jede Stufe ist kürzer als die vorherige: 90, 70, 50, 35 Wörter. Wer nach einer ausbleibenden Antwort mehr schreibt, läuft hinterher. Die LinkedIn-Nachricht kommt aus derselben Quelle.",
+        title: "Ein Entwurf, den du abschicken kannst",
+        body: "Die KI schreibt die Sequenz aus deinem Angebot: mehrere Stufen, je zwei eigenständige Fassungen, ein Betreff über alle. Jede Stufe ist kürzer als die vorherige, denn wer nach einer ausbleibenden Antwort mehr schreibt, läuft hinterher. Abstände und Anzahl sind unser Vorschlag und lassen sich ändern. Die LinkedIn-Nachricht kommt aus derselben Quelle.",
+      },      {
+        title: "Je Lead-Liste ein eigener Zuschnitt",
+        body: "Was du verkaufst, bleibt gleich, egal wen du anschreibst. Woran deine Empfänger hängen, nicht. Die KI liest jede Lead-Liste einzeln — die Filter der Suche und die recherchierten Firmenbeschreibungen — und schlägt dafür die Felder vor, die sich von Liste zu Liste unterscheiden. Zwei Zielgruppen brauchen damit nicht zwei Angebote, sondern ein Angebot und zwei Zuschnitte.",
       },
+
     ],
     limitsTitle: "Was sie dir nicht abnimmt",
     limits: [
@@ -1902,8 +1906,8 @@ const de = {
         },
       ],
       hub: {
-        name: "THAW",
-        state: "liest die zwölf Felder gegeneinander",
+        name: "Frostbreaker AI",
+        state: "füllt aus Website und Lead-Liste vor, dann liest sie die zwölf Felder gegeneinander",
         button: "Angebot prüfen",
       },
       // Muss genau die beiden Felder benennen, die der Pfeil verbindet:
@@ -2915,7 +2919,7 @@ const en: typeof de = {
         id: "write",
         eyebrow: "Write",
         title: "Eight emails, written out of twelve fields",
-        body: "The offer turns into four steps on day 0, 3, 5 and 7, two versions each, one subject line across all four. Every step is shorter than the one before it, 90, 70, 50, 35 words, and every one of them ends on the same small question. Not on a meeting: “book a free intro call” is what almost every website says, our first customer retaiyn included, and at the end of a cold email that is the biggest thing you can ask for. Then it gets measured instead of requested: if a step grew longer than the one before, if a meeting request slipped in, or if a field from the offer went into the email word for word, the app names the breach and has it written again.",
+        body: "The AI writes the sequence from your offer, along the lines of what works in cold outreach. Even if you have never written a cold email, you end up with a draft you can send. The shape is our suggestion, not a rule: you can add steps, change the intervals and overwrite any piece of copy. The last line is deliberately a small question rather than a meeting request — “book a free intro call” is what almost every website says, our first customer retaiyn included, and at the end of a cold email that is the biggest thing you can ask for.",
         bullets: [
           "Twelve fields, seven of them suggested off your website and confirmed one at a time",
           "Five findings at most, and each one comes with a finished replacement sentence",
@@ -3704,9 +3708,13 @@ const en: typeof de = {
         body: "Five findings at most, and none without a replacement. Not “that is too vague”, but the finished sentence with a button that puts it in. When two fields have swapped places — your proof sitting in the outcome field — the map draws an arrow between them. A form has nowhere to put a finding like that.",
       },
       {
-        title: "Eight pieces of copy come out of it",
-        body: "Four steps on day 0, 3, 5 and 7, two independent versions each, one subject line across all four. Every step is shorter than the one before it: 90, 70, 50, 35 words. Writing more after no reply reads as chasing. The LinkedIn message comes from the same source.",
+        title: "A draft you can send",
+        body: "The AI writes the sequence from your offer: several steps, two independent versions each, one subject line across all of them. Every step is shorter than the one before, because writing more after no reply reads as chasing. The number of steps and the intervals are our suggestion and can be changed. The LinkedIn message comes from the same source.",
+      },      {
+        title: "A separate cut for every lead list",
+        body: "What you sell stays the same whoever you write to. What your recipients are stuck on does not. The AI reads each lead list on its own — the search filters and the researched company descriptions — and suggests the fields that differ from list to list. Two audiences do not need two offers, they need one offer and two cuts.",
       },
+
     ],
     limitsTitle: "What it does not do for you",
     limits: [
@@ -3766,8 +3774,8 @@ const en: typeof de = {
         },
       ],
       hub: {
-        name: "THAW",
-        state: "reads the twelve fields against each other",
+        name: "Frostbreaker AI",
+        state: "fills in from your website and each lead list, then reads the twelve fields against each other",
         button: "Check the offer",
       },
       findingLabel: "The outcome field holds a promise, the proof field holds a slogan. The proof for the promise is nowhere in the offer.",

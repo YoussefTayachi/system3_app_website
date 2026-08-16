@@ -164,7 +164,7 @@ function ThawOrb({ size = 96 }: { size?: number }) {
       viewBox="0 0 64 64"
       className="text-sky-500"
       role="img"
-      aria-label="THAW"
+      aria-label="Frostbreaker AI"
       style={{ overflow: "visible" }}
     >
       <defs>
@@ -741,7 +741,7 @@ export const DEMO_OFFER_MAP: OfferMapMockupProps = {
     },
   ],
   hub: {
-    name: "THAW",
+    name: "Frostbreaker AI",
     state: "liest die zwölf Felder gegeneinander",
     button: "Angebot prüfen",
   },
@@ -756,12 +756,12 @@ export const DEMO_COACH_FINDING: CoachFindingMockupProps = {
   severity: "Blocker",
   beforeLabel: "Du hattest geschrieben",
   before: "Kostenloses Erstgespräch vereinbaren.",
-  verdictLabel: "THAW",
+  verdictLabel: "Frostbreaker AI",
   verdict:
     "Auf einer Website ist der Satz richtig. Am Ende einer ersten Mail ist er eine Terminbitte — die größte Bitte, die sie stellen kann, und deshalb die, die am häufigsten übergangen wird.",
   proposalLabel: "Stattdessen",
   proposal: "Soll ich dir die drei Stellen schicken, an denen E-Mail, WhatsApp und Support bei euch heute auseinanderlaufen?",
   apply: "Übernehmen",
   dismiss: "Passt so",
-  note: "Kein Befund ohne Gegenvorschlag: Was THAW bemängelt, schreibt er daneben neu.",
+  note: "Kein Befund ohne Gegenvorschlag: Was Frostbreaker AI bemängelt, schreibt er daneben neu.",
 };
