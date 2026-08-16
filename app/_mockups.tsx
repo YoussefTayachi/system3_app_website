@@ -111,8 +111,23 @@ export function LocalReachMockup() {
   const m = t.localReachMockup;
   return (
     <div className="rounded-2xl bg-panel p-6 shadow-card">
+      {/* min-w-0 an beiden Rasterkindern. Dieselbe Ursache wie an sechs
+          anderen Stellen dieser Website: eine Rasterspalte ist von Haus aus
+          minmax(auto, 1fr), und "auto" meint die MINDESTBREITE des breitesten
+          Kindes.
+
+          Hier kommt eine zweite Ursache dazu, die es sonst nirgends gibt: die
+          Firmennamen tragen "truncate", und das setzt white-space: nowrap.
+          Damit IST die Mindestbreite die volle Textbreite, egal wie schmal
+          das Fenster wird. Das min-w-0 an der Textzeile weiter unten half
+          nicht -- es erlaubt nur dem Textkasten zu schrumpfen, nicht der
+          Rasterspalte darueber.
+
+          Gemessen am 2026-08-15 auf /funktionen bei 320px Fensterbreite: die
+          Seite scrollte bis 339px seitlich, auf Deutsch. Bei 375px und
+          darueber war nie etwas zu sehen. */}
       <div className="grid gap-5 sm:grid-cols-2">
-        <div>
+        <div className="min-w-0">
           <p className="text-xs font-medium uppercase tracking-wide text-faint">{m.typicalLabel}</p>
           <div className="mt-2 space-y-1.5">
             {m.businesses.map((b) => (
@@ -128,7 +143,7 @@ export function LocalReachMockup() {
             ))}
           </div>
         </div>
-        <div>
+        <div className="min-w-0">
           <p className="text-xs font-medium uppercase tracking-wide text-faint">{m.frostbreakerLabel}</p>
           <div className="mt-2 space-y-1.5">
             {m.businesses.map((b) => (

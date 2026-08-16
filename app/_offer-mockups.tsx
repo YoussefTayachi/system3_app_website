@@ -152,7 +152,7 @@ const punkt = (grad: number, r: number) => {
  * Elternebene bis in die Verlaufsstopps hinein, und in der Datei steht kein
  * einziger Hex-Wert.
  */
-function ThawOrb({ size = 96 }: { size?: number }) {
+function ThawOrb({ size = 96, farbe = "text-sky-500" }: { size?: number; farbe?: string }) {
   // Eigene IDs je Instanz: zwei gleiche Verlaufs-IDs im selben Dokument
   // lassen die zweite Figur die Fuellung der ersten erben.
   const uid = useId().replace(/:/g, "");
@@ -162,7 +162,7 @@ function ThawOrb({ size = 96 }: { size?: number }) {
       width={size}
       height={size}
       viewBox="0 0 64 64"
-      className="text-sky-500"
+      className={farbe}
       role="img"
       aria-label="Frostbreaker AI"
       style={{ overflow: "visible" }}
@@ -329,6 +329,17 @@ export type OfferMapMockupProps = {
   findingLabel: string;
   /** Eine Zeile unter der Karte. */
   note: string;
+  /** Die Tafel oben links: der ZWEITE KI-Schritt, der aus einer Lead-Liste
+   *  vorschlaegt, was am Angebot fuer diese Empfaenger anders klingen muss.
+   *  Er fehlte im Bild, obwohl er der Teil ist, der Arbeit abnimmt -- die
+   *  Karte zeigte nur die Pruefung. Alle vier Zeilen stehen wortgleich in
+   *  der App (apps/web/lib/i18n/dict.ts, offers.fromSearch). */
+  listPanel: {
+    heading: string;
+    subtitle: string;
+    button: string;
+    hint: string;
+  };
 };
 
 /**
@@ -428,7 +439,7 @@ function MapNode({ node, lane, related }: { node: OfferMapNode; lane: "none" | "
  *    verboten. Sie traegt denselben Pfeilkopf wie die Spur, damit die
  *    Zuordnung eindeutig bleibt.
  */
-export function OfferMapMockup({ frameTitle, corners, hub, findingLabel, note }: OfferMapMockupProps) {
+export function OfferMapMockup({ frameTitle, corners, hub, findingLabel, note, listPanel }: OfferMapMockupProps) {
   /** Platzierung im Raster ab 52rem Kartenbreite. Index = Reihenfolge im
    *  Markup, also die Lesereihenfolge im Uhrzeigersinn. */
   const PLATZ = [
@@ -441,6 +452,35 @@ export function OfferMapMockup({ frameTitle, corners, hub, findingLabel, note }:
   return (
     <AppFrame title={frameTitle}>
       <div className="@container p-4 sm:p-6">
+        {/* DER ERSTE VON ZWEI KI-SCHRITTEN. Die Karte zeigte bis zum
+            2026-08-15 nur die Pruefung in der Mitte -- also den Teil, der
+            Fehler findet. Der Teil, der ARBEIT ABNIMMT, fehlte: dass
+            Frostbreaker AI die Firmen einer Lead-Liste liest und daraus
+            vorschlaegt, was fuer diese Empfaenger anders klingen muss.
+
+            Violett und nicht Blau, wie in der App: dort unterscheidet die
+            Farbe die Herkunft eines Vorschlags (Frost fuer die Website,
+            Violett fuer eine Lead-Liste). Die Bedeutung steht hier
+            zusaetzlich ausgeschrieben -- eine Farbbedeutung allein muss man
+            sich merken, und fuer einen Screenreader ist sie gar nicht da. */}
+        <div className="mb-5 rounded-2xl border border-violet-300/60 bg-violet-500/[0.04] p-4 sm:p-5">
+          <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-violet-800/80">
+            {listPanel.heading}
+          </p>
+          <div className="mt-2.5 flex items-start gap-3.5">
+            <div className="shrink-0 text-violet-500">
+              <ThawOrb size={44} farbe="text-violet-500" />
+            </div>
+            <div className="min-w-0">
+              <p className="max-w-[62ch] text-[13px] leading-relaxed text-ink">{listPanel.subtitle}</p>
+              <span className="mt-2.5 inline-flex rounded-lg border border-violet-400/60 bg-panel px-3 py-1.5 text-[11px] font-medium text-violet-800">
+                {listPanel.button}
+              </span>
+            </div>
+          </div>
+          <p className="mt-3 max-w-[70ch] text-[11px] leading-relaxed text-mute">{listPanel.hint}</p>
+        </div>
+
         <div className="grid gap-3 @min-[52rem]:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] @min-[52rem]:gap-x-6 @min-[52rem]:gap-y-4">
           {corners.map((corner, ci) => {
             const hatBefund = ci === BEFUND.ecke;
@@ -740,6 +780,13 @@ export const DEMO_OFFER_MAP: OfferMapMockupProps = {
       ],
     },
   ],
+  listPanel: {
+    heading: "Auf eine Lead-Liste zuschneiden",
+    subtitle:
+      "Frostbreaker AI liest die Firmen einer Liste und schlägt vor, was am Angebot für sie anders klingen sollte.",
+    button: "Liste wählen",
+    hint: "Neu vorgeschlagen: Problem, Stolperstein, Grund, Zielgruppe. Nur umformuliert: Ergebnis und Mechanismus. Zahlen und Beleg bleiben.",
+  },
   hub: {
     name: "Frostbreaker AI",
     state: "liest die zwölf Felder gegeneinander",

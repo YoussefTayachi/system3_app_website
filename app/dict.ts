@@ -1905,6 +1905,13 @@ const de = {
           ],
         },
       ],
+      listPanel: {
+        heading: "Auf eine Lead-Liste zuschneiden",
+        subtitle:
+          "Frostbreaker AI liest die Firmen einer Liste und schlägt vor, was am Angebot für sie anders klingen sollte.",
+        button: "Liste wählen",
+        hint: "Neu vorgeschlagen: Problem, Stolperstein, Grund, Zielgruppe. Nur umformuliert: Ergebnis und Mechanismus. Zahlen und Beleg bleiben.",
+      },
       hub: {
         name: "Frostbreaker AI",
         state: "füllt aus Website und Lead-Liste vor, dann liest sie die zwölf Felder gegeneinander",
@@ -3773,6 +3780,13 @@ const en: typeof de = {
           ],
         },
       ],
+      listPanel: {
+        heading: "Tailor it to a lead list",
+        subtitle:
+          "Frostbreaker AI reads the companies on a list and suggests what should sound different for them.",
+        button: "Pick a list",
+        hint: "Rewritten: problem, friction, reason, audience. Reworded only: outcome and mechanism. Numbers and proof stay.",
+      },
       hub: {
         name: "Frostbreaker AI",
         state: "fills in from your website and each lead list, then reads the twelve fields against each other",
