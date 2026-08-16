@@ -238,9 +238,40 @@ const de = {
     metaDescription:
       "Für SaaS-Anbieter ohne eigenes Vertriebsteam: zwölf Fragen zum Angebot, sieben davon aus der eigenen Website vorgeschlagen. Wunschkunden über die eingesetzte Technik finden, mehrere Angebote in einem Konto, und je Stufe und Fassung sehen, was zurückkam.",
     eyebrow: "Kunden für euch selbst",
-    title: "Ein Produkt, eine Zielgruppe, kein Vertriebsteam.",
+    title: "Ein Vertriebsteam, das aus einer Person besteht.",
     intro:
-      "Dein Produkt kennst du besser als jeder, den du dafür einstellen könntest. Was dir fehlt, ist nicht das Wissen, sondern der Apparat, der es jede Woche ausschreibt: neue Empfänger, vier Mails pro Empfänger, und jede so, als hätte vorher jemand nachgesehen. Diese Seite zeigt, wie das aussieht, wenn niemand im Haus Vertrieb gelernt hat.",
+      "Dein Produkt kennst du besser als jeder, den du dafür einstellen könntest. Was dir fehlt, ist nicht das Wissen, sondern der Apparat, der es jede Woche ausschreibt.",
+    crew: {
+      eyebrow: "Wer welchen Teil übernimmt",
+      title: "Das machen sonst vier Leute",
+      body: "Alles davon läuft automatisch, sobald die Lead-Liste steht.",
+      rows: [
+        {
+          label: "Finden",
+          text: "Aus deinem Wunschkunden-Profil wird eine Liste mit Namen: direkte E-Mail-Adresse, LinkedIn-Profil und, wo es eine gibt, die Telefonnummer.",
+        },
+        {
+          label: "Recherchieren",
+          text: "Jede Firma wird einzeln nachgeschlagen. Daraus entsteht der Aufhänger, mit dem ihre Mail anfängt.",
+        },
+        {
+          label: "Schreiben",
+          text: "Dein Angebot kommt aus deiner Website, die Lage der Empfänger aus der Lead-Liste. Daraus entstehen die Mails und die LinkedIn-Nachricht — als Entwurf, den du überschreiben kannst.",
+        },
+        {
+          label: "Senden",
+          text: "Die Mails gehen über deine eigenen Postfächer raus, über den Tag verteilt. Wer antwortet, bekommt im selben Moment keine weitere mehr.",
+        },
+        {
+          label: "Auswerten",
+          text: "Jede Antwort wird eingestuft und landet als Deal oder Aufgabe im CRM. Daneben steht, welche Fassung mehr Antworten gebracht hat.",
+        },
+      ],
+      you: {
+        label: "Sprechen — du",
+        text: "Das Gespräch, sobald jemand antwortet. Dafür ist die App nicht gebaut, und das bleibt auch so.",
+      },
+    },
     ctaLabel: "Gespräch buchen",
     sections: [
       {
@@ -282,7 +313,7 @@ const de = {
       // Der Abschnitt `multi` ("Zwei Zielgruppen" / "Zwei Angebote, ein
       // Konto") stand bis zum 2026-08-14 hier. Gefallen (EINHEITLICH.md S3):
       // er widersprach der Ueberschrift seiner eigenen Seite -- saasPage.title
-      // sagt "Ein Produkt, eine Zielgruppe, kein Vertriebsteam". Wer diese
+      // hiess damals "Ein Produkt, eine Zielgruppe, kein Vertriebsteam". Wer diese
       // Seite betritt, HAT eine Zielgruppe; ihm auf halber Strecke zu
       // erklaeren, dass man auch zwei fuehren kann, ist eine Mechanik-Auskunft
       // fuer einen Bestandskunden, keine Kaufentscheidung.
@@ -2729,9 +2760,40 @@ const en: typeof de = {
     metaDescription:
       "For SaaS companies without a sales team: twelve questions about your offer, seven of them suggested from your own website. Find buyers by the technology they run, keep several offers in one account, and see what came back per step and per version.",
     eyebrow: "Customers for yourselves",
-    title: "One product, one audience, no sales team.",
+    title: "A sales team of one.",
     intro:
-      "You know your product better than anyone you could hire to sell it. What you are missing is not the knowledge, it is the machinery that puts it in writing every week: new recipients, four emails each, every one of them written as if somebody had looked the company up first. This page is about what that looks like when nobody in the building has ever done sales.",
+      "You know your product better than anyone you could hire to sell it. What you are missing is not the knowledge, it is the machinery that puts it in writing every week.",
+    crew: {
+      eyebrow: "Who does which part",
+      title: "Four people would normally do this",
+      body: "All of it runs on its own, once the lead list is there.",
+      rows: [
+        {
+          label: "Finding",
+          text: "Your ideal-customer profile turns into a list of names: direct email address, LinkedIn profile and, where there is one, the phone number.",
+        },
+        {
+          label: "Researching",
+          text: "Every company is looked up on its own. That is where the opening line of its email comes from.",
+        },
+        {
+          label: "Writing",
+          text: "Your offer comes from your website, your recipients' situation from the lead list. Out of that come the emails and the LinkedIn message — as a draft you can overwrite.",
+        },
+        {
+          label: "Sending",
+          text: "The emails go out through your own mailboxes, spread across the day. Anyone who replies stops getting them that same moment.",
+        },
+        {
+          label: "Measuring",
+          text: "Every reply is classified and lands in the CRM as a deal or a task. Next to it stands which version brought more replies.",
+        },
+      ],
+      you: {
+        label: "Talking — you",
+        text: "The conversation, the moment somebody replies. The app is not built for that, and it stays that way.",
+      },
+    },
     ctaLabel: "Book a call",
     sections: [
       {

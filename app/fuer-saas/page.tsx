@@ -105,6 +105,58 @@ export default function SaasPage() {
         </div>
       </section>
 
+      {/*
+        Die Stellenbeschreibung. Steht BEWUSST ausserhalb von `sections.map`,
+        aus zwei Gruenden:
+
+        1. Die Flaechenfolge unten haengt an `i % 2 === 1`, also an der
+           POSITION in der Schleife. Ein Eintrag an Stelle 0 kippt jede
+           Flaeche dahinter, und `limits` laege wieder hell direkt am hellen
+           Schluss-CTA -- genau die Naht, die am 14.08. beseitigt wurde.
+        2. Sechs Zeilen "Aufgabe -> was passiert" sind kein Haekchen-Bullet.
+
+        Keine Zeile nennt einen Handelnden. Dass das automatisch laeuft, sagt
+        `crew.body` einmal fuer alle fuenf. Fuenfmal "eine KI macht X" liest
+        sich als Fuellmaterial -- und waere im Versand schlicht falsch: dort
+        arbeitet keine KI, sondern Instantly nach Zeitplan.
+      */}
+      <section id="crew" className="scroll-mt-20 border-b border-edge/60">
+        <div className={"mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
+          <div className="max-w-3xl">
+            <SectionHeading eyebrow={s.crew.eyebrow} title={s.crew.title} lead={s.crew.body} />
+          </div>
+          <Reveal>
+            <ul className="max-w-4xl border-t border-edge/60">
+              {s.crew.rows.map((r) => (
+                <li
+                  key={r.label}
+                  className="grid gap-1 border-b border-edge/60 py-5 sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-10"
+                >
+                  <p className="text-xs font-medium uppercase tracking-[0.14em] text-sky-700">
+                    {r.label}
+                  </p>
+                  <p className="min-w-0 text-[15px] leading-relaxed text-soft">{r.text}</p>
+                </li>
+              ))}
+              {/*
+                Zeile 6 ist der Leser. Sie sagt, was die App NICHT uebernimmt,
+                und traegt damit die fuenf Zeilen darueber -- dieselbe Rolle
+                wie der `limits`-Abschnitt weiter unten, nur in einem Satz.
+                Deshalb in Vollton statt in `text-soft`.
+              */}
+              <li className="grid gap-1 border-b border-edge/60 py-5 sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-10">
+                <p className="text-xs font-medium uppercase tracking-[0.14em] text-ink">
+                  {s.crew.you.label}
+                </p>
+                <p className="min-w-0 text-[15px] font-medium leading-relaxed text-ink">
+                  {s.crew.you.text}
+                </p>
+              </li>
+            </ul>
+          </Reveal>
+        </div>
+      </section>
+
       {s.sections.map((sec, i) => {
         const flipped = i % 2 === 1;
         const visual = visuals[sec.id];
