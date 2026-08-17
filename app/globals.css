@@ -263,8 +263,25 @@ body {
 /* `inert` nimmt die verborgenen Tafeln aus Tastaturreihenfolge und
    Vorlesereihenfolge -- sonst laege derselbe Bildschirm viermal im Baum.
    `transition: none` an dieser Stelle: die abtretende Tafel soll SOFORT weg
-   sein, sonst liegen zwei Bildschirme sichtbar uebereinander. */
+   sein, sonst liegen zwei Bildschirme sichtbar uebereinander.
+
+   AUS DEM FLUSS GENOMMEN, seit dem 2026-08-17. Vorher trugen die drei
+   verborgenen Tafeln zur Hoehe der Rasterzeile bei -- das war der Sinn der
+   Sache (kein Sprung beim Wechseln). Der Preis dafuer war eine LEERE
+   Flaeche unter der sichtbaren Tafel, und zwar dauerhaft:
+
+     natuerliche Hoehen der vier Tafeln (Suchbild, /funktionen, DE)
+       375px:  547 / 512 / 621 / 693  -> sichtbar ist 547, tot bleiben 142
+       1440px: 313 / 350 / 362 / 426  -> sichtbar ist 313, tot bleiben 109
+
+   142 Pixel Weiss in einem gerahmten Bild lesen sich als Fehler, und auf
+   einem Telefon fuellen sie ein Drittel des Bildschirms. Ein Hoehenwechsel
+   dagegen passiert nur, wenn jemand selbst auf einen Reiter tippt -- dort
+   ist er erwartetes Verhalten und nicht Bruch. */
+.fb-stack { position: relative; }
 .fb-stack > [inert] {
+  position: absolute;
+  inset: 0;
   opacity: 0;
   transform: translateY(4px);
   visibility: hidden;
