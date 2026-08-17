@@ -58,16 +58,15 @@ import { useId } from "react";
  *  werden. Wer hier etwas am Rahmen aendert, aendert es auch in den beiden
  *  anderen Dateien -- sonst stehen zwei Nachbildungen nebeneinander, von
  *  denen eine auf der Seite liegt und die andere davor steht. */
-function AppFrame({ children, title }: { children: React.ReactNode; title?: string }) {
+function AppFrame({ children, note }: { children: React.ReactNode; note?: string }) {
   return (
     <div className="overflow-hidden rounded-2xl bg-panel shadow-screen">
-      <div className="flex items-center gap-1.5 border-b border-edge/70 bg-panel2/60 px-4 py-2.5">
-        <span className="h-2 w-2 rounded-full bg-edge3/50" />
-        <span className="h-2 w-2 rounded-full bg-edge3/35" />
-        <span className="h-2 w-2 rounded-full bg-edge3/25" />
-        {title && <span className="ml-2 text-[11px] text-mute">{title}</span>}
-      </div>
       {children}
+      {note && (
+        <p className="border-t border-edge/70 bg-panel2/50 px-4 py-2 text-[10px] font-medium uppercase tracking-[0.1em] text-faint">
+          {note}
+        </p>
+      )}
     </div>
   );
 }
@@ -298,8 +297,9 @@ function ThawOrb({ size = 96, farbe = "text-sky-500" }: { size?: number; farbe?:
 export type OfferMapNode = {
   /** Die Frage, die das Feld stellt. */
   label: string;
-  /** Die Antwort darin. */
-  value: string;
+  /** Die Antwort darin. Nur dort gesetzt, wo der Befund sie braucht --
+   *  sonst zeigt die Karte die Frage allein, und das Bild bleibt ein Bild. */
+  value?: string;
 };
 
 export type OfferMapCorner = {
@@ -311,8 +311,8 @@ export type OfferMapCorner = {
 };
 
 export type OfferMapMockupProps = {
-  /** Steht klein in der Fensterleiste. */
-  frameTitle: string;
+  /** Steht als Hinweiszeile unter dem Bild. */
+  sampleNote: string;
   /** Genau vier, im Uhrzeigersinn ab oben links: wer schreibt an wen · woran
    *  haengt der Leser · was hat er davon · worum wird gebeten. */
   corners: [OfferMapCorner, OfferMapCorner, OfferMapCorner, OfferMapCorner];
@@ -387,7 +387,7 @@ function MapNode({ node, lane, related }: { node: OfferMapNode; lane: "none" | "
         }
       >
         <p className="text-[10px] font-medium uppercase tracking-[0.08em] text-mute">{node.label}</p>
-        <p className="mt-0.5 text-[12.5px] leading-snug text-soft">{node.value}</p>
+        {node.value && <p className="mt-0.5 text-[12.5px] leading-snug text-soft">{node.value}</p>}
       </div>
     </>
   );
@@ -439,7 +439,7 @@ function MapNode({ node, lane, related }: { node: OfferMapNode; lane: "none" | "
  *    verboten. Sie traegt denselben Pfeilkopf wie die Spur, damit die
  *    Zuordnung eindeutig bleibt.
  */
-export function OfferMapMockup({ frameTitle, corners, hub, findingLabel, note, listPanel }: OfferMapMockupProps) {
+export function OfferMapMockup({ sampleNote, corners, hub, findingLabel, note, listPanel }: OfferMapMockupProps) {
   /** Platzierung im Raster ab 52rem Kartenbreite. Index = Reihenfolge im
    *  Markup, also die Lesereihenfolge im Uhrzeigersinn. */
   const PLATZ = [
@@ -450,7 +450,7 @@ export function OfferMapMockup({ frameTitle, corners, hub, findingLabel, note, l
   ];
 
   return (
-    <AppFrame title={frameTitle}>
+    <AppFrame note={sampleNote}>
       <div className="@container p-4 sm:p-6">
         {/* DER ERSTE VON ZWEI KI-SCHRITTEN. Die Karte zeigte bis zum
             2026-08-15 nur die Pruefung in der Mitte -- also den Teil, der
@@ -571,8 +571,6 @@ export function OfferMapMockup({ frameTitle, corners, hub, findingLabel, note, l
    ═══════════════════════════════════════════════════════════════════════ */
 
 export type CoachFindingMockupProps = {
-  /** Steht klein in der Fensterleiste. */
-  frameTitle: string;
   /** Die Gruppe, in der das Feld liegt, z. B. "Worum du bittest". */
   group: string;
   /** Die Frage, die das Feld stellt. */
@@ -640,7 +638,6 @@ export type CoachFindingMockupProps = {
  * dieselbe Sache.
  */
 export function CoachFindingMockup({
-  frameTitle,
   group,
   fieldLabel,
   severity,
@@ -655,7 +652,7 @@ export function CoachFindingMockup({
   note,
 }: CoachFindingMockupProps) {
   return (
-    <AppFrame title={frameTitle}>
+    <AppFrame>
       <div className="p-5 sm:p-7">
         <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
           <div className="min-w-0">
@@ -745,38 +742,38 @@ export function CoachFindingMockup({
    um. `app/page.tsx` ist ein Client-Modul, dort ist das kein Thema. */
 
 export const DEMO_OFFER_MAP: OfferMapMockupProps = {
-  frameTitle: "Angebot",
+  sampleNote: "Beispielansicht",
   corners: [
     {
       title: "Wer schreibt an wen",
       nodes: [
-        { label: "Was verkaufst du?", value: "Customer Experience für E-Commerce: E-Mail, WhatsApp und Support verbunden statt isoliert." },
-        { label: "An wen?", value: "E-Commerce-Shops und -Brands, häufig schon mit Klaviyo oder WhatsApp im Einsatz." },
-        { label: "Wie soll es klingen?", value: "Beratend und konkret, keine Fachwörter, kein Hype." },
+        { label: "Was verkaufst du?" },
+        { label: "An wen?" },
+        { label: "Wie soll es klingen?" },
       ],
     },
     {
       title: "Woran der Leser hängt",
       nodes: [
-        { label: "Welches Problem hat er vorher?", value: "E-Mail, WhatsApp und Customer Support werden unabhängig voneinander betrachtet." },
-        { label: "Woran genau bleibt er hängen?", value: "Brüche in der Customer Journey, ungenutzte Umsatzpotenziale, unnötig hohe operative Aufwände." },
-        { label: "Warum lässt das zögern?", value: "Jedes der drei Systeme läuft für sich, deshalb fällt der Bruch dazwischen niemandem zu." },
+        { label: "Welches Problem hat er vorher?" },
+        { label: "Woran genau bleibt er hängen?" },
+        { label: "Warum lässt das zögern?" },
       ],
     },
     {
       title: "Was er davon hat",
       nodes: [
         { label: "Was ist danach anders?", value: "Bis zu 70 % des Kundensupports automatisiert, bis zu 30 % Mehrumsatz." },
-        { label: "Wie entsteht das Ergebnis?", value: "E-Mail, WhatsApp und Support laufen als ein Ablauf statt als drei." },
+        { label: "Wie entsteht das Ergebnis?" },
         { label: "Womit kannst du das belegen?", value: "Mehr als eine klassische Agentur: strategische Beratung mit operativer Exzellenz." },
       ],
     },
     {
       title: "Worum du bittest",
       nodes: [
-        { label: "Was schickst du, wenn er Ja sagt?", value: "Eine Übersicht der drei Stellen, an denen E-Mail, WhatsApp und Support bei euch auseinanderlaufen." },
-        { label: "Wie lange braucht er dafür?", value: "90 Sekunden" },
-        { label: "Die eine Frage", value: "Kostenloses Erstgespräch vereinbaren." },
+        { label: "Was schickst du, wenn er Ja sagt?" },
+        { label: "Wie lange braucht er dafür?" },
+        { label: "Die eine Frage" },
       ],
     },
   ],
@@ -793,11 +790,10 @@ export const DEMO_OFFER_MAP: OfferMapMockupProps = {
     button: "Angebot prüfen",
   },
   findingLabel: "Im Ergebnisfeld steht ein Versprechen, im Belegfeld ein Wahlspruch. Der Beleg für das Versprechen steht nirgends.",
-  note: "Zwölf Felder, vier Gruppen. Jede Linie dazwischen ist eine Regel, an der geprüft wird. Ausgefüllt mit den eigenen Sätzen unseres ersten Kunden retaiyn, von dessen Website.",
+  note: "Zwölf Fragen in vier Gruppen. Ausgefüllt siehst du hier die zwei, die nicht zusammenpassen — mit den eigenen Sätzen unseres ersten Kunden retaiyn, von dessen Website.",
 };
 
 export const DEMO_COACH_FINDING: CoachFindingMockupProps = {
-  frameTitle: "Angebot · Prüfung",
   group: "Worum du bittest",
   fieldLabel: "Die eine Frage, auf die er Ja oder Nein sagt",
   severity: "Blocker",

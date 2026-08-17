@@ -20,16 +20,15 @@ import { useT } from "./language-provider";
 /** Dritte Kopie desselben Rahmens (siehe `_offer-mockups.tsx`): `shadow-screen`
  *  bringt die Haarlinie als erste Schatten-Schicht selbst mit, deshalb steht
  *  hier kein `border` mehr daneben. */
-function AppFrame({ children, title }: { children: React.ReactNode; title?: string }) {
+function AppFrame({ children, note }: { children: React.ReactNode; note?: string }) {
   return (
     <div className="overflow-hidden rounded-2xl bg-panel shadow-screen">
-      <div className="flex items-center gap-1.5 border-b border-edge/70 bg-panel2/60 px-4 py-2.5">
-        <span className="h-2 w-2 rounded-full bg-edge3/50" />
-        <span className="h-2 w-2 rounded-full bg-edge3/35" />
-        <span className="h-2 w-2 rounded-full bg-edge3/25" />
-        {title && <span className="ml-2 text-[11px] text-mute">{title}</span>}
-      </div>
       {children}
+      {note && (
+        <p className="border-t border-edge/70 bg-panel2/50 px-4 py-2 text-[10px] font-medium uppercase tracking-[0.1em] text-faint">
+          {note}
+        </p>
+      )}
     </div>
   );
 }
@@ -77,7 +76,7 @@ export function GateMockup() {
   const riegelVerzoegerung = m.checks.length * GATE_ZEILEN_VERSATZ + GATE_RIEGEL_PAUSE;
 
   return (
-    <AppFrame title={m.frameTitle}>
+    <AppFrame>
       <div className="space-y-2 p-4 sm:p-5">
         {m.checks.map((c, i) => {
           const style = SEVERITY[c.severity as Severity];
@@ -136,7 +135,7 @@ export function ChainMockup() {
   const m = t.guardMockups.chain;
 
   return (
-    <AppFrame title={m.frameTitle}>
+    <AppFrame>
       <div className="p-5 sm:p-6">
         <ol className="relative m-0 list-none p-0">
           <span
@@ -183,7 +182,7 @@ export function EffectMockup() {
   const m = t.guardMockups.effect;
 
   return (
-    <AppFrame title={m.frameTitle}>
+    <AppFrame note={m.sampleNote}>
       <div className="p-4 sm:p-5">
         <div className="mb-4 flex flex-wrap items-baseline gap-x-7 gap-y-2 border-b border-edge/60 pb-4">
           {m.stats.map((s) => (
@@ -269,7 +268,7 @@ export function CopyOutcomesMockup() {
   const rows = m.rows;
 
   return (
-    <AppFrame title={m.frameTitle}>
+    <AppFrame note={m.sampleNote}>
       {/* @container: die Zeile unten ist eine Tabelle mit festen Spalten, und
           wie breit sie sein darf, haengt an der BREITE DIESER KARTE, nicht am
           Fenster -- genauso wie im OfferMapMockup. Im Rundgang steht das Bild
@@ -404,7 +403,7 @@ export function LinkedInMockup() {
   const m = t.guardMockups.linkedin;
 
   return (
-    <AppFrame title={m.frameTitle}>
+    <AppFrame>
       <div className="p-4 sm:p-5">
         <div className="flex flex-wrap items-start justify-between gap-2 border-b border-edge/60 pb-3">
           <div>

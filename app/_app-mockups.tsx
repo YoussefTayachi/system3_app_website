@@ -30,11 +30,6 @@ import { useT } from "./language-provider";
 function AppFrame({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
     <div className={"overflow-hidden rounded-2xl bg-panel shadow-screen " + className}>
-      <div className="flex items-center gap-1.5 border-b border-edge/70 bg-panel2/60 px-4 py-2.5">
-        <span className="h-2 w-2 rounded-full bg-edge3/50" />
-        <span className="h-2 w-2 rounded-full bg-edge3/35" />
-        <span className="h-2 w-2 rounded-full bg-edge3/25" />
-      </div>
       {children}
     </div>
   );

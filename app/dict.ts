@@ -715,7 +715,6 @@ const de = {
    */
   guardMockups: {
     gate: {
-      frameTitle: "Vor dem Start",
       blocked: "2 Sachen verhindern den Start",
       button: "Kampagne anlegen",
       checks: [
@@ -748,7 +747,6 @@ const de = {
       ],
     },
     chain: {
-      frameTitle: "Ein Lead, drei Kanäle",
       note: "Es entsteht immer nur ein nächster Schritt. Wer antwortet, bekommt sofort keine weiteren Nachrichten mehr.",
       steps: [
         {
@@ -787,7 +785,7 @@ const de = {
       // keinen Platz fuer eine eigene Marke, der Titel ist die sichtbarste
       // Stelle, die ohne Umbau des Bauteils erreichbar ist. Die Listennamen
       // unten bleiben: das sind Segmente, keine Firmen.
-      frameTitle: "Wirkung · nach Lead-Liste · Beispielansicht",
+      sampleNote: "Beispielansicht",
       note: "Gemessen an Kontakten, nicht an Mails: eine Sequenz schickt mehrere Mails an dieselbe Person.",
       stats: [
         { label: "Angeschrieben", value: "2.840", strong: false },
@@ -813,7 +811,7 @@ const de = {
       // effect darueber. Laut POSITIONIERUNG.md ist das hier das wichtigste
       // Bild der Seite -- und es war das einzige grosse Zahlenbild ohne
       // Kennzeichnung.
-      frameTitle: "Wirkung · nach Text · Beispielansicht",
+      sampleNote: "Beispielansicht",
       warning:
         "Die Antwortquote allein ist die falsche Zielgröße: eine Fassung kann führen und trotzdem nur Absagen sammeln. Die Spalte, die zählt, sind Termine.",
       // Vorher: "Kunde: Nordwind Coffee · Wiederverkäufer DACH". Kein
@@ -895,7 +893,6 @@ const de = {
     // Anrede ohne Vornamen. Erst mit schriftlicher Antwort darf hier ein Name
     // stehen.
     linkedin: {
-      frameTitle: "LinkedIn · Nachricht steht",
       name: "retaiyn",
       role: "Customer Experience für E-Commerce",
       template: "Vorlage: Standard ★",
@@ -1901,38 +1898,38 @@ const de = {
     // Neues ueber die Firma. Wer sie anfasst, muss diese Linie halten.
     // ────────────────────────────────────────────────────────────────────
     offerMap: {
-      frameTitle: "Angebot · Beispiel",
+      sampleNote: "Beispielansicht",
       corners: [
         {
           title: "Wer schreibt an wen",
           nodes: [
-            { label: "Was verkaufst du?", value: "Customer Experience für E-Commerce: E-Mail, WhatsApp und Support verbunden statt isoliert." },
-            { label: "An wen?", value: "E-Commerce-Shops und -Brands, häufig schon mit Klaviyo oder WhatsApp im Einsatz." },
-            { label: "Wie soll es klingen?", value: "Beratend und konkret, keine Fachwörter, kein Hype." },
+            { label: "Was verkaufst du?" },
+            { label: "An wen?" },
+            { label: "Wie soll es klingen?" },
           ],
         },
         {
           title: "Woran der Leser hängt",
           nodes: [
-            { label: "Welches Problem hat er vorher?", value: "E-Mail, WhatsApp und Customer Support werden unabhängig voneinander betrachtet." },
-            { label: "Woran genau bleibt er hängen?", value: "Brüche in der Customer Journey, ungenutzte Umsatzpotenziale, unnötig hohe operative Aufwände." },
-            { label: "Warum lässt das zögern?", value: "Jedes der drei Systeme läuft für sich, deshalb fällt der Bruch dazwischen niemandem zu." },
+            { label: "Welches Problem hat er vorher?" },
+            { label: "Woran genau bleibt er hängen?" },
+            { label: "Warum lässt das zögern?" },
           ],
         },
         {
           title: "Was er davon hat",
           nodes: [
             { label: "Was ist danach anders?", value: "Bis zu 70 % des Kundensupports automatisiert, bis zu 30 % Mehrumsatz." },
-            { label: "Wie entsteht das Ergebnis?", value: "E-Mail, WhatsApp und Support laufen als ein Ablauf statt als drei." },
+            { label: "Wie entsteht das Ergebnis?" },
             { label: "Womit kannst du das belegen?", value: "Mehr als eine klassische Agentur: strategische Beratung mit operativer Exzellenz." },
           ],
         },
         {
           title: "Worum du bittest",
           nodes: [
-            { label: "Was schickst du, wenn er Ja sagt?", value: "Eine Übersicht der drei Stellen, an denen E-Mail, WhatsApp und Support bei euch auseinanderlaufen." },
-            { label: "Wie lange braucht er dafür?", value: "90 Sekunden" },
-            { label: "Die eine Frage", value: "Kostenloses Erstgespräch vereinbaren." },
+            { label: "Was schickst du, wenn er Ja sagt?" },
+            { label: "Wie lange braucht er dafür?" },
+            { label: "Die eine Frage" },
           ],
         },
       ],
@@ -1954,10 +1951,9 @@ const de = {
       // Der Herkunftssatz ist am 2026-08-14 nach oben in `caseIntro`
       // gewandert. Unten bleibt nur die Mechanik -- zweimal dieselbe Auskunft
       // ueber und unter demselben Bild ist einmal zu viel.
-      note: "Zwölf Felder, vier Gruppen. Jede Linie dazwischen ist eine Regel, an der geprüft wird.",
+      note: "Zwölf Fragen in vier Gruppen. Ausgefüllt siehst du hier die zwei, die nicht zusammenpassen — den Rest füllst du oder die KI.",
     },
     coachFinding: {
-      frameTitle: "Angebot · Prüfung",
       group: "Worum du bittest",
       fieldLabel: "Die eine Frage, auf die er Ja oder Nein sagt",
       severity: "Blocker",
@@ -3084,7 +3080,6 @@ const en: typeof de = {
   },
   guardMockups: {
     gate: {
-      frameTitle: "Before you start",
       blocked: "2 things block the start",
       button: "Create campaign",
       checks: [
@@ -3112,7 +3107,6 @@ const en: typeof de = {
       ],
     },
     chain: {
-      frameTitle: "One lead, three channels",
       note: "There is always exactly one next step. Anyone who replies stops receiving further messages immediately.",
       steps: [
         {
@@ -3138,7 +3132,7 @@ const en: typeof de = {
       ],
     },
     effect: {
-      frameTitle: "Effect · by lead list · example view",
+      sampleNote: "Example view",
       note: "Measured per contact, not per mail: a sequence sends several mails to the same person.",
       stats: [
         { label: "Contacted", value: "2,840", strong: false },
@@ -3154,7 +3148,7 @@ const en: typeof de = {
       ],
     },
     copyOutcomes: {
-      frameTitle: "Effect \u00b7 by copy \u00b7 example view",
+      sampleNote: "Example view",
       warning:
         "Reply rate alone is the wrong target: a version can lead and still collect nothing but rejections. The column that counts is meetings.",
       campaign: "One campaign, two versions of the copy",
@@ -3210,7 +3204,6 @@ const en: typeof de = {
       note: "The attribution comes from the sending itself: a reply carries the step of the mail it answers. Below 30 contacts no percentage is shown.",
     },
     linkedin: {
-      frameTitle: "LinkedIn \u00b7 message ready",
       name: "retaiyn",
       role: "Customer experience for e-commerce",
       template: "Template: Default \u2605",
@@ -3807,38 +3800,38 @@ const en: typeof de = {
     caseIntro:
       "The offer below belongs to retaiyn, our first client: customer experience for e-commerce brands, meaning AI support, WhatsApp and email marketing as one flow instead of three. The fields are filled with their own sentences — the percentages in there are retaiyn's claims about themselves, not ours.",
     offerMap: {
-      frameTitle: "Offer · Example",
+      sampleNote: "Example view",
       corners: [
         {
           title: "Who writes to whom",
           nodes: [
-            { label: "What do you sell?", value: "Customer experience for e-commerce: email, WhatsApp and support connected rather than isolated." },
-            { label: "To whom?", value: "E-commerce shops and brands, often already running Klaviyo or WhatsApp." },
-            { label: "How should it sound?", value: "Advisory and concrete, no jargon, no hype." },
+            { label: "What do you sell?" },
+            { label: "To whom?" },
+            { label: "How should it sound?" },
           ],
         },
         {
           title: "Where the reader is stuck",
           nodes: [
-            { label: "What do they struggle with beforehand?", value: "Email, WhatsApp and customer support are treated independently of each other." },
-            { label: "Where exactly do they get stuck?", value: "Breaks in the customer journey, unused revenue potential, needlessly high operational effort." },
-            { label: "Why does that make buyers hesitate?", value: "Each of the three systems runs on its own, so the break between them is nobody's job." },
+            { label: "What do they struggle with beforehand?" },
+            { label: "Where exactly do they get stuck?" },
+            { label: "Why does that make buyers hesitate?" },
           ],
         },
         {
           title: "What they get out of it",
           nodes: [
             { label: "What is different afterwards?", value: "Up to 70% of customer support automated, up to 30% more revenue." },
-            { label: "How does the result happen?", value: "Email, WhatsApp and support run as one flow instead of three." },
+            { label: "How does the result happen?" },
             { label: "What backs that up?", value: "More than a classic agency: strategic advice with operational excellence." },
           ],
         },
         {
           title: "What you are asking for",
           nodes: [
-            { label: "What do you send once they say yes?", value: "A rundown of the three places where email, WhatsApp and support drift apart at your company." },
-            { label: "How long does that take them?", value: "90 seconds" },
-            { label: "The one question", value: "Book a free intro call." },
+            { label: "What do you send once they say yes?" },
+            { label: "How long does that take them?" },
+            { label: "The one question" },
           ],
         },
       ],
@@ -3855,10 +3848,9 @@ const en: typeof de = {
         button: "Check the offer",
       },
       findingLabel: "The outcome field holds a promise, the proof field holds a slogan. The proof for the promise is nowhere in the offer.",
-      note: "Twelve fields, four groups. Every line between them is a rule the offer is checked against.",
+      note: "Twelve questions in four groups. The two filled in here are the two that do not match — the rest you fill in, or the AI does.",
     },
     coachFinding: {
-      frameTitle: "Offer · Check",
       group: "What you are asking for",
       fieldLabel: "The one question they answer yes or no to",
       severity: "Blocker",
