@@ -120,7 +120,7 @@ export default function KontaktPage() {
         {/* Linksbuendig statt mittig, wie auf /case-study: der Rueckweg
             gehoert an dieselbe Kante wie alles darueber. */}
         <p className="mt-10 text-sm text-mute">
-          <Link href="/" className="underline hover:text-ink">{c.backLabel}</Link>
+          <Link href="/" className="tap-link underline hover:text-ink">{c.backLabel}</Link>
         </p>
       </section>
 

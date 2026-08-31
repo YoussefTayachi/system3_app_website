@@ -62,7 +62,7 @@ function Cell({ state, labels }: { state: Support; labels: { yes: string; no: st
   if (state === "partial") {
     return (
       <>
-        <span aria-hidden className="text-[11px] font-medium text-mute">
+        <span aria-hidden className="text-[13px] font-medium text-mute">
           {labels.partial}
         </span>
         <span className="sr-only">{labels.partial}</span>
@@ -101,7 +101,7 @@ export function AllInOneCompare() {
           <caption className="sr-only">{c.title}</caption>
           <thead>
             <tr>
-              <th scope="col" className="w-[34%] pb-3 text-left text-[11px] font-medium uppercase tracking-[0.12em] text-faint">
+              <th scope="col" className="w-[34%] pb-3 text-left text-[13px] font-medium uppercase tracking-[0.12em] text-faint">
                 {c.featureHeader}
               </th>
               {c.tools.map((tool) => (
@@ -192,7 +192,7 @@ export function AllInOneCompare() {
           Bewusst gruen/grau statt gruen/rot: was bleibt, ist kein Verlust.
           ═══════════════════════════════════════════════════════════════ */}
       <div className="mt-8 rounded-2xl border border-edge2/70 bg-panel2/50 p-5 sm:p-6">
-        <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-ink">{c.ledgerLabel}</p>
+        <p className="text-[13px] font-bold uppercase tracking-[0.12em] text-ink">{c.ledgerLabel}</p>
         <ul className="mt-3 space-y-2.5">
           <li className="flex gap-3 text-sm leading-relaxed text-soft">
             <span aria-hidden className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-edge3" />

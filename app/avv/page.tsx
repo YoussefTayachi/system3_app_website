@@ -1,6 +1,9 @@
 import { LegalShell } from "../_legal/LegalShell";
 
-export const metadata = { title: "Auftragsverarbeitungsvertrag · Frostbreaker" };
+export const metadata = {
+  title: "Auftragsverarbeitungsvertrag · Frostbreaker",
+  alternates: { canonical: "/avv" },
+};
 
 export default function AVV() {
   return (

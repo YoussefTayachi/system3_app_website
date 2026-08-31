@@ -107,7 +107,7 @@ export default function CaseStudyPage() {
         {/* Linksbuendig statt mittig: der Rueckweg gehoert an dieselbe Kante
             wie alles darueber, sonst schwebt er allein in der Breite. */}
         <p className="mt-12 text-sm text-mute">
-          <Link href="/" className="underline hover:text-ink">{c.backLabel}</Link>
+          <Link href="/" className="tap-link underline hover:text-ink">{c.backLabel}</Link>
         </p>
       </section>
 

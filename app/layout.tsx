@@ -17,6 +17,7 @@ import "@fontsource-variable/fraunces/opsz-italic.css";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { getLangServer } from "./lang";
+import { SITE_URL } from "./site";
 import { LanguageProvider } from "./language-provider";
 
 // Bewusst weg von Inter (die mit Abstand haeufigste SaaS-Schrift, null
@@ -36,7 +37,10 @@ const description =
 // metadataBase macht aus dem generierten OG-Bild (app/opengraph-image.tsx)
 // eine absolute URL -- ohne das steht beim Teilen ein localhost-Link im
 // og:image, den kein Crawler aufloesen kann.
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://system3-app-website.vercel.app";
+// Die Adresse steht seit dem 2026-08-31 in app/site.ts: robots.ts und
+// sitemap.ts brauchen sie ebenfalls, und drei Kopien einer Domain laufen beim
+// ersten Umzug still auseinander.
+const siteUrl = SITE_URL;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

@@ -1,5 +1,6 @@
 "use client";
 import { useT } from "./language-provider";
+import { stageIcons } from "./_icons";
 
 /**
  * Die Systemkarte: der ganze Umfang der App auf einen Blick, direkt unter dem
@@ -72,7 +73,7 @@ function StageArrow({ label, delay }: { label: string; delay: number }) {
         <path d="M0 8h26" stroke="currentColor" strokeWidth="1.5" />
         <path d="M21 2.5 28 8l-7 5.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
-      <span className="max-w-[9rem] text-center text-[11px] leading-tight text-mute">{label}</span>
+      <span className="max-w-[9rem] text-center text-[13px] leading-tight text-mute">{label}</span>
     </div>
   );
 }
@@ -117,18 +118,28 @@ function StageCard({ stage, accent, delay }: { stage: Stage; accent: boolean; de
         (accent ? "border border-coral/40 bg-coral-soft" : "bg-panel shadow-card")
       }
     >
+      {/* PIKTOGRAMM UND STUFENNAME IN EINER ZEILE, seit dem 2026-08-31.
+          Runde 3 der Mentor-Rueckmeldung am CTS-Fall, woertlich: "for the
+          card titles add icons in front of the title". Ohne Zeichen sind
+          drei Karten mit Ueberschrift und Liste eine dreispaltige Tabelle.
+          Das Zeichen steht VOR dem Stufennamen und nicht vor dem Titel: der
+          Stufenname ist das, was die drei Karten als Kette lesbar macht, und
+          das Zeichen gehoert zu ihm.
+          13px statt 11px: Grossbuchstaben unter 12px sind auf dieser Seite
+          seit dem 2026-08-15 verboten, in den Nachbildungen wie hier. */}
       <p
         className={
-          "text-[11px] font-bold uppercase tracking-[0.14em] " +
+          "flex items-center gap-2 text-[13px] font-bold uppercase tracking-[0.12em] " +
           (accent ? "text-ink" : "text-faint")
         }
       >
+        <span className="text-sky-600">{stageIcons[stage.id]}</span>
         {stage.label}
       </p>
       {/* Kartentitel in Space Grotesk, nicht in Fraunces: die Display-Serife
           traegt erst ab 24px. Darunter liest sie sich als Fachtext -- genau
           das war hier bei 18px der Fall. */}
-      <h3 className="mt-2 text-[1.0625rem] font-semibold leading-snug tracking-[-0.015em] text-ink">
+      <h3 className="mt-3 text-[1.1875rem] font-semibold leading-snug tracking-[-0.015em] text-ink">
         {stage.title}
       </h3>
       {/* ═══════════════════════════════════════════════════════════════
@@ -164,7 +175,7 @@ function StageCard({ stage, accent, delay }: { stage: Stage; accent: boolean; de
           bei 1440px: die Zeile lief vorher auf 13px/1.625, jetzt 15px/1.625 --
           derselbe Rhythmus, lesbare Groesse. */}
       {stage.body ? (
-        <p className="mt-4 text-[15px] leading-relaxed text-soft">{stage.body}</p>
+        <p className="mt-4 text-[17px] leading-relaxed text-soft">{stage.body}</p>
       ) : (
         // Linien NUR ZWISCHEN den Punkten, nicht darum herum: eine Liste
         // braucht keine Aussenkante, sie hat die Karte. Reiner Abstand
@@ -176,24 +187,22 @@ function StageCard({ stage, accent, delay }: { stage: Stage; accent: boolean; de
         // loest dasselbe eine Stufe leiser.
         <ul className="mt-4 divide-y divide-edge/70">
           {stage.items?.map((item) => (
-            <li key={item} className="py-2.5 text-[15px] leading-relaxed text-soft">
+            <li key={item} className="py-3 text-[17px] leading-relaxed text-soft">
               {item}
             </li>
           ))}
         </ul>
       )}
-      {/* mt-6 statt mt-auto, seit dem 2026-08-15.
-          Die Notiz sass am Kartenfuss, damit die drei Notizen auf einer Hoehe
-          enden. Der Preis dafuer stand ueber ihr: gemessen bei 1440px in
-          Deutsch klaffte zwischen der letzten Listenzeile und der Trennlinie
-          in Karte 2 rund 90px und in Karte 3 rund 100px leere Flaeche. Ein
-          leerer Streifen mitten in einer Karte liest sich als Fehlstelle, und
-          die Trennlinie erklaert ihn nicht, sie markiert ihn nur.
-          Ungleich hohe Karten sind ehrlicher als gleich hohe Karten mit
-          Loechern -- die Zeile darueber setzt dafuer items-start. */}
-      <p className="mt-6 border-t border-edge/70 pt-5 text-xs leading-relaxed text-mute">
-        {stage.note}
-      </p>
+      {/* HIER STAND DIE FUSSNOTE JEDER STUFE, gefallen am 2026-08-31.
+          Drei Absaetze von zusammen 88 Woertern in 12px, am Fuss von drei
+          Karten, die darueber schon einen Titel und drei Punkte tragen.
+          Gemessen: die Systemkarte war mit 253 Woertern der zweitteuerste
+          Abschnitt der Startseite, und ein Drittel davon stand in diesen
+          drei Fussnoten.
+          Alle drei stehen ausfuehrlich auf /funktionen; die wichtigste --
+          welche vier Anbieter angebunden sind -- steht dort unter #find.
+          `systemMap.stages[].note` bleibt im Woerterbuch: /funktionen liest
+          es weiter. */}
     </div>
   );
 }
@@ -263,18 +272,21 @@ export function SystemMap() {
           <path d="M2.5 9 8 2l5.5 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
         <div className="mt-2 w-full rounded-2xl border border-coral/40 bg-coral-soft p-5 sm:p-6">
-          <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-ink">
+          <p className="text-[13px] font-bold uppercase tracking-[0.12em] text-ink">
             {m.loop.label}
           </p>
-          <h3 className="mt-2 max-w-[46ch] text-[1.0625rem] font-semibold leading-snug tracking-[-0.015em] text-ink sm:text-xl">
+          <h3 className="mt-2.5 max-w-[46ch] text-xl font-semibold leading-snug tracking-[-0.015em] text-ink sm:text-2xl">
             {m.loop.title}
           </h3>
-          <p className="mt-2.5 max-w-[70ch] text-sm leading-relaxed text-soft">{m.loop.body}</p>
-          <ul className="mt-4 flex flex-wrap gap-2">
+          {/* HIER STAND `m.loop.body`, gefallen am 2026-08-31: 42 Woerter, die
+              erklaerten, was die sechs Marken darunter zeigen. Die Marken
+              zeigen es selbst -- das ist der ganze Grund, warum sie da sind.
+              Der Schluessel bleibt im Woerterbuch, /funktionen liest ihn. */}
+          <ul className="mt-5 flex flex-wrap gap-2">
             {m.loop.items.map((item) => (
               <li
                 key={item}
-                className="rounded-full border border-coral/30 bg-panel px-3 py-1 text-[12px] leading-snug text-soft"
+                className="rounded-full border border-coral/30 bg-panel px-3.5 py-1.5 text-[15px] leading-snug text-soft"
               >
                 {item}
               </li>

@@ -13,8 +13,12 @@ import {
 // DashboardMockup ist am 2026-08-14 mit dem textlosen Schlussabschnitt
 // gefallen (Begruendung unten an der Fundstelle). Die Komponente bleibt in
 // _app-mockups.tsx.
-import { UnifiedSearchMockup, LeadsTableMockup, LeadDetailMockup, MailboxesMockup, AiAgentMockup, VerificationReportMockup, CopyCheckMockup, PipelineMockup, TechFilterMockup } from "../_app-mockups";
-import { SuppressionMockup, LocalReachMockup, QualifiedLeadAnimation, CampaignMockup, DeliverabilityMockup } from "../_mockups";
+// LeadsTableMockup und VerificationReportMockup sind am 2026-08-31 aus
+// `enrich` gefallen (Begruendung an der Fundstelle). Sie bleiben in
+// _app-mockups.tsx liegen.
+import { UnifiedSearchMockup, LeadDetailMockup, MailboxesMockup, AiAgentMockup, CopyCheckMockup, PipelineMockup, TechFilterMockup } from "../_app-mockups";
+// DeliverabilityMockup ist am 2026-08-31 aus `send` gefallen.
+import { SuppressionMockup, LocalReachMockup, QualifiedLeadAnimation, CampaignMockup } from "../_mockups";
 import { LinkedInMockup } from "../_guard-mockups";
 import { CoachFindingMockup } from "../_offer-mockups";
 import { AllInOneCompare } from "../_compare";
@@ -53,14 +57,28 @@ export default function FunktionenPage() {
     tech: <TechFilterMockup />,
     // Verifizierung war bisher nur ein Textbullet ohne eigenes Bild -- genau
     // das Muster, das auf der Startseite schon eine eigene Sektion bekam.
+    // ══════════════════════════════════════════════════════════════════
+    // HOECHSTENS ZWEI BILDER JE GRUPPE, seit dem 2026-08-31.
+    //
+    // Hier standen vier gestapelte Nachbildungen, bei `send` drei. Gemessen
+    // mit scripts/count-words.mjs: `enrich` kam auf 208 sichtbare Woerter und
+    // war damit teurer als jeder Textabschnitt der Startseite -- fast alles
+    // davon Beschriftungen in Bildern, die untereinander stehen.
+    //
+    // Vier Bildschirme in einer Spalte sind kein Argument, sondern eine
+    // Scrollwand: der Leser sieht das dritte nicht mehr im Zusammenhang mit
+    // der Ueberschrift, zu der es gehoert. Zwei stehen noch zusammen.
+    //
+    // Gefallen sind VerificationReportMockup und LeadsTableMockup (hier) und
+    // DeliverabilityMockup (bei `send`). Die Aussagen bleiben als Stichpunkt
+    // stehen, und die Zustellbarkeit hat mit `protect` ohnehin eine eigene
+    // Gruppe. Alle drei Bauteile bleiben in ihren Dateien liegen.
+    // ══════════════════════════════════════════════════════════════════
     enrich: (
       <div className="space-y-5">
         <LeadDetailMockup />
-        {/* Das Aussortieren der info@-Adressen ist der Kern dieser Gruppe und
-            hatte hier bisher kein Bild. */}
+        {/* Das Aussortieren der info@-Adressen ist der Kern dieser Gruppe. */}
         <QualifiedLeadAnimation />
-        <VerificationReportMockup />
-        <LeadsTableMockup />
       </div>
     ),
     personalize: <AiAgentMockup />,
@@ -90,9 +108,10 @@ export default function FunktionenPage() {
             gehoert zur Kampagne -- sie traegt denselben Aufhaenger wie die
             Mail und entsteht mit ihr. */}
         <LinkedInMockup />
-        {/* Zustellbarkeit steht bewusst NACH den Postfaechern: erst sieht man,
-            womit gesendet wird, dann, was daran kaputtgehen kann. */}
-        <DeliverabilityMockup />
+        {/* DeliverabilityMockup stand hier als drittes Bild. Gefallen am
+            2026-08-31, siehe die Begruendung bei `enrich`: die
+            Zustellbarkeit hat mit `protect` eine eigene Gruppe, und die
+            Stichpunkte dieser Gruppe nennen SPF, DKIM und DMARC ohnehin. */}
       </div>
     ),
     pipeline: <PipelineMockup />,

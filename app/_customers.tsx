@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import { useT } from "./language-provider";
 import { BOOKING_URL } from "./_ui";
 import { Reveal } from "./reveal";
@@ -52,11 +53,11 @@ export function CustomerStrip({ className = "" }: { className?: string }) {
       target="_blank"
       rel="noopener noreferrer"
       className={
-        "group inline-flex max-w-full flex-wrap items-center gap-x-3 gap-y-1.5 rounded-full border border-edge2/70 bg-panel/70 py-2 pl-4 pr-4 transition-colors hover:border-edge3 " +
+        "group inline-flex min-h-[44px] max-w-full flex-wrap items-center gap-x-3 gap-y-1.5 rounded-full border border-edge2/70 bg-panel/70 px-4 py-2.5 transition-colors hover:border-edge3 " +
         className
       }
     >
-      <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-mute">
+      <span className="text-[13px] font-medium uppercase tracking-[0.12em] text-mute">
         {c.stripLabel}
       </span>
       <Image
@@ -64,12 +65,12 @@ export function CustomerStrip({ className = "" }: { className?: string }) {
         alt={c.logoAlt}
         width={LOGO.width}
         height={LOGO.height}
-        className="h-[15px] w-auto"
+        className="h-[17px] w-auto"
       />
       <span aria-hidden className="hidden text-edge3 sm:inline">
         ·
       </span>
-      <span className="hidden text-xs text-mute transition-colors group-hover:text-soft sm:inline">
+      <span className="hidden text-[13px] text-mute transition-colors group-hover:text-soft sm:inline">
         {c.descriptor}
       </span>
       <span className="text-mute transition-colors group-hover:text-ink">
@@ -80,18 +81,90 @@ export function CustomerStrip({ className = "" }: { className?: string }) {
 }
 
 /**
- * Der volle Abschnitt, zwei Teile in einer Karte.
+ * DIE KURZFASSUNG DES KUNDENBELEGS, neu am 2026-08-31.
  *
- * Oben der Beleg: Wortzeichen links, die Geschichte rechts. Die Fakten
- * stehen als Beschreibungsliste statt als Haken-Aufzaehlung -- Haken lesen
- * sich wie Produktvorteile, hier geht es um Angaben ueber jemand anderen.
+ * `CustomerSection` darunter ist 259 Woerter lang und war damit der
+ * drittteuerste Abschnitt der Startseite -- zwei Absaetze Fallbeschreibung,
+ * vier Faktenzeilen und ein Spiegel-Block mit eigenem Knopf. Der ganze Fall
+ * steht seit dem 2026-08-14 auf /kunden/retaiyn, wo er hingehoert; auf der
+ * Startseite muss er nur belegen, DASS es ihn gibt.
  *
- * Unten der Spiegel, abgesetzt auf eigenem Flaechenton: derselbe Gedanke,
- * aber in der zweiten Person und ohne den Kundennamen. Der Beleg allein
- * ueberzeugt niemanden, der sich nicht selbst darin erkennt -- deshalb
- * uebernimmt dieser Block die Uebertragung ausdruecklich, statt sie dem
- * Leser zu ueberlassen, und endet als einziger Teil des Abschnitts in
- * einem Weg ins Gespraech.
+ * Was bleibt: das Wortzeichen, der Zuschnitt in einer Zeile, und der Satz
+ * ueber die Zahl, die hier NICHT steht. Der ist der wichtigste von allen und
+ * darf nirgends wegfallen -- eine Seite, die zugibt, was sie nicht messen
+ * kann, wird beim Rest geglaubt.
+ *
+ * Steht auf der Startseite und auf /fuer-agenturen. Beide zeigten vorher die
+ * lange Fassung darunter.
+ */
+export function CustomerProof({ className = "" }: { className?: string }) {
+  const { t } = useT();
+  const c = t.customer;
+  return (
+    <section id="kunde" className={"scroll-mt-20 " + className}>
+      <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24">
+        <Reveal>
+          <div className="grid items-center gap-8 rounded-2xl bg-panel p-6 shadow-card sm:p-10 lg:grid-cols-[minmax(0,15rem)_1fr] lg:gap-14">
+            <a
+              href={c.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex flex-col items-center justify-center rounded-xl border border-edge/70 bg-panel2/60 px-6 py-9 transition-colors hover:border-edge2"
+            >
+              <Image
+                src={LOGO.src}
+                alt={c.logoAlt}
+                width={LOGO.width}
+                height={LOGO.height}
+                className="h-9 w-auto sm:h-11"
+              />
+              <span className="mt-5 inline-flex items-center gap-1.5 text-[13px] text-mute transition-colors group-hover:text-ink">
+                {c.urlLabel}
+                <ExternalIcon />
+              </span>
+            </a>
+
+            <div>
+              <h2 className="font-display max-w-[22ch] text-[1.75rem] font-medium leading-[1.12] tracking-[-0.025em] text-balance text-ink sm:text-[2.25rem]">
+                {c.title}
+              </h2>
+              {/* Die einzige Faktenzeile, die bleibt: WOFUER retaiyn sucht.
+                  Die drei anderen (Agentur fuer, Ueber, Als Naechstes) stehen
+                  auf /kunden/retaiyn. */}
+              <p className="mt-4 text-[19px] leading-relaxed text-soft">{c.descriptor}</p>
+              <p className="mt-6 border-l-2 border-edge2 pl-4 text-[15px] leading-relaxed text-mute">
+                {c.pending}
+              </p>
+              <Link
+                href="/kunden/retaiyn"
+                className="tap-link group mt-5 gap-1.5 text-[15px] font-medium text-soft transition-colors hover:text-ink"
+              >
+                {c.pageLink}
+                <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
+                  →
+                </span>
+              </Link>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/**
+ * DIE LANGE FASSUNG, zwei Teile in einer Karte: oben der Beleg, unten der
+ * Spiegel in der zweiten Person und ohne den Kundennamen.
+ *
+ * Seit dem 2026-08-31 von keiner Seite mehr aufgerufen:
+ * Startseite und /fuer-agenturen zeigen beide `CustomerProof` darueber, und
+ * der Fall selbst steht auf /kunden/retaiyn.
+ *
+ * Sie bleibt liegen und wird nicht geloescht. Der Spiegel-Block darin ("Und
+ * in eurer Agentur?") ist der einzige Ort auf dieser Website, an dem der Fall
+ * auf den Leser zurueckgedreht wird, und `customer.mirror` steht dafuer in
+ * beiden Sprachen formuliert bereit. Sobald es eine Seite gibt, auf die ein
+ * ausfuehrlicher Kundenbeleg gehoert, steht er hier.
  */
 export function CustomerSection({ className = "" }: { className?: string }) {
   const { t } = useT();
@@ -129,7 +202,7 @@ export function CustomerSection({ className = "" }: { className?: string }) {
                 <dl className="mt-6 space-y-3.5">
                   {c.facts.map((f) => (
                     <div key={f.label}>
-                      <dt className="text-[11px] font-medium uppercase tracking-[0.1em] text-mute">
+                      <dt className="text-[13px] font-medium uppercase tracking-[0.1em] text-mute">
                         {f.label}
                       </dt>
                       <dd className="mt-1 text-sm leading-relaxed text-soft">{f.value}</dd>
@@ -139,7 +212,7 @@ export function CustomerSection({ className = "" }: { className?: string }) {
               </div>
 
               <div className="lg:col-span-3">
-                <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-faint">
+                <p className="text-[13px] font-medium uppercase tracking-[0.14em] text-faint">
                   {c.eyebrow}
                 </p>
                 <h2 className="font-display mt-2 max-w-[24ch] text-2xl font-semibold leading-[1.15] tracking-[-0.02em] text-ink text-balance sm:text-[1.75rem]">
@@ -184,7 +257,7 @@ export function CustomerSection({ className = "" }: { className?: string }) {
                 // `transition-all` ersetzt durch die zwei Eigenschaften, die
                 // tatsaechlich wechseln -- gleiche Begruendung wie an
                 // CTAButton in _ui.tsx.
-                className="group mt-6 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-surface transition-[opacity,scale] duration-[140ms] ease-out hover:opacity-85 active:scale-[0.98]"
+                className="group mt-6 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-medium text-surface transition-[opacity,scale] duration-[140ms] ease-out hover:opacity-85 active:scale-[0.98]"
               >
                 {c.mirror.cta}
                 <span aria-hidden className="transition-transform group-hover:translate-x-0.5">

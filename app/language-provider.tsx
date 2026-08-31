@@ -36,7 +36,7 @@ export function LanguageToggle({ className = "" }: { className?: string }) {
       onClick={() => setLang(lang === "de" ? "en" : "de")}
       title={lang === "de" ? "Switch to English" : "Auf Deutsch wechseln"}
       className={
-        "flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-edge2 text-[11px] font-semibold uppercase text-soft transition-all hover:border-ink hover:text-ink active:scale-90 " +
+        "flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-edge2 text-[13px] font-semibold uppercase text-soft transition-all hover:border-ink hover:text-ink active:scale-90 " +
         className
       }
     >

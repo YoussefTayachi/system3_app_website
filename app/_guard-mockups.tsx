@@ -25,7 +25,7 @@ function AppFrame({ children, note }: { children: React.ReactNode; note?: string
     <div className="overflow-hidden rounded-2xl bg-panel shadow-screen">
       {children}
       {note && (
-        <p className="border-t border-edge/70 bg-panel2/50 px-4 py-2 text-[10px] font-medium uppercase tracking-[0.1em] text-faint">
+        <p className="border-t border-edge/70 bg-panel2/50 px-4 py-2 text-[12px] font-medium uppercase tracking-[0.1em] text-faint">
           {note}
         </p>
       )}
@@ -89,7 +89,7 @@ export function GateMockup() {
               <span className={"mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full " + style.dot} />
               <div className="min-w-0">
                 <p className="text-[13px] font-medium leading-snug text-ink">{c.title}</p>
-                {c.body && <p className="mt-0.5 text-[11px] leading-relaxed text-faint">{c.body}</p>}
+                {c.body && <p className="mt-0.5 text-[13px] leading-relaxed text-faint">{c.body}</p>}
               </div>
             </div>
           );
@@ -144,16 +144,16 @@ export function ChainMockup() {
           />
           {m.steps.map((s, i) => (
             <li key={s.title} className={"relative pl-11 " + (i < m.steps.length - 1 ? "pb-6" : "")}>
-              <span className="absolute left-0 top-0 grid h-8 w-8 place-items-center rounded-full border-2 border-sky-500/70 bg-panel text-[11px] font-bold text-sky-600">
+              <span className="absolute left-0 top-0 grid h-8 w-8 place-items-center rounded-full border-2 border-sky-500/70 bg-panel text-[13px] font-bold text-sky-600">
                 {i + 1}
               </span>
-              <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-sky-600">{s.day}</p>
+              <p className="text-[13px] font-bold uppercase tracking-[0.08em] text-sky-600">{s.day}</p>
               <p className="mt-0.5 text-[14px] font-semibold text-ink">{s.title}</p>
               <p className="mt-1 text-[12px] leading-relaxed text-soft">{s.body}</p>
             </li>
           ))}
         </ol>
-        <p className="mt-5 border-t border-edge/60 pt-4 text-[11px] leading-relaxed text-mute">{m.note}</p>
+        <p className="mt-5 border-t border-edge/60 pt-4 text-[13px] leading-relaxed text-mute">{m.note}</p>
       </div>
     </AppFrame>
   );
@@ -187,7 +187,7 @@ export function EffectMockup() {
         <div className="mb-4 flex flex-wrap items-baseline gap-x-7 gap-y-2 border-b border-edge/60 pb-4">
           {m.stats.map((s) => (
             <div key={s.label}>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-mute">{s.label}</p>
+              <p className="text-[12px] font-semibold uppercase tracking-[0.08em] text-mute">{s.label}</p>
               <p className={"tabular-nums " + (s.strong ? "text-xl font-semibold text-ink" : "text-xl text-soft")}>
                 {s.value}
               </p>
@@ -212,7 +212,7 @@ export function EffectMockup() {
               </span>
               <span
                 className={
-                  "w-[92px] shrink-0 text-right text-[11px] tabular-nums " +
+                  "w-[92px] shrink-0 text-right text-[13px] tabular-nums " +
                   (r.percent === null ? "text-mute" : "text-soft")
                 }
               >
@@ -222,7 +222,7 @@ export function EffectMockup() {
           ))}
         </div>
 
-        <p className="mt-4 text-[11px] leading-relaxed text-mute">{m.note}</p>
+        <p className="mt-4 text-[13px] leading-relaxed text-mute">{m.note}</p>
       </div>
     </AppFrame>
   );
@@ -306,7 +306,7 @@ export function CopyOutcomesMockup() {
                     sein, wenn die Farbe wegfaellt. */}
                 <span
                   className={
-                    "w-5 shrink-0 rounded text-center text-[11px] font-bold @min-[26rem]:w-6 " +
+                    "w-5 shrink-0 rounded text-center text-[13px] font-bold @min-[26rem]:w-6 " +
                     (r.variant ? "rounded border border-edge2 bg-chip text-soft" : "text-transparent")
                   }
                 >
@@ -357,14 +357,14 @@ export function CopyOutcomesMockup() {
               {/* Einzug bis zum Beginn des Balkens, damit die Unterzeile unter
                   den Zahlen haengt und nicht unter dem Schritt-Namen. Faellt
                   mit den Spaltenbreiten oben: 56+6+20 bzw. 80+10+24. */}
-              <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 pl-[82px] text-[11px] text-mute @min-[26rem]:pl-[113px]">
+              <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 pl-[82px] text-[13px] text-mute @min-[26rem]:pl-[113px]">
                 <span>
                   {r.contacts} {m.contactsWord}
                 </span>
                 <span>{r.interested}</span>
                 <span>{r.rejections}</span>
                 {r.best && (
-                  <span className="rounded-full bg-emerald-500/12 px-2 py-0.5 text-[11px] font-semibold text-emerald-700">
+                  <span className="rounded-full bg-emerald-500/12 px-2 py-0.5 text-[13px] font-semibold text-emerald-700">
                     {m.bestLabel}
                   </span>
                 )}
@@ -408,9 +408,9 @@ export function LinkedInMockup() {
         <div className="flex flex-wrap items-start justify-between gap-2 border-b border-edge/60 pb-3">
           <div>
             <p className="text-[13px] font-medium text-ink">{m.name}</p>
-            <p className="text-[11px] text-mute">{m.role}</p>
+            <p className="text-[13px] text-mute">{m.role}</p>
           </div>
-          <span className="rounded-full border border-edge2 bg-chip px-2.5 py-1 text-[10px] text-soft">
+          <span className="rounded-full border border-edge2 bg-chip px-2.5 py-1 text-[12px] text-soft">
             {m.template}
           </span>
         </div>
@@ -421,7 +421,7 @@ export function LinkedInMockup() {
               diese Nachricht von einem Serienbrief unterscheidet, und er
               stammt aus derselben Recherche wie die Mail. */}
           <div className="rounded-lg border border-coral/30 bg-coral-soft px-3 py-2.5">
-            <p className="mb-1 text-[9px] font-bold uppercase tracking-[0.1em] text-ink">{m.hookLabel}</p>
+            <p className="mb-1 text-[12px] font-bold uppercase tracking-[0.1em] text-ink">{m.hookLabel}</p>
             <p className="text-[12px] leading-relaxed text-soft">{m.hook}</p>
           </div>
           <p className="text-[12px] leading-relaxed text-soft">{m.pitch}</p>
@@ -429,15 +429,15 @@ export function LinkedInMockup() {
         </div>
 
         <div className="mt-3 flex flex-wrap gap-2">
-          <span className="rounded-lg bg-ink px-3 py-1.5 text-[11px] font-medium text-surface">{m.buttons[0]}</span>
+          <span className="rounded-lg bg-ink px-3 py-1.5 text-[13px] font-medium text-surface">{m.buttons[0]}</span>
           {m.buttons.slice(1).map((b) => (
-            <span key={b} className="rounded-lg border border-edge2 bg-panel px-3 py-1.5 text-[11px] text-soft">
+            <span key={b} className="rounded-lg border border-edge2 bg-panel px-3 py-1.5 text-[13px] text-soft">
               {b}
             </span>
           ))}
         </div>
 
-        <p className="mt-3.5 text-[11px] leading-relaxed text-mute">{m.note}</p>
+        <p className="mt-3.5 text-[13px] leading-relaxed text-mute">{m.note}</p>
       </div>
     </AppFrame>
   );

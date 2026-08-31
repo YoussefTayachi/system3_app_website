@@ -90,10 +90,31 @@ export const h1Cls =
 // haengt kein Kundenstreifen.
 export const h1SplitCls =
   "font-display text-4xl font-medium leading-[0.98] tracking-[-0.03em] text-balance sm:text-[3.75rem] lg:text-[3.25rem] xl:text-[3.75rem]";
+// ══════════════════════════════════════════════════════════════════════
+// EINE STUFE GROESSER, seit dem 2026-08-31.
+//
+// Aus Runde 2b der Rueckmeldungen am CTS-Fall
+// (Website_Business/Lehren/cts-cement/mentor.md, Punkt 11): "Alle kleinen
+// Schriftgroessen um eine Stufe angehoben, 63 Stellen in einem Durchgang."
+// Und aus Youssefs eigener Vorgabe fuer Verkaufsseiten: Fliesstext nicht
+// unter 17px, Ueberschriften deutlich groesser als das, was ein Werkzeug
+// haette.
+//
+// Was sich geaendert hat und warum:
+//   h2          40 -> 44px, ab lg 48 -> 56px. Eine H2, die auf 1440px nur
+//               8px groesser ist als der Kartentitel darunter, gliedert nicht.
+//   cardTitle   17 -> 19px. Er steht neben einem 17px-Fliesstext; 17 neben 17
+//               ist keine Hierarchie, sondern Fettschrift.
+//   lead        16 -> 19px. Der Einleitungssatz ist auf dieser Seite oft der
+//               einzige Fliesstext eines Abschnitts.
+//
+// Die Zeilenbreite bleibt: 62ch bei 19px sind rund 700px und damit im
+// Lesekorridor, den der Rahmen mit max-w-6xl ohnehin setzt.
+// ══════════════════════════════════════════════════════════════════════
 export const h2Cls =
-  "font-display max-w-[24ch] text-[2.5rem] font-medium leading-[1.05] tracking-[-0.025em] text-balance lg:text-5xl";
-export const h3Cls = "font-display text-2xl font-semibold leading-[1.25] tracking-[-0.02em]";
-export const cardTitleCls = "text-[1.0625rem] font-semibold leading-snug";
+  "font-display max-w-[22ch] text-[2.75rem] font-medium leading-[1.03] tracking-[-0.028em] text-balance lg:text-[3.5rem]";
+export const h3Cls = "font-display text-[1.75rem] font-semibold leading-[1.22] tracking-[-0.02em]";
+export const cardTitleCls = "text-[1.1875rem] font-semibold leading-snug";
 
 // Augenbraue und Fliesstext unter einer Ueberschrift. Beide standen bisher an
 // jeder Aufrufstelle ausgeschrieben, in drei Groessen (11px, 13px, 14px) und
@@ -101,7 +122,7 @@ export const cardTitleCls = "text-[1.0625rem] font-semibold leading-snug";
 // die Untergrenze fuer Grossbuchstaben, 14px die fuer Fliesstext.
 export const eyebrowCls =
   "flex items-center gap-2.5 text-xs font-medium uppercase tracking-[0.14em] text-faint";
-export const leadCls = "max-w-[62ch] text-base leading-relaxed text-soft";
+export const leadCls = "max-w-[62ch] text-[19px] leading-relaxed text-soft";
 
 // ══════════════════════════════════════════════════════════════════════
 // DER ABSCHNITTSRHYTHMUS. Zwei Stufen, nicht drei.
@@ -140,7 +161,7 @@ export const heroPad = "py-16 sm:py-24 lg:py-32";
 // Trennstelle: es kann nicht umbrechen, es kann nur ueberstehen.
 export function Logo() {
   return (
-    <Link href="/" className="text-2xl font-bold tracking-[-0.02em] text-[#0284C7] sm:text-3xl">
+    <Link href="/" className="inline-flex min-h-[44px] items-center text-2xl font-bold tracking-[-0.02em] text-[#0284C7] sm:text-3xl">
       frostbreaker
     </Link>
   );
@@ -201,8 +222,8 @@ export function CTAButton({
         // Knopf und einem Stueck Text mit Rahmen.
         // ────────────────────────────────────────────────────────────
         (isPrimary
-          ? "inline-flex items-center justify-center whitespace-nowrap rounded-full bg-ink px-4 py-2.5 text-sm font-medium text-surface shadow-sm transition-[opacity,scale] duration-[140ms] ease-out hover:opacity-85 hoverfine:scale-[1.02] active:scale-[0.98] sm:px-6 sm:py-3 "
-          : "inline-flex items-center justify-center whitespace-nowrap rounded-full border border-edge2 px-4 py-2.5 text-sm font-medium text-soft transition-[color,border-color,scale] duration-[140ms] ease-out hover:border-ink hover:text-ink active:scale-[0.98] sm:px-6 sm:py-3 ") +
+          ? "inline-flex items-center justify-center whitespace-nowrap rounded-full bg-ink px-4 py-3 text-sm font-medium text-surface shadow-sm transition-[opacity,scale] duration-[140ms] ease-out hover:opacity-85 hoverfine:scale-[1.02] active:scale-[0.98] sm:px-6 "
+          : "inline-flex items-center justify-center whitespace-nowrap rounded-full border border-edge2 px-4 py-3 text-sm font-medium text-soft transition-[color,border-color,scale] duration-[140ms] ease-out hover:border-ink hover:text-ink active:scale-[0.98] sm:px-6 ") +
         className
       }
     >
@@ -223,7 +244,7 @@ export function CTAGroup({ className = "" }: { className?: string }) {
           konkurrieren zwei gleich starke Knoepfe um dieselbe Entscheidung. */}
       <a
         href={BOOKING_URL}
-        className="group inline-flex items-center gap-1.5 text-sm font-medium text-soft transition-colors hover:text-ink"
+        className="tap-link group gap-1.5 text-sm font-medium text-soft transition-colors hover:text-ink"
       >
         {t.cta.secondary}
         <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>

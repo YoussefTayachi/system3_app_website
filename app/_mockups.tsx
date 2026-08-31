@@ -24,14 +24,14 @@ export function AgencyMockup() {
             }
           >
             <span
-              className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md text-[11px] font-semibold text-white"
+              className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md text-[13px] font-semibold text-white"
               style={{ backgroundColor: w.color }}
             >
               {(w.name.split(": ")[1] ?? w.name).slice(0, 1)}
             </span>
             {/* w-0 statt min-w-0 -- siehe Messnotiz am Report-Link unten. */}
             <span className="w-0 flex-1 truncate">{w.name}</span>
-            {w.active && <span className="shrink-0 text-[10px] font-medium uppercase tracking-wide text-sky-600">{m.active}</span>}
+            {w.active && <span className="shrink-0 text-[12px] font-medium uppercase tracking-wide text-sky-600">{m.active}</span>}
           </div>
         ))}
       </div>
@@ -60,7 +60,7 @@ export function AgencyMockup() {
             overflow-hidden am Elternteil hilft hier NICHT (gemessen: weiterhin
             417px), es versteckt den Ueberlauf nur. */}
         <span className="w-0 flex-1 truncate text-xs text-mute">{m.reportUrl}</span>
-        <span className="shrink-0 rounded-md border border-edge2 px-2 py-1 text-[11px] font-medium text-soft">{m.copyLabel}</span>
+        <span className="shrink-0 rounded-md border border-edge2 px-2 py-1 text-[13px] font-medium text-soft">{m.copyLabel}</span>
       </div>
     </div>
   );
@@ -137,7 +137,7 @@ export function LocalReachMockup() {
                 </span>
                 <div className="min-w-0">
                   <p className="truncate text-sm text-faint line-through">{b.name}</p>
-                  <p className="text-[11px] text-mute">{m.notListed}</p>
+                  <p className="text-[13px] text-mute">{m.notListed}</p>
                 </div>
               </div>
             ))}
@@ -153,7 +153,7 @@ export function LocalReachMockup() {
                 </span>
                 <div className="min-w-0">
                   <p className="truncate text-sm font-medium text-ink">{b.name}</p>
-                  <p className="text-[11px] text-mute">{b.sub}</p>
+                  <p className="text-[13px] text-mute">{b.sub}</p>
                 </div>
               </div>
             ))}
@@ -244,7 +244,7 @@ export function QualifiedLeadAnimation() {
 
   return (
     <div ref={ref} className="rounded-2xl bg-panel p-6 shadow-card sm:p-8">
-      <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-faint">{m.typicalLabel}</p>
+      <p className="text-[13px] font-medium uppercase tracking-[0.12em] text-faint">{m.typicalLabel}</p>
       <ul className="mt-3 space-y-2">
         {m.rows.map((r, i) => {
           const struck = step > i;
@@ -286,7 +286,7 @@ export function QualifiedLeadAnimation() {
           );
         })}
       </ul>
-      <p className="mt-2 text-[11px] text-mute">{m.genericNote}</p>
+      <p className="mt-2 text-[13px] text-mute">{m.genericNote}</p>
 
       {/* Kein `overflow-hidden` und kein `max-h-*` mehr: der Platz gehoert
           diesem Teil von der ersten Sekunde an, sichtbar wird nur sein
@@ -294,7 +294,7 @@ export function QualifiedLeadAnimation() {
           Zeit im Layout und ist auch die ganze Zeit vorlesbar, er ist nur
           noch nicht eingeblendet. */}
       <div className={"mt-5 fb-card-enter " + (revealed ? "fb-card-enter-on" : "")}>
-        <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.12em] text-emerald-700">{m.frostbreakerLabel}</p>
+        <p className="mb-2 text-[13px] font-medium uppercase tracking-[0.12em] text-emerald-700">{m.frostbreakerLabel}</p>
         <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/5 p-4">
           <div className="flex items-center gap-3">
             {/* Initialen in Space Grotesk, nicht in der Display-Serife: 14px
@@ -343,7 +343,7 @@ export function SuppressionMockup() {
           <p className="text-xs text-mute">{m.blocked.note}</p>
         </div>
       </div>
-      <span className="mt-2 inline-block rounded-full bg-sky-500/10 px-2.5 py-1 text-[10px] font-medium text-sky-600">
+      <span className="mt-2 inline-block rounded-full bg-sky-500/10 px-2.5 py-1 text-[12px] font-medium text-sky-600">
         {m.blockedTag}
       </span>
       <div className="mt-4 flex items-center gap-3 rounded-lg bg-panel2 px-4 py-3">
@@ -397,7 +397,7 @@ export function CampaignMockup() {
     <div className="rounded-2xl bg-panel p-6 shadow-card">
       <div className="flex items-center justify-between">
         <p className="text-xs font-medium uppercase tracking-wide text-faint">{m.label}</p>
-        <span className="flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-1 text-[10px] font-medium text-emerald-600">
+        <span className="flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-1 text-[12px] font-medium text-emerald-600">
           <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
           {m.activeLabel}
         </span>
@@ -408,7 +408,7 @@ export function CampaignMockup() {
           <div key={s.title} className="relative flex items-start gap-3">
             <span className="absolute -left-5 top-1 h-3.5 w-3.5 rounded-full border-2 border-sky-500 bg-panel" />
             <div>
-              <p className="text-[11px] font-medium uppercase tracking-wide text-mute">{s.day}</p>
+              <p className="text-[13px] font-medium uppercase tracking-wide text-mute">{s.day}</p>
               <p className="text-sm font-medium text-ink">{s.title}</p>
             </div>
           </div>

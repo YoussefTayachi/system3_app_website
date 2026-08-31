@@ -11,11 +11,13 @@ const de = dict.de;
 export const metadata: Metadata = {
   title: de.featuresPage.metaTitle,
   description: de.featuresPage.metaDescription,
+  alternates: { canonical: "/funktionen" },
   openGraph: {
     title: de.featuresPage.metaTitle,
     description: de.featuresPage.metaDescription,
     type: "website",
     locale: "de_DE",
+    url: "/funktionen",
   },
 };
 

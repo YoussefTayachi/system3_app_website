@@ -7,11 +7,13 @@ const de = dict.de;
 export const metadata: Metadata = {
   title: de.agencyPage.metaTitle,
   description: de.agencyPage.metaDescription,
+  alternates: { canonical: "/fuer-agenturen" },
   openGraph: {
     title: de.agencyPage.metaTitle,
     description: de.agencyPage.metaDescription,
     type: "website",
     locale: "de_DE",
+    url: "/fuer-agenturen",
   },
 };
 

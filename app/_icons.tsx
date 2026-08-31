@@ -159,3 +159,188 @@ export const featureIcons: Record<string, React.ReactNode> = {
     </svg>
   ),
 };
+
+// ══════════════════════════════════════════════════════════════════════
+// PIKTOGRAMME FUER DIE STARTSEITE, neu am 2026-08-31.
+//
+// Anlass ist die dritte Rueckmeldungsrunde des Mentors am CTS-Fall
+// (Website_Business/Lehren/cts-cement/mentor.md): "For the metrics below the
+// hero section add an icon for each" und "for the cards add icons in front of
+// the title". Ohne sie ist ein Kennzahlenband eine Tabelle und eine
+// Kartenreihe eine Liste.
+//
+// ZWEI REGELN, die fuer jedes Zeichen hier unten gelten:
+//
+// 1. GEPRUEFT BEI 26 PIXELN. Das ist die Groesse im Kennzahlenband, und es
+//    ist die kleinste, in der eines dieser Zeichen vorkommt. Was bei 26 px
+//    zu einem grauen Fleck zusammenlaeuft, wird vereinfacht, nicht verkleinert.
+//    Praktisch heisst das: hoechstens vier Striche, keine Flaeche unter 2 px,
+//    kein Detail naeher als 1,5 Einheiten am naechsten.
+// 2. EIN STRICH FUER ALLE. 24er-Raster, Strichstaerke 1.6, runde Enden,
+//    currentColor. Dieselben Werte wie die vier Saetze darueber -- ein
+//    zweites Strichgewicht faellt in einer Reihe sofort auf.
+// ══════════════════════════════════════════════════════════════════════
+
+/** Gemeinsame Huelle. `className` kommt von der Aufrufstelle, damit dasselbe
+ *  Zeichen im Kennzahlenband (26 px) und vor einer Kartenueberschrift (22 px)
+ *  ohne zweite Fassung auskommt. */
+function Ikon({ children, className = "h-[26px] w-[26px]" }: { children: React.ReactNode; className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden
+      className={className}
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      stroke="currentColor"
+    >
+      {children}
+    </svg>
+  );
+}
+
+/** Die sechs Zeichen des Kennzahlenbands unter dem Helden. Schluessel sind die
+ *  ids aus `dict.facts.items` -- wer dort umsortiert, dreht hier nichts mit. */
+export const factIcons: Record<string, React.ReactNode> = {
+  // Drei Kanaele: drei Bahnen, die auf denselben Punkt zulaufen.
+  channels: (
+    <Ikon>
+      <path d="M3 5h7M3 12h7M3 19h7" />
+      <path d="M10 5c5 0 6 7 11 7M10 12h11M10 19c5 0 6-7 11-7" opacity="0.45" />
+      <circle cx="21" cy="12" r="1.6" />
+    </Ikon>
+  ),
+  // Sechs Beruehrungen: sechs Marken auf einer Linie, die letzten zwei offen.
+  touches: (
+    <Ikon>
+      <path d="M3 12h18" opacity="0.45" />
+      <circle cx="4.5" cy="12" r="1.5" fill="currentColor" stroke="none" />
+      <circle cx="8" cy="12" r="1.5" fill="currentColor" stroke="none" />
+      <circle cx="11.5" cy="12" r="1.5" fill="currentColor" stroke="none" />
+      <circle cx="15" cy="12" r="1.5" fill="currentColor" stroke="none" />
+      <circle cx="18.5" cy="12" r="1.6" />
+      <circle cx="21.8" cy="12" r="1.6" />
+    </Ikon>
+  ),
+  // Acht Texte aus zwoelf Feldern: ein Formular, aus dem Zeilen herauslaufen.
+  texts: (
+    <Ikon>
+      <rect x="3" y="4" width="9" height="16" rx="2" />
+      <path d="M6 8.5h3M6 12h3M6 15.5h3" opacity="0.55" />
+      <path d="M15 8h6M15 12h6M15 16h4" />
+    </Ikon>
+  ),
+  // Zwoelf Pruefungen: ein Schild mit Haken.
+  checks: (
+    <Ikon>
+      <path d="M12 2.5 4 6v6c0 4.6 3.4 8 8 9.5 4.6-1.5 8-4.9 8-9.5V6l-8-3.5Z" />
+      <path d="m8.6 12.2 2.4 2.4 4.4-4.8" />
+    </Ikon>
+  ),
+  // Vier Stufen, eine Datenbasis: vier Kaesten auf einem Sockel.
+  stages: (
+    <Ikon>
+      <rect x="3" y="5" width="4" height="4" rx="1" />
+      <rect x="10" y="5" width="4" height="4" rx="1" />
+      <rect x="17" y="5" width="4" height="4" rx="1" />
+      <path d="M5 9v3h14V9" opacity="0.45" />
+      <rect x="3" y="15" width="18" height="5" rx="1.6" />
+    </Ikon>
+  ),
+  // Kein Aufschlag: eine Muenze mit durchgestrichenem Aufschlagspfeil.
+  markup: (
+    <Ikon>
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="M12 7.5v9M9.6 9.6h4.2a1.9 1.9 0 0 1 0 3.8h-3.6a1.9 1.9 0 0 0 0 3.8h4.2" opacity="0.85" />
+      <path d="m4.8 19.2 14.4-14.4" />
+    </Ikon>
+  ),
+};
+
+/** Vor den drei Kanalkarten. */
+export const channelIcons: Record<string, React.ReactNode> = {
+  email: (
+    <Ikon className="h-[22px] w-[22px]">
+      <rect x="3" y="5" width="18" height="14" rx="2.2" />
+      <path d="m3.8 7 8.2 6 8.2-6" />
+    </Ikon>
+  ),
+  linkedin: (
+    <Ikon className="h-[22px] w-[22px]">
+      <rect x="3" y="3" width="18" height="18" rx="3" />
+      <path d="M7.5 10.5V17M7.5 7.2v.1" />
+      <path d="M11.5 17v-6.5M11.5 13.2c0-1.6 1-2.7 2.4-2.7s2.6 1 2.6 2.9V17" />
+    </Ikon>
+  ),
+  phone: (
+    <Ikon className="h-[22px] w-[22px]">
+      <path d="M6.5 3.5h3l1.5 4-2 1.5a12 12 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2C11.6 19.2 4.8 12.4 4.3 5.7A2 2 0 0 1 6.5 3.5Z" />
+    </Ikon>
+  ),
+};
+
+/** Vor den drei Karten im Abschnitt "Fuer wen". */
+export const whoForIcons: Record<string, React.ReactNode> = {
+  // Fuer euch selbst: eine Zielscheibe.
+  self: (
+    <Ikon className="h-[22px] w-[22px]">
+      <circle cx="12" cy="12" r="8.5" />
+      <circle cx="12" cy="12" r="4" opacity="0.5" />
+      <circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none" />
+    </Ikon>
+  ),
+  // Fuer andere: mehrere Flaechen uebereinander.
+  clients: (
+    <Ikon className="h-[22px] w-[22px]">
+      <rect x="7" y="3.5" width="13.5" height="13.5" rx="2.4" />
+      <path d="M17 20.5H6.2A2.7 2.7 0 0 1 3.5 17.8V7" opacity="0.55" />
+    </Ikon>
+  ),
+  // Neu im Kanal: ein Trieb.
+  new: (
+    <Ikon className="h-[22px] w-[22px]">
+      <path d="M12 21v-7.5" />
+      <path d="M12 13.5C12 9.6 15 6.5 19.5 6.5c0 4-2.8 7-7.5 7Z" />
+      <path d="M11 15C8 15 5.5 12.8 5.5 9.8c2.9 0 5.5 2 5.5 5.2Z" opacity="0.55" />
+    </Ikon>
+  ),
+};
+
+/** Vor den Stufenueberschriften der Systemkarte. */
+export const stageIcons: Record<string, React.ReactNode> = {
+  find: (
+    <Ikon className="h-[22px] w-[22px]">
+      <circle cx="10.5" cy="10.5" r="6.5" />
+      <path d="m19 19-4.3-4.3" />
+    </Ikon>
+  ),
+  contact: (
+    <Ikon className="h-[22px] w-[22px]">
+      <path d="M20.5 3.5 10 14" />
+      <path d="M20.5 3.5 14 20.5 10.5 13.5 3.5 10l17-6.5Z" />
+    </Ikon>
+  ),
+  win: (
+    <Ikon className="h-[22px] w-[22px]">
+      <path d="M4 19V9.5M10 19V4.5M16 19v-6M4 19h16" />
+    </Ikon>
+  ),
+};
+
+/** Der eine Satz ueber den Menschen vor dem Versand, und die Preiszeile. */
+export const noteIcons: Record<string, React.ReactNode> = {
+  human: (
+    <Ikon className="h-[22px] w-[22px]">
+      <circle cx="12" cy="8" r="3.4" />
+      <path d="M5.5 20c1.1-3.9 3.6-5.9 6.5-5.9s5.4 2 6.5 5.9" />
+    </Ikon>
+  ),
+  price: (
+    <Ikon className="h-[22px] w-[22px]">
+      <path d="M3.5 10.5 11 3h6.5a3 3 0 0 1 3 3V12l-7.5 7.5a2.2 2.2 0 0 1-3.1 0l-6.4-6.4a2.2 2.2 0 0 1 0-3.1Z" />
+      <circle cx="16.4" cy="7.6" r="1.3" />
+    </Ikon>
+  ),
+};

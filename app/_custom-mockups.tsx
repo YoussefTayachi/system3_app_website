@@ -114,7 +114,7 @@ export function ProcessMockup() {
               }
             />
             <div className="min-w-0">
-              <p className="text-[11px] font-medium uppercase tracking-wide text-mute">{s.when}</p>
+              <p className="text-[13px] font-medium uppercase tracking-wide text-mute">{s.when}</p>
               <p className="text-sm font-medium text-ink">{s.title}</p>
               <p className="mt-0.5 text-xs text-soft">{s.note}</p>
             </div>

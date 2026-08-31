@@ -66,7 +66,7 @@ export function LeadCardStack() {
             </span>
             <p className="text-[12px] font-medium text-ink">{h.inboxLabel}</p>
           </div>
-          <span className="rounded-full border border-edge2 bg-chip px-2.5 py-1 text-[10px] font-medium uppercase tracking-wide text-mute">
+          <span className="rounded-full border border-edge2 bg-chip px-2.5 py-1 text-[12px] font-medium uppercase tracking-wide text-mute">
             {h.exampleLabel}
           </span>
         </div>
@@ -133,16 +133,16 @@ export function LeadCardStack() {
           <ul className="mt-4 space-y-1.5">
             {h.others.map((o) => (
               <li key={o.name} className="flex items-center gap-3 rounded-xl border border-edge/60 px-3 py-2.5">
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-chip text-[11px] font-semibold text-ink">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-chip text-[13px] font-semibold text-ink">
                   {o.initials}
                 </span>
                 <span className="min-w-0 flex-1">
                   <span className="block truncate text-[13px] font-medium text-ink">{o.name}</span>
-                  <span className="block truncate text-[11px] text-mute">{o.company}</span>
+                  <span className="block truncate text-[13px] text-mute">{o.company}</span>
                 </span>
                 <span
                   className={
-                    "shrink-0 rounded-full px-2.5 py-1 text-[10px] font-semibold " +
+                    "shrink-0 rounded-full px-2.5 py-1 text-[12px] font-semibold " +
                     (o.status === "meeting"
                       ? "bg-emerald-500/15 text-emerald-700"
                       : "bg-sky-500/15 text-sky-700")

@@ -12,7 +12,7 @@ import {
 import { AgencyMockup } from "../_mockups";
 import { ReportMockup, CallListMockup } from "../_app-mockups";
 import { CopyOutcomesMockup } from "../_guard-mockups";
-import { CustomerStrip, CustomerSection } from "../_customers";
+import { CustomerStrip, CustomerProof } from "../_customers";
 import { Reveal } from "../reveal";
 import { CheckIcon } from "../_icons";
 import { useT } from "../language-provider";
@@ -117,7 +117,12 @@ export default function AgenturenPage() {
       {/* Nach den sechs Abschnitten ueber den Agentur-Alltag und vor der
           Kostenfrage: an dieser Stelle ist alles behauptet, und der Leser
           fragt sich, ob es das auch ausserhalb dieser Seite gibt. */}
-      <CustomerSection className="border-b border-edge/60 bg-band" />
+      {/* Seit dem 2026-08-31 die Kurzfassung. `CustomerSection` war hier 259
+          Woerter: zwei Absaetze Fall, vier Faktenzeilen und ein Spiegel-Block
+          mit eigenem Knopf -- unmittelbar vor dem Schluss-CTA dieser Seite,
+          also ein zweiter Abschluss vor dem Abschluss. Der ganze Fall steht
+          auf /kunden/retaiyn, und dorthin fuehrt die Kurzfassung. */}
+      <CustomerProof className="border-b border-edge/60 bg-band" />
 
       {/* Ohne Anbieternamen und ohne erfundene Preise: die Aussage laesst sich
           belegen, eine konkrete Zahl fuer fremde Tools nicht. */}

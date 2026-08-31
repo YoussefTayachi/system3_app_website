@@ -63,7 +63,7 @@ function AppFrame({ children, note }: { children: React.ReactNode; note?: string
     <div className="overflow-hidden rounded-2xl bg-panel shadow-screen">
       {children}
       {note && (
-        <p className="border-t border-edge/70 bg-panel2/50 px-4 py-2 text-[10px] font-medium uppercase tracking-[0.1em] text-faint">
+        <p className="border-t border-edge/70 bg-panel2/50 px-4 py-2 text-[12px] font-medium uppercase tracking-[0.1em] text-faint">
           {note}
         </p>
       )}
@@ -386,7 +386,7 @@ function MapNode({ node, lane, related }: { node: OfferMapNode; lane: "none" | "
           (related ? "border-amber-500/45 bg-amber-500/[0.07]" : "border-edge2/70 bg-panel2/50")
         }
       >
-        <p className="text-[10px] font-medium uppercase tracking-[0.08em] text-mute">{node.label}</p>
+        <p className="text-[12px] font-medium uppercase tracking-[0.08em] text-mute">{node.label}</p>
         {node.value && <p className="mt-0.5 text-[12.5px] leading-snug text-soft">{node.value}</p>}
       </div>
     </>
@@ -464,7 +464,7 @@ export function OfferMapMockup({ sampleNote, corners, hub, findingLabel, note, l
             zusaetzlich ausgeschrieben -- eine Farbbedeutung allein muss man
             sich merken, und fuer einen Screenreader ist sie gar nicht da. */}
         <div className="mb-5 rounded-2xl border border-violet-300/60 bg-violet-500/[0.04] p-4 sm:p-5">
-          <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-violet-800/80">
+          <p className="text-[12px] font-bold uppercase tracking-[0.12em] text-violet-800/80">
             {listPanel.heading}
           </p>
           <div className="mt-2.5 flex items-start gap-3.5">
@@ -473,12 +473,12 @@ export function OfferMapMockup({ sampleNote, corners, hub, findingLabel, note, l
             </div>
             <div className="min-w-0">
               <p className="max-w-[62ch] text-[13px] leading-relaxed text-ink">{listPanel.subtitle}</p>
-              <span className="mt-2.5 inline-flex rounded-lg border border-violet-400/60 bg-panel px-3 py-1.5 text-[11px] font-medium text-violet-800">
+              <span className="mt-2.5 inline-flex rounded-lg border border-violet-400/60 bg-panel px-3 py-1.5 text-[13px] font-medium text-violet-800">
                 {listPanel.button}
               </span>
             </div>
           </div>
-          <p className="mt-3 max-w-[70ch] text-[11px] leading-relaxed text-mute">{listPanel.hint}</p>
+          <p className="mt-3 max-w-[70ch] text-[13px] leading-relaxed text-mute">{listPanel.hint}</p>
         </div>
 
         <div className="grid gap-3 @min-[52rem]:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] @min-[52rem]:gap-x-6 @min-[52rem]:gap-y-4">
@@ -502,10 +502,10 @@ export function OfferMapMockup({ sampleNote, corners, hub, findingLabel, note, l
                 }
               >
                 <div className="flex items-baseline gap-2">
-                  <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-sky-500/12 text-[10px] font-bold text-sky-700">
+                  <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-sky-500/12 text-[12px] font-bold text-sky-700">
                     {ci + 1}
                   </span>
-                  <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-faint">{corner.title}</p>
+                  <p className="text-[13px] font-bold uppercase tracking-[0.12em] text-faint">{corner.title}</p>
                 </div>
 
                 {/* Erste Spalte ist die Fahrbahn des Befund-Pfeils. Sie steht
@@ -552,9 +552,9 @@ export function OfferMapMockup({ sampleNote, corners, hub, findingLabel, note, l
             <div className="animate-float-slow">
               <ThawOrb size={108} />
             </div>
-            <p className="mt-1 text-[11px] font-bold uppercase tracking-[0.14em] text-ink">{hub.name}</p>
+            <p className="mt-1 text-[13px] font-bold uppercase tracking-[0.14em] text-ink">{hub.name}</p>
             <p className="max-w-[16rem] text-center text-[12px] leading-snug text-mute">{hub.state}</p>
-            <span className="mt-2 rounded-lg bg-ink px-3 py-1.5 text-[11px] font-medium text-surface">
+            <span className="mt-2 rounded-lg bg-ink px-3 py-1.5 text-[13px] font-medium text-surface">
               {hub.button}
             </span>
           </div>
@@ -656,12 +656,12 @@ export function CoachFindingMockup({
       <div className="p-5 sm:p-7">
         <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
           <div className="min-w-0">
-            <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-faint">{group}</p>
+            <p className="text-[13px] font-bold uppercase tracking-[0.12em] text-faint">{group}</p>
             <p className="mt-1 text-[15px] font-semibold leading-snug tracking-[-0.01em] text-ink sm:text-base">
               {fieldLabel}
             </p>
           </div>
-          <span className="shrink-0 rounded-full border border-amber-500/45 bg-amber-500/[0.08] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-amber-700">
+          <span className="shrink-0 rounded-full border border-amber-500/45 bg-amber-500/[0.08] px-2.5 py-1 text-[12px] font-bold uppercase tracking-[0.08em] text-amber-700">
             {severity}
           </span>
         </div>
@@ -669,7 +669,7 @@ export function CoachFindingMockup({
         {/* Der alte Satz. Durchgestrichen UND grau: die Durchstreichung allein
             traegt die Aussage nicht, wenn jemand das Bild ueberfliegt. */}
         <div className="mt-5">
-          <p className="text-[10px] font-medium uppercase tracking-[0.1em] text-mute">{beforeLabel}</p>
+          <p className="text-[12px] font-medium uppercase tracking-[0.1em] text-mute">{beforeLabel}</p>
           <p className="mt-1.5 rounded-xl border border-edge2/70 bg-panel2/60 px-4 py-3 text-[13px] leading-relaxed text-mute line-through decoration-edge3 decoration-1">
             {before}
           </p>
@@ -683,13 +683,13 @@ export function CoachFindingMockup({
             untereinander waeren zwei gleich laute Aussagen, und laut ist hier
             der Ersatztext. */}
         <div className="mt-5 border-l-2 border-amber-500 pl-4">
-          <p className="text-[10px] font-medium uppercase tracking-[0.1em] text-amber-700">{verdictLabel}</p>
+          <p className="text-[12px] font-medium uppercase tracking-[0.1em] text-amber-700">{verdictLabel}</p>
           <p className="mt-1 max-w-[68ch] text-[14px] leading-relaxed text-ink sm:text-[15px]">{verdict}</p>
         </div>
 
         {/* Der Ersatztext -- das eigentliche Bild. */}
         <div className="mt-5 rounded-2xl border border-amber-500/40 bg-amber-500/[0.06] p-4 sm:p-5">
-          <p className="text-[10px] font-medium uppercase tracking-[0.1em] text-amber-700">{proposalLabel}</p>
+          <p className="text-[12px] font-medium uppercase tracking-[0.1em] text-amber-700">{proposalLabel}</p>
           <p className="mt-2 max-w-[48ch] text-[17px] font-semibold leading-snug tracking-[-0.01em] text-ink sm:text-[19px]">
             {proposal}
           </p>

@@ -78,7 +78,7 @@ export default function StartPage() {
         <p className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-soft">{s.finalBody}</p>
         <CTAGroup className="mt-8" />
         <p className="mt-8 text-sm text-mute">
-          <Link href="/" className="underline hover:text-ink">{s.backLink}</Link>
+          <Link href="/" className="tap-link underline hover:text-ink">{s.backLink}</Link>
         </p>
       </section>
 

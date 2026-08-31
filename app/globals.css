@@ -380,11 +380,36 @@ body {
 }
 
 /* Inline-Rechtslinks: 20px hohe Textlinks unterschreiten das 24px-Minimum
-   aus WCAG 2.5.8; die Zeilenbox waechst, die Optik bleibt. */
+   aus WCAG 2.5.8; die Zeilenbox waechst, die Optik bleibt.
+
+   44 STATT 24 SEIT DEM 2026-08-31. Aus der Abnahmeliste
+   (Website_Business/Lehren/checkliste.md, "Mobil"): "Kein Klickziel unter
+   44 px." Gemessen bei 390 px im Rahmen: die fuenf Fusszeilen-Links waren
+   24 px hoch, also genau auf dem alten Minimum und deutlich unter dem
+   neuen. Die Fusszeile waechst dadurch um rund 20 px -- die einzige Stelle
+   der Seite, an der das ueberhaupt auffaellt, und die letzte, an der es
+   stoert. */
 .tap-row a {
   display: inline-flex;
   align-items: center;
-  min-height: 24px;
+  justify-content: center;
+  min-height: 44px;
+  /* "AGB" und "AVV" sind 27 und 25 Pixel breit. Ein Klickziel misst beide
+     Achsen, und drei Buchstaben in 14px werden nicht von allein breiter.
+     Die Mitte haelt den Text dort, wo er vorher stand; was waechst, ist der
+     unsichtbare Rand darum. */
+  min-width: 44px;
+}
+
+/* Dieselbe Regel fuer die Textlinks, die als zweiter Weg neben einem Knopf
+   stehen ("Oder erst Fragen stellen", "Den ganzen Fall lesen"). Sie sind
+   23 px hoch und stehen NICHT in einem Satz, sondern allein -- also sind es
+   Knoepfe ohne Kasten und keine Inline-Links. Die Zeilenbox waechst nach
+   oben und unten, die Grundlinie bleibt, wo sie war. */
+.tap-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
 }
 
 /* Hero-Grund: gerichteter Lichtverlauf statt gekacheltem Punktraster. Das

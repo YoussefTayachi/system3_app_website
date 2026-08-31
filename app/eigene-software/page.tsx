@@ -117,7 +117,7 @@ export default function EigeneSoftwarePage() {
               <SectionHeading eyebrow={c.proofEyebrow} title={c.proofTitle} lead={c.proofBody} />
               <Link
                 href="/case-study"
-                className="inline-flex items-center gap-1.5 text-[15px] text-soft underline decoration-edge3 underline-offset-4 transition-colors hover:text-ink"
+                className="tap-link gap-1.5 text-[15px] text-soft underline decoration-edge3 underline-offset-4 transition-colors hover:text-ink"
               >
                 {c.proofLinkLabel}
                 <span aria-hidden>→</span>

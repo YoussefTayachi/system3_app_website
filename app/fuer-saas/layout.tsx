@@ -7,11 +7,13 @@ const de = dict.de;
 export const metadata: Metadata = {
   title: de.saasPage.metaTitle,
   description: de.saasPage.metaDescription,
+  alternates: { canonical: "/fuer-saas" },
   openGraph: {
     title: de.saasPage.metaTitle,
     description: de.saasPage.metaDescription,
     type: "website",
     locale: "de_DE",
+    url: "/fuer-saas",
   },
 };
 
