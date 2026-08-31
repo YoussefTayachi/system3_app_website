@@ -1821,54 +1821,142 @@ const de = {
     note: "Es läuft weiter, während du an Kundenprojekten sitzt.",
   },
 
-  // Die Ablauf-Buehne. Sie ersetzt die Systemkarte, die dieselbe Sache in
-  // drei Karten mit Dreipunktlisten BESCHRIEB.
+  // ══════════════════════════════════════════════════════════════════════
+  // DER WEG. Das Kernstueck der Startseite, neu am 2026-08-31.
   //
-  // KEINE FIRMENNAMEN. Auf dieser Website gibt es genau zwei, Frostbreaker
-  // und retaiyn (siehe die Regel bei `appMockups`). Die drei Kontakte hier
-  // tragen Rolle und Segment, so wie jede andere Nachbildung auch. Die drei
-  // Aufhaenger sind Beispiele fuer die FORM einer recherchierten ersten
-  // Zeile, keine Aussage ueber eine echte Firma; die Buehne traegt deshalb
-  // dieselbe Kennzeichnung wie jedes Mockup.
-  flowStage: {
-    title: "Von deiner Nische bis zur Antwort",
+  // Youssef: "bau die animation weiter aus. und zwar wirklich konkret.
+  // schreib nix technisches. zeig wie der CEO gefunden wird, zeig dass seine
+  // website gescannt wird, zeig dann wie email template aufgesetzt wird, und
+  // zeig wie der lead auf die personalisierte email antwortet und einen call
+  // ausmacht, dann zeig wie ein call laeuft und ein deal geclosed wird."
+  //
+  // KEIN TECHNISCHES WORT. In diesem ganzen Block steht kein Werkzeugname,
+  // keine Schnittstelle, keine Einstellung und keine Abkuerzung. Was
+  // dasteht, koennte ein Mensch ueber seinen eigenen Dienstag erzaehlen.
+  //
+  // DREI NISCHEN, weil der Besucher waehlt und jede Wahl bis zum Schluss
+  // durchzieht: Rolle, Firma, Befunde, Mailtext, Antwort, Termin und Notizen
+  // sind je Nische eigene Saetze. Eine vierte Nische kostet denselben
+  // vollstaendigen Satz noch einmal, in zwei Sprachen, und eine halbfertige
+  // waere im Ablauf sofort zu sehen.
+  //
+  // DIE ZAHLEN. `firmen` ist die einzige, und sie steht in einer Buehne, die
+  // als Beispiel gekennzeichnet ist -- sie zeigt, wie ein Suchergebnis
+  // aussieht, und behauptet kein Ergebnis. Sonst steht hier keine Zahl:
+  // keine Antwortquote, keine Zeitersparnis, kein Umsatz. Der Abschluss-Akt
+  // endet deshalb mit einem Satz und nicht mit einem Betrag.
+  // ══════════════════════════════════════════════════════════════════════
+  journey: {
+    title: "Eine Nische rein. Ein Kunde raus.",
+    body: "Sechs Schritte, und du machst nur den ersten. Wähle eine Nische und sieh zu.",
     sampleNote: "Beispielansicht",
-    // GEMESSEN, NICHT GESCHAETZT. Bei 390 px bleiben im Suchfeld 225 px fuer
-    // den Text (Feld 303, minus Polsterung, Lupe und Abstand). Die erste
-    // Fassung "Sanitärbetriebe, Wien, ab 20 Mitarbeitende" brauchte 331 px
-    // und wurde auf dem Telefon mitten im Wort abgeschnitten -- ohne
-    // Auslassungspunkte, also wie ein Fehler und nicht wie eine Kuerzung.
-    // Diese hier misst 180 px, die englische 188. Die Groessenangabe faellt
-    // dabei nicht wirklich weg: sie steht auf den drei Karten darunter
-    // ("30 Mitarbeitende", "zwei Standorte", "45 Mitarbeitende").
-    suche: "Sanitärbetriebe in Wien",
-    suchLabel: "Deine Suche",
-    aussortiert: "info@…",
-    aussortiertNote: "kein Ansprechpartner, fällt raus",
-    leads: [
+    frage: "Welche Nische?",
+    hinweis: "Wähle eine. Alles danach passiert ohne dich.",
+    akte: [
+      "Entscheider gefunden",
+      "Website angesehen",
+      "Mail geschrieben",
+      "Antwort da",
+      "Gespräch läuft",
+      "Kunde",
+    ],
+    firmenLabel: "Firmen durchsucht",
+    gefundenLabel: "Entscheider",
+    geprueft: ["E-Mail geprüft", "Telefon", "LinkedIn"],
+    scanLabel: "Was auf der Website auffiel",
+    anLabel: "An",
+    betreffLabel: "Betreff",
+    schreibtLabel: "schreibt …",
+    antwortLabel: "Antwort eingegangen",
+    statusVorher: "Kontaktiert",
+    statusNachher: "Termin",
+    notizenLabel: "Notizen aus dem Gespräch",
+    spalten: ["Neu", "Kontaktiert", "Termin", "Kunde"],
+    wiederholen: "Nochmal ansehen",
+    neuWaehlen: "Andere Nische",
+    nischen: [
       {
+        id: "sanitaer",
+        label: "Sanitärbetriebe",
+        suche: "Sanitärbetriebe in Wien",
+        firmen: 247,
         rolle: "Inhaber",
         segment: "Sanitärbetrieb, 30 Mitarbeitende",
-        aufhaenger: "Ihr sucht seit drei Wochen zwei Monteure. Wer arbeitet die ein?",
+        befunde: [
+          "Die Notdienst-Seite hat kein Kontaktformular",
+          "Die Telefonnummer steht nur als Bild",
+          "Auf dem Handy fehlt das Menü",
+        ],
+        betreff: "Eure Notdienst-Seite",
+        mail: [
+          "Ihr habt einen Notdienst, aber auf der Seite dazu kann euch niemand schreiben.",
+          "Die Nummer steht als Bild, also lässt sie sich nicht antippen.",
+          "Soll ich euch die drei Stellen schicken?",
+        ],
+        antwort: "Stimmt, das wusste ich nicht. Donnerstag um 14 Uhr?",
+        termin: "Donnerstag, 14:00",
+        notizen: [
+          "Notdienst läuft über zwei private Handys",
+          "Will die Seite bis zum Herbst neu",
+          "Entscheidet allein, kein Gremium",
+        ],
+        abschluss: "Aus einer Nische wurde ein Kunde.",
       },
       {
-        rolle: "Geschäftsführerin",
-        segment: "Haustechnik, zwei Standorte",
-        aufhaenger: "Zwei Standorte, eine Telefonnummer auf der Website.",
+        id: "zahnarzt",
+        label: "Zahnarztpraxen",
+        suche: "Zahnarztpraxen in München",
+        firmen: 312,
+        rolle: "Praxisinhaberin",
+        segment: "Zahnarztpraxis, 12 Mitarbeitende",
+        befunde: [
+          "Termine gehen nur telefonisch",
+          "Die Öffnungszeiten stehen dreimal verschieden da",
+          "Auf dem Handy lädt die Seite neun Sekunden",
+        ],
+        betreff: "Terminbuchung auf eurer Seite",
+        mail: [
+          "Bei euch gibt es Termine nur am Telefon, und mittags ist die Leitung zu.",
+          "Die Öffnungszeiten stehen auf drei Seiten unterschiedlich.",
+          "Soll ich euch zeigen, was das an Anrufen spart?",
+        ],
+        antwort: "Das ärgert uns selbst am meisten. Dienstag früh?",
+        termin: "Dienstag, 08:30",
+        notizen: [
+          "Zwei Kräfte hängen halbtags am Telefon",
+          "Online-Termine sind das Hauptthema",
+          "Budget steht ab dem vierten Quartal",
+        ],
+        abschluss: "Aus einer Nische wurde eine Kundin.",
       },
       {
-        rolle: "Betriebsleiter",
-        segment: "Heizung und Bad, 45 Mitarbeitende",
-        aufhaenger: "Eure Notdienst-Seite ist die einzige ohne Kontaktformular.",
+        id: "shopify",
+        label: "Shopify-Marken",
+        suche: "Shopify-Marken in Deutschland",
+        firmen: 189,
+        rolle: "Gründerin",
+        segment: "Shopify-Marke, 14 Mitarbeitende",
+        befunde: [
+          "Der Warenkorb springt auf dem Handy zurück",
+          "Auf den Produktseiten stehen keine Bewertungen",
+          "Der Versandhinweis kommt erst nach dem Bezahlen",
+        ],
+        betreff: "Der Warenkorb auf dem Handy",
+        mail: [
+          "Auf dem Handy springt euer Warenkorb beim zweiten Artikel zurück.",
+          "Und den Versandhinweis sieht man erst, wenn schon bezahlt ist.",
+          "Soll ich euch das Video davon schicken?",
+        ],
+        antwort: "Oh. Schick mal her. Freitag um 11?",
+        termin: "Freitag, 11:00",
+        notizen: [
+          "Abbrüche seit dem Wechsel des Themes",
+          "Zwei Leute im Team, niemand entwickelt",
+          "Will vor dem Weihnachtsgeschäft fertig sein",
+        ],
+        abschluss: "Aus einer Nische wurde eine Kundin.",
       },
     ],
-    sequenzLabel: "Läuft von allein weiter",
-    tage: ["Tag 0", "Tag 3", "Tag 5", "Tag 7", "LinkedIn", "Anruf"],
-    antwortLabel: "Antwort:",
-    antwort: "„Nächste Woche Dienstag um zehn?“ Der Kontakt steht als Deal im CRM.",
-    terminLabel: "Termin",
-    schritte: ["Nische nennen", "Entscheider finden", "Persönlich anschreiben", "Nachfassen", "Antwort im CRM"],
-    wiederholen: "Nochmal ansehen",
   },
 
   // ══════════════════════════════════════════════════════════════════════
@@ -4024,37 +4112,117 @@ const en: typeof de = {
     ],
     note: "It keeps running while you sit in client work.",
   },
-  flowStage: {
-    title: "From your niche to a reply",
+  journey: {
+    title: "A niche in. A customer out.",
+    body: "Six steps, and you only take the first. Pick a niche and watch.",
     sampleNote: "Example view",
-    suche: "Plumbing firms in Vienna",
-    suchLabel: "Your search",
-    aussortiert: "info@…",
-    aussortiertNote: "nobody in charge, dropped",
-    leads: [
+    frage: "Which niche?",
+    hinweis: "Pick one. Everything after that happens without you.",
+    akte: [
+      "Decision-maker found",
+      "Website looked at",
+      "Email written",
+      "Reply is in",
+      "Call running",
+      "Customer",
+    ],
+    firmenLabel: "companies searched",
+    gefundenLabel: "Decision-maker",
+    geprueft: ["Email verified", "Phone", "LinkedIn"],
+    scanLabel: "What stood out on the website",
+    anLabel: "To",
+    betreffLabel: "Subject",
+    schreibtLabel: "writing …",
+    antwortLabel: "Reply received",
+    statusVorher: "Contacted",
+    statusNachher: "Meeting",
+    notizenLabel: "Notes from the call",
+    spalten: ["New", "Contacted", "Meeting", "Customer"],
+    wiederholen: "Play again",
+    neuWaehlen: "Another niche",
+    nischen: [
       {
+        id: "sanitaer",
+        label: "Plumbing firms",
+        suche: "Plumbing firms in Vienna",
+        firmen: 247,
         rolle: "Owner",
         segment: "Plumbing firm, 30 staff",
-        aufhaenger: "You have been hiring two fitters for three weeks. Who trains them?",
+        befunde: [
+          "The emergency page has no contact form",
+          "The phone number is only an image",
+          "On a phone the menu is missing",
+        ],
+        betreff: "Your emergency page",
+        mail: [
+          "You run an emergency service, but nobody can write to you from that page.",
+          "The number sits there as an image, so it cannot be tapped.",
+          "Shall I send you the three spots?",
+        ],
+        antwort: "True, I had no idea. Thursday at two?",
+        termin: "Thursday, 14:00",
+        notizen: [
+          "Emergency line runs on two private phones",
+          "Wants the site redone by autumn",
+          "Decides alone, no committee",
+        ],
+        abschluss: "A niche became a customer.",
       },
       {
-        rolle: "Managing director",
-        segment: "Building services, two sites",
-        aufhaenger: "Two sites, one phone number on the website.",
+        id: "zahnarzt",
+        label: "Dental practices",
+        suche: "Dental practices in Munich",
+        firmen: 312,
+        rolle: "Practice owner",
+        segment: "Dental practice, 12 staff",
+        befunde: [
+          "Appointments only by phone",
+          "Opening hours differ in three places",
+          "On a phone the site takes nine seconds",
+        ],
+        betreff: "Booking on your website",
+        mail: [
+          "You only take appointments by phone, and the line is closed at lunch.",
+          "Your opening hours differ across three pages.",
+          "Shall I show you what that saves in calls?",
+        ],
+        antwort: "That annoys us more than anyone. Tuesday morning?",
+        termin: "Tuesday, 08:30",
+        notizen: [
+          "Two people on the phone half the day",
+          "Online booking is the whole point",
+          "Budget from the fourth quarter",
+        ],
+        abschluss: "A niche became a customer.",
       },
       {
-        rolle: "Operations lead",
-        segment: "Heating and bathrooms, 45 staff",
-        aufhaenger: "Your emergency page is the only one without a contact form.",
+        id: "shopify",
+        label: "Shopify brands",
+        suche: "Shopify brands in Germany",
+        firmen: 189,
+        rolle: "Founder",
+        segment: "Shopify brand, 14 staff",
+        befunde: [
+          "The cart jumps back on a phone",
+          "No reviews on the product pages",
+          "Shipping info only shows after payment",
+        ],
+        betreff: "The cart on mobile",
+        mail: [
+          "On a phone your cart jumps back on the second item.",
+          "And the shipping note only appears once people have paid.",
+          "Shall I send you the recording?",
+        ],
+        antwort: "Oh. Send it over. Friday at eleven?",
+        termin: "Friday, 11:00",
+        notizen: [
+          "Drop-offs started with the theme change",
+          "Two people on the team, nobody codes",
+          "Wants it done before the Christmas season",
+        ],
+        abschluss: "A niche became a customer.",
       },
     ],
-    sequenzLabel: "Keeps going on its own",
-    tage: ["Day 0", "Day 3", "Day 5", "Day 7", "LinkedIn", "Call"],
-    antwortLabel: "Reply:",
-    antwort: "“Next Tuesday at ten?” The contact sits in the CRM as a deal.",
-    terminLabel: "Meeting",
-    schritte: ["Name the niche", "Find decision-makers", "Write personally", "Follow up", "Reply in the CRM"],
-    wiederholen: "Play again",
   },
   claudeStage: {
     title: "Tell Claude instead of clicking it",

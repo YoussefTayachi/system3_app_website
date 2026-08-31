@@ -63,6 +63,15 @@
      ease-in verzoegert die ersten Millisekunden, also genau die, in denen
      jemand hinsieht. */
   --fb-ease-out: cubic-bezier(0.2, 0.7, 0.3, 1);
+  /* Die zweite und letzte Kurve dieser Seite, neu am 2026-08-31. Sie gilt
+     ausschliesslich fuer Bewegung AUF dem Schirm -- ein Element, das weder
+     kommt noch geht, sondern von A nach B faehrt. Genau einen Fall gibt es
+     davon: die Karte, die in _journey.tsx durch die vier Spalten wandert.
+     Ein reines ease-out wuerde dort sofort losschiessen und schleichend
+     ankommen; ein Ding, das sich bewegt, muss auch anfahren.
+     Wer eine dritte Kurve anlegen will, muss zuerst einen dritten Fall
+     zeigen, der weder Kommen noch Gehen noch Fahren ist. */
+  --fb-ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   color-scheme: light;
 }
 
@@ -355,6 +364,72 @@ body {
   50% { opacity: 0; }
 }
 
+/* ── Bausteine der grossen Buehne (_journey.tsx) ────────────────────── */
+
+/* Reines Aufblenden, ohne Weg. Fuer Dinge, die nicht von irgendwoher
+   kommen: eine Zahl, die hochzaehlt, steht schon an ihrem Platz. */
+.fb-fade { animation-name: fbFadeOnly; animation-duration: 300ms; }
+
+/* Die Scanlinie ueber der Website des Leads.
+   Ein Verlauf und keine Linie: eine harte 2px-Linie, die durch ein Bild
+   faehrt, sieht aus wie ein Darstellungsfehler. Der Verlauf hat einen
+   hellen Kern und laeuft nach oben und unten aus, also liest man ihn als
+   Licht, das ueber die Seite streicht.
+   EINMAL, nicht in Schleife: eine Dauerbewegung an dieser Stelle wuerde
+   behaupten, das Ansehen dauere an. Es dauert nicht an, es ist fertig. */
+.fb-scan {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 64px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    color-mix(in oklab, var(--color-sky-500) 22%, transparent) 45%,
+    color-mix(in oklab, var(--color-sky-500) 40%, transparent) 50%,
+    color-mix(in oklab, var(--color-sky-500) 22%, transparent) 55%,
+    transparent
+  );
+  transform: translateY(-64px);
+  animation: fbScan 1400ms var(--fb-ease-in-out) 200ms both;
+}
+@keyframes fbScan {
+  from { transform: translateY(-64px); opacity: 0; }
+  12% { opacity: 1; }
+  88% { opacity: 1; }
+  to { transform: translateY(220px); opacity: 0; }
+}
+
+/* Der Punkt an der eingegangenen Antwort. Er blitzt EINMAL auf und bleibt
+   dann stehen: er meldet ein Ereignis, und ein Ereignis wiederholt sich
+   nicht. `animate-ping` von Tailwind laeuft unendlich und ist deshalb hier
+   ausdruecklich nicht benutzt. */
+.fb-ping { position: relative; }
+.fb-ping::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: currentColor;
+  animation: fbPing 900ms var(--fb-ease-out) 1 both;
+}
+@keyframes fbPing {
+  from { transform: scale(1); opacity: 0.6; }
+  to { transform: scale(3.2); opacity: 0; }
+}
+
+/* Der Cursor am Fuss der Mail, die gerade geschrieben wird. Dieselbe Marke
+   wie im Suchfeld, nur als Zeichen in einer Zeile statt absolut gesetzt. */
+.fb-caret-inline {
+  position: static;
+  display: inline-block;
+  width: 1.5px;
+  height: 1em;
+  transform: none;
+  background: var(--c-edge3);
+}
+
 /* Die Marken auf der Zeitachse. Sie wachsen aus 0.4 heraus und nicht aus 0:
    nichts in der Welt erscheint aus dem Nichts, und scale(0) laesst den Punkt
    aufploppen statt eintreffen. */
@@ -595,5 +670,11 @@ body {
      Es geht dabei NICHTS verloren: die Buehnen sind additiv gebaut, ihr
      letzter Takt ist das vollstaendige Bild. Weg ist nur die Vorfuehrung. */
   .fb-step, .fb-type, .fb-dot { transition: none; }
+  /* Die grosse Buehne (_journey.tsx) laeuft unter `reduce` gar nicht von
+     allein: der Besucher waehlt Nische und Akt selbst ueber die Leiste, und
+     jeder Akt steht sofort vollstaendig da. Scanlinie und Aufblitzen fallen
+     ganz weg -- beide sind reine Vorfuehrung und tragen keine Auskunft. */
+  .fb-scan, .fb-ping::after { animation: none; }
+  .fb-scan { opacity: 0; }
   .fb-caret-on { animation: none; opacity: 0; }
 }

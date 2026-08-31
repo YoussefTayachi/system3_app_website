@@ -11,7 +11,8 @@ import {
   sectionPad,
   heroPad,
 } from "./_ui";
-import { FlowStage, ClaudeStage, StrikeList } from "./_stage";
+import { ClaudeStage, StrikeList } from "./_stage";
+import { Journey } from "./_journey";
 import { CustomerStrip, CustomerProof } from "./_customers";
 import { Reveal } from "./reveal";
 import { whoForIcons, noteIcons } from "./_icons";
@@ -160,34 +161,62 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════
-          3 · DER ABLAUF, VORGEFUEHRT.
+          3 · DER WEG. Das Kernstueck der Seite.
 
-          Hier stand die Systemkarte: drei Karten, neun Stichpunkte, zwei
-          Pfeile, 127 sichtbare Woerter darueber, was das Werkzeug tut. Jetzt
-          tut es das. Fuenf Takte, additiv, mit einer Taktleiste, in der jeder
-          Knopf wirklich springt.
+          Youssef: "lass das das kernstueck der landing page sein denn darum
+          gehts in der app."
 
-          Die Zeitachse im vierten Takt ist der Rest des alten
-          Sequenzdiagramms: die TAGE bleiben, die Wortobergrenzen sind weg.
-          Youssefs Einwand galt der Wortzahl ("kein verkaufsargument"), und er
-          trifft nicht den Umstand, dass ohne Zutun weiter nachgefasst wird --
-          das ist der Grund, warum jemand das Werkzeug will.
+          Hier stand zuerst die Systemkarte (drei Karten mit Stichpunkten),
+          dann eine erste Buehne mit fuenf Takten. Jetzt laufen sechs Akte:
+          der Entscheider wird gefunden, seine Website angesehen, die Mail
+          geschrieben, die Antwort kommt, das Gespraech laeuft, aus dem Lead
+          wird ein Kunde.
+
+          DER BESUCHER WAEHLT DIE NISCHE. Das ist die einzige Handlung, die
+          er hat, und sie ist genau die Handlung, um die es im Produkt geht:
+          eine Eingabe, der Rest laeuft. Die Wahl zieht bis zum letzten Akt
+          durch -- Rolle, Befunde, Mailtext, Antwort und Notizen sind je
+          Nische andere Saetze.
+
+          KEIN ANKER MEHR AUF EINEN ABSCHNITT, DEN ES NICHT GIBT: die drei
+          alten Marken bleiben stehen, weil aus Navigation und von aussen
+          Verweise darauf zeigen.
           ═══════════════════════════════════════════════════════════ */}
       <section id="ablauf" className={"scroll-mt-20 mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
-        {/* Die alten Anker bleiben: auf /#system, /#kanaele und /#rundgang
-            zeigen vorhandene Verweise, aus der Navigation und von aussen. */}
         <span id="system" className="block scroll-mt-20" aria-hidden />
         <span id="kanaele" className="block scroll-mt-20" aria-hidden />
         <span id="rundgang" className="block scroll-mt-20" aria-hidden />
-        <div className="mb-12 flex flex-wrap items-end justify-between gap-x-8 gap-y-3">
-          <h2 className={h2Cls}>{t.flowStage.title}</h2>
+        <div className="mb-10 flex flex-wrap items-end justify-between gap-x-8 gap-y-3">
+          <div className="max-w-[34ch]">
+            <h2 className={h2Cls}>{t.journey.title}</h2>
+            <p className="mt-5 text-[19px] leading-relaxed text-soft">{t.journey.body}</p>
+          </div>
           {/* Dieselbe Kennzeichnung wie an jeder Nachbildung dieser Seite.
               Die Buehne zeigt Rollen und Segmente, keine Firmennamen -- aber
-              sie zeigt Text, der wie ein echter Aufhaenger aussieht, und dann
-              muss danebenstehen, dass er ein Beispiel ist. */}
-          <p className="text-[15px] text-mute">{t.flowStage.sampleNote}</p>
+              sie zeigt Saetze, die wie eine echte Mail aussehen, und dann
+              muss danebenstehen, dass es ein Beispiel ist. */}
+          <p className="text-[15px] text-mute">{t.journey.sampleNote}</p>
         </div>
-        <FlowStage {...t.flowStage} />
+        <Journey
+          frage={t.journey.frage}
+          hinweis={t.journey.hinweis}
+          nischen={t.journey.nischen}
+          akte={t.journey.akte}
+          firmenLabel={t.journey.firmenLabel}
+          gefundenLabel={t.journey.gefundenLabel}
+          geprueft={t.journey.geprueft}
+          scanLabel={t.journey.scanLabel}
+          anLabel={t.journey.anLabel}
+          betreffLabel={t.journey.betreffLabel}
+          schreibtLabel={t.journey.schreibtLabel}
+          antwortLabel={t.journey.antwortLabel}
+          statusVorher={t.journey.statusVorher}
+          statusNachher={t.journey.statusNachher}
+          notizenLabel={t.journey.notizenLabel}
+          spalten={t.journey.spalten}
+          wiederholen={t.journey.wiederholen}
+          neuWaehlen={t.journey.neuWaehlen}
+        />
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════
