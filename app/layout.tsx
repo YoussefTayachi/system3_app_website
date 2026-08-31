@@ -1,34 +1,44 @@
 import type { Metadata } from "next";
-import "@fontsource-variable/space-grotesk";
-// opsz statt der Standarddatei. `@fontsource-variable/fraunces` allein laedt
-// index.css, und das ist die reine wght-Datei -- OHNE die opsz-Achse. Fraunces
-// hat laut metadata.json ital, opsz (9-144), wght, SOFT und WONK; die opsz-Achse
-// steht auf ihrem Vorgabewert 14, also dem LESETEXT-Schnitt, und war damit auch
-// in der 48px-Ueberschrift aktiv. `font-optical-sizing: auto` in globals.css lief
-// deshalb seit dem ersten Tag ins Leere: es gab keine Achse zum Drehen.
-// Gegeneinander gerendert am 2026-08-15 (gleiche Zeile, gleiche 56px): mit
-// opsz 144 verdoppelt sich der Strichkontrast, die Zeile wird schmaler und passt
-// auf eine statt zwei Zeilen, und die Kursive wird von "schraeggestellt" zu einer
-// echten Kanzleikursiven.
-// Kosten: +67 kB latin. Bewusst NICHT full.css -- das braechte SOFT und WONK fuer
-// +189 kB, beides Effektachsen ohne Nutzen auf einer Seite, die ruhig bleiben soll.
-import "@fontsource-variable/fraunces/opsz.css";
-import "@fontsource-variable/fraunces/opsz-italic.css";
+// ══════════════════════════════════════════════════════════════════════
+// WIX MADEFOR, seit dem 2026-08-31.
+//
+// Youssef: "nutz die schriftart von Wix ... also mach schriftart ueberall wie
+// die von Wix bzw jz von der website marketing.frostbreaker.app."
+//
+// Nachgesehen am 2026-08-31 im Browser auf marketing.frostbreaker.app:
+//   Ueberschriften   Wix Madefor Display Variable
+//   Fliesstext       Wix Madefor Text Variable
+// Es sind zwei Schnitte derselben Familie, nicht zwei Familien. Genau das
+// macht den Unterschied zum vorigen Paar: Space Grotesk und Fraunces waren
+// eine Grotesk und eine Serife, also zwei Stimmen. Madefor Display und Text
+// sind eine Stimme in zwei Lautstaerken.
+//
+// WAS DAS FUER DIE UEBERSCHRIFTEN HEISST. Fraunces hatte eine echte
+// Kanzleikursive, und der Akzent in der H1 war kursiv gesetzt. Madefor
+// Display hat ueberhaupt keinen kursiven Schnitt (metadata.json: styles
+// ["normal"]). Der Akzent traegt deshalb jetzt nur noch Farbe -- so wie er
+// es auf marketing.frostbreaker.app auch tut ("before they call" in Blau,
+// nicht kursiv).
+//
+// `font-optical-sizing: auto` ist mit Fraunces gefallen: Madefor hat keine
+// opsz-Achse, nur wght von 400 bis 800.
+//
+// Weiter als @fontsource-variable und nicht ueber next/font/google: der Bau
+// soll keinen Live-Abruf zu Google Fonts brauchen. Begruendung unveraendert.
+// ══════════════════════════════════════════════════════════════════════
+import "@fontsource-variable/wix-madefor-text";
+import "@fontsource-variable/wix-madefor-display";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { getLangServer } from "./lang";
 import { SITE_URL } from "./site";
 import { LanguageProvider } from "./language-provider";
 
-// Bewusst weg von Inter (die mit Abstand haeufigste SaaS-Schrift, null
-// Wiedererkennung) hin zu einem Pairing mit mehr Charakter: Space Grotesk
-// fuer Fliesstext/UI, Fraunces als Display-Serife fuer Headline-Akzente
-// (z. B. hervorgehobene Zahlen/Woerter in H1). Als @fontsource-variable-Pakete
-// eingebunden (selbst gehostet, im Bundle) statt ueber next/font/google, weil
-// letzteres beim Build einen Live-Fetch zu Google Fonts braucht -- in
-// manchen CI/Sandbox-Umgebungen ohne Netzwerkzugriff blockiert das den
-// gesamten Build. @fontsource ist dadurch robuster, ohne Nachteile bei
-// Performance (Variable Fonts, wird trotzdem vollstaendig subsettet/gecacht).
+// Was hier vorher stand: Space Grotesk fuer Fliesstext und Fraunces als
+// Display-Serife. Das Paar hatte Charakter und war fuer diese Website nie
+// falsch -- es passte nur nicht mehr zu den anderen Seiten unter derselben
+// Marke. marketing.frostbreaker.app laeuft auf Wix Madefor, und zwei Seiten
+// desselben Absenders mit zwei Schriftpaaren lesen sich wie zwei Absender.
 
 const title = "Frostbreaker: find, enrich and personally contact leads without paying for four tools";
 const description =

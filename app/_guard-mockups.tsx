@@ -420,7 +420,7 @@ export function LinkedInMockup() {
           {/* Der Aufhaenger als eigener Absatz mit Marke: er ist das, was
               diese Nachricht von einem Serienbrief unterscheidet, und er
               stammt aus derselben Recherche wie die Mail. */}
-          <div className="rounded-lg border border-coral/30 bg-coral-soft px-3 py-2.5">
+          <div className="rounded-lg border border-ink/25 bg-ink/[0.05] px-3 py-2.5">
             <p className="mb-1 text-[12px] font-bold uppercase tracking-[0.1em] text-ink">{m.hookLabel}</p>
             <p className="text-[12px] leading-relaxed text-soft">{m.hook}</p>
           </div>

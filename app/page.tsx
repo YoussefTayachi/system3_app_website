@@ -113,7 +113,15 @@ export default function Home() {
           <div className="fade-up mx-auto max-w-3xl text-center">
             <h1 className={"mx-auto max-w-[17ch] " + h1Cls}>
               {t.hero.h1Pre}
-              <span className="italic text-sky-600">{t.hero.h1Accent}</span>
+              {/* NUR FARBE, KEINE KURSIVE. Fraunces hatte eine echte
+                  Kanzleikursive und der Akzent stand darin; Wix Madefor
+                  Display hat ueberhaupt keinen kursiven Schnitt
+                  (metadata.json: styles ["normal"]), und eine vom Browser
+                  schraeggestellte Grotesk ist keine Kursive, sondern ein
+                  gekippter Buchstabe. Auf marketing.frostbreaker.app traegt
+                  der Akzent ebenfalls nur Farbe: "before they call" steht
+                  dort blau und aufrecht. */}
+              <span className="text-sky-600">{t.hero.h1Accent}</span>
               {t.hero.h1Post}
             </h1>
             <p className="mx-auto mt-7 max-w-[46ch] text-lg leading-relaxed text-soft sm:text-xl">
@@ -296,7 +304,7 @@ export default function Home() {
         <h2 className={h2Cls}>{t.costs.title}</h2>
         <p className="mt-6 max-w-[56ch] text-[19px] leading-relaxed text-soft">{t.costs.body}</p>
         <p className="mt-8 flex max-w-[56ch] items-start gap-3.5 text-[19px] leading-relaxed text-ink">
-          <span className="mt-0.5 shrink-0 text-coral">{noteIcons.price}</span>
+          <span className="mt-0.5 shrink-0 text-sky-600">{noteIcons.price}</span>
           {t.costs.note}
         </p>
       </section>

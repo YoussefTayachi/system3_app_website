@@ -26,42 +26,38 @@ export const BOOKING_URL = "https://calendly.com/youssef-tayachi-frostbreaker/30
 // ══════════════════════════════════════════════════════════════════════
 // DIE TYPOSKALA. Vier Stufen, dazwischen nichts.
 //
-// Gemessen am 2026-08-15 auf dem Stand davor: H1 48px, ALLE H2 36px, H3 in
-// SECHS Groessen (14/18/20/22/24/28px), jede davon font-semibold. H1:H2 stand
-// damit auf 1,33 -- ein Sprung, den man nicht sieht. Die Hierarchie hing fast
-// vollstaendig an der Textfarbe, nicht an der Groesse.
-//
 //   h1Cls         Seitentitel, genau einer je Seite
 //   h2Cls         Kapitel: eigener Abschnitt mit eigenem Flaechenton
-//   h3Cls         Abschnitt innerhalb eines Kapitels -- EINE Groesse (24px),
-//                 sie ersetzt alle sechs alten
-//   cardTitleCls  Kartentitel, Space Grotesk statt Fraunces
+//   h3Cls         Abschnitt innerhalb eines Kapitels
+//   cardTitleCls  Kartentitel
 //
-// DIE REGEL, AUF DIE ES ANKOMMT: Fraunces erst ab 24px, darunter Space
-// Grotesk. Fraunces stand vorher bei 18px in Karten, und eine Display-Serife
-// in 18px liest sich als Fachtext, nicht als Produkt. Die Serife markiert
-// Kapitel, sonst nichts. Seit layout.tsx die opsz-Achse laedt, gewinnt grosse
-// Fraunces zusaetzlich, weil sie erst dort den Display-Schnitt bekommt --
-// derselbe Grund, aus dem sie klein verliert.
+// ═══ AUF WIX MADEFOR UMGESTELLT, 2026-08-31 ═══
 //
-// GEWICHT: 500 (font-medium) fuer h1/h2, 600 (font-semibold) ab h3 abwaerts.
-// Bei aktiver opsz-Achse traegt 500 die grossen Groessen bereits; 600 wirkt
-// dort gedrungen. Unter 24px ist es umgekehrt, dort traegt erst 600.
+// Vorher trug diese Skala Space Grotesk und Fraunces, also eine Grotesk und
+// eine Serife. Youssef: "nutz die schriftart von Wix ... wie die von der
+// website marketing.frostbreaker.app". Dort steht Wix Madefor Display ueber
+// Wix Madefor Text -- eine Familie in zwei Schnitten.
+//
+// DIE REGEL DAHINTER BLEIBT, nur ihre Begruendung wechselt: `font-display`
+// gehoert an Ueberschriften ab 24px, darunter steht die Textschrift. Bei
+// Fraunces lag der Grund in der Serife, die klein wie Fachtext las; bei
+// Madefor liegt er in der Zeichnung -- der Display-Schnitt ist fuer grosse
+// Grade gebaut, mit engeren Punzen und knapperen Abstaenden, und wird klein
+// gedrungen.
+//
+// GEWICHT UND LAUFWEITE SIND GEMESSEN, nicht geraten. Am 2026-08-31 auf
+// marketing.frostbreaker.app im Browser ausgelesen:
+//
+//   h1   88px  Gewicht 700  Laufweite -2,64px (-0.03em)  Zeile 1,02
+//   h2   60px  Gewicht 700  Laufweite -1,80px (-0.03em)  Zeile 1,05
+//   p    24px  Gewicht 400  Laufweite normal             Zeile 1,60
+//
+// Deshalb steht hier jetzt `font-bold` und nicht mehr `font-medium`:
+// Fraunces trug mit 500 bereits, weil ihr Strichkontrast die Groesse
+// mitmachte. Madefor ist eine Grotesk und braucht das Gewicht selbst.
 // ══════════════════════════════════════════════════════════════════════
-// KEINE FARBE IN DER SKALA. Eine Groessenstufe, die ihre eigene Textfarbe
-// mitbringt, laesst sich nicht umdrehen: `h2Cls + " text-surface"` gewinnt
-// nicht zuverlaessig gegen das mitgelieferte `text-ink`, weil beide Regeln
-// dieselbe Spezifitaet haben und dann die Reihenfolge im erzeugten CSS
-// entscheidet, nicht die im className. Gebraucht wird das genau einmal, im
-// dunklen Schluss-CTA der Startseite. Ohne Farbe erbt jede Ueberschrift
-// --c-ink vom body (globals.css) und die im dunklen Abschnitt --c-surface
-// von ihrem Container -- richtig herum, ohne Ausnahme und ohne Zweitkonstante.
-// h1Cls bringt bewusst KEINE Zeilenbreite mit, h2Cls schon: die Seite kennt
-// zwei Hero-Bauformen, und sie unterscheiden sich genau darin. Der
-// Startseiten-Hero ist zweispaltig, dort deckelt die Rasterspalte; die fuenf
-// Unterseiten-Heros stehen mittig und setzen max-w-[24ch] selbst.
 export const h1Cls =
-  "font-display text-4xl font-medium leading-[0.98] tracking-[-0.03em] text-balance sm:text-[3.75rem] lg:text-[4.5rem]";
+  "font-display text-4xl font-bold leading-[1.02] tracking-[-0.03em] text-balance sm:text-[3.75rem] lg:text-[4.5rem]";
 
 // Der zweispaltige Startseiten-Hero. Er teilt sich die Breite mit dem Bild,
 // und die Skala muss dem folgen -- gemessen am 2026-08-15 in Chrome:
@@ -88,8 +84,11 @@ export const h1Cls =
 // Der ZENTRIERTE Hero der Unterseiten (h1Cls) bleibt bei 72px: dort steht
 // keine Nachbildung daneben, die Ueberschriften sind kuerzer, und unter ihnen
 // haengt kein Kundenstreifen.
+// Die Pixelmessungen in diesem Block stammen aus der Fraunces-Zeit. Die
+// SCHLUSSFOLGERUNG traegt weiter (der Knopf darf nicht unter die Falz), die
+// genauen Zeilenumbrueche gehoeren bei Gelegenheit neu gemessen.
 export const h1SplitCls =
-  "font-display text-4xl font-medium leading-[0.98] tracking-[-0.03em] text-balance sm:text-[3.75rem] lg:text-[3.25rem] xl:text-[3.75rem]";
+  "font-display text-4xl font-bold leading-[1.02] tracking-[-0.03em] text-balance sm:text-[3.75rem] lg:text-[3.25rem] xl:text-[3.75rem]";
 // ══════════════════════════════════════════════════════════════════════
 // EINE STUFE GROESSER, seit dem 2026-08-31.
 //
@@ -112,8 +111,8 @@ export const h1SplitCls =
 // Lesekorridor, den der Rahmen mit max-w-6xl ohnehin setzt.
 // ══════════════════════════════════════════════════════════════════════
 export const h2Cls =
-  "font-display max-w-[22ch] text-[2.75rem] font-medium leading-[1.03] tracking-[-0.028em] text-balance lg:text-[3.5rem]";
-export const h3Cls = "font-display text-[1.75rem] font-semibold leading-[1.22] tracking-[-0.02em]";
+  "font-display max-w-[22ch] text-[2.75rem] font-bold leading-[1.05] tracking-[-0.03em] text-balance lg:text-[3.5rem]";
+export const h3Cls = "font-display text-[1.75rem] font-bold leading-[1.2] tracking-[-0.025em]";
 export const cardTitleCls = "text-[1.1875rem] font-semibold leading-snug";
 
 // Augenbraue und Fliesstext unter einer Ueberschrift. Beide standen bisher an

@@ -126,7 +126,7 @@ export function StepWalkthrough() {
                   {/* Das hervorgehobene Detail: je Schritt genau EINE Sache,
                       die ein Wettbewerber nicht sagen kann. Ohne sie waere
                       der Rundgang eine Funktionsliste. */}
-                  <p className="mt-4 max-w-[48ch] border-l-2 border-coral pl-4 text-sm leading-relaxed text-soft">
+                  <p className="mt-4 max-w-[48ch] border-l-2 border-sky-600/40 pl-4 text-sm leading-relaxed text-soft">
                     {step.detail}
                   </p>
 

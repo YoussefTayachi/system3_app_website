@@ -237,7 +237,7 @@ export function CustomerSection({ className = "" }: { className?: string }) {
             </div>
 
             <div className="mt-8 rounded-xl border border-edge/70 bg-panel2/70 p-6 sm:mt-10 sm:p-8">
-              {/* Ohne `font-display`: die Serife traegt erst ab 24px, und
+              {/* Ohne `font-display`: der Display-Schnitt traegt erst ab 24px, und
                   diese Zeile steht auf schmalen Fenstern in 20px. Ein
                   Familienwechsel je Breakpoint waere ein zweiter Bruch -- die
                   Groessen bleiben deshalb unveraendert, nur die Familie

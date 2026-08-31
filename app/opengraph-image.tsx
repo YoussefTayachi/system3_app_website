@@ -8,7 +8,7 @@ export const alt =
 // Wird zur Build-Zeit einmal gerendert und danach statisch ausgeliefert.
 // Bewusst ohne @fontsource-Fonts: Satori kann die variablen woff2-Dateien
 // nicht laden, deshalb traegt hier Gewicht und Groesse die Hierarchie
-// statt der Display-Serife der Website.
+// statt der Displayschrift der Website.
 export default function OpengraphImage() {
   return new ImageResponse(
     (

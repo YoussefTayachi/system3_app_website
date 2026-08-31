@@ -304,7 +304,11 @@ export function StrikeList({ items, note }: StrikeListProps) {
                 aria-hidden
                 className={
                   "mt-1 h-2 w-2 shrink-0 rounded-full transition-colors duration-300 " +
-                  (weg ? "bg-edge3" : "bg-coral")
+                  // Vor dem Strich Tinte, danach blass. Der Punkt war
+                  // korallrot und ist damit die einzige Stelle gewesen,
+                  // an der ein Handgriff nach Warnung aussah; er ist
+                  // keine Warnung, er ist nur noch nicht gestrichen.
+                  (weg ? "bg-edge3" : "bg-ink")
                 }
               />
               <span

@@ -297,12 +297,18 @@ function AktWebsite({ n, p }: { n: Nische; p: JourneyProps }) {
         {n.befunde.map((b, i) => (
           <li
             key={b}
-            className="fb-anim fb-rise-6 flex items-start gap-3 rounded-xl border border-coral/30 bg-coral-soft/70 px-4 py-3"
+            // NEUTRALE KARTE, NUMMER IN TINTE. Die drei Befunde waren
+            // korallrot; ohne den warmen Ton tragen sie die Nummer und
+            // die Ueberschrift darueber ("Was auf der Website auffiel").
+            // Der Abstand zum gruenen Moment zwei Akte spaeter bleibt
+            // dadurch sogar groesser: hier wird beobachtet, dort gelingt
+            // etwas.
+            className="fb-anim fb-rise-6 flex items-start gap-3 rounded-xl border border-edge2 bg-panel2/60 px-4 py-3"
             style={{ animationDelay: 1300 + i * 260 + "ms" }}
           >
             <span
               aria-hidden
-              className="mt-px grid h-[22px] w-[22px] shrink-0 place-items-center rounded-full bg-coral/15 text-[13px] font-bold text-coral"
+              className="mt-px grid h-[22px] w-[22px] shrink-0 place-items-center rounded-full bg-ink text-[13px] font-bold text-surface"
             >
               {i + 1}
             </span>

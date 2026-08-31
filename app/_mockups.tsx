@@ -264,7 +264,7 @@ export function QualifiedLeadAnimation() {
               <span
                 className={
                   "flex h-5 w-5 shrink-0 items-center justify-center rounded transition-colors duration-[220ms] ease-out " +
-                  (struck ? "bg-coral-soft text-coral" : "bg-panel text-mute")
+                  (struck ? "bg-ink/[0.06] text-faint" : "bg-panel text-mute")
                 }
               >
                 <svg viewBox="0 0 24 24" fill="none" className="h-3 w-3">

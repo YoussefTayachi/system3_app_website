@@ -110,12 +110,12 @@ function StageCard({ stage, accent, delay }: { stage: Stage; accent: boolean; de
       //
       // Die neutrale Karte traegt `shadow-card` und KEINEN border: die erste
       // Schicht des Schattens ist die Haarlinie (globals.css). Die
-      // Akzentfassung behaelt ihren coral-Rahmen -- er ist eine Aussage ueber
+      // Akzentfassung behaelt ihren blauen Rahmen -- er ist eine Aussage ueber
       // die Farbe, keine Kante, und daneben waere die graue Ringschicht des
       // Schattens ein zweiter, widersprechender Strich.
       className={
         "fb-anim fb-rise-8 flex flex-1 flex-col rounded-2xl p-5 " +
-        (accent ? "border border-coral/40 bg-coral-soft" : "bg-panel shadow-card")
+        (accent ? "border border-sky-600/30 bg-sky-500/8" : "bg-panel shadow-card")
       }
     >
       {/* PIKTOGRAMM UND STUFENNAME IN EINER ZEILE, seit dem 2026-08-31.
@@ -136,9 +136,9 @@ function StageCard({ stage, accent, delay }: { stage: Stage; accent: boolean; de
         <span className="text-sky-600">{stageIcons[stage.id]}</span>
         {stage.label}
       </p>
-      {/* Kartentitel in Space Grotesk, nicht in Fraunces: die Display-Serife
-          traegt erst ab 24px. Darunter liest sie sich als Fachtext -- genau
-          das war hier bei 18px der Fall. */}
+      {/* Kartentitel in der Textschrift, nicht in der Displayschrift: der
+          Display-Schnitt ist fuer grosse Grade gezeichnet und wird unter 24px
+          gedrungen. Dieselbe Grenze wie ueberall auf dieser Seite. */}
       <h3 className="mt-3 text-[1.1875rem] font-semibold leading-snug tracking-[-0.015em] text-ink">
         {stage.title}
       </h3>
@@ -267,11 +267,15 @@ export function SystemMap() {
         className="fb-anim fb-rise-8 mt-3 flex flex-col items-center"
         style={{ animationDelay: schleifeVerzoegerung + "ms" }}
       >
-        <svg viewBox="0 0 16 30" className="h-7 w-4 text-coral" fill="none" aria-hidden>
+        <svg viewBox="0 0 16 30" className="h-7 w-4 text-sky-600" fill="none" aria-hidden>
           <path d="M8 30V6" stroke="currentColor" strokeWidth="1.5" strokeDasharray="3 3" />
           <path d="M2.5 9 8 2l5.5 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
-        <div className="mt-2 w-full rounded-2xl border border-coral/40 bg-coral-soft p-5 sm:p-6">
+        {/* Die Rueckkopplung war korallrot -- der einzige warme Block der
+            Seite, und genau deshalb fiel sie auf. Blau kann dasselbe: sie
+            ist der einzige Kasten hier, der ueberhaupt eine Flaeche traegt,
+            und das hebt sie gegen die drei weissen Stufen schon heraus. */}
+        <div className="mt-2 w-full rounded-2xl border border-sky-600/30 bg-sky-500/8 p-5 sm:p-6">
           <p className="text-[13px] font-bold uppercase tracking-[0.12em] text-ink">
             {m.loop.label}
           </p>
@@ -286,7 +290,7 @@ export function SystemMap() {
             {m.loop.items.map((item) => (
               <li
                 key={item}
-                className="rounded-full border border-coral/30 bg-panel px-3.5 py-1.5 text-[15px] leading-snug text-soft"
+                className="rounded-full border border-sky-600/25 bg-panel px-3.5 py-1.5 text-[15px] leading-snug text-soft"
               >
                 {item}
               </li>

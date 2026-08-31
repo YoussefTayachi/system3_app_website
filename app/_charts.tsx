@@ -229,12 +229,18 @@ export function ReadinessGrid({ blockerLabel, warnLabel, items }: ReadinessProps
             className={
               "flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-[15px] leading-snug " +
               (it.blocker
-                ? "border border-coral/40 bg-coral-soft font-medium text-ink"
+                // WAS AUFHAELT, TRAEGT TINTE UND GEWICHT, NICHT FARBE.
+                // Bis zum 2026-08-31 waren die vier Blocker korallrot.
+                // Ohne den warmen Ton uebernimmt die Tinte: kraeftigere
+                // Kante, dunklerer Grund, fetter Text. Das liest sich
+                // gegen die acht hellen Nachbarn genauso deutlich und
+                // braucht keine zweite Farbfamilie.
+                ? "border border-ink/30 bg-ink/[0.05] font-semibold text-ink"
                 : "border border-edge/70 bg-panel text-soft")
             }
           >
             {it.blocker ? (
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden className="h-[18px] w-[18px] shrink-0 text-coral">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden className="h-[18px] w-[18px] shrink-0 text-ink">
                 <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.8" />
                 <path d="M8.2 8.2 15.8 15.8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
               </svg>
@@ -249,7 +255,7 @@ export function ReadinessGrid({ blockerLabel, warnLabel, items }: ReadinessProps
       </ul>
       <p className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-1.5 text-[13px] text-mute">
         <span className="flex items-center gap-2">
-          <span aria-hidden className="h-2.5 w-2.5 rounded-full bg-coral" />
+          <span aria-hidden className="h-2.5 w-2.5 rounded-full bg-ink" />
           {blockerLabel.replace("{n}", String(blocker))}
         </span>
         <span className="flex items-center gap-2">
@@ -392,7 +398,7 @@ export function OfferFlow(p: OfferFlowProps) {
           <path d="M0 8h26" stroke="currentColor" strokeWidth="1.5" />
           <path d="M21 2.5 28 8l-7 5.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
-        <span className="whitespace-nowrap rounded-full border border-coral/40 bg-coral-soft px-4 py-2 text-[15px] font-medium text-ink">
+        <span className="whitespace-nowrap rounded-full border border-sky-600/30 bg-sky-500/10 px-4 py-2 text-[15px] font-medium text-sky-900">
           {p.hub}
         </span>
         <svg viewBox="0 0 16 34" className="h-8 w-4 shrink-0 text-faint lg:hidden" fill="none" aria-hidden>

@@ -1,8 +1,21 @@
 @import "tailwindcss";
 
-/* ===== Farb-Tokens — Basis identisch zur System3-App (Attio/Notion-artig),
-   plus ein warmer Zweitton (Coral) fuer CTA-Highlights/Rechner, damit nicht
-   alles auf einem einzigen Blauton (Sky) sitzt. ===== */
+/* ═══ Farb-Tokens ═══════════════════════════════════════════════════════
+   Basis identisch zur Frostbreaker-App (Attio/Notion-artig).
+
+   KEIN ZWEITTON MEHR, seit dem 2026-08-31. Hier stand ein warmes Korall
+   (#ea5a3e) neben dem Blau, "damit nicht alles auf einem einzigen Blauton
+   sitzt". Youssef hat es herausgenommen: "entfern all dieses korall".
+
+   Die Seite laeuft damit auf drei Toenen -- Tinte, Blau, und Gruen fuer den
+   einen Moment, an dem etwas gelingt. Das ist die Palette, auf der auch
+   marketing.frostbreaker.app steht (dort nachgesehen am 2026-08-31: alle
+   Textfarben sind Tinte, Weich, Blass und sky-700, kein warmer Ton
+   darunter).
+
+   Wer einen Warnton braucht, nimmt NICHT Korall zurueck: was aufhaelt,
+   traegt auf dieser Seite jetzt Tinte und Gewicht, nicht Farbe. Siehe die
+   Startpruefung in _charts.tsx. ═══════════════════════════════════════ */
 :root {
   /* Drei Flaechenstufen statt zwei. Bis zum 2026-08-15 wechselten die
      Abschnitte zwischen --c-surface (#f9f9f8) und --c-panel2 (#f5f5f4), und
@@ -51,8 +64,6 @@
   --c-soft: #57534e;
   --c-faint: #5d5b56;
   --c-mute: #6b6963;
-  --c-coral: #ea5a3e;
-  --c-coral-soft: #fdece7;
 
   /* EINE Kurve fuer die ganze Seite. Sie stand bis zum 2026-08-15 zweimal
      ausgeschrieben da (.fade-up und .reveal) und waere mit jeder neuen
@@ -99,10 +110,8 @@
   --color-soft: var(--c-soft);
   --color-faint: var(--c-faint);
   --color-mute: var(--c-mute);
-  --color-coral: var(--c-coral);
-  --color-coral-soft: var(--c-coral-soft);
-  --font-sans: "Space Grotesk Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-display: "Fraunces Variable", ui-serif, Georgia, serif;
+  --font-sans: "Wix Madefor Text Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Wix Madefor Display Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
   /* Zwei Schatten, benannt nach ihrer Aufgabe statt nach ihrer Groesse.
      Vorher gab es auf der ganzen Seite drei Werte, und der Schatten der
@@ -128,19 +137,21 @@ body {
   color: var(--c-ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
-  font-feature-settings: "cv11", "ss01";
+  /* `font-feature-settings: "cv11", "ss01"` stand hier fuer Space Grotesk.
+     Wix Madefor kennt beide Merkmale nicht, und eine Angabe, die auf nichts
+     wirkt, liest sich beim naechsten Mal wie eine Absicht. */
 }
 
-/* font-optical-sizing wirkt erst, seit layout.tsx die opsz-Datei laedt (siehe
-   die Begruendung dort). `auto` setzt opsz auf die Schriftgroesse in px,
-   begrenzt auf den Bereich der Schrift (9-144): eine 72px-Ueberschrift bekommt
-   den Display-Schnitt mit hohem Strichkontrast, ein 24px-Zwischentitel einen
-   dazwischenliegenden. Bewusst `auto` und kein fester Wert: opsz 144 sieht in
-   der Ueberschrift grossartig aus und laesst 24px-Titel haarduenn werden --
-   genau dafuer gibt es die Achse. */
+/* Die Display-Familie. Sie unterscheidet sich von der Textschrift nicht in
+   der Stimme, sondern in der Lautstaerke: engere Laufweite, kraeftigere
+   Strichenden, gebaut fuer grosse Grade. Genau so steht sie auf
+   marketing.frostbreaker.app.
+
+   KEIN font-optical-sizing mehr. Das stand hier fuer die opsz-Achse von
+   Fraunces; Madefor hat nur wght (400-800), und eine Eigenschaft, die auf
+   nichts wirkt, liest sich beim naechsten Mal wie eine Absicht. */
 .font-display {
   font-family: var(--font-display);
-  font-optical-sizing: auto;
 }
 
 ::selection { background: rgba(14, 165, 233, 0.18); }
@@ -555,12 +566,15 @@ body {
   box-shadow: 0 2px 6px -1px rgba(28, 27, 25, 0.35);
   cursor: grab;
 }
+/* Der Fokusring setzt sich vom tintenfarbenen Griff ab. Das war der einzige
+   Zweck des Koralls hier, und Blau kann ihn genauso -- es ist ausserdem die
+   Farbe, die jeder andere Fokus auf dieser Seite traegt. */
 .range-touch:focus-visible::-webkit-slider-thumb {
-  outline: 2px solid var(--c-coral);
+  outline: 2px solid var(--color-sky-600);
   outline-offset: 2px;
 }
 .range-touch:focus-visible::-moz-range-thumb {
-  outline: 2px solid var(--c-coral);
+  outline: 2px solid var(--color-sky-600);
   outline-offset: 2px;
 }
 
