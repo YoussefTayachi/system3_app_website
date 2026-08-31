@@ -288,6 +288,116 @@ body {
   transition: none;
 }
 
+/* ══════════════════════════════════════════════════════════════════════
+   DIE BAUSTEINE DER BEIDEN BUEHNEN (_stage.tsx), neu am 2026-08-31.
+
+   Vier Stueck, und alle vier bewegen ausschliesslich `transform`, `opacity`
+   oder `clip-path`. Die Kurve ist ueberall `--fb-ease-out`, also dieselbe wie
+   im Rest der Seite -- ein zweites Kurvensystem waere genau das, was der
+   Kommentar bei der Kurve oben verhindern soll.
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* Ein Element, das ab einem bestimmten Takt da ist.
+   TRANSITION UND NICHT KEYFRAMES: der Besucher kann in der Taktleiste einen
+   Takt anklicken und dabei auch zurueckspringen. Eine Transition zielt vom
+   aktuellen Wert um; ein Keyframe finge von vorn an, und beim Zurueckspringen
+   liefen alle Elemente noch einmal ein.
+   Der Weg steht in --fb-step-y an der Aufrufstelle (8px fuer Karten, 4px fuer
+   Zeilen), damit diese Regel ihn nicht kennen muss. */
+.fb-step {
+  opacity: 0;
+  transform: translateY(var(--fb-step-y, 8px));
+  transition:
+    opacity 420ms var(--fb-ease-out),
+    transform 420ms var(--fb-ease-out);
+}
+.fb-step-on {
+  opacity: 1;
+  transform: none;
+}
+
+/* Die Schreibmaschine im Suchfeld.
+   clip-path statt eines Zustands je Zeichen: vierzig Rerender fuer eine Zeile
+   Text waeren vierzig Gelegenheiten, ein Bild zu verlieren, und der Cursor
+   stuende trotzdem an der falschen Stelle. Hier steht die fertige Zeile im
+   DOM und wird von rechts freigeschnitten -- dieselbe Technik wie fbBarGrow
+   an den Balken.
+   `steps(28)` statt linear: eine Schreibmaschine rueckt zeichenweise vor. 28
+   ist keine Zeichenzahl, sondern die Zahl der Rucke; sie passt fuer beide
+   Sprachen, weil sie den Weg teilt und nicht den Text. */
+.fb-type {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 900ms steps(28, end);
+}
+.fb-type-on {
+  clip-path: inset(0 0 0 0);
+}
+
+/* Der Cursor blinkt NUR, solange getippt wird (die Klasse setzt _stage.tsx
+   nur im nullten Takt). Ein Cursor, der neben einer stehenden Zeile
+   weiterblinkt, ist eine Dauerbewegung ohne Aussage -- genau die Sorte, wegen
+   der Menschen `prefers-reduced-motion` einschalten. */
+.fb-caret {
+  position: absolute;
+  right: -3px;
+  top: 50%;
+  width: 1.5px;
+  height: 1.1em;
+  transform: translateY(-50%);
+  background: var(--c-edge3);
+  opacity: 0;
+}
+.fb-caret-on {
+  animation: fbCaret 1s steps(2, end) infinite;
+}
+@keyframes fbCaret {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Die Marken auf der Zeitachse. Sie wachsen aus 0.4 heraus und nicht aus 0:
+   nichts in der Welt erscheint aus dem Nichts, und scale(0) laesst den Punkt
+   aufploppen statt eintreffen. */
+.fb-dot {
+  display: grid;
+  place-items: center;
+  border-radius: 9999px;
+  background: var(--c-panel);
+  opacity: 0;
+  transform: scale(0.4);
+  transition:
+    opacity 300ms var(--fb-ease-out),
+    transform 300ms var(--fb-ease-out),
+    background-color 300ms var(--fb-ease-out);
+}
+.fb-dot[data-an] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Die vier Mails: gefuellt. Sie gehen von allein raus. */
+.fb-dot-auto {
+  width: 13px;
+  height: 13px;
+  box-shadow: inset 0 0 0 1.5px var(--c-edge2);
+}
+.fb-dot-auto[data-an] {
+  background: var(--color-sky-600);
+  box-shadow: 0 0 0 3px var(--c-panel);
+}
+
+/* LinkedIn und der Anruf: offen, mit ihrem Kanalzeichen darin. Die App
+   sendet dort nicht, und eine gefuellte Marke wuerde genau das behaupten.
+   Groesser als die vier daneben, weil ein Zeichen Platz braucht -- der
+   Groessenunterschied ist derselbe Unterschied noch einmal. */
+.fb-dot-hand {
+  width: 26px;
+  height: 26px;
+  box-shadow:
+    inset 0 0 0 1.5px var(--c-edge2),
+    0 0 0 3px var(--c-panel);
+}
+
 @keyframes float {
   0%, 100% { transform: translateY(0px) rotate(-1deg); }
   50% { transform: translateY(-10px) rotate(1deg); }
@@ -478,4 +588,12 @@ body {
      in ihren Endzustand. Bei allen dreien fuehrt JS bzw. ein Klick den
      Zustand -- ohne Transition heisst das: sofort da, nichts unsichtbar. */
   .fb-card-enter, .fb-strike::after, .fb-stack > *, .fb-faq-answer { transition: none; }
+
+  /* Die beiden Buehnen (_stage.tsx) laufen unter `reduce` gar nicht erst ab:
+     useTakt springt auf den letzten Takt, sobald der Block im Bild ist. Diese
+     Regeln nehmen den Rest -- die Transitions und den blinkenden Cursor.
+     Es geht dabei NICHTS verloren: die Buehnen sind additiv gebaut, ihr
+     letzter Takt ist das vollstaendige Bild. Weg ist nur die Vorfuehrung. */
+  .fb-step, .fb-type, .fb-dot { transition: none; }
+  .fb-caret-on { animation: none; opacity: 0; }
 }

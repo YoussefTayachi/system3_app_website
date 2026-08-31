@@ -11,80 +11,75 @@ import {
   sectionPad,
   heroPad,
 } from "./_ui";
-import { SystemMap } from "./_system-map";
-// OfferMapMockup ist am 2026-08-31 von der Startseite gefallen und steht
-// weiter auf /funktionen#write. Begruendung im Kopf von OfferFlow.
-import { FactStrip, SequenceChart, ReadinessGrid, OfferFlow } from "./_charts";
+import { FlowStage, ClaudeStage, StrikeList } from "./_stage";
 import { CustomerStrip, CustomerProof } from "./_customers";
 import { Reveal } from "./reveal";
-import { factIcons, channelIcons, whoForIcons, noteIcons } from "./_icons";
+import { whoForIcons, noteIcons } from "./_icons";
 import { useT } from "./language-provider";
 
 /**
  * ══════════════════════════════════════════════════════════════════════
- * DIE STARTSEITE, neu gefasst am 2026-08-31.
+ * DIE STARTSEITE. Zweiter Umbau am 2026-08-31.
  * ══════════════════════════════════════════════════════════════════════
  *
- * ANLASS. Youssefs Mentor hat den CTS-Entwurf in drei Runden gelesen; was
- * dabei herauskam, liegt als Pruefliste in Website_Business/Lehren. Diese
- * Seite ist danach umgebaut worden. Die vier Punkte, die hier alles
- * entschieden haben:
+ * Der erste Umbau desselben Tages hat die Seite von 2.331 auf 640 sichtbare
+ * Woerter gebracht und Zahlen durch Bilder ersetzt. Youssef hat sie danach
+ * gelesen, und seine Rueckmeldung dreht die AUSRICHTUNG, nicht die Laenge:
  *
- *   "650 Woerter, nicht 1.250. Beim Schreiben streichen, nicht danach."
- *   "Gekuerzt wurden ganze Elemente, nicht Saetze."
- *   "Piktogramme fuer Kennzahlen und Kartenueberschriften."
- *   "Das Diagramm antwortet, mit Zeiger und mit Tastatur."
+ *   "bei landing page musst du auf motivationsebene denken und nicht auf
+ *    feature ebene."
+ *   "generell bei der landing page wuerde ich keine features nennen sondern
+ *    nur, was das produkt macht."
+ *   "du hast zwar visuals eingebaut aber es ist eig nur text in kaestchen --
+ *    mach lieber eine animation die zeigt was passiert anstatt es zu
+ *    schreiben."
+ *   "die claude mcp integration ist ein viel besserer verkaufsargument."
  *
- * GEMESSEN, NICHT GESCHAETZT. Vor dem Umbau, mit scripts/count-words.mjs auf
- * der ausgelieferten Seite:
+ * ═══ WAS DARAUFHIN GEFALLEN IST ═══
  *
- *   Startseite gesamt        2.331 sichtbare Woerter
- *   davon #torwart             425
- *   davon #angebot             369
- *   davon #kunde               259
- *   davon #system              253
- *   davon #kanaele             221
- *   davon #crm                 175
+ * Fuenf Abschnitte, alle vom selben Tag, alle auf Funktionsebene:
  *
- * WAS GANZ WEGGEFALLEN IST, und wohin es gegangen ist. Kein Satz ist
- * umgeschrieben worden, um ihn kuerzer zu machen -- gestrichen wurden
- * Elemente, und jedes steht ausfuehrlich auf einer Unterseite:
+ *   Kennzahlenband  3 Kanaele, 6 Beruehrungen, 8 Mails, 12 Pruefungen ...
+ *   Systemkarte     drei Karten mit je einer Dreipunktliste
+ *   Sequenzdiagramm 90/70/50/35 Woerter an Tag 0/3/5/7
+ *   Angebot         zwoelf Felder hinein, acht Mails hinaus
+ *   Startpruefung   zwoelf Kacheln, vier davon Blocker
  *
- *   #rundgang       sechs Schritttitel   -> /funktionen, ganz
- *   #crm            drei Karten + Bild   -> /funktionen#pipeline
- *   #ehrlich        A/B-Ehrlichkeit      -> /funktionen#vergleich
- *   #ergaenzt       Ergaenzungsband      -> /funktionen
- *   #integrationen  Integrationsliste    -> /funktionen
- *   "Warum es Frostbreaker gibt"         -> /kontakt, dort mit Gesicht
- *   #kunde          voller Fall          -> /kunden/retaiyn
+ * Jede dieser Zahlen stimmt und jede ist im App-Repo nachzaehlbar. Genau das
+ * war das Problem: sie beschreiben, WIE DAS WERKZEUG GEBAUT IST. Wer auf
+ * dieser Seite landet, hat es noch nie benutzt und fragt sich, was ihm das
+ * bringt. Alle fuenf stehen weiter auf /funktionen, wo diese Frage gestellt
+ * wird.
  *
- * Der Rundgang war der teuerste Einzelfall: er beantwortete "wie laeuft das
- * ab" ein zweites Mal, direkt unter der Systemkarte, die dieselbe Frage als
- * BILD beantwortet. Zwei Zusammenfassungen desselben Ablaufs hintereinander
- * sind eine zu viel, und die mit dem Bild gewinnt.
+ * ═══ WAS AN IHRE STELLE GETRETEN IST ═══
  *
- * DIE AUGENBRAUEN SIND WEG. Auf jedem Abschnitt stand ueber der Ueberschrift
- * eine Zeile in Grossbuchstaben, die die Ueberschrift ankuendigte ("Der
- * Ablauf" ueber "Vier Stufen, eine Datenbasis"). Die Ueberschrift traegt sich
- * selbst; die Augenbraue kostete nur Wortbudget und eine Zeile Hoehe. Die
- * Schluessel bleiben im Woerterbuch -- die Unterseiten benutzen sie weiter.
+ *   1  Held         das Ergebnis, nicht die Faehigkeit
+ *   2  Handgriffe   vier Dinge, die der Leser heute selbst macht, durch-
+ *                   gestrichen waehrend er hinsieht
+ *   3  Ablauf       der ganze Weg als Buehne, die ihn vorfuehrt
+ *   4  Claude       die Anbindung, der neue Hauptgrund
+ *   5  Fuer wen     bin ich gemeint
+ *   6  Kunde        macht das ausser euch jemand
+ *   7  Kosten       was es kostet
+ *   8  Fragen       der Rest
+ *   9  Schluss      die eine Handlung
  *
- * DIE REIHENFOLGE, und warum sie so und nicht anders ist:
+ * Zwei der neun Abschnitte fuehren etwas VOR statt es zu beschreiben. Die
+ * Regeln dafuer stehen im Kopf von _stage.tsx; die wichtigste ist, dass beide
+ * Buehnen additiv sind, also am Ende das ganze Bild zeigen und nicht den
+ * letzten Takt.
  *
- *   1  Held           was es ist
- *   2  Kennzahlen     wie gross es ist, in sechs Zahlen mit Zeichen
- *   3  Systemkarte    wie es zusammenhaengt, als Bild
- *   4  Sequenz        was der Empfaenger davon merkt, als Diagramm
- *   5  Angebot        wer den Text schreibt
- *   6  Startpruefung  was schiefgehen kann und was das aufhaelt
- *   7  Fuer wen       bin ich gemeint
- *   8  Kunde          macht das ausser euch jemand
- *   9  Kosten         was es kostet
- *  10  Fragen         der Rest
- *  11  Schluss        die eine Handlung
+ * ═══ DIE EINE STELLE, AN DER ICH VON YOUSSEFS WORTEN ABGEWICHEN BIN ═══
  *
- * Vier der elf Abschnitte tragen ein Bild, das etwas belegt, und zwischen
- * zwei Bildern liegt nie mehr als ein Abschnitt Text.
+ * Er schrieb, man koenne ueber Claude "automatisiert leads suchen ... und
+ * abschicken". Beides kann die Anbindung nicht, und zwar mit Absicht: kein
+ * Werkzeug im Protokoll startet eine Suche oder sendet eine Mail
+ * (apps/web/lib/mcp/tool-descriptions.ts, wortwoertlich "that boundary is
+ * deliberate"). Die Suche legt er in seinen eigenen Ablaeufen per SQL an, was
+ * ein Kunde nicht kann. Der Abschnitt sagt deshalb, was stimmt, und benennt
+ * die Grenze selbst -- auf einer Seite, die sonst keine Zahl zeigt, die sie
+ * nicht nachrechnen kann, ist das keine Schwaeche, sondern der Grund, warum
+ * ihr der Rest geglaubt wird.
  * ══════════════════════════════════════════════════════════════════════ */
 
 // Wohin die drei Tueren aus dem Abschnitt "Fuer wen" fuehren. Bewusst hier und
@@ -105,22 +100,17 @@ export default function Home() {
       <SiteHeader />
 
       {/* ═══════════════════════════════════════════════════════════════
-          1 · DER HELD, und direkt darunter das Kennzahlenband.
+          1 · DER HELD.
 
-          Beide liegen im SELBEN Abschnitt und auf derselben Flaeche, nur
-          durch eine Haarlinie getrennt. Das ist der Punkt: die sechs Zahlen
-          sind die Beweisfuehrung der Ueberschrift, nicht der naechste
-          Abschnitt. Ein eigener Flaechenton oder sechs Karten haetten daraus
-          ein zweites Kapitel gemacht.
+          Ohne Kennzahlenband darunter, seit dem zweiten Umbau. Was dort
+          stand, waren sechs Zahlen ueber die Mechanik; was jetzt folgt, sind
+          vier Handgriffe, die wegfallen. Der Unterschied ist die ganze
+          Rueckmeldung.
           ═══════════════════════════════════════════════════════════ */}
       <section className="hero-wash border-b border-edge/60">
         <div className={"mx-auto max-w-6xl px-4 sm:px-6 " + heroPad}>
           <div className="fade-up mx-auto max-w-3xl text-center">
-            {/* HIER STAND DIE AUGENBRAUE ("Fuer alle, die Kunden per E-Mail
-                gewinnen wollen"). Sie sagte in acht Woertern, was die
-                Ueberschrift darunter in neun sagt, nur allgemeiner.
-                `hero.eyebrow` bleibt im Woerterbuch: /start liest es. */}
-            <h1 className={"mx-auto max-w-[19ch] " + h1Cls}>
+            <h1 className={"mx-auto max-w-[17ch] " + h1Cls}>
               {t.hero.h1Pre}
               <span className="italic text-sky-600">{t.hero.h1Accent}</span>
               {t.hero.h1Post}
@@ -138,9 +128,6 @@ export default function Home() {
                 <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
               </a>
             </div>
-            {/* Die Kurzfassung. Die lange Zeile stand mit 24 Woertern unter
-                dem wichtigsten Knopf der Seite und beantwortete dort eine
-                Frage, die erst im Gespraech kommt. */}
             <p className="mx-auto mt-4 text-[15px] text-mute">{t.cta.trialShort}</p>
 
             {/* Der einzige fremde Name ueber der Falz. Er steht bewusst NACH
@@ -150,182 +137,131 @@ export default function Home() {
             <CustomerStrip className="mt-8 justify-center" />
           </div>
         </div>
+      </section>
 
-        <div className="border-t border-edge/60">
-          <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-14">
-            <FactStrip items={t.facts.items} icons={factIcons} />
+      {/* ═══════════════════════════════════════════════════════════════
+          2 · WAS WEGFAELLT.
+
+          Der erste Abschnitt nach dem Helden nennt kein einziges Produktwort.
+          Er nennt vier Dinge, die der Leser HEUTE macht, und streicht sie
+          durch, waehrend er hinsieht. Wer sich in dreien davon wiedererkennt,
+          liest den Rest.
+
+          Der Strich ist die Aussage und deshalb animiert: ein Haken sagt
+          "erledigt", ein Strich sagt "faellt weg". Technik in _stage.tsx.
+          ═══════════════════════════════════════════════════════════ */}
+      <section className="border-b border-edge/60 bg-band">
+        <div className={"mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+            <h2 className={h2Cls}>{t.strikeList.title}</h2>
+            <StrikeList items={t.strikeList.items} note={t.strikeList.note} />
           </div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════
-          2 · DIE SYSTEMKARTE. Beantwortet "wie gross ist das hier?" in einem
-          Bild, bevor irgendetwas im Einzelnen erklaert wird. Seit heute ohne
-          Einleitungssatz: die Karte darunter ist die Einleitung.
+          3 · DER ABLAUF, VORGEFUEHRT.
+
+          Hier stand die Systemkarte: drei Karten, neun Stichpunkte, zwei
+          Pfeile, 127 sichtbare Woerter darueber, was das Werkzeug tut. Jetzt
+          tut es das. Fuenf Takte, additiv, mit einer Taktleiste, in der jeder
+          Knopf wirklich springt.
+
+          Die Zeitachse im vierten Takt ist der Rest des alten
+          Sequenzdiagramms: die TAGE bleiben, die Wortobergrenzen sind weg.
+          Youssefs Einwand galt der Wortzahl ("kein verkaufsargument"), und er
+          trifft nicht den Umstand, dass ohne Zutun weiter nachgefasst wird --
+          das ist der Grund, warum jemand das Werkzeug will.
           ═══════════════════════════════════════════════════════════ */}
-      <section id="system" className="scroll-mt-20 border-b border-edge/60 bg-band">
-        <div className={"mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
-          <h2 className={"mb-12 " + h2Cls}>{t.systemMap.title}</h2>
-          <Reveal>
-            <SystemMap />
-          </Reveal>
+      <section id="ablauf" className={"scroll-mt-20 mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
+        {/* Die alten Anker bleiben: auf /#system, /#kanaele und /#rundgang
+            zeigen vorhandene Verweise, aus der Navigation und von aussen. */}
+        <span id="system" className="block scroll-mt-20" aria-hidden />
+        <span id="kanaele" className="block scroll-mt-20" aria-hidden />
+        <span id="rundgang" className="block scroll-mt-20" aria-hidden />
+        <div className="mb-12 flex flex-wrap items-end justify-between gap-x-8 gap-y-3">
+          <h2 className={h2Cls}>{t.flowStage.title}</h2>
+          {/* Dieselbe Kennzeichnung wie an jeder Nachbildung dieser Seite.
+              Die Buehne zeigt Rollen und Segmente, keine Firmennamen -- aber
+              sie zeigt Text, der wie ein echter Aufhaenger aussieht, und dann
+              muss danebenstehen, dass er ein Beispiel ist. */}
+          <p className="text-[15px] text-mute">{t.flowStage.sampleNote}</p>
         </div>
+        <FlowStage {...t.flowStage} />
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════
-          3 · DIE SEQUENZ ALS DIAGRAMM.
+          4 · DIE ANBINDUNG AN CLAUDE, der neue Hauptgrund.
 
-          Hier stand ein Abschnitt aus drei Karten mit je einer
-          Dreipunktliste "Was die App tut" und einer Zeile "Was du tust" --
-          221 Woerter, die beschrieben, was ein Diagramm zeigt.
+          Youssef: "die claude mcp integration ist ein viel besserer
+          verkaufsargument denn der kunde kann alle seine agent skills und
+          automations dazu integrieren."
 
-          Das Diagramm zeigt zwei Dinge auf einmal, die vorher zwei Absaetze
-          brauchten: dass die Mails KUERZER WERDEN (90/70/50/35 Woerter), und
-          dass nach Tag 7 zwei Beruehrungen kommen, die die App NICHT sendet.
-          Beide Aussagen stehen jetzt in der Form des Bildes selbst -- die
-          gestrichelten Felder sind keine Zierde, sie sind der Unterschied
-          zwischen automatisch und von Hand.
+          Der Abschnitt steht NACH dem Ablauf und nicht davor. Wer nicht
+          gesehen hat, was das Werkzeug tut, kann mit "du kannst es von Claude
+          bedienen lassen" nichts anfangen -- die Anbindung ist eine Aussage
+          UEBER den Ablauf, also braucht sie den Ablauf davor.
 
-          Die drei Kanalkarten darunter behalten Zeichen und Titel und
-          verlieren ihre Listen. `channels.cards[].app` und `.you` bleiben im
-          Woerterbuch: /funktionen zeigt sie vollstaendig.
+          Eigene Flaeche: es ist das staerkste Argument der Seite, und es ist
+          das einzige, das sonst kein Anbieter in dieser Kategorie hat.
           ═══════════════════════════════════════════════════════════ */}
-      <section id="kanaele" className={"scroll-mt-20 mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
-        {/* Der alte Anker bleibt: auf /#telefon zeigen vorhandene Verweise. */}
-        <span id="telefon" className="block scroll-mt-20" aria-hidden />
-        <h2 className={"mb-12 " + h2Cls}>{t.channels.title}</h2>
-
-        <Reveal>
-          <SequenceChart {...t.sequenceChart} />
-        </Reveal>
-
-        <ul className="mt-14 grid gap-4 sm:grid-cols-3">
-          {t.channels.cards.map((c) => (
-            <li key={c.id} className="rounded-2xl border border-edge/60 bg-panel p-6">
-              <p className="flex items-center gap-2.5 text-[13px] font-bold uppercase tracking-[0.12em] text-faint">
-                <span className="text-sky-600">{channelIcons[c.id]}</span>
-                {c.label}
-              </p>
-              <h3 className={"mt-3.5 " + cardTitleCls}>{c.title}</h3>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
-          4 · DAS ANGEBOT. Die Antwort auf "und wer schreibt das alles?", die
-          der Leser nach dem Sequenzdiagramm stellt.
-
-          Gefallen sind: der Einleitungsabsatz (55 Woerter), die vier
-          nummerierten Punkttitel (30), die Einordnung ueber retaiyns eigene
-          Zahlen (33) und der Schlusssatz.
-
-          UND DIE NACHBILDUNG DES ANGEBOTSBILDSCHIRMS. Sie allein trug 268
-          sichtbare Woerter -- zwoelf Feldfragen, vier Eckentitel, eine Tafel
-          fuer den Listen-Zuschnitt, ein Befundpfeil. Das ist kein schlechtes
-          Bild, es ist am falschen Ort: es zeigt, WIE MAN DAS BEDIENT, und
-          diese Seite beantwortet, WAS DA PASSIERT. An ihrer Stelle steht
-          jetzt das Ablaufbild -- zwoelf Felder hinein, eine Pruefung, acht
-          Mails hinaus. Der Bildschirm steht unveraendert auf
-          /funktionen#write.
-
-          GEBLIEBEN IST DER EINE SATZ UEBER DEN MENSCHEN VOR DEM VERSAND. Er
-          ist die Antwort auf die haeufigste Sorge bei KI-Texten und steht
-          sonst nur in der FAQ, also hinter einem Klick. Seit heute mit
-          Piktogramm: er ist kein Nachsatz, er ist eine Zusage.
-          ═══════════════════════════════════════════════════════════ */}
-      <section id="angebot" className="scroll-mt-20 border-y border-edge/60 bg-band">
+      <section id="claude" className="scroll-mt-20 border-y border-edge/60 bg-band">
         <div className={"mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
-          <h2 className={"mb-12 " + h2Cls}>{t.offerSection.title}</h2>
-
-          <Reveal>
-            <OfferFlow {...t.offerFlow} />
-          </Reveal>
-
-          <p className="mt-12 flex max-w-[62ch] items-start gap-3.5 text-[19px] leading-relaxed text-ink">
-            <span className="mt-0.5 shrink-0 text-sky-600">{noteIcons.human}</span>
-            {t.offerSection.humanCheck}
-          </p>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
-          5 · DIE STARTPRUEFUNG, mit 425 Woertern bisher der teuerste
-          Abschnitt der Seite.
-
-          Er bestand aus einem Absatz ueber verbrannte Domains, zwei Karten
-          mit je einem Absatz und zwei Nachbildungen. Was davon uebrig bleibt,
-          ist die Zahl: zwoelf Pruefungen, vier davon halten den Start auf.
-          Als Raster aus zwoelf Kacheln sagt das dasselbe in zwanzig Woertern,
-          und die vier korallenen Kacheln sagen es, bevor eine gelesen ist.
-
-          GateMockup und EffectMockup sind damit von der Startseite weg und
-          stehen weiter auf /funktionen#protect. `guard.body` und
-          `guard.points` bleiben im Woerterbuch, dieselbe Seite liest sie.
-          ═══════════════════════════════════════════════════════════ */}
-      <section id="torwart" className={"scroll-mt-20 mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
-        {/* Der alte Anker bleibt: auf /#ehrlich zeigen vorhandene Verweise.
-            Der Ehrlichkeits-Abschnitt selbst steht auf /funktionen. */}
-        <span id="ehrlich" className="block scroll-mt-20" aria-hidden />
-        <h2 className={"mb-12 " + h2Cls}>{t.guard.title}</h2>
-        <Reveal>
-          <ReadinessGrid
-            blockerLabel={t.readiness.blockerLabel}
-            warnLabel={t.readiness.warnLabel}
-            items={t.readiness.items}
+          <div className="mb-12 max-w-[52ch]">
+            <h2 className={h2Cls}>{t.claudeStage.title}</h2>
+            <p className="mt-6 text-[19px] leading-relaxed text-soft">{t.claudeStage.body}</p>
+          </div>
+          <ClaudeStage
+            auftrag={t.claudeStage.auftrag}
+            schritte={t.claudeStage.schritte}
+            ergebnis={t.claudeStage.ergebnis}
+            grenze={t.claudeStage.grenze}
+            wiederholen={t.claudeStage.wiederholen}
           />
-        </Reveal>
+        </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════
-          6 · FUER WEN. Drei Lagen, keine Branchen: wer sich in einer Lage
+          5 · FUER WEN. Drei Lagen, keine Branchen: wer sich in einer Lage
           wiedererkennt, liest weiter; wer in einer Branchenliste seine
           Branche nicht findet, geht.
-
-          Die drei Beschreibungssaetze sind gefallen (74 Woerter). Titel und
-          Weg reichen -- die Zielseite dahinter erklaert es ohnehin, und sie
-          hat dafuer eine ganze Seite. `whoFor.cards[].body` bleibt im
-          Woerterbuch fuer den Fall, dass eine Unterseite es aufgreift.
           ═══════════════════════════════════════════════════════════ */}
-      <section id="fuer-wen" className="scroll-mt-20 border-y border-edge/60 bg-band">
+      <section id="fuer-wen" className={"scroll-mt-20 mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
         {/* Der alte Anker bleibt: auf /#agenturen zeigen vorhandene Verweise. */}
         <span id="agenturen" className="block scroll-mt-20" aria-hidden />
-        <div className={"mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
-          <h2 className={"mb-12 " + h2Cls}>{t.whoFor.title}</h2>
+        <h2 className={"mb-12 " + h2Cls}>{t.whoFor.title}</h2>
 
-          <div className="grid items-stretch gap-5 md:grid-cols-3">
-            {t.whoFor.cards.map((c, i) => (
-              <Reveal key={c.id} delay={i * 80} className="h-full">
-                <Link
-                  href={WOHIN[c.id]}
-                  // Die ganze Karte ist der Weg, nicht nur die Zeile unten.
-                  // Ohne Beschreibungstext ist eine Karte mit einem einzigen
-                  // Textlink am Fuss eine Karte, deren obere zwei Drittel
-                  // nichts tun.
-                  className="group flex h-full flex-col rounded-2xl border border-edge/60 bg-panel p-7 transition-[border-color,transform] duration-200 ease-out hover:border-edge3 hoverfine:-translate-y-0.5"
-                >
-                  <span className="text-sky-600">{whoForIcons[c.id]}</span>
-                  <h3 className={"mt-5 " + cardTitleCls}>{c.title}</h3>
-                  <span className="mt-auto inline-flex items-center gap-1.5 pt-8 text-[15px] font-medium text-soft transition-colors group-hover:text-ink">
-                    {c.linkLabel}
-                    <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
-                  </span>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
+        <div className="grid items-stretch gap-5 md:grid-cols-3">
+          {t.whoFor.cards.map((c, i) => (
+            <Reveal key={c.id} delay={i * 80} className="h-full">
+              <Link
+                href={WOHIN[c.id]}
+                // Die ganze Karte ist der Weg, nicht nur die Zeile unten.
+                // Ohne Beschreibungstext ist eine Karte mit einem einzigen
+                // Textlink am Fuss eine Karte, deren obere zwei Drittel
+                // nichts tun.
+                className="group flex h-full flex-col rounded-2xl border border-edge/60 bg-panel p-7 transition-[border-color,transform] duration-200 ease-out hover:border-edge3 hoverfine:-translate-y-0.5"
+              >
+                <span className="text-sky-600">{whoForIcons[c.id]}</span>
+                <h3 className={"mt-5 " + cardTitleCls}>{c.title}</h3>
+                <span className="mt-auto inline-flex items-center gap-1.5 pt-8 text-[15px] font-medium text-soft transition-colors group-hover:text-ink">
+                  {c.linkLabel}
+                  <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
+                </span>
+              </Link>
+            </Reveal>
+          ))}
         </div>
       </section>
 
-      {/* 7 · Der Kundenbeleg, kurz. Der ganze Fall steht auf /kunden/retaiyn. */}
-      <CustomerProof className="border-b border-edge/60" />
+      {/* 6 · Der Kundenbeleg, kurz. Der ganze Fall steht auf /kunden/retaiyn. */}
+      <CustomerProof className="border-y border-edge/60 bg-band" />
 
       {/* ═══════════════════════════════════════════════════════════════
-          8 · WAS ES KOSTET. Ohne Zahl, und das bleibt so -- was sich
-          geaendert hat, ist die Stelle und die Klarheit: der Abschnitt sagt,
-          WOVON der Betrag abhaengt (Kundenzahl) und WANN er faellt (im ersten
-          Gespraech). "Preis auf Anfrage" ist eine Verweigerung, beides
-          zusammen ist eine Auskunft.
+          7 · WAS ES KOSTET. Ohne Zahl, und das bleibt so -- was der Abschnitt
+          leistet, ist zu sagen, WOVON der Betrag abhaengt (Kundenzahl) und
+          WANN er faellt (im ersten Gespraech). "Preis auf Anfrage" ist eine
+          Verweigerung, beides zusammen ist eine Auskunft.
           ═══════════════════════════════════════════════════════════ */}
       <section id="kosten" className={"scroll-mt-20 mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
         <h2 className={h2Cls}>{t.costs.title}</h2>
@@ -412,10 +348,6 @@ export default function Home() {
               <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
             </a>
           </div>
-          {/* HIER STAND `finalCta.body`, 34 Woerter darueber, was in den
-              dreissig Minuten passiert. Es steht wortgleich in
-              `cta.trialNote` unter dem Helden und noch einmal auf /start.
-              Dreimal dieselbe Auskunft auf einem Weg von elf Abschnitten. */}
         </div>
       </section>
 

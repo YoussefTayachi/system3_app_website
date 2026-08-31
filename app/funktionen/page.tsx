@@ -20,8 +20,21 @@ import { UnifiedSearchMockup, LeadDetailMockup, MailboxesMockup, AiAgentMockup, 
 // DeliverabilityMockup ist am 2026-08-31 aus `send` gefallen.
 import { SuppressionMockup, LocalReachMockup, QualifiedLeadAnimation, CampaignMockup } from "../_mockups";
 import { LinkedInMockup } from "../_guard-mockups";
-import { CoachFindingMockup } from "../_offer-mockups";
+// Aus _offer-mockups.tsx importiert diese Seite seit dem 2026-08-31 nichts
+// mehr. CoachFindingMockup stand in der Gruppe `write` und auf
+// /kunden/retaiyn mit denselben Props, also zweimal dasselbe Bild; an seiner
+// Stelle steht jetzt OfferFlow. Die ausfuehrliche Nachbildung des
+// Angebotsbildschirms (OfferMapMockup) bleibt der Kundenseite vorbehalten,
+// wo sie retaiyns eigenes Profil zeigt und nicht ein Beispiel.
 import { AllInOneCompare } from "../_compare";
+// Vier Bauteile, am 2026-08-31 von der Startseite hierher gezogen. Youssef
+// hat sie dort herausgenommen, weil sie die MECHANIK beschreiben und eine
+// Landeseite die Motivation beantwortet. Auf dieser Seite ist die Mechanik
+// genau die Frage -- Begruendung ausfuehrlich im Woerterbuch bei
+// `featuresPage.facts`.
+import { FactStrip, SequenceChart, ReadinessGrid, OfferFlow } from "../_charts";
+import { SystemMap } from "../_system-map";
+import { factIcons } from "../_icons";
 import { Reveal } from "../reveal";
 import { CheckIcon } from "../_icons";
 import { useT } from "../language-provider";
@@ -92,15 +105,27 @@ export default function FunktionenPage() {
     // Haelfte desselben Absatzes -- der benannte Verstoss samt fertigem
     // Ersatzsatz. Es steht sonst nur auf /kunden/retaiyn, also entsteht keine
     // zweite Fundstelle auf derselben Seite.
+    // OfferFlow statt CoachFindingMockup, seit dem 2026-08-31. Die Gruppe
+    // heisst "Acht Mails, geschrieben aus zwoelf Feldern", und genau das
+    // zeigt das Ablaufbild in einem Blick. Der Coach-Befund steht auf
+    // /kunden/retaiyn, wo der Fall erzaehlt wird, und war hier die zweite
+    // Fundstelle desselben Bildes.
     write: (
       <div className="space-y-5">
+        <OfferFlow {...f.offerFlow} />
         <CampaignMockup />
-        <CoachFindingMockup {...t.offerSection.coachFinding} />
       </div>
     ),
     check: <CopyCheckMockup />,
+    // Das Sequenzdiagramm gehoert hierher und nicht auf die Landeseite: die
+    // Wortobergrenzen sagen, WIE die Sequenz gebaut ist. Youssef zur
+    // Startseite: "der kunde kann selbst aussuchen wie viele woerter er
+    // fuers template nutzt ... sowieso ists kein verkaufsargument." Als
+    // Auskunft auf der Funktionsseite ist es beides nicht -- es ist die
+    // Antwort auf "was macht ihr mit meinen Texten".
     send: (
       <div className="space-y-5">
+        <SequenceChart {...f.sequenceChart} />
         <MailboxesMockup />
         {/* Am 2026-08-14 von Rundgang Schritt 4 hierher gezogen: dort traegt
             jetzt ChainMockup das Bild, seit der Abschnitt #kette gefallen ist
@@ -115,7 +140,19 @@ export default function FunktionenPage() {
       </div>
     ),
     pipeline: <PipelineMockup />,
-    protect: <SuppressionMockup />,
+    // Die zwoelf Startpruefungen, vier davon Blocker. Die Gruppe heisst "Was
+    // nicht rausgehen darf, geht nicht raus" -- das Raster sagt es, bevor
+    // ein Stichpunkt gelesen ist.
+    protect: (
+      <div className="space-y-5">
+        <ReadinessGrid
+          blockerLabel={f.readiness.blockerLabel}
+          warnLabel={f.readiness.warnLabel}
+          items={f.readiness.items}
+        />
+        <SuppressionMockup />
+      </div>
+    ),
   };
 
   return (
@@ -150,6 +187,32 @@ export default function FunktionenPage() {
             {f.intro}
           </p>
           <CTAGroup className="mt-9" />
+        </div>
+
+        {/* Das Kennzahlenband, seit dem 2026-08-31 hier statt auf der
+            Startseite. Sechs Zahlen ueber den Aufbau, jede im App-Repo
+            nachzaehlbar -- auf einer Seite, die "von der Suche bis zur
+            beantworteten Mail" verspricht, sind sie die Kurzfassung des
+            Versprechens. Auf der Landeseite waren sie die Antwort auf eine
+            Frage, die dort niemand stellt. */}
+        <div className="border-t border-edge/60">
+          <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-14">
+            <FactStrip items={f.facts.items} icons={factIcons} />
+          </div>
+        </div>
+      </section>
+
+      {/* Die Systemkarte, ebenfalls von der Startseite. Sie steht hier vor
+          den neun Gruppen und ist deren Inhaltsverzeichnis: vier Stufen, und
+          jede Gruppe darunter ist eine davon im Einzelnen. Auf der
+          Startseite fuehrt jetzt eine Buehne denselben Ablauf vor, statt ihn
+          in drei Karten zu beschreiben (_stage.tsx). */}
+      <section id="ueberblick" className={"scroll-mt-20 border-b border-edge/60 bg-band"}>
+        <div className={"mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
+          <h2 className={"mb-12 " + h2Cls}>{t.systemMap.title}</h2>
+          <Reveal>
+            <SystemMap />
+          </Reveal>
         </div>
       </section>
 

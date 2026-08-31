@@ -443,6 +443,116 @@ const de = {
   // verteilt ueber zwoelf Sektionen. Wer wissen will, was drinsteckt, findet
   // es jetzt an einem Ort, ohne die Startseite weiter zu verlaengern.
   featuresPage: {
+    // ══════════════════════════════════════════════════════════════════
+    // DIE VIER BAUSTEINE, DIE VON DER STARTSEITE HIERHER GEZOGEN SIND.
+    //
+    // Kennzahlenband, Sequenzdiagramm, Startpruefung und das
+    // Angebot-Ablaufbild standen am 2026-08-31 einen halben Tag lang auf der
+    // Startseite. Youssef hat sie dort herausgenommen, und der Grund gilt
+    // fuer alle vier: es sind Angaben ueber die MECHANIK. "der kunde kann
+    // selbst aussuchen wie viele woerter er fuers template nutzt und wichtig
+    // ist die wortanzahl auch nicht und sowieso ists kein verkaufsargument."
+    //
+    // Auf DIESER Seite ist die Mechanik die Frage. Wer hier liest, hat sich
+    // schon entschieden, dass ihn das Werkzeug interessiert, und will
+    // wissen, wie es gebaut ist. Deshalb sind die vier nicht geloescht,
+    // sondern umgezogen -- und die Zahlen darin bleiben, was sie waren: im
+    // App-Repo nachzaehlbar, nicht geschaetzt.
+    // ══════════════════════════════════════════════════════════════════
+    facts: {
+      items: [
+        { id: "channels", value: "3", label: "Kanäle je Lead" },
+        { id: "touches", value: "6", label: "Berührungen ohne Antwort" },
+        { id: "texts", value: "8", label: "Mails aus einem Angebot" },
+        { id: "checks", value: "12", label: "Prüfungen vor dem Versand" },
+        { id: "stages", value: "4", label: "Stufen, eine Datenbasis" },
+        { id: "markup", value: "0 %", label: "Aufschlag auf deine Kosten" },
+      ],
+    },
+    // Das Sequenzdiagramm. Zahlen aus apps/web/lib/copy/playbook.ts:
+    // PLAYBOOK_DELAYS [0,3,2,2] ergibt Tag 0/3/5/7, STEP_MAX_WORDS [90,70,50,35]
+    // die Wortobergrenzen. Wer dort dreht, dreht hier mit -- die Zahlen stehen
+    // in beiden Sprachbloecken, nicht im Bauteil.
+    sequenceChart: {
+      title: "Vier Mails, jede kürzer als die davor",
+      axisLabel: "Wortobergrenze je Stufe",
+      autoLabel: "Automatisch",
+      manualLabel: "Von Hand",
+      wordUnit: "Wörter",
+      hint: "LinkedIn und Telefon haben keine Grenze: dort sendet die App nicht.",
+      steps: [
+        {
+          id: "m1",
+          day: "Tag 0",
+          label: "Erstmail",
+          words: 90,
+          note: "Der Aufhänger ist zu dieser Firma recherchiert, kein Platzhalter an der richtigen Stelle.",
+        },
+        { id: "m2", day: "Tag 3", label: "Follow-up 1", words: 70, note: "Geht nur raus, wenn auf die Erstmail keine Antwort kam." },
+        { id: "m3", day: "Tag 5", label: "Follow-up 2", words: 50, note: "Anderer Blickwinkel, nicht dieselbe Bitte lauter." },
+        { id: "m4", day: "Tag 7", label: "Follow-up 3", words: 35, note: "Der Vorgang schließt am siebten Tag, nicht am zehnten." },
+        {
+          id: "linkedin",
+          day: "danach",
+          label: "LinkedIn",
+          note: "Die Nachricht steht fertig da, mit demselben Aufhänger. Senden drückst du.",
+        },
+        {
+          id: "phone",
+          day: "danach",
+          label: "Anruf",
+          note: "Nummer aus dem öffentlichen Eintrag, Gesprächsnotiz daneben, nach Dringlichkeit sortiert.",
+        },
+      ],
+    },
+    // Die zwoelf Startpruefungen, gezaehlt am 2026-08-31 in
+    // apps/web/lib/campaign-readiness.ts. Vier Zweige geben "blocker" zurueck:
+    // leads, spf, dkim, bounce. Die Website sprach bis heute von ELF -- das war
+    // beim Schreiben richtig und ist es seit `websiteFindingMissing` nicht mehr.
+    readiness: {
+      title: "Zwölf Prüfungen, bevor die erste Mail rausgeht",
+      blockerLabel: "{n} halten den Start auf",
+      warnLabel: "{n} melden sich, lassen dich aber durch",
+      items: [
+        { id: "leads", label: "Sendbare Leads", blocker: true },
+        { id: "spf", label: "SPF-Eintrag", blocker: true },
+        { id: "dkim", label: "DKIM-Eintrag", blocker: true },
+        { id: "bounce", label: "Bounce-Quote", blocker: true },
+        { id: "dmarc", label: "DMARC-Eintrag" },
+        { id: "verification", label: "Adressen geprüft" },
+        { id: "icebreakerMissing", label: "Aufhänger fehlt" },
+        { id: "icebreakerFailing", label: "Aufhänger zu schwach" },
+        { id: "websiteFinding", label: "Website-Befund" },
+        { id: "sequence", label: "Mehr als eine Stufe" },
+        { id: "firstMailLength", label: "Länge der Erstmail" },
+        { id: "firstMailLink", label: "Link in der Erstmail" },
+      ],
+    },
+    // Zwoelf Felder hinein, acht Mails hinaus. Ersetzt auf der Startseite die
+    // Nachbildung des Angebotsbildschirms -- Begruendung im Kopf von OfferFlow
+    // in _charts.tsx. Die drei Zahlen sind im App-Repo nachzaehlbar:
+    // OFFER_TEXT_FIELDS hat zwoelf Eintraege, NICHT_VORSCHLAGEN fuenf davon,
+    // PLAYBOOK_DELAYS vier Stufen mit je zwei Fassungen.
+    offerFlow: {
+      fieldsValue: "12",
+      fieldsLabel: "Felder in deinem Angebot",
+      fromSite: "7 liest die App aus deiner Website",
+      fromYou: "5 füllst du selbst",
+      hub: "Frostbreaker AI",
+      outValue: "8",
+      outLabel: "Mails, fertig geschrieben",
+      outNote: "Vier Stufen, je zwei Fassungen",
+    },
+    // Die drei Zeilen unter dem Hero. Sie standen bis zum 2026-08-06 auf
+    // "4 Suchwege / 3 Kanaele / 1 Login" -- alles nachzaehlbar, aber alles
+    // MECHANIK. Niemand kauft vier Suchwege. Auf der wichtigsten Flaeche der
+    // wichtigsten Seite muss stehen, was man davon hat.
+    //
+    // Bewusst weiter ohne erfundene Ergebniszahl: eine Terminquote koennten wir
+    // nicht belegen, und die Seite hat gerade erst den Rechner davon befreit.
+    // Ein Versprechen in Worten ist etwas anderes als eine erfundene Zahl --
+    // jedes der drei ist unten auf der Seite mit einem Bild belegt.
+
     metaTitle: "Funktionen: von der Suche bis zur beantworteten Mail",
     metaDescription:
       "Alle Funktionen von Frostbreaker im Überblick: Lead-Suche über Google Maps, Firmendatenbank und Entscheider-Datenbank mit Technologie-Filter, Entscheider-Recherche, E-Mail-Verifizierung, KI-Personalisierung, Kampagnen, Zustellbarkeit und Sperrliste.",
@@ -1606,15 +1716,32 @@ const de = {
     // der CSS-Klasse (uppercase tracking-[0.14em]), der String bleibt deshalb
     // in normaler Schreibung -- unter 50 Zeichen, sonst bricht die Zeile um.
     eyebrow: "Für alle, die Kunden per E-Mail gewinnen wollen",
-    h1Pre: "Entscheider finden. Auf ",
-    h1Accent: "jedem Kanal",
-    h1Post: " erreichen. Zu Kunden machen.",
+    // ══════════════════════════════════════════════════════════════════
+    // AUF ERGEBNIS UMGESTELLT, 2026-08-31.
+    //
+    // Vorher: "Entscheider finden. Auf jedem Kanal erreichen. Zu Kunden
+    // machen." Das sind drei Faehigkeiten des Werkzeugs, hintereinander
+    // aufgezaehlt -- eine Zeile auf FUNKTIONSEBENE.
+    //
+    // Youssef zur alten Fassung: "bei landing page musst du auf
+    // motivationsebene denken und nicht auf feature ebene." Der Leser dieser
+    // Seite betreut den ganzen Tag Kunden; sein Problem ist nicht, dass er
+    // keine Entscheider FINDEN kann, sondern dass er keine Zeit hat, sie
+    // anzuschreiben. Die neue Zeile nennt genau das Ergebnis.
+    //
+    // Sie steht wortnah an `customer.mirror`, dem Spiegel-Block der
+    // Kundenseite: "Die eigene Akquise ist das, was passiert, sobald wieder
+    // Luft ist. Es wird nie Luft." Der Held gibt darauf die Antwort.
+    // ══════════════════════════════════════════════════════════════════
+    h1Pre: "Kundengewinnung, die ",
+    h1Accent: "auch ohne dich",
+    h1Post: " weiterläuft.",
     // Die Kurzfassung von `body` fuer die Startseite, seit dem 2026-08-31.
     // `body` nennt in 37 Woertern sieben Dinge; das Kennzahlenband direkt
     // darunter zeigt sechs davon als Zahl mit Piktogramm. Zwei Aufzaehlungen
     // uebereinander sind eine zu viel, und die mit den Bildern gewinnt.
     // `body` bleibt stehen: die Metabeschreibung und /start lesen es.
-    short: "Ein Werkzeug von der Nische bis zum Auftrag, je Kunde ein eigener Workspace.",
+    short: "Du sagst, wen du erreichen willst. Finden, anschreiben und nachfassen passiert von allein.",
     // Nennt alle drei Kanaele beim Namen, weil genau das der Unterschied zu
     // jedem Sendetool ist. "Geprueft" bezieht sich bewusst nur auf die
     // E-Mail-Adresse -- Telefonnummern kommen aus oeffentlichen Eintraegen
@@ -1655,99 +1782,136 @@ const de = {
   // Bauteil zaehlt, sondern eine Zusage macht -- und die letzte, die man
   // liest, bevor der Blick weiterzieht.
   // ══════════════════════════════════════════════════════════════════════
-  facts: {
-    items: [
-      { id: "channels", value: "3", label: "Kanäle je Lead" },
-      { id: "touches", value: "6", label: "Berührungen ohne Antwort" },
-      { id: "texts", value: "8", label: "Mails aus einem Angebot" },
-      { id: "checks", value: "12", label: "Prüfungen vor dem Versand" },
-      { id: "stages", value: "4", label: "Stufen, eine Datenbasis" },
-      { id: "markup", value: "0 %", label: "Aufschlag auf deine Kosten" },
-    ],
-  },
-  // Das Sequenzdiagramm. Zahlen aus apps/web/lib/copy/playbook.ts:
-  // PLAYBOOK_DELAYS [0,3,2,2] ergibt Tag 0/3/5/7, STEP_MAX_WORDS [90,70,50,35]
-  // die Wortobergrenzen. Wer dort dreht, dreht hier mit -- die Zahlen stehen
-  // in beiden Sprachbloecken, nicht im Bauteil.
-  sequenceChart: {
-    title: "Vier Mails, jede kürzer als die davor",
-    axisLabel: "Wortobergrenze je Stufe",
-    autoLabel: "Automatisch",
-    manualLabel: "Von Hand",
-    wordUnit: "Wörter",
-    hint: "LinkedIn und Telefon haben keine Grenze: dort sendet die App nicht.",
-    steps: [
-      {
-        id: "m1",
-        day: "Tag 0",
-        label: "Erstmail",
-        words: 90,
-        note: "Der Aufhänger ist zu dieser Firma recherchiert, kein Platzhalter an der richtigen Stelle.",
-      },
-      { id: "m2", day: "Tag 3", label: "Follow-up 1", words: 70, note: "Geht nur raus, wenn auf die Erstmail keine Antwort kam." },
-      { id: "m3", day: "Tag 5", label: "Follow-up 2", words: 50, note: "Anderer Blickwinkel, nicht dieselbe Bitte lauter." },
-      { id: "m4", day: "Tag 7", label: "Follow-up 3", words: 35, note: "Der Vorgang schließt am siebten Tag, nicht am zehnten." },
-      {
-        id: "linkedin",
-        day: "danach",
-        label: "LinkedIn",
-        note: "Die Nachricht steht fertig da, mit demselben Aufhänger. Senden drückst du.",
-      },
-      {
-        id: "phone",
-        day: "danach",
-        label: "Anruf",
-        note: "Nummer aus dem öffentlichen Eintrag, Gesprächsnotiz daneben, nach Dringlichkeit sortiert.",
-      },
-    ],
-  },
-  // Die zwoelf Startpruefungen, gezaehlt am 2026-08-31 in
-  // apps/web/lib/campaign-readiness.ts. Vier Zweige geben "blocker" zurueck:
-  // leads, spf, dkim, bounce. Die Website sprach bis heute von ELF -- das war
-  // beim Schreiben richtig und ist es seit `websiteFindingMissing` nicht mehr.
-  readiness: {
-    title: "Zwölf Prüfungen, bevor die erste Mail rausgeht",
-    blockerLabel: "{n} halten den Start auf",
-    warnLabel: "{n} melden sich, lassen dich aber durch",
-    items: [
-      { id: "leads", label: "Sendbare Leads", blocker: true },
-      { id: "spf", label: "SPF-Eintrag", blocker: true },
-      { id: "dkim", label: "DKIM-Eintrag", blocker: true },
-      { id: "bounce", label: "Bounce-Quote", blocker: true },
-      { id: "dmarc", label: "DMARC-Eintrag" },
-      { id: "verification", label: "Adressen geprüft" },
-      { id: "icebreakerMissing", label: "Aufhänger fehlt" },
-      { id: "icebreakerFailing", label: "Aufhänger zu schwach" },
-      { id: "websiteFinding", label: "Website-Befund" },
-      { id: "sequence", label: "Mehr als eine Stufe" },
-      { id: "firstMailLength", label: "Länge der Erstmail" },
-      { id: "firstMailLink", label: "Link in der Erstmail" },
-    ],
-  },
-  // Zwoelf Felder hinein, acht Mails hinaus. Ersetzt auf der Startseite die
-  // Nachbildung des Angebotsbildschirms -- Begruendung im Kopf von OfferFlow
-  // in _charts.tsx. Die drei Zahlen sind im App-Repo nachzaehlbar:
-  // OFFER_TEXT_FIELDS hat zwoelf Eintraege, NICHT_VORSCHLAGEN fuenf davon,
-  // PLAYBOOK_DELAYS vier Stufen mit je zwei Fassungen.
-  offerFlow: {
-    fieldsValue: "12",
-    fieldsLabel: "Felder in deinem Angebot",
-    fromSite: "7 liest die App aus deiner Website",
-    fromYou: "5 füllst du selbst",
-    hub: "Frostbreaker AI",
-    outValue: "8",
-    outLabel: "Mails, fertig geschrieben",
-    outNote: "Vier Stufen, je zwei Fassungen",
-  },
-  // Die drei Zeilen unter dem Hero. Sie standen bis zum 2026-08-06 auf
-  // "4 Suchwege / 3 Kanaele / 1 Login" -- alles nachzaehlbar, aber alles
-  // MECHANIK. Niemand kauft vier Suchwege. Auf der wichtigsten Flaeche der
-  // wichtigsten Seite muss stehen, was man davon hat.
+  // ══════════════════════════════════════════════════════════════════════
+  // WAS AN DIESER STELLE GESTANDEN HAT, und warum es weg ist.
   //
-  // Bewusst weiter ohne erfundene Ergebniszahl: eine Terminquote koennten wir
-  // nicht belegen, und die Seite hat gerade erst den Rechner davon befreit.
-  // Ein Versprechen in Worten ist etwas anderes als eine erfundene Zahl --
-  // jedes der drei ist unten auf der Seite mit einem Bild belegt.
+  // `facts` (sechs Kennzahlen), `sequenceChart` (Wortobergrenzen je Stufe),
+  // `readiness` (zwoelf Startpruefungen) und `offerFlow` (zwoelf Felder, acht
+  // Mails). Alle vier waren am 2026-08-31 neu, alle vier sind am selben Tag
+  // wieder gefallen.
+  //
+  // Youssef zum Sequenzdiagramm: "es ist extrem unnoetig die regel der email
+  // sequenz bezueglich wortzahl zu zeigen, weil das ueberhaupt keine relevanz
+  // hat. der kunde kann selbst aussuchen wie viele woerter er fuers template
+  // nutzt und wichtig ist die wortanzahl auch nicht und sowieso ists kein
+  // verkaufsargument."
+  //
+  // Er hat bei allen vieren recht, und der Grund ist derselbe: es sind
+  // Angaben ueber die MECHANIK. Zwoelf Pruefungen, acht Mails, vier Stufen,
+  // 90 Woerter -- das interessiert jemanden, der das Werkzeug schon benutzt,
+  // und niemanden, der ueberlegt, ob er es braucht. Eine Landeseite
+  // beantwortet "was habe ich davon", nicht "wie ist es gebaut".
+  //
+  // Die Zahlen sind nicht falsch und nicht verloren: sie stehen auf
+  // /funktionen, wo genau die Frage gestellt wird, die sie beantworten.
+  // ══════════════════════════════════════════════════════════════════════
+
+  // Die vier Handgriffe, die wegfallen. Bewusst in der Ich-Form des Lesers
+  // formuliert und ohne ein einziges Produktwort: was hier steht, macht er
+  // heute selbst, und er erkennt jeden der vier Punkte an seinem eigenen
+  // Dienstag wieder.
+  strikeList: {
+    title: "Das machst du nicht mehr von Hand",
+    items: [
+      "Listen aus vier Werkzeugen zusammensuchen",
+      "Jede erste Zeile selbst schreiben",
+      "Nachfassen im Kalender führen",
+      "Am Monatsende zusammentragen, was gelaufen ist",
+    ],
+    note: "Es läuft weiter, während du an Kundenprojekten sitzt.",
+  },
+
+  // Die Ablauf-Buehne. Sie ersetzt die Systemkarte, die dieselbe Sache in
+  // drei Karten mit Dreipunktlisten BESCHRIEB.
+  //
+  // KEINE FIRMENNAMEN. Auf dieser Website gibt es genau zwei, Frostbreaker
+  // und retaiyn (siehe die Regel bei `appMockups`). Die drei Kontakte hier
+  // tragen Rolle und Segment, so wie jede andere Nachbildung auch. Die drei
+  // Aufhaenger sind Beispiele fuer die FORM einer recherchierten ersten
+  // Zeile, keine Aussage ueber eine echte Firma; die Buehne traegt deshalb
+  // dieselbe Kennzeichnung wie jedes Mockup.
+  flowStage: {
+    title: "Von deiner Nische bis zur Antwort",
+    sampleNote: "Beispielansicht",
+    // GEMESSEN, NICHT GESCHAETZT. Bei 390 px bleiben im Suchfeld 225 px fuer
+    // den Text (Feld 303, minus Polsterung, Lupe und Abstand). Die erste
+    // Fassung "Sanitärbetriebe, Wien, ab 20 Mitarbeitende" brauchte 331 px
+    // und wurde auf dem Telefon mitten im Wort abgeschnitten -- ohne
+    // Auslassungspunkte, also wie ein Fehler und nicht wie eine Kuerzung.
+    // Diese hier misst 180 px, die englische 188. Die Groessenangabe faellt
+    // dabei nicht wirklich weg: sie steht auf den drei Karten darunter
+    // ("30 Mitarbeitende", "zwei Standorte", "45 Mitarbeitende").
+    suche: "Sanitärbetriebe in Wien",
+    suchLabel: "Deine Suche",
+    aussortiert: "info@…",
+    aussortiertNote: "kein Ansprechpartner, fällt raus",
+    leads: [
+      {
+        rolle: "Inhaber",
+        segment: "Sanitärbetrieb, 30 Mitarbeitende",
+        aufhaenger: "Ihr sucht seit drei Wochen zwei Monteure. Wer arbeitet die ein?",
+      },
+      {
+        rolle: "Geschäftsführerin",
+        segment: "Haustechnik, zwei Standorte",
+        aufhaenger: "Zwei Standorte, eine Telefonnummer auf der Website.",
+      },
+      {
+        rolle: "Betriebsleiter",
+        segment: "Heizung und Bad, 45 Mitarbeitende",
+        aufhaenger: "Eure Notdienst-Seite ist die einzige ohne Kontaktformular.",
+      },
+    ],
+    sequenzLabel: "Läuft von allein weiter",
+    tage: ["Tag 0", "Tag 3", "Tag 5", "Tag 7", "LinkedIn", "Anruf"],
+    antwortLabel: "Antwort:",
+    antwort: "„Nächste Woche Dienstag um zehn?“ Der Kontakt steht als Deal im CRM.",
+    terminLabel: "Termin",
+    schritte: ["Nische nennen", "Entscheider finden", "Persönlich anschreiben", "Nachfassen", "Antwort im CRM"],
+    wiederholen: "Nochmal ansehen",
+  },
+
+  // ══════════════════════════════════════════════════════════════════════
+  // DIE ANBINDUNG AN CLAUDE, neu am 2026-08-31 und der neue Hauptgrund.
+  //
+  // Youssef: "die claude mcp integration ist ein viel besserer verkaufsargument
+  // denn der kunde kann alle seine agent skills und automations dazu
+  // integrieren."
+  //
+  // WAS DIE ANBINDUNG WIRKLICH KANN, nachgesehen am 2026-08-31 in
+  // apps/web/lib/mcp/tool-descriptions.ts: 23 Werkzeuge, lesend ueber
+  // Workspaces, Listen, Leads, Angebot, Sequenz, Zahlen und Antworten;
+  // schreibend ueber Aufhaenger, Website-Befund, Kontaktstatus, Notizen und
+  // Angebotsfelder; dazu Kampagne anlegen, Sequenz setzen und zu Instantly
+  // veroeffentlichen.
+  //
+  // WAS SIE NICHT KANN, und was deshalb hier nicht behauptet wird: eine Suche
+  // starten und eine Mail senden. Beides ist ausdruecklich so gebaut ("No tool
+  // here sends an email, starts a search, activates or pauses a campaign, or
+  // deletes anything, and that boundary is deliberate"), und eine Suche legt
+  // Youssef in seinen eigenen Abläufen per SQL-INSERT an, nicht ueber die
+  // Anbindung. Wer hier "suchen" oder "senden" hineinschreibt, laesst die
+  // Seite etwas versprechen, das der erste Interessent im Gespraech widerlegt.
+  //
+  // DIE ZAHL IM ERGEBNIS ist unser eigener Lauf vom 27.08.2026 und steht so
+  // im Ablauf-Drehbuch: 1.227 Leads, 883 Website-Befunde, sechs Kampagnen.
+  // Sie ist ausdruecklich als UNSER Lauf formuliert, nicht als Kundenergebnis.
+  // ══════════════════════════════════════════════════════════════════════
+  claudeStage: {
+    title: "Sag es Claude, statt es zu klicken",
+    body: "Frostbreaker hängt sich als Anbindung in Claude. Deine eigenen Abläufe und Skills greifen darauf zu.",
+    auftrag: "Geh die neue Liste durch, schreib die Aufhänger und leg die Kampagne an.",
+    schritte: [
+      { name: "list_workspaces", text: "Öffnet den Workspace des Kunden" },
+      { name: "get_leads", text: "Liest die neue Liste" },
+      { name: "set_lead_icebreakers", text: "Schreibt fünfzig eigene Aufhänger auf einmal, mit Vorschau und Rückgängig" },
+      { name: "create_campaign", text: "Legt die Kampagne mit ihrer Sequenz an" },
+      { name: "publish_campaign", text: "Veröffentlicht sie zu Instantly, ohne Abgemeldete und Sperrliste" },
+    ],
+    ergebnis: "So sind bei uns am 27. August 1.227 Leads durchgelaufen: 883 Website-Befunde, sechs Kampagnen, an einem Tag.",
+    grenze: "Suchen startet die Anbindung nicht, und senden auch nicht. Die Kampagne liegt fertig bei Instantly und wartet auf deinen Startknopf.",
+    wiederholen: "Nochmal ansehen",
+  },
   heroPromises: [
     {
       title: "Vom Suchbegriff zum Termin",
@@ -3060,6 +3224,78 @@ const en: typeof de = {
       "Thirty minutes: your offer, your audience, the first search. No pitch built on someone else's percentages — the ones from retaiyn belong to retaiyn.",
   },
   featuresPage: {
+    facts: {
+      items: [
+        { id: "channels", value: "3", label: "Channels per lead" },
+        { id: "touches", value: "6", label: "Touches without a reply" },
+        { id: "texts", value: "8", label: "Emails from one offer" },
+        { id: "checks", value: "12", label: "Checks before sending" },
+        { id: "stages", value: "4", label: "Stages, one dataset" },
+        { id: "markup", value: "0 %", label: "Markup on your cost" },
+      ],
+    },
+    sequenceChart: {
+      title: "Four emails, each shorter than the one before",
+      axisLabel: "Word ceiling per step",
+      autoLabel: "Automatic",
+      manualLabel: "By hand",
+      wordUnit: "words",
+      hint: "LinkedIn and phone have no ceiling: there the app does not send.",
+      steps: [
+        {
+          id: "m1",
+          day: "Day 0",
+          label: "First email",
+          words: 90,
+          note: "The opener is researched for this company, not a placeholder in the right spot.",
+        },
+        { id: "m2", day: "Day 3", label: "Follow-up 1", words: 70, note: "Only sent if the first email got no reply." },
+        { id: "m3", day: "Day 5", label: "Follow-up 2", words: 50, note: "A different angle, not the same ask louder." },
+        { id: "m4", day: "Day 7", label: "Follow-up 3", words: 35, note: "The run closes on day seven, not on day ten." },
+        {
+          id: "linkedin",
+          day: "then",
+          label: "LinkedIn",
+          note: "The message sits ready with the same opener. You press send.",
+        },
+        {
+          id: "phone",
+          day: "then",
+          label: "Call",
+          note: "Number from the public listing, call note beside it, sorted by urgency.",
+        },
+      ],
+    },
+    readiness: {
+      title: "Twelve checks before the first email leaves",
+      blockerLabel: "{n} stop the start",
+      warnLabel: "{n} speak up but let you through",
+      items: [
+        { id: "leads", label: "Sendable leads", blocker: true },
+        { id: "spf", label: "SPF record", blocker: true },
+        { id: "dkim", label: "DKIM record", blocker: true },
+        { id: "bounce", label: "Bounce rate", blocker: true },
+        { id: "dmarc", label: "DMARC record" },
+        { id: "verification", label: "Addresses verified" },
+        { id: "icebreakerMissing", label: "Opener missing" },
+        { id: "icebreakerFailing", label: "Opener too weak" },
+        { id: "websiteFinding", label: "Website finding" },
+        { id: "sequence", label: "More than one step" },
+        { id: "firstMailLength", label: "Length of first email" },
+        { id: "firstMailLink", label: "Link in first email" },
+      ],
+    },
+    offerFlow: {
+      fieldsValue: "12",
+      fieldsLabel: "fields in your offer",
+      fromSite: "7 read from your own website",
+      fromYou: "5 you fill in yourself",
+      hub: "Frostbreaker AI",
+      outValue: "8",
+      outLabel: "emails, written and ready",
+      outNote: "Four steps, two versions each",
+    },
+
     metaTitle: "Features: from search to answered email",
     metaDescription:
       "Every Frostbreaker feature at a glance: lead search via Google Maps, company database and a decision-maker database with technology filter, decision-maker research, email verification, AI personalization, campaigns, deliverability and suppression list.",
@@ -3770,84 +4006,70 @@ const en: typeof de = {
   hero: {
     // Geschrieben, nicht uebersetzt -- siehe die Begruendung im de-Block.
     eyebrow: "For anyone who wants to win customers over email",
-    h1Pre: "Find decision-makers. Reach them on ",
-    h1Accent: "every channel",
-    h1Post: ". Turn them into clients.",
-    short: "One tool from a niche to a signed deal, one workspace per client.",
+    h1Pre: "Customer acquisition that ",
+    h1Accent: "keeps running",
+    h1Post: " without you.",
+    short: "You say who you want to reach. Finding, writing and following up happens on its own.",
     body: "One tool from a niche to a signed deal: verified decision-makers, a personal opener for each one, the email sequence, the LinkedIn message and the phone number. One workspace per client in their branding, all in the same CRM.",
     dashboardAlt:
       "Frostbreaker dashboard: 800 companies found, 2,000 contacts, 1,327 with an email address, around 267 hours of research saved at 30.40 US dollars in lookup cost",
   },
-  facts: {
+  strikeList: {
+    title: "You stop doing this by hand",
     items: [
-      { id: "channels", value: "3", label: "Channels per lead" },
-      { id: "touches", value: "6", label: "Touches without a reply" },
-      { id: "texts", value: "8", label: "Emails from one offer" },
-      { id: "checks", value: "12", label: "Checks before sending" },
-      { id: "stages", value: "4", label: "Stages, one dataset" },
-      { id: "markup", value: "0 %", label: "Markup on your cost" },
+      "Pulling lists together out of four tools",
+      "Writing every opening line yourself",
+      "Keeping follow-ups in your calendar",
+      "Piecing together at month end what actually happened",
     ],
+    note: "It keeps running while you sit in client work.",
   },
-  sequenceChart: {
-    title: "Four emails, each shorter than the one before",
-    axisLabel: "Word ceiling per step",
-    autoLabel: "Automatic",
-    manualLabel: "By hand",
-    wordUnit: "words",
-    hint: "LinkedIn and phone have no ceiling: there the app does not send.",
-    steps: [
+  flowStage: {
+    title: "From your niche to a reply",
+    sampleNote: "Example view",
+    suche: "Plumbing firms in Vienna",
+    suchLabel: "Your search",
+    aussortiert: "info@…",
+    aussortiertNote: "nobody in charge, dropped",
+    leads: [
       {
-        id: "m1",
-        day: "Day 0",
-        label: "First email",
-        words: 90,
-        note: "The opener is researched for this company, not a placeholder in the right spot.",
-      },
-      { id: "m2", day: "Day 3", label: "Follow-up 1", words: 70, note: "Only sent if the first email got no reply." },
-      { id: "m3", day: "Day 5", label: "Follow-up 2", words: 50, note: "A different angle, not the same ask louder." },
-      { id: "m4", day: "Day 7", label: "Follow-up 3", words: 35, note: "The run closes on day seven, not on day ten." },
-      {
-        id: "linkedin",
-        day: "then",
-        label: "LinkedIn",
-        note: "The message sits ready with the same opener. You press send.",
+        rolle: "Owner",
+        segment: "Plumbing firm, 30 staff",
+        aufhaenger: "You have been hiring two fitters for three weeks. Who trains them?",
       },
       {
-        id: "phone",
-        day: "then",
-        label: "Call",
-        note: "Number from the public listing, call note beside it, sorted by urgency.",
+        rolle: "Managing director",
+        segment: "Building services, two sites",
+        aufhaenger: "Two sites, one phone number on the website.",
+      },
+      {
+        rolle: "Operations lead",
+        segment: "Heating and bathrooms, 45 staff",
+        aufhaenger: "Your emergency page is the only one without a contact form.",
       },
     ],
+    sequenzLabel: "Keeps going on its own",
+    tage: ["Day 0", "Day 3", "Day 5", "Day 7", "LinkedIn", "Call"],
+    antwortLabel: "Reply:",
+    antwort: "“Next Tuesday at ten?” The contact sits in the CRM as a deal.",
+    terminLabel: "Meeting",
+    schritte: ["Name the niche", "Find decision-makers", "Write personally", "Follow up", "Reply in the CRM"],
+    wiederholen: "Play again",
   },
-  readiness: {
-    title: "Twelve checks before the first email leaves",
-    blockerLabel: "{n} stop the start",
-    warnLabel: "{n} speak up but let you through",
-    items: [
-      { id: "leads", label: "Sendable leads", blocker: true },
-      { id: "spf", label: "SPF record", blocker: true },
-      { id: "dkim", label: "DKIM record", blocker: true },
-      { id: "bounce", label: "Bounce rate", blocker: true },
-      { id: "dmarc", label: "DMARC record" },
-      { id: "verification", label: "Addresses verified" },
-      { id: "icebreakerMissing", label: "Opener missing" },
-      { id: "icebreakerFailing", label: "Opener too weak" },
-      { id: "websiteFinding", label: "Website finding" },
-      { id: "sequence", label: "More than one step" },
-      { id: "firstMailLength", label: "Length of first email" },
-      { id: "firstMailLink", label: "Link in first email" },
+  claudeStage: {
+    title: "Tell Claude instead of clicking it",
+    body: "Frostbreaker plugs into Claude as a connector. Your own workflows and skills reach it from there.",
+    auftrag: "Go through the new list, write the openers and set up the campaign.",
+    schritte: [
+      { name: "list_workspaces", text: "Opens that client's workspace" },
+      { name: "get_leads", text: "Reads the new list" },
+      { name: "set_lead_icebreakers", text: "Writes fifty personal openers at once, with a preview and an undo" },
+      { name: "create_campaign", text: "Sets up the campaign with its sequence" },
+      { name: "publish_campaign", text: "Publishes it to Instantly, minus opt-outs and the suppression list" },
     ],
-  },
-  offerFlow: {
-    fieldsValue: "12",
-    fieldsLabel: "fields in your offer",
-    fromSite: "7 read from your own website",
-    fromYou: "5 you fill in yourself",
-    hub: "Frostbreaker AI",
-    outValue: "8",
-    outLabel: "emails, written and ready",
-    outNote: "Four steps, two versions each",
+    ergebnis: "That is how 1,227 leads ran through here on 27 August: 883 website findings, six campaigns, in one day.",
+    grenze: "The connector does not start a search and it does not send. The campaign sits ready in Instantly and waits for you to press start.",
+    wiederholen: "Play again",
   },
   heroPromises: [
     {
