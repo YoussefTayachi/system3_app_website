@@ -6,8 +6,18 @@ const fs = require("fs");
 const path = require("path");
 
 const HIER = __dirname.replace(/\\/g, "/");
+// Aus __dirname abgeleitet statt fest eingetragen: der Projektordner ist am
+// 2026-08-31 nach Website_Business/Websites gewandert, und ein absoluter Pfad
+// haette den Umzug still ueberlebt -- mit einer Wortmarke in der Ersatzschrift.
 const SCHRIFT =
-  "file:///c:/Users/Youssef Tayachi/Desktop/Frostbreaker_Website/node_modules/@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2";
+  "file:///" +
+  path
+    .join(
+      __dirname,
+      "..",
+      "node_modules/@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2",
+    )
+    .replace(/\\/g, "/");
 
 const AUS = path.join(__dirname, "aus");
 fs.mkdirSync(AUS, { recursive: true });
