@@ -65,7 +65,10 @@ export function CustomerStrip({ className = "" }: { className?: string }) {
         alt={c.logoAlt}
         width={LOGO.width}
         height={LOGO.height}
-        className="h-[17px] w-auto"
+        // Auf der dunklen Startseite wird das violette Logo weiss: ein
+        // farbiges Logo auf Dunkel liest sich als Werbung, ein weisses als
+        // Beleg.
+        className="h-[17px] w-auto [.fb-dark_&]:brightness-0 [.fb-dark_&]:invert"
       />
       <span aria-hidden className="hidden text-edge3 sm:inline">
         ·
@@ -269,5 +272,98 @@ export function CustomerSection({ className = "" }: { className?: string }) {
         </Reveal>
       </div>
     </section>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   ZWEI NAMEN, seit dem 2026-09-02. Neben retaiyn steht Frostbreaker
+   Marketing, Youssefs Website-Angebot fuer lokale Betriebe: es findet seine
+   Kunden ueber Frostbreaker. Das ist der Beleg, der am naechsten am Produkt
+   liegt, und er hat ein eigenes Gesicht (marketing.frostbreaker.app).
+
+   Das Logo von Frostbreaker Marketing ist eine Wortmarke und wird als Text
+   gesetzt, so wie es dort selbst steht: "frostbreaker" in Blau, "marketing"
+   daneben in Grau.
+   ══════════════════════════════════════════════════════════════════════ */
+
+function Wortmarke({ id, name }: { id: string; name: string }) {
+  const { t } = useT();
+  if (id === "retaiyn") {
+    return (
+      <Image
+        src={LOGO.src}
+        alt={t.customer.logoAlt}
+        width={LOGO.width}
+        height={LOGO.height}
+        className="h-6 w-auto [.fb-dark_&]:brightness-0 [.fb-dark_&]:invert sm:h-7"
+      />
+    );
+  }
+  const [erst, ...rest] = name.split(" ");
+  return (
+    <span className="whitespace-nowrap text-[22px] font-bold leading-none tracking-[-0.02em] sm:text-[26px]">
+      <span className="text-sky-600 [.fb-dark_&]:text-sky-400">{erst}</span>
+      <span className="ml-1.5 font-normal text-soft">{rest.join(" ")}</span>
+    </span>
+  );
+}
+
+/** Die Logoleiste unter dem Helden: ein Wort, zwei Namen. */
+export function CustomerLogos({ className = "" }: { className?: string }) {
+  const { t } = useT();
+  const c = t.customer;
+  return (
+    <div className={"flex flex-wrap items-center justify-center gap-x-8 gap-y-4 " + className}>
+      <span className="text-[13px] font-medium uppercase tracking-[0.14em] text-mute">{c.stripLabel}</span>
+      {c.logos.map((l) => (
+        <a
+          key={l.id}
+          href={l.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex min-h-[44px] items-center opacity-80 transition-opacity hover:opacity-100"
+        >
+          <Wortmarke id={l.id} name={l.name} />
+        </a>
+      ))}
+    </div>
+  );
+}
+
+/** Zwei Karten: wer, wofuer, und wen er damit sucht. */
+export function CustomerCards({ className = "" }: { className?: string }) {
+  const { t } = useT();
+  const c = t.customer;
+  return (
+    <div className={"grid gap-4 sm:grid-cols-2 sm:gap-5 " + className}>
+      {c.logos.map((l, i) => (
+        <Reveal key={l.id} delay={i * 90} className="h-full">
+          <div className="flex h-full flex-col rounded-2xl border border-white/10 bg-panel p-6 sm:p-7">
+            <div className="flex min-h-[32px] items-center">
+              <Wortmarke id={l.id} name={l.name} />
+            </div>
+            <p className="mt-5 text-[17px] leading-snug text-ink sm:text-[19px]">{l.descriptor}</p>
+            <p className="mt-2 text-[15px] leading-relaxed text-soft">{l.sucht}</p>
+            <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-2 pt-6">
+              <a
+                href={l.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="tap-link group gap-1.5 text-[14px] text-mute transition-colors hover:text-ink"
+              >
+                {l.urlLabel}
+                <ExternalIcon />
+              </a>
+              {l.href && (
+                <Link href={l.href} className="tap-link group gap-1.5 text-[14px] font-medium text-soft transition-colors hover:text-ink">
+                  {c.pageLink}
+                  <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
+                </Link>
+              )}
+            </div>
+          </div>
+        </Reveal>
+      ))}
+    </div>
   );
 }

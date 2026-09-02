@@ -676,7 +676,7 @@ body {
   /* Der aufklappende Teil, das Durchstreichen und der Tafelwechsel springen
      in ihren Endzustand. Bei allen dreien fuehrt JS bzw. ein Klick den
      Zustand -- ohne Transition heisst das: sofort da, nichts unsichtbar. */
-  .fb-card-enter, .fb-strike::after, .fb-stack > *, .fb-faq-answer { transition: none; }
+  .fb-card-enter, .fb-strike::after, .fb-strike-lg, .fb-stack > *, .fb-faq-answer { transition: none; }
 
   /* Die beiden Buehnen (_stage.tsx) laufen unter `reduce` gar nicht erst ab:
      useTakt springt auf den letzten Takt, sobald der Block im Bild ist. Diese
@@ -692,3 +692,182 @@ body {
   .fb-scan { opacity: 0; }
   .fb-caret-on { animation: none; opacity: 0; }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   DIE DUNKLE STARTSEITE, 2026-09-02.
+
+   Youssef hat Fora und Godly als Vorbild gezeigt: dunkle Flaeche, ein
+   Lichthorizont, das Produkt gross und gerahmt darauf, wenig Text. Die
+   Startseite ist seitdem ein eigener Raum. Die Unterseiten bleiben hell,
+   weil ihre Nachbildungen auf Weiss gebaut sind.
+
+   KEIN ZWEITES FARBSYSTEM: `.fb-dark` belegt dieselben Tokens neu, die der
+   Rest der Seite benutzt. Kopfzeile, Fusszeile und Knoepfe kippen dadurch
+   mit, ohne dass eine Klasse an ihnen geaendert wurde. Was auf dieser
+   Flaeche steht, nennt weiterhin ink, soft, panel und edge.
+
+   Die Textstufen sind gegen #070a10 (Grund) und #151b25 (panel2) gerechnet:
+   mute 5,7 und 5,0 · faint 7,0 und 6,2 · soft 9,4 · ink 18. Jede Stufe
+   besteht 4,5:1 auch in 13 px.
+   ═══════════════════════════════════════════════════════════════════════ */
+.fb-dark {
+  --c-surface: #070a10;
+  --c-panel: #0e131b;
+  --c-panel2: #151b25;
+  --c-band: #0a0e15;
+  --c-field: #0e131b;
+  --c-chip: #151b25;
+  --c-wash: #0e131b;
+  --c-edge: #1b2230;
+  --c-edge2: #263042;
+  --c-edge3: #4c586c;
+  --c-ink: #f4f6f9;
+  --c-soft: #aeb7c4;
+  --c-faint: #93a0b3;
+  --c-mute: #7f8a9b;
+  color-scheme: dark;
+  background: var(--c-surface);
+  color: var(--c-ink);
+}
+.fb-dark ::selection { background: rgba(56, 189, 248, 0.32); }
+
+/* Der Horizont. Ein kaltes Licht, das von unten in die Flaeche steigt --
+   kein Foto, weil die Seite keines hat, das woertlich die Ueberschrift
+   waere, und ein Stockfoto genau das Gegenteil davon ist. Drei Schichten:
+   der weite Dunst, der dichte Kern an der Kante, die Linie darauf.
+   Wo das Licht sitzt, sagt --hy an der Aufrufstelle (Standard: an der
+   Unterkante, wie ein Horizont; im Helden auf 28 %, also hinter der
+   Oberkante der Nachbildung). Die Bewegung des Zeigers steht in --px/--py (gesetzt in _hero-visual.tsx,
+   nur bei feinem Zeiger) und verschiebt den Kern um wenige Pixel: das Licht
+   antwortet, ohne zu laufen. */
+.fb-horizon {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  --px: 0;
+  --py: 0;
+}
+.fb-horizon > i {
+  position: absolute;
+  display: block;
+  left: 50%;
+  top: var(--hy, 100%);
+  border-radius: 9999px;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+.fb-horizon .fb-h-a {
+  width: 150%;
+  height: 110%;
+  background: radial-gradient(closest-side, rgba(14, 165, 233, 0.28), rgba(14, 165, 233, 0.08) 45%, transparent 72%);
+  animation: fbBreathe 16s ease-in-out infinite;
+}
+.fb-horizon .fb-h-b {
+  width: 90%;
+  height: 60%;
+  background: radial-gradient(closest-side, rgba(125, 211, 252, 0.55), rgba(56, 189, 248, 0.22) 40%, transparent 72%);
+  transform: translate(calc(-50% + var(--px) * 18px), calc(-50% + var(--py) * 10px));
+  transition: transform 900ms var(--fb-ease-out);
+}
+.fb-horizon .fb-h-c {
+  width: 70%;
+  height: 1px;
+  border-radius: 0;
+  background: linear-gradient(90deg, transparent, rgba(224, 242, 254, 0.9) 50%, transparent);
+  transform: translate(calc(-50% + var(--px) * 10px), -50%);
+  transition: transform 900ms var(--fb-ease-out);
+}
+@keyframes fbBreathe {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+/* Korn ueber dem Licht. Ohne es sehen die Verlaeufe nach Bildschirm aus,
+   mit ihm nach Luft. 7 % und overlay, mehr faellt als Rauschen auf. */
+.fb-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* Der Auftritt des Helden. Nacheinander, mit Unschaerfe: ein Element, das
+   scharf wird, waehrend es ankommt, liest sich als Tiefe, nicht als
+   Einblendung. Staffelung ueber --i an der Aufrufstelle. */
+@keyframes fbHeroUp {
+  from { opacity: 0; transform: translateY(16px); filter: blur(8px); }
+  to { opacity: 1; transform: none; filter: blur(0); }
+}
+.fb-hero-in {
+  animation: fbHeroUp 900ms var(--fb-ease-out) both;
+  animation-delay: calc(var(--i, 0) * 110ms);
+}
+@keyframes fbScreenIn {
+  from { opacity: 0; transform: translateY(48px) scale(0.965); filter: blur(12px); }
+  to { opacity: 1; transform: none; filter: blur(0); }
+}
+.fb-screen-in { animation: fbScreenIn 1200ms var(--fb-ease-out) 420ms both; }
+
+/* Reihen in der Nachbildung des Helden: kommen nacheinander, sobald die
+   Buehne im Bild ist. Ohne .reveal-visible darueber stehen sie still. */
+.fb-row-in {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 420ms var(--fb-ease-out), transform 420ms var(--fb-ease-out);
+  transition-delay: calc(var(--i, 0) * 90ms + 600ms);
+}
+.fb-on .fb-row-in { opacity: 1; transform: none; }
+
+/* Die Antwortkarte, die ueber der Nachbildung schwebt: kommt von rechts
+   unten, bleibt dann liegen und atmet leicht. */
+.fb-float-in {
+  opacity: 0;
+  transform: translate(24px, 24px) scale(0.96);
+  transition: opacity 600ms var(--fb-ease-out), transform 600ms var(--fb-ease-out);
+}
+.fb-float-in.fb-float-on { opacity: 1; transform: none; }
+.fb-float-in.fb-float-on .fb-float-body { animation: floatSlow 6s ease-in-out 2s infinite; }
+
+/* Reiterleiste ohne Scrollbalken: auf dem Telefon rollt sie seitlich,
+   und ein Balken unter sechs Reitern saehe nach Tabelle aus. */
+.fb-noscroll { scrollbar-width: none; -ms-overflow-style: none; }
+.fb-noscroll::-webkit-scrollbar { display: none; }
+
+/* Der Strich durch die Handgriffe, in der Schriftgroesse eines Kapitels.
+   NICHT als ::after: ein absolut gesetztes Pseudoelement liegt einmal ueber
+   dem ganzen Span, und bei drei Zeilen trifft es nur die mittlere
+   (gesehen am 2026-09-02 bei "Am Monatsende zusammentragen ..."). Ein
+   Hintergrundverlauf mit box-decoration-break: clone wird je ZEILENBOX
+   wiederholt, und background-size ist animierbar: der Strich laeuft in
+   jeder Zeile von links durch. */
+.fb-strike-lg {
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 56%;
+  background-size: 0% 2px;
+  transition: background-size 360ms var(--fb-ease-out);
+}
+.fb-strike-lg::after { content: none; }
+.fb-strike-lg.fb-strike-on { background-size: 100% 2px; }
+
+/* Kein Streulicht in Bewegung fuer Menschen, die das abgestellt haben. */
+@media (prefers-reduced-motion: reduce) {
+  .fb-horizon .fb-h-a { animation: none; opacity: 1; }
+  .fb-horizon .h2, .fb-horizon .fb-h-c { transition: none; transform: translateX(-50%); }
+  .fb-hero-in, .fb-screen-in { animation-name: fbFadeOnly; animation-duration: 200ms; animation-delay: 0s; }
+  .fb-row-in, .fb-float-in { transition: none; }
+  .fb-float-in.fb-float-on .fb-float-body { animation: none; }
+}
+
+/* Die Zeitlinie im aktiven Reiter des Ablaufs: waechst linear ueber die
+   Standzeit des Akts und sagt damit, wann es weitergeht. Linear, weil sie
+   Zeit misst und Zeit nicht beschleunigt. */
+@keyframes fbGrowX { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.fb-timer { transform-origin: left; animation: fbGrowX var(--fb-ms, 3400ms) linear both; }
+@media (prefers-reduced-motion: reduce) { .fb-timer { animation: none; transform: none; } }

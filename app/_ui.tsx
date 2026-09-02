@@ -160,7 +160,7 @@ export const heroPad = "py-16 sm:py-24 lg:py-32";
 // Trennstelle: es kann nicht umbrechen, es kann nur ueberstehen.
 export function Logo() {
   return (
-    <Link href="/" className="inline-flex min-h-[44px] items-center text-2xl font-bold tracking-[-0.02em] text-[#0284C7] sm:text-3xl">
+    <Link href="/" className="inline-flex min-h-[44px] items-center text-2xl font-bold tracking-[-0.02em] text-sky-600 [.fb-dark_&]:text-sky-400 sm:text-3xl">
       frostbreaker
     </Link>
   );

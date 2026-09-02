@@ -1716,6 +1716,9 @@ const de = {
     // der CSS-Klasse (uppercase tracking-[0.14em]), der String bleibt deshalb
     // in normaler Schreibung -- unter 50 Zeichen, sonst bricht die Zeile um.
     eyebrow: "Für alle, die Kunden per E-Mail gewinnen wollen",
+    // Die eine Zeile ueber der Ueberschrift, seit dem 2026-09-02: sagt, WER
+    // gemeint ist, bevor die Ueberschrift sagt, was er bekommt.
+    pill: "Für Agenturen und B2B-Teams",
     // ══════════════════════════════════════════════════════════════════
     // AUF ERGEBNIS UMGESTELLT, 2026-08-31.
     //
@@ -1810,6 +1813,31 @@ const de = {
   // formuliert und ohne ein einziges Produktwort: was hier steht, macht er
   // heute selbst, und er erkennt jeden der vier Punkte an seinem eigenen
   // Dienstag wieder.
+  // ══════════════════════════════════════════════════════════════════════
+  // DIE NACHBILDUNG IM HELDEN, neu am 2026-09-02. Zeigt das Versprechen
+  // der Ueberschrift als Bild: eine Liste, die sich von allein fuellt, ein
+  // Aufhaenger, der gerade geschrieben wird, eine Antwort, die eintrifft.
+  // Keine Firmennamen, nur Rolle und Stadtteil -- dieselbe Regel wie im
+  // Ablauf darunter.
+  // ══════════════════════════════════════════════════════════════════════
+  heroVisual: {
+    workspace: "Zahnarztpraxen München",
+    nav: ["Leads", "Kampagnen", "Antworten", "Pipeline"],
+    listTitle: "Neue Leads",
+    count: "312 Firmen durchsucht",
+    columns: ["Firma", "Entscheider", "Aufhänger", "Status"],
+    rows: [
+      { firma: "Zahnarztpraxis, Schwabing", rolle: "Praxisinhaberin", aufhaenger: "Termine gibt es bei euch nur am Telefon, und mittags ist die Leitung zu.", status: "kontaktiert" },
+      { firma: "Kieferorthopädie, Bogenhausen", rolle: "Praxisleitung", aufhaenger: "Auf dem Handy lädt eure Seite neun Sekunden.", status: "kontaktiert" },
+      { firma: "Zahnarztpraxis, Pasing", rolle: "Inhaber", aufhaenger: "", status: "neu" },
+      { firma: "Zahnklinik, Haidhausen", rolle: "Geschäftsführer", aufhaenger: "Euer Kontaktformular schickt ins Leere.", status: "neu" },
+    ],
+    typing: "Eure Notdienst-Nummer steht nur als Bild und lässt sich nicht antippen.",
+    status: { neu: "Neu", kontaktiert: "Kontaktiert", termin: "Termin" },
+    replyLabel: "Antwort eingegangen",
+    reply: "Das ärgert uns selbst am meisten. Dienstag früh?",
+    replyFrom: "Praxisinhaberin, Schwabing",
+  },
   strikeList: {
     title: "Das machst du nicht mehr von Hand",
     items: [
@@ -1852,6 +1880,16 @@ const de = {
     sampleNote: "Beispielansicht",
     frage: "Welche Nische?",
     hinweis: "Wähle eine. Alles danach passiert ohne dich.",
+    // Ein Satz je Akt, unter dem Rahmen. Nischenunabhaengig, damit er beim
+    // Wechsel der Nische stehen bleiben kann.
+    untertitel: [
+      "Nische durchsucht, Adresse geprüft.",
+      "Website gelesen, drei Befunde.",
+      "Eine Mail, die nur hierhin passt.",
+      "Antwort da, Status springt auf Termin.",
+      "Gespräch läuft, Notizen im CRM.",
+      "Kunde. Die nächste Nische läuft schon.",
+    ],
     akte: [
       "Entscheider gefunden",
       "Website angesehen",
@@ -2618,6 +2656,14 @@ const de = {
   customer: {
     // Kurzform fuer den Hero: klein, aber ueber der Falz.
     stripLabel: "Im Einsatz bei",
+    // Seit dem 2026-09-02 zwei Namen: retaiyn und Frostbreaker Marketing,
+    // Youssefs Website-Angebot fuer lokale Betriebe, das seine Kunden ueber
+    // Frostbreaker findet.
+    logosTitle: "Wer damit Kunden gewinnt",
+    logos: [
+      { id: "retaiyn", name: "retaiyn", url: "https://www.retaiyn.com", urlLabel: "retaiyn.com", descriptor: "Customer Experience für E-Commerce-Marken", sucht: "Sucht Entscheider bei E-Commerce-Marken", href: "/kunden/retaiyn" },
+      { id: "marketing", name: "frostbreaker marketing", url: "https://marketing.frostbreaker.app", urlLabel: "marketing.frostbreaker.app", descriptor: "Websites für lokale Betriebe", sucht: "Sucht Betriebe, deren Website keine Anrufe bringt", href: "" },
+    ],
     // Der Weg zur ausfuehrlichen Fallbeschreibung. Neu am 2026-08-31: die
     // Startseite zeigt den Beleg nur noch kurz, der Fall selbst steht auf
     // /kunden/retaiyn und braucht von dort einen benannten Weg.
@@ -4094,6 +4140,7 @@ const en: typeof de = {
   hero: {
     // Geschrieben, nicht uebersetzt -- siehe die Begruendung im de-Block.
     eyebrow: "For anyone who wants to win customers over email",
+    pill: "For agencies and B2B teams",
     h1Pre: "Customer acquisition that ",
     h1Accent: "keeps running",
     h1Post: " without you.",
@@ -4101,6 +4148,24 @@ const en: typeof de = {
     body: "One tool from a niche to a signed deal: verified decision-makers, a personal opener for each one, the email sequence, the LinkedIn message and the phone number. One workspace per client in their branding, all in the same CRM.",
     dashboardAlt:
       "Frostbreaker dashboard: 800 companies found, 2,000 contacts, 1,327 with an email address, around 267 hours of research saved at 30.40 US dollars in lookup cost",
+  },
+  heroVisual: {
+    workspace: "Dental practices Munich",
+    nav: ["Leads", "Campaigns", "Replies", "Pipeline"],
+    listTitle: "New leads",
+    count: "312 companies searched",
+    columns: ["Company", "Decision-maker", "Opener", "Status"],
+    rows: [
+      { firma: "Dental practice, Schwabing", rolle: "Practice owner", aufhaenger: "Appointments only by phone, and the line is closed at lunch.", status: "kontaktiert" },
+      { firma: "Orthodontics, Bogenhausen", rolle: "Practice manager", aufhaenger: "On a phone your site takes nine seconds to load.", status: "kontaktiert" },
+      { firma: "Dental practice, Pasing", rolle: "Owner", aufhaenger: "", status: "neu" },
+      { firma: "Dental clinic, Haidhausen", rolle: "Managing director", aufhaenger: "Your contact form sends into nowhere.", status: "neu" },
+    ],
+    typing: "Your emergency number is only an image, so nobody can tap it.",
+    status: { neu: "New", kontaktiert: "Contacted", termin: "Booked" },
+    replyLabel: "Reply is in",
+    reply: "That annoys us most of all. Tuesday morning?",
+    replyFrom: "Practice owner, Schwabing",
   },
   strikeList: {
     title: "You stop doing this by hand",
@@ -4118,6 +4183,14 @@ const en: typeof de = {
     sampleNote: "Example view",
     frage: "Which niche?",
     hinweis: "Pick one. Everything after that happens without you.",
+    untertitel: [
+      "Niche searched, address verified.",
+      "Website read, three findings.",
+      "One email that fits only here.",
+      "Reply is in, status jumps to booked.",
+      "Call running, notes in the CRM.",
+      "Customer. The next niche is already running.",
+    ],
     akte: [
       "Decision-maker found",
       "Website looked at",
@@ -4624,6 +4697,11 @@ const en: typeof de = {
   },
   customer: {
     stripLabel: "Working with",
+    logosTitle: "Who wins customers with it",
+    logos: [
+      { id: "retaiyn", name: "retaiyn", url: "https://www.retaiyn.com", urlLabel: "retaiyn.com", descriptor: "Customer experience for e-commerce brands", sucht: "Looking for decision-makers at e-commerce brands", href: "/kunden/retaiyn" },
+      { id: "marketing", name: "frostbreaker marketing", url: "https://marketing.frostbreaker.app", urlLabel: "marketing.frostbreaker.app", descriptor: "Websites for local businesses", sucht: "Looking for businesses whose website brings no calls", href: "" },
+    ],
     pageLink: "Read the whole case",
     eyebrow: "Client",
     title: "retaiyn: winning customers over email and LinkedIn",

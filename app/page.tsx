@@ -1,398 +1,311 @@
 "use client";
 import Link from "next/link";
-import {
-  CTAButton,
-  SiteHeader,
-  SiteFooter,
-  BOOKING_URL,
-  h1Cls,
-  h2Cls,
-  cardTitleCls,
-  sectionPad,
-  heroPad,
-} from "./_ui";
+import { CTAButton, SiteHeader, SiteFooter, BOOKING_URL } from "./_ui";
 import { ClaudeStage, StrikeList } from "./_stage";
 import { Journey } from "./_journey";
-import { CustomerStrip, CustomerProof } from "./_customers";
+import { Horizon, HeroScreen } from "./_hero-visual";
+import { CustomerLogos, CustomerCards } from "./_customers";
 import { Reveal } from "./reveal";
 import { whoForIcons, noteIcons } from "./_icons";
 import { useT } from "./language-provider";
 
 /**
  * ══════════════════════════════════════════════════════════════════════
- * DIE STARTSEITE. Zweiter Umbau am 2026-08-31.
+ * DIE STARTSEITE. Dritter Umbau am 2026-09-02: die dunkle Fassung.
  * ══════════════════════════════════════════════════════════════════════
  *
- * Der erste Umbau desselben Tages hat die Seite von 2.331 auf 640 sichtbare
- * Woerter gebracht und Zahlen durch Bilder ersetzt. Youssef hat sie danach
- * gelesen, und seine Rueckmeldung dreht die AUSRICHTUNG, nicht die Laenge:
+ * Youssef hat Fora (fora.so) und die Galerie auf godly.design als Vorbild
+ * gezeigt und dazu gesagt: weniger Text, mehr Bild, Bewegung, und der Text
+ * denkt in Schmerz, Person und Versprechen. Der Umbau vom 2026-08-31 hatte
+ * die AUSRICHTUNG schon richtig (Ergebnis statt Funktion, ein Ablauf als
+ * Kernstueck). Was ihm fehlte, war der Raum: Tinte auf Papier, Kaesten auf
+ * Weiss, und die Buehne ein leerer Kasten, der auf einen Klick wartet.
  *
- *   "bei landing page musst du auf motivationsebene denken und nicht auf
- *    feature ebene."
- *   "generell bei der landing page wuerde ich keine features nennen sondern
- *    nur, was das produkt macht."
- *   "du hast zwar visuals eingebaut aber es ist eig nur text in kaestchen --
- *    mach lieber eine animation die zeigt was passiert anstatt es zu
- *    schreiben."
- *   "die claude mcp integration ist ein viel besserer verkaufsargument."
+ * ═══ WAS SICH AENDERT ═══
  *
- * ═══ WAS DARAUFHIN GEFALLEN IST ═══
+ *   · Die Startseite ist dunkel. Nicht als Theme, sondern als Raum: ein
+ *     kaltes Licht am Horizont, das Produkt gross und gerahmt darauf. Die
+ *     Tokens dafuer stehen in globals.css unter `.fb-dark`; die
+ *     Unterseiten bleiben hell, ihre Nachbildungen sind auf Weiss gebaut.
+ *   · Der Held zeigt das Produkt. Unter der Ueberschrift steht eine
+ *     Nachbildung, in der eine Liste sich fuellt, ein Aufhaenger
+ *     geschrieben wird und eine Antwort eintrifft (_hero-visual.tsx). Das
+ *     ist die Ueberschrift als Bild.
+ *   · Der Ablauf hat Reiter ueber dem Rahmen und den Horizont im Rahmen,
+ *     wie der Abschnitt von Fora, den Youssef als Bild geschickt hat.
+ *   · Die Handgriffe streicht der Scroll durch, nicht eine Uhr.
+ *   · Zwei Kunden statt einem: retaiyn und Frostbreaker Marketing.
  *
- * Fuenf Abschnitte, alle vom selben Tag, alle auf Funktionsebene:
+ * ═══ WAS BLEIBT ═══
  *
- *   Kennzahlenband  3 Kanaele, 6 Beruehrungen, 8 Mails, 12 Pruefungen ...
- *   Systemkarte     drei Karten mit je einer Dreipunktliste
- *   Sequenzdiagramm 90/70/50/35 Woerter an Tag 0/3/5/7
- *   Angebot         zwoelf Felder hinein, acht Mails hinaus
- *   Startpruefung   zwoelf Kacheln, vier davon Blocker
+ * Die Ueberschrift (Entscheidung vom 2026-08-05), die neun Abschnitte in
+ * ihrer Reihenfolge, die Texte des Ablaufs, die Claude-Buehne mit ihrer
+ * Grenze, der eine Weg ueber Calendly, und das Wortbudget von rund 650
+ * sichtbaren Woertern (gezaehlt mit scripts/count-words.mjs).
  *
- * Jede dieser Zahlen stimmt und jede ist im App-Repo nachzaehlbar. Genau das
- * war das Problem: sie beschreiben, WIE DAS WERKZEUG GEBAUT IST. Wer auf
- * dieser Seite landet, hat es noch nie benutzt und fragt sich, was ihm das
- * bringt. Alle fuenf stehen weiter auf /funktionen, wo diese Frage gestellt
- * wird.
+ * ═══ SCHMERZ, PERSON, VERSPRECHEN ═══
  *
- * ═══ WAS AN IHRE STELLE GETRETEN IST ═══
+ *   Person        die Zeile ueber der Ueberschrift, und "Fuer wen"
+ *   Versprechen   die Ueberschrift, und die Nachbildung darunter
+ *   Schmerz       die vier Handgriffe, die durchgestrichen werden
  *
- *   1  Held         das Ergebnis, nicht die Faehigkeit
- *   2  Handgriffe   vier Dinge, die der Leser heute selbst macht, durch-
- *                   gestrichen waehrend er hinsieht
- *   3  Ablauf       der ganze Weg als Buehne, die ihn vorfuehrt
- *   4  Claude       die Anbindung, der neue Hauptgrund
- *   5  Fuer wen     bin ich gemeint
- *   6  Kunde        macht das ausser euch jemand
- *   7  Kosten       was es kostet
- *   8  Fragen       der Rest
- *   9  Schluss      die eine Handlung
+ * ═══ MOBIL ═══
  *
- * Zwei der neun Abschnitte fuehren etwas VOR statt es zu beschreiben. Die
- * Regeln dafuer stehen im Kopf von _stage.tsx; die wichtigste ist, dass beide
- * Buehnen additiv sind, also am Ende das ganze Bild zeigen und nicht den
- * letzten Takt.
- *
- * ═══ DIE EINE STELLE, AN DER ICH VON YOUSSEFS WORTEN ABGEWICHEN BIN ═══
- *
- * Er schrieb, man koenne ueber Claude "automatisiert leads suchen ... und
- * abschicken". Beides kann die Anbindung nicht, und zwar mit Absicht: kein
- * Werkzeug im Protokoll startet eine Suche oder sendet eine Mail
- * (apps/web/lib/mcp/tool-descriptions.ts, wortwoertlich "that boundary is
- * deliberate"). Die Suche legt er in seinen eigenen Ablaeufen per SQL an, was
- * ein Kunde nicht kann. Der Abschnitt sagt deshalb, was stimmt, und benennt
- * die Grenze selbst -- auf einer Seite, die sonst keine Zahl zeigt, die sie
- * nicht nachrechnen kann, ist das keine Schwaeche, sondern der Grund, warum
- * ihr der Rest geglaubt wird.
+ * Bei 390 px gebaut, nicht nur geprueft: die Nachbildung verliert ihre
+ * Seitenleiste und die Firmenspalte, die Reiter rollen seitlich, der
+ * Rahmen hat 22 statt 28 px Radius, kein Klickziel unter 44 px.
  * ══════════════════════════════════════════════════════════════════════ */
 
-// Wohin die drei Tueren aus dem Abschnitt "Fuer wen" fuehren. Bewusst hier und
-// nicht im Woerterbuch: das Woerterbuch haelt Text, keine Wege. Und bewusst
-// nach id statt nach Reihenfolge -- wer die drei Karten umsortiert, soll nicht
-// aus Versehen die Ziele mitdrehen.
+// Wohin die drei Tueren aus "Fuer wen" fuehren. Nach id, nicht nach
+// Reihenfolge, damit ein Umsortieren der Karten die Ziele nicht mitdreht.
 const WOHIN: Record<string, string> = {
   self: "/fuer-saas",
   clients: "/fuer-agenturen",
   new: "/funktionen",
 };
 
+// Die Kapitelueberschrift dieser Seite. Leichter als h2Cls in _ui.tsx
+// (medium statt bold): auf Dunkel traegt eine fette Grotesk in 56 px zu
+// dick auf, und Fora setzt seine Kapitel in derselben Lautstaerke.
+const kapitel =
+  "font-display text-[2.125rem] font-medium leading-[1.06] tracking-[-0.03em] text-balance text-ink sm:text-[2.75rem] lg:text-[3.25rem]";
+const einleitung = "text-[17px] leading-relaxed text-soft sm:text-[19px]";
+const abschnitt = "py-20 sm:py-28 lg:py-32";
+
 export default function Home() {
   const { t } = useT();
 
   return (
-    <div className="min-h-screen pb-16 sm:pb-0">
+    <div className="fb-dark min-h-screen pb-16 sm:pb-0">
       <SiteHeader />
 
-      {/* ═══════════════════════════════════════════════════════════════
-          1 · DER HELD.
-
-          Ohne Kennzahlenband darunter, seit dem zweiten Umbau. Was dort
-          stand, waren sechs Zahlen ueber die Mechanik; was jetzt folgt, sind
-          vier Handgriffe, die wegfallen. Der Unterschied ist die ganze
-          Rueckmeldung.
+      {/* ═══ 1 · DER HELD ═══════════════════════════════════════════════
+          Ueberschrift in Ruhe, darunter das Produkt auf dem Horizont. Die
+          Reihenfolge der Einblendung steht in --i: Zeile, Titel, Satz,
+          Knoepfe, dann die Nachbildung (eigene, laengere Kurve).
           ═══════════════════════════════════════════════════════════ */}
-      <section className="hero-wash border-b border-edge/60">
-        <div className={"mx-auto max-w-6xl px-4 sm:px-6 " + heroPad}>
-          <div className="fade-up mx-auto max-w-3xl text-center">
-            <h1 className={"mx-auto max-w-[17ch] " + h1Cls}>
+      <section className="fb-grain relative overflow-hidden">
+        <div className="relative mx-auto max-w-6xl px-4 pb-14 pt-16 sm:px-6 sm:pb-24 sm:pt-24 lg:pt-28">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="fb-hero-in inline-flex min-h-[32px] items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 text-[13px] font-medium text-soft sm:text-[14px]" style={{ ["--i" as string]: 0 }}>
+              <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-sky-400" />
+              {t.hero.pill}
+            </p>
+            <h1
+              className="fb-hero-in mx-auto mt-6 max-w-[16ch] font-display text-[2.625rem] font-medium leading-[1.02] tracking-[-0.035em] text-balance text-ink sm:text-[4rem] lg:text-[5rem]"
+              style={{ ["--i" as string]: 1 }}
+            >
               {t.hero.h1Pre}
-              {/* NUR FARBE, KEINE KURSIVE. Fraunces hatte eine echte
-                  Kanzleikursive und der Akzent stand darin; Wix Madefor
-                  Display hat ueberhaupt keinen kursiven Schnitt
-                  (metadata.json: styles ["normal"]), und eine vom Browser
-                  schraeggestellte Grotesk ist keine Kursive, sondern ein
-                  gekippter Buchstabe. Auf marketing.frostbreaker.app traegt
-                  der Akzent ebenfalls nur Farbe: "before they call" steht
-                  dort blau und aufrecht. */}
-              <span className="text-sky-600">{t.hero.h1Accent}</span>
+              <span className="text-sky-400">{t.hero.h1Accent}</span>
               {t.hero.h1Post}
             </h1>
-            <p className="mx-auto mt-7 max-w-[46ch] text-lg leading-relaxed text-soft sm:text-xl">
+            <p className="fb-hero-in mx-auto mt-6 max-w-[44ch] text-[17px] leading-relaxed text-soft sm:text-[20px]" style={{ ["--i" as string]: 2 }}>
               {t.hero.short}
             </p>
-            <div className="mt-9 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
-              <CTAButton />
-              <a
-                href={BOOKING_URL}
-                className="tap-link group gap-1.5 text-[15px] font-medium text-soft transition-colors hover:text-ink"
-              >
+            <div className="fb-hero-in mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3" style={{ ["--i" as string]: 3 }}>
+              <CTAButton className="!px-6 !py-3.5 !text-[15px]" />
+              <a href={BOOKING_URL} className="tap-link group gap-1.5 text-[15px] font-medium text-soft transition-colors hover:text-ink">
                 {t.cta.secondary}
                 <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
               </a>
             </div>
-            <p className="mx-auto mt-4 text-[15px] text-mute">{t.cta.trialShort}</p>
-
-            {/* Der einzige fremde Name ueber der Falz. Er steht bewusst NACH
-                dem Knopf: wer schon klickt, soll nicht aufgehalten werden,
-                wer zoegert, findet hier den ersten Beleg, der nicht von uns
-                selbst kommt. */}
-            <CustomerStrip className="mt-8 justify-center" />
+            <p className="fb-hero-in mt-4 text-[14px] text-mute" style={{ ["--i" as string]: 4 }}>
+              {t.cta.trialShort}
+            </p>
           </div>
+
+          <div className="relative mx-auto mt-12 max-w-5xl sm:mt-16">
+            {/* Das Licht sitzt hinter der Oberkante der Nachbildung, nicht
+                am Fuss des Abschnitts: die Nachbildung steht auf dem
+                Horizont, so wie bei Fora das Produkt auf der Landschaft. */}
+            <div aria-hidden className="absolute -inset-x-[12%] -bottom-[18%] -top-[42%] sm:-inset-x-[18%]">
+              <Horizon parallax hy="22%" className="[&_.fb-h-a]:h-[140%] [&_.fb-h-b]:h-[72%] [&_.fb-h-b]:w-[118%]" />
+            </div>
+            <HeroScreen note={t.journey.sampleNote} />
+          </div>
+
+          <Reveal className="mt-16 sm:mt-20">
+            <CustomerLogos />
+          </Reveal>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════════
-          2 · WAS WEGFAELLT.
-
-          Der erste Abschnitt nach dem Helden nennt kein einziges Produktwort.
-          Er nennt vier Dinge, die der Leser HEUTE macht, und streicht sie
-          durch, waehrend er hinsieht. Wer sich in dreien davon wiedererkennt,
-          liest den Rest.
-
-          Der Strich ist die Aussage und deshalb animiert: ein Haken sagt
-          "erledigt", ein Strich sagt "faellt weg". Technik in _stage.tsx.
+      {/* ═══ 2 · DER SCHMERZ ════════════════════════════════════════════
+          Vier Dinge, die der Leser heute macht. Der Scroll streicht sie
+          durch, eine nach der anderen, waehrend er hinsieht.
           ═══════════════════════════════════════════════════════════ */}
-      <section className="border-b border-edge/60 bg-band">
-        <div className={"mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
-          <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
-            <h2 className={h2Cls}>{t.strikeList.title}</h2>
+      <section className={"border-t border-white/8 " + abschnitt}>
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-20">
+            <Reveal>
+              <h2 className={kapitel + " lg:sticky lg:top-28"}>{t.strikeList.title}</h2>
+            </Reveal>
             <StrikeList items={t.strikeList.items} note={t.strikeList.note} />
           </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════════
-          3 · DER WEG. Das Kernstueck der Seite.
-
-          Youssef: "lass das das kernstueck der landing page sein denn darum
-          gehts in der app."
-
-          Hier stand zuerst die Systemkarte (drei Karten mit Stichpunkten),
-          dann eine erste Buehne mit fuenf Takten. Jetzt laufen sechs Akte:
-          der Entscheider wird gefunden, seine Website angesehen, die Mail
-          geschrieben, die Antwort kommt, das Gespraech laeuft, aus dem Lead
-          wird ein Kunde.
-
-          DER BESUCHER WAEHLT DIE NISCHE. Das ist die einzige Handlung, die
-          er hat, und sie ist genau die Handlung, um die es im Produkt geht:
-          eine Eingabe, der Rest laeuft. Die Wahl zieht bis zum letzten Akt
-          durch -- Rolle, Befunde, Mailtext, Antwort und Notizen sind je
-          Nische andere Saetze.
-
-          KEIN ANKER MEHR AUF EINEN ABSCHNITT, DEN ES NICHT GIBT: die drei
-          alten Marken bleiben stehen, weil aus Navigation und von aussen
-          Verweise darauf zeigen.
+      {/* ═══ 3 · DER WEG. Das Kernstueck. ═══════════════════════════════
+          Die alten Anker bleiben: auf #system, #kanaele und #rundgang
+          zeigen Navigation und Verweise von aussen.
           ═══════════════════════════════════════════════════════════ */}
-      <section id="ablauf" className={"scroll-mt-20 mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
+      <section id="ablauf" className={"scroll-mt-20 border-t border-white/8 " + abschnitt}>
         <span id="system" className="block scroll-mt-20" aria-hidden />
         <span id="kanaele" className="block scroll-mt-20" aria-hidden />
         <span id="rundgang" className="block scroll-mt-20" aria-hidden />
-        <div className="mb-10 flex flex-wrap items-end justify-between gap-x-8 gap-y-3">
-          <div className="max-w-[34ch]">
-            <h2 className={h2Cls}>{t.journey.title}</h2>
-            <p className="mt-5 text-[19px] leading-relaxed text-soft">{t.journey.body}</p>
-          </div>
-          {/* Dieselbe Kennzeichnung wie an jeder Nachbildung dieser Seite.
-              Die Buehne zeigt Rollen und Segmente, keine Firmennamen -- aber
-              sie zeigt Saetze, die wie eine echte Mail aussehen, und dann
-              muss danebenstehen, dass es ein Beispiel ist. */}
-          <p className="text-[15px] text-mute">{t.journey.sampleNote}</p>
-        </div>
-        <Journey
-          frage={t.journey.frage}
-          hinweis={t.journey.hinweis}
-          nischen={t.journey.nischen}
-          akte={t.journey.akte}
-          firmenLabel={t.journey.firmenLabel}
-          gefundenLabel={t.journey.gefundenLabel}
-          geprueft={t.journey.geprueft}
-          scanLabel={t.journey.scanLabel}
-          anLabel={t.journey.anLabel}
-          betreffLabel={t.journey.betreffLabel}
-          schreibtLabel={t.journey.schreibtLabel}
-          antwortLabel={t.journey.antwortLabel}
-          statusVorher={t.journey.statusVorher}
-          statusNachher={t.journey.statusNachher}
-          notizenLabel={t.journey.notizenLabel}
-          spalten={t.journey.spalten}
-          wiederholen={t.journey.wiederholen}
-          neuWaehlen={t.journey.neuWaehlen}
-        />
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
-          4 · DIE ANBINDUNG AN CLAUDE, der neue Hauptgrund.
-
-          Youssef: "die claude mcp integration ist ein viel besserer
-          verkaufsargument denn der kunde kann alle seine agent skills und
-          automations dazu integrieren."
-
-          Der Abschnitt steht NACH dem Ablauf und nicht davor. Wer nicht
-          gesehen hat, was das Werkzeug tut, kann mit "du kannst es von Claude
-          bedienen lassen" nichts anfangen -- die Anbindung ist eine Aussage
-          UEBER den Ablauf, also braucht sie den Ablauf davor.
-
-          Eigene Flaeche: es ist das staerkste Argument der Seite, und es ist
-          das einzige, das sonst kein Anbieter in dieser Kategorie hat.
-          ═══════════════════════════════════════════════════════════ */}
-      <section id="claude" className="scroll-mt-20 border-y border-edge/60 bg-band">
-        <div className={"mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
-          <div className="mb-12 max-w-[52ch]">
-            <h2 className={h2Cls}>{t.claudeStage.title}</h2>
-            <p className="mt-6 text-[19px] leading-relaxed text-soft">{t.claudeStage.body}</p>
-          </div>
-          <ClaudeStage
-            auftrag={t.claudeStage.auftrag}
-            schritte={t.claudeStage.schritte}
-            ergebnis={t.claudeStage.ergebnis}
-            grenze={t.claudeStage.grenze}
-            wiederholen={t.claudeStage.wiederholen}
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <Reveal className="mx-auto mb-10 max-w-2xl text-center sm:mb-12">
+            <h2 className={kapitel + " mx-auto"}>{t.journey.title}</h2>
+            <p className={"mx-auto mt-5 max-w-[40ch] " + einleitung}>{t.journey.body}</p>
+          </Reveal>
+          <Journey
+            nischen={t.journey.nischen}
+            akte={t.journey.akte}
+            untertitel={t.journey.untertitel}
+            firmenLabel={t.journey.firmenLabel}
+            gefundenLabel={t.journey.gefundenLabel}
+            geprueft={t.journey.geprueft}
+            scanLabel={t.journey.scanLabel}
+            anLabel={t.journey.anLabel}
+            betreffLabel={t.journey.betreffLabel}
+            schreibtLabel={t.journey.schreibtLabel}
+            antwortLabel={t.journey.antwortLabel}
+            statusVorher={t.journey.statusVorher}
+            statusNachher={t.journey.statusNachher}
+            notizenLabel={t.journey.notizenLabel}
+            spalten={t.journey.spalten}
+            wiederholen={t.journey.wiederholen}
+            nischeLabel={t.journey.frage}
           />
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════════
-          5 · FUER WEN. Drei Lagen, keine Branchen: wer sich in einer Lage
-          wiedererkennt, liest weiter; wer in einer Branchenliste seine
-          Branche nicht findet, geht.
+      {/* ═══ 4 · CLAUDE ═════════════════════════════════════════════════
+          Nach dem Ablauf, nicht davor: die Anbindung ist eine Aussage
+          UEBER den Ablauf. Ueberschrift links, Chatfenster rechts.
           ═══════════════════════════════════════════════════════════ */}
-      <section id="fuer-wen" className={"scroll-mt-20 mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
-        {/* Der alte Anker bleibt: auf /#agenturen zeigen vorhandene Verweise. */}
-        <span id="agenturen" className="block scroll-mt-20" aria-hidden />
-        <h2 className={"mb-12 " + h2Cls}>{t.whoFor.title}</h2>
-
-        <div className="grid items-stretch gap-5 md:grid-cols-3">
-          {t.whoFor.cards.map((c, i) => (
-            <Reveal key={c.id} delay={i * 80} className="h-full">
-              <Link
-                href={WOHIN[c.id]}
-                // Die ganze Karte ist der Weg, nicht nur die Zeile unten.
-                // Ohne Beschreibungstext ist eine Karte mit einem einzigen
-                // Textlink am Fuss eine Karte, deren obere zwei Drittel
-                // nichts tun.
-                className="group flex h-full flex-col rounded-2xl border border-edge/60 bg-panel p-7 transition-[border-color,transform] duration-200 ease-out hover:border-edge3 hoverfine:-translate-y-0.5"
-              >
-                <span className="text-sky-600">{whoForIcons[c.id]}</span>
-                <h3 className={"mt-5 " + cardTitleCls}>{c.title}</h3>
-                <span className="mt-auto inline-flex items-center gap-1.5 pt-8 text-[15px] font-medium text-soft transition-colors group-hover:text-ink">
-                  {c.linkLabel}
-                  <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
-                </span>
-              </Link>
+      <section id="claude" className={"scroll-mt-20 border-t border-white/8 bg-band " + abschnitt}>
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.25fr] lg:gap-16">
+            <Reveal>
+              <h2 className={kapitel}>{t.claudeStage.title}</h2>
+              <p className={"mt-5 max-w-[40ch] " + einleitung}>{t.claudeStage.body}</p>
             </Reveal>
-          ))}
+            <Reveal delay={120}>
+              <ClaudeStage
+                auftrag={t.claudeStage.auftrag}
+                schritte={t.claudeStage.schritte}
+                ergebnis={t.claudeStage.ergebnis}
+                grenze={t.claudeStage.grenze}
+                wiederholen={t.claudeStage.wiederholen}
+              />
+            </Reveal>
+          </div>
         </div>
       </section>
 
-      {/* 6 · Der Kundenbeleg, kurz. Der ganze Fall steht auf /kunden/retaiyn. */}
-      <CustomerProof className="border-y border-edge/60 bg-band" />
-
-      {/* ═══════════════════════════════════════════════════════════════
-          7 · WAS ES KOSTET. Ohne Zahl, und das bleibt so -- was der Abschnitt
-          leistet, ist zu sagen, WOVON der Betrag abhaengt (Kundenzahl) und
-          WANN er faellt (im ersten Gespraech). "Preis auf Anfrage" ist eine
-          Verweigerung, beides zusammen ist eine Auskunft.
-          ═══════════════════════════════════════════════════════════ */}
-      <section id="kosten" className={"scroll-mt-20 mx-auto max-w-6xl px-4 sm:px-6 " + sectionPad}>
-        <h2 className={h2Cls}>{t.costs.title}</h2>
-        <p className="mt-6 max-w-[56ch] text-[19px] leading-relaxed text-soft">{t.costs.body}</p>
-        <p className="mt-8 flex max-w-[56ch] items-start gap-3.5 text-[19px] leading-relaxed text-ink">
-          <span className="mt-0.5 shrink-0 text-sky-600">{noteIcons.price}</span>
-          {t.costs.note}
-        </p>
+      {/* ═══ 5 · FUER WEN ═══════════════════════════════════════════════ */}
+      <section id="fuer-wen" className={"scroll-mt-20 border-t border-white/8 " + abschnitt}>
+        <span id="agenturen" className="block scroll-mt-20" aria-hidden />
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <Reveal>
+            <h2 className={kapitel + " mb-10 sm:mb-12"}>{t.whoFor.title}</h2>
+          </Reveal>
+          <div className="grid items-stretch gap-4 md:grid-cols-3 sm:gap-5">
+            {t.whoFor.cards.map((c, i) => (
+              <Reveal key={c.id} delay={i * 90} className="h-full">
+                <Link
+                  href={WOHIN[c.id]}
+                  className="group flex h-full flex-col rounded-2xl border border-white/10 bg-panel p-6 transition-[border-color,transform,background-color] duration-200 ease-out hover:border-white/25 hover:bg-panel2 hoverfine:-translate-y-1 sm:p-7"
+                >
+                  <span className="grid h-11 w-11 place-items-center rounded-xl bg-sky-400/12 text-sky-300">{whoForIcons[c.id]}</span>
+                  <h3 className="mt-6 text-[19px] font-semibold leading-snug text-ink sm:text-[21px]">{c.title}</h3>
+                  <span className="mt-auto inline-flex items-center gap-1.5 pt-8 text-[15px] font-medium text-soft transition-colors group-hover:text-ink">
+                    {c.linkLabel}
+                    <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
+                  </span>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+        </div>
       </section>
 
-      <section id="faq" className="scroll-mt-20 border-t border-edge/60 bg-band">
-        <div className={"mx-auto max-w-3xl px-4 sm:px-6 " + sectionPad}>
-          <h2 className={"mb-10 " + h2Cls}>{t.faq.title}</h2>
-          <div className="divide-y divide-edge/60 rounded-2xl border border-edge/60 bg-panel">
-            {/* DIE POLSTERUNG SITZT AN summary, NICHT AN details.
-                Gemessen am 2026-08-31 bei 390 px: die Zeile war 66 px hoch,
-                aufklappbar war aber nur die summary darin, und die mass 26 px.
-                Wer die oberen oder unteren 20 px einer FAQ-Zeile antippt,
-                trifft nichts -- und genau dorthin faellt der Daumen. Jetzt
-                traegt summary die Polsterung und ist so hoch wie die Zeile;
-                die Antwort bringt ihre eigene mit. */}
+      {/* ═══ 6 · WER DAMIT KUNDEN GEWINNT ═══════════════════════════════ */}
+      <section id="kunde" className={"scroll-mt-20 border-t border-white/8 bg-band " + abschnitt}>
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <Reveal>
+            <h2 className={kapitel + " mb-10 sm:mb-12"}>{t.customer.logosTitle}</h2>
+          </Reveal>
+          <CustomerCards />
+        </div>
+      </section>
+
+      {/* ═══ 7 · KOSTEN ═════════════════════════════════════════════════ */}
+      <section id="kosten" className={"scroll-mt-20 border-t border-white/8 " + abschnitt}>
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="grid gap-8 lg:grid-cols-[1fr_1.4fr] lg:gap-20">
+            <Reveal>
+              <h2 className={kapitel}>{t.costs.title}</h2>
+            </Reveal>
+            <Reveal delay={100}>
+              <p className={"max-w-[52ch] " + einleitung}>{t.costs.body}</p>
+              <p className="mt-6 flex max-w-[52ch] items-start gap-3.5 text-[17px] leading-relaxed text-ink sm:text-[19px]">
+                <span className="mt-0.5 shrink-0 text-sky-300">{noteIcons.price}</span>
+                {t.costs.note}
+              </p>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ 8 · FRAGEN ═════════════════════════════════════════════════ */}
+      <section id="faq" className={"scroll-mt-20 border-t border-white/8 bg-band " + abschnitt}>
+        <div className="mx-auto max-w-3xl px-4 sm:px-6">
+          <Reveal>
+            <h2 className={kapitel + " mb-8 sm:mb-10"}>{t.faq.title}</h2>
+          </Reveal>
+          <div className="divide-y divide-white/8 rounded-2xl border border-white/10 bg-panel">
             {t.faq.items.map((f) => (
               <details key={f.q} className="group">
-                {/* Ohne Chevron war den Fragen nicht anzusehen, dass sie
-                    aufklappbar sind. */}
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 text-[17px] font-medium text-ink marker:content-none">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 text-[16px] font-medium text-ink marker:content-none sm:px-6 sm:text-[17px]">
                   {f.q}
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    aria-hidden
-                    className="h-4 w-4 shrink-0 text-faint transition-transform duration-200 group-open:-rotate-180"
-                  >
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden className="h-4 w-4 shrink-0 text-faint transition-transform duration-200 group-open:-rotate-180">
                     <path d="m6 9 6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </summary>
-                {/* `fb-faq-answer`: die Antwort blendet ein statt aufzu-
-                    springen -- nur Deckkraft und 4px, ausdruecklich KEINE
-                    Hoehenanimation. Begruendung in globals.css. */}
-                <p className="fb-faq-answer -mt-1 max-w-[68ch] px-6 pb-5 text-[17px] leading-relaxed text-soft">{f.a}</p>
+                <p className="fb-faq-answer -mt-1 max-w-[68ch] px-5 pb-5 text-[16px] leading-relaxed text-soft sm:px-6 sm:text-[17px]">{f.a}</p>
               </details>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════════
-          DIE EINE DUNKLE FLAECHE.
-
-          Die Seite traegt vom ersten bis zum letzten Pixel Tinte auf Papier:
-          Flaechenwechsel nur zwischen #fbfbfa und #f1f0ed, dazu Weiss in den
-          Karten. Das ist die richtige Entscheidung fuer die Erklaerung -- und
-          die falsche fuer die letzten 400 Pixel, an denen genau eine Handlung
-          gefragt ist.
-
-          GENAU EINE, UND ZWAR DIESE. Zwei dunkle Flaechen waeren eine Optik;
-          eine ist eine Aussage. Deshalb steht das Markup hier ausgeschrieben
-          und nicht als Bauteil in _ui.tsx -- ein Bauteil laedt dazu ein, es
-          ein zweites Mal zu benutzen, und beim zweiten Mal ist das Argument
-          weg. Wer einen zweiten dunklen Abschnitt will, muss diesen Kommentar
-          zuerst widerlegen.
-
-          text-surface/75 auf #1c1b19 misst 9,9:1.
+      {/* ═══ 9 · DER SCHLUSS ════════════════════════════════════════════
+          Derselbe Horizont wie am Anfang, diesmal ueber der Handlung. Die
+          Seite endet, wo sie begonnen hat: im Licht, mit einem Knopf.
           ═══════════════════════════════════════════════════════════ */}
-      <section className="bg-ink">
-        <div className="mx-auto max-w-3xl px-4 py-24 text-center text-surface sm:px-6 lg:py-32">
-          <h2 className={"mx-auto " + h2Cls}>{t.finalCta.title}</h2>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
-            <a
-              href={BOOKING_URL}
-              // Umgedrehte Fassung des Primaerknopfes (heller Knopf auf der
-              // dunklen Flaeche) und deshalb Zeichen fuer Zeichen dieselben
-              // Bewegungsklassen wie in CTAButton -- die Begruendung steht
-              // dort.
-              className="inline-flex items-center justify-center whitespace-nowrap rounded-full bg-surface px-4 py-3 text-sm font-medium text-ink shadow-sm transition-[opacity,scale] duration-[140ms] ease-out hover:opacity-85 hoverfine:scale-[1.02] active:scale-[0.98] sm:px-6"
-            >
-              {t.cta.primary}
-            </a>
-            <a
-              href={BOOKING_URL}
-              className="tap-link group gap-1.5 text-[15px] font-medium text-surface/75 transition-colors hover:text-surface"
-            >
-              {t.cta.secondary}
-              <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
-            </a>
-          </div>
+      <section className="fb-grain relative overflow-hidden border-t border-white/8">
+        <Horizon hy="108%" />
+        <div className="relative mx-auto max-w-3xl px-4 py-28 text-center sm:px-6 sm:py-36 lg:py-44">
+          <Reveal>
+            <h2 className={kapitel + " mx-auto"}>{t.finalCta.title}</h2>
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+              <CTAButton className="!px-6 !py-3.5 !text-[15px]" />
+              <a href={BOOKING_URL} className="tap-link group gap-1.5 text-[15px] font-medium text-soft transition-colors hover:text-ink">
+                {t.cta.secondary}
+                <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
+              </a>
+            </div>
+          </Reveal>
         </div>
       </section>
 
       <SiteFooter />
 
-      {/* Sticky mobile CTA */}
-      <div className="fixed inset-x-0 bottom-0 z-20 border-t border-edge/60 bg-surface/95 p-3 backdrop-blur sm:hidden">
-        <CTAButton className="w-full" />
+      {/* Der feste Knopf am unteren Rand des Telefons. */}
+      <div className="fixed inset-x-0 bottom-0 z-20 border-t border-white/10 bg-surface/90 p-3 backdrop-blur sm:hidden">
+        <CTAButton className="w-full !py-3.5 !text-[15px]" />
       </div>
     </div>
   );
