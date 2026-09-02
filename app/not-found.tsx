@@ -28,7 +28,7 @@ export default function NotFound() {
     <div className="flex min-h-screen flex-col">
       <SiteHeader />
       <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col justify-center px-4 py-28 sm:px-6">
-        <p className="text-[15px] font-medium uppercase tracking-[0.14em] text-sky-700">404</p>
+        <p className="text-[15px] font-medium uppercase tracking-[0.14em] text-accent">404</p>
         <h1 className={"mt-4 " + h1Cls}>{t.notFound.title}</h1>
         <p className="mt-6 text-[19px] leading-relaxed text-soft">{t.notFound.body}</p>
         <ul className="mt-8 flex flex-col gap-3">

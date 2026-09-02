@@ -83,8 +83,20 @@
      Wer eine dritte Kurve anlegen will, muss zuerst einen dritten Fall
      zeigen, der weder Kommen noch Gehen noch Fahren ist. */
   --fb-ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  /* Akzent und Erfolg als Token, seit dem 2026-09-02 beide Designs: Blau
+     und Gruen brauchen auf Hell eine dunklere Stufe als auf Dunkel, sonst
+     faellt beides unter 4,5:1. sky-700 auf #fbfbfa misst 5,9, emerald-700
+     misst 5,4. */
+  --c-accent: #0369a1;
+  --c-ok: #047857;
+  /* Wie stark Horizont und Korn auf dieser Flaeche stehen. */
+  --glow: 0.75;
+  --grain: 0.04;
   color-scheme: light;
 }
+/* Sanftes Springen zu den Ankern des Onepagers. */
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 /* Tailwind v4 verpackt `hover:` von sich aus in `@media (hover: hover)`
    (nachgesehen 2026-08-15 im erzeugten layout.css). Das reicht fuer reine
@@ -94,6 +106,11 @@
    haengen, ein kurz aufblitzender Farbwechsel beim Tippen stoert niemanden,
    ein springender Knopf schon. */
 @custom-variant hoverfine (@media (hover: hover) and (pointer: fine));
+/* `dark:` haengt am Cookie (data-theme), nicht an der Systemeinstellung:
+   der Besucher waehlt in der Kopfzeile, und der Server rendert schon
+   richtig. Innerhalb einer .fb-dark-Nachbildung gilt es nicht, dort sind
+   die Farben ohnehin fest. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 @theme inline {
   --color-surface: var(--c-surface);
@@ -110,6 +127,8 @@
   --color-soft: var(--c-soft);
   --color-faint: var(--c-faint);
   --color-mute: var(--c-mute);
+  --color-accent: var(--c-accent);
+  --color-ok: var(--c-ok);
   --font-sans: "Wix Madefor Text Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-display: "Wix Madefor Display Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
@@ -694,22 +713,28 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
-   DIE DUNKLE STARTSEITE, 2026-09-02.
+   DAS DUNKLE DESIGN, 2026-09-02.
 
    Youssef hat Fora und Godly als Vorbild gezeigt: dunkle Flaeche, ein
-   Lichthorizont, das Produkt gross und gerahmt darauf, wenig Text. Die
-   Startseite ist seitdem ein eigener Raum. Die Unterseiten bleiben hell,
-   weil ihre Nachbildungen auf Weiss gebaut sind.
+   Lichthorizont, das Produkt gross und gerahmt darauf, wenig Text. Seit
+   demselben Tag gibt es beides: `[data-theme="dark"]` am html-Element
+   schaltet die ganze Website (Cookie, Schalter in der Kopfzeile), und
+   `.fb-dark` haelt einzelne Nachbildungen IMMER dunkel, auch im hellen
+   Design. Ein dunkles Produktfenster auf heller Seite ist der Godly-Look;
+   ein helles Produktfenster gibt es nicht, weil die Nachbildungen ihre
+   Farben fest tragen.
 
-   KEIN ZWEITES FARBSYSTEM: `.fb-dark` belegt dieselben Tokens neu, die der
-   Rest der Seite benutzt. Kopfzeile, Fusszeile und Knoepfe kippen dadurch
-   mit, ohne dass eine Klasse an ihnen geaendert wurde. Was auf dieser
-   Flaeche steht, nennt weiterhin ink, soft, panel und edge.
+   KEIN ZWEITES FARBSYSTEM: derselbe Block belegt dieselben Tokens neu, die
+   der Rest der Seite benutzt. Was auf dieser Flaeche steht, nennt weiterhin
+   ink, soft, panel und edge. Linien und Flaechen, die in beiden Designs
+   stimmen muessen, nehmen `ink/8`, `ink/10`, `ink/12`: auf Hell ein Hauch
+   Tinte, auf Dunkel ein Hauch Weiss, ohne eine Klasse zu wechseln.
 
    Die Textstufen sind gegen #070a10 (Grund) und #151b25 (panel2) gerechnet:
    mute 5,7 und 5,0 · faint 7,0 und 6,2 · soft 9,4 · ink 18. Jede Stufe
    besteht 4,5:1 auch in 13 px.
    ═══════════════════════════════════════════════════════════════════════ */
+[data-theme="dark"],
 .fb-dark {
   --c-surface: #070a10;
   --c-panel: #0e131b;
@@ -725,11 +750,13 @@ body {
   --c-soft: #aeb7c4;
   --c-faint: #93a0b3;
   --c-mute: #7f8a9b;
+  --c-accent: #38bdf8;
+  --c-ok: #6ee7b7;
+  --glow: 1;
+  --grain: 0.07;
   color-scheme: dark;
-  background: var(--c-surface);
-  color: var(--c-ink);
 }
-.fb-dark ::selection { background: rgba(56, 189, 248, 0.32); }
+[data-theme="dark"] ::selection, .fb-dark ::selection { background: rgba(56, 189, 248, 0.32); }
 
 /* Der Horizont. Ein kaltes Licht, das von unten in die Flaeche steigt --
    kein Foto, weil die Seite keines hat, das woertlich die Ueberschrift
@@ -745,6 +772,7 @@ body {
   inset: 0;
   overflow: hidden;
   pointer-events: none;
+  opacity: var(--glow, 1);
   --px: 0;
   --py: 0;
 }
@@ -789,7 +817,7 @@ body {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.07;
+  opacity: var(--grain, 0.07);
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 200px 200px;
@@ -871,3 +899,62 @@ body {
 @keyframes fbGrowX { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 .fb-timer { transform-origin: left; animation: fbGrowX var(--fb-ms, 3400ms) linear both; }
 @media (prefers-reduced-motion: reduce) { .fb-timer { animation: none; transform: none; } }
+
+/* ══════════════════════════════════════════════════════════════════════
+   DREI BEWEGUNGEN NACH GODLY-ART, 2026-09-02.
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* Kapitelueberschriften kommen Wort fuer Wort: jedes Wort steigt aus der
+   Unschaerfe, 45 ms nach dem davor. Der Schalter ist derselbe wie fuer
+   alles andere (.reveal-visible aus reveal.tsx), die Staffelung steht in
+   --i an jedem Wort (_motion.tsx). */
+.fb-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.35em);
+  filter: blur(6px);
+  transition:
+    opacity 600ms var(--fb-ease-out),
+    transform 600ms var(--fb-ease-out),
+    filter 600ms var(--fb-ease-out);
+  transition-delay: calc(var(--i, 0) * 45ms);
+}
+.reveal-visible .fb-word { opacity: 1; transform: none; filter: blur(0); }
+
+/* Ein Lichtfleck, der dem Zeiger ueber eine Karte folgt. --mx/--my setzt
+   die Karte selbst (spot in _motion.tsx). Nur bei feinem Zeiger: auf dem
+   Telefon gibt es keinen Zeiger, dem etwas folgen koennte. */
+.fb-spot { position: relative; overflow: hidden; }
+.fb-spot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 320ms var(--fb-ease-out);
+  background: radial-gradient(
+    260px circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in oklab, var(--c-accent) 16%, transparent),
+    transparent 62%
+  );
+}
+@media (hover: hover) and (pointer: fine) {
+  .fb-spot:hover::before { opacity: 1; }
+}
+
+/* Der Schalter zwischen Hell und Dunkel: Sonne und Mond drehen
+   ineinander, statt hart zu wechseln. */
+.fb-theme-icon {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  transition: opacity 300ms var(--fb-ease-out), transform 400ms var(--fb-ease-out);
+}
+.fb-theme-icon[data-off] { opacity: 0; transform: rotate(90deg) scale(0.6); }
+
+@media (prefers-reduced-motion: reduce) {
+  .fb-word { transition: opacity 200ms; transition-delay: 0s; transform: none; filter: none; }
+  .fb-spot::before { display: none; }
+  .fb-theme-icon { transition: none; }
+}

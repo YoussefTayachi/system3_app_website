@@ -132,7 +132,7 @@ export function HeroScreen({ note }: { note: string }) {
 
   return (
     <div ref={ref} className={"fb-screen-in relative " + (drin ? "fb-on" : "")}>
-      <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0c1119] shadow-[0_40px_120px_-30px_rgba(0,0,0,0.8),0_0_0_1px_rgba(255,255,255,0.03)] sm:rounded-[22px]">
+      <div className="fb-dark relative overflow-hidden rounded-2xl border border-white/10 bg-[#0c1119] shadow-[0_40px_120px_-30px_rgba(0,0,0,0.8),0_0_0_1px_rgba(255,255,255,0.03)] sm:rounded-[22px]">
         {/* Fensterleiste */}
         <div className="flex items-center gap-3 border-b border-white/8 px-4 py-2.5 sm:px-5">
           <span aria-hidden className="flex gap-1.5">
@@ -234,7 +234,7 @@ export function HeroScreen({ note }: { note: string }) {
         }
         aria-hidden={takt < 2}
       >
-        <div className="fb-float-body rounded-2xl border border-emerald-400/25 bg-[#0d1a17]/95 p-4 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.8)] backdrop-blur">
+        <div className="fb-dark fb-float-body rounded-2xl border border-emerald-400/25 bg-[#0d1a17]/95 p-4 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.8)] backdrop-blur">
           <p className="flex items-center gap-2 text-[12px] font-medium uppercase tracking-[0.1em] text-emerald-300">
             <span aria-hidden className={"h-2 w-2 rounded-full bg-emerald-400 " + (takt >= 2 ? "fb-ping" : "")} />
             {v.replyLabel}

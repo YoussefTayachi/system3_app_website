@@ -16,16 +16,13 @@ export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://system3-app
  * sie erwartet. Rechtsseiten am Ende und mit niedriger Prioritaet -- sie
  * muessen auffindbar sein, sie muessen nicht gefunden werden.
  *
- * `/start` fehlt bewusst, siehe robots.ts.
+ * Seit dem 2026-09-02 ein Onepager: /funktionen, /fuer-agenturen,
+ * /fuer-saas, /kunden, /case-study und /start sind Umleitungen
+ * (next.config.mjs).
  */
 export const SEITEN: { pfad: string; prioritaet: number }[] = [
   { pfad: "/", prioritaet: 1 },
-  { pfad: "/funktionen", prioritaet: 0.9 },
-  { pfad: "/fuer-agenturen", prioritaet: 0.9 },
-  { pfad: "/fuer-saas", prioritaet: 0.8 },
-  { pfad: "/kunden/retaiyn", prioritaet: 0.7 },
   { pfad: "/eigene-software", prioritaet: 0.7 },
-  { pfad: "/case-study", prioritaet: 0.6 },
   { pfad: "/kontakt", prioritaet: 0.6 },
   { pfad: "/impressum", prioritaet: 0.2 },
   { pfad: "/datenschutz", prioritaet: 0.2 },

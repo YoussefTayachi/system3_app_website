@@ -1,11 +1,12 @@
 "use client";
-import Link from "next/link";
 import { CTAButton, SiteHeader, SiteFooter, BOOKING_URL } from "./_ui";
 import { ClaudeStage, StrikeList } from "./_stage";
 import { Journey } from "./_journey";
 import { Horizon, HeroScreen } from "./_hero-visual";
 import { CustomerLogos, CustomerCards } from "./_customers";
 import { Reveal } from "./reveal";
+import { Words, spot } from "./_motion";
+import { FeatureTable } from "./_features-table";
 import { whoForIcons, noteIcons } from "./_icons";
 import { useT } from "./language-provider";
 
@@ -56,14 +57,6 @@ import { useT } from "./language-provider";
  * Rahmen hat 22 statt 28 px Radius, kein Klickziel unter 44 px.
  * ══════════════════════════════════════════════════════════════════════ */
 
-// Wohin die drei Tueren aus "Fuer wen" fuehren. Nach id, nicht nach
-// Reihenfolge, damit ein Umsortieren der Karten die Ziele nicht mitdreht.
-const WOHIN: Record<string, string> = {
-  self: "/fuer-saas",
-  clients: "/fuer-agenturen",
-  new: "/funktionen",
-};
-
 // Die Kapitelueberschrift dieser Seite. Leichter als h2Cls in _ui.tsx
 // (medium statt bold): auf Dunkel traegt eine fette Grotesk in 56 px zu
 // dick auf, und Fora setzt seine Kapitel in derselben Lautstaerke.
@@ -76,7 +69,7 @@ export default function Home() {
   const { t } = useT();
 
   return (
-    <div className="fb-dark min-h-screen pb-16 sm:pb-0">
+    <div className="min-h-screen pb-16 sm:pb-0">
       <SiteHeader />
 
       {/* ═══ 1 · DER HELD ═══════════════════════════════════════════════
@@ -87,8 +80,8 @@ export default function Home() {
       <section className="fb-grain relative overflow-hidden">
         <div className="relative mx-auto max-w-6xl px-4 pb-14 pt-16 sm:px-6 sm:pb-24 sm:pt-24 lg:pt-28">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="fb-hero-in inline-flex min-h-[32px] items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 text-[13px] font-medium text-soft sm:text-[14px]" style={{ ["--i" as string]: 0 }}>
-              <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-sky-400" />
+            <p className="fb-hero-in inline-flex min-h-[32px] items-center gap-2 rounded-full border border-ink/10 bg-ink/[0.04] px-3.5 text-[13px] font-medium text-soft sm:text-[14px]" style={{ ["--i" as string]: 0 }}>
+              <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-accent" />
               {t.hero.pill}
             </p>
             <h1
@@ -96,7 +89,7 @@ export default function Home() {
               style={{ ["--i" as string]: 1 }}
             >
               {t.hero.h1Pre}
-              <span className="text-sky-400">{t.hero.h1Accent}</span>
+              <span className="text-accent">{t.hero.h1Accent}</span>
               {t.hero.h1Post}
             </h1>
             <p className="fb-hero-in mx-auto mt-6 max-w-[44ch] text-[17px] leading-relaxed text-soft sm:text-[20px]" style={{ ["--i" as string]: 2 }}>
@@ -118,8 +111,11 @@ export default function Home() {
             {/* Das Licht sitzt hinter der Oberkante der Nachbildung, nicht
                 am Fuss des Abschnitts: die Nachbildung steht auf dem
                 Horizont, so wie bei Fora das Produkt auf der Landschaft. */}
-            <div aria-hidden className="absolute -inset-x-[12%] -bottom-[18%] -top-[42%] sm:-inset-x-[18%]">
-              <Horizon parallax hy="22%" className="[&_.fb-h-a]:h-[140%] [&_.fb-h-b]:h-[72%] [&_.fb-h-b]:w-[118%]" />
+            {/* Der Kasten reicht weit ueber die Nachbildung hinaus und wird
+                nach oben weich ausgeblendet: im hellen Design war seine
+                Oberkante als Linie zu sehen (gesehen 2026-09-02 bei 390 px). */}
+            <div aria-hidden className="absolute -inset-x-[12%] -bottom-[18%] -top-[70%] sm:-inset-x-[18%] [mask-image:linear-gradient(to_bottom,transparent,black_35%)]">
+              <Horizon parallax hy="36%" className="[&_.fb-h-a]:h-[120%] [&_.fb-h-b]:h-[60%] [&_.fb-h-b]:w-[118%]" />
             </div>
             <HeroScreen note={t.journey.sampleNote} />
           </div>
@@ -134,11 +130,11 @@ export default function Home() {
           Vier Dinge, die der Leser heute macht. Der Scroll streicht sie
           durch, eine nach der anderen, waehrend er hinsieht.
           ═══════════════════════════════════════════════════════════ */}
-      <section className={"border-t border-white/8 " + abschnitt}>
+      <section className={"border-t border-ink/8 " + abschnitt}>
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-20">
             <Reveal>
-              <h2 className={kapitel + " lg:sticky lg:top-28"}>{t.strikeList.title}</h2>
+              <h2 className={kapitel + " lg:sticky lg:top-28"}><Words text={t.strikeList.title} /></h2>
             </Reveal>
             <StrikeList items={t.strikeList.items} note={t.strikeList.note} />
           </div>
@@ -149,13 +145,13 @@ export default function Home() {
           Die alten Anker bleiben: auf #system, #kanaele und #rundgang
           zeigen Navigation und Verweise von aussen.
           ═══════════════════════════════════════════════════════════ */}
-      <section id="ablauf" className={"scroll-mt-20 border-t border-white/8 " + abschnitt}>
+      <section id="ablauf" className={"scroll-mt-20 border-t border-ink/8 " + abschnitt}>
         <span id="system" className="block scroll-mt-20" aria-hidden />
         <span id="kanaele" className="block scroll-mt-20" aria-hidden />
         <span id="rundgang" className="block scroll-mt-20" aria-hidden />
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <Reveal className="mx-auto mb-10 max-w-2xl text-center sm:mb-12">
-            <h2 className={kapitel + " mx-auto"}>{t.journey.title}</h2>
+            <h2 className={kapitel + " mx-auto"}><Words text={t.journey.title} /></h2>
             <p className={"mx-auto mt-5 max-w-[40ch] " + einleitung}>{t.journey.body}</p>
           </Reveal>
           <Journey
@@ -184,11 +180,11 @@ export default function Home() {
           Nach dem Ablauf, nicht davor: die Anbindung ist eine Aussage
           UEBER den Ablauf. Ueberschrift links, Chatfenster rechts.
           ═══════════════════════════════════════════════════════════ */}
-      <section id="claude" className={"scroll-mt-20 border-t border-white/8 bg-band " + abschnitt}>
+      <section id="claude" className={"scroll-mt-20 border-t border-ink/8 bg-band " + abschnitt}>
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.25fr] lg:gap-16">
             <Reveal>
-              <h2 className={kapitel}>{t.claudeStage.title}</h2>
+              <h2 className={kapitel}><Words text={t.claudeStage.title} /></h2>
               <p className={"mt-5 max-w-[40ch] " + einleitung}>{t.claudeStage.body}</p>
             </Reveal>
             <Reveal delay={120}>
@@ -205,53 +201,60 @@ export default function Home() {
       </section>
 
       {/* ═══ 5 · FUER WEN ═══════════════════════════════════════════════ */}
-      <section id="fuer-wen" className={"scroll-mt-20 border-t border-white/8 " + abschnitt}>
+      <section id="fuer-wen" className={"scroll-mt-20 border-t border-ink/8 " + abschnitt}>
         <span id="agenturen" className="block scroll-mt-20" aria-hidden />
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <Reveal>
-            <h2 className={kapitel + " mb-10 sm:mb-12"}>{t.whoFor.title}</h2>
+            <h2 className={kapitel + " mb-10 sm:mb-12"}><Words text={t.whoFor.title} /></h2>
           </Reveal>
+          {/* Keine Verweise mehr: die drei Seiten dahinter sind am 2026-09-02
+              gefallen. Youssef: "diese buttons muessen zu nix verweisen, alle
+              infos und details werden im call geklaert." */}
           <div className="grid items-stretch gap-4 md:grid-cols-3 sm:gap-5">
             {t.whoFor.cards.map((c, i) => (
               <Reveal key={c.id} delay={i * 90} className="h-full">
-                <Link
-                  href={WOHIN[c.id]}
-                  className="group flex h-full flex-col rounded-2xl border border-white/10 bg-panel p-6 transition-[border-color,transform,background-color] duration-200 ease-out hover:border-white/25 hover:bg-panel2 hoverfine:-translate-y-1 sm:p-7"
-                >
-                  <span className="grid h-11 w-11 place-items-center rounded-xl bg-sky-400/12 text-sky-300">{whoForIcons[c.id]}</span>
+                <div onPointerMove={spot} className="fb-spot flex h-full flex-col rounded-2xl border border-ink/10 bg-panel p-6 sm:p-7">
+                  <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent/12 text-accent">{whoForIcons[c.id]}</span>
                   <h3 className="mt-6 text-[19px] font-semibold leading-snug text-ink sm:text-[21px]">{c.title}</h3>
-                  <span className="mt-auto inline-flex items-center gap-1.5 pt-8 text-[15px] font-medium text-soft transition-colors group-hover:text-ink">
-                    {c.linkLabel}
-                    <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
-                  </span>
-                </Link>
+                </div>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
+      {/* ═══ 5b · WAS DRIN IST. Die Funktionen als Tafel, nicht als Seite. ═══ */}
+      <section id="funktionen" className={"scroll-mt-20 border-t border-ink/8 " + abschnitt}>
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <Reveal className="mb-10 flex flex-wrap items-end justify-between gap-x-8 gap-y-3 sm:mb-12">
+            <h2 className={kapitel}><Words text={t.featureTable.title} /></h2>
+            <p className={einleitung}>{t.featureTable.body}</p>
+          </Reveal>
+          <FeatureTable />
+        </div>
+      </section>
+
       {/* ═══ 6 · WER DAMIT KUNDEN GEWINNT ═══════════════════════════════ */}
-      <section id="kunde" className={"scroll-mt-20 border-t border-white/8 bg-band " + abschnitt}>
+      <section id="kunde" className={"scroll-mt-20 border-t border-ink/8 bg-band " + abschnitt}>
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <Reveal>
-            <h2 className={kapitel + " mb-10 sm:mb-12"}>{t.customer.logosTitle}</h2>
+            <h2 className={kapitel + " mb-10 sm:mb-12"}><Words text={t.customer.logosTitle} /></h2>
           </Reveal>
           <CustomerCards />
         </div>
       </section>
 
       {/* ═══ 7 · KOSTEN ═════════════════════════════════════════════════ */}
-      <section id="kosten" className={"scroll-mt-20 border-t border-white/8 " + abschnitt}>
+      <section id="kosten" className={"scroll-mt-20 border-t border-ink/8 " + abschnitt}>
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <div className="grid gap-8 lg:grid-cols-[1fr_1.4fr] lg:gap-20">
             <Reveal>
-              <h2 className={kapitel}>{t.costs.title}</h2>
+              <h2 className={kapitel}><Words text={t.costs.title} /></h2>
             </Reveal>
             <Reveal delay={100}>
               <p className={"max-w-[52ch] " + einleitung}>{t.costs.body}</p>
               <p className="mt-6 flex max-w-[52ch] items-start gap-3.5 text-[17px] leading-relaxed text-ink sm:text-[19px]">
-                <span className="mt-0.5 shrink-0 text-sky-300">{noteIcons.price}</span>
+                <span className="mt-0.5 shrink-0 text-accent">{noteIcons.price}</span>
                 {t.costs.note}
               </p>
             </Reveal>
@@ -260,12 +263,12 @@ export default function Home() {
       </section>
 
       {/* ═══ 8 · FRAGEN ═════════════════════════════════════════════════ */}
-      <section id="faq" className={"scroll-mt-20 border-t border-white/8 bg-band " + abschnitt}>
+      <section id="faq" className={"scroll-mt-20 border-t border-ink/8 bg-band " + abschnitt}>
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
           <Reveal>
-            <h2 className={kapitel + " mb-8 sm:mb-10"}>{t.faq.title}</h2>
+            <h2 className={kapitel + " mb-8 sm:mb-10"}><Words text={t.faq.title} /></h2>
           </Reveal>
-          <div className="divide-y divide-white/8 rounded-2xl border border-white/10 bg-panel">
+          <div className="divide-y divide-ink/8 rounded-2xl border border-ink/10 bg-panel">
             {t.faq.items.map((f) => (
               <details key={f.q} className="group">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 text-[16px] font-medium text-ink marker:content-none sm:px-6 sm:text-[17px]">
@@ -285,11 +288,11 @@ export default function Home() {
           Derselbe Horizont wie am Anfang, diesmal ueber der Handlung. Die
           Seite endet, wo sie begonnen hat: im Licht, mit einem Knopf.
           ═══════════════════════════════════════════════════════════ */}
-      <section className="fb-grain relative overflow-hidden border-t border-white/8">
+      <section className="fb-grain relative overflow-hidden border-t border-ink/8">
         <Horizon hy="108%" />
         <div className="relative mx-auto max-w-3xl px-4 py-28 text-center sm:px-6 sm:py-36 lg:py-44">
           <Reveal>
-            <h2 className={kapitel + " mx-auto"}>{t.finalCta.title}</h2>
+            <h2 className={kapitel + " mx-auto"}><Words text={t.finalCta.title} /></h2>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
               <CTAButton className="!px-6 !py-3.5 !text-[15px]" />
               <a href={BOOKING_URL} className="tap-link group gap-1.5 text-[15px] font-medium text-soft transition-colors hover:text-ink">
@@ -304,7 +307,7 @@ export default function Home() {
       <SiteFooter />
 
       {/* Der feste Knopf am unteren Rand des Telefons. */}
-      <div className="fixed inset-x-0 bottom-0 z-20 border-t border-white/10 bg-surface/90 p-3 backdrop-blur sm:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-20 border-t border-ink/10 bg-surface/90 p-3 backdrop-blur-md sm:hidden">
         <CTAButton className="w-full !py-3.5 !text-[15px]" />
       </div>
     </div>

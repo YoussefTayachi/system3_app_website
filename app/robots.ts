@@ -12,16 +12,14 @@ import { SITE_URL } from "./site";
  * hat in keinem Index etwas verloren. Das hier ist die eigene Seite: sie
  * soll gefunden werden.
  *
- * `/start` bleibt draussen. Die Seite ist die Landeseite der Kaltakquise und
- * traegt dieselbe Aussage wie die Startseite, nur kuerzer. Zwei Seiten mit
- * derselben Aussage im Index sind fuer beide schlechter als eine.
+ * `/start` gab es bis zum 2026-09-02 als eigene Landeseite und stand hier
+ * auf disallow. Seitdem ist es eine Umleitung auf die Startseite.
  */
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: "/start",
     },
     sitemap: SITE_URL + "/sitemap.xml",
   };

@@ -101,7 +101,7 @@ export function ClaudeStage(p: ClaudeStageProps) {
   const { takt, setTakt, fertig, setFertig } = useTakt(p.schritte.length + 1, drin, 850);
   return (
     <div ref={ref}>
-      <div className="overflow-hidden rounded-[22px] border border-white/10 bg-panel shadow-[0_40px_120px_-40px_rgba(0,0,0,0.8)]">
+      <div className="fb-dark overflow-hidden rounded-[22px] border border-white/10 bg-panel shadow-[0_40px_120px_-40px_rgba(0,0,0,0.8)]">
         <div className="flex items-center gap-2.5 border-b border-white/8 px-5 py-3 text-[13px] text-faint">
           <span aria-hidden className="h-2 w-2 rounded-full bg-emerald-400" />
           Claude · Frostbreaker
@@ -182,11 +182,11 @@ function Zeile({ text, weg, zeilenRef }: { text: string; weg: boolean; zeilenRef
     <li
       ref={zeilenRef}
       className={
-        "flex items-baseline gap-4 border-b border-white/8 py-5 transition-opacity duration-700 last:border-b-0 sm:gap-6 sm:py-6 " +
+        "flex items-baseline gap-4 border-b border-ink/8 py-5 transition-opacity duration-700 last:border-b-0 sm:gap-6 sm:py-6 " +
         (weg ? "opacity-40" : "opacity-100")
       }
     >
-      <span aria-hidden className={"mt-2 h-2 w-2 shrink-0 rounded-full transition-colors duration-500 " + (weg ? "bg-edge3" : "bg-sky-400")} />
+      <span aria-hidden className={"mt-2 h-2 w-2 shrink-0 rounded-full transition-colors duration-500 " + (weg ? "bg-edge3" : "bg-accent")} />
       <span
         className={
           "fb-strike-lg font-display text-[1.5rem] font-medium leading-tight tracking-[-0.02em] text-ink sm:text-[2rem] lg:text-[2.25rem] " +

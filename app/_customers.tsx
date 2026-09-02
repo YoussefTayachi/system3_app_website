@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useT } from "./language-provider";
 import { BOOKING_URL } from "./_ui";
 import { Reveal } from "./reveal";
+import { spot } from "./_motion";
 
 // ══════════════════════════════════════════════════════════════════════
 // KUNDENBELEG. Zwei Groessen desselben Inhalts, damit derselbe Name zweimal
@@ -68,7 +69,7 @@ export function CustomerStrip({ className = "" }: { className?: string }) {
         // Auf der dunklen Startseite wird das violette Logo weiss: ein
         // farbiges Logo auf Dunkel liest sich als Werbung, ein weisses als
         // Beleg.
-        className="h-[17px] w-auto [.fb-dark_&]:brightness-0 [.fb-dark_&]:invert"
+        className="h-[17px] w-auto dark:brightness-0 dark:invert"
       />
       <span aria-hidden className="hidden text-edge3 sm:inline">
         ·
@@ -295,14 +296,14 @@ function Wortmarke({ id, name }: { id: string; name: string }) {
         alt={t.customer.logoAlt}
         width={LOGO.width}
         height={LOGO.height}
-        className="h-6 w-auto [.fb-dark_&]:brightness-0 [.fb-dark_&]:invert sm:h-7"
+        className="h-6 w-auto dark:brightness-0 dark:invert sm:h-7"
       />
     );
   }
   const [erst, ...rest] = name.split(" ");
   return (
     <span className="whitespace-nowrap text-[22px] font-bold leading-none tracking-[-0.02em] sm:text-[26px]">
-      <span className="text-sky-600 [.fb-dark_&]:text-sky-400">{erst}</span>
+      <span className="text-accent">{erst}</span>
       <span className="ml-1.5 font-normal text-soft">{rest.join(" ")}</span>
     </span>
   );
@@ -338,7 +339,7 @@ export function CustomerCards({ className = "" }: { className?: string }) {
     <div className={"grid gap-4 sm:grid-cols-2 sm:gap-5 " + className}>
       {c.logos.map((l, i) => (
         <Reveal key={l.id} delay={i * 90} className="h-full">
-          <div className="flex h-full flex-col rounded-2xl border border-white/10 bg-panel p-6 sm:p-7">
+          <div onPointerMove={spot} className="fb-spot flex h-full flex-col rounded-2xl border border-ink/10 bg-panel p-6 sm:p-7">
             <div className="flex min-h-[32px] items-center">
               <Wortmarke id={l.id} name={l.name} />
             </div>
@@ -354,12 +355,6 @@ export function CustomerCards({ className = "" }: { className?: string }) {
                 {l.urlLabel}
                 <ExternalIcon />
               </a>
-              {l.href && (
-                <Link href={l.href} className="tap-link group gap-1.5 text-[14px] font-medium text-soft transition-colors hover:text-ink">
-                  {c.pageLink}
-                  <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
-                </Link>
-              )}
             </div>
           </div>
         </Reveal>

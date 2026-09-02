@@ -403,7 +403,7 @@ function Pfeil({ richtung }: { richtung: "l" | "r" }) {
 }
 
 const rundKnopf =
-  "grid h-11 w-11 shrink-0 place-items-center rounded-full border border-white/12 text-soft transition-[border-color,color,transform] duration-200 hover:border-white/30 hover:text-ink active:scale-95 disabled:opacity-30 disabled:hover:border-white/12 disabled:hover:text-soft";
+  "grid h-11 w-11 shrink-0 place-items-center rounded-full border border-ink/12 text-soft transition-[border-color,color,transform] duration-200 hover:border-ink/30 hover:text-ink active:scale-95 disabled:opacity-30 disabled:hover:border-ink/12 disabled:hover:text-soft";
 
 export function Journey(p: JourneyProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -482,7 +482,7 @@ export function Journey(p: JourneyProps) {
             aria-pressed={i === nische}
             className={
               "inline-flex min-h-[44px] items-center rounded-full border px-4 text-[14px] font-medium transition-[background-color,border-color,color,transform] duration-200 ease-out active:scale-[0.97] sm:text-[15px] " +
-              (i === nische ? "border-ink bg-ink text-surface" : "border-white/12 text-soft hover:border-white/30 hover:text-ink")
+              (i === nische ? "border-ink bg-ink text-surface" : "border-ink/12 text-soft hover:border-ink/30 hover:text-ink")
             }
           >
             {x.label}
@@ -492,7 +492,7 @@ export function Journey(p: JourneyProps) {
 
       {/* Die Reiter: alle sechs Akte, immer. */}
       <div ref={leiste} className="fb-noscroll -mx-4 mt-6 overflow-x-auto px-4 sm:mx-0 sm:px-0">
-        <ol className="flex w-max min-w-full gap-1 rounded-full border border-white/8 bg-white/[0.04] p-1 sm:grid sm:w-full sm:grid-cols-6">
+        <ol className="flex w-max min-w-full gap-1 rounded-full border border-ink/8 bg-ink/[0.04] p-1 sm:grid sm:w-full sm:grid-cols-6">
           {p.akte.map((name, i) => {
             const nr = i + 1;
             const hier = a === nr;
@@ -505,19 +505,19 @@ export function Journey(p: JourneyProps) {
                   aria-current={hier ? "step" : undefined}
                   className={
                     "relative flex min-h-[44px] w-full items-center justify-center gap-1.5 overflow-hidden whitespace-nowrap rounded-full px-4 text-[14px] transition-[background-color,color] duration-300 sm:px-1.5 " +
-                    (hier ? "bg-white/10 font-medium text-ink" : vorbei ? "text-soft hover:bg-white/5" : "text-mute hover:bg-white/5 hover:text-soft")
+                    (hier ? "bg-ink/10 font-medium text-ink" : vorbei ? "text-soft hover:bg-ink/5" : "text-mute hover:bg-ink/5 hover:text-soft")
                   }
                 >
                   {/* Ein Punkt statt eines Hakens: bei 1440 px teilen sich
                       sechs Reiter 1104 px, und "Entscheider gefunden" passte
                       mit Haken nicht mehr in seinen (gesehen 2026-09-02). */}
-                  {vorbei && <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" />}
+                  {vorbei && <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full bg-ok" />}
                   <span className="truncate">{name}</span>
                   {hier && laeuft && !fertig && (
                     <span
                       key={n.id + "-" + a}
                       aria-hidden
-                      className="fb-timer absolute inset-x-4 bottom-1 h-px bg-sky-400/80"
+                      className="fb-timer absolute inset-x-4 bottom-1 h-px bg-accent/80"
                       style={{ ["--fb-ms" as string]: (STANDZEIT[a - 1] ?? 3600) + "ms" }}
                     />
                   )}
@@ -529,7 +529,9 @@ export function Journey(p: JourneyProps) {
       </div>
 
       {/* Der Rahmen. */}
-      <div className="fb-grain relative mt-4 overflow-hidden rounded-[22px] border border-white/10 bg-[#080c13] sm:mt-5 sm:rounded-[28px]">
+      {/* `fb-dark`: der Rahmen bleibt in beiden Designs dunkel, die Akte darin
+          tragen ihre Farben fest. */}
+      <div className="fb-dark fb-grain relative mt-4 overflow-hidden rounded-[22px] border border-ink/10 bg-[#080c13] sm:mt-5 sm:rounded-[28px]">
         <Horizon className="[&_.fb-h-a]:h-[170%] [&_.fb-h-b]:h-[95%] [&_.fb-h-b]:w-[110%]" />
         <div className="relative grid min-h-[430px] place-items-center px-4 py-10 sm:min-h-[480px] sm:px-10 sm:py-14">
           {akt > 0 && (

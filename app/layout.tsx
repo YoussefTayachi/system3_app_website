@@ -30,7 +30,7 @@ import "@fontsource-variable/wix-madefor-text";
 import "@fontsource-variable/wix-madefor-display";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
-import { getLangServer } from "./lang";
+import { getLangServer, getThemeServer } from "./lang";
 import { SITE_URL } from "./site";
 import { LanguageProvider } from "./language-provider";
 
@@ -40,16 +40,9 @@ import { LanguageProvider } from "./language-provider";
 // Marke. marketing.frostbreaker.app laeuft auf Wix Madefor, und zwei Seiten
 // desselben Absenders mit zwei Schriftpaaren lesen sich wie zwei Absender.
 
-const title = "Frostbreaker: find, enrich and personally contact leads without paying for four tools";
+const title = "Frostbreaker: customer acquisition that keeps running without you";
 const description =
-  "Frostbreaker finds B2B leads, verifies email addresses, brings the phone number from the public listing along and writes individual icebreakers automatically. All in one tool, with your own API keys instead of an expensive flat rate.";
-
-// metadataBase macht aus dem generierten OG-Bild (app/opengraph-image.tsx)
-// eine absolute URL -- ohne das steht beim Teilen ein localhost-Link im
-// og:image, den kein Crawler aufloesen kann.
-// Die Adresse steht seit dem 2026-08-31 in app/site.ts: robots.ts und
-// sitemap.ts brauchen sie ebenfalls, und drei Kopien einer Domain laufen beim
-// ersten Umzug still auseinander.
+  "You say who you want to reach. Frostbreaker finds the decision-makers, reads their website, writes the email and follows up. One tool, on your own API keys.";
 const siteUrl = SITE_URL;
 
 export const metadata: Metadata = {
@@ -89,8 +82,9 @@ const orgJsonLd = {
 // Hydration-Mismatch/Flackern beim Umschalten.
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const lang = await getLangServer();
+  const theme = await getThemeServer();
   return (
-    <html lang={lang}>
+    <html lang={lang} data-theme={theme} style={{ colorScheme: theme }}>
       <head>
         <script
           type="application/ld+json"
@@ -98,7 +92,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         />
       </head>
       <body>
-        <LanguageProvider lang={lang}>{children}</LanguageProvider>
+        <LanguageProvider lang={lang} theme={theme}>
+          {children}
+        </LanguageProvider>
         <Analytics />
       </body>
     </html>

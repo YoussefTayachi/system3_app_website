@@ -24,6 +24,15 @@ const nextConfig = {
   async redirects() {
     return [
       { source: "/preise", destination: "/kontakt", permanent: true },
+      // Onepager seit dem 2026-09-02: sechs Seiten sind in die Startseite
+      // gewandert. Alte Links aus Mails und Suchmaschinen landen dort, wo
+      // ihr Inhalt jetzt steht, statt auf 404.
+      { source: "/funktionen", destination: "/#funktionen", permanent: true },
+      { source: "/fuer-agenturen", destination: "/#fuer-wen", permanent: true },
+      { source: "/fuer-saas", destination: "/#fuer-wen", permanent: true },
+      { source: "/kunden/:pfad*", destination: "/#kunde", permanent: true },
+      { source: "/case-study", destination: "/eigene-software", permanent: true },
+      { source: "/start", destination: "/", permanent: true },
     ];
   },
 };
