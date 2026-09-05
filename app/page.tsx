@@ -161,6 +161,7 @@ export default function Home() {
             firmenLabel={t.journey.firmenLabel}
             gefundenLabel={t.journey.gefundenLabel}
             geprueft={t.journey.geprueft}
+            quellen={t.journey.quellen}
             scanLabel={t.journey.scanLabel}
             anLabel={t.journey.anLabel}
             betreffLabel={t.journey.betreffLabel}

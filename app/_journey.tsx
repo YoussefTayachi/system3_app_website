@@ -57,6 +57,7 @@ export type JourneyProps = {
   gefundenLabel: string;
   geprueft: readonly string[];
   scanLabel: string;
+  quellen: readonly string[];
   anLabel: string;
   betreffLabel: string;
   schreibtLabel: string;
@@ -218,6 +219,20 @@ function AktWebsite({ n, p }: { n: Nische; p: JourneyProps }) {
           </span>
           <span aria-hidden className="fb-scan" />
         </div>
+        {/* Woher die Befunde kommen. Seit dem 2026-09-05 liest der Akt die
+            Firma und nicht nur ihre Website, und die drei Chips sagen das,
+            ohne dass die Befunde es erklaeren muessen. */}
+        <ul className="flex flex-wrap gap-1.5 border-t border-white/8 px-3 py-2.5">
+          {p.quellen.map((q, i) => (
+            <li
+              key={q}
+              className="fb-anim fb-rise-6 rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[12px] font-medium text-soft"
+              style={{ animationDelay: 600 + i * 220 + "ms" }}
+            >
+              {q}
+            </li>
+          ))}
+        </ul>
       </div>
       <div>
         <p className={label + " text-faint"}>{p.scanLabel}</p>

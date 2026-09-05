@@ -185,6 +185,17 @@ const de = {
   // Aufhaenger, der gerade geschrieben wird, eine Antwort, die eintrifft.
   // Keine Firmennamen, nur Rolle und Stadtteil -- dieselbe Regel wie im
   // Ablauf darunter.
+  //
+  // DIE AUFHAENGER HANDELN VON DER FIRMA, NICHT VON IHRER WEBSITE, seit dem
+  // 2026-09-05. Vorher standen hier Website-Maengel (Ladezeit, Formular,
+  // Nummer als Bild), und die Seite las sich, als waere Frostbreaker ein
+  // Werkzeug fuer Webdesigner. Youssef: "es geht prinzipiell darum dass man
+  // sich deren unternehmen anschaut, personalisierung schreibt und dann
+  // outreached, nicht nur website pains um dann eine website loesung
+  // anzubieten." Ein Aufhaenger ist also etwas, das nur auf diese Firma
+  // passt: neuer Standort, Stellenanzeige, was Bewertungen sagen. Was der
+  // Absender verkauft, steht nicht drin, denn das ist bei jedem Nutzer
+  // ein anderes.
   // ══════════════════════════════════════════════════════════════════════
   heroVisual: {
     workspace: "Zahnarztpraxen München",
@@ -193,15 +204,15 @@ const de = {
     count: "312 Firmen durchsucht",
     columns: ["Firma", "Entscheider", "Aufhänger", "Status"],
     rows: [
-      { firma: "Zahnarztpraxis, Schwabing", rolle: "Praxisinhaberin", aufhaenger: "Termine gibt es bei euch nur am Telefon, und mittags ist die Leitung zu.", status: "kontaktiert" },
-      { firma: "Kieferorthopädie, Bogenhausen", rolle: "Praxisleitung", aufhaenger: "Auf dem Handy lädt eure Seite neun Sekunden.", status: "kontaktiert" },
+      { firma: "Zahnarztpraxis, Schwabing", rolle: "Praxisinhaberin", aufhaenger: "Glückwunsch zur zweiten Praxis in Bogenhausen, das Team ist seit März dreimal so groß.", status: "kontaktiert" },
+      { firma: "Kieferorthopädie, Bogenhausen", rolle: "Praxisleitung", aufhaenger: "Ihr sucht laut Anzeige seit Juni eine dritte Kraft für die Anmeldung.", status: "kontaktiert" },
       { firma: "Zahnarztpraxis, Pasing", rolle: "Inhaber", aufhaenger: "", status: "neu" },
-      { firma: "Zahnklinik, Haidhausen", rolle: "Geschäftsführer", aufhaenger: "Euer Kontaktformular schickt ins Leere.", status: "neu" },
+      { firma: "Zahnklinik, Haidhausen", rolle: "Geschäftsführer", aufhaenger: "Eure Bewertungen loben das Team, drei fragen nach Terminen am Abend.", status: "neu" },
     ],
-    typing: "Eure Notdienst-Nummer steht nur als Bild und lässt sich nicht antippen.",
+    typing: "Ihr habt im Frühjahr die Kinderzahnheilkunde dazugenommen, und die Warteliste steht schon auf der Seite.",
     status: { neu: "Neu", kontaktiert: "Kontaktiert", termin: "Termin" },
     replyLabel: "Antwort eingegangen",
-    reply: "Das ärgert uns selbst am meisten. Dienstag früh?",
+    reply: "Das ist genau unser Engpass gerade. Dienstag früh?",
     replyFrom: "Praxisinhaberin, Schwabing",
   },
   strikeList: {
@@ -240,6 +251,15 @@ const de = {
   // keine Antwortquote, keine Zeitersparnis, kein Umsatz. Der Abschluss-Akt
   // endet deshalb mit einem Satz und nicht mit einem Betrag.
   // ══════════════════════════════════════════════════════════════════════
+  // AKT ZWEI LIEST DIE FIRMA, NICHT NUR IHRE WEBSITE, seit dem 2026-09-05.
+  // Die drei Befunde je Nische waren Website-Maengel, die Mail bot deren
+  // Behebung an, und der ganze Ablauf sah aus wie das Drehbuch eines
+  // Webdesigners. Youssef: "nicht nur website pains um dann eine website
+  // loesung anzubieten." Jetzt sind die drei Befunde Dinge, die nur auf
+  // diese Firma zutreffen (neuer Standort, Stellenanzeige, Bewertungen),
+  // die Mail greift eines davon auf und stellt eine Frage, und was der
+  // Absender verkauft, bleibt offen: das ist bei jedem Nutzer ein anderes.
+  //
   // Der Titel hiess bis zum 2026-09-05 "Eine Nische rein. Ein Kunde raus."
   // Youssefs Mentor: "Change this title because it doesn't make sense."
   // Jetzt steht da, was der Abschnitt zeigt: der Weg von der Nische zum
@@ -255,7 +275,7 @@ const de = {
     // Wechsel der Nische stehen bleiben kann.
     untertitel: [
       "Nische durchsucht, Adresse geprüft.",
-      "Website gelesen, drei Befunde.",
+      "Firma gelesen, drei Dinge, die nur auf sie passen.",
       "Eine Mail, die nur hierhin passt.",
       "Antwort da, Status springt auf Termin.",
       "Gespräch läuft, Notizen im CRM.",
@@ -263,7 +283,7 @@ const de = {
     ],
     akte: [
       "Entscheider gefunden",
-      "Website angesehen",
+      "Firma angesehen",
       "Mail geschrieben",
       "Antwort da",
       "Gespräch läuft",
@@ -272,7 +292,9 @@ const de = {
     firmenLabel: "Firmen durchsucht",
     gefundenLabel: "Entscheider",
     geprueft: ["E-Mail geprüft", "Telefon", "LinkedIn"],
-    scanLabel: "Was auf der Website auffiel",
+    scanLabel: "Was sich über die Firma finden ließ",
+    // Woher die drei Befunde kommen: drei Chips unter dem Fenster im Akt.
+    quellen: ["Website", "Stellenanzeigen", "Bewertungen"],
     anLabel: "An",
     betreffLabel: "Betreff",
     schreibtLabel: "schreibt …",
@@ -292,21 +314,21 @@ const de = {
         rolle: "Inhaber",
         segment: "Sanitärbetrieb, 30 Mitarbeitende",
         befunde: [
-          "Die Notdienst-Seite hat kein Kontaktformular",
-          "Die Telefonnummer steht nur als Bild",
-          "Auf dem Handy fehlt das Menü",
+          "Seit Juli Notdienst rund um die Uhr, auch am Wochenende",
+          "Sucht laut Stellenanzeige zwei weitere Monteure",
+          "Bewertungen loben die Pünktlichkeit, bemängeln die Erreichbarkeit",
         ],
-        betreff: "Eure Notdienst-Seite",
+        betreff: "Euer Notdienst seit Juli",
         mail: [
-          "Ihr habt einen Notdienst, aber auf der Seite dazu kann euch niemand schreiben.",
-          "Die Nummer steht als Bild, also lässt sie sich nicht antippen.",
-          "Soll ich euch die drei Stellen schicken?",
+          "Ihr habt im Juli auf Notdienst rund um die Uhr umgestellt und sucht gerade zwei Monteure dazu.",
+          "Wer nimmt nachts ab, wenn alle vier unterwegs sind?",
+          "Zehn Minuten am Donnerstag, dann zeig ich euch, wie andere Betriebe das lösen?",
         ],
-        antwort: "Stimmt, das wusste ich nicht. Donnerstag um 14 Uhr?",
+        antwort: "Gute Frage, genau das ist gerade unser Thema. Donnerstag um 14 Uhr?",
         termin: "Donnerstag, 14:00",
         notizen: [
-          "Notdienst läuft über zwei private Handys",
-          "Will die Seite bis zum Herbst neu",
+          "Nachts landen Anrufe auf zwei privaten Handys",
+          "Sucht seit Mai, findet keine Monteure",
           "Entscheidet allein, kein Gremium",
         ],
         abschluss: "Eine Nische, ein neuer Kunde.",
@@ -319,21 +341,21 @@ const de = {
         rolle: "Praxisinhaberin",
         segment: "Zahnarztpraxis, 12 Mitarbeitende",
         befunde: [
-          "Termine gehen nur telefonisch",
-          "Die Öffnungszeiten stehen dreimal verschieden da",
-          "Auf dem Handy lädt die Seite neun Sekunden",
+          "Zweiter Standort in Bogenhausen, eröffnet im März",
+          "Schwerpunkt Kinderzahnheilkunde, Team von vier auf zwölf gewachsen",
+          "Bewertungen: freundlich, aber am Telefon schwer zu erreichen",
         ],
-        betreff: "Terminbuchung auf eurer Seite",
+        betreff: "Euer zweiter Standort",
         mail: [
-          "Bei euch gibt es Termine nur am Telefon, und mittags ist die Leitung zu.",
-          "Die Öffnungszeiten stehen auf drei Seiten unterschiedlich.",
-          "Soll ich euch zeigen, was das an Anrufen spart?",
+          "Glückwunsch zum zweiten Standort in Bogenhausen, das Team ist seit März dreimal so groß.",
+          "Läuft die Terminvergabe für beide Praxen noch über ein Telefon?",
+          "Soll ich euch zeigen, wie zwei Praxen mit einer Anmeldung auskommen?",
         ],
-        antwort: "Das ärgert uns selbst am meisten. Dienstag früh?",
+        antwort: "Das ist genau unser Engpass gerade. Dienstag früh?",
         termin: "Dienstag, 08:30",
         notizen: [
           "Zwei Kräfte hängen halbtags am Telefon",
-          "Online-Termine sind das Hauptthema",
+          "Beide Standorte sollen eine Anmeldung teilen",
           "Budget steht ab dem vierten Quartal",
         ],
         abschluss: "Eine Nische, eine neue Kundin.",
@@ -346,20 +368,20 @@ const de = {
         rolle: "Gründerin",
         segment: "Shopify-Marke, 14 Mitarbeitende",
         befunde: [
-          "Der Warenkorb springt auf dem Handy zurück",
-          "Auf den Produktseiten stehen keine Bewertungen",
-          "Der Versandhinweis kommt erst nach dem Bezahlen",
+          "Dritte Kollektion in diesem Jahr, seit September im Shop",
+          "Versendet aus dem eigenen Lager in Leipzig",
+          "Bewertungen loben die Verpackung und fragen, wann was wieder da ist",
         ],
-        betreff: "Der Warenkorb auf dem Handy",
+        betreff: "Eure dritte Kollektion",
         mail: [
-          "Auf dem Handy springt euer Warenkorb beim zweiten Artikel zurück.",
-          "Und den Versandhinweis sieht man erst, wenn schon bezahlt ist.",
-          "Soll ich euch das Video davon schicken?",
+          "Drei Kollektionen in einem Jahr, und ihr verschickt alles selbst aus Leipzig.",
+          "Wie haltet ihr die Nachbestellungen im Griff, wenn eine Größe ausverkauft ist?",
+          "Soll ich euch zeigen, was drei Marken in eurer Größe dafür nutzen?",
         ],
-        antwort: "Oh. Schick mal her. Freitag um 11?",
+        antwort: "Oh, das trifft einen Nerv. Freitag um 11?",
         termin: "Freitag, 11:00",
         notizen: [
-          "Abbrüche seit dem Wechsel des Themes",
+          "Wer nach einer Größe fragt, bekommt eine Mail von Hand",
           "Zwei Leute im Team, niemand entwickelt",
           "Will vor dem Weihnachtsgeschäft fertig sein",
         ],
@@ -420,7 +442,7 @@ const de = {
     rows: [
       { id: "find", name: "Lead Finder", text: "Google Maps, Apollo und Hunter in einer Liste" },
       { id: "enrich", name: "Decision Maker Finder", text: "Die richtige Person, Adresse geprüft" },
-      { id: "personalize", name: "Aufhänger", text: "Ein eigener je Empfänger, aus seiner Website" },
+      { id: "personalize", name: "Aufhänger", text: "Ein eigener je Empfänger, aus dem, was sich über ihn finden lässt" },
       { id: "write", name: "Sequenz", text: "Acht Mails aus eurem Angebot" },
       { id: "check", name: "Textprüfung", text: "Zwölf Prüfungen vor dem Versand" },
       { id: "send", name: "Kampagnen", text: "Versand über Instantly, Postfächer im Blick" },
@@ -858,15 +880,15 @@ const en: typeof de = {
     count: "312 companies searched",
     columns: ["Company", "Decision-maker", "Opener", "Status"],
     rows: [
-      { firma: "Dental practice, Schwabing", rolle: "Practice owner", aufhaenger: "Appointments only by phone, and the line is closed at lunch.", status: "kontaktiert" },
-      { firma: "Orthodontics, Bogenhausen", rolle: "Practice manager", aufhaenger: "On a phone your site takes nine seconds to load.", status: "kontaktiert" },
+      { firma: "Dental practice, Schwabing", rolle: "Practice owner", aufhaenger: "Congratulations on the second practice in Bogenhausen, the team has tripled since March.", status: "kontaktiert" },
+      { firma: "Orthodontics, Bogenhausen", rolle: "Practice manager", aufhaenger: "Your job ad has been looking for a third person at reception since June.", status: "kontaktiert" },
       { firma: "Dental practice, Pasing", rolle: "Owner", aufhaenger: "", status: "neu" },
-      { firma: "Dental clinic, Haidhausen", rolle: "Managing director", aufhaenger: "Your contact form sends into nowhere.", status: "neu" },
+      { firma: "Dental clinic, Haidhausen", rolle: "Managing director", aufhaenger: "Your reviews praise the team, three of them ask for evening appointments.", status: "neu" },
     ],
-    typing: "Your emergency number is only an image, so nobody can tap it.",
+    typing: "You added paediatric dentistry in spring, and the waiting list is already on the site.",
     status: { neu: "New", kontaktiert: "Contacted", termin: "Booked" },
     replyLabel: "Reply is in",
-    reply: "That annoys us most of all. Tuesday morning?",
+    reply: "That is exactly our bottleneck right now. Tuesday morning?",
     replyFrom: "Practice owner, Schwabing",
   },
   strikeList: {
@@ -887,7 +909,7 @@ const en: typeof de = {
     hinweis: "Pick one. Everything after that happens without you.",
     untertitel: [
       "Niche searched, address verified.",
-      "Website read, three findings.",
+      "Company read, three things that fit only them.",
       "One email that fits only here.",
       "Reply is in, status jumps to booked.",
       "Call running, notes in the CRM.",
@@ -895,7 +917,7 @@ const en: typeof de = {
     ],
     akte: [
       "Decision-maker found",
-      "Website looked at",
+      "Company looked at",
       "Email written",
       "Reply is in",
       "Call running",
@@ -904,7 +926,8 @@ const en: typeof de = {
     firmenLabel: "companies searched",
     gefundenLabel: "Decision-maker",
     geprueft: ["Email verified", "Phone", "LinkedIn"],
-    scanLabel: "What stood out on the website",
+    scanLabel: "What could be found about the company",
+    quellen: ["Website", "Job ads", "Reviews"],
     anLabel: "To",
     betreffLabel: "Subject",
     schreibtLabel: "writing …",
@@ -924,21 +947,21 @@ const en: typeof de = {
         rolle: "Owner",
         segment: "Plumbing firm, 30 staff",
         befunde: [
-          "The emergency page has no contact form",
-          "The phone number is only an image",
-          "On a phone the menu is missing",
+          "Round-the-clock emergency service since July, weekends included",
+          "Job ad is looking for two more fitters",
+          "Reviews praise punctuality, complain about reachability",
         ],
-        betreff: "Your emergency page",
+        betreff: "Your emergency service since July",
         mail: [
-          "You run an emergency service, but nobody can write to you from that page.",
-          "The number sits there as an image, so it cannot be tapped.",
-          "Shall I send you the three spots?",
+          "You switched to a round-the-clock emergency service in July and are hiring two more fitters.",
+          "Who picks up at night when all four are out on jobs?",
+          "Ten minutes on Thursday, and I show you how other firms handle it?",
         ],
-        antwort: "True, I had no idea. Thursday at two?",
+        antwort: "Good question, that is exactly what we are dealing with. Thursday at two?",
         termin: "Thursday, 14:00",
         notizen: [
-          "Emergency line runs on two private phones",
-          "Wants the site redone by autumn",
+          "Night calls land on two private phones",
+          "Hiring since May, cannot find fitters",
           "Decides alone, no committee",
         ],
         abschluss: "One niche, one new customer.",
@@ -951,21 +974,21 @@ const en: typeof de = {
         rolle: "Practice owner",
         segment: "Dental practice, 12 staff",
         befunde: [
-          "Appointments only by phone",
-          "Opening hours differ in three places",
-          "On a phone the site takes nine seconds",
+          "Second location in Bogenhausen, opened in March",
+          "Focus on paediatric dentistry, team grown from four to twelve",
+          "Reviews: friendly, but hard to reach by phone",
         ],
-        betreff: "Booking on your website",
+        betreff: "Your second location",
         mail: [
-          "You only take appointments by phone, and the line is closed at lunch.",
-          "Your opening hours differ across three pages.",
-          "Shall I show you what that saves in calls?",
+          "Congratulations on the second location in Bogenhausen, the team has tripled since March.",
+          "Is booking for both practices still running through one phone?",
+          "Shall I show you how two practices get by with one front desk?",
         ],
-        antwort: "That annoys us more than anyone. Tuesday morning?",
+        antwort: "That is exactly our bottleneck right now. Tuesday morning?",
         termin: "Tuesday, 08:30",
         notizen: [
           "Two people on the phone half the day",
-          "Online booking is the whole point",
+          "Both locations should share one front desk",
           "Budget from the fourth quarter",
         ],
         abschluss: "One niche, one new customer.",
@@ -978,20 +1001,20 @@ const en: typeof de = {
         rolle: "Founder",
         segment: "Shopify brand, 14 staff",
         befunde: [
-          "The cart jumps back on a phone",
-          "No reviews on the product pages",
-          "Shipping info only shows after payment",
+          "Third collection this year, in the shop since September",
+          "Ships from its own warehouse in Leipzig",
+          "Reviews praise the packaging and ask when items are back in stock",
         ],
-        betreff: "The cart on mobile",
+        betreff: "Your third collection",
         mail: [
-          "On a phone your cart jumps back on the second item.",
-          "And the shipping note only appears once people have paid.",
-          "Shall I send you the recording?",
+          "Three collections in one year, and you ship everything yourselves from Leipzig.",
+          "How do you keep restocks under control when a size sells out?",
+          "Shall I show you what three brands your size use for that?",
         ],
-        antwort: "Oh. Send it over. Friday at eleven?",
+        antwort: "Oh, that hits a nerve. Friday at eleven?",
         termin: "Friday, 11:00",
         notizen: [
-          "Drop-offs started with the theme change",
+          "Whoever asks about a size gets an email written by hand",
           "Two people on the team, nobody codes",
           "Wants it done before the Christmas season",
         ],
@@ -1020,7 +1043,7 @@ const en: typeof de = {
     rows: [
       { id: "find", name: "Lead Finder", text: "Google Maps, Apollo and Hunter in one list" },
       { id: "enrich", name: "Decision Maker Finder", text: "The right person, address verified" },
-      { id: "personalize", name: "Openers", text: "One per recipient, from their website" },
+      { id: "personalize", name: "Openers", text: "One per recipient, from what can be found about them" },
       { id: "write", name: "Sequence", text: "Eight emails written from your offer" },
       { id: "check", name: "Copy check", text: "Twelve checks before anything sends" },
       { id: "send", name: "Campaigns", text: "Sending via Instantly, inboxes in view" },
