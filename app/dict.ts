@@ -240,8 +240,13 @@ const de = {
   // keine Antwortquote, keine Zeitersparnis, kein Umsatz. Der Abschluss-Akt
   // endet deshalb mit einem Satz und nicht mit einem Betrag.
   // ══════════════════════════════════════════════════════════════════════
+  // Der Titel hiess bis zum 2026-09-05 "Eine Nische rein. Ein Kunde raus."
+  // Youssefs Mentor: "Change this title because it doesn't make sense."
+  // Jetzt steht da, was der Abschnitt zeigt: der Weg von der Nische zum
+  // Kunden in sechs Schritten. Der Schlusssatz je Nische (`abschluss`) hat
+  // dasselbe Bild getragen und ist mitgezogen.
   journey: {
-    title: "Eine Nische rein. Ein Kunde raus.",
+    title: "Von der Nische zum Kunden, in sechs Schritten.",
     body: "Sechs Schritte, und du machst nur den ersten. Wähle eine Nische und sieh zu.",
     sampleNote: "Beispielansicht",
     frage: "Welche Nische?",
@@ -304,7 +309,7 @@ const de = {
           "Will die Seite bis zum Herbst neu",
           "Entscheidet allein, kein Gremium",
         ],
-        abschluss: "Aus einer Nische wurde ein Kunde.",
+        abschluss: "Eine Nische, ein neuer Kunde.",
       },
       {
         id: "zahnarzt",
@@ -331,7 +336,7 @@ const de = {
           "Online-Termine sind das Hauptthema",
           "Budget steht ab dem vierten Quartal",
         ],
-        abschluss: "Aus einer Nische wurde eine Kundin.",
+        abschluss: "Eine Nische, eine neue Kundin.",
       },
       {
         id: "shopify",
@@ -358,7 +363,7 @@ const de = {
           "Zwei Leute im Team, niemand entwickelt",
           "Will vor dem Weihnachtsgeschäft fertig sein",
         ],
-        abschluss: "Aus einer Nische wurde eine Kundin.",
+        abschluss: "Eine Nische, eine neue Kundin.",
       },
     ],
   },
@@ -875,7 +880,7 @@ const en: typeof de = {
     note: "It keeps running while you sit in client work.",
   },
   journey: {
-    title: "A niche in. A customer out.",
+    title: "From a niche to a customer, in six steps.",
     body: "Six steps, and you only take the first. Pick a niche and watch.",
     sampleNote: "Example view",
     frage: "Which niche?",
@@ -936,7 +941,7 @@ const en: typeof de = {
           "Wants the site redone by autumn",
           "Decides alone, no committee",
         ],
-        abschluss: "A niche became a customer.",
+        abschluss: "One niche, one new customer.",
       },
       {
         id: "zahnarzt",
@@ -963,7 +968,7 @@ const en: typeof de = {
           "Online booking is the whole point",
           "Budget from the fourth quarter",
         ],
-        abschluss: "A niche became a customer.",
+        abschluss: "One niche, one new customer.",
       },
       {
         id: "shopify",
@@ -990,7 +995,7 @@ const en: typeof de = {
           "Two people on the team, nobody codes",
           "Wants it done before the Christmas season",
         ],
-        abschluss: "A niche became a customer.",
+        abschluss: "One niche, one new customer.",
       },
     ],
   },

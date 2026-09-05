@@ -207,15 +207,25 @@ export default function Home() {
           <Reveal>
             <h2 className={kapitel + " mb-10 sm:mb-12"}><Words text={t.whoFor.title} /></h2>
           </Reveal>
-          {/* Keine Verweise mehr: die drei Seiten dahinter sind am 2026-09-02
+          {/* Keine Verweise: die drei Seiten dahinter sind am 2026-09-02
               gefallen. Youssef: "diese buttons muessen zu nix verweisen, alle
-              infos und details werden im call geklaert." */}
-          <div className="grid items-stretch gap-4 md:grid-cols-3 sm:gap-5">
+              infos und details werden im call geklaert."
+
+              NEU GESETZT AM 2026-09-05. Mit den Verweisen war auch der Text
+              der Karten gefallen, uebrig blieben drei Kaesten mit Symbol und
+              Ueberschrift. Der Mentor: "Change the design of 'Who it's for'
+              or completely remove it since it looks unfinished." Jetzt: EINE
+              Tafel, drei Felder mit Haarlinien dazwischen statt drei
+              schwebender Kaesten, und der Satz je Feld ist zurueck, denn er
+              beantwortet die Frage, die der Titel stellt. Der Satz stand in
+              beiden Sprachen die ganze Zeit im Woerterbuch. */}
+          <div className="grid gap-px overflow-hidden rounded-2xl border border-ink/10 bg-ink/10 md:grid-cols-3">
             {t.whoFor.cards.map((c, i) => (
-              <Reveal key={c.id} delay={i * 90} className="h-full">
-                <div onPointerMove={spot} className="fb-spot flex h-full flex-col rounded-2xl border border-ink/10 bg-panel p-6 sm:p-7">
+              <Reveal key={c.id} delay={i * 90} className="h-full bg-panel">
+                <div onPointerMove={spot} className="fb-spot flex h-full flex-col bg-panel p-7 sm:p-8 lg:p-9">
                   <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent/12 text-accent">{whoForIcons[c.id]}</span>
-                  <h3 className="mt-6 text-[19px] font-semibold leading-snug text-ink sm:text-[21px]">{c.title}</h3>
+                  <h3 className="mt-7 text-[21px] font-semibold leading-snug text-ink sm:text-[23px]">{c.title}</h3>
+                  <p className="mt-3 max-w-[34ch] text-[17px] leading-relaxed text-soft">{c.body}</p>
                 </div>
               </Reveal>
             ))}

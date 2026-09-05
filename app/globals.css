@@ -865,24 +865,26 @@ body {
 .fb-noscroll { scrollbar-width: none; -ms-overflow-style: none; }
 .fb-noscroll::-webkit-scrollbar { display: none; }
 
-/* Der Strich durch die Handgriffe, in der Schriftgroesse eines Kapitels.
-   NICHT als ::after: ein absolut gesetztes Pseudoelement liegt einmal ueber
-   dem ganzen Span, und bei drei Zeilen trifft es nur die mittlere
-   (gesehen am 2026-09-02 bei "Am Monatsende zusammentragen ..."). Ein
-   Hintergrundverlauf mit box-decoration-break: clone wird je ZEILENBOX
-   wiederholt, und background-size ist animierbar: der Strich laeuft in
-   jeder Zeile von links durch. */
+/* DER STRICH DURCH DIE HANDGRIFFE, seit dem 2026-09-05 als echte
+   text-decoration. Vorher lag er als Hintergrundverlauf bei 56 % Hoehe auf
+   dem Span, und box-decoration-break: clone sollte ihn je Zeilenbox
+   wiederholen. Chrome hat das nicht getan: bei zweizeiligen Eintraegen lag
+   die Linie ZWISCHEN den Zeilen und sah aus wie eine Unterstreichung der
+   ersten. Youssefs Mentor: "Why are you underlining some of the elements in
+   'You stop doing this by hand'?"
+
+   line-through sitzt in jeder Zeile an der richtigen Stelle, weil der
+   Browser die Zeilen kennt. Animierbar ist nicht die Laenge, aber die
+   FARBE: der Strich blendet von durchsichtig auf die Textfarbe, waehrend die
+   Zeile selbst auf 40 % Deckkraft faellt. Die Aussage bleibt "faellt weg". */
 .fb-strike-lg {
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
-  background-image: linear-gradient(currentColor, currentColor);
-  background-repeat: no-repeat;
-  background-position: 0 56%;
-  background-size: 0% 2px;
-  transition: background-size 360ms var(--fb-ease-out);
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  text-decoration-color: transparent;
+  transition: text-decoration-color 360ms var(--fb-ease-out);
 }
 .fb-strike-lg::after { content: none; }
-.fb-strike-lg.fb-strike-on { background-size: 100% 2px; }
+.fb-strike-lg.fb-strike-on { text-decoration-color: currentColor; }
 
 /* Kein Streulicht in Bewegung fuer Menschen, die das abgestellt haben. */
 @media (prefers-reduced-motion: reduce) {
